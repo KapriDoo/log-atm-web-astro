@@ -1,0 +1,102 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  noindex?: boolean;
+}
+
+const SITE_NAME = 'LOG ATM';
+const SITE_URL  = 'https://logatm.com';
+const DEFAULT_DESC = 'Logística aérea y marítima a tu medida. Carga internacional, aduana, almacenaje y consultoría desde Vitacura, Santiago, Chile.';
+const DEFAULT_IMG  = `${SITE_URL}/og-default.jpg`;
+
+const {
+  title,
+  description = DEFAULT_DESC,
+  image = DEFAULT_IMG,
+  canonical = Astro.url.href,
+  noindex = false,
+} = Astro.props;
+
+const pageTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} — Logística a tu medida`;
+
+const schemaLocalBusiness = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FreightForwarder',
+  name: 'LOG ATM',
+  description: DEFAULT_DESC,
+  url: SITE_URL,
+  telephone: '+56942162739',
+  email: 'mpazrivera@logatm.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Av. Pdte Kennedy 5600, Of. 507',
+    addressLocality: 'Vitacura',
+    addressRegion: 'Región Metropolitana',
+    addressCountry: 'CL',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -33.4081,
+    longitude: -70.5756,
+  },
+  sameAs: [
+    'https://facebook.com/logatm',
+    'https://twitter.com/logatm',
+    'https://instagram.com/logatm',
+  ],
+  areaServed: {
+    '@type': 'Country',
+    name: 'Chile',
+  },
+  slogan: 'Logística a tu medida',
+});
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO primario -->
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content={canonical} />
+    <meta property="og:title"       content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image"       content={image} />
+    <meta property="og:site_name"   content={SITE_NAME} />
+    <meta property="og:locale"      content="es_CL" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image"       content={image} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon"  href="/favicon.ico" />
+
+    <!-- Schema.org -->
+    <script type="application/ld+json" set:html={schemaLocalBusiness} />
+
+    <!-- View Transitions (Astro 6) -->
+    <ClientRouter />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
