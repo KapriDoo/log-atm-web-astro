@@ -1,0 +1,225 @@
+/* LOG ATM — Global Styles */
+
+/* ─── Fuentes — DEBE ir primero (spec CSS: @import antes de todo) ─── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap');
+/* TODO: migrar a fontsource self-hosted antes del launch */
+
+@import "tailwindcss";
+
+/* Design tokens: paleta, sombras, radios */
+@import "./tokens.css";
+
+/* ─── Tailwind v4 @theme ────────────────────────────────────── */
+@theme {
+  /* Primary Blue */
+  --color-primary-50:  #eef4fb;
+  --color-primary-100: #d7e4f4;
+  --color-primary-200: #aec7e5;
+  --color-primary-300: #83a7d2;
+  --color-primary-400: #658fc3;
+  --color-primary-500: #4A7BB5;
+  --color-primary-600: #3b6497;
+  --color-primary-700: #2b4e78;
+  --color-primary-800: #1c3554;
+  --color-primary-900: #112236;
+  --color-primary-950: #0a1624;
+
+  /* Accent Amber */
+  --color-accent-300: #f7b76e;
+  --color-accent-400: #f39f3f;
+  --color-accent-500: #ed8c1d;
+  --color-accent-600: #cc7614;
+  --color-accent-700: #a15e12;
+
+  /* Neutral Warm Gray */
+  --color-neutral-50:  #f8f7f6;
+  --color-neutral-100: #efedeb;
+  --color-neutral-200: #e1dedb;
+  --color-neutral-300: #c8c4c1;
+  --color-neutral-400: #aaa6a1;
+  --color-neutral-500: #898580;
+  --color-neutral-600: #6e6963;
+  --color-neutral-700: #544f4a;
+  --color-neutral-800: #37332f;
+  --color-neutral-900: #211f1c;
+  --color-neutral-950: #131210;
+
+  /* Semánticos */
+  --color-success: #2D9B6F;
+  --color-warning: #ed8c1d;
+  --color-error:   #E04848;
+
+  /* Funcionales */
+  --color-bg:          #f8f7f6;
+  --color-surface:     #ffffff;
+  --color-surface-alt: #efedeb;
+  --color-border:      #e1dedb;
+  --color-text:        #211f1c;
+  --color-text-muted:  #6e6963;
+  --color-brand:       #4A7BB5;
+  --color-cta:         #ed8c1d;
+
+  /* Tipografía */
+  --font-sans:    'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Outfit', 'Inter', ui-sans-serif, sans-serif;
+
+  /* Border radius */
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-xl:   28px;
+  --radius-pill: 9999px;
+}
+
+/* ─── Reset / Base ─────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    line-height: 1.2;
+    color: var(--color-neutral-900);
+  }
+
+  a {
+    color: var(--color-brand);
+    text-decoration: none;
+  }
+
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Respeta prefers-reduced-motion en TODA la aplicación */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ─── Componentes base ─────────────────────────────────────── */
+@layer components {
+  /* Botón primario — azul marca */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    background-color: var(--color-brand);
+    color: #ffffff;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    border-radius: var(--radius-pill);
+    border: 2px solid transparent;
+    transition: background-color 150ms ease, transform 100ms ease, box-shadow 150ms ease;
+  }
+  .btn-primary:hover {
+    background-color: var(--color-primary-700);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+  /* Botón CTA — ámbar */
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    background-color: var(--color-cta);
+    color: #ffffff;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    border-radius: var(--radius-pill);
+    border: 2px solid transparent;
+    box-shadow: var(--shadow-cta);
+    transition: background-color 150ms ease, transform 100ms ease, box-shadow 150ms ease;
+  }
+  .btn-cta:hover {
+    background-color: var(--color-accent-600);
+    box-shadow: 0 6px 24px 0 rgb(237 140 29 / 0.45);
+    transform: translateY(-1px);
+  }
+  .btn-cta:active {
+    transform: translateY(0);
+  }
+
+  /* Botón outline */
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    background-color: transparent;
+    color: var(--color-brand);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    border-radius: var(--radius-pill);
+    border: 2px solid var(--color-primary-300);
+    transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
+  }
+  .btn-outline:hover {
+    border-color: var(--color-brand);
+    background-color: var(--color-primary-50);
+  }
+
+  /* Card base — estilo lifecare */
+  .card {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: box-shadow 200ms ease, transform 200ms ease;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  /* Contenedor de sección */
+  .section-container {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-container {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .section-container {
+      padding-inline: 2rem;
+    }
+  }
+}
