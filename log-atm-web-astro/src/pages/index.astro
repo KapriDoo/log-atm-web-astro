@@ -1,11 +1,1227 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/ui/Navbar.astro';
+import Footer from '../components/ui/Footer.astro';
+import { Icon } from 'astro-icon/components';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout
+  title="Logística Aérea y Marítima"
+  description="LOG ATM — Soluciones de carga aérea, carga marítima, aduana y almacenaje personalizadas para empresas chilenas. Cotiza ahora."
+>
+  <Navbar />
+
+  <main id="main-content">
+
+    <!-- ══════════════════════════════════════════════════════
+         HERO
+    ══════════════════════════════════════════════════════ -->
+    <section class="hero" aria-labelledby="hero-heading">
+
+      <!-- Decorativos de fondo -->
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__blob hero__blob--1"></div>
+        <div class="hero__blob hero__blob--2"></div>
+        <div class="hero__grid-lines"></div>
+      </div>
+
+      <div class="hero__inner container">
+        <div class="hero__content">
+
+          <!-- Badge de eyebrow -->
+          <div class="hero__badge">
+            <span class="hero__badge-dot" aria-hidden="true"></span>
+            Logística internacional desde Santiago, Chile
+          </div>
+
+          <h1 id="hero-heading" class="hero__title">
+            Tu carga,
+            <span class="hero__title-gradient">nuestra ruta.</span>
+          </h1>
+
+          <p class="hero__lead">
+            Conectamos Chile con el mundo. Carga aérea, marítima y gestión
+            aduanera <em>diseñada a tu medida</em>, con un ejecutivo dedicado
+            que conoce tu negocio.
+          </p>
+
+          <div class="hero__ctas">
+            <a href="/cotizar" class="hero__btn-cta">
+              Cotiza ahora
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="https://wa.me/56942162739?text=Hola%2C%20me%20interesa%20cotizar" class="hero__btn-wa" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.564 4.139 1.543 5.876L0 24l6.324-1.51A11.928 11.928 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-4.997-1.373l-.357-.213-3.753.897.947-3.653-.232-.374A9.773 9.773 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+              WhatsApp
+            </a>
+          </div>
+
+          <!-- Mini trust -->
+          <div class="hero__trust">
+            <div class="hero__trust-avatars" aria-hidden="true">
+              {['#658fc3','#3b6497','#4A7BB5'].map(c => (
+                <span class="hero__trust-avatar" style={`background:${c}`}></span>
+              ))}
+            </div>
+            <p class="hero__trust-text">+200 empresas confían en LOG ATM</p>
+          </div>
+
+        </div>
+
+        <!-- Cards flotantes — efecto "fanned" estilo Lifecare -->
+        <div class="hero__cards" aria-hidden="true">
+          <div class="hero__card hero__card--back">
+            <div class="hero__card-icon"><Icon name="lucide:ship" width="28" height="28" /></div>
+            <div>
+              <p class="hero__card-label">Carga Marítima</p>
+              <p class="hero__card-sub">FCL / LCL · 80+ puertos</p>
+            </div>
+          </div>
+          <div class="hero__card hero__card--mid">
+            <div class="hero__card-icon"><Icon name="lucide:plane" width="28" height="28" /></div>
+            <div>
+              <p class="hero__card-label">Carga Aérea</p>
+              <p class="hero__card-sub">Express · 48h garantizado</p>
+            </div>
+          </div>
+          <div class="hero__card hero__card--front">
+            <div class="hero__card-top">
+              <span class="hero__card-status"></span>
+              <p class="hero__card-label">Envío en tránsito</p>
+            </div>
+            <p class="hero__card-tracking">LOG-2025-04872</p>
+            <div class="hero__card-progress">
+              <div class="hero__card-bar"></div>
+            </div>
+            <p class="hero__card-eta">Llegada estimada: 3 días</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wave hacia la siguiente sección -->
+      <div class="hero__wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,60 C240,20 480,80 720,40 C960,0 1200,60 1440,40 L1440,80 L0,80 Z" fill="var(--color-bg)"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         STATS — banda de confianza
+    ══════════════════════════════════════════════════════ -->
+    <section class="stats" aria-label="Cifras LOG ATM">
+      <div class="container stats__inner">
+        {[
+          { value: '15+',    label: 'Años de experiencia', icon: 'lucide:award',    anim: 'award'    },
+          { value: '80+',    label: 'Países conectados',   icon: 'lucide:globe',    anim: 'globe'    },
+          { value: '5.000+', label: 'Envíos por año',      icon: 'lucide:package',  anim: 'package'  },
+          { value: '98%',    label: 'Satisfacción',        icon: 'lucide:sparkles', anim: 'sparkles' },
+        ].map(({ value, label, icon, anim }) => (
+          <div class="stats__item">
+            <div class={`stats__icon-wrap stats__icon-wrap--${anim}`} aria-hidden="true">
+              <Icon name={icon} width="26" height="26" />
+            </div>
+            <strong class="stats__value">{value}</strong>
+            <span class="stats__label">{label}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         SERVICIOS
+    ══════════════════════════════════════════════════════ -->
+    <section class="services" aria-labelledby="services-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Qué hacemos</span>
+          <h2 id="services-heading" class="section-title">
+            Soluciones para<br/>cada necesidad
+          </h2>
+          <p class="section-lead">
+            Desde el despacho urgente hasta la consultoría de supply chain completa.
+          </p>
+        </div>
+
+        <div class="services__grid">
+          {[
+            { n:'01', icon:'lucide:plane-takeoff', title:'Carga Aérea',           desc:'Envíos urgentes, courier internacional y chárter aéreo con cobertura global y tiempos optimizados.',    href:'/servicios/carga-aerea',    accent:false },
+            { n:'02', icon:'lucide:ship',          title:'Carga Marítima',        desc:'FCL y LCL a los principales puertos del mundo. Consolidamos tu carga para reducir costos.',              href:'/servicios/carga-maritima', accent:false },
+            { n:'03', icon:'lucide:file-check',    title:'Aduana y Documentación',desc:'Gestión integral de trámites aduaneros, DUS, certificados de origen y clasificación arancelaria.',       href:'/servicios/aduanas',        accent:true  },
+            { n:'04', icon:'lucide:warehouse',     title:'Almacenaje',            desc:'Bodegaje seguro, fulfillment y distribución última milla con gestión de inventario en tiempo real.',       href:'/servicios/almacenaje',     accent:false },
+            { n:'05', icon:'lucide:compass',       title:'Consultoría Logística', desc:'Diseñamos tu supply chain a medida. Reducimos costos y plazos con soluciones personalizadas.',           href:'/cotizar',                  accent:true  },
+          ].map(({ n, icon, title, desc, href, accent }) => (
+            <a href={href} class:list={['svc-card', accent && 'svc-card--accent']}>
+              <!-- Línea superior animada -->
+              <div class="svc-card__line" aria-hidden="true"></div>
+              <!-- Header: número + flecha -->
+              <div class="svc-card__header">
+                <span class="svc-card__num" aria-hidden="true">{n}</span>
+                <span class="svc-card__arrow" aria-hidden="true">
+                  <Icon name="lucide:arrow-up-right" width="18" height="18" />
+                </span>
+              </div>
+              <!-- Icono en contenedor coloreado -->
+              <div class="svc-card__icon-wrap" aria-hidden="true">
+                <Icon name={icon} width="28" height="28" class="svc-card__icon" />
+              </div>
+              <h3 class="svc-card__title">{title}</h3>
+              <p class="svc-card__desc">{desc}</p>
+              <!-- Overlay reveal estilo Lifecare -->
+              <div class="svc-card__overlay" aria-hidden="true">
+                <span class="svc-card__overlay-label">Ver más →</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         POR QUÉ ELEGIRNOS
+    ══════════════════════════════════════════════════════ -->
+    <section class="why" aria-labelledby="why-heading">
+      <div class="container why__inner">
+
+        <!-- Visual -->
+        <div class="why__visual">
+          <div class="why__img-wrap">
+            <!-- Placeholder hasta tener foto real del equipo -->
+            <div class="why__img-ph">
+              <svg viewBox="0 0 520 420" xmlns="http://www.w3.org/2000/svg">
+                <rect width="520" height="420" fill="#aec7e5"/>
+                <text x="260" y="215" text-anchor="middle" font-size="13" fill="#2b4e78" font-family="sans-serif">Foto equipo / operación portuaria</text>
+              </svg>
+            </div>
+            <!-- Badge flotante -->
+            <div class="why__badge">
+              <span class="why__badge-icon">🇨🇱</span>
+              <div>
+                <p class="why__badge-title">Empresa chilena</p>
+                <p class="why__badge-sub">con red global</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contenido -->
+        <div class="why__content">
+          <span class="eyebrow">Por qué LOG ATM</span>
+          <h2 id="why-heading" class="section-title">
+            Personas. Confianza.<br/>Resultados.
+          </h2>
+          <p class="section-lead why__lead">
+            No somos una multinacional anónima. Somos un equipo chileno con
+            conexiones globales y el compromiso de tratarte como nuestro único cliente.
+          </p>
+
+          <ul class="why__list" role="list">
+            {[
+              { icon:'lucide:user-round-check', title:'Ejecutivo dedicado',        desc:'Una persona que conoce tu negocio y anticipa tus necesidades.',  anim:'' },
+              { icon:'lucide:globe-2',          title:'Red en 80+ países',         desc:'Alianzas verificadas para garantizar tus plazos de entrega.',    anim:'' },
+              { icon:'lucide:map-pin',          title:'Rastreo en tiempo real',    desc:'Visualiza el estado de tu carga en cada etapa del proceso.',     anim:'pin-pulse' },
+              { icon:'lucide:shield-check',     title:'Expertise en aduana Chile', desc:'Operadores certificados por el Servicio Nacional de Aduanas.',   anim:'' },
+            ].map(({ icon, title, desc, anim }) => (
+              <li class="why__item">
+                <div class:list={['why__item-icon', anim && `why__item-icon--${anim}`]} aria-hidden="true">
+                  <Icon name={icon} width="22" height="22" />
+                </div>
+                <div>
+                  <strong class="why__item-title">{title}</strong>
+                  <p class="why__item-desc">{desc}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <a href="/nosotros" class="why__btn">Conoce al equipo</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         INDUSTRIAS
+    ══════════════════════════════════════════════════════ -->
+    <section class="industries" aria-labelledby="industries-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Industrias</span>
+          <h2 id="industries-heading" class="section-title">Experiencia en tu sector</h2>
+        </div>
+        <div class="industries__grid">
+          {[
+            { icon:'lucide:pickaxe',       name:'Minería',       sub:'Cobre, litio, equipamiento pesado',  color:'#658fc3' },
+            { icon:'lucide:shopping-bag',  name:'Retail',        sub:'Moda, consumo masivo, temporada',    color:'#ed8c1d' },
+            { icon:'lucide:wheat',         name:'Agroindustria', sub:'Fruta fresca, vinos, granos',        color:'#2D9B6F' },
+            { icon:'lucide:pill',          name:'Farmacéutica',  sub:'Cadena de frío, reactivos',          color:'#4A7BB5' },
+            { icon:'lucide:shopping-cart', name:'E-commerce',    sub:'Cross-border, fulfillment',          color:'#cc7614' },
+            { icon:'lucide:hard-hat',      name:'Construcción',  sub:'Maquinaria, materiales',             color:'#3b6497' },
+          ].map(({ icon, name, sub, color }) => (
+            <div class="ind-card" style={`--ind-color:${color}`}>
+              <div class="ind-card__glow" aria-hidden="true"></div>
+              <div class="ind-card__icon-wrap" aria-hidden="true">
+                <Icon name={icon} width="28" height="28" class="ind-card__icon" />
+              </div>
+              <h3 class="ind-card__name">{name}</h3>
+              <p class="ind-card__sub">{sub}</p>
+              <span class="ind-card__arrow" aria-hidden="true">→</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════
+         CTA BANNER
+    ══════════════════════════════════════════════════════ -->
+    <section class="cta-section" aria-labelledby="cta-heading">
+      <div class="cta-section__bg" aria-hidden="true">
+        <div class="cta-section__blob cta-section__blob--1"></div>
+        <div class="cta-section__blob cta-section__blob--2"></div>
+      </div>
+      <div class="container cta-section__inner">
+        <div class="cta-section__text">
+          <h2 id="cta-heading" class="cta-section__title">¿Listo para mover tu carga?</h2>
+          <p class="cta-section__desc">
+            Cotiza en 2 minutos · Sin compromisos · Respuesta en menos de 24 h
+          </p>
+        </div>
+        <div class="cta-section__actions">
+          <a href="/cotizar" class="cta-section__btn-primary">
+            Cotiza ahora
+          </a>
+          <a href="https://wa.me/56942162739?text=Hola%2C%20me%20interesa%20cotizar" class="cta-section__btn-wa" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.564 4.139 1.543 5.876L0 24l6.324-1.51A11.928 11.928 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-4.997-1.373l-.357-.213-3.753.897.947-3.653-.232-.374A9.773 9.773 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+            Escribir por WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+/* ──────────────────────────────────────────────────────────
+   UTILIDADES GLOBALES DE ESTA PÁGINA
+────────────────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent-600);
+  margin-bottom: 0.875rem;
+}
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-accent-500);
+  flex-shrink: 0;
+}
+
+.section-header { text-align: center; margin-bottom: 3.5rem; }
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.875rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--color-neutral-900);
+  margin: 0 0 1rem;
+}
+
+.section-lead {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  max-width: 560px;
+  margin-inline: auto;
+}
+
+/* ──────────────────────────────────────────────────────────
+   HERO
+────────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  background: linear-gradient(150deg,
+    var(--color-primary-950) 0%,
+    var(--color-primary-800) 45%,
+    var(--color-primary-600) 100%
+  );
+  overflow: hidden;
+  padding-bottom: 0;
+}
+
+/* Decorativos */
+.hero__bg { position: absolute; inset: 0; pointer-events: none; }
+
+.hero__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.25;
+}
+.hero__blob--1 {
+  width: 600px; height: 600px;
+  background: var(--color-primary-400);
+  top: -200px; right: -150px;
+}
+.hero__blob--2 {
+  width: 400px; height: 400px;
+  background: var(--color-accent-500);
+  bottom: -100px; left: -100px;
+  opacity: 0.15;
+}
+.hero__grid-lines {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+  padding-top: clamp(4rem, 8vw, 7rem);
+  padding-bottom: clamp(4rem, 8vw, 6rem);
+}
+
+/* Content */
+.hero__content { color: #fff; }
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-primary-200);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 9999px;
+  padding: 0.375rem 1rem;
+  margin-bottom: 1.75rem;
+  backdrop-filter: blur(8px);
+}
+.hero__badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent-400);
+  box-shadow: 0 0 0 3px rgba(237,140,29,0.3);
+  animation: pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 3px rgba(237,140,29,0.3); }
+  50%      { box-shadow: 0 0 0 6px rgba(237,140,29,0.1); }
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 6vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0 0 1.5rem;
+}
+.hero__title-gradient {
+  display: block;
+  background: linear-gradient(90deg, var(--color-accent-300), var(--color-accent-500));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero__lead {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--color-primary-200);
+  margin: 0 0 2.25rem;
+  max-width: 480px;
+}
+.hero__lead em { font-style: normal; color: var(--color-accent-300); font-weight: 500; }
+
+.hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.875rem;
+  margin-bottom: 2rem;
+}
+
+.hero__btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.875rem;
+  background: var(--color-cta);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  border-radius: 9999px;
+  box-shadow: 0 4px 20px rgba(237,140,29,0.40);
+  transition: background 150ms, transform 100ms, box-shadow 150ms;
+}
+.hero__btn-cta:hover {
+  background: var(--color-accent-600);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(237,140,29,0.50);
+}
+
+.hero__btn-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(8px);
+  transition: background 150ms, border-color 150ms;
+}
+.hero__btn-wa:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.4);
+}
+
+.hero__trust {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.hero__trust-avatars {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.hero__trust-avatar {
+  display: block;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.4);
+  margin-left: -10px;
+}
+.hero__trust-avatars .hero__trust-avatar:last-child { margin-left: 0; }
+.hero__trust-text {
+  font-size: 0.8125rem;
+  color: var(--color-primary-300);
+  margin: 0;
+}
+
+/* Cards flotantes — efecto fanned (Lifecare) */
+.hero__cards {
+  position: relative;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero__card {
+  position: absolute;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 20px;
+  padding: 1.25rem 1.5rem;
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+
+.hero__card--back {
+  width: 220px;
+  top: 20px; right: 20px;
+  transform: rotate(6deg);
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+.hero__card--mid {
+  width: 220px;
+  top: 60px; left: 10px;
+  transform: rotate(-4deg);
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+.hero__card--front {
+  width: 260px;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) rotate(1deg);
+  z-index: 2;
+}
+
+.hero__card-icon {
+  flex-shrink: 0;
+  width: 42px; height: 42px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.12);
+  color: var(--color-accent-400);
+}
+.hero__card-label { font-size: 0.875rem; font-weight: 700; margin: 0; }
+.hero__card-sub { font-size: 0.75rem; opacity: 0.7; margin: 0.125rem 0 0; }
+
+.hero__card-top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.hero__card-status {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34,197,94,0.25);
+}
+.hero__card-tracking {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8125rem;
+  opacity: 0.9;
+  margin: 0 0 0.75rem;
+  letter-spacing: 0.05em;
+}
+.hero__card-progress {
+  height: 4px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 9999px;
+  margin-bottom: 0.625rem;
+  overflow: hidden;
+}
+.hero__card-bar {
+  height: 100%;
+  width: 68%;
+  background: linear-gradient(90deg, #22c55e, #86efac);
+  border-radius: 9999px;
+}
+.hero__card-eta { font-size: 0.75rem; opacity: 0.7; margin: 0; }
+
+.hero__wave {
+  line-height: 0;
+  margin-top: -1px;
+}
+.hero__wave svg { display: block; width: 100%; }
+
+/* ──────────────────────────────────────────────────────────
+   STATS
+────────────────────────────────────────────────────────── */
+.stats {
+  background: var(--color-bg);
+  padding: 3.5rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.stats__inner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+.stats__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 1rem;
+  border-radius: 16px;
+  transition: background 200ms;
+}
+.stats__item:hover { background: var(--color-primary-50); }
+
+.stats__icon-wrap {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--color-primary-50);
+  border: 1px solid var(--color-primary-100);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-brand);
+  margin-bottom: 0.5rem;
+  transition: background 200ms, transform 200ms;
+  flex-shrink: 0;
+}
+.stats__item:hover .stats__icon-wrap {
+  background: var(--color-primary-100);
+  transform: scale(1.08);
+}
+
+/* Animaciones por tipo de icono */
+@keyframes globe-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes sparkles-pulse {
+  0%,100% { opacity: 0.65; }
+  50%     { opacity: 1; }
+}
+@keyframes award-rock {
+  0%,100% { transform: rotate(0deg); }
+  25%     { transform: rotate(4deg); }
+  75%     { transform: rotate(-4deg); }
+}
+@keyframes package-bounce {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-4px); }
+}
+
+.stats__icon-wrap--globe svg    { animation: globe-spin 20s linear infinite; }
+.stats__icon-wrap--sparkles svg { animation: sparkles-pulse 2s ease-in-out infinite; }
+.stats__item:hover .stats__icon-wrap--award svg   { animation: award-rock 0.5s ease-in-out; }
+.stats__item:hover .stats__icon-wrap--package svg { animation: package-bounce 0.5s ease-in-out; }
+
+.stats__value {
+  font-family: var(--font-display);
+  font-size: clamp(1.875rem, 4vw, 2.75rem);
+  font-weight: 900;
+  color: var(--color-brand);
+  line-height: 1;
+}
+.stats__label {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* ──────────────────────────────────────────────────────────
+   SERVICIOS
+────────────────────────────────────────────────────────── */
+.services {
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  background: var(--color-bg);
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.svc-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding: 2rem 1.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: border-color 300ms, box-shadow 300ms, transform 300ms;
+}
+.svc-card:hover {
+  border-color: var(--color-primary-200);
+  box-shadow: 0 12px 40px rgba(74,123,181,0.14);
+  transform: translateY(-4px);
+}
+.svc-card--accent:hover { border-color: var(--color-accent-300); }
+
+/* Línea decorativa superior */
+.svc-card__line {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary-400), var(--color-primary-200));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 350ms ease;
+  border-radius: 20px 20px 0 0;
+}
+.svc-card--accent .svc-card__line {
+  background: linear-gradient(90deg, var(--color-accent-500), var(--color-accent-300));
+}
+.svc-card:hover .svc-card__line { transform: scaleX(1); }
+
+/* Header: número + flecha */
+.svc-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.svc-card__num {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--color-neutral-300);
+  transition: color 300ms;
+}
+.svc-card:hover .svc-card__num { color: var(--color-primary-300); }
+.svc-card--accent:hover .svc-card__num { color: var(--color-accent-400); }
+
+.svc-card__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  color: var(--color-neutral-300);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: opacity 250ms, transform 250ms, color 250ms, background 250ms;
+}
+.svc-card:hover .svc-card__arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+  color: var(--color-brand);
+  background: var(--color-primary-50);
+}
+.svc-card--accent:hover .svc-card__arrow {
+  color: var(--color-accent-600);
+  background: rgba(237,140,29,0.08);
+}
+
+/* Icon wrap */
+.svc-card__icon-wrap {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--color-primary-50), var(--color-primary-100));
+  border: 1px solid var(--color-primary-100);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-brand);
+  transition: background 300ms, transform 250ms;
+  flex-shrink: 0;
+}
+.svc-card--accent .svc-card__icon-wrap {
+  background: linear-gradient(135deg, rgba(237,140,29,0.08), rgba(237,140,29,0.16));
+  border-color: rgba(237,140,29,0.2);
+  color: var(--color-accent-600);
+}
+.svc-card:hover .svc-card__icon-wrap { transform: scale(1.05); }
+
+/* Icono — animación hover en plane */
+.svc-card__icon { transition: transform 250ms ease; }
+.svc-card:hover .svc-card__icon { transform: translate(3px, -3px); }
+
+.svc-card__title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-neutral-900);
+  margin: 0;
+  transition: color 300ms;
+}
+.svc-card--accent .svc-card__title { color: var(--color-accent-700); }
+
+.svc-card__desc {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+/* Overlay estilo Lifecare — desliza desde abajo */
+.svc-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(74,123,181,0.92) 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 400ms ease-in-out, transform 400ms ease-in-out;
+  border-radius: 20px;
+}
+.svc-card--accent .svc-card__overlay {
+  background: linear-gradient(180deg, transparent 0%, rgba(204,118,20,0.92) 100%);
+}
+.svc-card:hover .svc-card__overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+.svc-card__overlay-label {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ──────────────────────────────────────────────────────────
+   POR QUÉ ELEGIRNOS
+────────────────────────────────────────────────────────── */
+.why {
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  background: var(--color-surface);
+}
+.why__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: center;
+}
+
+.why__visual {}
+.why__img-wrap {
+  position: relative;
+  border-radius: 24px;
+  overflow: visible;
+}
+.why__img-ph {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(74,123,181,0.18);
+}
+.why__img-ph svg { display: block; width: 100%; height: auto; }
+
+/* Badge flotante */
+.why__badge {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 0.875rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+}
+.why__badge-icon { font-size: 1.75rem; }
+.why__badge-title { font-weight: 700; font-size: 0.875rem; color: var(--color-neutral-900); margin: 0; }
+.why__badge-sub { font-size: 0.75rem; color: var(--color-text-muted); margin: 0; }
+
+.why__content { padding-left: clamp(0px, 2vw, 2rem); }
+.why__lead { margin: 0 0 0.5rem; text-align: left; }
+
+.why__list {
+  list-style: none; margin: 1.75rem 0 2.5rem; padding: 0;
+  display: flex; flex-direction: column; gap: 1.25rem;
+}
+.why__item { display: flex; gap: 1.125rem; align-items: flex-start; }
+.why__item-icon {
+  flex-shrink: 0;
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  background: var(--color-primary-50);
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--color-primary-100);
+  color: var(--color-brand);
+  transition: background 200ms, transform 200ms;
+}
+.why__item:hover .why__item-icon {
+  background: var(--color-primary-100);
+  transform: scale(1.08);
+}
+
+@keyframes pin-pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(74,123,181,0.4); }
+  50%     { box-shadow: 0 0 0 8px rgba(74,123,181,0); }
+}
+.why__item-icon--pin-pulse { animation: pin-pulse 2.5s ease-in-out infinite; }
+.why__item-title {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-neutral-900);
+  margin-bottom: 0.25rem;
+}
+.why__item-desc { font-size: 0.875rem; color: var(--color-text-muted); margin: 0; line-height: 1.55; }
+
+.why__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: var(--color-brand);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  border-radius: 9999px;
+  box-shadow: 0 4px 18px rgba(74,123,181,0.25);
+  transition: background 150ms, transform 100ms, box-shadow 150ms;
+}
+.why__btn:hover {
+  background: var(--color-primary-700);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(74,123,181,0.35);
+}
+
+/* ──────────────────────────────────────────────────────────
+   INDUSTRIAS
+────────────────────────────────────────────────────────── */
+.industries {
+  padding: clamp(4rem, 7vw, 6rem) 0;
+  background: var(--color-surface-alt);
+}
+.industries__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.ind-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 220px;
+  padding: 2rem 1.5rem 1.75rem;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: border-color 250ms, box-shadow 250ms, transform 250ms;
+  cursor: default;
+}
+.ind-card:hover {
+  border-color: var(--ind-color, var(--color-primary-300));
+  box-shadow: 0 16px 40px color-mix(in srgb, var(--ind-color, #4A7BB5) 20%, transparent);
+  transform: translateY(-6px);
+}
+
+/* Glow difuminado de fondo */
+.ind-card__glow {
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: var(--ind-color, var(--color-primary-300));
+  filter: blur(60px);
+  opacity: 0.10;
+  transition: opacity 250ms, transform 250ms;
+  pointer-events: none;
+}
+.ind-card:hover .ind-card__glow { opacity: 0.22; transform: scale(1.2); }
+
+/* Icon wrap coloreado */
+.ind-card__icon-wrap {
+  width: 60px; height: 60px;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--ind-color, #4A7BB5) 12%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--ind-color, #4A7BB5) 28%, transparent);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ind-color, var(--color-brand));
+  flex-shrink: 0;
+  transition: transform 250ms;
+}
+.ind-card:hover .ind-card__icon-wrap { transform: scale(1.08); }
+.ind-card__icon { display: block; }
+
+.ind-card__name {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--color-neutral-900);
+  margin: 0.25rem 0 0;
+  line-height: 1.2;
+}
+
+.ind-card__sub {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+  flex: 1;
+}
+
+.ind-card__arrow {
+  display: block;
+  font-size: 1rem;
+  color: var(--ind-color, var(--color-primary-400));
+  opacity: 0.6;
+  transition: opacity 200ms, transform 200ms;
+  margin-top: auto;
+}
+.ind-card:hover .ind-card__arrow { opacity: 1; transform: translateX(4px); }
+
+/* ──────────────────────────────────────────────────────────
+   CTA SECTION
+────────────────────────────────────────────────────────── */
+.cta-section {
+  position: relative;
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  background: linear-gradient(135deg,
+    var(--color-primary-900) 0%,
+    var(--color-primary-700) 50%,
+    var(--color-primary-800) 100%
+  );
+  overflow: hidden;
+}
+.cta-section__bg { position: absolute; inset: 0; pointer-events: none; }
+.cta-section__blob {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); opacity: 0.2;
+}
+.cta-section__blob--1 {
+  width: 500px; height: 500px;
+  background: var(--color-primary-400);
+  top: -200px; right: -100px;
+}
+.cta-section__blob--2 {
+  width: 350px; height: 350px;
+  background: var(--color-accent-500);
+  bottom: -100px; left: 10%;
+  opacity: 0.12;
+}
+
+.cta-section__inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+.cta-section__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.625rem, 3.5vw, 2.5rem);
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 0.625rem;
+}
+.cta-section__desc {
+  font-size: 1rem; color: var(--color-primary-200); margin: 0;
+}
+.cta-section__actions {
+  display: flex; gap: 1rem; flex-wrap: wrap; flex-shrink: 0;
+}
+
+.cta-section__btn-primary {
+  display: inline-flex; align-items: center;
+  padding: 0.9375rem 2.25rem;
+  background: var(--color-cta); color: #fff;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 1rem; border-radius: 9999px;
+  box-shadow: 0 4px 20px rgba(237,140,29,0.40);
+  transition: background 150ms, transform 100ms;
+}
+.cta-section__btn-primary:hover {
+  background: var(--color-accent-600);
+  transform: translateY(-2px);
+}
+
+.cta-section__btn-wa {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.9375rem 1.75rem;
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: #fff; font-weight: 600; font-size: 1rem;
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+  transition: background 150ms, border-color 150ms;
+}
+.cta-section__btn-wa:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.5);
+}
+
+/* ──────────────────────────────────────────────────────────
+   RESPONSIVE
+────────────────────────────────────────────────────────── */
+
+/* Evitar desborde horizontal de blobs/decorativos */
+html, body { overflow-x: hidden; }
+
+/* ── 1024px (tablet landscape / laptop pequeña) ── */
+@media (max-width: 1023px) {
+  .hero__inner { grid-template-columns: 1fr; }
+  .hero__cards { display: none; }
+
+  .stats__inner { grid-template-columns: repeat(2, 1fr); }
+
+  /* Services ya usa auto-fit, nada que hacer */
+
+  .why__inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .why__visual {
+    display: flex;
+    justify-content: center;
+  }
+  .why__img-wrap { max-width: 480px; width: 100%; }
+  .why__badge { right: 0; }
+
+  .cta-section__inner { flex-direction: column; text-align: center; }
+  .cta-section__actions { justify-content: center; }
+}
+
+/* ── 768px (tablet portrait) ── */
+@media (max-width: 768px) {
+  .why__visual { display: none; }
+}
+
+/* ── 639px (mobile grande / phablet) ── */
+@media (max-width: 639px) {
+  .stats__inner { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+
+  /* Services auto-fit cae a 1 col automático */
+
+  .industries__grid { gap: 1rem; }
+  .ind-card { min-height: 190px; padding: 1.5rem 1.25rem; }
+
+  .hero__ctas { flex-direction: column; }
+  .hero__btn-cta, .hero__btn-wa { justify-content: center; }
+
+  .cta-section__btn-primary,
+  .cta-section__btn-wa { width: 100%; justify-content: center; }
+
+  .cta-section { padding: 3rem 0; }
+}
+
+/* ── 479px (smartphone estándar) ── */
+@media (max-width: 479px) {
+  .hero__title { font-size: clamp(2rem, 10vw, 2.75rem); }
+  .hero__lead  { font-size: 0.9375rem; }
+  .hero__trust-text { font-size: 0.75rem; }
+  .hero__badge { font-size: 0.75rem; padding: 0.3rem 0.75rem; }
+
+  .stats__inner { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .stats__item { padding: 0.875rem 0.5rem; }
+  .stats__value { font-size: 1.75rem; }
+
+  .industries__grid { grid-template-columns: 1fr; }
+  .ind-card { min-height: auto; }
+
+  .section-title { font-size: clamp(1.625rem, 7vw, 2.5rem); }
+}
+
+/* ── Prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .stats__icon-wrap--globe svg    { animation: none; }
+  .stats__icon-wrap--sparkles svg { animation: none; }
+  .why__item-icon--pin-pulse      { animation: none; }
+  .hero__badge-dot                { animation: none; }
+  .svc-card__overlay,
+  .svc-card__line,
+  .svc-card__arrow,
+  .svc-card__icon                 { transition: none; }
+  .ind-card__glow,
+  .ind-card__arrow,
+  .ind-card__icon-wrap            { transition: none; }
+}
+</style>
