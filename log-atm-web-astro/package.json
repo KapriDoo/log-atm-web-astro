@@ -12,6 +12,22 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^6.1.5"
+    "@astrojs/react": "^5.0.3",
+    "@astrojs/sitemap": "^3.7.2",
+    "@tailwindcss/vite": "^4.2.2",
+    "astro": "^6.1.5",
+    "gsap": "^3.14.2",
+    "motion": "^12.38.0",
+    "potrace": "^2.1.8",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^4.2.2"
+  },
+  "devDependencies": {
+    "@iconify-json/lucide": "^1.2.102",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "astro-icon": "^1.1.5"
   }
 }
