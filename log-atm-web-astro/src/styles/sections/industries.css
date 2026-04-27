@@ -28,7 +28,7 @@
 @media (hover: hover) {
   .ind-card:hover {
     border-color: var(--ind-color, var(--color-primary-300));
-    box-shadow: 0 16px 40px color-mix(in srgb, var(--ind-color, #4A7BB5) 20%, transparent);
+    box-shadow: 0 16px 40px color-mix(in srgb, var(--ind-color, var(--color-industry-fallback)) 20%, transparent);
     transform: translateY(-6px);
   }
 }
@@ -51,8 +51,8 @@
 .ind-card__icon-wrap {
   width: 60px; height: 60px;
   border-radius: 16px;
-  background: color-mix(in srgb, var(--ind-color, #4A7BB5) 12%, transparent);
-  border: 1.5px solid color-mix(in srgb, var(--ind-color, #4A7BB5) 28%, transparent);
+  background: color-mix(in srgb, var(--ind-color, var(--color-industry-fallback)) 12%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--ind-color, var(--color-industry-fallback)) 28%, transparent);
   display: flex; align-items: center; justify-content: center;
   color: var(--ind-color, var(--color-brand));
   flex-shrink: 0;

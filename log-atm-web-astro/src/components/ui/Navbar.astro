@@ -82,14 +82,14 @@ const currentPath = Astro.url.pathname;
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(255,255,255,0.92);
+    background: color-mix(in srgb, var(--color-surface) 92%, transparent);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--color-border);
     transition: box-shadow 200ms ease;
   }
   .navbar.is-scrolled {
-    box-shadow: 0 2px 24px rgba(74,123,181,0.10);
+    box-shadow: var(--shadow-navbar);
   }
 
   .navbar__inner {
@@ -157,14 +157,14 @@ const currentPath = Astro.url.pathname;
     background: var(--color-cta);
     padding: 0.5rem 1.25rem;
     border-radius: 9999px;
-    box-shadow: 0 2px 12px rgba(237,140,29,0.30);
+    box-shadow: var(--shadow-cta);
     transition: background 150ms, transform 100ms, box-shadow 150ms;
     white-space: nowrap;
   }
   .navbar__cta:hover {
     background: var(--color-accent-600);
     transform: translateY(-1px);
-    box-shadow: 0 4px 18px rgba(237,140,29,0.40);
+    box-shadow: 0 4px 18px color-mix(in srgb, var(--color-accent-500) 40%, transparent);
   }
 
   /* Hamburger */
@@ -206,7 +206,7 @@ const currentPath = Astro.url.pathname;
   .drawer__backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(17,34,54,0.55);
+    background: color-mix(in srgb, var(--color-primary-900) 55%, transparent);
     backdrop-filter: blur(4px);
     animation: fadeIn 200ms ease forwards;
   }
@@ -217,7 +217,7 @@ const currentPath = Astro.url.pathname;
     width: min(320px, 88vw);
     height: 100dvh;
     background: var(--color-surface);
-    box-shadow: -8px 0 48px rgba(0,0,0,0.18);
+    box-shadow: var(--shadow-drawer);
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
@@ -299,7 +299,7 @@ const currentPath = Astro.url.pathname;
     font-weight: 700;
     font-size: 0.9375rem;
     color: #fff;
-    box-shadow: 0 3px 14px rgba(237,140,29,0.35);
+    box-shadow: 0 3px 14px color-mix(in srgb, var(--color-accent-500) 35%, transparent);
     transition: background 150ms;
   }
   .drawer__cta:hover { background: var(--color-accent-600); }

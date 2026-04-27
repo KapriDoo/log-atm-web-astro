@@ -12,70 +12,8 @@
 
 @import "tailwindcss";
 
-/* Design tokens: paleta, sombras, radios */
+/* Design tokens: paleta, sombras, radios — fuente única de verdad */
 @import "./tokens.css";
-
-/* ─── Tailwind v4 @theme ────────────────────────────────────── */
-@theme {
-  /* Primary Blue */
-  --color-primary-50:  #eef4fb;
-  --color-primary-100: #d7e4f4;
-  --color-primary-200: #aec7e5;
-  --color-primary-300: #83a7d2;
-  --color-primary-400: #658fc3;
-  --color-primary-500: #4A7BB5;
-  --color-primary-600: #3b6497;
-  --color-primary-700: #2b4e78;
-  --color-primary-800: #1c3554;
-  --color-primary-900: #112236;
-  --color-primary-950: #0a1624;
-
-  /* Accent Amber */
-  --color-accent-300: #f7b76e;
-  --color-accent-400: #f39f3f;
-  --color-accent-500: #ed8c1d;
-  --color-accent-600: #cc7614;
-  --color-accent-700: #a15e12;
-
-  /* Neutral Warm Gray */
-  --color-neutral-50:  #f8f7f6;
-  --color-neutral-100: #efedeb;
-  --color-neutral-200: #e1dedb;
-  --color-neutral-300: #c8c4c1;
-  --color-neutral-400: #aaa6a1;
-  --color-neutral-500: #898580;
-  --color-neutral-600: #6e6963;
-  --color-neutral-700: #544f4a;
-  --color-neutral-800: #37332f;
-  --color-neutral-900: #211f1c;
-  --color-neutral-950: #131210;
-
-  /* Semánticos */
-  --color-success: #2D9B6F;
-  --color-warning: #ed8c1d;
-  --color-error:   #E04848;
-
-  /* Funcionales */
-  --color-bg:          #f8f7f6;
-  --color-surface:     #ffffff;
-  --color-surface-alt: #efedeb;
-  --color-border:      #e1dedb;
-  --color-text:        #211f1c;
-  --color-text-muted:  #6e6963;
-  --color-brand:       #4A7BB5;
-  --color-cta:         #ed8c1d;
-
-  /* Tipografía */
-  --font-sans:    'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Outfit', 'Inter', ui-sans-serif, sans-serif;
-
-  /* Border radius */
-  --radius-sm:   6px;
-  --radius-md:   12px;
-  --radius-lg:   20px;
-  --radius-xl:   28px;
-  --radius-pill: 9999px;
-}
 
 /* ─── Reset / Base ─────────────────────────────────────────── */
 @layer base {
@@ -192,7 +130,7 @@
   }
   .btn-cta:hover {
     background-color: var(--color-accent-600);
-    box-shadow: 0 6px 24px 0 rgb(237 140 29 / 0.45);
+    box-shadow: 0 6px 24px 0 color-mix(in srgb, var(--color-accent-500) 45%, transparent);
     transform: translateY(-1px);
   }
   .btn-cta:active {
