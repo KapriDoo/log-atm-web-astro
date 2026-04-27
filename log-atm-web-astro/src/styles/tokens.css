@@ -43,10 +43,19 @@
     --color-neutral-950: #131210;
 
     /* ─── Semánticos ─────────────────────────────────────── */
-    --color-success: #2D9B6F;
-    --color-warning: #ed8c1d; /* = accent-500 */
-    --color-error:   #E04848;
-    --color-info:    #4A7BB5; /* = primary-500 */
+    --color-success:       #22c55e;
+    --color-success-light: #86efac;
+    --color-warning:       #ed8c1d; /* = accent-500 */
+    --color-error:         #E04848;
+    --color-info:          #4A7BB5; /* = primary-500 */
+
+    /* ─── WhatsApp ───────────────────────────────────────── */
+    --color-whatsapp:           #128C7E;
+    --color-whatsapp-hover:     #1da851;
+    --color-whatsapp-hover-dark:#0d6b61;
+
+    /* ─── Amber (overlay accent fallback) ────────────────── */
+    --color-amber-600: #cc7614;
 
     /* ─── Tokens funcionales (usar estos en componentes) ─── */
     --color-bg:          var(--color-neutral-50);
@@ -74,10 +83,12 @@
     --shadow-cta: 0 4px 20px 0 rgb(62 185 120 / 0.35);
 
     /* ─── Border radius ──────────────────────────────────── */
-    --radius-sm:  6px;
-    --radius-md:  12px;
-    --radius-lg:  20px;   /* cards principales — estilo lifecare */
-    --radius-xl:  28px;   /* cards hero, destacadas */
+    --radius-sm:   6px;
+    --radius-md:   12px;
+    --radius-lg:   20px;   /* cards principales — estilo lifecare */
+    --radius-xl:   24px;   /* cards hero, destacadas */
+    --radius-2xl:  28px;   /* badges flotantes */
+    --radius-card: 16px;   /* cards secundarias, badges */
     --radius-pill: 9999px; /* botones CTA, badges */
   }
 }
@@ -121,10 +132,19 @@
   --color-neutral-950: #131210;
 
   /* Semánticos */
-  --color-success: #2D9B6F;
-  --color-warning: #ed8c1d;
-  --color-error:   #E04848;
-  --color-info:    #4A7BB5;
+  --color-success:       #22c55e;
+  --color-success-light: #86efac;
+  --color-warning:       #ed8c1d;
+  --color-error:         #E04848;
+  --color-info:          #4A7BB5;
+
+  /* WhatsApp */
+  --color-whatsapp:            #128C7E;
+  --color-whatsapp-hover:      #1da851;
+  --color-whatsapp-hover-dark: #0d6b61;
+
+  /* Amber */
+  --color-amber-600: #cc7614;
 
   /* Funcionales */
   --color-bg:          #f8f7f6;
@@ -140,6 +160,8 @@
   --radius-sm:   6px;
   --radius-md:   12px;
   --radius-lg:   20px;
-  --radius-xl:   28px;
+  --radius-xl:   24px;
+  --radius-2xl:  28px;
+  --radius-card: 16px;
   --radius-pill: 9999px;
 }

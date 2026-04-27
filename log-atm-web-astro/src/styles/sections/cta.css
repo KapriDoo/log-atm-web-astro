@@ -55,7 +55,7 @@
   background: var(--color-cta); color: var(--color-text-inverse);
   font-family: var(--font-display); font-weight: 700;
   font-size: 1rem; border-radius: 9999px;
-  box-shadow: 0 4px 20px rgba(62,185,120,0.40);
+  box-shadow: 0 4px 20px color-mix(in srgb, var(--color-accent-500) 40%, transparent);
   transition: background 150ms, transform 100ms;
 }
 .cta-section__btn-primary:hover {
@@ -66,16 +66,16 @@
 .cta-section__btn-wa {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.9375rem 1.75rem;
-  background: rgba(255,255,255,0.08);
-  border: 1.5px solid rgba(255,255,255,0.25);
+  background: color-mix(in srgb, var(--color-text-inverse) 8%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--color-text-inverse) 25%, transparent);
   color: var(--color-text-inverse); font-weight: 600; font-size: 1rem;
   border-radius: 9999px;
   backdrop-filter: blur(8px);
   transition: background 150ms, border-color 150ms;
 }
 .cta-section__btn-wa:hover {
-  background: rgba(255,255,255,0.15);
-  border-color: rgba(255,255,255,0.5);
+  background: color-mix(in srgb, var(--color-text-inverse) 15%, transparent);
+  border-color: color-mix(in srgb, var(--color-text-inverse) 50%, transparent);
 }
 
 /* ── Responsive ── */
