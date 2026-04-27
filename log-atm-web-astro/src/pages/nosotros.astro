@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/ui/Navbar.astro';
+import Footer from '../components/ui/Footer.astro';
+import { Icon } from 'astro-icon/components';
+import { SITE } from '../lib/constants';
+
+const title = 'Nosotros';
+const description = 'Conoce LOG ATM: empresa chilena de logística internacional con 15+ años de experiencia en carga aérea, marítima y aduanas.';
+const canonical = `${SITE.url}/nosotros`;
+---
+
+<BaseLayout title={title} description={description} canonical={canonical}>
+  <Navbar />
+
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="container page-hero__inner">
+        <span class="eyebrow">Nosotros</span>
+        <h1 id="page-title" class="page-hero__title">Personas. Confianza. Resultados.</h1>
+        <p class="page-hero__lead">
+          Somos un equipo chileno con conexiones globales y el compromiso de tratarte como nuestro único cliente.
+        </p>
+      </div>
+    </section>
+
+    <!-- Historia / Valores -->
+    <section class="about-section" aria-labelledby="about-title">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-card">
+            <div class="about-card__icon" aria-hidden="true">
+              <Icon name="lucide:award" width="32" height="32" />
+            </div>
+            <h2 class="about-card__title">15+ años de experiencia</h2>
+            <p class="about-card__desc">
+              Desde 2009 conectando Chile con el mundo. Hemos crecido junto a nuestros clientes,
+              adaptándonos a cada desafío del comercio internacional.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-card__icon" aria-hidden="true">
+              <Icon name="lucide:globe" width="32" height="32" />
+            </div>
+            <h2 class="about-card__title">Red global</h2>
+            <p class="about-card__desc">
+              Alianzas estratégicas con agentes en 80+ países. Donde haya un puerto o aeropuerto,
+              tenemos un socio confiable.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-card__icon" aria-hidden="true">
+              <Icon name="lucide:users" width="32" height="32" />
+            </div>
+            <h2 class="about-card__title">Equipo dedicado</h2>
+            <p class="about-card__desc">
+              Cada cliente tiene un ejecutivo asignado que conoce su negocio y anticipa sus necesidades.
+              No somos una multinacional anónima.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-card__icon" aria-hidden="true">
+              <Icon name="lucide:shield-check" width="32" height="32" />
+            </div>
+            <h2 class="about-card__title">Certificaciones</h2>
+            <p class="about-card__desc">
+              Operadores certificados por el Servicio Nacional de Aduanas. Cumplimos con los más altos
+              estándares de calidad y seguridad.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CEO Quote -->
+    <section class="quote-section" aria-labelledby="quote-title">
+      <div class="container quote-section__inner">
+        <blockquote class="quote">
+          <p class="quote__text">
+            "Nuestra misión es simple: hacer que el comercio internacional sea accesible para cualquier empresa chilena.
+            No importa el tamaño de tu carga, siempre hay una solución."
+          </p>
+          <footer class="quote__footer">
+            <strong>María Paz Rivera Zapata</strong>
+            <span>CEO &amp; Fundadora, LOG ATM</span>
+          </footer>
+        </blockquote>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* .page-hero, .page-hero__* → global.css */
+
+  .about-section {
+    padding: clamp(4rem, 8vw, 6rem) 0;
+    background: var(--color-bg);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  .about-card {
+    background: #fff;
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+  }
+  .about-card__icon {
+    width: 72px; height: 72px;
+    border-radius: 20px;
+    background: var(--color-primary-50);
+    color: var(--color-brand);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+  }
+  .about-card__title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.75rem;
+    color: var(--color-neutral-900);
+  }
+  .about-card__desc {
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .quote-section {
+    padding: clamp(4rem, 8vw, 6rem) 0;
+    background: var(--color-primary-50);
+  }
+  .quote-section__inner {
+    max-width: 800px;
+    text-align: center;
+  }
+  .quote {
+    margin: 0;
+  }
+  .quote__text {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--color-primary-800);
+    margin: 0 0 1.5rem;
+  }
+  .quote__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    color: var(--color-text-muted);
+  }
+  .quote__footer strong {
+    color: var(--color-neutral-900);
+    font-size: 1.125rem;
+  }
+</style>
