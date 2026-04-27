@@ -7,7 +7,7 @@ domain: "refactoring"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
@@ -21,7 +21,7 @@ related: []
 affects: []
 adrs: []
 scope: ["src/styles/tokens.css", "src/styles/global.css"]
-verified_at: null
+verified_at: "2026-04-27"
 created: "2026-04-26"
 updated: "2026-04-26"
 tags: [capability-spec]
