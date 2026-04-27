@@ -22,12 +22,12 @@
     --color-primary-900: #112236;
     --color-primary-950: #0a1624;
 
-    /* ─── Accent Amber ───────────────────────────────────── */
-    --color-accent-300: #f7b76e;
-    --color-accent-400: #f39f3f;
-    --color-accent-500: #ed8c1d; /* ← CTA */
-    --color-accent-600: #cc7614;
-    --color-accent-700: #a15e12;
+    /* ─── Accent Green ───────────────────────────────────── */
+    --color-accent-300: #d8f1e6;
+    --color-accent-400: #87d3b0;
+    --color-accent-500: #3EB978; /* ← CTA */
+    --color-accent-600: #339965;
+    --color-accent-700: #297A51;
 
     /* ─── Neutral Warm Gray ──────────────────────────────── */
     --color-neutral-50:  #f8f7f6; /* ← background página */
@@ -63,64 +63,22 @@
 
     --color-cta:         var(--color-accent-500);
     --color-cta-hover:   var(--color-accent-600);
-    --color-cta-text:    #ffffff;
-
-    /* ─── Tokens de opacidad ─────────────────────────────── */
-    /* Overlays y efectos */
-    --opacity-overlay-light:  0.10; /* fondos glass, badges */
-    --opacity-overlay-medium: 0.25; /* blobs decorativos */
-    --opacity-overlay-heavy:  0.92; /* gradient overlays */
-    /* Sombras */
-    --opacity-shadow:    0.14; /* sombras de cards */
-    --opacity-cta-shadow: 0.40; /* sombras de botones CTA */
-    /* Bordes */
-    --opacity-border-light: 0.15; /* bordes sutiles sobre fondos oscuros */
-    --opacity-border-medium: 0.18; /* bordes de cards glass */
-    --opacity-border-heavy: 0.40; /* bordes hover sobre fondos oscuros */
+    --color-cta-text:    var(--color-text-inverse);
+    --color-text-inverse: #ffffff;
 
     /* ─── Elevaciones / Sombras ──────────────────────────── */
-    /* Usan color-mix() con tokens base para mantener consistencia */
-    --shadow-sm:  0 1px 3px 0  color-mix(in srgb, var(--color-primary-500) 8%,  transparent);
-    --shadow-md:  0 4px 16px 0 color-mix(in srgb, var(--color-primary-500) 12%, transparent);
-    --shadow-lg:  0 8px 32px 0 color-mix(in srgb, var(--color-primary-500) 16%, transparent);
-    --shadow-xl:  0 16px 48px 0 color-mix(in srgb, var(--color-primary-500) 20%, transparent);
-    --shadow-cta: 0 4px 20px 0 color-mix(in srgb, var(--color-accent-500) 35%, transparent);
-
-    /* Sombras semánticas para secciones específicas */
-    --shadow-card:    0 12px 40px color-mix(in srgb, var(--color-primary-500) 14%, transparent);
-    --shadow-why:     0 20px 60px color-mix(in srgb, var(--color-primary-500) 18%, transparent);
-    --shadow-navbar:  0 2px 24px  color-mix(in srgb, var(--color-primary-500) 10%, transparent);
-    --shadow-drawer:  -8px 0 48px color-mix(in srgb, var(--color-neutral-950) 18%, transparent);
-    --shadow-hero-card: 0 8px 32px color-mix(in srgb, var(--color-neutral-950) 25%, transparent);
+    --shadow-sm:  0 1px 3px 0 rgb(74 123 181 / 0.08);
+    --shadow-md:  0 4px 16px 0 rgb(74 123 181 / 0.12);
+    --shadow-lg:  0 8px 32px 0 rgb(74 123 181 / 0.16);
+    --shadow-xl:  0 16px 48px 0 rgb(74 123 181 / 0.20);
+    --shadow-cta: 0 4px 20px 0 rgb(62 185 120 / 0.35);
 
     /* ─── Border radius ──────────────────────────────────── */
-    --radius-sm:   6px;
-    --radius-md:   12px;
-    --radius-lg:   20px;   /* cards principales — estilo lifecare */
-    --radius-xl:   28px;   /* cards hero, destacadas */
-    --radius-2xl:  24px;   /* imágenes destacadas, badges */
+    --radius-sm:  6px;
+    --radius-md:  12px;
+    --radius-lg:  20px;   /* cards principales — estilo lifecare */
+    --radius-xl:  28px;   /* cards hero, destacadas */
     --radius-pill: 9999px; /* botones CTA, badges */
-
-    /* ─── Colores semánticos específicos ─────────────────── */
-    /* Avatars (HeroSection) */
-    --color-avatar-1: var(--color-primary-400); /* #658fc3 */
-    --color-avatar-2: var(--color-primary-600); /* #3b6497 */
-    --color-avatar-3: var(--color-primary-500); /* #4A7BB5 */
-
-    /* WhatsApp */
-    --color-whatsapp:       #128C7E;
-    --color-whatsapp-hover: #1da851;
-
-    /* Fallback de industrias */
-    --color-industry-fallback: var(--color-primary-500);
-
-    /* Colores SVG (WhySection placeholder) */
-    --color-svg-bg:   var(--color-primary-200); /* #aec7e5 */
-    --color-svg-text: var(--color-primary-700); /* #2b4e78 */
-
-    /* Status / indicadores */
-    --color-status-online: #22c55e;
-    --color-status-pulse:  var(--color-accent-400);
   }
 }
 
@@ -142,12 +100,12 @@
   --color-primary-900: #112236;
   --color-primary-950: #0a1624;
 
-  /* Accent Amber */
-  --color-accent-300: #f7b76e;
-  --color-accent-400: #f39f3f;
-  --color-accent-500: #ed8c1d;
-  --color-accent-600: #cc7614;
-  --color-accent-700: #a15e12;
+  /* Accent Green */
+  --color-accent-300: #d8f1e6;
+  --color-accent-400: #87d3b0;
+  --color-accent-500: #3EB978;
+  --color-accent-600: #339965;
+  --color-accent-700: #297A51;
 
   /* Neutral */
   --color-neutral-50:  #f8f7f6;
@@ -176,7 +134,7 @@
   --color-text:        #211f1c;
   --color-text-muted:  #6e6963;
   --color-brand:       #4A7BB5;
-  --color-cta:         #ed8c1d;
+  --color-cta:         #3EB978;
 
   /* Border radius */
   --radius-sm:   6px;

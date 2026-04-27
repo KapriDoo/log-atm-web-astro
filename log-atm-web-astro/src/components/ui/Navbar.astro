@@ -82,14 +82,14 @@ const currentPath = Astro.url.pathname;
     position: sticky;
     top: 0;
     z-index: 100;
-    background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+    background: rgba(255,255,255,0.92);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--color-border);
     transition: box-shadow 200ms ease;
   }
   .navbar.is-scrolled {
-    box-shadow: var(--shadow-navbar);
+    box-shadow: 0 2px 24px rgba(74,123,181,0.10);
   }
 
   .navbar__inner {
@@ -153,18 +153,18 @@ const currentPath = Astro.url.pathname;
   .navbar__cta {
     font-size: 0.875rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--color-text-inverse);
     background: var(--color-cta);
     padding: 0.5rem 1.25rem;
     border-radius: 9999px;
-    box-shadow: var(--shadow-cta);
+    box-shadow: 0 2px 12px rgba(62,185,120,0.30);
     transition: background 150ms, transform 100ms, box-shadow 150ms;
     white-space: nowrap;
   }
   .navbar__cta:hover {
     background: var(--color-accent-600);
     transform: translateY(-1px);
-    box-shadow: 0 4px 18px color-mix(in srgb, var(--color-accent-500) 40%, transparent);
+    box-shadow: 0 4px 18px rgba(62,185,120,0.40);
   }
 
   /* Hamburger */
@@ -206,7 +206,7 @@ const currentPath = Astro.url.pathname;
   .drawer__backdrop {
     position: absolute;
     inset: 0;
-    background: color-mix(in srgb, var(--color-primary-900) 55%, transparent);
+    background: rgba(17,34,54,0.55);
     backdrop-filter: blur(4px);
     animation: fadeIn 200ms ease forwards;
   }
@@ -217,7 +217,7 @@ const currentPath = Astro.url.pathname;
     width: min(320px, 88vw);
     height: 100dvh;
     background: var(--color-surface);
-    box-shadow: var(--shadow-drawer);
+    box-shadow: -8px 0 48px rgba(0,0,0,0.18);
     display: flex;
     flex-direction: column;
     padding: 1.5rem;
@@ -298,8 +298,8 @@ const currentPath = Astro.url.pathname;
     background: var(--color-cta);
     font-weight: 700;
     font-size: 0.9375rem;
-    color: #fff;
-    box-shadow: 0 3px 14px color-mix(in srgb, var(--color-accent-500) 35%, transparent);
+    color: var(--color-text-inverse);
+    box-shadow: 0 3px 14px rgba(62,185,120,0.35);
     transition: background 150ms;
   }
   .drawer__cta:hover { background: var(--color-accent-600); }
