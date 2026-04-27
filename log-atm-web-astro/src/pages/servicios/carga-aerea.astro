@@ -116,10 +116,10 @@ const schemaService = JSON.stringify({
   .service-hero__blob {
     position: absolute;
     width: 500px; height: 500px;
-    border-radius: 50%;
+    border-radius: var(--radius-circle);
     background: var(--color-primary-400);
     filter: blur(100px);
-    opacity: 0.2;
+    opacity: var(--opacity-20);
     top: -100px; right: -150px;
   }
   .service-hero__inner {
@@ -155,7 +155,7 @@ const schemaService = JSON.stringify({
     align-items: center;
     gap: 0.5rem;
     padding: 0.875rem 1.75rem;
-    border-radius: 9999px;
+    border-radius: var(--radius-pill);
     background: var(--color-cta);
     color: var(--color-text-inverse);
     font-weight: 600;
@@ -168,14 +168,14 @@ const schemaService = JSON.stringify({
     align-items: center;
     gap: 0.5rem;
     padding: 0.875rem 1.75rem;
-    border-radius: 9999px;
-    background: rgba(255,255,255,0.1);
+    border-radius: var(--radius-pill);
+    background: color-mix(in srgb, var(--color-text-inverse) var(--opacity-subtle), transparent);
     color: var(--color-text-inverse);
     font-weight: 500;
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid color-mix(in srgb, var(--color-text-inverse) var(--opacity-20), transparent);
     transition: background 150ms;
   }
-  .btn-whatsapp:hover { background: rgba(255,255,255,0.2); }
+  .btn-whatsapp:hover { background: color-mix(in srgb, var(--color-text-inverse) var(--opacity-20), transparent); }
 
   .service-features {
     padding: clamp(4rem, 8vw, 6rem) 0;
@@ -197,17 +197,17 @@ const schemaService = JSON.stringify({
   .feature-card {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 20px;
+    border-radius: var(--radius-lg);
     padding: 2rem;
     transition: box-shadow 300ms, transform 300ms;
   }
   .feature-card:hover {
-    box-shadow: 0 12px 40px rgba(74,123,181,0.12);
+    box-shadow: 0 12px 40px color-mix(in srgb, var(--color-brand) var(--opacity-12), transparent);
     transform: translateY(-4px);
   }
   .feature-card__icon {
     width: 56px; height: 56px;
-    border-radius: 16px;
+    border-radius: var(--radius-card);
     background: var(--color-primary-50);
     color: var(--color-brand);
     display: flex;
@@ -248,7 +248,7 @@ const schemaService = JSON.stringify({
   .btn-cta {
     display: inline-flex;
     padding: 1rem 2rem;
-    border-radius: 9999px;
+    border-radius: var(--radius-pill);
     background: var(--color-cta);
     color: var(--color-text-inverse);
     font-weight: 700;

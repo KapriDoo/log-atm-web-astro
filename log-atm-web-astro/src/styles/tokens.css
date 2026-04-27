@@ -86,9 +86,23 @@
     --color-svg-text: var(--color-neutral-400);
 
     /* ─── Opacidad ───────────────────────────────────────── */
+    --opacity-subtle: 0.10;
     --opacity-low:    0.08;
+    --opacity-12:     0.12;
     --opacity-medium: 0.15;
+    --opacity-20:     0.20;
+    --opacity-22:     0.22;
     --opacity-high:   0.25;
+    --opacity-30:     0.30;
+    --opacity-35:     0.35;
+    --opacity-40:     0.40;
+    --opacity-45:     0.45;
+    --opacity-50:     0.50;
+    --opacity-60:     0.60;
+    --opacity-65:     0.65;
+    --opacity-70:     0.70;
+    --opacity-80:     0.80;
+    --opacity-90:     0.90;
     --opacity-full:   1;
 
     /* ─── Elevaciones / Sombras ──────────────────────────── */
@@ -99,13 +113,16 @@
     --shadow-cta: 0 4px 20px 0 rgb(62 185 120 / 0.35);
 
     /* ─── Border radius ──────────────────────────────────── */
-    --radius-sm:   6px;
-    --radius-md:   12px;
-    --radius-lg:   20px;   /* cards principales — estilo lifecare */
-    --radius-xl:   24px;   /* cards hero, destacadas */
-    --radius-2xl:  28px;   /* badges flotantes */
-    --radius-card: 16px;   /* cards secundarias, badges */
-    --radius-pill: 9999px; /* botones CTA, badges */
+    --radius-xs:    4px;
+    --radius-sm:    6px;
+    --radius-input: 10px;  /* inputs de formularios */
+    --radius-md:    12px;
+    --radius-card:  16px;  /* cards secundarias, badges */
+    --radius-lg:    20px;  /* cards principales — estilo lifecare */
+    --radius-xl:    24px;  /* cards hero, destacadas */
+    --radius-2xl:   28px;  /* badges flotantes */
+    --radius-circle:50%;   /* círculos perfectos */
+    --radius-pill:  9999px;/* botones CTA, badges */
   }
 }
 
@@ -183,17 +200,34 @@
   --color-svg-text: #aaa6a1;
 
   /* Opacidad */
+  --opacity-subtle: 0.10;
   --opacity-low:    0.08;
+  --opacity-12:     0.12;
   --opacity-medium: 0.15;
+  --opacity-20:     0.20;
+  --opacity-22:     0.22;
   --opacity-high:   0.25;
+  --opacity-30:     0.30;
+  --opacity-35:     0.35;
+  --opacity-40:     0.40;
+  --opacity-45:     0.45;
+  --opacity-50:     0.50;
+  --opacity-60:     0.60;
+  --opacity-65:     0.65;
+  --opacity-70:     0.70;
+  --opacity-80:     0.80;
+  --opacity-90:     0.90;
   --opacity-full:   1;
 
   /* Border radius */
-  --radius-sm:   6px;
-  --radius-md:   12px;
-  --radius-lg:   20px;
-  --radius-xl:   24px;
-  --radius-2xl:  28px;
-  --radius-card: 16px;
-  --radius-pill: 9999px;
+  --radius-xs:    4px;
+  --radius-sm:    6px;
+  --radius-input: 10px;
+  --radius-md:    12px;
+  --radius-card:  16px;
+  --radius-lg:    20px;
+  --radius-xl:    24px;
+  --radius-2xl:   28px;
+  --radius-circle:50%;
+  --radius-pill:  9999px;
 }

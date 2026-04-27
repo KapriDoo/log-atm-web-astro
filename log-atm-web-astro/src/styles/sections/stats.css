@@ -44,8 +44,8 @@
   to   { transform: rotate(360deg); }
 }
 @keyframes sparkles-pulse {
-  0%,100% { opacity: 0.65; }
-  50%     { opacity: 1; }
+  0%,100% { opacity: var(--opacity-65); }
+  50%     { opacity: var(--opacity-full); }
 }
 @keyframes award-rock {
   0%,100% { transform: rotate(0deg); }
