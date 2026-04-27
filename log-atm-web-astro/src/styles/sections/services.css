@@ -1,0 +1,169 @@
+/* LOG ATM — Services section ─────────────────────────── */
+
+.services {
+  padding: clamp(4rem, 8vw, 7rem) 0;
+  background: var(--color-bg);
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.svc-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding: 2rem 1.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: border-color 300ms, box-shadow 300ms, transform 300ms;
+}
+@media (hover: hover) {
+  .svc-card:hover {
+    border-color: var(--color-primary-200);
+    box-shadow: 0 12px 40px rgba(74,123,181,0.14);
+    transform: translateY(-4px);
+  }
+  .svc-card--accent:hover { border-color: var(--color-accent-300); }
+}
+
+/* ── Línea decorativa superior ── */
+.svc-card__line {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary-400), var(--color-primary-200));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 350ms ease;
+  border-radius: 20px 20px 0 0;
+}
+.svc-card--accent .svc-card__line {
+  background: linear-gradient(90deg, var(--color-accent-500), var(--color-accent-300));
+}
+.svc-card:hover .svc-card__line { transform: scaleX(1); }
+
+/* ── Header: número + flecha ── */
+.svc-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.svc-card__num {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--color-neutral-300);
+  transition: color 300ms;
+}
+.svc-card:hover .svc-card__num       { color: var(--color-primary-300); }
+.svc-card--accent:hover .svc-card__num { color: var(--color-accent-400); }
+
+.svc-card__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; height: 30px;
+  border-radius: 8px;
+  color: var(--color-neutral-300);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: opacity 250ms, transform 250ms, color 250ms, background 250ms;
+}
+.svc-card:hover .svc-card__arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+  color: var(--color-brand);
+  background: var(--color-primary-50);
+}
+.svc-card--accent:hover .svc-card__arrow {
+  color: var(--color-accent-600);
+  background: rgba(237,140,29,0.08);
+}
+
+/* ── Icon wrap ── */
+.svc-card__icon-wrap {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--color-primary-50), var(--color-primary-100));
+  border: 1px solid var(--color-primary-100);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-brand);
+  transition: background 300ms, transform 250ms;
+  flex-shrink: 0;
+}
+.svc-card--accent .svc-card__icon-wrap {
+  background: linear-gradient(135deg, rgba(237,140,29,0.08), rgba(237,140,29,0.16));
+  border-color: rgba(237,140,29,0.2);
+  color: var(--color-accent-600);
+}
+.svc-card:hover .svc-card__icon-wrap { transform: scale(1.05); }
+
+/* Icono — micro-animación hover (plane/ship) */
+.svc-card__icon { transition: transform 250ms ease; }
+.svc-card:hover .svc-card__icon { transform: translate(3px, -3px); }
+
+.svc-card__title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-neutral-900);
+  margin: 0;
+  transition: color 300ms;
+}
+.svc-card--accent .svc-card__title { color: var(--color-accent-700); }
+
+.svc-card__desc {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+/* ── Overlay estilo Lifecare (desliza desde abajo) ── */
+.svc-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(74,123,181,0.92) 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 400ms ease-in-out, transform 400ms ease-in-out;
+  border-radius: 20px;
+}
+.svc-card--accent .svc-card__overlay {
+  background: linear-gradient(180deg, transparent 0%, rgba(204,118,20,0.92) 100%);
+}
+.svc-card:hover .svc-card__overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+.svc-card__overlay-label {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ── Prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .svc-card__overlay,
+  .svc-card__line,
+  .svc-card__arrow,
+  .svc-card__icon { transition: none; }
+}

@@ -1,0 +1,107 @@
+/* LOG ATM — Industries section ───────────────────────── */
+
+.industries {
+  padding: clamp(4rem, 7vw, 6rem) 0;
+  background: var(--color-surface-alt);
+}
+.industries__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.ind-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 220px;
+  padding: 2rem 1.5rem 1.75rem;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: border-color 250ms, box-shadow 250ms, transform 250ms;
+  cursor: default;
+}
+@media (hover: hover) {
+  .ind-card:hover {
+    border-color: var(--ind-color, var(--color-primary-300));
+    box-shadow: 0 16px 40px color-mix(in srgb, var(--ind-color, #4A7BB5) 20%, transparent);
+    transform: translateY(-6px);
+  }
+}
+
+/* ── Glow difuminado de fondo ── */
+.ind-card__glow {
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: var(--ind-color, var(--color-primary-300));
+  filter: blur(60px);
+  opacity: 0.10;
+  transition: opacity 250ms, transform 250ms;
+  pointer-events: none;
+}
+.ind-card:hover .ind-card__glow { opacity: 0.22; transform: scale(1.2); }
+
+/* ── Icon wrap coloreado ── */
+.ind-card__icon-wrap {
+  width: 60px; height: 60px;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--ind-color, #4A7BB5) 12%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--ind-color, #4A7BB5) 28%, transparent);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ind-color, var(--color-brand));
+  flex-shrink: 0;
+  transition: transform 250ms;
+}
+.ind-card:hover .ind-card__icon-wrap { transform: scale(1.08); }
+.ind-card__icon { display: block; }
+
+.ind-card__name {
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--color-neutral-900);
+  margin: 0.25rem 0 0;
+  line-height: 1.2;
+}
+
+.ind-card__sub {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin: 0;
+  flex: 1;
+}
+
+.ind-card__arrow {
+  display: block;
+  font-size: 1rem;
+  color: var(--ind-color, var(--color-primary-400));
+  opacity: 0.6;
+  transition: opacity 200ms, transform 200ms;
+  margin-top: auto;
+}
+.ind-card:hover .ind-card__arrow { opacity: 1; transform: translateX(4px); }
+
+/* ── Responsive ── */
+@media (max-width: 639px) {
+  .industries__grid { gap: 1rem; }
+  .ind-card { min-height: 190px; padding: 1.5rem 1.25rem; }
+}
+
+@media (max-width: 479px) {
+  .industries__grid { grid-template-columns: 1fr; }
+  .ind-card { min-height: auto; }
+}
+
+/* ── Prefers-reduced-motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .ind-card__glow,
+  .ind-card__arrow,
+  .ind-card__icon-wrap { transition: none; }
+}
