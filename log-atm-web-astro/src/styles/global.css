@@ -1,8 +1,14 @@
 /* LOG ATM — Global Styles */
 
-/* ─── Fuentes — DEBE ir primero (spec CSS: @import antes de todo) ─── */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap');
-/* TODO: migrar a fontsource self-hosted antes del launch */
+/* ─── Fuentes self-hosted vía @fontsource ─── */
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/outfit/600.css';
+@import '@fontsource/outfit/700.css';
+@import '@fontsource/outfit/800.css';
+@import '@fontsource/outfit/900.css';
 
 @import "tailwindcss";
 
@@ -79,6 +85,7 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -89,6 +96,29 @@
     font-family: var(--font-sans);
     font-size: 1rem;
     line-height: 1.6;
+  }
+
+  /* Skip link — accesibilidad */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-brand);
+    color: #fff;
+    padding: 8px 16px;
+    z-index: 1000;
+    border-radius: 0 0 4px 0;
+    transition: top 0.2s;
+  }
+  .skip-link:focus {
+    top: 0;
+  }
+
+  /* Focus visible accesible */
+  :focus-visible {
+    outline: 3px solid var(--color-accent-500);
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -203,23 +233,82 @@
     transform: translateY(-2px);
   }
 
-  /* Contenedor de sección */
-  .section-container {
+  /* ─── Contenedor canónico ─────────────────────────────── */
+  /* Padding fluido: 1.25rem (mobile) → 2.5rem (desktop)   */
+  .container {
     width: 100%;
     max-width: 1280px;
     margin-inline: auto;
-    padding-inline: 1.5rem;
+    padding-inline: clamp(1.25rem, 5vw, 2.5rem);
   }
 
-  @media (min-width: 768px) {
-    .section-container {
-      padding-inline: 2.5rem;
-    }
+  /* ─── Eyebrow / encabezados de sección ───────────────── */
+  /* Reutilizados en home y páginas internas                */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent-600);
+    margin-bottom: 0.875rem;
+  }
+  .eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-accent-500);
+    flex-shrink: 0;
   }
 
-  @media (min-width: 1280px) {
-    .section-container {
-      padding-inline: 2rem;
-    }
+  .section-header { text-align: center; margin-bottom: 3.5rem; }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.875rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--color-neutral-900);
+    margin: 0 0 1rem;
+  }
+  @media (max-width: 479px) {
+    .section-title { font-size: clamp(1.625rem, 7vw, 2.5rem); }
+  }
+
+  .section-lead {
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    max-width: 560px;
+    margin-inline: auto;
+  }
+
+  /* ─── Hero de páginas internas ────────────────────────── */
+  /* Usado en: contacto, cotizar, nosotros                  */
+  .page-hero {
+    padding: clamp(4rem, 10vw, 7rem) 0 clamp(2rem, 4vw, 3rem);
+    background: linear-gradient(150deg,
+      var(--color-primary-950) 0%,
+      var(--color-primary-800) 100%
+    );
+    text-align: center;
+  }
+  .page-hero__inner { color: #fff; }
+  .page-hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin: 0 0 1rem;
+  }
+  .page-hero__lead {
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    color: var(--color-primary-200);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
   }
 }

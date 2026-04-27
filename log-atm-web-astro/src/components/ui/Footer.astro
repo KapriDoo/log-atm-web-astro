@@ -1,25 +1,9 @@
 ---
-const SERVICES = [
-  { href: '/servicios/carga-aerea',    label: 'Carga Aérea' },
-  { href: '/servicios/carga-maritima', label: 'Carga Marítima' },
-  { href: '/servicios/aduanas',        label: 'Aduana y Documentación' },
-  { href: '/servicios/almacenaje',     label: 'Almacenaje y Distribución' },
-  { href: '/cotizar',                  label: 'Consultoría Logística' },
-];
-
-const COMPANY = [
-  { href: '/nosotros',   label: 'Nosotros' },
-  { href: '/industrias', label: 'Industrias' },
-  { href: '/rutas',      label: 'Rutas y Cobertura' },
-  { href: '/recursos',   label: 'Recursos y Blog' },
-  { href: '/contacto',   label: 'Contacto' },
-];
-
-const YEAR = new Date().getFullYear();
+import { FOOTER_SERVICES, FOOTER_COMPANY, CURRENT_YEAR, SITE } from '../../lib/constants';
 ---
 
 <footer class="footer" role="contentinfo">
-  <div class="section-container footer__grid">
+  <div class="container footer__grid">
 
     <!-- Brand column -->
     <div class="footer__brand">
@@ -30,7 +14,7 @@ const YEAR = new Date().getFullYear();
       <p class="footer__desc">
         Soluciones de transporte aéreo y marítimo personalizadas para empresas chilenas con visión global.
       </p>
-      <div class="footer__social" aria-label="Redes sociales">
+      <nav class="footer__social" aria-label="Redes sociales">
         <a href="https://facebook.com/logatm"  aria-label="Facebook"  target="_blank" rel="noopener noreferrer" class="footer__social-link">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
@@ -46,14 +30,14 @@ const YEAR = new Date().getFullYear();
             <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
           </svg>
         </a>
-      </div>
+      </nav>
     </div>
 
     <!-- Servicios -->
     <div class="footer__col">
       <h3 class="footer__heading">Servicios</h3>
       <ul class="footer__links" role="list">
-        {SERVICES.map(({ href, label }) => (
+        {FOOTER_SERVICES.map(({ href, label }) => (
           <li><a href={href} class="footer__link">{label}</a></li>
         ))}
       </ul>
@@ -63,7 +47,7 @@ const YEAR = new Date().getFullYear();
     <div class="footer__col">
       <h3 class="footer__heading">Empresa</h3>
       <ul class="footer__links" role="list">
-        {COMPANY.map(({ href, label }) => (
+        {FOOTER_COMPANY.map(({ href, label }) => (
           <li><a href={href} class="footer__link">{label}</a></li>
         ))}
       </ul>
@@ -74,18 +58,18 @@ const YEAR = new Date().getFullYear();
       <h3 class="footer__heading">Contacto</h3>
       <address class="footer__address">
         <p>
-          <a href="tel:+56942162739" class="footer__link">+569 421 62739</a>
+          <a href={`tel:${SITE.phone}`} class="footer__link">{SITE.phone}</a>
         </p>
         <p>
-          <a href="mailto:mpazrivera@logatm.com" class="footer__link">mpazrivera@logatm.com</a>
+          <a href={`mailto:${SITE.email}`} class="footer__link">{SITE.email}</a>
         </p>
         <p class="footer__address-text">
-          Av. Pdte Kennedy 5600, Of. 507<br />
-          Vitacura, Santiago, Chile
+          {SITE.address.split(', ').slice(0, 2).join(', ')}<br />
+          {SITE.address.split(', ').slice(2).join(', ')}
         </p>
       </address>
       <a
-        href="https://wa.me/56942162739?text=Hola%2C%20me%20interesa%20cotizar%20un%20servicio"
+        href={SITE.whatsappUrl}
         class="footer__whatsapp"
         target="_blank"
         rel="noopener noreferrer"
@@ -103,9 +87,9 @@ const YEAR = new Date().getFullYear();
 
   <!-- Bottom bar -->
   <div class="footer__bottom">
-    <div class="section-container footer__bottom-inner">
+    <div class="container footer__bottom-inner">
       <p class="footer__copyright">
-        &copy; {YEAR} LOG ATM. Todos los derechos reservados.
+        &copy; {CURRENT_YEAR} {SITE.name}. Todos los derechos reservados.
       </p>
       <div class="footer__legal">
         <a href="/privacidad" class="footer__link-sm">Política de privacidad</a>
@@ -162,8 +146,8 @@ const YEAR = new Date().getFullYear();
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background-color: var(--color-primary-800);
     color: var(--color-primary-200);
@@ -227,7 +211,7 @@ const YEAR = new Date().getFullYear();
     align-items: center;
     gap: 0.5rem;
     padding: 0.625rem 1.25rem;
-    background-color: #25D366;
+    background-color: #128C7E;
     color: #ffffff;
     font-size: 0.875rem;
     font-weight: 600;
