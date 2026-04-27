@@ -1,0 +1,18 @@
+---
+import { Icon } from 'astro-icon/components';
+import { STATS } from '../../lib/constants';
+---
+
+<section class="stats" aria-label="Cifras LOG ATM">
+  <div class="container stats__inner">
+    {STATS.map(({ value, label, icon, anim }) => (
+      <div class="stats__item">
+        <div class={`stats__icon-wrap stats__icon-wrap--${anim}`} aria-hidden="true">
+          <Icon name={icon} width="26" height="26" />
+        </div>
+        <strong class="stats__value">{value}</strong>
+        <span class="stats__label">{label}</span>
+      </div>
+    ))}
+  </div>
+</section>

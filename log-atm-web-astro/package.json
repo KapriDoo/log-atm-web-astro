@@ -25,9 +25,12 @@
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/outfit": "^5.2.8",
     "@iconify-json/lucide": "^1.2.102",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "astro-icon": "^1.1.5"
+    "astro-icon": "^1.1.5",
+    "svgo": "^4.0.1"
   }
 }

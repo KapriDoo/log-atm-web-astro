@@ -1,12 +1,5 @@
 ---
-const NAV_LINKS = [
-  { href: '/servicios/carga-aerea',    label: 'Carga Aérea' },
-  { href: '/servicios/carga-maritima', label: 'Carga Marítima' },
-  { href: '/servicios/aduanas',        label: 'Aduana' },
-  { href: '/servicios/almacenaje',     label: 'Almacenaje' },
-  { href: '/nosotros',                 label: 'Nosotros' },
-  { href: '/contacto',                 label: 'Contacto' },
-];
+import { NAV_LINKS, SITE } from '../../lib/constants';
 const currentPath = Astro.url.pathname;
 ---
 
@@ -31,8 +24,8 @@ const currentPath = Astro.url.pathname;
     </nav>
 
     <div class="navbar__actions">
-      <a href="/rastrear" class="navbar__track">Rastrea tu carga</a>
-      <a href="/cotizar"  class="navbar__cta">Cotiza ahora</a>
+      <a href="#rastrear" class="navbar__track">Rastrea tu carga</a>
+      <a href="#cotizar"  class="navbar__cta">Cotiza ahora</a>
     </div>
 
     <!-- Hamburger -->
@@ -45,9 +38,9 @@ const currentPath = Astro.url.pathname;
 </header>
 
 <!-- Drawer overlay (mobile) -->
-<div class="drawer" id="drawer" aria-hidden="true" role="dialog" aria-label="Menú de navegación">
+<div class="drawer" id="drawer" aria-hidden="true">
   <div class="drawer__backdrop" id="drawer-backdrop"></div>
-  <nav class="drawer__panel">
+  <nav class="drawer__panel" role="dialog" aria-modal="true" aria-label="Menú de navegación">
     <div class="drawer__header">
       <a href="/" class="drawer__logo">
         <img src="/logo.svg" alt="LOG ATM" width="100" height="48" />
@@ -62,19 +55,23 @@ const currentPath = Astro.url.pathname;
     <ul class="drawer__links" role="list">
       {NAV_LINKS.map(({ href, label }) => (
         <li>
-          <a href={href} class:list={['drawer__link', { 'is-active': currentPath.startsWith(href) }]}>{label}</a>
+          <a
+            href={href}
+            class:list={['drawer__link', { 'is-active': currentPath.startsWith(href) }]}
+            aria-current={currentPath.startsWith(href) ? 'page' : undefined}
+          >{label}</a>
         </li>
       ))}
     </ul>
 
     <div class="drawer__ctas">
-      <a href="/rastrear" class="drawer__track">Rastrea tu carga</a>
-      <a href="/cotizar"  class="drawer__cta">Cotiza ahora →</a>
+      <a href="#rastrear" class="drawer__track">Rastrea tu carga</a>
+      <a href="#cotizar"  class="drawer__cta">Cotiza ahora →</a>
     </div>
 
     <div class="drawer__contact">
-      <a href="tel:+56942162739">+569 421 62739</a>
-      <a href="mailto:mpazrivera@logatm.com">mpazrivera@logatm.com</a>
+      <a href={`tel:${SITE.phone}`}>{SITE.phone}</a>
+      <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
     </div>
   </nav>
 </div>
@@ -117,7 +114,7 @@ const currentPath = Astro.url.pathname;
 
   .navbar__link {
     display: block;
-    padding: 0.5rem 0.875rem;
+    padding: 0.75rem 1rem;
     font-size: 0.9rem;
     font-weight: 500;
     color: var(--color-neutral-600);
@@ -181,8 +178,8 @@ const currentPath = Astro.url.pathname;
     cursor: pointer;
     padding: 0.5rem;
     margin-left: auto;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
   .burger__bar {
     display: block;
@@ -243,7 +240,7 @@ const currentPath = Astro.url.pathname;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.375rem;
+    padding: 0.625rem;
     border-radius: 8px;
     color: var(--color-neutral-600);
     transition: background 150ms, color 150ms;
@@ -342,15 +339,48 @@ const currentPath = Astro.url.pathname;
   const closeBtn = document.getElementById('drawer-close')!;
   const navbar   = document.getElementById('navbar')!;
 
+  let lastFocusedElement: HTMLElement | null = null;
+
+  function getFocusableElements() {
+    return Array.from(
+      drawer.querySelectorAll<HTMLElement>('a[href], button, [tabindex]:not([tabindex="-1"])')
+    );
+  }
+
+  function trapFocus(e: KeyboardEvent) {
+    if (e.key !== 'Tab') return;
+    const focusable = getFocusableElements();
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+
   function openDrawer() {
+    lastFocusedElement = document.activeElement as HTMLElement;
     drawer.setAttribute('aria-hidden', 'false');
     burger.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
+    // Transferir foco al primer elemento focusable del drawer
+    const focusable = getFocusableElements();
+    if (focusable.length > 0) focusable[0].focus();
+    drawer.addEventListener('keydown', trapFocus);
   }
+
   function closeDrawer() {
+    drawer.removeEventListener('keydown', trapFocus);
     drawer.setAttribute('aria-hidden', 'true');
     burger.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
+    // Devolver foco al elemento que abrió el drawer
+    if (lastFocusedElement) lastFocusedElement.focus();
   }
 
   burger.addEventListener('click', openDrawer);
@@ -367,6 +397,8 @@ const currentPath = Astro.url.pathname;
     { threshold: 0, rootMargin: '-72px 0px 0px 0px' }
   );
   const sentinel = document.createElement('div');
+  sentinel.setAttribute('aria-hidden', 'true');
+  sentinel.style.cssText = 'position:absolute;top:0;height:1px;width:1px;pointer-events:none;';
   document.body.prepend(sentinel);
   observer.observe(sentinel);
 </script>

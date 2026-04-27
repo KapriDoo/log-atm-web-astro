@@ -1,5 +1,4 @@
 ---
-import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 
 interface Props {
@@ -13,13 +12,13 @@ interface Props {
 const SITE_NAME = 'LOG ATM';
 const SITE_URL  = 'https://logatm.com';
 const DEFAULT_DESC = 'Logística aérea y marítima a tu medida. Carga internacional, aduana, almacenaje y consultoría desde Vitacura, Santiago, Chile.';
-const DEFAULT_IMG  = `${SITE_URL}/og-default.jpg`;
+const DEFAULT_IMG  = `${SITE_URL}/og-default.svg`;
 
 const {
   title,
   description = DEFAULT_DESC,
   image = DEFAULT_IMG,
-  canonical = Astro.url.href,
+  canonical = new URL(Astro.url.pathname, SITE_URL).href,
   noindex = false,
 } = Astro.props;
 
@@ -56,6 +55,37 @@ const schemaLocalBusiness = JSON.stringify({
   },
   slogan: 'Logística a tu medida',
 });
+
+const schemaWebSite = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE_NAME,
+  url: SITE_URL,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${SITE_URL}/?q={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
+});
+
+const breadcrumbSchema = Astro.url.pathname !== '/' ? JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Inicio',
+      item: SITE_URL,
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: title || SITE_NAME,
+      item: canonical,
+    },
+  ],
+}) : null;
 ---
 
 <!doctype html>
@@ -79,24 +109,32 @@ const schemaLocalBusiness = JSON.stringify({
     <meta property="og:image"       content={image} />
     <meta property="og:site_name"   content={SITE_NAME} />
     <meta property="og:locale"      content="es_CL" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
+    <meta name="twitter:site"        content="@logatm" />
+    <meta name="twitter:creator"     content="@logatm" />
     <meta name="twitter:card"        content="summary_large_image" />
     <meta name="twitter:title"       content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image"       content={image} />
 
+    <meta name="theme-color" content="#4A7BB5" />
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon"  href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
 
     <!-- Schema.org -->
     <script type="application/ld+json" set:html={schemaLocalBusiness} />
-
-    <!-- View Transitions (Astro 6) -->
-    <ClientRouter />
+    <script type="application/ld+json" set:html={schemaWebSite} />
+    {breadcrumbSchema && <script type="application/ld+json" set:html={breadcrumbSchema} />}
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
     <slot />
   </body>
 </html>

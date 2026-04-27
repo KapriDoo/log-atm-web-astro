@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#4A7BB5"/>
+  <rect x="50" y="50" width="1100" height="530" rx="20" fill="#ffffff" opacity="0.1"/>
+  <text x="600" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#ffffff">LOG ATM</text>
+  <text x="600" y="360" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" fill="#ffffff">Logística Aérea y Marítima a tu Medida</text>
+  <text x="600" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#d7e4f4">Cotiza tu envío internacional hoy</text>
+</svg>

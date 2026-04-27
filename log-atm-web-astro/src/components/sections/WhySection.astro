@@ -1,0 +1,53 @@
+---
+import { Icon } from 'astro-icon/components';
+import { WHY_ITEMS } from '../../lib/constants';
+---
+
+<section class="why" aria-labelledby="why-heading">
+  <div class="container why__inner">
+    <div class="why__visual">
+      <div class="why__img-wrap">
+        <div class="why__img-ph">
+          <svg viewBox="0 0 520 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Foto del equipo LOG ATM en operación portuaria (próximamente)">
+            <rect width="520" height="420" fill="#aec7e5"/>
+            <text x="260" y="215" text-anchor="middle" font-size="13" fill="#2b4e78" font-family="sans-serif">Foto equipo / operación portuaria</text>
+          </svg>
+        </div>
+        <div class="why__badge">
+          <span class="why__badge-icon">🇨🇱</span>
+          <div>
+            <p class="why__badge-title">Empresa chilena</p>
+            <p class="why__badge-sub">con red global</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="why__content">
+      <span class="eyebrow">Por qué LOG ATM</span>
+      <h2 id="why-heading" class="section-title">
+        Personas. Confianza.<br/>Resultados.
+      </h2>
+      <p class="section-lead why__lead">
+        No somos una multinacional anónima. Somos un equipo chileno con
+        conexiones globales y el compromiso de tratarte como nuestro único cliente.
+      </p>
+
+      <ul class="why__list" role="list">
+        {WHY_ITEMS.map(({ icon, title, desc, anim }) => (
+          <li class="why__item">
+            <div class:list={['why__item-icon', anim && `why__item-icon--${anim}`]} aria-hidden="true">
+              <Icon name={icon} width="22" height="22" />
+            </div>
+            <div>
+              <strong class="why__item-title">{title}</strong>
+              <p class="why__item-desc">{desc}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <a href="#nosotros" class="why__btn">Conoce al equipo</a>
+    </div>
+  </div>
+</section>

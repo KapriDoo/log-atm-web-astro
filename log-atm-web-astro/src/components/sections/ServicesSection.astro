@@ -1,0 +1,40 @@
+---
+import { Icon } from 'astro-icon/components';
+import { SERVICES } from '../../lib/constants';
+---
+
+<section class="services" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Qué hacemos</span>
+      <h2 id="services-heading" class="section-title">
+        Soluciones para<br/>cada necesidad
+      </h2>
+      <p class="section-lead">
+        Desde el despacho urgente hasta la consultoría de supply chain completa.
+      </p>
+    </div>
+
+    <div class="services__grid">
+      {SERVICES.map(({ n, icon, title, desc, href, accent }) => (
+        <a href={href} class:list={['svc-card', accent && 'svc-card--accent']}>
+          <div class="svc-card__line" aria-hidden="true"></div>
+          <div class="svc-card__header">
+            <span class="svc-card__num" aria-hidden="true">{n}</span>
+            <span class="svc-card__arrow" aria-hidden="true">
+              <Icon name="lucide:arrow-up-right" width="18" height="18" />
+            </span>
+          </div>
+          <div class="svc-card__icon-wrap" aria-hidden="true">
+            <Icon name={icon} width="28" height="28" class="svc-card__icon" />
+          </div>
+          <h3 class="svc-card__title">{title}</h3>
+          <p class="svc-card__desc">{desc}</p>
+          <div class="svc-card__overlay" aria-hidden="true">
+            <span class="svc-card__overlay-label">Ver más →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>

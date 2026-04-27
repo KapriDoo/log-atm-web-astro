@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: ./log-atm-web-astro
+      dockerfile: Dockerfile
+    image: log-atm-web:latest
+    container_name: log-atm-web
+    ports:
+      - "4321:80"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Servicio opcional: si quieres desarrollo en vivo con hot reload
+  # descomenta esto y comenta el servicio 'web' de arriba
+  # dev:
+  #   image: node:22-alpine
+  #   container_name: log-atm-web-dev
+  #   working_dir: /app
+  #   volumes:
+  #     - ./log-atm-web-astro:/app
+  #   ports:
+  #     - "4321:4321"
+  #   command: sh -c "npm install && npm run dev -- --host"
+  #   restart: unless-stopped

@@ -1,0 +1,89 @@
+---
+import { Icon } from 'astro-icon/components';
+import { SITE } from '../../lib/constants';
+---
+
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="hero__bg" aria-hidden="true">
+    <div class="hero__blob hero__blob--1"></div>
+    <div class="hero__blob hero__blob--2"></div>
+    <div class="hero__grid-lines"></div>
+  </div>
+
+  <div class="hero__inner container">
+    <div class="hero__content">
+      <div class="hero__badge">
+        <span class="hero__badge-dot" aria-hidden="true"></span>
+        Logística internacional desde Santiago, Chile
+      </div>
+
+      <h1 id="hero-heading" class="hero__title">
+        Tu carga,
+        <span class="hero__title-gradient">nuestra ruta.</span>
+      </h1>
+
+      <p class="hero__lead">
+        Conectamos Chile con el mundo. Carga aérea, marítima y gestión
+        aduanera <em>diseñada a tu medida</em>, con un ejecutivo dedicado
+        que conoce tu negocio.
+      </p>
+
+      <div class="hero__ctas">
+        <a href="/cotizar" class="hero__btn-cta">
+          Cotiza ahora
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href={SITE.whatsappUrl} class="hero__btn-wa" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.564 4.139 1.543 5.876L0 24l6.324-1.51A11.928 11.928 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-4.997-1.373l-.357-.213-3.753.897.947-3.653-.232-.374A9.773 9.773 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+          </svg>
+          WhatsApp
+        </a>
+      </div>
+
+      <div class="hero__trust">
+        <div class="hero__trust-avatars" aria-hidden="true">
+          {['#658fc3','#3b6497','#4A7BB5'].map(c => (
+            <span class="hero__trust-avatar" style={`background:${c}`}></span>
+          ))}
+        </div>
+        <p class="hero__trust-text">+200 empresas confían en LOG ATM</p>
+      </div>
+    </div>
+
+    <div class="hero__cards" aria-hidden="true">
+      <div class="hero__card hero__card--back">
+        <div class="hero__card-icon"><Icon name="lucide:ship" width="28" height="28" /></div>
+        <div>
+          <p class="hero__card-label">Carga Marítima</p>
+          <p class="hero__card-sub">FCL / LCL · 80+ puertos</p>
+        </div>
+      </div>
+      <div class="hero__card hero__card--mid">
+        <div class="hero__card-icon"><Icon name="lucide:plane" width="28" height="28" /></div>
+        <div>
+          <p class="hero__card-label">Carga Aérea</p>
+          <p class="hero__card-sub">Express · 48h garantizado</p>
+        </div>
+      </div>
+      <div class="hero__card hero__card--front">
+        <div class="hero__card-top">
+          <span class="hero__card-status"></span>
+          <p class="hero__card-label">Envío en tránsito</p>
+        </div>
+        <p class="hero__card-tracking">LOG-2025-04872</p>
+        <div class="hero__card-progress">
+          <div class="hero__card-bar"></div>
+        </div>
+        <p class="hero__card-eta">Llegada estimada: 3 días</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,60 C240,20 480,80 720,40 C960,0 1200,60 1440,40 L1440,80 L0,80 Z" fill="var(--color-bg)"/>
+    </svg>
+  </div>
+</section>

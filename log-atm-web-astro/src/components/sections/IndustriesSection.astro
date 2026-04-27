@@ -1,0 +1,26 @@
+---
+import { Icon } from 'astro-icon/components';
+import { INDUSTRIES } from '../../lib/constants';
+---
+
+<section class="industries" aria-labelledby="industries-heading">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Industrias</span>
+      <h2 id="industries-heading" class="section-title">Experiencia en tu sector</h2>
+    </div>
+    <div class="industries__grid">
+      {INDUSTRIES.map(({ icon, name, sub, color }) => (
+        <div class="ind-card" style={`--ind-color:${color}`}>
+          <div class="ind-card__glow" aria-hidden="true"></div>
+          <div class="ind-card__icon-wrap" aria-hidden="true">
+            <Icon name={icon} width="28" height="28" class="ind-card__icon" />
+          </div>
+          <h3 class="ind-card__name">{name}</h3>
+          <p class="ind-card__sub">{sub}</p>
+          <span class="ind-card__arrow" aria-hidden="true">→</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

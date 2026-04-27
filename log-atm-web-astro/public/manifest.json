@@ -1,0 +1,21 @@
+{
+  "name": "LOG ATM - Logística a tu medida",
+  "short_name": "LOG ATM",
+  "description": "Servicios de carga aérea, marítima, aduana y almacenaje para empresas chilenas.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f7f6",
+  "theme_color": "#4A7BB5",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "logistics"],
+  "lang": "es",
+  "dir": "ltr"
+}
