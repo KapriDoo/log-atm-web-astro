@@ -16,7 +16,7 @@
 
 .hero__blob {
   position: absolute;
-  border-radius: 50%;
+  border-radius: var(--radius-pill);
   filter: blur(80px);
   opacity: 0.25;
 }
@@ -62,14 +62,14 @@
   color: var(--color-primary-200);
   background: color-mix(in srgb, var(--color-text-inverse) 8%, transparent);
   border: 1px solid color-mix(in srgb, var(--color-text-inverse) 15%, transparent);
-  border-radius: 9999px;
+  border-radius: var(--radius-pill);
   padding: 0.375rem 1rem;
   margin-bottom: 1.75rem;
   backdrop-filter: blur(8px);
 }
 .hero__badge-dot {
   width: 6px; height: 6px;
-  border-radius: 50%;
+  border-radius: var(--radius-pill);
   background: var(--color-accent-400);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent-500) 30%, transparent);
   animation: hero-badge-pulse 2s ease-in-out infinite;
@@ -123,7 +123,7 @@
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.9375rem;
-  border-radius: 9999px;
+  border-radius: var(--radius-pill);
   box-shadow: 0 4px 20px color-mix(in srgb, var(--color-accent-500) 40%, transparent);
   transition: background 150ms, transform 100ms, box-shadow 150ms;
 }
@@ -142,7 +142,7 @@
   color: var(--color-text-inverse);
   font-weight: 600;
   font-size: 0.9375rem;
-  border-radius: 9999px;
+  border-radius: var(--radius-pill);
   border: 1.5px solid color-mix(in srgb, var(--color-text-inverse) 20%, transparent);
   backdrop-filter: blur(8px);
   transition: background 150ms, border-color 150ms;
@@ -164,7 +164,7 @@
 .hero__trust-avatar {
   display: block;
   width: 32px; height: 32px;
-  border-radius: 50%;
+  border-radius: var(--radius-pill);
   border: 2px solid color-mix(in srgb, var(--color-text-inverse) 40%, transparent);
   margin-left: -10px;
 }
@@ -190,10 +190,10 @@
   border: 1px solid color-mix(in srgb, var(--color-text-inverse) 18%, transparent);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   padding: 1.25rem 1.5rem;
   color: var(--color-text-inverse);
-  box-shadow: 0 8px 32px color-mix(in srgb, #000 25%, transparent);
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--color-text-inverse-alt) 25%, transparent);
 }
 
 .hero__card--back {
@@ -226,7 +226,7 @@
   flex-shrink: 0;
   width: 42px; height: 42px;
   display: flex; align-items: center; justify-content: center;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   background: color-mix(in srgb, var(--color-text-inverse) 12%, transparent);
   color: var(--color-accent-400);
 }
@@ -241,7 +241,7 @@
 }
 .hero__card-status {
   width: 8px; height: 8px;
-  border-radius: 50%;
+  border-radius: var(--radius-pill);
   background: var(--color-success);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-success) 25%, transparent);
 }
@@ -255,7 +255,7 @@
 .hero__card-progress {
   height: 4px;
   background: color-mix(in srgb, var(--color-text-inverse) 20%, transparent);
-  border-radius: 9999px;
+  border-radius: var(--radius-pill);
   margin-bottom: 0.625rem;
   overflow: hidden;
 }
@@ -263,9 +263,8 @@
   height: 100%;
   width: 68%;
   background: linear-gradient(90deg, var(--color-success), var(--color-success-light));
-  border-radius: 9999px;
+  border-radius: var(--radius-pill);
 }
-.hero__card-eta { font-size: 0.75rem; opacity: 0.7; margin: 0; }
 
 .hero__wave {
   line-height: 0;

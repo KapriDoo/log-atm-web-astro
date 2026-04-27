@@ -20,7 +20,7 @@
   padding: 2rem 1.5rem 1.75rem;
   background: var(--color-surface);
   border: 1.5px solid var(--color-border);
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   transition: border-color 250ms, box-shadow 250ms, transform 250ms;
   cursor: default;
@@ -28,7 +28,7 @@
 @media (hover: hover) {
   .ind-card:hover {
     border-color: var(--ind-color, var(--color-primary-300));
-    box-shadow: 0 16px 40px color-mix(in srgb, var(--ind-color, var(--color-industry-fallback)) 20%, transparent);
+    box-shadow: 0 16px 40px color-mix(in srgb, var(--ind-color, var(--color-brand)) 20%, transparent);
     transform: translateY(-6px);
   }
 }
@@ -38,7 +38,7 @@
   position: absolute;
   top: -60px; right: -60px;
   width: 220px; height: 220px;
-  border-radius: 50%;
+  border-radius: var(--radius-pill);
   background: var(--ind-color, var(--color-primary-300));
   filter: blur(60px);
   opacity: 0.10;
@@ -50,9 +50,9 @@
 /* ── Icon wrap coloreado ── */
 .ind-card__icon-wrap {
   width: 60px; height: 60px;
-  border-radius: 16px;
-  background: color-mix(in srgb, var(--ind-color, var(--color-industry-fallback)) 12%, transparent);
-  border: 1.5px solid color-mix(in srgb, var(--ind-color, var(--color-industry-fallback)) 28%, transparent);
+  border-radius: var(--radius-card);
+  background: color-mix(in srgb, var(--ind-color, var(--color-brand)) 12%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--ind-color, var(--color-brand)) 28%, transparent);
   display: flex; align-items: center; justify-content: center;
   color: var(--ind-color, var(--color-brand));
   flex-shrink: 0;

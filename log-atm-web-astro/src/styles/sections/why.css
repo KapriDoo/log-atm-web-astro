@@ -35,7 +35,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  box-shadow: 0 8px 32px color-mix(in srgb, #000 10%, transparent);
+  box-shadow: 0 8px 32px color-mix(in srgb, var(--color-text-inverse-alt) 10%, transparent);
 }
 .why__badge-icon  { font-size: 1.75rem; }
 .why__badge-title { font-weight: 700; font-size: 0.875rem; color: var(--color-neutral-900); margin: 0; }
@@ -52,7 +52,7 @@
 .why__item-icon {
   flex-shrink: 0;
   width: 42px; height: 42px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   background: var(--color-primary-50);
   display: flex; align-items: center; justify-content: center;
   border: 1px solid var(--color-primary-100);
@@ -89,7 +89,7 @@
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.9375rem;
-  border-radius: 9999px;
+  border-radius: var(--radius-pill);
   box-shadow: 0 4px 18px color-mix(in srgb, var(--color-primary-500) 25%, transparent);
   transition: background 150ms, transform 100ms, box-shadow 150ms;
 }
