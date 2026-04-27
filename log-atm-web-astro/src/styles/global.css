@@ -233,15 +233,6 @@
     transform: translateY(-2px);
   }
 
-  /* ─── Contenedor canónico ─────────────────────────────── */
-  /* Padding fluido: 1.25rem (mobile) → 2.5rem (desktop)   */
-  .container {
-    width: 100%;
-    max-width: 1280px;
-    margin-inline: auto;
-    padding-inline: clamp(1.25rem, 5vw, 2.5rem);
-  }
-
   /* ─── Eyebrow / encabezados de sección ───────────────── */
   /* Reutilizados en home y páginas internas                */
   .eyebrow {
@@ -311,4 +302,18 @@
     max-width: 600px;
     margin: 0 auto;
   }
+}
+
+/*
+ * ─── Contenedor canónico (fuera de capas) ──────────────────────────────────
+ * IMPORTANTE: se define FUERA de @layer para que las reglas unlayered tengan
+ * mayor precedencia que cualquier utilidad de Tailwind (@layer utilities),
+ * evitando que el .container nativo de Tailwind restrinja el max-width a
+ * los breakpoints sm/md/lg en lugar de nuestros 1280px fijos.
+ */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 2.5rem);
 }
