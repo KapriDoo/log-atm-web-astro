@@ -174,7 +174,7 @@ const canonical = `${SITE.url}/cotizar`;
 
   .quote-contact {
     background: var(--color-primary-50);
-    border-radius: 16px;
+    border-radius: var(--radius-card);
     padding: 1.5rem;
   }
   .quote-contact strong {
@@ -187,19 +187,19 @@ const canonical = `${SITE.url}/cotizar`;
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.25rem;
-    border-radius: 9999px;
-    background: #128C7E;
-    color: #fff;
+    border-radius: var(--radius-pill);
+    background: var(--color-whatsapp);
+    color: var(--color-text-inverse);
     font-weight: 600;
     font-size: 0.9375rem;
     transition: background 150ms;
   }
-  .quote-whatsapp:hover { background: #0d6b61; }
+  .quote-whatsapp:hover { background: var(--color-whatsapp-hover-dark); }
 
   .quote-form-wrap {
-    background: #fff;
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 20px;
+    border-radius: var(--radius-lg);
     padding: 2.5rem;
   }
   .form-row {
@@ -226,10 +226,10 @@ const canonical = `${SITE.url}/cotizar`;
     width: 100%;
     padding: 0.75rem 1rem;
     border: 1px solid var(--color-neutral-200);
-    border-radius: 10px;
+    border-radius: var(--radius-input);
     font-size: 1rem;
     color: var(--color-neutral-900);
-    background: #fff;
+    background: var(--color-surface);
     transition: border-color 150ms, box-shadow 150ms;
   }
   .form-group input:focus,
@@ -237,7 +237,7 @@ const canonical = `${SITE.url}/cotizar`;
   .form-group textarea:focus {
     outline: none;
     border-color: var(--color-brand);
-    box-shadow: 0 0 0 3px rgba(74, 123, 181, 0.1);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-500) 10%, transparent);
   }
   .form-group textarea {
     resize: vertical;
@@ -251,9 +251,9 @@ const canonical = `${SITE.url}/cotizar`;
     width: 100%;
     justify-content: center;
     padding: 0.875rem;
-    border-radius: 9999px;
+    border-radius: var(--radius-pill);
     background: var(--color-cta);
-    color: #fff;
+    color: var(--color-text-inverse);
     font-weight: 700;
     font-size: 1rem;
     border: none;

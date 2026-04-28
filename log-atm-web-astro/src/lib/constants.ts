@@ -136,12 +136,16 @@ export const WHY_ITEMS = [
 ] as const;
 
 // Industrias atendidas
+// NOTA: Los colores son datos de contenido (cada industria tiene su identidad
+// visual distintiva), no tokens del sistema de diseño. Se mantienen aquí
+// porque pertenecen al dominio de datos, no al dominio de estilos.
+// Se aplican vía CSS custom property --ind-color en runtime.
 export const INDUSTRIES = [
   { icon: 'lucide:pickaxe', name: 'Minería', sub: 'Cobre, litio, equipamiento pesado', color: '#658fc3' },
-  { icon: 'lucide:shopping-bag', name: 'Retail', sub: 'Moda, consumo masivo, temporada', color: '#ed8c1d' },
+  { icon: 'lucide:shopping-bag', name: 'Retail', sub: 'Moda, consumo masivo, temporada', color: '#3EB978' },
   { icon: 'lucide:wheat', name: 'Agroindustria', sub: 'Fruta fresca, vinos, granos', color: '#2D9B6F' },
   { icon: 'lucide:pill', name: 'Farmacéutica', sub: 'Cadena de frío, reactivos', color: '#4A7BB5' },
-  { icon: 'lucide:shopping-cart', name: 'E-commerce', sub: 'Cross-border, fulfillment', color: '#cc7614' },
+  { icon: 'lucide:shopping-cart', name: 'E-commerce', sub: 'Cross-border, fulfillment', color: '#339965' },
   { icon: 'lucide:hard-hat', name: 'Construcción', sub: 'Maquinaria, materiales', color: '#3b6497' },
 ] as const;
 

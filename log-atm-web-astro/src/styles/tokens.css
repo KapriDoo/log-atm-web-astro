@@ -22,12 +22,12 @@
     --color-primary-900: #112236;
     --color-primary-950: #0a1624;
 
-    /* ─── Accent Amber ───────────────────────────────────── */
-    --color-accent-300: #f7b76e;
-    --color-accent-400: #f39f3f;
-    --color-accent-500: #ed8c1d; /* ← CTA */
-    --color-accent-600: #cc7614;
-    --color-accent-700: #a15e12;
+    /* ─── Accent Green ───────────────────────────────────── */
+    --color-accent-300: #d8f1e6;
+    --color-accent-400: #87d3b0;
+    --color-accent-500: #3EB978; /* ← CTA */
+    --color-accent-600: #339965;
+    --color-accent-700: #297A51;
 
     /* ─── Neutral Warm Gray ──────────────────────────────── */
     --color-neutral-50:  #f8f7f6; /* ← background página */
@@ -43,10 +43,19 @@
     --color-neutral-950: #131210;
 
     /* ─── Semánticos ─────────────────────────────────────── */
-    --color-success: #2D9B6F;
-    --color-warning: #ed8c1d; /* = accent-500 */
-    --color-error:   #E04848;
-    --color-info:    #4A7BB5; /* = primary-500 */
+    --color-success:       #22c55e;
+    --color-success-light: #86efac;
+    --color-warning:       #ed8c1d; /* = accent-500 */
+    --color-error:         #E04848;
+    --color-info:          #4A7BB5; /* = primary-500 */
+
+    /* ─── WhatsApp ───────────────────────────────────────── */
+    --color-whatsapp:           #128C7E;
+    --color-whatsapp-hover:     #1da851;
+    --color-whatsapp-hover-dark:#0d6b61;
+
+    /* ─── Amber (overlay accent fallback) ────────────────── */
+    --color-amber-600: #cc7614;
 
     /* ─── Tokens funcionales (usar estos en componentes) ─── */
     --color-bg:          var(--color-neutral-50);
@@ -63,21 +72,57 @@
 
     --color-cta:         var(--color-accent-500);
     --color-cta-hover:   var(--color-accent-600);
-    --color-cta-text:    #ffffff;
+    --color-cta-text:    var(--color-text-inverse);
+    --color-text-inverse: #ffffff;
+    --color-text-inverse-alt: var(--color-neutral-950);
+
+    /* ─── Avatar placeholders (HeroSection trust) ────────── */
+    --color-avatar-1: var(--color-primary-400);
+    --color-avatar-2: var(--color-accent-400);
+    --color-avatar-3: var(--color-primary-300);
+
+    /* ─── SVG placeholder (WhySection) ───────────────────── */
+    --color-svg-bg:   var(--color-neutral-100);
+    --color-svg-text: var(--color-neutral-400);
+
+    /* ─── Opacidad ───────────────────────────────────────── */
+    --opacity-subtle: 0.10;
+    --opacity-low:    0.08;
+    --opacity-12:     0.12;
+    --opacity-medium: 0.15;
+    --opacity-20:     0.20;
+    --opacity-22:     0.22;
+    --opacity-high:   0.25;
+    --opacity-30:     0.30;
+    --opacity-35:     0.35;
+    --opacity-40:     0.40;
+    --opacity-45:     0.45;
+    --opacity-50:     0.50;
+    --opacity-60:     0.60;
+    --opacity-65:     0.65;
+    --opacity-70:     0.70;
+    --opacity-80:     0.80;
+    --opacity-90:     0.90;
+    --opacity-full:   1;
 
     /* ─── Elevaciones / Sombras ──────────────────────────── */
     --shadow-sm:  0 1px 3px 0 rgb(74 123 181 / 0.08);
     --shadow-md:  0 4px 16px 0 rgb(74 123 181 / 0.12);
     --shadow-lg:  0 8px 32px 0 rgb(74 123 181 / 0.16);
     --shadow-xl:  0 16px 48px 0 rgb(74 123 181 / 0.20);
-    --shadow-cta: 0 4px 20px 0 rgb(237 140 29 / 0.35);
+    --shadow-cta: 0 4px 20px 0 rgb(62 185 120 / 0.35);
 
     /* ─── Border radius ──────────────────────────────────── */
-    --radius-sm:  6px;
-    --radius-md:  12px;
-    --radius-lg:  20px;   /* cards principales — estilo lifecare */
-    --radius-xl:  28px;   /* cards hero, destacadas */
-    --radius-pill: 9999px; /* botones CTA, badges */
+    --radius-xs:    4px;
+    --radius-sm:    6px;
+    --radius-input: 10px;  /* inputs de formularios */
+    --radius-md:    12px;
+    --radius-card:  16px;  /* cards secundarias, badges */
+    --radius-lg:    20px;  /* cards principales — estilo lifecare */
+    --radius-xl:    24px;  /* cards hero, destacadas */
+    --radius-2xl:   28px;  /* badges flotantes */
+    --radius-circle:50%;   /* círculos perfectos */
+    --radius-pill:  9999px;/* botones CTA, badges */
   }
 }
 
@@ -99,12 +144,12 @@
   --color-primary-900: #112236;
   --color-primary-950: #0a1624;
 
-  /* Accent */
-  --color-accent-300: #f7b76e;
-  --color-accent-400: #f39f3f;
-  --color-accent-500: #ed8c1d;
-  --color-accent-600: #cc7614;
-  --color-accent-700: #a15e12;
+  /* Accent Green */
+  --color-accent-300: #d8f1e6;
+  --color-accent-400: #87d3b0;
+  --color-accent-500: #3EB978;
+  --color-accent-600: #339965;
+  --color-accent-700: #297A51;
 
   /* Neutral */
   --color-neutral-50:  #f8f7f6;
@@ -120,10 +165,19 @@
   --color-neutral-950: #131210;
 
   /* Semánticos */
-  --color-success: #2D9B6F;
-  --color-warning: #ed8c1d;
-  --color-error:   #E04848;
-  --color-info:    #4A7BB5;
+  --color-success:       #22c55e;
+  --color-success-light: #86efac;
+  --color-warning:       #ed8c1d;
+  --color-error:         #E04848;
+  --color-info:          #4A7BB5;
+
+  /* WhatsApp */
+  --color-whatsapp:            #128C7E;
+  --color-whatsapp-hover:      #1da851;
+  --color-whatsapp-hover-dark: #0d6b61;
+
+  /* Amber */
+  --color-amber-600: #cc7614;
 
   /* Funcionales */
   --color-bg:          #f8f7f6;
@@ -133,12 +187,47 @@
   --color-text:        #211f1c;
   --color-text-muted:  #6e6963;
   --color-brand:       #4A7BB5;
-  --color-cta:         #ed8c1d;
+  --color-cta:         #3EB978;
+  --color-text-inverse-alt: #131210;
+
+  /* Avatar placeholders */
+  --color-avatar-1: #658fc3;
+  --color-avatar-2: #87d3b0;
+  --color-avatar-3: #83a7d2;
+
+  /* SVG placeholder */
+  --color-svg-bg:   #efedeb;
+  --color-svg-text: #aaa6a1;
+
+  /* Opacidad */
+  --opacity-subtle: 0.10;
+  --opacity-low:    0.08;
+  --opacity-12:     0.12;
+  --opacity-medium: 0.15;
+  --opacity-20:     0.20;
+  --opacity-22:     0.22;
+  --opacity-high:   0.25;
+  --opacity-30:     0.30;
+  --opacity-35:     0.35;
+  --opacity-40:     0.40;
+  --opacity-45:     0.45;
+  --opacity-50:     0.50;
+  --opacity-60:     0.60;
+  --opacity-65:     0.65;
+  --opacity-70:     0.70;
+  --opacity-80:     0.80;
+  --opacity-90:     0.90;
+  --opacity-full:   1;
 
   /* Border radius */
-  --radius-sm:   6px;
-  --radius-md:   12px;
-  --radius-lg:   20px;
-  --radius-xl:   28px;
-  --radius-pill: 9999px;
+  --radius-xs:    4px;
+  --radius-sm:    6px;
+  --radius-input: 10px;
+  --radius-md:    12px;
+  --radius-card:  16px;
+  --radius-lg:    20px;
+  --radius-xl:    24px;
+  --radius-2xl:   28px;
+  --radius-circle:50%;
+  --radius-pill:  9999px;
 }

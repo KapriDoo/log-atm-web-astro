@@ -148,7 +148,7 @@ import { FOOTER_SERVICES, FOOTER_COMPANY, CURRENT_YEAR, SITE } from '../../lib/c
     justify-content: center;
     width: 44px;
     height: 44px;
-    border-radius: 50%;
+    border-radius: var(--radius-circle);
     background-color: var(--color-primary-800);
     color: var(--color-primary-200);
     transition: background-color 150ms ease, color 150ms ease;
@@ -156,14 +156,14 @@ import { FOOTER_SERVICES, FOOTER_COMPANY, CURRENT_YEAR, SITE } from '../../lib/c
 
   .footer__social-link:hover {
     background-color: var(--color-brand);
-    color: #ffffff;
+    color: var(--color-text-inverse);
   }
 
   .footer__heading {
     font-family: var(--font-display);
     font-size: 0.8rem;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--color-text-inverse);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     margin: 0 0 1.25rem;
@@ -185,7 +185,7 @@ import { FOOTER_SERVICES, FOOTER_COMPANY, CURRENT_YEAR, SITE } from '../../lib/c
   }
 
   .footer__link:hover {
-    color: #ffffff;
+    color: var(--color-text-inverse);
   }
 
   .footer__address {
@@ -211,8 +211,8 @@ import { FOOTER_SERVICES, FOOTER_COMPANY, CURRENT_YEAR, SITE } from '../../lib/c
     align-items: center;
     gap: 0.5rem;
     padding: 0.625rem 1.25rem;
-    background-color: #128C7E;
-    color: #ffffff;
+    background-color: var(--color-whatsapp);
+    color: var(--color-text-inverse);
     font-size: 0.875rem;
     font-weight: 600;
     border-radius: var(--radius-pill);
@@ -220,7 +220,7 @@ import { FOOTER_SERVICES, FOOTER_COMPANY, CURRENT_YEAR, SITE } from '../../lib/c
   }
 
   .footer__whatsapp:hover {
-    background-color: #1da851;
+    background-color: var(--color-whatsapp-hover);
     transform: translateY(-1px);
   }
 

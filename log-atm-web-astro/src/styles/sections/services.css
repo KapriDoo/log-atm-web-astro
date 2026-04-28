@@ -19,7 +19,7 @@
   padding: 2rem 1.75rem;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   text-decoration: none;
   overflow: hidden;
   transition: border-color 300ms, box-shadow 300ms, transform 300ms;
@@ -27,7 +27,7 @@
 @media (hover: hover) {
   .svc-card:hover {
     border-color: var(--color-primary-200);
-    box-shadow: 0 12px 40px rgba(74,123,181,0.14);
+    box-shadow: 0 12px 40px color-mix(in srgb, var(--color-primary-500) 14%, transparent);
     transform: translateY(-4px);
   }
   .svc-card--accent:hover { border-color: var(--color-accent-300); }
@@ -42,7 +42,7 @@
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 350ms ease;
-  border-radius: 20px 20px 0 0;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 .svc-card--accent .svc-card__line {
   background: linear-gradient(90deg, var(--color-accent-500), var(--color-accent-300));
@@ -72,7 +72,7 @@
   align-items: center;
   justify-content: center;
   width: 30px; height: 30px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   color: var(--color-neutral-300);
   opacity: 0;
   transform: translate(-4px, 4px);
@@ -86,13 +86,17 @@
 }
 .svc-card--accent:hover .svc-card__arrow {
   color: var(--color-accent-600);
-  background: rgba(237,140,29,0.08);
+  background: color-mix(in srgb, var(--color-accent-500) 8%, transparent);
+}
+.svc-card--accent:hover .svc-card__arrow {
+  color: var(--color-accent-600);
+  background: color-mix(in srgb, var(--color-accent-500) 8%, transparent);
 }
 
 /* ── Icon wrap ── */
 .svc-card__icon-wrap {
   width: 56px; height: 56px;
-  border-radius: 14px;
+  border-radius: var(--radius-sm);
   background: linear-gradient(135deg, var(--color-primary-50), var(--color-primary-100));
   border: 1px solid var(--color-primary-100);
   display: flex; align-items: center; justify-content: center;
@@ -101,8 +105,8 @@
   flex-shrink: 0;
 }
 .svc-card--accent .svc-card__icon-wrap {
-  background: linear-gradient(135deg, rgba(237,140,29,0.08), rgba(237,140,29,0.16));
-  border-color: rgba(237,140,29,0.2);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--color-accent-500) 8%, transparent), color-mix(in srgb, var(--color-accent-500) 16%, transparent));
+  border-color: color-mix(in srgb, var(--color-accent-500) 20%, transparent);
   color: var(--color-accent-600);
 }
 .svc-card:hover .svc-card__icon-wrap { transform: scale(1.05); }
@@ -136,7 +140,7 @@
   background: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(74,123,181,0.92) 100%
+    color-mix(in srgb, var(--color-primary-500) 92%, transparent) 100%
   );
   display: flex;
   align-items: flex-end;
@@ -144,10 +148,10 @@
   opacity: 0;
   transform: translateY(100%);
   transition: opacity 400ms ease-in-out, transform 400ms ease-in-out;
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
 }
 .svc-card--accent .svc-card__overlay {
-  background: linear-gradient(180deg, transparent 0%, rgba(204,118,20,0.92) 100%);
+  background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--color-amber-600) 92%, transparent) 100%);
 }
 .svc-card:hover .svc-card__overlay {
   opacity: 1;
@@ -157,7 +161,7 @@
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-inverse);
 }
 
 /* ── Prefers-reduced-motion ── */

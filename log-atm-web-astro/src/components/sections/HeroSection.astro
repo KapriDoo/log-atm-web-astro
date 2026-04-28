@@ -44,7 +44,11 @@ import { SITE } from '../../lib/constants';
 
       <div class="hero__trust">
         <div class="hero__trust-avatars" aria-hidden="true">
-          {['#658fc3','#3b6497','#4A7BB5'].map(c => (
+          {[
+            'var(--color-avatar-1)',
+            'var(--color-avatar-2)',
+            'var(--color-avatar-3)'
+          ].map(c => (
             <span class="hero__trust-avatar" style={`background:${c}`}></span>
           ))}
         </div>

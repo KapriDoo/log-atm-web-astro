@@ -151,7 +151,7 @@ const canonical = `${SITE.url}/contacto`;
   }
   .contact-method__icon {
     width: 48px; height: 48px;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     background: var(--color-primary-50);
     color: var(--color-brand);
     display: flex;
@@ -180,19 +180,19 @@ const canonical = `${SITE.url}/contacto`;
     align-items: center;
     gap: 0.75rem;
     padding: 0.875rem 1.5rem;
-    border-radius: 9999px;
-    background: #128C7E;
-    color: #fff;
+    border-radius: var(--radius-pill);
+    background: var(--color-whatsapp);
+    color: var(--color-text-inverse);
     font-weight: 600;
     margin-top: 1rem;
     transition: background 150ms;
   }
-  .contact-whatsapp:hover { background: #0d6b61; }
+  .contact-whatsapp:hover { background: var(--color-whatsapp-hover-dark); }
 
   .contact-form-wrap {
-    background: #fff;
+    background: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: 20px;
+    border-radius: var(--radius-lg);
     padding: 2.5rem;
   }
   .contact-form__title {
@@ -218,10 +218,10 @@ const canonical = `${SITE.url}/contacto`;
     width: 100%;
     padding: 0.75rem 1rem;
     border: 1px solid var(--color-neutral-200);
-    border-radius: 10px;
+    border-radius: var(--radius-input);
     font-size: 1rem;
     color: var(--color-neutral-900);
-    background: #fff;
+    background: var(--color-surface);
     transition: border-color 150ms, box-shadow 150ms;
   }
   .form-group input:focus,
@@ -229,7 +229,7 @@ const canonical = `${SITE.url}/contacto`;
   .form-group textarea:focus {
     outline: none;
     border-color: var(--color-brand);
-    box-shadow: 0 0 0 3px rgba(74, 123, 181, 0.1);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-500) 10%, transparent);
   }
   .form-group textarea {
     resize: vertical;
@@ -243,9 +243,9 @@ const canonical = `${SITE.url}/contacto`;
     width: 100%;
     justify-content: center;
     padding: 0.875rem;
-    border-radius: 9999px;
+    border-radius: var(--radius-pill);
     background: var(--color-cta);
-    color: #fff;
+    color: var(--color-text-inverse);
     font-weight: 700;
     font-size: 1rem;
     border: none;
