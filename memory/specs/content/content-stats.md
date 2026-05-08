@@ -23,7 +23,7 @@ related: []
 affects: [src/lib/constants.ts, src/components/sections/StatsSection.astro]
 adrs: []
 scope: [src/lib/constants.ts, src/components/sections/StatsSection.astro]
-verified_at: null
+verified_at: "2026-05-08"
 ---
 
 ## Purpose

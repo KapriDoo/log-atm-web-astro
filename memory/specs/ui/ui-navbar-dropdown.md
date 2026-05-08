@@ -24,7 +24,7 @@ related: []
 affects: [src/components/ui/Navbar.astro]
 adrs: []
 scope: [src/components/ui/Navbar.astro]
-verified_at: null
+verified_at: "2026-05-08"
 ---
 
 ## Purpose
