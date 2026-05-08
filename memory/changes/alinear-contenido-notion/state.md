@@ -2,10 +2,9 @@
 type: change-state
 change_name: "alinear-contenido-notion"
 domain: "feature"
-status: active
-fast_path: "full"
-current_phase: sdd-archive
-phases_completed: [sdd-explore, sdd-propose, sdd-spec, sdd-design, sdd-apply, sdd-verify]
+status: completed
+current_phase: ""
+phases_completed: [sdd-explore, sdd-propose, sdd-spec, sdd-design, sdd-apply, sdd-verify, sdd-archive]
 updated: "2026-05-08"
 spec_refs:
   - content-services
