@@ -7,17 +7,19 @@ domain: feature
 delta_type: add
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: null
 priority: high
 depends_on: []
 change_ref: alinear-contenido-notion
+commits: [c5d7002]
+feature_branch: feature/alinear-contenido-notion
 acceptance_criteria:
-  - "El navbar muestra dos dropdowns: Servicios e Industrias"
-  - "Cada dropdown lista todos los items de su categoría (11 servicios, 14 industrias)"
-  - "El dropdown se abre al hover/click y cierra al click outside o Escape"
-  - "El dropdown es accesible (ARIA expanded, roles, foco)"
-  - "En mobile (≤1023px) el drawer muestra las categorías agrupadas"
+  - "[x] El navbar muestra dos dropdowns: Servicios e Industrias"
+  - "[x] Cada dropdown lista todos los items de su categoría (11 servicios, 14 industrias)"
+  - "[x] El dropdown se abre al hover/click y cierra al click outside o Escape"
+  - "[x] El dropdown es accesible (ARIA expanded, roles, foco)"
+  - "[x] En mobile (≤1023px) el drawer muestra las categorías agrupadas"
 related: []
 affects: [src/components/ui/Navbar.astro]
 adrs: []

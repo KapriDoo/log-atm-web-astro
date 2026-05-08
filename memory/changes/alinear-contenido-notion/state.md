@@ -4,8 +4,9 @@ change_name: "alinear-contenido-notion"
 domain: "feature"
 status: active
 fast_path: "full"
-current_phase: sdd-apply
-phases_completed: [sdd-explore, sdd-propose, sdd-spec, sdd-design]
+current_phase: sdd-verify
+phases_completed: [sdd-explore, sdd-propose, sdd-spec, sdd-design, sdd-apply]
+updated: "2026-05-08"
 spec_refs:
   - content-services
   - content-industries

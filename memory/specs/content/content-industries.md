@@ -7,16 +7,18 @@ domain: feature
 delta_type: add
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: null
 priority: high
 depends_on: []
 change_ref: alinear-contenido-notion
+commits: [c5d7002]
+feature_branch: feature/alinear-contenido-notion
 acceptance_criteria:
-  - "El array INDUSTRIES contiene 14 items (6 originales + 8 nuevas)"
-  - "Las 8 industrias nuevas son: Chatarra Ferrosa, Iluminarias, Vehiculos Usados, Efectos Personales, Maquinaria, Repuestos Automotrices y de maquinaria Pesada, Textil, Proyectos"
-  - "Cada industria tiene icono, nombre, subtitulo y color definidos"
-  - "IndustriesSection renderiza todas las 14 industrias"
+  - "[x] El array INDUSTRIES contiene 14 items (6 originales + 8 nuevas)"
+  - "[x] Las 8 industrias nuevas son: Chatarra Ferrosa, Iluminarias, Vehiculos Usados, Efectos Personales, Maquinaria, Repuestos Automotrices y de maquinaria Pesada, Textil, Proyectos"
+  - "[x] Cada industria tiene icono, nombre, subtitulo y color definidos"
+  - "[x] IndustriesSection renderiza todas las 14 industrias"
 related: []
 affects: [src/lib/constants.ts, src/components/sections/IndustriesSection.astro]
 adrs: []

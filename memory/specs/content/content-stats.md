@@ -7,16 +7,18 @@ domain: feature
 delta_type: update
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: null
 priority: high
 depends_on: []
 change_ref: alinear-contenido-notion
+commits: [c5d7002]
+feature_branch: feature/alinear-contenido-notion
 acceptance_criteria:
-  - "El array STATS contiene exactamente 4 items"
-  - "Los valores son: 20+ años, 70+ países, 98% satisfacción, Atendemos de manera personalizada"
-  - "El item '5.000+ envíos por año' ha sido eliminado"
-  - "StatsSection renderiza las 4 stats correctamente"
+  - "[x] El array STATS contiene exactamente 4 items"
+  - "[x] Los valores son: 20+ años, 70+ países, 98% satisfacción, Atendemos de manera personalizada"
+  - "[x] El item '5.000+ envíos por año' ha sido eliminado"
+  - "[x] StatsSection renderiza las 4 stats correctamente"
 related: []
 affects: [src/lib/constants.ts, src/components/sections/StatsSection.astro]
 adrs: []

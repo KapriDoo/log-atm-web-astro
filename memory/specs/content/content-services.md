@@ -7,16 +7,18 @@ domain: feature
 delta_type: add
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: null
 priority: high
 depends_on: []
 change_ref: alinear-contenido-notion
+commits: [c5d7002]
+feature_branch: feature/alinear-contenido-notion
 acceptance_criteria:
-  - "El array SERVICES contiene 11 items (5 originales + 6 nuevos)"
-  - "Los 6 servicios nuevos son: Courier internacional, Seguros de Carga, Desconsolidado, Servicio de Casillero USA, Asesoria en Compras Internacionales, Te conectamos con el Medio Oriente"
-  - "Cada servicio tiene icono, titulo, descripcion, href y accent definidos"
-  - "ServicesSection renderiza todos los 11 servicios"
+  - "[x] El array SERVICES contiene 11 items (5 originales + 6 nuevos)"
+  - "[x] Los 6 servicios nuevos son: Courier internacional, Seguros de Carga, Desconsolidado, Servicio de Casillero USA, Asesoria en Compras Internacionales, Te conectamos con el Medio Oriente"
+  - "[x] Cada servicio tiene icono, titulo, descripcion, href y accent definidos"
+  - "[x] ServicesSection renderiza todos los 11 servicios"
 related: []
 affects: [src/lib/constants.ts, src/components/sections/ServicesSection.astro]
 adrs: []
