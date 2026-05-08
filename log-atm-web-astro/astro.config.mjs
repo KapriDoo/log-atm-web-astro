@@ -19,7 +19,10 @@ export default defineConfig({
           'package-open', 'hard-hat', 'plane-takeoff', 'compass',
           'user-round-check', 'globe-2', 'map-pin', 'shield-check',
           'pickaxe', 'shopping-cart', 'phone', 'mail', 'map-pin', 'message-circle',
-          'users', 'tag', 'clock', 'shield-check', 'headphones', 'send'
+          'users', 'tag', 'clock', 'shield-check', 'headphones', 'send',
+          'package-check', 'container', 'handshake', 'user-check',
+          'hammer', 'lightbulb', 'car', 'briefcase', 'settings', 'wrench',
+          'scissors', 'layout'
         ]
       }
     }),

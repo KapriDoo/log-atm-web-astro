@@ -29,10 +29,41 @@ export const SEO = {
 
 // Navegación principal
 export const NAV_LINKS = [
-  { href: '/servicios/carga-aerea', label: 'Carga Aérea' },
-  { href: '/servicios/carga-maritima', label: 'Carga Marítima' },
-  { href: '#servicios-aduanas', label: 'Aduana' },
-  { href: '#servicios-almacenaje', label: 'Almacenaje' },
+  {
+    label: 'Servicios',
+    children: [
+      { href: '#servicios-carga-aerea', label: 'Carga Aérea' },
+      { href: '#servicios-carga-maritima', label: 'Carga Marítima' },
+      { href: '#servicios-aduanas', label: 'Aduana y Documentación' },
+      { href: '#servicios-almacenaje', label: 'Almacenaje y Distribución' },
+      { href: '#cotizar', label: 'Consultoría Logística' },
+      { href: '#servicios-courier', label: 'Courier internacional' },
+      { href: '#servicios-seguros', label: 'Seguros de Carga' },
+      { href: '#servicios-desconsolidado', label: 'Desconsolidado' },
+      { href: '#servicios-casillero', label: 'Servicio de Casillero USA' },
+      { href: '#servicios-asesoria', label: 'Asesoria en Compras Internacionales' },
+      { href: '#servicios-medio-oriente', label: 'Te conectamos con el Medio Oriente' },
+    ] as const,
+  },
+  {
+    label: 'Industrias',
+    children: [
+      { href: '#industrias', label: 'Minería' },
+      { href: '#industrias', label: 'Retail' },
+      { href: '#industrias', label: 'Agroindustria' },
+      { href: '#industrias', label: 'Farmacéutica' },
+      { href: '#industrias', label: 'E-commerce' },
+      { href: '#industrias', label: 'Construcción' },
+      { href: '#industrias', label: 'Chatarra Ferrosa' },
+      { href: '#industrias', label: 'Iluminarias' },
+      { href: '#industrias', label: 'Vehiculos Usados' },
+      { href: '#industrias', label: 'Efectos Personales' },
+      { href: '#industrias', label: 'Maquinaria' },
+      { href: '#industrias', label: 'Repuestos Automotrices y de maquinaria Pesada' },
+      { href: '#industrias', label: 'Textil' },
+      { href: '#industrias', label: 'Proyectos' },
+    ] as const,
+  },
   { href: '/nosotros', label: 'Nosotros' },
   { href: '/contacto', label: 'Contacto' },
 ] as const;
@@ -57,10 +88,10 @@ export const FOOTER_COMPANY = [
 
 // Stats de la banda de confianza
 export const STATS = [
-  { value: '15+', label: 'Años de experiencia', icon: 'lucide:award', anim: 'award' },
-  { value: '80+', label: 'Países conectados', icon: 'lucide:globe', anim: 'globe' },
-  { value: '5.000+', label: 'Envíos por año', icon: 'lucide:package', anim: 'package' },
+  { value: '20+', label: 'Años de experiencia', icon: 'lucide:award', anim: 'award' },
+  { value: '70+', label: 'Países conectados', icon: 'lucide:globe', anim: 'globe' },
   { value: '98%', label: 'Satisfacción', icon: 'lucide:sparkles', anim: 'sparkles' },
+  { value: '', label: 'Atendemos de manera personalizada', icon: 'lucide:user-check', anim: 'heart' },
 ] as const;
 
 // Servicios ofrecidos
@@ -105,6 +136,54 @@ export const SERVICES = [
     href: '#cotizar',
     accent: true,
   },
+  {
+    n: '06',
+    icon: 'lucide:package-check',
+    title: 'Courier internacional',
+    desc: 'Envíos exprés puerta a puerta con seguimiento internacional y entregas ágiles a cualquier destino.',
+    href: '#servicios-courier',
+    accent: false,
+  },
+  {
+    n: '07',
+    icon: 'lucide:shield-check',
+    title: 'Seguros de Carga',
+    desc: 'Protección integral para tu mercancía durante todo el trayecto, con coberturas flexibles y respaldo global.',
+    href: '#servicios-seguros',
+    accent: true,
+  },
+  {
+    n: '08',
+    icon: 'lucide:container',
+    title: 'Desconsolidado',
+    desc: 'Recepción, fraccionamiento y distribución de carga consolidada desde los principales puertos.',
+    href: '#servicios-desconsolidado',
+    accent: false,
+  },
+  {
+    n: '09',
+    icon: 'lucide:mail',
+    title: 'Servicio de Casillero USA',
+    desc: 'Dirección propia en Estados Unidos para recibir compras online y traerlas a Chile de forma rápida y segura.',
+    href: '#servicios-casillero',
+    accent: true,
+  },
+  {
+    n: '10',
+    icon: 'lucide:handshake',
+    title: 'Asesoria en Compras Internacionales',
+    desc: 'Te guiamos en el proceso de compra en el extranjero: proveedores, pagos, logística y entrega final.',
+    href: '#servicios-asesoria',
+    accent: false,
+  },
+  {
+    n: '11',
+    icon: 'lucide:globe-2',
+    title: 'Te conectamos con el Medio Oriente',
+    desc: 'Rutas especializadas hacia y desde el Medio Oriente con socios locales de confianza.',
+    href: '#servicios-medio-oriente',
+    accent: true,
+  },
 ] as const;
 
 // Razones para elegir LOG ATM
@@ -147,6 +226,14 @@ export const INDUSTRIES = [
   { icon: 'lucide:pill', name: 'Farmacéutica', sub: 'Cadena de frío, reactivos', color: '#4A7BB5' },
   { icon: 'lucide:shopping-cart', name: 'E-commerce', sub: 'Cross-border, fulfillment', color: '#339965' },
   { icon: 'lucide:hard-hat', name: 'Construcción', sub: 'Maquinaria, materiales', color: '#3b6497' },
+  { icon: 'lucide:hammer', name: 'Chatarra Ferrosa', sub: 'Reciclaje, exportación de metales', color: '#7a7a7a' },
+  { icon: 'lucide:lightbulb', name: 'Iluminarias', sub: 'Equipos de iluminación LED e industrial', color: '#f5c842' },
+  { icon: 'lucide:car', name: 'Vehiculos Usados', sub: 'Importación y trámites de vehículos', color: '#e84c3d' },
+  { icon: 'lucide:briefcase', name: 'Efectos Personales', sub: 'Mudanzas internacionales y traslados', color: '#9b59b6' },
+  { icon: 'lucide:settings', name: 'Maquinaria', sub: 'Equipos industriales y agrícolas', color: '#34495e' },
+  { icon: 'lucide:wrench', name: 'Repuestos Automotrices y de maquinaria Pesada', sub: 'Piezas y componentes de reposición', color: '#d35400' },
+  { icon: 'lucide:scissors', name: 'Textil', sub: 'Prendas, telas y accesorios de moda', color: '#e91e63' },
+  { icon: 'lucide:layout', name: 'Proyectos', sub: 'Logística de proyectos especiales y carga sobredimensionada', color: '#16a085' },
 ] as const;
 
 // Año actual para copyright
