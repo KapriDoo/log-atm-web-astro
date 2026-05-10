@@ -272,6 +272,12 @@
 }
 .hero__wave svg { display: block; width: 100%; }
 
+/* ── Animación de entrada ── */
+.animate-on-load {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
 /* ── Responsive ── */
 @media (max-width: 1023px) {
   .hero__inner  { grid-template-columns: 1fr; }
@@ -294,4 +300,16 @@
 /* ── Prefers-reduced-motion ── */
 @media (prefers-reduced-motion: reduce) {
   .hero__badge-dot { animation: none; }
+  .animate-on-load {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ── Fallback scripting: none ── */
+@media (scripting: none) {
+  .animate-on-load {
+    opacity: 1;
+    transform: none;
+  }
 }
