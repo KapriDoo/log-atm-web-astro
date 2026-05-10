@@ -41,3 +41,4 @@ updated: "2026-04-26"
 - Tailwind v4 usa `@theme` en `styles/global.css` para tokens
 - Performance objetivo: Lighthouse ≥ 95
 - Accesibilidad: WCAG AA mínimo
+- **Antes de proponer cambios de UI, leer `DESIGN.md` en la raíz del proyecto**
