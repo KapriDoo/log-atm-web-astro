@@ -1,6 +1,10 @@
 ---
 import { NAV_LINKS, SITE } from '../../lib/constants';
 const currentPath = Astro.url.pathname;
+
+function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV_LINKS[number], { children: any }> {
+  return 'children' in link;
+}
 ---
 
 <header class="navbar" id="navbar" role="banner">
@@ -11,14 +15,40 @@ const currentPath = Astro.url.pathname;
 
     <nav class="navbar__nav" aria-label="Navegación principal">
       <ul class="navbar__links" role="list">
-        {NAV_LINKS.map(({ href, label }) => (
-          <li>
-            <a
-              href={href}
-              class:list={['navbar__link', { 'is-active': currentPath.startsWith(href) }]}
-              aria-current={currentPath.startsWith(href) ? 'page' : undefined}
-            >{label}</a>
-          </li>
+        {NAV_LINKS.map((link, idx) => (
+          hasChildren(link) ? (
+            <li class="navbar__item navbar__item--dropdown">
+              <button
+                type="button"
+                class="navbar__link navbar__link--trigger"
+                id={`nav-trigger-${idx}`}
+                aria-expanded="false"
+                aria-haspopup="true"
+              >
+                {link.label}
+                <svg class="navbar__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </button>
+              <ul class="dropdown" role="menu" aria-labelledby={`nav-trigger-${idx}`}>
+                {link.children.map((child) => (
+                  <li role="none">
+                    <a href={child.href} class="dropdown__link" role="menuitem">
+                      {child.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ) : (
+            <li>
+              <a
+                href={link.href}
+                class:list={['navbar__link', { 'is-active': currentPath.startsWith(link.href) }]}
+                aria-current={currentPath.startsWith(link.href) ? 'page' : undefined}
+              >{link.label}</a>
+            </li>
+          )
         ))}
       </ul>
     </nav>
@@ -53,14 +83,27 @@ const currentPath = Astro.url.pathname;
     </div>
 
     <ul class="drawer__links" role="list">
-      {NAV_LINKS.map(({ href, label }) => (
-        <li>
-          <a
-            href={href}
-            class:list={['drawer__link', { 'is-active': currentPath.startsWith(href) }]}
-            aria-current={currentPath.startsWith(href) ? 'page' : undefined}
-          >{label}</a>
-        </li>
+      {NAV_LINKS.map((link) => (
+        hasChildren(link) ? (
+          <li class="drawer__group">
+            <span class="drawer__group-label">{link.label}</span>
+            <ul class="drawer__group-links" role="list">
+              {link.children.map((child) => (
+                <li>
+                  <a href={child.href} class="drawer__link">{child.label}</a>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ) : (
+          <li>
+            <a
+              href={link.href}
+              class:list={['drawer__link', { 'is-active': currentPath.startsWith(link.href) }]}
+              aria-current={currentPath.startsWith(link.href) ? 'page' : undefined}
+            >{link.label}</a>
+          </li>
+        )
       ))}
     </ul>
 
@@ -113,7 +156,9 @@ const currentPath = Astro.url.pathname;
   }
 
   .navbar__link {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
     padding: 0.75rem 1rem;
     font-size: 0.9rem;
     font-weight: 500;
@@ -121,11 +166,71 @@ const currentPath = Astro.url.pathname;
     border-radius: var(--radius-sm);
     transition: color 150ms, background 150ms;
     white-space: nowrap;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
   }
   .navbar__link:hover,
   .navbar__link.is-active {
     color: var(--color-brand);
     background: var(--color-primary-50);
+  }
+
+  .navbar__chevron {
+    transition: transform 200ms ease;
+  }
+  .navbar__item--dropdown.is-open .navbar__chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown */
+  .navbar__item--dropdown {
+    position: relative;
+  }
+
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    min-width: 240px;
+    max-height: 70vh;
+    overflow-y: auto;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: 0 12px 40px color-mix(in srgb, var(--color-primary-900) 12%, transparent);
+    padding: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+    z-index: 110;
+    list-style: none;
+    margin: 0;
+  }
+
+  .navbar__item--dropdown.is-open .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown__link {
+    display: block;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-neutral-700);
+    border-radius: var(--radius-sm);
+    transition: background 150ms, color 150ms;
+    white-space: nowrap;
+  }
+  .dropdown__link:hover,
+  .dropdown__link:focus {
+    background: var(--color-primary-50);
+    color: var(--color-brand);
+    outline: none;
   }
 
   .navbar__actions {
@@ -271,6 +376,35 @@ const currentPath = Astro.url.pathname;
     color: var(--color-brand);
   }
 
+  .drawer__group {
+    margin-bottom: 0.5rem;
+  }
+
+  .drawer__group-label {
+    display: block;
+    padding: 0.75rem 1rem 0.375rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-neutral-500);
+  }
+
+  .drawer__group-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    padding-left: 0.5rem;
+  }
+
+  .drawer__group-links .drawer__link {
+    font-size: 0.9375rem;
+    padding: 0.625rem 1rem;
+  }
+
   .drawer__ctas {
     display: flex;
     flex-direction: column;
@@ -389,6 +523,51 @@ const currentPath = Astro.url.pathname;
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && drawer.getAttribute('aria-hidden') === 'false') closeDrawer();
+  });
+
+  // ─── Dropdown handling ────────────────────────────────────
+  const dropdownItems = document.querySelectorAll<HTMLElement>('.navbar__item--dropdown');
+
+  function closeAllDropdowns() {
+    dropdownItems.forEach(item => {
+      item.classList.remove('is-open');
+      const trigger = item.querySelector('.navbar__link--trigger');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  dropdownItems.forEach(item => {
+    const trigger = item.querySelector('.navbar__link--trigger') as HTMLButtonElement;
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = item.classList.contains('is-open');
+      closeAllDropdowns();
+      if (!isOpen) {
+        item.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // Click outside closes dropdowns
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest('.navbar__item--dropdown')) {
+      closeAllDropdowns();
+    }
+  });
+
+  // Escape closes dropdowns and returns focus
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const openDropdown = document.querySelector('.navbar__item--dropdown.is-open') as HTMLElement;
+      if (openDropdown) {
+        closeAllDropdowns();
+        const trigger = openDropdown.querySelector('.navbar__link--trigger') as HTMLButtonElement;
+        trigger?.focus();
+      }
+    }
   });
 
   // Scroll shadow
