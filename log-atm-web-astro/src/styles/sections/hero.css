@@ -272,11 +272,13 @@
 }
 .hero__wave svg { display: block; width: 100%; }
 
-/* ── Animación de entrada ── */
-.animate-on-load {
-  opacity: 0;
-  transform: translateY(20px);
-}
+/* ── Animación de entrada ──
+ * El estado inicial oculto (opacity:0) se aplica desde el script GSAP via
+ * gsap.set(), no desde CSS, para que si JS falla el contenido permanezca
+ * visible (sin FOUC ni texto fantasma).
+ * La clase .animate-on-load se mantiene como marcador semántico para que
+ * el script identifique los elementos a animar.
+ */
 
 /* ── Responsive ── */
 @media (max-width: 1023px) {
@@ -300,16 +302,4 @@
 /* ── Prefers-reduced-motion ── */
 @media (prefers-reduced-motion: reduce) {
   .hero__badge-dot { animation: none; }
-  .animate-on-load {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* ── Fallback scripting: none ── */
-@media (scripting: none) {
-  .animate-on-load {
-    opacity: 1;
-    transform: none;
-  }
 }

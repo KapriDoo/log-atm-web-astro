@@ -98,21 +98,24 @@ import { SITE } from '../../lib/constants';
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (prefersReducedMotion) {
-      // Colocar todos los elementos en estado final
-      gsap.set('.animate-on-load', { opacity: 1, y: 0, clearProps: 'transform' });
-      gsap.set('[data-hero-card]', { opacity: 1, y: 0, scale: 1 });
-      gsap.set('[data-hero-blob]', { opacity: 1, scale: 1 });
-      gsap.set('[data-hero-grid]', { opacity: 1 });
-      gsap.set('[data-hero-wave]', { opacity: 1 });
+      // No se requiere acción: el contenido es visible por CSS default.
+      // (No hay clase que ocultar ni transform que limpiar.)
     } else {
-      // Timeline de entrada escalonada
+      // Ocultar inmediatamente desde JS — si este script no corre, los
+      // elementos permanecen visibles (sin FOUC oculto en caso de fallo
+      // de carga de GSAP). El CSS ya no aplica .animate-on-load{opacity:0}.
+      gsap.set('.animate-on-load', { opacity: 0, y: 20 });
+
+      // Timeline de entrada escalonada (fromTo para destino explícito,
+      // independiente del estado computed actual del DOM).
+      const fadeIn = { opacity: 1, y: 0 };
       const tl = gsap.timeline({ defaults: { ease: 'power2.out', duration: 0.6 } });
 
-      tl.from('[data-hero-badge]', { y: 20, opacity: 0 })
-        .from('[data-hero-title]', { y: 30, opacity: 0 }, '+=0.15')
-        .from('[data-hero-lead]', { y: 20, opacity: 0 }, '+=0.15')
-        .from('[data-hero-ctas]', { y: 15, opacity: 0 }, '+=0.15')
-        .from('[data-hero-trust]', { y: 10, opacity: 0 }, '+=0.15');
+      tl.fromTo('[data-hero-badge]', { y: 20, opacity: 0 }, fadeIn)
+        .fromTo('[data-hero-title]', { y: 30, opacity: 0 }, fadeIn, '+=0.15')
+        .fromTo('[data-hero-lead]',  { y: 20, opacity: 0 }, fadeIn, '+=0.15')
+        .fromTo('[data-hero-ctas]',  { y: 15, opacity: 0 }, fadeIn, '+=0.15')
+        .fromTo('[data-hero-trust]', { y: 10, opacity: 0 }, fadeIn, '+=0.15');
 
       // Animaciones ambientales (inician después de la entrada)
       tl.then(() => {
