@@ -4,8 +4,8 @@ change_name: "fix-hero-styles"
 domain: "fix"
 status: active
 fast_path: "apply-only"
-current_phase: sdd-verify
-phases_completed: [sdd-apply]
+current_phase: sdd-archive
+phases_completed: [sdd-apply, sdd-verify]
 spec_refs: []
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-hero-styles"
 feature_branch: "feature/fix-hero-styles"
@@ -13,8 +13,9 @@ integration_target: "main"
 mr: ""
 mr_status: pending
 mr_error: ""
+verify_verdict: pass
 created: "2026-05-10"
-updated: "2026-05-10T18:55"
+updated: "2026-05-10T19:10"
 tags: [change]
 ---
 
