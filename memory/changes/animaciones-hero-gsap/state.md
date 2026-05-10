@@ -2,13 +2,15 @@
 type: change-state
 change_name: "animaciones-hero-gsap"
 domain: "feature"
-status: active
+status: completed
 fast_path: "full"
-current_phase: sdd-apply
-phases_completed: [sdd-init, sdd-explore, sdd-propose, sdd-spec, sdd-design, sdd-tasks]
+current_phase: ""
+phases_completed: [sdd-init, sdd-explore, sdd-propose, sdd-spec, sdd-design, sdd-tasks, sdd-apply, sdd-verify]
+mr_url: ""
+mr_status: pending
+mr_error: ""
 updated: "2026-05-10"
 created: "2026-05-10"
-updated: "2026-05-10"
 tags: [change]
 ---
 

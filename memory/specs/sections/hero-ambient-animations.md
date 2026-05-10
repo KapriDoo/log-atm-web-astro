@@ -7,29 +7,31 @@ domain: "feature"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on: []
 change_ref: "[[animaciones-hero-gsap]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/animaciones-hero-gsap"
+feature_branch: "feature/animaciones-hero-gsap"
+commits: ["91d819e"]
 mr: ""
 acceptance_criteria:
-  - "Las 3 cards decorativas flotan suavemente con movimiento yoyo continuo"
-  - "Los blobs de fondo tienen animación sutil de escala y opacidad"
-  - "Las grid lines se revelan progresivamente al cargar"
-  - "El wave SVG tiene animación continua de su path"
-  - "Todas las animaciones respetan prefers-reduced-motion"
-  - "Las animaciones no afectan el rendimiento (60fps)"
-related: []
+  - "[x] Las 3 cards decorativas flotan suavemente con movimiento yoyo continuo"
+  - "[x] Los blobs de fondo tienen animación sutil de escala y opacidad"
+  - "[x] Las grid lines se revelan progresivamente al cargar"
+  - "[x] El wave SVG tiene animación continua de su path"
+  - "[x] Todas las animaciones respetan prefers-reduced-motion"
+  - "[x] Las animaciones no afectan el rendimiento (60fps)"
+related:
+  - "[[hero-content-entrance]]"
 affects: []
 adrs: []
 scope: ["src/components/sections/HeroSection.astro", "src/styles/sections/hero.css"]
 verified_at: null
 created: "2026-05-10"
 updated: "2026-05-10"
+verified_at: "2026-05-10"
 tags: [capability-spec]
 ---
 
