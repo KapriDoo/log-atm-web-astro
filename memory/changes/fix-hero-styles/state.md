@@ -2,20 +2,20 @@
 type: change-state
 change_name: "fix-hero-styles"
 domain: "fix"
-status: active
+status: completed
 fast_path: "apply-only"
-current_phase: sdd-archive
-phases_completed: [sdd-apply, sdd-verify]
+current_phase: ""
+phases_completed: [sdd-apply, sdd-verify, sdd-archive]
 spec_refs: []
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-hero-styles"
 feature_branch: "feature/fix-hero-styles"
 integration_target: "main"
-mr: ""
-mr_status: pending
-mr_error: ""
+mr: "https://github.com/KapriDoo/log-atm-web-astro/compare/main...feature/fix-hero-styles"
+mr_status: created_skipped_no_cli
+mr_error: "gh CLI not authenticated; create PR manually via compare URL"
 verify_verdict: pass
 created: "2026-05-10"
-updated: "2026-05-10T19:10"
+updated: "2026-05-10"
 tags: [change]
 ---
 
