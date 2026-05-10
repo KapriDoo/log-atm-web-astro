@@ -29,41 +29,8 @@ export const SEO = {
 
 // Navegación principal
 export const NAV_LINKS = [
-  {
-    label: 'Servicios',
-    children: [
-      { href: '#servicios-carga-aerea', label: 'Carga Aérea' },
-      { href: '#servicios-carga-maritima', label: 'Carga Marítima' },
-      { href: '#servicios-aduanas', label: 'Aduana y Documentación' },
-      { href: '#servicios-almacenaje', label: 'Almacenaje y Distribución' },
-      { href: '#cotizar', label: 'Consultoría Logística' },
-      { href: '#servicios-courier', label: 'Courier internacional' },
-      { href: '#servicios-seguros', label: 'Seguros de Carga' },
-      { href: '#servicios-desconsolidado', label: 'Desconsolidado' },
-      { href: '#servicios-casillero', label: 'Servicio de Casillero USA' },
-      { href: '#servicios-asesoria', label: 'Asesoria en Compras Internacionales' },
-      { href: '#servicios-medio-oriente', label: 'Te conectamos con el Medio Oriente' },
-    ] as const,
-  },
-  {
-    label: 'Industrias',
-    children: [
-      { href: '#industrias', label: 'Minería' },
-      { href: '#industrias', label: 'Retail' },
-      { href: '#industrias', label: 'Agroindustria' },
-      { href: '#industrias', label: 'Farmacéutica' },
-      { href: '#industrias', label: 'E-commerce' },
-      { href: '#industrias', label: 'Construcción' },
-      { href: '#industrias', label: 'Chatarra Ferrosa' },
-      { href: '#industrias', label: 'Iluminarias' },
-      { href: '#industrias', label: 'Vehiculos Usados' },
-      { href: '#industrias', label: 'Efectos Personales' },
-      { href: '#industrias', label: 'Maquinaria' },
-      { href: '#industrias', label: 'Repuestos Automotrices y de maquinaria Pesada' },
-      { href: '#industrias', label: 'Textil' },
-      { href: '#industrias', label: 'Proyectos' },
-    ] as const,
-  },
+  { href: '/servicios', label: 'Servicios' },
+  { href: '/industrias', label: 'Industrias' },
   { href: '/nosotros', label: 'Nosotros' },
   { href: '/contacto', label: 'Contacto' },
 ] as const;

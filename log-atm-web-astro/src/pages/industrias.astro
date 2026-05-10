@@ -1,0 +1,440 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/ui/Navbar.astro';
+import Footer from '../components/ui/Footer.astro';
+import { Icon } from 'astro-icon/components';
+import { SITE } from '../lib/constants';
+
+const pageTitle = 'Industrias que Atendemos | LOG ATM';
+const pageDesc = 'LOG ATM tiene experiencia comprobada en múltiples industrias: minería, retail, agroindustria, farmacéutica, e-commerce, construcción y más. Soluciones logísticas a tu medida.';
+
+const industries = [
+  {
+    icon: 'lucide:pickaxe',
+    name: 'Minería',
+    color: '#658fc3',
+    description: 'Entendemos la urgencia y complejidad de la minería. Gestionamos el transporte de equipamiento pesado, repuestos críticos, ácido sulfúrico y materiales de construcción para operaciones mineras en Chile y el extranjero. Nuestra experiencia con proyectos de cobre y litio nos permite ofrecer tiempos de respuesta que mantienen tu producción sin detenciones.',
+    specialties: ['Equipamiento pesado', 'Repuestos críticos', 'Insumos mineros', 'Proyectos greenfield'],
+  },
+  {
+    icon: 'lucide:shopping-bag',
+    name: 'Retail',
+    color: '#3EB978',
+    description: 'El retail no espera. Coordinamos la llegada puntual de mercancía para temporadas clave, lanzamientos de producto y reposición de inventario. Desde fábricas en Asia hasta tu centro de distribución en Chile, garantizamos que tu stock llegue cuando lo necesitas. Especialistas en moda, consumo masivo y artículos de temporada.',
+    specialties: ['Temporadas críticas', 'Reposición de stock', 'Moda y accesorios', 'Consumo masivo'],
+  },
+  {
+    icon: 'lucide:wheat',
+    name: 'Agroindustria',
+    color: '#2D9B6F',
+    description: 'La agroindustria requiere cuidado especial. Transportamos fruta fresca, vinos, granos y productos procesados respetando las cadenas de frío y los protocolos sanitarios de cada país destino. Conocemos los requisitos fitosanitarios de los mercados más exigentes y gestionamos la documentación necesaria para exportaciones sin contratiempos.',
+    specialties: ['Fruta fresca', 'Vinos y bebidas', 'Granos y cereales', 'Exportación fitosanitaria'],
+  },
+  {
+    icon: 'lucide:pill',
+    name: 'Farmacéutica',
+    color: '#4A7BB5',
+    description: 'La salud no admite errores. Ofrecemos cadena de frío certificada para medicamentos, reactivos de laboratorio y equipamiento médico. Cumplimos con las normativas GDP (Good Distribution Practice) y gestionamos la documentación regulatoria requerida por el ISP y autoridades sanitarias internacionales. Tu mercancía llega en perfectas condiciones y a tiempo.',
+    specialties: ['Cadena de frío', 'Reactivos de laboratorio', 'Cumplimiento GDP', 'Documentación ISP'],
+  },
+  {
+    icon: 'lucide:shopping-cart',
+    name: 'E-commerce',
+    color: '#339965',
+    description: 'El e-commerce cross-border crece exponencialmente y nosotros crecemos con él. Gestionamos importaciones de productos desde China, USA y Europa con consolidación de carga, fulfillment y última milla. Optimizamos tus costos logísticos para que puedas competir en precio sin sacrificar la experiencia de entrega de tus clientes.',
+    specialties: ['Importaciones Asia/USA/Europa', 'Fulfillment', 'Última milla', 'Consolidación'],
+  },
+  {
+    icon: 'lucide:hard-hat',
+    name: 'Construcción',
+    color: '#3b6497',
+    description: 'Los proyectos de construcción dependen de la llegada oportuna de materiales y maquinaria. Coordinamos el transporte de equipos pesados, materiales de construcción, acero, cemento y elementos prefabricados desde cualquier origen. Planificamos con anticipación para evitar retrasos que afecten los cronogramas de obra.',
+    specialties: ['Maquinaria pesada', 'Materiales de construcción', 'Elementos prefabricados', 'Planificación de obra'],
+  },
+  {
+    icon: 'lucide:hammer',
+    name: 'Chatarra Ferrosa',
+    color: '#7a7a7a',
+    description: 'El comercio de chatarra ferrosa y metales requiere conocimiento especializado en normativas ambientales y de reciclaje. Gestionamos la exportación de chatarra, cobre reciclado y otros metales hacia mercados asiáticos y europeos, cumpliendo con todas las regulaciones internacionales de comercio de residuos.',
+    specialties: ['Exportación de chatarra', 'Metales reciclados', 'Normativas ambientales', 'Destinos Asia/Europa'],
+  },
+  {
+    icon: 'lucide:lightbulb',
+    name: 'Iluminarias',
+    color: '#f5c842',
+    description: 'El sector de iluminación LED e industrial se mueve rápido. Importamos luminarias, componentes electrónicos y sistemas de control desde fabricantes en China, Europa y USA. Conocemos las certificaciones eléctricas requeridas en Chile (SEC) y gestionamos todo el proceso de importación hasta la entrega en tu bodega.',
+    specialties: ['Iluminación LED', 'Componentes electrónicos', 'Certificación SEC', 'Importación Asia/Europa'],
+  },
+  {
+    icon: 'lucide:car',
+    name: 'Vehículos Usados',
+    color: '#e84c3d',
+    description: 'La importación de vehículos usados tiene regulaciones específicas que deben cumplirse al pie de la letra. Nos encargamos de toda la logística internacional, trámites aduaneros, homologación y documentación necesaria para traer vehículos desde USA, Europa u otros mercados de origen. Un servicio integral que te evita dolores de cabeza.',
+    specialties: ['Importación USA/Europa', 'Trámites aduaneros', 'Homologación', 'Documentación vehicular'],
+  },
+  {
+    icon: 'lucide:briefcase',
+    name: 'Efectos Personales',
+    color: '#9b59b6',
+    description: 'Las mudanzas internacionales son momentos de estrés. Nosotros lo hacemos simple. Gestionamos el embalaje, transporte, seguro, aduana y entrega de tus efectos personales y pertenencias familiares. Ya sea que te mudes a Chile o al extranjero, cuidamos tus recuerdos como si fueran nuestros.',
+    specialties: ['Mudanzas internacionales', 'Embalaje especializado', 'Seguro de pertenencias', 'Traslados corporativos'],
+  },
+  {
+    icon: 'lucide:settings',
+    name: 'Maquinaria',
+    color: '#34495e',
+    description: 'Equipos industriales y agrícolas de gran tamaño requieren planificación logística meticulosa. Coordinamos el transporte de maquinaria pesada, equipos agrícolas, herramientas industriales y repuestos desde cualquier origen. Desmontaje, embalaje especializado, transporte internacional y entrega final con grúa si es necesario.',
+    specialties: ['Maquinaria industrial', 'Equipos agrícolas', 'Embalaje especializado', 'Entrega con grúa'],
+  },
+  {
+    icon: 'lucide:wrench',
+    name: 'Repuestos Automotrices y de Maquinaria Pesada',
+    color: '#d35400',
+    description: 'Un repuesto fuera de stock puede detener toda una operación. Gestionamos la importación urgente de piezas y componentes de reposición para vehículos y maquinaria pesada. Nuestra red global de proveedores y agentes nos permite ubicar incluso repuestos difíciles y traerlos en el menor tiempo posible.',
+    specialties: ['Piezas de reposición', 'Importación urgente', 'Vehículos livianos y pesados', 'Componentes difíciles'],
+  },
+  {
+    icon: 'lucide:scissors',
+    name: 'Textil',
+    color: '#e91e63',
+    description: 'La industria textil vive de la velocidad. Desde telas en rollo hasta prendas terminadas y accesorios de moda, gestionamos importaciones desde Asia, Europa y Latinoamérica. Conocemos las temporadas de la moda y trabajamos para que tu mercancía llegue antes de que la tendencia pase.',
+    specialties: ['Telas y confección', 'Prendas terminadas', 'Accesorios de moda', 'Importación Asia/Europa'],
+  },
+  {
+    icon: 'lucide:layout',
+    name: 'Proyectos',
+    color: '#16a085',
+    description: 'Los proyectos especiales y carga sobredimensionada son nuestro desafío favorito. Diseñamos soluciones logísticas a medida para piezas especiales, equipos industriales de gran tamaño, estructuras metálicas y proyectos de ingeniería. Analizamos rutas, permisos especiales, equipos de izaje y todo lo necesario para que tu proyecto llegue a destino intacto y a tiempo.',
+    specialties: ['Carga sobredimensionada', 'Piezas especiales', 'Permisos especiales', 'Equipos de izaje'],
+  },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDesc}>
+  <Navbar />
+  
+  <main id="main-content">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero__container">
+        <div class="hero__content">
+          <p class="hero__eyebrow">Expertise sectorial</p>
+          <h1 class="hero__title">Industrias que Atendemos</h1>
+          <p class="hero__desc">
+            Cada industria tiene desafíos logísticos únicos. Con más de 20 años de experiencia, 
+            hemos desarrollado expertise profundo en los sectores más exigentes de Chile y la región. 
+            Entendemos tu negocio para ofrecerte soluciones que realmente funcionan.
+          </p>
+          <div class="hero__cta">
+            <a href={`https://wa.me/${SITE.phone.replace('+', '')}?text=Hola%2C%20me%20interesa%20cotizar%20para%20mi%20industria`} class="btn-primary" target="_blank" rel="noopener">
+              Consulta por tu sector
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Industries Grid -->
+    <section class="industries-section" aria-labelledby="industries-heading">
+      <div class="industries__container">
+        <h2 id="industries-heading" class="industries__title">Sectores con los que trabajamos</h2>
+        <p class="industries__subtitle">
+          Desde la minería hasta el e-commerce, tenemos la experiencia y la red logística 
+          para atender las necesidades específicas de tu industria con soluciones personalizadas.
+        </p>
+
+        <div class="industries__grid">
+          {industries.map((industry, index) => (
+            <article class="industry-card" style={`--delay: ${index * 0.05}s; --ind-color: ${industry.color}`}>
+              <div class="industry-card__header">
+                <div class="industry-card__icon">
+                  <Icon name={industry.icon} size={32} />
+                </div>
+                <h3 class="industry-card__title">{industry.name}</h3>
+              </div>
+              
+              <p class="industry-card__desc">{industry.description}</p>
+              
+              <ul class="industry-card__specialties" role="list">
+                {industry.specialties.map(specialty => (
+                  <li class="industry-card__specialty">
+                    <span class="industry-card__dot"></span>
+                    <span>{specialty}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" aria-labelledby="cta-heading">
+      <div class="cta__container">
+        <h2 id="cta-heading" class="cta__title">¿Tu industria no aparece en la lista?</h2>
+        <p class="cta__desc">
+          Eso no significa que no podamos ayudarte. Nuestra experiencia abarca decenas de sectores 
+          adicionales. Cuéntanos sobre tu necesidad y te diremos cómo podemos apoyarte.
+        </p>
+        <div class="cta__buttons">
+          <a href={`https://wa.me/${SITE.phone.replace('+', '')}?text=Hola%2C%20me%20interesa%20cotizar`} class="btn-primary btn-large" target="_blank" rel="noopener">
+            Cotiza ahora vía WhatsApp
+          </a>
+          <a href="/contacto" class="btn-secondary btn-large">
+            Déjanos tus datos
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, var(--color-primary-900) 0%, var(--color-primary-700) 100%);
+    color: var(--color-text-inverse);
+    padding: 6rem 1.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+  }
+  .hero__container {
+    max-width: 1280px;
+    margin-inline: auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero__content {
+    max-width: 700px;
+  }
+  .hero__eyebrow {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent-400);
+    margin-bottom: 1rem;
+  }
+  .hero__title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .hero__desc {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-primary-200);
+    margin-bottom: 2rem;
+  }
+  .hero__cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* Industries Section */
+  .industries-section {
+    padding: 5rem 1.5rem;
+    background: var(--color-bg);
+  }
+  .industries__container {
+    max-width: 1280px;
+    margin-inline: auto;
+  }
+  .industries__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    text-align: center;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+  }
+  .industries__subtitle {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    text-align: center;
+    color: var(--color-neutral-600);
+    max-width: 700px;
+    margin-inline: auto;
+    margin-bottom: 3.5rem;
+  }
+  .industries__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 1.5rem;
+  }
+  @media (max-width: 400px) {
+    .industries__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Industry Card */
+  .industry-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: var(--delay);
+    opacity: 0;
+    border-top: 3px solid var(--ind-color);
+  }
+  .industry-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px color-mix(in srgb, var(--color-primary-900) 8%, transparent);
+    border-color: var(--color-primary-200);
+  }
+  .industry-card__header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .industry-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    background: color-mix(in srgb, var(--ind-color) 10%, transparent);
+    color: var(--ind-color);
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+  }
+  .industry-card__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.3;
+  }
+  .industry-card__desc {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: var(--color-neutral-600);
+    margin-bottom: 1.25rem;
+  }
+  .industry-card__specialties {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .industry-card__specialty {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-neutral-700);
+  }
+  .industry-card__dot {
+    width: 8px;
+    height: 8px;
+    background: var(--ind-color);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: 5rem 1.5rem;
+    background: var(--color-primary-900);
+    color: var(--color-text-inverse);
+    text-align: center;
+  }
+  .cta__container {
+    max-width: 700px;
+    margin-inline: auto;
+  }
+  .cta__title {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  .cta__desc {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--color-primary-200);
+    margin-bottom: 2rem;
+  }
+  .cta__buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.875rem 2rem;
+    background: var(--color-cta);
+    color: var(--color-text-inverse);
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: var(--radius-pill);
+    transition: background 150ms, transform 100ms;
+    text-decoration: none;
+  }
+  .btn-primary:hover {
+    background: var(--color-accent-600);
+    transform: translateY(-2px);
+  }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.875rem 2rem;
+    background: transparent;
+    color: var(--color-text-inverse);
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: var(--radius-pill);
+    border: 2px solid var(--color-primary-400);
+    transition: background 150ms, border-color 150ms;
+    text-decoration: none;
+  }
+  .btn-secondary:hover {
+    background: var(--color-primary-800);
+    border-color: var(--color-primary-300);
+  }
+  .btn-large {
+    padding: 1rem 2.5rem;
+    font-size: 1.0625rem;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 4rem 1rem 3rem; }
+    .industries-section { padding: 3rem 1rem; }
+    .cta-section { padding: 3rem 1rem; }
+    .industry-card { padding: 1.5rem; }
+  }
+</style>
