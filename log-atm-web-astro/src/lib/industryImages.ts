@@ -1,7 +1,6 @@
 /**
  * LOG ATM — Mapa de imágenes de industrias
  * Imports estáticos para Astro Assets (optimización build-time vía Sharp)
- * NOTA: Estos son placeholders. Reemplazar archivos en src/assets/industries/ por imágenes reales.
  */
 
 import mineria from '../assets/industries/mineria.jpg';
