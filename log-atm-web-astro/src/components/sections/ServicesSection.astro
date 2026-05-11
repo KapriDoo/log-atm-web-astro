@@ -6,18 +6,18 @@ import { SERVICES } from '../../lib/constants';
 <section class="services" aria-labelledby="services-heading">
   <div class="container">
     <div class="section-header">
-      <span class="eyebrow">Qué hacemos</span>
-      <h2 id="services-heading" class="section-title">
+      <span class="eyebrow" data-scroll-animate>Qué hacemos</span>
+      <h2 id="services-heading" class="section-title" data-scroll-animate data-scroll-delay="0.1">
         Soluciones para<br/>cada necesidad
       </h2>
-      <p class="section-lead">
+      <p class="section-lead" data-scroll-animate data-scroll-delay="0.2">
         Desde el despacho urgente hasta la consultoría de supply chain completa.
       </p>
     </div>
 
-    <div class="services__grid">
+    <div class="services__grid" data-scroll-batch>
       {SERVICES.map(({ n, icon, title, desc, href, accent }) => (
-        <a href={href} class:list={['svc-card', accent && 'svc-card--accent']}>
+        <a href={href} class:list={['svc-card', accent && 'svc-card--accent']} data-scroll-animate>
           <div class="svc-card__line" aria-hidden="true"></div>
           <div class="svc-card__header">
             <span class="svc-card__num" aria-hidden="true">{n}</span>

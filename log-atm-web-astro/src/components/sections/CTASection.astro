@@ -9,12 +9,12 @@ import { SITE } from '../../lib/constants';
   </div>
   <div class="container cta-section__inner">
     <div class="cta-section__text">
-      <h2 id="cta-heading" class="cta-section__title">¿Listo para mover tu carga?</h2>
-      <p class="cta-section__desc">
+      <h2 id="cta-heading" class="cta-section__title" data-scroll-animate>¿Listo para mover tu carga?</h2>
+      <p class="cta-section__desc" data-scroll-animate data-scroll-delay="0.1">
         Cotiza en 2 minutos · Sin compromisos · Respuesta en menos de 24 h
       </p>
     </div>
-    <div class="cta-section__actions">
+    <div class="cta-section__actions" data-scroll-animate data-scroll-delay="0.2">
       <a href="/cotizar" class="cta-section__btn-primary">
         Cotiza ahora
       </a>
@@ -28,3 +28,36 @@ import { SITE } from '../../lib/constants';
     </div>
   </div>
 </section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { prefersReducedMotion } from '../../scripts/scroll-animations';
+
+  if (!prefersReducedMotion) {
+    const blob1 = document.querySelector('.cta-section__blob--1');
+    const blob2 = document.querySelector('.cta-section__blob--2');
+
+    if (blob1) {
+      gsap.to(blob1, {
+        y: -20,
+        scale: 1.08,
+        duration: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+      });
+    }
+
+    if (blob2) {
+      gsap.to(blob2, {
+        y: 15,
+        scale: 1.05,
+        duration: 5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        delay: 1,
+      });
+    }
+  }
+</script>
