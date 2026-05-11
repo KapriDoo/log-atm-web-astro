@@ -7,7 +7,7 @@ domain: "feature"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
@@ -23,12 +23,14 @@ acceptance_criteria:
   - "[x] Las imágenes se sirven en formato optimizado para web (WebP o AVIF) con fallback."
   - "[x] No hay regresiones en el modelo de datos existente (icono, nombre, subtítulo y color se mantienen)."
 related: []
-affects: []
+affects:
+  - "[[sections/industries-home]]"
+  - "[[sections/industries-page]]"
 adrs: []
 scope:
   - "src/lib/constants.ts"
   - "public/industries/"
-verified_at: null
+verified_at: "2026-05-10"
 created: "2026-05-10"
 updated: "2026-05-10"
 tags: [capability-spec]

@@ -7,7 +7,7 @@ domain: "feature"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on:
@@ -31,7 +31,7 @@ adrs: []
 scope:
   - "src/components/sections/IndustriesSection.astro"
   - "src/styles/sections/industries.css"
-verified_at: null
+verified_at: "2026-05-10"
 created: "2026-05-10"
 updated: "2026-05-10"
 tags: [capability-spec]
