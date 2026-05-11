@@ -2,19 +2,19 @@
 type: change-state
 change_name: "gsap-scroll-animations"
 domain: "feature"
-status: active
+status: completed
 fast_path: "full"
 current_phase: ""
-phases_completed: [sdd-init, sdd-explore, sdd-propose, sdd-spec, sdd-design, sdd-tasks, sdd-apply, sdd-verify]
+phases_completed: [sdd-init, sdd-explore, sdd-propose, sdd-spec, sdd-design, sdd-tasks, sdd-apply, sdd-verify, sdd-archive]
 spec_refs: ["[[scroll-entrance-utility]]", "[[scroll-stats-counters]]", "[[scroll-why-reveal]]", "[[scroll-cta-blobs]]", "[[scroll-404-effect]]", "[[scroll-inner-pages]]"]
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/gsap-scroll-animations"
 feature_branch: "feature/gsap-scroll-animations"
 integration_target: "main"
-mr: ""
-mr_status: pending
+mr: "https://github.com/KapriDoo/log-atm-web-astro/pull/6"
+mr_status: created
 mr_error: ""
 created: "2026-05-10"
-updated: "2026-05-10T20:17:00"
+updated: "2026-05-10"
 tasks_ref: "[[tasks]]"
 design_ref: "[[design]]"
 
