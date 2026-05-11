@@ -187,20 +187,20 @@ export const WHY_ITEMS = [
 // porque pertenecen al dominio de datos, no al dominio de estilos.
 // Se aplican vía CSS custom property --ind-color en runtime.
 export const INDUSTRIES = [
-  { icon: 'lucide:pickaxe', name: 'Minería', sub: 'Cobre, litio, equipamiento pesado', color: '#658fc3' },
-  { icon: 'lucide:shopping-bag', name: 'Retail', sub: 'Moda, consumo masivo, temporada', color: '#3EB978' },
-  { icon: 'lucide:wheat', name: 'Agroindustria', sub: 'Fruta fresca, vinos, granos', color: '#2D9B6F' },
-  { icon: 'lucide:pill', name: 'Farmacéutica', sub: 'Cadena de frío, reactivos', color: '#4A7BB5' },
-  { icon: 'lucide:shopping-cart', name: 'E-commerce', sub: 'Cross-border, fulfillment', color: '#339965' },
-  { icon: 'lucide:hard-hat', name: 'Construcción', sub: 'Maquinaria, materiales', color: '#3b6497' },
-  { icon: 'lucide:hammer', name: 'Chatarra Ferrosa', sub: 'Reciclaje, exportación de metales', color: '#7a7a7a' },
-  { icon: 'lucide:lightbulb', name: 'Iluminarias', sub: 'Equipos de iluminación LED e industrial', color: '#f5c842' },
-  { icon: 'lucide:car', name: 'Vehiculos Usados', sub: 'Importación y trámites de vehículos', color: '#e84c3d' },
-  { icon: 'lucide:briefcase', name: 'Efectos Personales', sub: 'Mudanzas internacionales y traslados', color: '#9b59b6' },
-  { icon: 'lucide:settings', name: 'Maquinaria', sub: 'Equipos industriales y agrícolas', color: '#34495e' },
-  { icon: 'lucide:wrench', name: 'Repuestos Automotrices y de maquinaria Pesada', sub: 'Piezas y componentes de reposición', color: '#d35400' },
-  { icon: 'lucide:scissors', name: 'Textil', sub: 'Prendas, telas y accesorios de moda', color: '#e91e63' },
-  { icon: 'lucide:layout', name: 'Proyectos', sub: 'Logística de proyectos especiales y carga sobredimensionada', color: '#16a085' },
+  { icon: 'lucide:pickaxe', name: 'Minería', sub: 'Cobre, litio, equipamiento pesado', color: '#658fc3', image: 'mineria', alt: 'Operación minera a cielo abierto con maquinaria pesada' },
+  { icon: 'lucide:shopping-bag', name: 'Retail', sub: 'Moda, consumo masivo, temporada', color: '#3EB978', image: 'retail', alt: 'Tienda retail con estantes de productos' },
+  { icon: 'lucide:wheat', name: 'Agroindustria', sub: 'Fruta fresca, vinos, granos', color: '#2D9B6F', image: 'agroindustria', alt: 'Campo agrícola con cosecha de frutas frescas' },
+  { icon: 'lucide:pill', name: 'Farmacéutica', sub: 'Cadena de frío, reactivos', color: '#4A7BB5', image: 'farmaceutica', alt: 'Laboratorio farmacéutico con cadena de frío' },
+  { icon: 'lucide:shopping-cart', name: 'E-commerce', sub: 'Cross-border, fulfillment', color: '#339965', image: 'ecommerce', alt: 'Centro de distribución de e-commerce con paquetes' },
+  { icon: 'lucide:hard-hat', name: 'Construcción', sub: 'Maquinaria, materiales', color: '#3b6497', image: 'construccion', alt: 'Obra de construcción con maquinaria pesada' },
+  { icon: 'lucide:hammer', name: 'Chatarra Ferrosa', sub: 'Reciclaje, exportación de metales', color: '#7a7a7a', image: 'chatarra-ferrosa', alt: 'Reciclaje de chatarra ferrosa y metales' },
+  { icon: 'lucide:lightbulb', name: 'Iluminarias', sub: 'Equipos de iluminación LED e industrial', color: '#f5c842', image: 'iluminarias', alt: 'Sistemas de iluminación LED industrial' },
+  { icon: 'lucide:car', name: 'Vehiculos Usados', sub: 'Importación y trámites de vehículos', color: '#e84c3d', image: 'vehiculos-usados', alt: 'Vehículos usados en patio de importación' },
+  { icon: 'lucide:briefcase', name: 'Efectos Personales', sub: 'Mudanzas internacionales y traslados', color: '#9b59b6', image: 'efectos-personales', alt: 'Mudanza internacional con cajas de efectos personales' },
+  { icon: 'lucide:settings', name: 'Maquinaria', sub: 'Equipos industriales y agrícolas', color: '#34495e', image: 'maquinaria', alt: 'Maquinaria industrial y equipos agrícolas' },
+  { icon: 'lucide:wrench', name: 'Repuestos Automotrices y de maquinaria Pesada', sub: 'Piezas y componentes de reposición', color: '#d35400', image: 'repuestos-automotrices', alt: 'Repuestos automotrices y componentes de maquinaria pesada' },
+  { icon: 'lucide:scissors', name: 'Textil', sub: 'Prendas, telas y accesorios de moda', color: '#e91e63', image: 'textil', alt: 'Fábrica textil con telas y prendas de moda' },
+  { icon: 'lucide:layout', name: 'Proyectos', sub: 'Logística de proyectos especiales y carga sobredimensionada', color: '#16a085', image: 'proyectos', alt: 'Logística de proyectos con carga sobredimensionada' },
 ] as const;
 
 // Año actual para copyright
