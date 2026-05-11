@@ -35,6 +35,8 @@ export interface IndustryItem {
   name: string;
   sub: string;
   color: string;
+  image?: string;
+  alt?: string;
 }
 
 export interface FooterLink {
