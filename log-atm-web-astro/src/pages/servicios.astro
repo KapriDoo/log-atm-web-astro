@@ -105,15 +105,15 @@ const services = [
     <!-- Services Grid -->
     <section class="services-section" aria-labelledby="services-heading">
       <div class="services__container">
-        <h2 id="services-heading" class="services__title">Servicios que impulsan tu negocio</h2>
-        <p class="services__subtitle">
+        <h2 id="services-heading" class="services__title" data-scroll-animate>Servicios que impulsan tu negocio</h2>
+        <p class="services__subtitle" data-scroll-animate data-scroll-delay="0.1">
           Cada servicio está diseñado para resolver un desafío específico de tu cadena de suministro.
           Seleccionamos las mejores rutas, modalidades y socios para entregar resultados superiores.
         </p>
 
-        <div class="services__grid">
+        <div class="services__grid" data-scroll-batch>
           {services.map((service, index) => (
-            <article class="service-card" style={`--delay: ${index * 0.05}s`}>
+            <article class="service-card" data-scroll-animate>
               <div class="service-card__header">
                 <div class="service-card__icon">
                   <Icon name={service.icon} size={32} />
@@ -254,9 +254,6 @@ const services = [
     border-radius: var(--radius-lg);
     padding: 2rem;
     transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
-    animation: fadeInUp 0.6s ease forwards;
-    animation-delay: var(--delay);
-    opacity: 0;
   }
   .service-card:hover {
     transform: translateY(-4px);
@@ -383,18 +380,6 @@ const services = [
   .btn-large {
     padding: 1rem 2.5rem;
     font-size: 1.0625rem;
-  }
-
-  /* Animations */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   @media (max-width: 640px) {

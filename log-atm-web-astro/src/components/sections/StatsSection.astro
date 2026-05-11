@@ -1,18 +1,71 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { STATS } from '../../lib/constants';
+
+// Extraer datos numéricos para data-counter-target
+// STATS: 20+, 70+, 98%, '' (texto libre)
+const counterData = [
+  { target: '20', suffix: '+' },
+  { target: '70', suffix: '+' },
+  { target: '98', suffix: '%' },
+  null, // cuarto stat es texto libre, no se anima como contador
+];
 ---
 
 <section class="stats" aria-label="Cifras LOG ATM">
-  <div class="container stats__inner">
-    {STATS.map(({ value, label, icon, anim }) => (
-      <div class="stats__item">
+  <div class="container stats__inner" data-scroll-animate>
+    {STATS.map(({ value, label, icon, anim }, i) => (
+      <div class="stats__item" data-scroll-animate data-scroll-delay={`${i * 0.1}`}>
         <div class={`stats__icon-wrap stats__icon-wrap--${anim}`} aria-hidden="true">
           <Icon name={icon} width="26" height="26" />
         </div>
-        <strong class="stats__value">{value}</strong>
+        {counterData[i] ? (
+          <strong
+            class="stats__value"
+            data-counter-target={counterData[i]!.target}
+            data-counter-suffix={counterData[i]!.suffix}
+          >{value}</strong>
+        ) : (
+          <strong class="stats__value">{value}</strong>
+        )}
         <span class="stats__label">{label}</span>
       </div>
     ))}
   </div>
 </section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { prefersReducedMotion } from '../../scripts/scroll-animations';
+
+  if (!prefersReducedMotion) {
+    const section = document.querySelector('.stats');
+    const counters = document.querySelectorAll<HTMLElement>('[data-counter-target]');
+
+    if (section && counters.length > 0) {
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top 80%',
+        once: true,
+        onEnter: () => {
+          counters.forEach((el) => {
+            const target = parseInt(el.dataset.counterTarget || '0', 10);
+            const suffix = el.dataset.counterSuffix || '';
+            const obj = { val: 0 };
+
+            gsap.to(obj, {
+              val: target,
+              duration: 2,
+              ease: 'power2.out',
+              snap: { val: 1 },
+              onUpdate: () => {
+                el.textContent = `${obj.val}${suffix}`;
+              },
+            });
+          });
+        },
+      });
+    }
+  }
+</script>

@@ -28,6 +28,28 @@ import Footer from '../components/ui/Footer.astro';
   <Footer />
 </BaseLayout>
 
+<script>
+  import { gsap } from 'gsap';
+  import { prefersReducedMotion } from '../scripts/scroll-animations';
+
+  if (!prefersReducedMotion) {
+    const code = document.querySelector('.error-page__code');
+
+    if (code) {
+      gsap.fromTo(code,
+        { scale: 0.5, opacity: 0, rotation: -5 },
+        {
+          scale: 1,
+          opacity: 1,
+          rotation: 0,
+          duration: 0.8,
+          ease: 'back.out(1.7)',
+        }
+      );
+    }
+  }
+</script>
+
 <style>
   .error-page {
     min-height: 60vh;

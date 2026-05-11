@@ -31,18 +31,18 @@ import { WHY_ITEMS } from '../../lib/constants';
     </div>
 
     <div class="why__content">
-      <span class="eyebrow">Por qué LOG ATM</span>
-      <h2 id="why-heading" class="section-title">
+      <span class="eyebrow" data-scroll-animate>Por qué LOG ATM</span>
+      <h2 id="why-heading" class="section-title" data-scroll-animate data-scroll-delay="0.1">
         Personas. Confianza.<br/>Resultados.
       </h2>
-      <p class="section-lead why__lead">
+      <p class="section-lead why__lead" data-scroll-animate data-scroll-delay="0.2">
         No somos una multinacional anónima. Somos un equipo chileno con
         conexiones globales y el compromiso de tratarte como nuestro único cliente.
       </p>
 
       <ul class="why__list" role="list">
-        {WHY_ITEMS.map(({ icon, title, desc, anim }) => (
-          <li class="why__item">
+        {WHY_ITEMS.map(({ icon, title, desc, anim }, i) => (
+          <li class="why__item" data-scroll-animate data-scroll-delay={`${0.3 + i * 0.1}`}>
             <div class:list={['why__item-icon', anim && `why__item-icon--${anim}`]} aria-hidden="true">
               <Icon name={icon} width="22" height="22" />
             </div>
@@ -54,13 +54,38 @@ import { WHY_ITEMS } from '../../lib/constants';
         ))}
       </ul>
 
-      <a href="#nosotros" class="why__btn">Conoce al equipo</a>
+      <a href="#nosotros" class="why__btn" data-scroll-animate data-scroll-delay="0.7">Conoce al equipo</a>
     </div>
   </div>
 </section>
 
 <script>
-  // Video loop con pausa para mostrar el logo al final
+  // --- Animación GSAP: clip-path reveal ---
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { prefersReducedMotion } from '../../scripts/scroll-animations';
+
+  if (!prefersReducedMotion) {
+    const imgWrap = document.querySelector('.why__img-wrap');
+
+    if (imgWrap) {
+      // Estado inicial: recortado desde los bordes
+      gsap.set(imgWrap, { clipPath: 'inset(15% 15% 15% 15%)' });
+
+      gsap.to(imgWrap, {
+        clipPath: 'inset(0% 0% 0% 0%)',
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.why',
+          start: 'top 75%',
+          once: true,
+        },
+      });
+    }
+  }
+
+  // --- Video loop con pausa para mostrar el logo al final ---
   const LOGO_DISPLAY_MS = 2500;
   let cleanupWhyVideo: (() => void) | null = null;
 

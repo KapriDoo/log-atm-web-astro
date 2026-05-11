@@ -68,15 +68,15 @@ const schemaService = JSON.stringify({
     <!-- Features -->
     <section class="service-features" aria-labelledby="features-title">
       <div class="container">
-        <h2 id="features-title" class="section-title">¿Por qué elegir nuestra carga marítima?</h2>
-        <div class="features-grid">
+        <h2 id="features-title" class="section-title" data-scroll-animate>¿Por qué elegir nuestra carga marítima?</h2>
+        <div class="features-grid" data-scroll-batch>
           {[
             { icon: 'lucide:ship', title: 'FCL y LCL', desc: 'Contenedor completo o carga consolidada según tus necesidades.' },
             { icon: 'lucide:globe', title: '80+ puertos', desc: 'Cobertura en los principales puertos de Asia, Europa y América.' },
             { icon: 'lucide:package', title: 'Consolidación', desc: 'Agrupamos tu carga con otros clientes para reducir costos.' },
             { icon: 'lucide:headphones', title: 'Ejecutivo dedicado', desc: 'Un solo punto de contacto para todo tu envío.' },
           ].map(({ icon, title, desc }) => (
-            <div class="feature-card">
+            <div class="feature-card" data-scroll-animate>
               <div class="feature-card__icon" aria-hidden="true">
                 <Icon name={icon} width="28" height="28" />
               </div>
@@ -91,9 +91,9 @@ const schemaService = JSON.stringify({
     <!-- CTA -->
     <section class="service-cta" aria-labelledby="cta-title">
       <div class="container service-cta__inner">
-        <h2 id="cta-title" class="service-cta__title">¿Necesitas enviar carga marítima?</h2>
-        <p class="service-cta__desc">Cotiza en 2 minutos y recibe una propuesta en menos de 24 horas.</p>
-        <a href="/cotizar" class="btn-cta">Solicitar cotización</a>
+        <h2 id="cta-title" class="service-cta__title" data-scroll-animate>¿Necesitas enviar carga marítima?</h2>
+        <p class="service-cta__desc" data-scroll-animate data-scroll-delay="0.1">Cotiza en 2 minutos y recibe una propuesta en menos de 24 horas.</p>
+        <a href="/cotizar" class="btn-cta" data-scroll-animate data-scroll-delay="0.2">Solicitar cotización</a>
       </div>
     </section>
   </main>
