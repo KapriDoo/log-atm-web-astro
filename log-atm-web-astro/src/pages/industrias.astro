@@ -137,15 +137,15 @@ const industries = [
     <!-- Industries Grid -->
     <section class="industries-section" aria-labelledby="industries-heading">
       <div class="industries__container">
-        <h2 id="industries-heading" class="industries__title">Sectores con los que trabajamos</h2>
-        <p class="industries__subtitle">
+        <h2 id="industries-heading" class="industries__title" data-scroll-animate>Sectores con los que trabajamos</h2>
+        <p class="industries__subtitle" data-scroll-animate data-scroll-delay="0.1">
           Desde la minería hasta el e-commerce, tenemos la experiencia y la red logística 
           para atender las necesidades específicas de tu industria con soluciones personalizadas.
         </p>
 
-        <div class="industries__grid">
+        <div class="industries__grid" data-scroll-batch>
           {industries.map((industry, index) => (
-            <article class="industry-card" style={`--delay: ${index * 0.05}s; --ind-color: ${industry.color}`}>
+            <article class="industry-card" style={`--ind-color: ${industry.color}`} data-scroll-animate>
               <div class="industry-card__header">
                 <div class="industry-card__icon">
                   <Icon name={industry.icon} size={32} />
@@ -286,9 +286,6 @@ const industries = [
     border-radius: var(--radius-lg);
     padding: 2rem;
     transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
-    animation: fadeInUp 0.6s ease forwards;
-    animation-delay: var(--delay);
-    opacity: 0;
     border-top: 3px solid var(--ind-color);
   }
   .industry-card:hover {
@@ -417,18 +414,6 @@ const industries = [
   .btn-large {
     padding: 1rem 2.5rem;
     font-size: 1.0625rem;
-  }
-
-  /* Animations */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   @media (max-width: 640px) {
