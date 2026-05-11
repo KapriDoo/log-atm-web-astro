@@ -7,17 +7,24 @@ domain: "feature"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: high
 depends_on:
   - "[[data/industries-images]]"
 change_ref: "[[redesign-experiencia-sector]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/redesign-experiencia-sector"
+feature_branch: "feature/redesign-experiencia-sector"
+commits: ["aac99af"]
 mr: ""
-acceptance_criteria: []
+acceptance_criteria:
+  - "[x] Las 14 tarjetas expandidas de la página de industrias muestran una imagen fotográfica en la parte superior."
+  - "[x] El contenido textual de cada tarjeta permanece legible sobre fondo sólido (sin solapamiento con la imagen)."
+  - "[x] Las imágenes no causan saltos de layout (CLS igual a cero)."
+  - "[x] Las imágenes fuera del viewport inicial se cargan de forma diferida."
+  - "[x] El diseño es responsive y funciona correctamente en los breakpoints 639px y 479px."
+  - "[x] Cada imagen tiene texto alternativo descriptivo."
+  - "[x] No hay regresiones en el contenido textual (nombres, descripciones, especialidades)."
 related: []
 affects: []
 adrs: []

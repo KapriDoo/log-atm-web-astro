@@ -4,7 +4,7 @@ change_name: "redesign-experiencia-sector"
 domain: "feature"
 status: active
 fast_path: "full"
-current_phase: sdd-apply
+current_phase: sdd-verify
 phases_completed:
   - sdd-init
   - sdd-explore
@@ -12,6 +12,7 @@ phases_completed:
   - sdd-spec
   - sdd-design
   - sdd-tasks
+  - sdd-apply
 spec_refs:
   - "[[data/industries-images]]"
   - "[[sections/industries-home]]"

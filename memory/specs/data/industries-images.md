@@ -7,16 +7,21 @@ domain: "feature"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
 change_ref: "[[redesign-experiencia-sector]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/redesign-experiencia-sector"
+feature_branch: "feature/redesign-experiencia-sector"
+commits: ["aac99af"]
 mr: ""
-acceptance_criteria: []
+acceptance_criteria:
+  - "[x] Cada una de las 14 industrias tiene una imagen fotográfica asociada."
+  - "[x] Las imágenes están disponibles en un directorio de assets público."
+  - "[x] Cada imagen cuenta con texto alternativo descriptivo."
+  - "[x] Las imágenes se sirven en formato optimizado para web (WebP o AVIF) con fallback."
+  - "[x] No hay regresiones en el modelo de datos existente (icono, nombre, subtítulo y color se mantienen)."
 related: []
 affects: []
 adrs: []
