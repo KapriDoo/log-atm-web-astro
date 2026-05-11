@@ -7,11 +7,18 @@ import { WHY_ITEMS } from '../../lib/constants';
   <div class="container why__inner">
     <div class="why__visual">
       <div class="why__img-wrap">
-        <div class="why__img-ph">
-          <svg viewBox="0 0 520 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Foto del equipo LOG ATM en operación portuaria (próximamente)">
-            <rect width="520" height="420" fill="var(--color-svg-bg)"/>
-            <text x="260" y="215" text-anchor="middle" font-size="13" fill="var(--color-svg-text)" font-family="sans-serif">Foto equipo / operación portuaria</text>
-          </svg>
+        <div class="why__video-wrap">
+          <video
+            class="why__video"
+            src="/videos/hero-port.mp4"
+            muted
+            autoplay
+            playsinline
+            aria-label="Camión en ruta costera — operación logística LOG ATM"
+          ></video>
+          <div class="why__logo-overlay" aria-hidden="true">
+            <img src="/logo.svg" alt="" width="180" height="198" />
+          </div>
         </div>
         <div class="why__badge">
           <span class="why__badge-icon">🇨🇱</span>
@@ -53,6 +60,7 @@ import { WHY_ITEMS } from '../../lib/constants';
 </section>
 
 <script>
+  // --- Animación GSAP: clip-path reveal ---
   import { gsap } from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
   import { prefersReducedMotion } from '../../scripts/scroll-animations';
@@ -76,4 +84,52 @@ import { WHY_ITEMS } from '../../lib/constants';
       });
     }
   }
+
+  // --- Video loop con pausa para mostrar el logo al final ---
+  const LOGO_DISPLAY_MS = 2500;
+  let cleanupWhyVideo: (() => void) | null = null;
+
+  function initWhyVideo() {
+    // Limpiar instancia anterior (protege contra view transitions)
+    cleanupWhyVideo?.();
+
+    const video = document.querySelector<HTMLVideoElement>('.why__video');
+    const overlay = document.querySelector<HTMLElement>('.why__logo-overlay');
+    if (!video || !overlay) return;
+
+    // Respetar prefers-reduced-motion
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    let timerId: ReturnType<typeof setTimeout> | null = null;
+
+    function onVideoEnded() {
+      overlay!.classList.add('is-visible');
+      timerId = setTimeout(() => {
+        overlay!.classList.remove('is-visible');
+        video!.play();
+        timerId = null;
+      }, LOGO_DISPLAY_MS);
+    }
+
+    video.addEventListener('ended', onVideoEnded);
+
+    // Función de cleanup para evitar memory leaks
+    cleanupWhyVideo = () => {
+      video.removeEventListener('ended', onVideoEnded);
+      if (timerId !== null) {
+        clearTimeout(timerId);
+        timerId = null;
+      }
+      cleanupWhyVideo = null;
+    };
+  }
+
+  // Ejecutar cuando el DOM esté listo (compatible con Astro view transitions)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initWhyVideo);
+  } else {
+    initWhyVideo();
+  }
+  document.addEventListener('astro:after-swap', initWhyVideo);
 </script>
