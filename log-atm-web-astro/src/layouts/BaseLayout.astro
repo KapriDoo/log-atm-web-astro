@@ -136,5 +136,8 @@ const breadcrumbSchema = Astro.url.pathname !== '/' ? JSON.stringify({
   <body>
     <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
     <slot />
+    <script>
+      import '../scripts/scroll-animations';
+    </script>
   </body>
 </html>
