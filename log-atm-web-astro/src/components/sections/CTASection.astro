@@ -32,43 +32,40 @@ import { SITE } from '../../lib/constants';
 
       <div class="cta-final__row">
         <div class="cta-final__field">
-          <label class="cta-final__label" for="cta-mode">Modalidad</label>
-          <select class="cta-final__select" id="cta-mode" name="mode">
-            <option>Marítimo · FCL</option>
-            <option>Marítimo · LCL</option>
-            <option>Aéreo</option>
-            <option>Courier</option>
-          </select>
+          <label class="cta-final__label" for="cta-name">Nombre</label>
+          <input
+            class="cta-final__input"
+            id="cta-name"
+            name="name"
+            type="text"
+            autocomplete="name"
+            placeholder="Tu nombre"
+            required
+          />
         </div>
         <div class="cta-final__field">
-          <label class="cta-final__label" for="cta-origin">Origen</label>
-          <select class="cta-final__select" id="cta-origin" name="origin">
-            <option>Shanghai, CN</option>
-            <option>Miami, US</option>
-            <option>Rotterdam, NL</option>
-            <option>Dubai, AE</option>
-          </select>
+          <label class="cta-final__label" for="cta-email">Email</label>
+          <input
+            class="cta-final__input"
+            id="cta-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            placeholder="tu@empresa.cl"
+            required
+          />
         </div>
       </div>
 
-      <div class="cta-final__row">
-        <div class="cta-final__field">
-          <label class="cta-final__label" for="cta-dest">Destino</label>
-          <select class="cta-final__select" id="cta-dest" name="dest">
-            <option>Santiago, CL</option>
-            <option>San Antonio, CL</option>
-            <option>Iquique, CL</option>
-          </select>
-        </div>
-        <div class="cta-final__field">
-          <label class="cta-final__label" for="cta-vol">Volumen</label>
-          <select class="cta-final__select" id="cta-vol" name="volume">
-            <option>1 CBM o menos</option>
-            <option>1 – 15 CBM</option>
-            <option>1 contenedor 20'</option>
-            <option>1 contenedor 40'</option>
-          </select>
-        </div>
+      <div class="cta-final__field">
+        <label class="cta-final__label" for="cta-cargo">Carga estimada</label>
+        <input
+          class="cta-final__input"
+          id="cta-cargo"
+          name="cargo"
+          type="text"
+          placeholder="Ej: 1 contenedor 20' Shanghai → SCL"
+        />
       </div>
 
       <button class="cta-final__btn" type="submit">

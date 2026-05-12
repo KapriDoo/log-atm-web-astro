@@ -87,25 +87,26 @@
   color: color-mix(in srgb, var(--color-text-inverse) 70%, transparent);
 }
 
-.cta-final__select {
+.cta-final__input {
   appearance: none;
   -webkit-appearance: none;
-  background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 0.875rem center / 12px,
-    color-mix(in srgb, var(--color-text-inverse) 10%, transparent);
+  background: color-mix(in srgb, var(--color-text-inverse) 10%, transparent);
   border: 1px solid color-mix(in srgb, var(--color-text-inverse) 22%, transparent);
-  padding: 0.75rem 2rem 0.75rem 0.875rem;
+  padding: 0.75rem 0.875rem;
   border-radius: var(--radius-input);
   color: var(--color-text-inverse);
   font-size: 0.9375rem;
   font-family: inherit;
   transition: border-color 150ms ease, background 150ms ease;
+  width: 100%;
 }
-.cta-final__select:focus {
+.cta-final__input::placeholder {
+  color: color-mix(in srgb, var(--color-text-inverse) 50%, transparent);
+}
+.cta-final__input:focus {
   border-color: var(--color-accent-400);
   outline: none;
 }
-.cta-final__select option { color: var(--color-text); background: var(--color-surface); }
 
 .cta-final__btn {
   display: inline-flex;

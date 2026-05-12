@@ -1,7 +1,7 @@
 /* ─── Why Section ───────────────────────────────────────── */
 .why {
   padding-block: var(--section-pad);
-  background: var(--color-surface);
+  background: var(--color-surface-alt);
 }
 
 .why__head {
