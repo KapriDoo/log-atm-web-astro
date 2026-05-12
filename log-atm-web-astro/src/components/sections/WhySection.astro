@@ -1,19 +1,27 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { WHY_ITEMS } from '../../lib/constants';
+import { useTranslations, getLangFromUrl, type Locale } from '../../i18n/utils';
+
+interface Props { lang?: Locale; }
+const lang: Locale = Astro.props.lang ?? getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const ITEMS = [
+  { slug: 'executive', icon: 'lucide:user-round-check' },
+  { slug: 'network',   icon: 'lucide:globe-2' },
+  { slug: 'support',   icon: 'lucide:clock' },
+  { slug: 'customs',   icon: 'lucide:shield-check' },
+] as const;
 ---
 
-<section class="why" id="why" aria-label="Por qué LOG ATM">
+<section class="why" id="why" aria-label={t('why.aria')}>
   <div class="container">
     <div class="why__head">
       <div class="why__head-left">
-        <span class="eyebrow">Por qué LOG ATM</span>
-        <h2 class="why__title">El operador que opera contigo</h2>
+        <span class="eyebrow">{t('why.eyebrow')}</span>
+        <h2 class="why__title">{t('why.title')}</h2>
       </div>
-      <p class="why__desc">
-        Somos un partner logístico, no un proveedor más. Conocemos tu negocio
-        y diseñamos la operación a tu medida.
-      </p>
+      <p class="why__desc">{t('why.desc')}</p>
     </div>
 
     <div class="why__grid">
@@ -32,28 +40,28 @@ import { WHY_ITEMS } from '../../lib/constants';
 
         <div class="why__video-logo" aria-hidden="true">
           <img src="/logo.png" alt="" />
-          <span class="why__video-logo-tag">Logística a tu medida</span>
+          <span class="why__video-logo-tag">{t('why.videoLogoTag')}</span>
         </div>
 
         <div class="why__video-caption">
-          <span class="why__video-eyebrow">Conoce LOG ATM</span>
-          <span class="why__video-title">2 minutos para entender cómo trabajamos</span>
+          <span class="why__video-eyebrow">{t('why.videoEyebrow')}</span>
+          <span class="why__video-title">{t('why.videoTitle')}</span>
         </div>
       </div>
 
       <div class="why__items">
-        {WHY_ITEMS.map((w) => (
+        {ITEMS.map((w) => (
           <article class="why-card">
             <span class="why-card__icon" aria-hidden="true">
               <Icon name={w.icon} width={22} height={22} />
             </span>
             <div class="why-card__body">
-              <h3 class="why-card__title">{w.title}</h3>
-              <p class="why-card__desc">{w.desc}</p>
+              <h3 class="why-card__title">{t(`why.items.${w.slug}.title`)}</h3>
+              <p class="why-card__desc">{t(`why.items.${w.slug}.desc`)}</p>
             </div>
             <div class="why-card__metric">
-              <span class="why-card__metric-value">{w.metric}</span>
-              <span class="why-card__metric-sub">{w.sub}</span>
+              <span class="why-card__metric-value">{t(`why.items.${w.slug}.metric`)}</span>
+              <span class="why-card__metric-sub">{t(`why.items.${w.slug}.sub`)}</span>
             </div>
           </article>
         ))}

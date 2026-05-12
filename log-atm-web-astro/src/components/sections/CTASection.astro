@@ -1,47 +1,50 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { SITE } from '../../lib/constants';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, type Locale } from '../../i18n/utils';
+
+interface Props { lang?: Locale; }
+const lang: Locale = Astro.props.lang ?? getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const quoteHref = buildLocaleUrl(lang, '/cotizar');
 ---
 
-<section class="cta-final" id="contacto" aria-label="Cotización rápida">
+<section class="cta-final" id="contacto" aria-label={t('cta.aria')}>
   <div class="container cta-final__inner">
     <div class="cta-final__copy">
-      <span class="eyebrow eyebrow--light">Empieza hoy</span>
+      <span class="eyebrow eyebrow--light">{t('cta.eyebrow')}</span>
       <h2 class="cta-final__title">
-        Tu próximo envío,<br />
-        con <em>visibilidad total</em>.
+        {t('cta.title1')}<br />
+        <Fragment set:html={t('cta.title2')} />
       </h2>
-      <p class="cta-final__lead">
-        Cotiza en menos de 24 horas con un ejecutivo dedicado.
-        Sin intermediarios, sin sorpresas.
-      </p>
+      <p class="cta-final__lead">{t('cta.lead')}</p>
       <div class="cta-final__ctas">
-        <a class="btn-cta" href="/cotizar">
-          Cotiza ahora
+        <a class="btn-cta" href={quoteHref}>
+          {t('cta.ctaQuote')}
           <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
         </a>
         <a class="btn-ghost-light" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
           <Icon name="lucide:message-circle" width={16} height={16} aria-hidden="true" />
-          WhatsApp
+          {t('cta.ctaWhatsapp')}
         </a>
       </div>
     </div>
 
-    <form class="cta-final__form" id="cta-form" novalidate>
-      <p class="cta-final__form-title">Cotización rápida · 30 seg</p>
+    <form class="cta-final__form" id="cta-form" novalidate data-quote-href={quoteHref}>
+      <p class="cta-final__form-title">{t('cta.formTitle')}</p>
 
       <div class="cta-final__row">
         <div class="cta-final__field">
-          <label class="cta-final__label" for="cta-mode">Modalidad</label>
+          <label class="cta-final__label" for="cta-mode">{t('cta.formMode')}</label>
           <select class="cta-final__select" id="cta-mode" name="mode">
-            <option>Marítimo · FCL</option>
-            <option>Marítimo · LCL</option>
-            <option>Aéreo</option>
-            <option>Courier</option>
+            <option>{t('cta.modeOptions.fcl')}</option>
+            <option>{t('cta.modeOptions.lcl')}</option>
+            <option>{t('cta.modeOptions.air')}</option>
+            <option>{t('cta.modeOptions.courier')}</option>
           </select>
         </div>
         <div class="cta-final__field">
-          <label class="cta-final__label" for="cta-origin">Origen</label>
+          <label class="cta-final__label" for="cta-origin">{t('cta.formOrigin')}</label>
           <select class="cta-final__select" id="cta-origin" name="origin">
             <option>Shanghai, CN</option>
             <option>Miami, US</option>
@@ -53,7 +56,7 @@ import { SITE } from '../../lib/constants';
 
       <div class="cta-final__row">
         <div class="cta-final__field">
-          <label class="cta-final__label" for="cta-dest">Destino</label>
+          <label class="cta-final__label" for="cta-dest">{t('cta.formDest')}</label>
           <select class="cta-final__select" id="cta-dest" name="dest">
             <option>Santiago, CL</option>
             <option>San Antonio, CL</option>
@@ -61,23 +64,23 @@ import { SITE } from '../../lib/constants';
           </select>
         </div>
         <div class="cta-final__field">
-          <label class="cta-final__label" for="cta-vol">Volumen</label>
+          <label class="cta-final__label" for="cta-vol">{t('cta.formVolume')}</label>
           <select class="cta-final__select" id="cta-vol" name="volume">
-            <option>1 CBM o menos</option>
-            <option>1 – 15 CBM</option>
-            <option>1 contenedor 20'</option>
-            <option>1 contenedor 40'</option>
+            <option>{t('cta.volumeOptions.small')}</option>
+            <option>{t('cta.volumeOptions.medium')}</option>
+            <option>{t('cta.volumeOptions.container20')}</option>
+            <option>{t('cta.volumeOptions.container40')}</option>
           </select>
         </div>
       </div>
 
       <button class="cta-final__btn" type="submit">
-        Obtener cotización
+        {t('cta.formSubmit')}
         <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
       </button>
 
       <p class="cta-final__alt">
-        O escríbenos a <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        {t('cta.formAlt')} <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
       </p>
     </form>
   </div>
@@ -90,6 +93,7 @@ import { SITE } from '../../lib/constants';
     const data = new FormData(form);
     const params = new URLSearchParams();
     data.forEach((v, k) => params.set(k, String(v)));
-    window.location.href = `/cotizar?${params.toString()}`;
+    const target = form.dataset.quoteHref || '/cotizar';
+    window.location.href = `${target}?${params.toString()}`;
   });
 </script>

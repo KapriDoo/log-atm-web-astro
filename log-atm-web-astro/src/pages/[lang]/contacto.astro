@@ -1,0 +1,96 @@
+---
+/**
+ * Versión localizada de /contacto.
+ * Chrome (Navbar, Footer, metadatos, hreflang) en el locale activo;
+ * el cuerpo narrativo se mantiene en español hasta que un nativo lo refine
+ * (marcado vía `__needs_native_review` en cada JSON no-es).
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/ui/Navbar.astro';
+import Footer from '../../components/ui/Footer.astro';
+import { Icon } from 'astro-icon/components';
+import { SITE } from '../../lib/constants';
+import { NON_DEFAULT_LOCALES } from '../../i18n/config';
+import { useTranslations, type Locale } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return NON_DEFAULT_LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const lang = (Astro.params.lang ?? 'es') as Locale;
+const t = useTranslations(lang);
+const currentPath = `/${lang}/contacto`;
+const canonical = `${SITE.url}${currentPath}`;
+---
+
+<BaseLayout
+  title={t('pages.contacto.title')}
+  description={t('pages.contacto.description')}
+  canonical={canonical}
+  lang={lang}
+  currentPath={currentPath}
+>
+  <Navbar lang={lang} currentPath={currentPath} />
+
+  <main id="main-content">
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="container page-hero__inner">
+        <span class="eyebrow">{t('pages.contacto.title')}</span>
+        <h1 id="page-title" class="page-hero__title">{t('nav.contact')}</h1>
+        <p class="page-hero__lead">{t('pages.contacto.description')}</p>
+      </div>
+    </section>
+
+    <section class="contact-section" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h2 id="contact-title" class="contact-info__title">{t('footer.contactHeading')}</h2>
+
+            <div class="contact-method">
+              <div class="contact-method__icon" aria-hidden="true">
+                <Icon name="lucide:phone" width="24" height="24" />
+              </div>
+              <div>
+                <a href={`tel:${SITE.phone}`}>{SITE.phoneDisplay}</a>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="contact-method__icon" aria-hidden="true">
+                <Icon name="lucide:mail" width="24" height="24" />
+              </div>
+              <div>
+                <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+              </div>
+            </div>
+
+            <div class="contact-method">
+              <div class="contact-method__icon" aria-hidden="true">
+                <Icon name="lucide:map-pin" width="24" height="24" />
+              </div>
+              <div>{SITE.address}</div>
+            </div>
+
+            <a href={SITE.whatsappUrl} class="footer__whatsapp" target="_blank" rel="noopener noreferrer">
+              <Icon name="lucide:message-circle" width={16} height={16} aria-hidden="true" />
+              {t('footer.whatsappBtn')}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang={lang} />
+</BaseLayout>
+
+<style>
+  .contact-section { padding: clamp(4rem, 8vw, 6rem) 0; }
+  .contact-grid { display: grid; gap: 2rem; }
+  .contact-info { max-width: 480px; margin: 0 auto; }
+  .contact-info__title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; margin: 0 0 1.5rem; }
+  .contact-method { display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--color-border); }
+  .contact-method__icon { color: var(--color-brand); }
+  .footer__whatsapp { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.5rem; padding: 0.75rem 1.25rem; background: var(--color-whatsapp); color: var(--color-text-inverse); border-radius: var(--radius-pill); font-weight: 600; }
+</style>

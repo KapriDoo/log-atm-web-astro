@@ -1,0 +1,46 @@
+---
+/**
+ * Versión localizada de /industrias. Reutiliza IndustriesSection.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/ui/Navbar.astro';
+import Footer from '../../components/ui/Footer.astro';
+import IndustriesSection from '../../components/sections/IndustriesSection.astro';
+import '../../styles/sections.css';
+import { SITE } from '../../lib/constants';
+import { NON_DEFAULT_LOCALES } from '../../i18n/config';
+import { useTranslations, type Locale } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return NON_DEFAULT_LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const lang = (Astro.params.lang ?? 'es') as Locale;
+const t = useTranslations(lang);
+const currentPath = `/${lang}/industrias`;
+const canonical = `${SITE.url}${currentPath}`;
+---
+
+<BaseLayout
+  title={t('pages.industrias.title')}
+  description={t('pages.industrias.description')}
+  canonical={canonical}
+  lang={lang}
+  currentPath={currentPath}
+>
+  <Navbar lang={lang} currentPath={currentPath} />
+
+  <main id="main-content">
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="container page-hero__inner">
+        <span class="eyebrow">{t('industries.eyebrow')}</span>
+        <h1 id="page-title" class="page-hero__title">{t('industries.title')}</h1>
+        <p class="page-hero__lead">{t('industries.desc')}</p>
+      </div>
+    </section>
+
+    <IndustriesSection lang={lang} />
+  </main>
+
+  <Footer lang={lang} />
+</BaseLayout>

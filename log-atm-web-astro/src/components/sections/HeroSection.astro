@@ -1,9 +1,18 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { SITE, LIVE_ROUTES, STATS } from '../../lib/constants';
+import { SITE, LIVE_ROUTES } from '../../lib/constants';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, type Locale } from '../../i18n/utils';
+
+interface Props { lang?: Locale; }
+const lang: Locale = Astro.props.lang ?? getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const STAT_KEYS = ['stats.yearsLabel', 'stats.countriesLabel', 'stats.satisfactionLabel', 'stats.dedicatedLabel'] as const;
+const STAT_VALUES = ['20+', '70+', '98%', '1:1'];
+const quoteHref = buildLocaleUrl(lang, '/cotizar');
 ---
 
-<header class="hero-b" aria-label="Hero LOG ATM">
+<header class="hero-b" aria-label={t('hero.eyebrow')}>
   <div class="hero-b__media" aria-hidden="true">
     <img src="/images/services/svc-maritima.jpeg" alt="" fetchpriority="high" />
     <div class="hero-b__overlay"></div>
@@ -12,31 +21,28 @@ import { SITE, LIVE_ROUTES, STATS } from '../../lib/constants';
   <div class="container hero-b__inner">
     <div class="hero-b__grid">
       <div class="hero-b__copy">
-        <span class="eyebrow eyebrow--light">Operador logístico chileno · 20+ años</span>
+        <span class="eyebrow eyebrow--light">{t('hero.eyebrow')}</span>
         <h1 class="hero-b__title">
-          Chile con el mundo,<br />
-          <span class="hero-b__title-accent">a tu medida.</span>
+          {t('hero.title1')}<br />
+          <span class="hero-b__title-accent">{t('hero.title2')}</span>
         </h1>
-        <p class="hero-b__lead">
-          Carga aérea, marítima y aduana <em>sin intermediarios</em>:
-          un ejecutivo dedicado que conoce tu operación de extremo a extremo.
-        </p>
+        <p class="hero-b__lead" set:html={t('hero.lead')}></p>
         <div class="hero-b__ctas">
-          <a class="btn-cta" href="/cotizar">
-            Cotiza ahora
+          <a class="btn-cta" href={quoteHref}>
+            {t('hero.ctaQuote')}
             <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
           </a>
           <a class="btn-ghost-light" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
             <Icon name="lucide:message-circle" width={14} height={14} aria-hidden="true" />
-            WhatsApp
+            {t('hero.ctaWhatsapp')}
           </a>
         </div>
       </div>
 
-      <aside class="hero-b__live" aria-label="Rutas frecuentes">
+      <aside class="hero-b__live" aria-label={t('hero.liveAria')}>
         <header class="hero-b__live-head">
-          <span class="hero-b__live-title">Rutas frecuentes</span>
-          <span class="hero-b__live-pill">Cobertura</span>
+          <span class="hero-b__live-title">{t('hero.liveTitle')}</span>
+          <span class="hero-b__live-pill">{t('hero.livePill')}</span>
         </header>
         <ul class="hero-b__live-rows" role="list">
           {LIVE_ROUTES.map((r) => (
@@ -55,10 +61,10 @@ import { SITE, LIVE_ROUTES, STATS } from '../../lib/constants';
     </div>
 
     <div class="hero-b__strip">
-      {STATS.map((s) => (
+      {STAT_KEYS.map((k, i) => (
         <div class="hero-b__strip-item">
-          <span class="hero-b__strip-num">{s.value}</span>
-          <span class="hero-b__strip-label">{s.label}</span>
+          <span class="hero-b__strip-num">{STAT_VALUES[i]}</span>
+          <span class="hero-b__strip-label">{t(k)}</span>
         </div>
       ))}
     </div>

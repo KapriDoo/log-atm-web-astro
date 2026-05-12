@@ -1,0 +1,182 @@
+{
+  "__needs_native_review": true,
+  "__note": "AI 生成翻译,等待母语者审校。",
+  "site": {
+    "name": "LOG ATM",
+    "tagline": "为您量身定制的物流",
+    "taglineUpper": "为您量身定制的物流"
+  },
+  "a11y": {
+    "skipLink": "跳到主要内容",
+    "brandHome": "LOG ATM — 首页",
+    "mainNav": "主导航",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单",
+    "menuDialog": "导航菜单",
+    "whatsappContact": "通过 WhatsApp 联系",
+    "languageSelector": "选择语言",
+    "languageCurrent": "当前语言:{lang}"
+  },
+  "nav": {
+    "services": "服务",
+    "industries": "行业",
+    "why": "为何选择 LOG ATM",
+    "contact": "联系我们",
+    "quote": "立即报价",
+    "quoteArrow": "立即报价 →"
+  },
+  "hero": {
+    "eyebrow": "智利物流运营商 · 20+ 年",
+    "title1": "连接智利与世界,",
+    "title2": "为您量身定制。",
+    "lead": "<em>无中间商</em>的空运、海运及报关服务:一位专属客户经理全程了解您的业务。",
+    "ctaQuote": "立即报价",
+    "ctaWhatsapp": "WhatsApp",
+    "liveTitle": "常用航线",
+    "livePill": "覆盖范围",
+    "liveAria": "常用航线"
+  },
+  "stats": {
+    "aria": "LOG ATM 指标",
+    "yearsLabel": "运营年限",
+    "countriesLabel": "覆盖国家",
+    "satisfactionLabel": "满意度",
+    "dedicatedLabel": "专属客户经理"
+  },
+  "services": {
+    "aria": "LOG ATM 服务",
+    "eyebrow": "我们的业务",
+    "title": "满足每一种需求的解决方案",
+    "desc": "从紧急派送到完整的供应链咨询。每一位客户都有专属客户经理为您量身设计路线。",
+    "numPrefix": "服务",
+    "ctaMore": "了解更多",
+    "items": {
+      "01": { "title": "空运",            "desc": "快递、国际快件及包机服务,确保准时送达。",       "tag": "Express · 48h" },
+      "02": { "title": "海运",            "desc": "FCL 和 LCL 直达 80+ 港口,合并装箱以降低成本。",  "tag": "FCL · LCL" },
+      "03": { "title": "报关与单证",      "desc": "DUS、原产地证书及关税归类。",                   "tag": "OEA Chile" },
+      "04": { "title": "仓储",            "desc": "仓储、订单履行及末端配送,库存实时可见。",        "tag": "24/7" },
+      "05": { "title": "物流咨询",        "desc": "量身定制的供应链方案,降低成本和交期。",          "tag": "量身定制" },
+      "06": { "title": "国际快递",        "desc": "全球覆盖的门到门快递。",                        "tag": "D2D" },
+      "07": { "title": "货物保险",        "desc": "全程覆盖的综合保险。",                          "tag": "全球" },
+      "08": { "title": "拆箱分拨",        "desc": "港口接收、分拆与配送。",                        "tag": "LCL" },
+      "09": { "title": "美国代收地址",    "desc": "您的专属美国地址,用于线上购物。",               "tag": "Miami" },
+      "10": { "title": "国际采购",        "desc": "全方位咨询:供应商、付款与物流。",               "tag": "咨询" },
+      "11": { "title": "中东航线",        "desc": "与可靠的当地伙伴的专业连接。",                  "tag": "DXB · JED" }
+    }
+  },
+  "industries": {
+    "aria": "服务行业",
+    "eyebrow": "行业",
+    "title": "我们服务的领域",
+    "desc": "12 个具有专业操作、特殊法规和优化路线的行业。",
+    "items": {
+      "mineria":      { "name": "矿业",       "sub": "铜、锂、重型机械" },
+      "retail":       { "name": "零售",       "sub": "时尚、消费品、季节性" },
+      "agro":         { "name": "农产品",     "sub": "新鲜水果、葡萄酒、谷物" },
+      "farma":        { "name": "医药",       "sub": "冷链、试剂" },
+      "ecommerce":    { "name": "电商",       "sub": "跨境、订单履行" },
+      "construccion": { "name": "建筑",       "sub": "机械、材料" },
+      "chatarra":     { "name": "废钢",       "sub": "回收与出口" },
+      "iluminarias":  { "name": "照明",       "sub": "LED 与工业" },
+      "vehiculos":    { "name": "二手车",     "sub": "进口及手续" },
+      "efectos":      { "name": "私人物品",   "sub": "国际搬家" },
+      "maquinaria":   { "name": "机械设备",   "sub": "工业与农业" },
+      "textil":       { "name": "纺织",       "sub": "服装、面料、配件" }
+    }
+  },
+  "why": {
+    "aria": "为何选择 LOG ATM",
+    "eyebrow": "为何选择 LOG ATM",
+    "title": "与您并肩运营的伙伴",
+    "desc": "我们是物流合作伙伴,不只是供应商。我们了解您的业务并为您量身设计运营方案。",
+    "videoEyebrow": "了解 LOG ATM",
+    "videoTitle": "两分钟了解我们的工作方式",
+    "videoLogoTag": "为您量身定制的物流",
+    "items": {
+      "executive": { "title": "专属客户经理",      "desc": "一位了解您的业务并预见您需求的人。", "metric": "1:1",  "sub": "账户" },
+      "network":   { "title": "覆盖 70+ 国家网络", "desc": "经过认证的合作伙伴,保证交期。",     "metric": "70+",  "sub": "国家" },
+      "support":   { "title": "24/7 服务",         "desc": "随时与您的专属客户经理保持联系。",   "metric": "24/7", "sub": "支持" },
+      "customs":   { "title": "智利报关专长",      "desc": "智利海关认证 (OEA) 运营商。",       "metric": "OEA",  "sub": "认证" }
+    }
+  },
+  "cta": {
+    "aria": "快速报价",
+    "eyebrow": "今天开始",
+    "title1": "您的下一票货物,",
+    "title2": "<em>完全可视化</em>。",
+    "lead": "由专属客户经理在 24 小时内完成报价。无中间商,无意外。",
+    "ctaQuote": "立即报价",
+    "ctaWhatsapp": "WhatsApp",
+    "formTitle": "快速报价 · 30 秒",
+    "formMode": "运输方式",
+    "formOrigin": "起运地",
+    "formDest": "目的地",
+    "formVolume": "货量",
+    "formSubmit": "获取报价",
+    "formAlt": "或来信至",
+    "modeOptions": {
+      "fcl": "海运 · FCL",
+      "lcl": "海运 · LCL",
+      "air": "空运",
+      "courier": "快递"
+    },
+    "volumeOptions": {
+      "small": "1 CBM 或以下",
+      "medium": "1 – 15 CBM",
+      "container20": "1 个 20' 集装箱",
+      "container40": "1 个 40' 集装箱"
+    }
+  },
+  "footer": {
+    "aboutHeading": "关于",
+    "contactHeading": "联系",
+    "linkAbout": "关于我们",
+    "linkServices": "服务",
+    "linkIndustries": "行业",
+    "linkWhy": "为何选择 LOG ATM",
+    "linkQuote": "报价",
+    "whatsappBtn": "通过 WhatsApp 交谈",
+    "copyright": "© {year} {name} · 版权所有",
+    "brandDesc": "智利物流运营商,20+ 年连接 70+ 国家的企业。空运、海运及报关,无中间商。"
+  },
+  "pages": {
+    "home": {
+      "title": "空运与海运物流",
+      "description": "LOG ATM — 为智利企业量身打造的空运、海运、报关及仓储解决方案。立即报价。"
+    },
+    "nosotros": {
+      "title": "关于我们",
+      "description": "认识 LOG ATM:拥有 15+ 年国际物流经验的智利公司,提供空运、海运及报关服务。",
+      "eyebrow": "关于我们",
+      "h1": "人。信任。成果。",
+      "lead": "我们是一支具有全球连接能力的智利团队,致力于像对待唯一客户一样对待您。",
+      "card1Title": "15+ 年经验",
+      "card1Desc": "自 2009 年起连接智利与世界。我们与客户一同成长,适应国际贸易的每一项挑战。",
+      "card2Title": "全球网络",
+      "card2Desc": "与 80+ 国家的代理建立战略合作。只要有港口或机场,就有我们可信赖的伙伴。",
+      "card3Title": "专属团队",
+      "card3Desc": "每位客户都有专属客户经理,了解其业务并预见需求。我们不是冷冰冰的跨国公司。",
+      "card4Title": "认证资质",
+      "card4Desc": "智利海关认证运营商,符合最高的质量和安全标准。",
+      "quoteText": "\"我们的使命很简单:让任何智利公司都能进入国际贸易。无论货量大小,总有解决方案。\"",
+      "quoteRole": "首席执行官兼创始人,LOG ATM"
+    },
+    "servicios":  { "title": "服务",   "description": "LOG ATM 完整物流服务目录。" },
+    "industrias": { "title": "行业",   "description": "LOG ATM 深耕的行业领域。" },
+    "contacto":   { "title": "联系",   "description": "联系 LOG ATM 开启下一次物流操作。" },
+    "cotizar":    { "title": "报价",   "description": "申请空运、海运或快递的定制报价。" },
+    "404": {
+      "title": "页面未找到",
+      "description": "您查找的页面不存在。返回 LOG ATM 首页。",
+      "code": "404",
+      "h1": "页面未找到",
+      "lead": "抱歉,您查找的页面不存在或已被移动。",
+      "backHome": "返回首页"
+    }
+  },
+  "schema": {
+    "description": "为您量身定制的空运与海运物流。国际货运、报关、仓储与咨询服务,源自智利圣地亚哥维塔库拉。",
+    "slogan": "为您量身定制的物流",
+    "breadcrumbHome": "首页"
+  }
+}

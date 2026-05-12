@@ -9,22 +9,29 @@ import WhySection from '../components/sections/WhySection.astro';
 import IndustriesSection from '../components/sections/IndustriesSection.astro';
 import CTASection from '../components/sections/CTASection.astro';
 import '../styles/sections.css';
+import { useTranslations, type Locale } from '../i18n/utils';
+
+const lang: Locale = 'es';
+const currentPath = '/';
+const t = useTranslations(lang);
 ---
 
 <BaseLayout
-  title="Logística Aérea y Marítima"
-  description="LOG ATM — Soluciones de carga aérea, carga marítima, aduana y almacenaje personalizadas para empresas chilenas. Cotiza ahora."
+  lang={lang}
+  currentPath={currentPath}
+  title={t('pages.home.title')}
+  description={t('pages.home.description')}
 >
-  <Navbar />
+  <Navbar lang={lang} currentPath={currentPath} />
 
   <main id="main-content">
-    <HeroSection />
-    <StatsSection />
-    <ServicesSection />
-    <WhySection />
-    <IndustriesSection />
-    <CTASection />
+    <HeroSection lang={lang} />
+    <StatsSection lang={lang} />
+    <ServicesSection lang={lang} />
+    <WhySection lang={lang} />
+    <IndustriesSection lang={lang} />
+    <CTASection lang={lang} />
   </main>
 
-  <Footer />
+  <Footer lang={lang} />
 </BaseLayout>

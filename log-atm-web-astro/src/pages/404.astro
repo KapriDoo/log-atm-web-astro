@@ -2,30 +2,33 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, type Locale } from '../i18n/utils';
+
+const lang: Locale = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <BaseLayout
-  title="Página no encontrada"
-  description="La página que buscas no existe. Vuelve al inicio de LOG ATM."
+  title={t('pages.404.title')}
+  description={t('pages.404.description')}
   noindex={true}
+  lang={lang}
 >
-  <Navbar />
+  <Navbar lang={lang} />
   <main id="main-content" class="error-page" role="main">
     <div class="error-page__container">
-      <span class="error-page__code" aria-hidden="true">404</span>
-      <h1 class="error-page__title">Página no encontrada</h1>
-      <p class="error-page__lead">
-        Lo sentimos, la página que buscas no existe o ha sido movida.
-      </p>
-      <a href="/" class="error-page__cta">
-        Volver al inicio
+      <span class="error-page__code" aria-hidden="true">{t('pages.404.code')}</span>
+      <h1 class="error-page__title">{t('pages.404.h1')}</h1>
+      <p class="error-page__lead">{t('pages.404.lead')}</p>
+      <a href={buildLocaleUrl(lang, '/')} class="error-page__cta">
+        {t('pages.404.backHome')}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
       </a>
     </div>
   </main>
-  <Footer />
+  <Footer lang={lang} />
 </BaseLayout>
 
 <script>

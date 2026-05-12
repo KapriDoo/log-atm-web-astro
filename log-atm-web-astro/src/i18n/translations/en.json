@@ -1,0 +1,182 @@
+{
+  "__needs_native_review": true,
+  "__note": "AI-generated translation, pending native review.",
+  "site": {
+    "name": "LOG ATM",
+    "tagline": "Logistics tailored to you",
+    "taglineUpper": "LOGISTICS TAILORED TO YOU"
+  },
+  "a11y": {
+    "skipLink": "Skip to main content",
+    "brandHome": "LOG ATM — Home",
+    "mainNav": "Main navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "menuDialog": "Navigation menu",
+    "whatsappContact": "Contact via WhatsApp",
+    "languageSelector": "Select language",
+    "languageCurrent": "Current language: {lang}"
+  },
+  "nav": {
+    "services": "Services",
+    "industries": "Industries",
+    "why": "Why LOG ATM",
+    "contact": "Contact",
+    "quote": "Get a quote",
+    "quoteArrow": "Get a quote →"
+  },
+  "hero": {
+    "eyebrow": "Chilean logistics operator · 20+ years",
+    "title1": "Chile to the world,",
+    "title2": "tailored to you.",
+    "lead": "Air, ocean and customs freight <em>without intermediaries</em>: a dedicated executive who knows your operation end to end.",
+    "ctaQuote": "Get a quote",
+    "ctaWhatsapp": "WhatsApp",
+    "liveTitle": "Frequent routes",
+    "livePill": "Coverage",
+    "liveAria": "Frequent routes"
+  },
+  "stats": {
+    "aria": "LOG ATM indicators",
+    "yearsLabel": "Years of operation",
+    "countriesLabel": "Countries connected",
+    "satisfactionLabel": "Satisfaction",
+    "dedicatedLabel": "Dedicated executive"
+  },
+  "services": {
+    "aria": "LOG ATM services",
+    "eyebrow": "What we do",
+    "title": "Solutions for every need",
+    "desc": "From urgent dispatch to full supply chain consulting. Every account has a dedicated executive who designs the route tailored to you.",
+    "numPrefix": "Service",
+    "ctaMore": "Learn more",
+    "items": {
+      "01": { "title": "Air Freight",                "desc": "Express, international courier and air charter with guaranteed transit times.", "tag": "Express · 48h" },
+      "02": { "title": "Ocean Freight",              "desc": "FCL and LCL to 80+ ports. We consolidate to cut costs.",                          "tag": "FCL · LCL" },
+      "03": { "title": "Customs & Documentation",    "desc": "DUS, certificates of origin and tariff classification.",                         "tag": "OEA Chile" },
+      "04": { "title": "Warehousing",                "desc": "Storage, fulfillment and last-mile with real-time inventory.",                   "tag": "24/7" },
+      "05": { "title": "Logistics Consulting",       "desc": "A tailored supply chain that reduces costs and lead times.",                     "tag": "Tailor-made" },
+      "06": { "title": "International Courier",      "desc": "Express door-to-door shipments with global coverage.",                           "tag": "D2D" },
+      "07": { "title": "Cargo Insurance",            "desc": "Comprehensive coverage throughout the entire journey.",                          "tag": "Global" },
+      "08": { "title": "Deconsolidation",            "desc": "Receipt, split and distribution from port.",                                      "tag": "LCL" },
+      "09": { "title": "USA Mailbox",                "desc": "Your own U.S. address for online shopping.",                                      "tag": "Miami" },
+      "10": { "title": "International Procurement",  "desc": "Full advisory: suppliers, payments and logistics.",                              "tag": "Advisory" },
+      "11": { "title": "Middle East Route",          "desc": "Specialized connection with trusted local partners.",                            "tag": "DXB · JED" }
+    }
+  },
+  "industries": {
+    "aria": "Industries served",
+    "eyebrow": "Industries",
+    "title": "Sectors we move",
+    "desc": "12 industries with specialized operations, particular regulations and optimized routes.",
+    "items": {
+      "mineria":      { "name": "Mining",             "sub": "Copper, lithium, heavy machinery" },
+      "retail":       { "name": "Retail",             "sub": "Fashion, consumer goods, seasonal" },
+      "agro":         { "name": "Agribusiness",       "sub": "Fresh fruit, wines, grains" },
+      "farma":        { "name": "Pharmaceutical",     "sub": "Cold chain, reagents" },
+      "ecommerce":    { "name": "E-commerce",         "sub": "Cross-border, fulfillment" },
+      "construccion": { "name": "Construction",       "sub": "Machinery, materials" },
+      "chatarra":     { "name": "Ferrous Scrap",      "sub": "Recycling and export" },
+      "iluminarias":  { "name": "Lighting",           "sub": "LED and industrial" },
+      "vehiculos":    { "name": "Used Vehicles",      "sub": "Imports and paperwork" },
+      "efectos":      { "name": "Personal Effects",   "sub": "International moving" },
+      "maquinaria":   { "name": "Machinery",          "sub": "Industrial and agricultural" },
+      "textil":       { "name": "Textiles",           "sub": "Garments, fabrics, accessories" }
+    }
+  },
+  "why": {
+    "aria": "Why LOG ATM",
+    "eyebrow": "Why LOG ATM",
+    "title": "The operator that works with you",
+    "desc": "We are a logistics partner, not just another vendor. We know your business and design the operation tailored to you.",
+    "videoEyebrow": "Meet LOG ATM",
+    "videoTitle": "2 minutes to understand how we work",
+    "videoLogoTag": "Logistics tailored to you",
+    "items": {
+      "executive": { "title": "Dedicated executive",          "desc": "One person who knows your business and anticipates your needs.", "metric": "1:1",  "sub": "account" },
+      "network":   { "title": "Network in 70+ countries",     "desc": "Verified partnerships to guarantee delivery times.",              "metric": "70+",  "sub": "countries" },
+      "support":   { "title": "24/7 support",                 "desc": "Direct support with your executive whenever you need it.",       "metric": "24/7", "sub": "support" },
+      "customs":   { "title": "Chilean customs expertise",    "desc": "Operators certified by Chilean Customs (OEA).",                   "metric": "OEA",  "sub": "certified" }
+    }
+  },
+  "cta": {
+    "aria": "Quick quote",
+    "eyebrow": "Start today",
+    "title1": "Your next shipment,",
+    "title2": "with <em>full visibility</em>.",
+    "lead": "Get a quote in under 24 hours with a dedicated executive. No intermediaries, no surprises.",
+    "ctaQuote": "Get a quote",
+    "ctaWhatsapp": "WhatsApp",
+    "formTitle": "Quick quote · 30 sec",
+    "formMode": "Mode",
+    "formOrigin": "Origin",
+    "formDest": "Destination",
+    "formVolume": "Volume",
+    "formSubmit": "Get quote",
+    "formAlt": "Or write to us at",
+    "modeOptions": {
+      "fcl": "Ocean · FCL",
+      "lcl": "Ocean · LCL",
+      "air": "Air",
+      "courier": "Courier"
+    },
+    "volumeOptions": {
+      "small": "1 CBM or less",
+      "medium": "1 – 15 CBM",
+      "container20": "1 × 20' container",
+      "container40": "1 × 40' container"
+    }
+  },
+  "footer": {
+    "aboutHeading": "About",
+    "contactHeading": "Contact",
+    "linkAbout": "About",
+    "linkServices": "Services",
+    "linkIndustries": "Industries",
+    "linkWhy": "Why LOG ATM",
+    "linkQuote": "Get a quote",
+    "whatsappBtn": "Talk on WhatsApp",
+    "copyright": "© {year} {name} · All rights reserved",
+    "brandDesc": "Chilean logistics operator with 20+ years connecting companies with 70+ countries. Air, ocean and customs freight, with no intermediaries."
+  },
+  "pages": {
+    "home": {
+      "title": "Air and Ocean Logistics",
+      "description": "LOG ATM — Air freight, ocean freight, customs and warehousing solutions tailored for Chilean companies. Get a quote now."
+    },
+    "nosotros": {
+      "title": "About",
+      "description": "Meet LOG ATM: a Chilean international logistics company with 15+ years of experience in air, ocean and customs freight.",
+      "eyebrow": "About",
+      "h1": "People. Trust. Results.",
+      "lead": "We are a Chilean team with global connections and the commitment to treat you like our only client.",
+      "card1Title": "15+ years of experience",
+      "card1Desc": "Since 2009 connecting Chile with the world. We have grown alongside our clients, adapting to every challenge in international trade.",
+      "card2Title": "Global network",
+      "card2Desc": "Strategic alliances with agents in 80+ countries. Wherever there is a port or airport, we have a trusted partner.",
+      "card3Title": "Dedicated team",
+      "card3Desc": "Every client has an assigned executive who knows their business and anticipates their needs. We are not a faceless multinational.",
+      "card4Title": "Certifications",
+      "card4Desc": "Operators certified by Chile's National Customs Service. We meet the highest standards of quality and safety.",
+      "quoteText": "\"Our mission is simple: make international trade accessible for any Chilean company. No matter the size of your cargo, there is always a solution.\"",
+      "quoteRole": "CEO & Founder, LOG ATM"
+    },
+    "servicios":  { "title": "Services",   "description": "Complete catalog of LOG ATM logistics services." },
+    "industrias": { "title": "Industries", "description": "Sectors LOG ATM operates with deep expertise." },
+    "contacto":   { "title": "Contact",    "description": "Contact LOG ATM for your next logistics operation." },
+    "cotizar":    { "title": "Get a quote","description": "Request a custom quote for air, ocean or courier freight." },
+    "404": {
+      "title": "Page not found",
+      "description": "The page you are looking for does not exist. Go back to LOG ATM home.",
+      "code": "404",
+      "h1": "Page not found",
+      "lead": "Sorry, the page you are looking for does not exist or has been moved.",
+      "backHome": "Back to home"
+    }
+  },
+  "schema": {
+    "description": "Air and ocean logistics tailored to you. International freight, customs, warehousing and consulting from Vitacura, Santiago, Chile.",
+    "slogan": "Logistics tailored to you",
+    "breadcrumbHome": "Home"
+  }
+}

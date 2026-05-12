@@ -1,0 +1,256 @@
+{
+  "site": {
+    "name": "LOG ATM",
+    "tagline": "Logística a tu medida",
+    "taglineUpper": "LOGÍSTICA A TU MEDIDA"
+  },
+  "a11y": {
+    "skipLink": "Saltar al contenido principal",
+    "brandHome": "LOG ATM — Inicio",
+    "mainNav": "Navegación principal",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "menuDialog": "Menú de navegación",
+    "whatsappContact": "Contactar por WhatsApp",
+    "languageSelector": "Seleccionar idioma",
+    "languageCurrent": "Idioma actual: {lang}"
+  },
+  "nav": {
+    "services": "Servicios",
+    "industries": "Industrias",
+    "why": "Por qué LOG ATM",
+    "contact": "Contacto",
+    "quote": "Cotiza ahora",
+    "quoteArrow": "Cotiza ahora →"
+  },
+  "hero": {
+    "eyebrow": "Operador logístico chileno · 20+ años",
+    "title1": "Chile con el mundo,",
+    "title2": "a tu medida.",
+    "lead": "Carga aérea, marítima y aduana <em>sin intermediarios</em>: un ejecutivo dedicado que conoce tu operación de extremo a extremo.",
+    "ctaQuote": "Cotiza ahora",
+    "ctaWhatsapp": "WhatsApp",
+    "liveTitle": "Rutas frecuentes",
+    "livePill": "Cobertura",
+    "liveAria": "Rutas frecuentes"
+  },
+  "stats": {
+    "aria": "Indicadores LOG ATM",
+    "yearsLabel": "Años de operación",
+    "countriesLabel": "Países conectados",
+    "satisfactionLabel": "Satisfacción",
+    "dedicatedLabel": "Ejecutivo dedicado"
+  },
+  "services": {
+    "aria": "Servicios LOG ATM",
+    "eyebrow": "Qué hacemos",
+    "title": "Soluciones para cada necesidad",
+    "desc": "Desde el despacho urgente hasta la consultoría de supply chain completa. Cada cuenta tiene un ejecutivo dedicado que diseña la ruta a tu medida.",
+    "numPrefix": "Servicio",
+    "ctaMore": "Conocer más",
+    "items": {
+      "01": {
+        "title": "Carga Aérea",
+        "desc": "Express, courier internacional y chárter aéreo con tiempos garantizados.",
+        "tag": "Express · 48h"
+      },
+      "02": {
+        "title": "Carga Marítima",
+        "desc": "FCL y LCL a 80+ puertos. Consolidamos para reducir costos.",
+        "tag": "FCL · LCL"
+      },
+      "03": {
+        "title": "Aduana y Documentación",
+        "desc": "DUS, certificados de origen y clasificación arancelaria.",
+        "tag": "OEA Chile"
+      },
+      "04": {
+        "title": "Almacenaje",
+        "desc": "Bodegaje, fulfillment y última milla con inventario en tiempo real.",
+        "tag": "24/7"
+      },
+      "05": {
+        "title": "Consultoría Logística",
+        "desc": "Supply chain a medida que reduce costos y plazos.",
+        "tag": "A tu medida"
+      },
+      "06": {
+        "title": "Courier Internacional",
+        "desc": "Envíos exprés puerta a puerta con cobertura global.",
+        "tag": "D2D"
+      },
+      "07": {
+        "title": "Seguros de Carga",
+        "desc": "Cobertura integral durante todo el trayecto.",
+        "tag": "Global"
+      },
+      "08": {
+        "title": "Desconsolidado",
+        "desc": "Recepción, fraccionamiento y distribución desde puerto.",
+        "tag": "LCL"
+      },
+      "09": {
+        "title": "Casillero USA",
+        "desc": "Dirección propia en EE.UU. para compras online.",
+        "tag": "Miami"
+      },
+      "10": {
+        "title": "Compras Internacionales",
+        "desc": "Asesoría completa: proveedores, pagos y logística.",
+        "tag": "Asesoría"
+      },
+      "11": {
+        "title": "Ruta Medio Oriente",
+        "desc": "Conexión especializada con socios locales de confianza.",
+        "tag": "DXB · JED"
+      }
+    }
+  },
+  "industries": {
+    "aria": "Industrias atendidas",
+    "eyebrow": "Industrias",
+    "title": "Sectores que movemos",
+    "desc": "12 industrias con operaciones especializadas, regulaciones particulares y rutas optimizadas.",
+    "items": {
+      "mineria":      { "name": "Minería",            "sub": "Cobre, litio, maquinaria pesada" },
+      "retail":       { "name": "Retail",             "sub": "Moda, consumo, temporada" },
+      "agro":         { "name": "Agroindustria",      "sub": "Fruta fresca, vinos, granos" },
+      "farma":        { "name": "Farmacéutica",       "sub": "Cadena de frío, reactivos" },
+      "ecommerce":    { "name": "E-commerce",         "sub": "Cross-border, fulfillment" },
+      "construccion": { "name": "Construcción",       "sub": "Maquinaria, materiales" },
+      "chatarra":     { "name": "Chatarra Ferrosa",   "sub": "Reciclaje y exportación" },
+      "iluminarias":  { "name": "Iluminarias",        "sub": "LED e industrial" },
+      "vehiculos":    { "name": "Vehículos Usados",   "sub": "Importación y trámites" },
+      "efectos":      { "name": "Efectos Personales", "sub": "Mudanzas internacionales" },
+      "maquinaria":   { "name": "Maquinaria",         "sub": "Industrial y agrícola" },
+      "textil":       { "name": "Textil",             "sub": "Prendas, telas, accesorios" }
+    }
+  },
+  "why": {
+    "aria": "Por qué LOG ATM",
+    "eyebrow": "Por qué LOG ATM",
+    "title": "El operador que opera contigo",
+    "desc": "Somos un partner logístico, no un proveedor más. Conocemos tu negocio y diseñamos la operación a tu medida.",
+    "videoEyebrow": "Conoce LOG ATM",
+    "videoTitle": "2 minutos para entender cómo trabajamos",
+    "videoLogoTag": "Logística a tu medida",
+    "items": {
+      "executive": {
+        "title": "Ejecutivo dedicado",
+        "desc": "Una persona que conoce tu negocio y anticipa tus necesidades.",
+        "metric": "1:1",
+        "sub": "cuenta"
+      },
+      "network": {
+        "title": "Red en 70+ países",
+        "desc": "Alianzas verificadas para garantizar plazos de entrega.",
+        "metric": "70+",
+        "sub": "países"
+      },
+      "support": {
+        "title": "Atención 24/7",
+        "desc": "Soporte directo con tu ejecutivo cuando lo necesites.",
+        "metric": "24/7",
+        "sub": "soporte"
+      },
+      "customs": {
+        "title": "Expertise en aduana Chile",
+        "desc": "Operadores certificados por Aduanas (OEA).",
+        "metric": "OEA",
+        "sub": "certificación"
+      }
+    }
+  },
+  "cta": {
+    "aria": "Cotización rápida",
+    "eyebrow": "Empieza hoy",
+    "title1": "Tu próximo envío,",
+    "title2": "con <em>visibilidad total</em>.",
+    "lead": "Cotiza en menos de 24 horas con un ejecutivo dedicado. Sin intermediarios, sin sorpresas.",
+    "ctaQuote": "Cotiza ahora",
+    "ctaWhatsapp": "WhatsApp",
+    "formTitle": "Cotización rápida · 30 seg",
+    "formMode": "Modalidad",
+    "formOrigin": "Origen",
+    "formDest": "Destino",
+    "formVolume": "Volumen",
+    "formSubmit": "Obtener cotización",
+    "formAlt": "O escríbenos a",
+    "modeOptions": {
+      "fcl": "Marítimo · FCL",
+      "lcl": "Marítimo · LCL",
+      "air": "Aéreo",
+      "courier": "Courier"
+    },
+    "volumeOptions": {
+      "small": "1 CBM o menos",
+      "medium": "1 – 15 CBM",
+      "container20": "1 contenedor 20'",
+      "container40": "1 contenedor 40'"
+    }
+  },
+  "footer": {
+    "aboutHeading": "Nosotros",
+    "contactHeading": "Contacto",
+    "linkAbout": "Nosotros",
+    "linkServices": "Servicios",
+    "linkIndustries": "Industrias",
+    "linkWhy": "Por qué LOG ATM",
+    "linkQuote": "Cotizar",
+    "whatsappBtn": "Hablar por WhatsApp",
+    "copyright": "© {year} {name} · Todos los derechos reservados",
+    "brandDesc": "Operador logístico chileno con 20+ años conectando empresas con 70+ países. Carga aérea, marítima y aduana, sin intermediaros."
+  },
+  "pages": {
+    "home": {
+      "title": "Logística Aérea y Marítima",
+      "description": "LOG ATM — Soluciones de carga aérea, carga marítima, aduana y almacenaje personalizadas para empresas chilenas. Cotiza ahora."
+    },
+    "nosotros": {
+      "title": "Nosotros",
+      "description": "Conoce LOG ATM: empresa chilena de logística internacional con 15+ años de experiencia en carga aérea, marítima y aduanas.",
+      "eyebrow": "Nosotros",
+      "h1": "Personas. Confianza. Resultados.",
+      "lead": "Somos un equipo chileno con conexiones globales y el compromiso de tratarte como nuestro único cliente.",
+      "card1Title": "15+ años de experiencia",
+      "card1Desc": "Desde 2009 conectando Chile con el mundo. Hemos crecido junto a nuestros clientes, adaptándonos a cada desafío del comercio internacional.",
+      "card2Title": "Red global",
+      "card2Desc": "Alianzas estratégicas con agentes en 80+ países. Donde haya un puerto o aeropuerto, tenemos un socio confiable.",
+      "card3Title": "Equipo dedicado",
+      "card3Desc": "Cada cliente tiene un ejecutivo asignado que conoce su negocio y anticipa sus necesidades. No somos una multinacional anónima.",
+      "card4Title": "Certificaciones",
+      "card4Desc": "Operadores certificados por el Servicio Nacional de Aduanas. Cumplimos con los más altos estándares de calidad y seguridad.",
+      "quoteText": "\"Nuestra misión es simple: hacer que el comercio internacional sea accesible para cualquier empresa chilena. No importa el tamaño de tu carga, siempre hay una solución.\"",
+      "quoteRole": "CEO & Fundadora, LOG ATM"
+    },
+    "servicios": {
+      "title": "Servicios",
+      "description": "Catálogo completo de servicios logísticos de LOG ATM."
+    },
+    "industrias": {
+      "title": "Industrias",
+      "description": "Sectores que LOG ATM opera con experiencia."
+    },
+    "contacto": {
+      "title": "Contacto",
+      "description": "Contacta a LOG ATM para tu próxima operación logística."
+    },
+    "cotizar": {
+      "title": "Cotizar",
+      "description": "Solicita una cotización personalizada de carga aérea, marítima o courier."
+    },
+    "404": {
+      "title": "Página no encontrada",
+      "description": "La página que buscas no existe. Vuelve al inicio de LOG ATM.",
+      "code": "404",
+      "h1": "Página no encontrada",
+      "lead": "Lo sentimos, la página que buscas no existe o ha sido movida.",
+      "backHome": "Volver al inicio"
+    }
+  },
+  "schema": {
+    "description": "Logística aérea y marítima a tu medida. Carga internacional, aduana, almacenaje y consultoría desde Vitacura, Santiago, Chile.",
+    "slogan": "Logística a tu medida",
+    "breadcrumbHome": "Inicio"
+  }
+}

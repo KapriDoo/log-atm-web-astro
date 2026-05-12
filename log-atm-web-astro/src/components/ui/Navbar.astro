@@ -1,6 +1,31 @@
 ---
 import { NAV_LINKS, SITE } from '../../lib/constants';
-const currentPath = Astro.url.pathname;
+import LanguageSelector from './LanguageSelector.astro';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, type Locale } from '../../i18n/utils';
+
+interface Props {
+  lang?: Locale;
+  currentPath?: string;
+}
+
+const lang: Locale = Astro.props.lang ?? getLangFromUrl(Astro.url);
+const currentPath = Astro.props.currentPath ?? Astro.url.pathname;
+const t = useTranslations(lang);
+
+// Map de claves de traducción para los items de NAV_LINKS (definidos en constants.ts).
+const NAV_LABEL_KEYS: Record<string, string> = {
+  '#servicios':  'nav.services',
+  '#industrias': 'nav.industries',
+  '#why':        'nav.why',
+  '#contacto':   'nav.contact',
+};
+const labelFor = (href: string, fallback: string) => {
+  const key = NAV_LABEL_KEYS[href];
+  return key ? t(key) : fallback;
+};
+
+const homeHref = buildLocaleUrl(lang, '/');
+const quoteHref = buildLocaleUrl(lang, '/cotizar');
 
 function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV_LINKS[number], { children: any }> {
   return 'children' in link;
@@ -9,15 +34,15 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
 
 <header class="navbar" id="navbar" role="banner">
   <div class="navbar__inner">
-    <a href="/" class="navbar__brand" aria-label="LOG ATM — Inicio">
+    <a href={homeHref} class="navbar__brand" aria-label={t('a11y.brandHome')}>
       <img class="navbar__brand-logo" src="/logo.png" alt="" width="38" height="38" loading="eager" fetchpriority="high" />
       <span class="navbar__brand-text">
-        <span class="navbar__brand-name">LOG ATM</span>
-        <span class="navbar__brand-sub">LOGÍSTICA A TU MEDIDA</span>
+        <span class="navbar__brand-name">{t('site.name')}</span>
+        <span class="navbar__brand-sub">{t('site.taglineUpper')}</span>
       </span>
     </a>
 
-    <nav class="navbar__nav" aria-label="Navegación principal">
+    <nav class="navbar__nav" aria-label={t('a11y.mainNav')}>
       <ul class="navbar__links" role="list">
         {NAV_LINKS.map((link, idx) => (
           hasChildren(link) ? (
@@ -29,7 +54,7 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
                 aria-expanded="false"
                 aria-haspopup="true"
               >
-                {link.label}
+                {labelFor(link.href, link.label)}
                 <svg class="navbar__chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
                   <path d="m6 9 6 6 6-6"/>
                 </svg>
@@ -50,7 +75,7 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
                 href={link.href}
                 class:list={['navbar__link', { 'is-active': currentPath.startsWith(link.href) }]}
                 aria-current={currentPath.startsWith(link.href) ? 'page' : undefined}
-              >{link.label}</a>
+              >{labelFor(link.href, link.label)}</a>
             </li>
           )
         ))}
@@ -58,11 +83,12 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
     </nav>
 
     <div class="navbar__actions">
-      <a href="#cotizar"  class="navbar__cta">Cotiza ahora</a>
+      <LanguageSelector currentLang={lang} currentPath={currentPath} variant="desktop" />
+      <a href={quoteHref}  class="navbar__cta">{t('nav.quote')}</a>
     </div>
 
     <!-- Hamburger -->
-    <button class="navbar__burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="drawer">
+    <button class="navbar__burger" id="burger" aria-label={t('a11y.openMenu')} aria-expanded="false" aria-controls="drawer">
       <span class="burger__bar"></span>
       <span class="burger__bar"></span>
       <span class="burger__bar"></span>
@@ -73,16 +99,16 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
 <!-- Drawer overlay (mobile) -->
 <div class="drawer" id="drawer" aria-hidden="true">
   <div class="drawer__backdrop" id="drawer-backdrop"></div>
-  <nav class="drawer__panel" role="dialog" aria-modal="true" aria-label="Menú de navegación">
+  <nav class="drawer__panel" role="dialog" aria-modal="true" aria-label={t('a11y.menuDialog')}>
     <div class="drawer__header">
-      <a href="/" class="drawer__logo" aria-label="LOG ATM — Inicio">
+      <a href={homeHref} class="drawer__logo" aria-label={t('a11y.brandHome')}>
         <img src="/logo.png" alt="" width="38" height="38" />
         <span>
-          <span class="navbar__brand-name">LOG ATM</span>
-          <span class="navbar__brand-sub">LOGÍSTICA A TU MEDIDA</span>
+          <span class="navbar__brand-name">{t('site.name')}</span>
+          <span class="navbar__brand-sub">{t('site.taglineUpper')}</span>
         </span>
       </a>
-      <button class="drawer__close" id="drawer-close" aria-label="Cerrar menú">
+      <button class="drawer__close" id="drawer-close" aria-label={t('a11y.closeMenu')}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
           <path d="M18 6 6 18M6 6l12 12"/>
         </svg>
@@ -93,7 +119,7 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
       {NAV_LINKS.map((link) => (
         hasChildren(link) ? (
           <li class="drawer__group">
-            <span class="drawer__group-label">{link.label}</span>
+            <span class="drawer__group-label">{labelFor(link.href, link.label)}</span>
             <ul class="drawer__group-links" role="list">
               {link.children.map((child) => (
                 <li>
@@ -108,15 +134,17 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
               href={link.href}
               class:list={['drawer__link', { 'is-active': currentPath.startsWith(link.href) }]}
               aria-current={currentPath.startsWith(link.href) ? 'page' : undefined}
-            >{link.label}</a>
+            >{labelFor(link.href, link.label)}</a>
           </li>
         )
       ))}
     </ul>
 
     <div class="drawer__ctas">
-      <a href="#cotizar"  class="drawer__cta">Cotiza ahora →</a>
+      <a href={quoteHref}  class="drawer__cta">{t('nav.quoteArrow')}</a>
     </div>
+
+    <LanguageSelector currentLang={lang} currentPath={currentPath} variant="mobile" />
 
     <div class="drawer__contact">
       <a href={`tel:${SITE.phone}`}>{SITE.phone}</a>
@@ -229,7 +257,7 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
   .dropdown {
     position: absolute;
     top: calc(100% + 0.5rem);
-    left: 0;
+    inset-inline-start: 0;
     min-width: 240px;
     max-height: 70vh;
     overflow-y: auto;
@@ -319,7 +347,7 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
     border: none;
     cursor: pointer;
     padding: 0.5rem;
-    margin-left: auto;
+    margin-inline-start: auto;
     width: 44px;
     height: 44px;
   }
@@ -355,7 +383,7 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
 
   .drawer__panel {
     position: absolute;
-    top: 0; right: 0;
+    top: 0; inset-inline-end: 0;
     width: min(320px, 88vw);
     height: 100dvh;
     background: var(--color-surface);
@@ -366,6 +394,10 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
     gap: 1rem;
     animation: slideIn 250ms cubic-bezier(0.32, 0.72, 0, 1) forwards;
     overflow-y: auto;
+  }
+  [dir="rtl"] .drawer__panel {
+    box-shadow: 8px 0 48px color-mix(in srgb, var(--color-text-inverse-alt) 18%, transparent);
+    animation-name: slideInRTL;
   }
 
   .drawer__header {
@@ -440,7 +472,7 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
     display: flex;
     flex-direction: column;
     gap: 0.125rem;
-    padding-left: 0.5rem;
+    padding-inline-start: 0.5rem;
   }
 
   .drawer__group-links .drawer__link {
@@ -497,6 +529,7 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
   /* ─── Animations ────────────────────────────────────────── */
   @keyframes fadeIn  { from { opacity: 0 } to { opacity: 1 } }
   @keyframes slideIn { from { transform: translateX(100%) } to { transform: translateX(0) } }
+  @keyframes slideInRTL { from { transform: translateX(-100%) } to { transform: translateX(0) } }
 
   /* ─── Responsive ─────────────────────────────────────────── */
   @media (max-width: 1023px) {

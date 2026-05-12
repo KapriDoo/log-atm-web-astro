@@ -1,17 +1,28 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { STATS } from '../../lib/constants';
+import { useTranslations, getLangFromUrl, type Locale } from '../../i18n/utils';
+
+interface Props { lang?: Locale; }
+const lang: Locale = Astro.props.lang ?? getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const ITEMS = [
+  { value: '20+', label: 'stats.yearsLabel',        icon: 'lucide:award' },
+  { value: '70+', label: 'stats.countriesLabel',    icon: 'lucide:globe' },
+  { value: '98%', label: 'stats.satisfactionLabel', icon: 'lucide:sparkles' },
+  { value: '1:1', label: 'stats.dedicatedLabel',    icon: 'lucide:user-check' },
+] as const;
 ---
 
-<section class="stats" aria-label="Indicadores LOG ATM">
+<section class="stats" aria-label={t('stats.aria')}>
   <div class="container stats__grid">
-    {STATS.map((s) => (
+    {ITEMS.map((s) => (
       <div class="stats__item">
         <span class="stats__icon" aria-hidden="true">
           <Icon name={s.icon} width={22} height={22} />
         </span>
         <span class="stats__value">{s.value}</span>
-        <span class="stats__label">{s.label}</span>
+        <span class="stats__label">{t(s.label)}</span>
       </div>
     ))}
   </div>

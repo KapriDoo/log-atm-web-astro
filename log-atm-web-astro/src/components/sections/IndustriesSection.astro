@@ -1,33 +1,46 @@
 ---
 import { INDUSTRIES } from '../../lib/constants';
+import { useTranslations, getLangFromUrl, type Locale } from '../../i18n/utils';
+
+interface Props { lang?: Locale; }
+const lang: Locale = Astro.props.lang ?? getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+/** Mapeo posicional INDUSTRIES → slug del namespace `industries.items`. */
+const SLUGS = [
+  'mineria', 'retail', 'agro', 'farma', 'ecommerce', 'construccion',
+  'chatarra', 'iluminarias', 'vehiculos', 'efectos', 'maquinaria', 'textil',
+] as const;
 ---
 
-<section class="industries" id="industrias" aria-label="Industrias atendidas">
+<section class="industries" id="industrias" aria-label={t('industries.aria')}>
   <div class="container">
     <div class="industries__head">
       <div class="industries__head-left">
-        <span class="eyebrow">Industrias</span>
-        <h2 class="industries__title">Sectores que movemos</h2>
+        <span class="eyebrow">{t('industries.eyebrow')}</span>
+        <h2 class="industries__title">{t('industries.title')}</h2>
       </div>
-      <p class="industries__desc">
-        12 industrias con operaciones especializadas, regulaciones particulares
-        y rutas optimizadas.
-      </p>
+      <p class="industries__desc">{t('industries.desc')}</p>
     </div>
 
     <div class="industries__grid">
-      {INDUSTRIES.map((ind) => (
-        <a class="ind-card" href="#industrias" style={`--ind-color: ${ind.color}`}>
-          <div class="ind-card__media">
-            <img src={ind.img} alt={ind.name} loading="lazy" decoding="async" />
-            <div class="ind-card__overlay"></div>
-          </div>
-          <div class="ind-card__body">
-            <h3 class="ind-card__name">{ind.name}</h3>
-            <p class="ind-card__sub">{ind.sub}</p>
-          </div>
-        </a>
-      ))}
+      {INDUSTRIES.map((ind, i) => {
+        const slug = SLUGS[i];
+        const name = t(`industries.items.${slug}.name`);
+        const sub = t(`industries.items.${slug}.sub`);
+        return (
+          <a class="ind-card" href="#industrias" style={`--ind-color: ${ind.color}`}>
+            <div class="ind-card__media">
+              <img src={ind.img} alt={name} loading="lazy" decoding="async" />
+              <div class="ind-card__overlay"></div>
+            </div>
+            <div class="ind-card__body">
+              <h3 class="ind-card__name">{name}</h3>
+              <p class="ind-card__sub">{sub}</p>
+            </div>
+          </a>
+        );
+      })}
     </div>
   </div>
 </section>

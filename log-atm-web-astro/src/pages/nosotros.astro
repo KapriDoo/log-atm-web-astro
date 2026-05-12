@@ -4,24 +4,27 @@ import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
 import { Icon } from 'astro-icon/components';
 import { SITE } from '../lib/constants';
+import { useTranslations, getLangFromUrl, type Locale } from '../i18n/utils';
 
-const title = 'Nosotros';
-const description = 'Conoce LOG ATM: empresa chilena de logística internacional con 15+ años de experiencia en carga aérea, marítima y aduanas.';
+interface Props { lang?: Locale; }
+const lang: Locale = Astro.props.lang ?? getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const title = t('pages.nosotros.title');
+const description = t('pages.nosotros.description');
 const canonical = `${SITE.url}/nosotros`;
 ---
 
-<BaseLayout title={title} description={description} canonical={canonical}>
-  <Navbar />
+<BaseLayout title={title} description={description} canonical={canonical} lang={lang}>
+  <Navbar lang={lang} />
 
   <main id="main-content">
     <!-- Hero -->
     <section class="page-hero" aria-labelledby="page-title">
       <div class="container page-hero__inner">
-        <span class="eyebrow">Nosotros</span>
-        <h1 id="page-title" class="page-hero__title">Personas. Confianza. Resultados.</h1>
-        <p class="page-hero__lead">
-          Somos un equipo chileno con conexiones globales y el compromiso de tratarte como nuestro único cliente.
-        </p>
+        <span class="eyebrow">{t('pages.nosotros.eyebrow')}</span>
+        <h1 id="page-title" class="page-hero__title">{t('pages.nosotros.h1')}</h1>
+        <p class="page-hero__lead">{t('pages.nosotros.lead')}</p>
       </div>
     </section>
 
@@ -33,44 +36,32 @@ const canonical = `${SITE.url}/nosotros`;
             <div class="about-card__icon" aria-hidden="true">
               <Icon name="lucide:award" width="32" height="32" />
             </div>
-            <h2 class="about-card__title">15+ años de experiencia</h2>
-            <p class="about-card__desc">
-              Desde 2009 conectando Chile con el mundo. Hemos crecido junto a nuestros clientes,
-              adaptándonos a cada desafío del comercio internacional.
-            </p>
+            <h2 class="about-card__title">{t('pages.nosotros.card1Title')}</h2>
+            <p class="about-card__desc">{t('pages.nosotros.card1Desc')}</p>
           </div>
 
           <div class="about-card" data-scroll-animate>
             <div class="about-card__icon" aria-hidden="true">
               <Icon name="lucide:globe" width="32" height="32" />
             </div>
-            <h2 class="about-card__title">Red global</h2>
-            <p class="about-card__desc">
-              Alianzas estratégicas con agentes en 80+ países. Donde haya un puerto o aeropuerto,
-              tenemos un socio confiable.
-            </p>
+            <h2 class="about-card__title">{t('pages.nosotros.card2Title')}</h2>
+            <p class="about-card__desc">{t('pages.nosotros.card2Desc')}</p>
           </div>
 
           <div class="about-card" data-scroll-animate>
             <div class="about-card__icon" aria-hidden="true">
               <Icon name="lucide:users" width="32" height="32" />
             </div>
-            <h2 class="about-card__title">Equipo dedicado</h2>
-            <p class="about-card__desc">
-              Cada cliente tiene un ejecutivo asignado que conoce su negocio y anticipa sus necesidades.
-              No somos una multinacional anónima.
-            </p>
+            <h2 class="about-card__title">{t('pages.nosotros.card3Title')}</h2>
+            <p class="about-card__desc">{t('pages.nosotros.card3Desc')}</p>
           </div>
 
           <div class="about-card" data-scroll-animate>
             <div class="about-card__icon" aria-hidden="true">
               <Icon name="lucide:shield-check" width="32" height="32" />
             </div>
-            <h2 class="about-card__title">Certificaciones</h2>
-            <p class="about-card__desc">
-              Operadores certificados por el Servicio Nacional de Aduanas. Cumplimos con los más altos
-              estándares de calidad y seguridad.
-            </p>
+            <h2 class="about-card__title">{t('pages.nosotros.card4Title')}</h2>
+            <p class="about-card__desc">{t('pages.nosotros.card4Desc')}</p>
           </div>
         </div>
       </div>
@@ -80,20 +71,17 @@ const canonical = `${SITE.url}/nosotros`;
     <section class="quote-section" aria-labelledby="quote-title">
       <div class="container quote-section__inner">
         <blockquote class="quote" data-scroll-animate>
-          <p class="quote__text">
-            "Nuestra misión es simple: hacer que el comercio internacional sea accesible para cualquier empresa chilena.
-            No importa el tamaño de tu carga, siempre hay una solución."
-          </p>
+          <p class="quote__text">{t('pages.nosotros.quoteText')}</p>
           <footer class="quote__footer">
             <strong>María Paz Rivera Zapata</strong>
-            <span>CEO &amp; Fundadora, LOG ATM</span>
+            <span>{t('pages.nosotros.quoteRole')}</span>
           </footer>
         </blockquote>
       </div>
     </section>
   </main>
 
-  <Footer />
+  <Footer lang={lang} />
 </BaseLayout>
 
 <style>

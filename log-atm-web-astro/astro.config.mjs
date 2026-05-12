@@ -5,11 +5,58 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 
+/**
+ * Integration mínima que valida la paridad de claves i18n antes de cada build.
+ * No bloquea el dev server; sólo se ejecuta en `astro build`.
+ */
+function i18nValidator() {
+  return {
+    name: 'log-atm:i18n-validator',
+    hooks: {
+      'astro:build:start': async ({ logger }) => {
+        const { validate } = await import('./scripts/validate-i18n.ts');
+        const { ok, report } = validate();
+        logger.info(report.join('\n'));
+        if (!ok) {
+          throw new Error(
+            '[i18n] Paridad de claves rota entre traducciones. Ver detalles arriba.'
+          );
+        }
+      },
+    },
+  };
+}
+
 export default defineConfig({
   site: 'https://logatm.com',
+  i18n: {
+    defaultLocale: 'es',
+    locales: ['es', 'en', 'zh', 'hi', 'ar', 'pt'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+    // Nota: i18n.fallback se omite intencionalmente. Astro auto-genera rutas
+    // fallback (p.ej. `/en/servicios` desde `/servicios`) que colisionan con
+    // `src/pages/[lang]/*.astro` y dejan las páginas no-default sin HTML.
+    // El fallback de contenido se aplica a nivel de claves en `t()`
+    // (ver src/i18n/utils.ts), no a nivel de rutas.
+  },
   integrations: [
     react(),
-    sitemap(),
+    i18nValidator(),
+    sitemap({
+      i18n: {
+        defaultLocale: 'es',
+        locales: {
+          es: 'es-CL',
+          en: 'en-US',
+          zh: 'zh-CN',
+          hi: 'hi-IN',
+          ar: 'ar',
+          pt: 'pt-BR',
+        },
+      },
+    }),
     icon({
       include: {
         lucide: [
@@ -22,7 +69,7 @@ export default defineConfig({
           'users', 'tag', 'clock', 'shield-check', 'headphones', 'send',
           'package-check', 'container', 'handshake', 'user-check',
           'hammer', 'lightbulb', 'car', 'briefcase', 'settings', 'wrench',
-          'scissors', 'layout'
+          'scissors', 'layout', 'check', 'chevron-down', 'languages'
         ]
       }
     }),

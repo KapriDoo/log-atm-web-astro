@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/ui/Navbar.astro';
+import Footer from '../../components/ui/Footer.astro';
+import { Icon } from 'astro-icon/components';
+import { SITE } from '../../lib/constants';
+import { NON_DEFAULT_LOCALES } from '../../i18n/config';
+import { useTranslations, type Locale } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return NON_DEFAULT_LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const lang = (Astro.params.lang ?? 'es') as Locale;
+const t = useTranslations(lang);
+const currentPath = `/${lang}/nosotros`;
+const title = t('pages.nosotros.title');
+const description = t('pages.nosotros.description');
+const canonical = `${SITE.url}${currentPath}`;
+---
+
+<BaseLayout title={title} description={description} canonical={canonical} lang={lang} currentPath={currentPath}>
+  <Navbar lang={lang} currentPath={currentPath} />
+
+  <main id="main-content">
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="container page-hero__inner">
+        <span class="eyebrow">{t('pages.nosotros.eyebrow')}</span>
+        <h1 id="page-title" class="page-hero__title">{t('pages.nosotros.h1')}</h1>
+        <p class="page-hero__lead">{t('pages.nosotros.lead')}</p>
+      </div>
+    </section>
+
+    <section class="about-section" aria-labelledby="about-title">
+      <div class="container">
+        <div class="about-grid" data-scroll-batch>
+          {[1, 2, 3, 4].map((n) => (
+            <div class="about-card" data-scroll-animate>
+              <div class="about-card__icon" aria-hidden="true">
+                <Icon name={n === 1 ? 'lucide:award' : n === 2 ? 'lucide:globe' : n === 3 ? 'lucide:users' : 'lucide:shield-check'} width="32" height="32" />
+              </div>
+              <h2 class="about-card__title">{t(`pages.nosotros.card${n}Title`)}</h2>
+              <p class="about-card__desc">{t(`pages.nosotros.card${n}Desc`)}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-section" aria-labelledby="quote-title">
+      <div class="container quote-section__inner">
+        <blockquote class="quote" data-scroll-animate>
+          <p class="quote__text">{t('pages.nosotros.quoteText')}</p>
+          <footer class="quote__footer">
+            <strong>María Paz Rivera Zapata</strong>
+            <span>{t('pages.nosotros.quoteRole')}</span>
+          </footer>
+        </blockquote>
+      </div>
+    </section>
+  </main>
+
+  <Footer lang={lang} />
+</BaseLayout>
+
+<style>
+  .about-section { padding: clamp(4rem, 8vw, 6rem) 0; background: var(--color-bg); }
+  .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+  .about-card { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 2.5rem; text-align: center; }
+  .about-card__icon { width: 72px; height: 72px; border-radius: var(--radius-lg); background: var(--color-primary-50); color: var(--color-brand); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
+  .about-card__title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; margin: 0 0 0.75rem; color: var(--color-neutral-900); }
+  .about-card__desc { color: var(--color-text-muted); line-height: 1.65; margin: 0; }
+  .quote-section { padding: clamp(4rem, 8vw, 6rem) 0; background: var(--color-primary-50); }
+  .quote-section__inner { max-width: 800px; text-align: center; }
+  .quote { margin: 0; }
+  .quote__text { font-family: var(--font-display); font-size: clamp(1.35rem, 2.5vw, 1.75rem); font-weight: 600; line-height: 1.5; color: var(--color-primary-800); margin: 0 0 1.5rem; }
+  .quote__footer { display: flex; flex-direction: column; gap: 0.25rem; color: var(--color-text-muted); }
+  .quote__footer strong { color: var(--color-neutral-900); font-size: 1.125rem; }
+</style>

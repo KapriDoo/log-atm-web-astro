@@ -1,0 +1,217 @@
+---
+/**
+ * LOG ATM — Selector de idioma accesible.
+ * - Variante 'desktop': dropdown con `:focus-within` + click handler.
+ * - Variante 'mobile': lista plana dentro del drawer.
+ */
+import { LOCALES, LOCALE_LABELS, LOCALE_NAMES } from '../../i18n/config';
+import { buildLocaleUrl, stripLocaleFromPath, useTranslations, type Locale } from '../../i18n/utils';
+
+interface Props {
+  currentLang: Locale;
+  currentPath: string;
+  variant?: 'desktop' | 'mobile';
+}
+
+const { currentLang, currentPath, variant = 'desktop' } = Astro.props;
+const t = useTranslations(currentLang);
+const cleanPath = stripLocaleFromPath(currentPath);
+const currentLabel = LOCALE_LABELS[currentLang];
+const currentName = LOCALE_NAMES[currentLang];
+const isMobile = variant === 'mobile';
+---
+
+{isMobile ? (
+  <div class="lang-selector lang-selector--mobile" role="navigation" aria-label={t('a11y.languageSelector')}>
+    <span class="lang-selector__heading">{t('a11y.languageSelector')}</span>
+    <ul class="lang-selector__list" role="list">
+      {LOCALES.map((lang) => (
+        <li>
+          <a
+            href={buildLocaleUrl(lang, cleanPath)}
+            class:list={['lang-selector__option', { 'is-active': lang === currentLang }]}
+            hreflang={lang}
+            aria-current={lang === currentLang ? 'true' : undefined}
+            lang={lang}
+          >
+            <span class="lang-selector__code">{LOCALE_LABELS[lang]}</span>
+            <span class="lang-selector__name">{LOCALE_NAMES[lang]}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+) : (
+  <div class="lang-selector lang-selector--desktop" role="navigation" aria-label={t('a11y.languageSelector')}>
+    <button
+      type="button"
+      class="lang-selector__trigger"
+      aria-haspopup="listbox"
+      aria-expanded="false"
+      aria-label={t('a11y.languageCurrent', { lang: currentName })}
+      id="lang-trigger"
+    >
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+      </svg>
+      <span class="lang-selector__current">{currentLabel}</span>
+      <svg class="lang-selector__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="m6 9 6 6 6-6"/>
+      </svg>
+    </button>
+    <ul class="lang-selector__listbox" role="listbox" aria-labelledby="lang-trigger">
+      {LOCALES.map((lang) => (
+        <li role="option" aria-selected={lang === currentLang ? 'true' : 'false'}>
+          <a
+            href={buildLocaleUrl(lang, cleanPath)}
+            class:list={['lang-selector__option', { 'is-active': lang === currentLang }]}
+            hreflang={lang}
+            lang={lang}
+          >
+            <span class="lang-selector__code">{LOCALE_LABELS[lang]}</span>
+            <span class="lang-selector__name">{LOCALE_NAMES[lang]}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
+<style>
+  .lang-selector { position: relative; }
+
+  /* ─── Desktop dropdown ───────────────────────────────── */
+  .lang-selector--desktop .lang-selector__trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    background: transparent;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    color: var(--color-neutral-700);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: border-color 150ms, color 150ms, background 150ms;
+  }
+  .lang-selector--desktop .lang-selector__trigger:hover,
+  .lang-selector--desktop .lang-selector__trigger[aria-expanded="true"] {
+    border-color: var(--color-brand);
+    color: var(--color-brand);
+  }
+  .lang-selector__chevron { transition: transform 200ms; }
+  .lang-selector--desktop .lang-selector__trigger[aria-expanded="true"] .lang-selector__chevron {
+    transform: rotate(180deg);
+  }
+
+  .lang-selector--desktop .lang-selector__listbox {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    inset-inline-end: 0;
+    min-width: 180px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: 0 12px 40px color-mix(in srgb, var(--color-primary-900) 12%, transparent);
+    padding: 0.375rem;
+    margin: 0;
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 180ms, transform 180ms, visibility 180ms;
+    z-index: 110;
+  }
+  .lang-selector--desktop .lang-selector__trigger[aria-expanded="true"] + .lang-selector__listbox,
+  .lang-selector--desktop:focus-within .lang-selector__listbox {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* ─── Option common ──────────────────────────────────── */
+  .lang-selector__option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    color: var(--color-neutral-700);
+    border-radius: var(--radius-sm);
+    transition: background 150ms, color 150ms;
+    white-space: nowrap;
+  }
+  .lang-selector__option:hover,
+  .lang-selector__option:focus-visible {
+    background: var(--color-primary-50);
+    color: var(--color-brand);
+    outline: none;
+  }
+  .lang-selector__option.is-active {
+    background: var(--color-primary-50);
+    color: var(--color-brand);
+    font-weight: 600;
+  }
+  .lang-selector__code {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    min-width: 2ch;
+  }
+  .lang-selector__option.is-active .lang-selector__code { color: var(--color-brand); }
+  .lang-selector__name { flex: 1; }
+
+  /* ─── Mobile list (en drawer) ────────────────────────── */
+  .lang-selector--mobile { margin-top: 0.5rem; padding-top: 0.75rem; border-top: 1px solid var(--color-border); }
+  .lang-selector__heading {
+    display: block;
+    padding: 0.5rem 1rem 0.375rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-neutral-500);
+  }
+  .lang-selector--mobile .lang-selector__list {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.25rem;
+  }
+  .lang-selector--mobile .lang-selector__option {
+    padding: 0.625rem 0.875rem;
+  }
+</style>
+
+<script>
+  // Dropdown toggle accesible para variante desktop.
+  document.querySelectorAll<HTMLButtonElement>('.lang-selector--desktop .lang-selector__trigger').forEach((trigger) => {
+    const root = trigger.closest('.lang-selector') as HTMLElement | null;
+    if (!root) return;
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+      trigger.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!root.contains(e.target as Node)) {
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && trigger.getAttribute('aria-expanded') === 'true') {
+        trigger.setAttribute('aria-expanded', 'false');
+        trigger.focus();
+      }
+    });
+  });
+</script>

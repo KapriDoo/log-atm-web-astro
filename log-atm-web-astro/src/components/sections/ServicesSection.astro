@@ -1,43 +1,56 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { SERVICES } from '../../lib/constants';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, type Locale } from '../../i18n/utils';
+
+interface Props { lang?: Locale; }
+const lang: Locale = Astro.props.lang ?? getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+/** Re-prefijar URLs internas con el locale activo (excluye anclas y externos). */
+function localized(href: string): string {
+  if (!href || href.startsWith('#') || /^https?:/i.test(href)) return href;
+  return buildLocaleUrl(lang, href);
+}
 ---
 
-<section class="services" id="servicios" aria-label="Servicios LOG ATM">
+<section class="services" id="servicios" aria-label={t('services.aria')}>
   <div class="container">
     <div class="services__head">
       <div class="services__head-left">
-        <span class="eyebrow">Qué hacemos</span>
-        <h2 class="services__title">Soluciones para cada necesidad</h2>
+        <span class="eyebrow">{t('services.eyebrow')}</span>
+        <h2 class="services__title">{t('services.title')}</h2>
       </div>
-      <p class="services__desc">
-        Desde el despacho urgente hasta la consultoría de supply chain completa.
-        Cada cuenta tiene un ejecutivo dedicado que diseña la ruta a tu medida.
-      </p>
+      <p class="services__desc">{t('services.desc')}</p>
     </div>
 
     <div class="services__grid">
-      {SERVICES.map((s) => (
-        <a class:list={[`svc-card`, `svc-card--${s.size}`]} href={s.href}>
-          <div class="svc-card__media">
-            <img src={s.img} alt={s.title} loading="lazy" decoding="async" />
-            <div class="svc-card__overlay"></div>
-          </div>
-          <span class:list={['svc-card__tag', { 'svc-card__tag--cta': s.isCta }]}>{s.tag}</span>
-          <span class="svc-card__icon-pill" aria-hidden="true">
-            <Icon name={s.icon} width={18} height={18} />
-          </span>
-          <div class="svc-card__body">
-            <span class="svc-card__num">{s.n} · Servicio</span>
-            <h3 class="svc-card__title">{s.title}</h3>
-            <p class="svc-card__desc">{s.desc}</p>
-            <span class="svc-card__cta">
-              Conocer más
-              <Icon name="lucide:arrow-right" width={14} height={14} aria-hidden="true" />
+      {SERVICES.map((s) => {
+        const title = t(`services.items.${s.n}.title`);
+        const desc = t(`services.items.${s.n}.desc`);
+        const tag = t(`services.items.${s.n}.tag`);
+        return (
+          <a class:list={[`svc-card`, `svc-card--${s.size}`]} href={localized(s.href)}>
+            <div class="svc-card__media">
+              <img src={s.img} alt={title} loading="lazy" decoding="async" />
+              <div class="svc-card__overlay"></div>
+            </div>
+            <span class:list={['svc-card__tag', { 'svc-card__tag--cta': s.isCta }]}>{tag}</span>
+            <span class="svc-card__icon-pill" aria-hidden="true">
+              <Icon name={s.icon} width={18} height={18} />
             </span>
-          </div>
-        </a>
-      ))}
+            <div class="svc-card__body">
+              <span class="svc-card__num">{s.n} · {t('services.numPrefix')}</span>
+              <h3 class="svc-card__title">{title}</h3>
+              <p class="svc-card__desc">{desc}</p>
+              <span class="svc-card__cta">
+                {t('services.ctaMore')}
+                <Icon name="lucide:arrow-right" width={14} height={14} aria-hidden="true" />
+              </span>
+            </div>
+          </a>
+        );
+      })}
     </div>
   </div>
 </section>

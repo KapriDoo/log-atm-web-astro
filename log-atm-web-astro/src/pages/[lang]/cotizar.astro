@@ -1,0 +1,47 @@
+---
+/**
+ * Versión localizada de /cotizar. Reutiliza el CTASection — su formulario
+ * ya está traducido — y un hero simple con copia traducida.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/ui/Navbar.astro';
+import Footer from '../../components/ui/Footer.astro';
+import CTASection from '../../components/sections/CTASection.astro';
+import '../../styles/sections.css';
+import { SITE } from '../../lib/constants';
+import { NON_DEFAULT_LOCALES } from '../../i18n/config';
+import { useTranslations, type Locale } from '../../i18n/utils';
+
+export function getStaticPaths() {
+  return NON_DEFAULT_LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const lang = (Astro.params.lang ?? 'es') as Locale;
+const t = useTranslations(lang);
+const currentPath = `/${lang}/cotizar`;
+const canonical = `${SITE.url}${currentPath}`;
+---
+
+<BaseLayout
+  title={t('pages.cotizar.title')}
+  description={t('pages.cotizar.description')}
+  canonical={canonical}
+  lang={lang}
+  currentPath={currentPath}
+>
+  <Navbar lang={lang} currentPath={currentPath} />
+
+  <main id="main-content">
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="container page-hero__inner">
+        <span class="eyebrow">{t('cta.eyebrow')}</span>
+        <h1 id="page-title" class="page-hero__title">{t('pages.cotizar.title')}</h1>
+        <p class="page-hero__lead">{t('pages.cotizar.description')}</p>
+      </div>
+    </section>
+
+    <CTASection lang={lang} />
+  </main>
+
+  <Footer lang={lang} />
+</BaseLayout>
