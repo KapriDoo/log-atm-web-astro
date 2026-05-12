@@ -123,6 +123,16 @@
     --radius-2xl:   28px;  /* badges flotantes */
     --radius-circle:50%;   /* círculos perfectos */
     --radius-pill:  9999px;/* botones CTA, badges */
+
+    /* ─── Tipografía ─────────────────────────────────────── */
+    --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
+    --font-body:    var(--font-sans);
+    --font-display: 'Outfit', 'Inter', system-ui, sans-serif;
+    --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    /* ─── Layout ─────────────────────────────────────────── */
+    --container-max: 1280px;
+    --section-pad:   clamp(4rem, 8vw, 7rem);
   }
 }
 
@@ -230,4 +240,9 @@
   --radius-2xl:   28px;
   --radius-circle:50%;
   --radius-pill:  9999px;
+
+  /* Tipografía (Tailwind v4 utility classes: font-sans, font-display, font-mono) */
+  --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Outfit', 'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 }

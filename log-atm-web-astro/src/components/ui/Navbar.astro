@@ -9,8 +9,12 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
 
 <header class="navbar" id="navbar" role="banner">
   <div class="navbar__inner">
-    <a href="/" class="navbar__logo" aria-label="LOG ATM — Inicio">
-      <img src="/logo.svg" alt="LOG ATM" width="110" height="52" loading="eager" fetchpriority="high" />
+    <a href="/" class="navbar__brand" aria-label="LOG ATM — Inicio">
+      <img class="navbar__brand-logo" src="/logo.png" alt="" width="38" height="38" loading="eager" fetchpriority="high" />
+      <span class="navbar__brand-text">
+        <span class="navbar__brand-name">LOG ATM</span>
+        <span class="navbar__brand-sub">LOGÍSTICA A TU MEDIDA</span>
+      </span>
     </a>
 
     <nav class="navbar__nav" aria-label="Navegación principal">
@@ -71,8 +75,12 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
   <div class="drawer__backdrop" id="drawer-backdrop"></div>
   <nav class="drawer__panel" role="dialog" aria-modal="true" aria-label="Menú de navegación">
     <div class="drawer__header">
-      <a href="/" class="drawer__logo">
-        <img src="/logo.svg" alt="LOG ATM" width="100" height="48" />
+      <a href="/" class="drawer__logo" aria-label="LOG ATM — Inicio">
+        <img src="/logo.png" alt="" width="38" height="38" />
+        <span>
+          <span class="navbar__brand-name">LOG ATM</span>
+          <span class="navbar__brand-sub">LOGÍSTICA A TU MEDIDA</span>
+        </span>
       </a>
       <button class="drawer__close" id="drawer-close" aria-label="Cerrar menú">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
@@ -143,7 +151,38 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
     gap: 2rem;
   }
 
-  .navbar__logo img { display: block; height: 44px; width: auto; }
+  .navbar__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    flex-shrink: 0;
+  }
+  .navbar__brand-logo {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+  }
+  .navbar__brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.0625rem;
+    line-height: 1;
+  }
+  .navbar__brand-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    color: var(--color-text);
+    letter-spacing: 0.01em;
+  }
+  .navbar__brand-sub {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
 
   .navbar__nav { flex: 1; }
   .navbar__links {
@@ -257,17 +296,17 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
     font-size: 0.875rem;
     font-weight: 700;
     color: var(--color-text-inverse);
-    background: var(--color-cta);
+    background: var(--color-brand);
     padding: 0.5rem 1.25rem;
     border-radius: var(--radius-pill);
-    box-shadow: 0 2px 12px color-mix(in srgb, var(--color-accent-500) 30%, transparent);
+    box-shadow: 0 2px 12px color-mix(in srgb, var(--color-brand) 28%, transparent);
     transition: background 150ms, transform 100ms, box-shadow 150ms;
     white-space: nowrap;
   }
   .navbar__cta:hover {
-    background: var(--color-accent-600);
+    background: var(--color-primary-700);
     transform: translateY(-1px);
-    box-shadow: 0 4px 18px color-mix(in srgb, var(--color-accent-500) 40%, transparent);
+    box-shadow: 0 4px 18px color-mix(in srgb, var(--color-brand) 40%, transparent);
   }
 
   /* Hamburger */
@@ -337,7 +376,13 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
     border-bottom: 1px solid var(--color-border);
   }
 
-  .drawer__logo img { height: 40px; width: auto; }
+  .drawer__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+  }
+  .drawer__logo img { width: 38px; height: 38px; object-fit: contain; }
+  .drawer__logo > span { display: flex; flex-direction: column; gap: 0.125rem; line-height: 1; }
 
   .drawer__close {
     background: none;
@@ -427,14 +472,14 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
     text-align: center;
     padding: 0.875rem;
     border-radius: var(--radius-pill);
-    background: var(--color-cta);
+    background: var(--color-brand);
     font-weight: 700;
     font-size: 0.9375rem;
     color: var(--color-text-inverse);
-    box-shadow: 0 3px 14px color-mix(in srgb, var(--color-accent-500) 35%, transparent);
+    box-shadow: 0 3px 14px color-mix(in srgb, var(--color-brand) 32%, transparent);
     transition: background 150ms;
   }
-  .drawer__cta:hover { background: var(--color-accent-600); }
+  .drawer__cta:hover { background: var(--color-primary-700); }
 
   .drawer__contact {
     display: flex;
@@ -459,7 +504,7 @@ function hasChildren(link: typeof NAV_LINKS[number]): link is Extract<typeof NAV
     .navbar__burger { display: flex; }
   }
   @media (max-width: 479px) {
-    .navbar__logo img { height: 38px; }
+    .navbar__brand-text { display: none; }
     .navbar__inner { height: 60px; padding-inline: 1rem; }
   }
 </style>

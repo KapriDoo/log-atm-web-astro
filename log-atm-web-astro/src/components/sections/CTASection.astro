@@ -1,63 +1,95 @@
 ---
+import { Icon } from 'astro-icon/components';
 import { SITE } from '../../lib/constants';
 ---
 
-<section class="cta-section" aria-labelledby="cta-heading">
-  <div class="cta-section__bg" aria-hidden="true">
-    <div class="cta-section__blob cta-section__blob--1"></div>
-    <div class="cta-section__blob cta-section__blob--2"></div>
-  </div>
-  <div class="container cta-section__inner">
-    <div class="cta-section__text">
-      <h2 id="cta-heading" class="cta-section__title" data-scroll-animate>¿Listo para mover tu carga?</h2>
-      <p class="cta-section__desc" data-scroll-animate data-scroll-delay="0.1">
-        Cotiza en 2 minutos · Sin compromisos · Respuesta en menos de 24 h
+<section class="cta-final" id="contacto" aria-label="Cotización rápida">
+  <div class="container cta-final__inner">
+    <div class="cta-final__copy">
+      <span class="eyebrow eyebrow--light">Empieza hoy</span>
+      <h2 class="cta-final__title">
+        Tu próximo envío,<br />
+        con <em>visibilidad total</em>.
+      </h2>
+      <p class="cta-final__lead">
+        Cotiza en menos de 24 horas con un ejecutivo dedicado.
+        Sin intermediarios, sin sorpresas.
       </p>
+      <div class="cta-final__ctas">
+        <a class="btn-cta" href="/cotizar">
+          Cotiza ahora
+          <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
+        </a>
+        <a class="btn-ghost-light" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
+          <Icon name="lucide:message-circle" width={16} height={16} aria-hidden="true" />
+          WhatsApp
+        </a>
+      </div>
     </div>
-    <div class="cta-section__actions" data-scroll-animate data-scroll-delay="0.2">
-      <a href="/cotizar" class="cta-section__btn-primary">
-        Cotiza ahora
-      </a>
-      <a href={SITE.whatsappUrl} class="cta-section__btn-wa" target="_blank" rel="noopener noreferrer">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/>
-          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.564 4.139 1.543 5.876L0 24l6.324-1.51A11.928 11.928 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-4.997-1.373l-.357-.213-3.753.897.947-3.653-.232-.374A9.773 9.773 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
-        </svg>
-        Escribir por WhatsApp
-      </a>
-    </div>
+
+    <form class="cta-final__form" id="cta-form" novalidate>
+      <p class="cta-final__form-title">Cotización rápida · 30 seg</p>
+
+      <div class="cta-final__row">
+        <div class="cta-final__field">
+          <label class="cta-final__label" for="cta-mode">Modalidad</label>
+          <select class="cta-final__select" id="cta-mode" name="mode">
+            <option>Marítimo · FCL</option>
+            <option>Marítimo · LCL</option>
+            <option>Aéreo</option>
+            <option>Courier</option>
+          </select>
+        </div>
+        <div class="cta-final__field">
+          <label class="cta-final__label" for="cta-origin">Origen</label>
+          <select class="cta-final__select" id="cta-origin" name="origin">
+            <option>Shanghai, CN</option>
+            <option>Miami, US</option>
+            <option>Rotterdam, NL</option>
+            <option>Dubai, AE</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="cta-final__row">
+        <div class="cta-final__field">
+          <label class="cta-final__label" for="cta-dest">Destino</label>
+          <select class="cta-final__select" id="cta-dest" name="dest">
+            <option>Santiago, CL</option>
+            <option>San Antonio, CL</option>
+            <option>Iquique, CL</option>
+          </select>
+        </div>
+        <div class="cta-final__field">
+          <label class="cta-final__label" for="cta-vol">Volumen</label>
+          <select class="cta-final__select" id="cta-vol" name="volume">
+            <option>1 CBM o menos</option>
+            <option>1 – 15 CBM</option>
+            <option>1 contenedor 20'</option>
+            <option>1 contenedor 40'</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="cta-final__btn" type="submit">
+        Obtener cotización
+        <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
+      </button>
+
+      <p class="cta-final__alt">
+        O escríbenos a <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+      </p>
+    </form>
   </div>
 </section>
 
 <script>
-  import { gsap } from 'gsap';
-  import { prefersReducedMotion } from '../../scripts/scroll-animations';
-
-  if (!prefersReducedMotion) {
-    const blob1 = document.querySelector('.cta-section__blob--1');
-    const blob2 = document.querySelector('.cta-section__blob--2');
-
-    if (blob1) {
-      gsap.to(blob1, {
-        y: -20,
-        scale: 1.08,
-        duration: 4,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
-    }
-
-    if (blob2) {
-      gsap.to(blob2, {
-        y: 15,
-        scale: 1.05,
-        duration: 5,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-        delay: 1,
-      });
-    }
-  }
+  const form = document.getElementById('cta-form') as HTMLFormElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const params = new URLSearchParams();
+    data.forEach((v, k) => params.set(k, String(v)));
+    window.location.href = `/cotizar?${params.toString()}`;
+  });
 </script>
