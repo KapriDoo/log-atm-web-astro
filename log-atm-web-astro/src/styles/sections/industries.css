@@ -1,105 +1,127 @@
-/* ─── Industries Section ────────────────────────────────── */
+/* ─── Industries (handoff paridad 1:1) ──────────────────── */
 .industries {
-  padding-block: var(--section-pad);
-  background: var(--color-surface);
+  background: var(--color-bg);
 }
-
-.industries__head {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: end;
-  margin-bottom: 3rem;
-}
-
-.industries__title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  color: var(--color-text);
-  margin: 0;
-}
-
-.industries__desc {
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  color: var(--color-text-muted);
-  margin: 0;
-}
-
-/* ─── Photo grid ────────────────────────────────────────── */
 .industries__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  grid-auto-rows: minmax(180px, auto);
+  grid-auto-flow: dense;
+  gap: 0.75rem;
+}
+@media (max-width: 980px) { .industries__grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 640px) { .industries__grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* Bento: 4 cards "tall" (Minería, Farmacéutica, Construcción, Chatarra Ferrosa)
+   ocupan 2 filas verticales — el resto, 1 fila. Patrón paridad target.            */
+.industries__grid > .ind-card--photo:nth-child(1),
+.industries__grid > .ind-card--photo:nth-child(4),
+.industries__grid > .ind-card--photo:nth-child(6),
+.industries__grid > .ind-card--photo:nth-child(7) {
+  grid-row: span 2;
 }
 
 .ind-card {
-  position: relative;
-  aspect-ratio: 3 / 4;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
+  padding: 1.125rem 1.125rem 1.25rem;
+  display: grid;
+  gap: 0.625rem;
+  transition: transform 180ms, border-color 180ms, box-shadow 180ms;
+  cursor: pointer;
+  position: relative;
   overflow: hidden;
-  isolation: isolate;
-  color: var(--color-text-inverse);
-  transition: transform 250ms ease, box-shadow 250ms ease;
 }
 .ind-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 16px 40px color-mix(in srgb, var(--color-primary-950) 22%, transparent);
+  border-color: var(--ind-color, var(--color-primary-200));
+  box-shadow: var(--shadow-md);
 }
 
-.ind-card__media { position: absolute; inset: 0; z-index: -1; }
+/* Photo variant — imagen full bleed + gradient overlay.
+   El aspect-ratio se quita aquí porque el bento controla altura via grid-row span. */
+.ind-card--photo {
+  padding: 0;
+  aspect-ratio: auto;
+  min-height: 0;
+  border-color: transparent;
+  isolation: isolate;
+}
+.ind-card__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
 .ind-card__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 400ms ease;
 }
-.ind-card:hover .ind-card__media img { transform: scale(1.02); }
-
-.ind-card__overlay {
+.ind-card--photo:hover .ind-card__media img { transform: scale(1.05); }
+.ind-card__media::after {
+  content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg,
-    color-mix(in srgb, var(--color-primary-950) 0%, transparent) 40%,
-    color-mix(in srgb, var(--color-primary-950) 85%, transparent) 100%);
+  background:
+    linear-gradient(180deg, rgba(10,22,36,0.10) 0%, rgba(10,22,36,0.30) 45%, rgba(10,22,36,0.92) 100%);
+}
+
+/* Top row dentro de la card photo: índice (izq) + icono (der) */
+.ind-card--photo .ind-card__top {
+  position: relative;
+  z-index: 2;
+  padding: 1rem 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.ind-card--photo .ind-card__index {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+}
+.ind-card--photo .ind-card__icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,0.92);
+  color: var(--ind-color, var(--color-brand));
+  border-radius: 50%;
+  backdrop-filter: blur(8px);
 }
 
 .ind-card__body {
-  position: absolute;
-  inset: auto 1.25rem 1.25rem 1.25rem;
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  padding: 1rem 1.125rem 1.125rem;
+  color: var(--color-text-inverse);
+  display: grid;
   gap: 0.25rem;
 }
+.ind-card--photo .ind-card__name { color: var(--color-text-inverse); }
+.ind-card--photo .ind-card__sub  { color: rgba(255,255,255,0.85); }
 
 .ind-card__name {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.125rem;
-  line-height: 1.2;
-  color: var(--color-text-inverse);
+  font-size: 1.0625rem;
   margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
 }
-
 .ind-card__sub {
   font-size: 0.8125rem;
-  line-height: 1.4;
-  color: color-mix(in srgb, var(--color-text-inverse) 78%, transparent);
+  color: var(--color-text-muted);
   margin: 0;
-}
-
-@media (max-width: 1023px) {
-  .industries__grid { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 640px) {
-  .industries__head { grid-template-columns: 1fr; gap: 1.5rem; }
-  .industries__grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
-}
-@media (max-width: 360px) {
-  .industries__grid { grid-template-columns: 1fr; }
+  line-height: 1.4;
 }
 
 @media (prefers-reduced-motion: reduce) {

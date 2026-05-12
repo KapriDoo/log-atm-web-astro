@@ -14,13 +14,13 @@ export default defineConfig({
       include: {
         lucide: [
           'ship', 'plane', 'award', 'globe', 'package', 'sparkles',
-          'arrow-right', 'arrow-up-right', 'truck', 'file-check', 'warehouse', 'route',
+          'arrow-right', 'arrow-up-right', 'truck', 'file-check', 'file', 'warehouse', 'route',
           'trending-up', 'landmark', 'shopping-bag', 'wheat', 'pill',
           'package-open', 'hard-hat', 'plane-takeoff', 'compass',
-          'user-round-check', 'globe-2', 'map-pin', 'shield-check',
-          'pickaxe', 'shopping-cart', 'phone', 'mail', 'map-pin', 'message-circle',
-          'users', 'tag', 'clock', 'shield-check', 'headphones', 'send',
-          'package-check', 'container', 'handshake', 'user-check',
+          'user', 'user-round-check', 'user-check', 'globe-2', 'map-pin', 'shield', 'shield-check',
+          'pickaxe', 'shopping-cart', 'phone', 'mail', 'mailbox', 'message-circle',
+          'users', 'tag', 'clock', 'headphones', 'send',
+          'package-check', 'container', 'handshake',
           'hammer', 'lightbulb', 'car', 'briefcase', 'settings', 'wrench',
           'scissors', 'layout'
         ]

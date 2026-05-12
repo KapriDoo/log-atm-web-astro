@@ -4,200 +4,148 @@ import { CURRENT_YEAR, SITE } from '../../lib/constants';
 ---
 
 <footer class="footer" role="contentinfo">
-  <div class="container footer__grid">
+  <div class="container footer__inner">
+    <div class="footer__top">
+      <div class="footer__brand-block">
+        <a href="/" class="nav__brand nav__brand--footer">
+          <img class="nav__brand-logo nav__brand-logo--light" src="/logo.png" alt="" width="38" height="38" />
+          <span>
+            <span class="nav__brand-name">LOG ATM</span>
+            <span class="nav__brand-sub nav__brand-sub--footer">Logística a tu medida</span>
+          </span>
+        </a>
+        <p class="footer__tagline">Conectamos Chile con el mundo, a tu medida.</p>
+        <p class="footer__desc">
+          Operador logístico chileno con 20+ años de experiencia en carga aérea,
+          marítima, aduana y supply chain.
+        </p>
+      </div>
 
-    <!-- Brand column -->
-    <div class="footer__brand">
-      <img class="footer__logo" src="/logo.png" alt="LOG ATM" width="48" height="48" loading="lazy" />
-      <p class="footer__brand-name">LOG ATM</p>
-      <p class="footer__brand-sub">LOGÍSTICA A TU MEDIDA</p>
-      <p class="footer__desc">
-        Operador logístico chileno con 20+ años conectando empresas
-        con 70+ países. Carga aérea, marítima y aduana, sin intermediarios.
-      </p>
+      <div>
+        <h4 class="footer__col-title">Nosotros</h4>
+        <ul class="footer__links" role="list">
+          <li><a href="/nosotros">Nosotros</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer__col-title">Contacto</h4>
+        <div class="footer__contact">
+          <a href={`tel:${SITE.phone}`}>
+            <Icon name="lucide:phone" width={14} height={14} aria-hidden="true" />&nbsp;{SITE.phoneDisplay}
+          </a>
+          <a href={`mailto:${SITE.email}`}>
+            <Icon name="lucide:mail" width={14} height={14} aria-hidden="true" />&nbsp;{SITE.email}
+          </a>
+          <a href="/contacto" class="footer__contact-address">
+            <Icon name="lucide:map-pin" width={14} height={14} aria-hidden="true" />
+            <span>{SITE.address}</span>
+          </a>
+        </div>
+      </div>
     </div>
 
-    <!-- Nosotros -->
-    <nav class="footer__col" aria-label="Empresa">
-      <h3 class="footer__heading">Nosotros</h3>
-      <ul class="footer__links" role="list">
-        <li><a href="/nosotros" class="footer__link">Nosotros</a></li>
-        <li><a href="#servicios" class="footer__link">Servicios</a></li>
-        <li><a href="#industrias" class="footer__link">Industrias</a></li>
-        <li><a href="#why" class="footer__link">Por qué LOG ATM</a></li>
-        <li><a href="/cotizar" class="footer__link">Cotizar</a></li>
-      </ul>
-    </nav>
-
-    <!-- Contacto -->
-    <address class="footer__col footer__contact">
-      <h3 class="footer__heading">Contacto</h3>
-      <a href={`tel:${SITE.phone}`} class="footer__contact-item">
-        <Icon name="lucide:phone" width={14} height={14} aria-hidden="true" />
-        {SITE.phoneDisplay}
-      </a>
-      <a href={`mailto:${SITE.email}`} class="footer__contact-item">
-        <Icon name="lucide:mail" width={14} height={14} aria-hidden="true" />
-        {SITE.email}
-      </a>
-      <span class="footer__contact-item">
-        <Icon name="lucide:map-pin" width={14} height={14} aria-hidden="true" />
-        <span>{SITE.address}</span>
-      </span>
-      <a
-        href={SITE.whatsappUrl}
-        class="footer__whatsapp"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Contactar por WhatsApp"
-      >
-        <Icon name="lucide:message-circle" width={16} height={16} aria-hidden="true" />
-        Hablar por WhatsApp
-      </a>
-    </address>
-
-  </div>
-
-  <div class="footer__bottom">
-    <div class="container">
-      <p class="footer__copyright">
-        &copy; {CURRENT_YEAR} {SITE.name} · Todos los derechos reservados
-      </p>
+    <div class="footer__bottom">
+      <span>© {CURRENT_YEAR} {SITE.name} · Todos los derechos reservados</span>
     </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    background-color: var(--color-primary-950);
-    color: var(--color-primary-200);
-    border-top: 1px solid color-mix(in srgb, var(--color-text-inverse) 8%, transparent);
-    padding-top: clamp(3rem, 6vw, 5rem);
+    background: var(--color-neutral-950);
+    color: var(--color-neutral-300);
   }
-
-  .footer__grid {
+  .footer__inner {
+    padding-block: clamp(3rem, 5vw, 4rem) 1.5rem;
+  }
+  .footer__top {
     display: grid;
-    grid-template-columns: 1.4fr 1fr 1.2fr;
-    gap: clamp(2rem, 4vw, 4rem);
-    padding-bottom: 3rem;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  @media (max-width: 880px) { .footer__top { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 540px) { .footer__top { grid-template-columns: 1fr; } }
+
+  .footer__brand-block { max-width: 32ch; }
+  .footer__brand-block .nav__brand,
+  .footer__brand-block .nav__brand-name {
+    color: var(--color-text-inverse);
+  }
+  .nav__brand-logo--light { filter: brightness(0) invert(1); }
+  .nav__brand-sub--footer {
+    color: var(--color-neutral-500);
   }
 
-  /* ─── Brand block ─────────────────────────────────────── */
-  .footer__brand { display: flex; flex-direction: column; align-items: flex-start; gap: 0.25rem; }
-  .footer__logo {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
-    margin-bottom: 0.75rem;
-  }
-  .footer__brand-name {
+  .footer__tagline {
     font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.0625rem;
     color: var(--color-text-inverse);
-    margin: 0;
-    letter-spacing: 0.01em;
-  }
-  .footer__brand-sub {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-accent-400);
-    margin: 0 0 1rem;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    margin: 1rem 0 0.5rem;
+    letter-spacing: -0.005em;
   }
   .footer__desc {
     font-size: 0.875rem;
-    line-height: 1.6;
-    color: var(--color-primary-300);
+    color: var(--color-neutral-400);
+    line-height: 1.55;
     margin: 0;
-    max-width: 36ch;
   }
-
-  /* ─── Heading + links ─────────────────────────────────── */
-  .footer__heading {
+  .footer__col-title {
     font-family: var(--font-mono);
     font-size: 0.6875rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--color-text-inverse);
-    margin: 0 0 1.25rem;
+    color: var(--color-neutral-500);
+    margin: 0 0 1rem;
     font-weight: 500;
   }
-
   .footer__links {
     list-style: none;
     padding: 0;
     margin: 0;
-    display: flex;
-    flex-direction: column;
+    display: grid;
     gap: 0.625rem;
   }
-
-  .footer__link {
-    font-size: 0.875rem;
-    color: var(--color-primary-300);
-    transition: color 150ms ease;
+  .footer__links a {
+    font-size: 0.9375rem;
+    color: var(--color-neutral-300);
+    transition: color 150ms;
   }
-  .footer__link:hover { color: var(--color-text-inverse); }
+  .footer__links a:hover { color: var(--color-text-inverse); }
 
-  /* ─── Contact col ─────────────────────────────────────── */
   .footer__contact {
-    font-style: normal;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+    display: grid;
+    gap: 0.625rem;
+    font-size: 0.9375rem;
   }
-  .footer__contact-item {
-    display: inline-flex;
-    align-items: flex-start;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    line-height: 1.5;
-    color: var(--color-primary-300);
-    transition: color 150ms ease;
-  }
-  .footer__contact-item:hover { color: var(--color-text-inverse); }
-  .footer__contact-item svg { flex-shrink: 0; margin-top: 0.25rem; color: var(--color-accent-400); }
-
-  .footer__whatsapp {
+  .footer__contact a {
+    color: var(--color-neutral-300);
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-    padding: 0.625rem 1rem;
-    background: var(--color-whatsapp);
-    color: var(--color-text-inverse);
+    gap: 6px;
+  }
+  .footer__contact a:hover { color: var(--color-text-inverse); }
+  .footer__contact-address {
+    align-items: start !important;
+  }
+  .footer__contact-address span {
     font-size: 0.875rem;
-    font-weight: 600;
-    border-radius: var(--radius-pill);
-    transition: background 150ms ease, transform 100ms ease;
-    align-self: flex-start;
-  }
-  .footer__whatsapp:hover {
-    background: var(--color-whatsapp-hover);
-    transform: translateY(-1px);
+    line-height: 1.5;
   }
 
-  /* ─── Bottom bar ──────────────────────────────────────── */
   .footer__bottom {
-    border-top: 1px solid color-mix(in srgb, var(--color-text-inverse) 8%, transparent);
-    padding-block: 1.25rem;
-  }
-  .footer__copyright {
-    font-size: 0.8125rem;
-    color: var(--color-primary-400);
-    text-align: center;
-    margin: 0;
-  }
-
-  /* ─── Responsive ──────────────────────────────────────── */
-  @media (max-width: 880px) {
-    .footer__grid { grid-template-columns: 1fr 1fr; }
-    .footer__brand { grid-column: 1 / -1; }
-  }
-  @media (max-width: 479px) {
-    .footer__grid { grid-template-columns: 1fr; gap: 2rem; }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-neutral-500);
+    letter-spacing: 0.04em;
   }
 </style>

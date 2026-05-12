@@ -3,17 +3,19 @@ import { Icon } from 'astro-icon/components';
 import { WHY_ITEMS } from '../../lib/constants';
 ---
 
-<section class="why" id="why" aria-label="Por qué LOG ATM">
+<section class="why section" id="why" aria-label="Por qué LOG ATM">
   <div class="container">
-    <div class="why__head">
-      <div class="why__head-left">
-        <span class="eyebrow">Por qué LOG ATM</span>
-        <h2 class="why__title">El operador que opera contigo</h2>
+    <div class="section-head">
+      <div class="section-head__top">
+        <div>
+          <span class="eyebrow">Por qué LOG ATM</span>
+          <h2 class="section-head__title">El operador que opera contigo</h2>
+        </div>
+        <p class="section-head__desc">
+          Somos un partner logístico, no un proveedor más. Conocemos tu negocio
+          y diseñamos la operación a tu medida.
+        </p>
       </div>
-      <p class="why__desc">
-        Somos un partner logístico, no un proveedor más. Conocemos tu negocio
-        y diseñamos la operación a tu medida.
-      </p>
     </div>
 
     <div class="why__grid">
@@ -27,11 +29,11 @@ import { WHY_ITEMS } from '../../lib/constants';
           playsinline
           preload="auto"
         >
-          <source src="/video/intro.mp4" type="video/mp4" />
+          <source src="/videos/log-atm-intro.mp4" type="video/mp4" />
         </video>
 
         <div class="why__video-logo" aria-hidden="true">
-          <img src="/logo.png" alt="" />
+          <img src="/logo.png" alt="LOG ATM" />
           <span class="why__video-logo-tag">Logística a tu medida</span>
         </div>
 
@@ -43,19 +45,18 @@ import { WHY_ITEMS } from '../../lib/constants';
 
       <div class="why__items">
         {WHY_ITEMS.map((w) => (
-          <article class="why-card">
-            <span class="why-card__icon" aria-hidden="true">
+          <div class="why-card">
+            <div class="why-card__icon" aria-hidden="true">
               <Icon name={w.icon} width={22} height={22} />
-            </span>
-            <div class="why-card__body">
+            </div>
+            <div>
               <h3 class="why-card__title">{w.title}</h3>
               <p class="why-card__desc">{w.desc}</p>
             </div>
             <div class="why-card__metric">
-              <span class="why-card__metric-value">{w.metric}</span>
-              <span class="why-card__metric-sub">{w.sub}</span>
+              {w.metric}<small>{w.sub}</small>
             </div>
-          </article>
+          </div>
         ))}
       </div>
     </div>
@@ -75,6 +76,7 @@ import { WHY_ITEMS } from '../../lib/constants';
     video.addEventListener('seeked', () => {
       if (video.currentTime < 0.2) logo.classList.remove('is-visible');
     });
-    video.play().catch(() => { /* autoplay blocked: noop */ });
+    // muted autoplay should be allowed; ignore failures (Safari iOS strict mode)
+    video.play().catch(() => { /* noop */ });
   }
 </script>

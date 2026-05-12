@@ -3,6 +3,23 @@
 /* Importar estilos del CTA Final (usado al pie de servicios/industrias/nosotros) */
 @import '../sections/cta.css';
 
+/* ─── Section modifiers (reutilizables) ─────────────────── */
+/* Reemplazan los inline style="background: ..." dispersos en sub-pages.   */
+.section--surface { background: var(--color-surface); }
+.section--alt     { background: var(--color-neutral-50); }
+.section--narrow > .container { max-width: 900px; }
+
+/* Variante centrada de section-head (FAQ y cierres editoriales) */
+.section-head--centered { text-align: center; }
+.section-head--centered .section-head__title { margin-inline: auto; }
+
+/* Override de eyebrow sobre fondos oscuros — process-strip + ind-directory */
+.process-strip .eyebrow { color: var(--color-accent-400); }
+.process-strip .eyebrow::before { background: var(--color-accent-400); }
+
+/* Alineación de la última columna del ind-services__head (era inline) */
+.ind-services__head > :last-child { text-align: right; }
+
 /* Industrias · directory editorial ─────────────────────── */
 .ind-directory-section {
   background: var(--color-primary-900);
@@ -478,7 +495,7 @@
 .process-strip {
   background: var(--color-neutral-900);
   color: #fff;
-  padding: clamp(4rem, 7vw, 6rem) 0;
+  padding-block: var(--section-pad);
 }
 .process-strip__head { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 3rem; flex-wrap: wrap; }
 .process-strip__title {
@@ -648,7 +665,7 @@
 /* ── Nosotros page ─────────────────────────────────────────── */
 .manifesto {
   background: var(--color-surface);
-  padding: clamp(4rem, 7vw, 6rem) 0;
+  padding-block: var(--section-pad);
 }
 .manifesto__grid {
   display: grid;
@@ -680,7 +697,7 @@
 /* Timeline */
 .timeline {
   background: var(--color-neutral-50);
-  padding: clamp(4rem, 7vw, 6rem) 0;
+  padding-block: var(--section-pad);
 }
 .timeline__track {
   position: relative;
@@ -1014,7 +1031,7 @@
 .office-card {
   border-radius: var(--radius-xl); overflow: hidden;
   border: 1px solid var(--color-border); background: var(--color-surface);
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 .office-card__map {
   aspect-ratio: 16/9;

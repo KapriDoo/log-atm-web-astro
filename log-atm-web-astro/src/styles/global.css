@@ -90,94 +90,64 @@
 
 /* ─── Componentes base ─────────────────────────────────────── */
 @layer components {
-  /* Botón primario — azul marca */
-  .btn-primary {
+  /* ─── Botones BEM (handoff paridad — .btn + modificadores) ──── */
+  /* Sistema único de botones del sitio. Sub-pages históricas              */
+  /* (carga-aerea, carga-maritima, cotizar) tienen sus propias clases      */
+  /* scoped (.btn-primary, .btn-cta, .btn-ghost, .btn-primary-lg) — son    */
+  /* internas a esos componentes y NO usan ni colisionan con este sistema. */
+  /* Usados en home redesign: hero, services, CTA, navbar.        */
+  .btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
-    padding: 0.75rem 1.75rem;
-    background-color: var(--color-brand);
-    color: var(--color-text-inverse);
     font-family: var(--font-display);
     font-weight: 600;
     font-size: 0.9375rem;
+    padding: 0.875rem 1.625rem;
     border-radius: var(--radius-pill);
-    border: 2px solid transparent;
-    transition: background-color 150ms ease, transform 100ms ease, box-shadow 150ms ease;
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    transition: transform 120ms ease, background 150ms ease, border-color 150ms ease, box-shadow 150ms ease, color 150ms ease;
+    white-space: nowrap;
   }
-  .btn-primary:hover {
-    background-color: var(--color-primary-700);
-    box-shadow: var(--shadow-md);
-    transform: translateY(-1px);
-  }
-  .btn-primary:active {
-    transform: translateY(0);
-  }
-
-  /* Botón CTA — azul marca */
-  .btn-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.75rem;
-    background-color: var(--color-brand);
+  .btn:hover { transform: translateY(-1px); }
+  .btn--cta {
+    background: var(--color-cta);
     color: var(--color-text-inverse);
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.9375rem;
-    border-radius: var(--radius-pill);
-    border: 2px solid transparent;
-    box-shadow: 0 4px 20px 0 color-mix(in srgb, var(--color-brand) 35%, transparent);
-    transition: background-color 150ms ease, transform 100ms ease, box-shadow 150ms ease;
+    box-shadow: var(--shadow-cta);
   }
-  .btn-cta:hover {
-    background-color: var(--color-primary-700);
-    box-shadow: 0 6px 24px 0 color-mix(in srgb, var(--color-brand) 45%, transparent);
-    transform: translateY(-1px);
+  .btn--cta:hover {
+    background: var(--color-accent-600);
+    box-shadow: 0 6px 28px rgb(62 185 120 / 0.45);
   }
-  .btn-cta:active {
-    transform: translateY(0);
+  .btn--brand {
+    background: var(--color-brand);
+    color: var(--color-text-inverse);
   }
-
-  /* Botón ghost sobre fondos oscuros (hero + CTA final) */
-  .btn-ghost-light {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
+  .btn--brand:hover { background: var(--color-brand-dark); }
+  .btn--ghost-light {
+    background: rgba(255,255,255,0.08);
+    color: var(--color-text-inverse);
+    border-color: rgba(255,255,255,0.22);
+    backdrop-filter: blur(8px);
+  }
+  .btn--ghost-light:hover {
+    background: rgba(255,255,255,0.16);
+    border-color: rgba(255,255,255,0.40);
+  }
+  .btn--ghost {
     background: transparent;
-    border: 1px solid color-mix(in srgb, var(--color-text-inverse) 35%, transparent);
+    color: var(--color-text);
+    border-color: var(--color-border);
+  }
+  .btn--ghost:hover { background: var(--color-surface); border-color: var(--color-neutral-300); }
+  .btn--wa {
+    background: #25D366;
     color: var(--color-text-inverse);
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 0.9375rem;
-    border-radius: var(--radius-pill);
-    transition: background 150ms ease, border-color 150ms ease;
   }
-  .btn-ghost-light:hover {
-    background: color-mix(in srgb, var(--color-text-inverse) 12%, transparent);
-    border-color: var(--color-text-inverse);
-  }
-
-  /* Botón outline */
-  .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.75rem;
-    background-color: transparent;
-    color: var(--color-brand);
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 0.9375rem;
-    border-radius: var(--radius-pill);
-    border: 2px solid var(--color-primary-300);
-    transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
-  }
-  .btn-outline:hover {
-    border-color: var(--color-brand);
-    background-color: var(--color-primary-50);
-  }
+  .btn--wa:hover { background: #1da851; }
+  .btn--sm { padding: 0.5rem 1rem; font-size: 0.8125rem; }
 
   /* Card base — estilo lifecare */
   .card {
@@ -217,16 +187,23 @@
 
   /* Variante sobre fondos oscuros (hero + CTA final) */
   .eyebrow--light {
-    color: color-mix(in srgb, var(--color-text-inverse) 85%, transparent);
+    color: var(--color-primary-200);
     font-family: var(--font-mono);
     font-weight: 500;
     font-size: 0.6875rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     margin-bottom: 1.5rem;
   }
-  .eyebrow--light::before { display: none; }
+  .eyebrow--light::before {
+    width: 18px;
+    height: 1px;
+    background: var(--color-accent-400);
+    opacity: 1;
+  }
 
   .section-header { text-align: center; margin-bottom: 3.5rem; }
 
@@ -248,6 +225,42 @@
     line-height: 1.65;
     max-width: 560px;
     margin-inline: auto;
+  }
+
+  /* ─── Patrón handoff .section-head (eyebrow + título + descripción) ─── */
+  /* Usado por Services, WhyVideo, Industries en el home redesign.        */
+  /* NOTA: no usamos grid-gap aquí porque el patrón tiene 2 variantes:    */
+  /*   (1) home: section-head > section-head__top (1 hijo, gap no aplica) */
+  /*   (2) sub-pages: section-head > eyebrow + h2 (gap añade ~24px de    */
+  /*       más; el eyebrow ya trae margin-bottom: 0.875rem natural).      */
+  .section-head {
+    display: grid;
+    margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  }
+  .section-head__top {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .section-head__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.875rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin: 0;
+    max-width: 18ch;
+    text-wrap: balance;
+  }
+  .section-head__desc {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+    margin: 0;
+    max-width: 48ch;
   }
 
   /* ─── Hero de páginas internas ────────────────────────── */

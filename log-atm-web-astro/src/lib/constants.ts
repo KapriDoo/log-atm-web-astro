@@ -28,12 +28,12 @@ export const SEO = {
   twitterHandle: '@logatm',
 } as const;
 
-// Navegación principal — anclas hacia secciones del home + CTA
+// Navegación principal — rutas hacia sub-páginas (paridad con handoff data.jsx)
 export const NAV_LINKS = [
-  { href: '#servicios', label: 'Servicios' },
-  { href: '#industrias', label: 'Industrias' },
-  { href: '#why', label: 'Por qué LOG ATM' },
-  { href: '#contacto', label: 'Contacto' },
+  { href: '/servicios', label: 'Servicios' },
+  { href: '/industrias', label: 'Industrias' },
+  { href: '/nosotros', label: 'Nosotros' },
+  { href: '/contacto', label: 'Contacto' },
 ] as const;
 
 // Links del footer — Servicios (sub-páginas reales)
@@ -54,12 +54,20 @@ export const FOOTER_COMPANY = [
   { href: '/contacto', label: 'Contacto' },
 ] as const;
 
-// Stats del hero strip y stats band
+// Stats band (sección bajo el hero) — etiquetas largas del handoff
 export const STATS = [
-  { value: '20+', label: 'Años de operación', icon: 'lucide:award' },
-  { value: '70+', label: 'Países conectados', icon: 'lucide:globe' },
-  { value: '98%', label: 'Satisfacción', icon: 'lucide:sparkles' },
-  { value: '1:1', label: 'Ejecutivo dedicado', icon: 'lucide:user-check' },
+  { value: '20+', label: 'Años conectando Chile con el mundo', icon: 'lucide:award',    isText: false },
+  { value: '70+', label: 'Países en nuestra red operativa',     icon: 'lucide:globe',    isText: false },
+  { value: '98%', label: 'Clientes que repiten con nosotros',   icon: 'lucide:sparkles', isText: false },
+  { value: '1:1', label: 'Ejecutivo dedicado en cada cuenta',   icon: 'lucide:user',     isText: true  },
+] as const;
+
+// Strip de stats dentro del hero — etiquetas cortas del handoff (hero-b.jsx)
+export const HERO_STRIP_STATS = [
+  { num: '20+', label: 'Años de operación' },
+  { num: '70+', label: 'Países conectados' },
+  { num: '98%', label: 'Satisfacción' },
+  { num: '1:1', label: 'Ejecutivo dedicado' },
 ] as const;
 
 // Servicios — 11 cards en bento grid con foto, tag y tamaño
@@ -71,7 +79,7 @@ export const SERVICES = [
     img: '/images/services/svc-aerea.jpeg',
     desc: 'Express, courier internacional y chárter aéreo con tiempos garantizados.',
     tag: 'Express · 48h',
-    icon: 'lucide:plane-takeoff',
+    icon: 'lucide:plane',
     size: 'feature',
     isCta: false,
     href: '/servicios/carga-aerea',
@@ -96,7 +104,7 @@ export const SERVICES = [
     icon: 'lucide:file-check',
     size: 'std',
     isCta: false,
-    href: '#servicios',
+    href: '/servicios',
   },
   {
     n: '04',
@@ -107,7 +115,7 @@ export const SERVICES = [
     icon: 'lucide:warehouse',
     size: 'std',
     isCta: false,
-    href: '#servicios',
+    href: '/servicios',
   },
   {
     n: '05',
@@ -129,7 +137,7 @@ export const SERVICES = [
     icon: 'lucide:package',
     size: 'wide',
     isCta: false,
-    href: '#servicios',
+    href: '/servicios',
   },
   {
     n: '07',
@@ -137,10 +145,10 @@ export const SERVICES = [
     img: '/images/services/svc-seguros.jpeg',
     desc: 'Cobertura integral durante todo el trayecto.',
     tag: 'Global',
-    icon: 'lucide:shield-check',
+    icon: 'lucide:shield',
     size: 'std',
     isCta: false,
-    href: '#servicios',
+    href: '/servicios',
   },
   {
     n: '08',
@@ -151,7 +159,7 @@ export const SERVICES = [
     icon: 'lucide:container',
     size: 'std',
     isCta: false,
-    href: '#servicios',
+    href: '/servicios',
   },
   {
     n: '09',
@@ -159,10 +167,10 @@ export const SERVICES = [
     img: '/images/services/svc-casillero.jpeg',
     desc: 'Dirección propia en EE.UU. para compras online.',
     tag: 'Miami',
-    icon: 'lucide:mail',
+    icon: 'lucide:mailbox',
     size: 'mini',
     isCta: false,
-    href: '#servicios',
+    href: '/servicios',
   },
   {
     n: '10',
@@ -173,7 +181,7 @@ export const SERVICES = [
     icon: 'lucide:handshake',
     size: 'mini',
     isCta: false,
-    href: '#servicios',
+    href: '/servicios',
   },
   {
     n: '11',
@@ -181,59 +189,59 @@ export const SERVICES = [
     img: '/images/services/svc-medio-oriente.jpeg',
     desc: 'Conexión especializada con socios locales de confianza.',
     tag: 'DXB · JED',
-    icon: 'lucide:globe-2',
+    icon: 'lucide:globe',
     size: 'wide',
     isCta: true,
-    href: '#servicios',
+    href: '/servicios',
   },
 ] as const;
 
-// Razones para elegir LOG ATM — con métrica destacada
+// Razones para elegir LOG ATM — con métrica destacada (paridad target image)
 export const WHY_ITEMS = [
   {
-    icon: 'lucide:user-round-check',
+    icon: 'lucide:user',
     title: 'Ejecutivo dedicado',
     desc: 'Una persona que conoce tu negocio y anticipa tus necesidades.',
     metric: '1:1',
     sub: 'cuenta',
   },
   {
-    icon: 'lucide:globe-2',
-    title: 'Red en 70+ países',
-    desc: 'Alianzas verificadas para garantizar plazos de entrega.',
-    metric: '70+',
-    sub: 'países',
+    icon: 'lucide:globe',
+    title: 'Alianzas verificadas',
+    desc: 'Partners locales auditados en cada nodo crítico de la ruta.',
+    metric: '80+',
+    sub: 'partners',
   },
   {
-    icon: 'lucide:clock',
+    icon: 'lucide:map-pin',
     title: 'Atención 24/7',
     desc: 'Soporte directo con tu ejecutivo cuando lo necesites.',
     metric: '24/7',
     sub: 'soporte',
   },
   {
-    icon: 'lucide:shield-check',
-    title: 'Expertise en aduana Chile',
-    desc: 'Operadores certificados por Aduanas (OEA).',
-    metric: 'OEA',
-    sub: 'certificación',
+    icon: 'lucide:compass',
+    title: 'Multimodal real',
+    desc: 'Aéreo, marítimo, terrestre y courier bajo un mismo equipo.',
+    metric: '4',
+    sub: 'modalidades',
   },
 ] as const;
 
-// Industrias atendidas (12 con foto en home; el catálogo completo puede crecer en /industrias)
+// Industrias atendidas (12 con foto en home — paridad handoff data.jsx)
 export const INDUSTRIES = [
-  { icon: 'lucide:pickaxe',       name: 'Minería',            sub: 'Cobre, litio, maquinaria pesada',   color: '#658fc3', img: '/images/industries/ind-mineria.jpeg' },
-  { icon: 'lucide:shopping-bag',  name: 'Retail',             sub: 'Moda, consumo, temporada',          color: '#3EB978', img: '/images/industries/ind-retail.jpeg' },
-  { icon: 'lucide:wheat',         name: 'Agroindustria',      sub: 'Fruta fresca, vinos, granos',       color: '#2D9B6F', img: '/images/industries/ind-agro.jpeg' },
-  { icon: 'lucide:pill',          name: 'Farmacéutica',       sub: 'Cadena de frío, reactivos',         color: '#4A7BB5', img: '/images/industries/ind-farma.jpeg' },
-  { icon: 'lucide:shopping-cart', name: 'E-commerce',         sub: 'Cross-border, fulfillment',         color: '#339965', img: '/images/industries/ind-ecommerce.jpeg' },
-  { icon: 'lucide:hard-hat',      name: 'Construcción',       sub: 'Maquinaria, materiales',            color: '#3b6497', img: '/images/industries/ind-construccion.jpeg' },
-  { icon: 'lucide:hammer',        name: 'Chatarra Ferrosa',   sub: 'Reciclaje y exportación',           color: '#7a7a7a', img: '/images/industries/ind-chatarra.jpeg' },
-  { icon: 'lucide:lightbulb',     name: 'Iluminarias',        sub: 'LED e industrial',                  color: '#cc7614', img: '/images/industries/ind-iluminarias.jpeg' },
-  { icon: 'lucide:car',           name: 'Vehículos Usados',   sub: 'Importación y trámites',            color: '#e84c3d', img: '/images/industries/ind-vehiculos.jpeg' },
-  { icon: 'lucide:briefcase',     name: 'Efectos Personales', sub: 'Mudanzas internacionales',          color: '#9b59b6', img: '/images/industries/ind-efectos.jpeg' },
-  { icon: 'lucide:settings',      name: 'Maquinaria',         sub: 'Industrial y agrícola',             color: '#34495e', img: '/images/industries/ind-maquinaria.jpeg' },
-  { icon: 'lucide:scissors',      name: 'Textil',             sub: 'Prendas, telas, accesorios',        color: '#e91e63', img: '/images/industries/ind-textil.jpeg' },
+  { icon: 'lucide:pickaxe',       name: 'Minería',            sub: 'Cobre, litio, maquinaria',     color: '#658fc3', img: '/images/industries/ind-mineria.jpeg' },
+  { icon: 'lucide:shopping-bag',  name: 'Retail',             sub: 'Moda, consumo, temporada',     color: '#3EB978', img: '/images/industries/ind-retail.jpeg' },
+  { icon: 'lucide:wheat',         name: 'Agroindustria',      sub: 'Fruta, vinos, granos',         color: '#2D9B6F', img: '/images/industries/ind-agro.jpeg' },
+  { icon: 'lucide:pill',          name: 'Farmacéutica',       sub: 'Cadena de frío, reactivos',    color: '#4A7BB5', img: '/images/industries/ind-farma.jpeg' },
+  { icon: 'lucide:shopping-cart', name: 'E-commerce',         sub: 'Cross-border, fulfillment',    color: '#339965', img: '/images/industries/ind-ecommerce.jpeg' },
+  { icon: 'lucide:hard-hat',      name: 'Construcción',       sub: 'Maquinaria, materiales',       color: '#3b6497', img: '/images/industries/ind-construccion.jpeg' },
+  { icon: 'lucide:hammer',        name: 'Chatarra Ferrosa',   sub: 'Reciclaje y exportación',      color: '#7a7a7a', img: '/images/industries/ind-chatarra.jpeg' },
+  { icon: 'lucide:lightbulb',     name: 'Iluminarias',        sub: 'LED e industrial',             color: '#cc7614', img: '/images/industries/ind-iluminarias.jpeg' },
+  { icon: 'lucide:car',           name: 'Vehículos Usados',   sub: 'Importación y trámites',       color: '#e84c3d', img: '/images/industries/ind-vehiculos.jpeg' },
+  { icon: 'lucide:briefcase',     name: 'Efectos Personales', sub: 'Mudanzas internacionales',     color: '#9b59b6', img: '/images/industries/ind-efectos.jpeg' },
+  { icon: 'lucide:settings',      name: 'Maquinaria',         sub: 'Industrial y agrícola',        color: '#34495e', img: '/images/industries/ind-maquinaria.jpeg' },
+  { icon: 'lucide:scissors',      name: 'Textil',             sub: 'Prendas, telas, accesorios',   color: '#e91e63', img: '/images/industries/ind-textil.jpeg' },
 ] as const;
 
 // Rutas marítimas/aéreas mostradas en el panel translúcido del hero
@@ -242,6 +250,31 @@ export const LIVE_ROUTES = [
   { from: 'Miami',     to: 'Santiago',    mode: 'air', eta: '36h', status: 'transit' },
   { from: 'Rotterdam', to: 'Valparaíso',  mode: 'sea', eta: '21d', status: 'port' },
   { from: 'Hong Kong', to: 'Iquique',     mode: 'sea', eta: '18d', status: 'transit' },
+] as const;
+
+// Opciones del formulario "Cotización rápida · 30 seg" del CtaFinal (handoff sections.jsx)
+export const QUICK_QUOTE_MODES = [
+  'Marítimo · FCL',
+  'Marítimo · LCL',
+  'Aéreo',
+  'Courier',
+] as const;
+export const QUICK_QUOTE_ORIGINS = [
+  'Shanghai, CN',
+  'Miami, US',
+  'Rotterdam, NL',
+  'Dubai, AE',
+] as const;
+export const QUICK_QUOTE_DESTINATIONS = [
+  'Santiago, CL',
+  'San Antonio, CL',
+  'Iquique, CL',
+] as const;
+export const QUICK_QUOTE_VOLUMES = [
+  '1 CBM o menos',
+  '1 – 15 CBM',
+  "1 contenedor 20'",
+  "1 contenedor 40'",
 ] as const;
 
 // ──────────────────────────────────────────────────────────

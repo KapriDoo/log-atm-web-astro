@@ -83,11 +83,11 @@ const detailedServices = SERVICES.filter((s) => SERVICE_DETAILS[s.n as keyof typ
       </div>
     </section>
 
-    <section class="section" style="background: var(--color-surface);">
+    <section class="section section--surface">
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">Detalle por servicio</span>
-          <h2 class="section-head__title" style="margin-top: 0.5rem;">Lo que incluye cada uno</h2>
+          <h2 class="section-head__title">Lo que incluye cada uno</h2>
         </div>
         {detailedServices.map((s, i) => {
           const detail = SERVICE_DETAILS[s.n as keyof typeof SERVICE_DETAILS]!;
@@ -119,8 +119,8 @@ const detailedServices = SERVICES.filter((s) => SERVICE_DETAILS[s.n as keyof typ
       <div class="container">
         <div class="process-strip__head">
           <div>
-            <span class="eyebrow" style="color: var(--color-accent-400);">Cómo trabajamos</span>
-            <h2 class="process-strip__title" style="margin-top: 0.75rem;">Un proceso predecible en 6 pasos.</h2>
+            <span class="eyebrow">Cómo trabajamos</span>
+            <h2 class="process-strip__title">Un proceso predecible en 6 pasos.</h2>
           </div>
           <p class="process-strip__desc">
             De la cotización al cierre con KPIs. Un solo ejecutivo dedicado coordina cada etapa.
@@ -138,11 +138,11 @@ const detailedServices = SERVICES.filter((s) => SERVICE_DETAILS[s.n as keyof typ
       </div>
     </section>
 
-    <section class="section" style="background: var(--color-neutral-50);">
-      <div class="container" style="max-width: 900px;">
-        <div class="section-head" style="text-align: center;">
+    <section class="section section--alt section--narrow">
+      <div class="container">
+        <div class="section-head section-head--centered">
           <span class="eyebrow">Preguntas frecuentes</span>
-          <h2 class="section-head__title" style="margin-top: 0.5rem;">Resolvemos lo que más nos preguntan</h2>
+          <h2 class="section-head__title">Resolvemos lo que más nos preguntan</h2>
         </div>
         <div class="faq-list">
           {FAQ.map((f, i) => (
