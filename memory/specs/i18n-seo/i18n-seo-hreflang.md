@@ -7,16 +7,17 @@ domain: "feature"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on:
   - "[[i18n-routing-locale-prefixes]]"
   - "[[i18n-translations-json-structure]]"
 change_ref: "[[multi-language-support]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/multi-language-support"
+feature_branch: "feature/multi-language-support"
+commits:
+  - "76664bf"
 mr: ""
 acceptance_criteria:
   - "[ ] Cada página incluye etiquetas <link rel='alternate' hreflang> apuntando a todas las versiones de idioma de esa página, incluido x-default apuntando a la versión española"
@@ -35,10 +36,11 @@ adrs: []
 scope:
   - "src/layouts/BaseLayout.astro"
   - "astro.config.mjs"
-verified_at: null
+verified_at: "2026-05-12"
 
 created: "2026-05-11"
-updated: "2026-05-11"
+updated: "2026-05-12"
+archived: "2026-05-12"
 tags: [capability-spec, i18n, seo, hreflang, sitemap, schema]
 ---
 

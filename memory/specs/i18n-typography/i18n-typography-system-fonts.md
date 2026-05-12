@@ -7,15 +7,16 @@ domain: "feature"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
   - "[[i18n-routing-locale-prefixes]]"
 change_ref: "[[multi-language-support]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/multi-language-support"
+feature_branch: "feature/multi-language-support"
+commits:
+  - "76664bf"
 mr: ""
 acceptance_criteria:
   - "[ ] Los textos en chino (zh) se renderizan con una fuente que soporte caracteres CJK en los principales sistemas operativos (macOS, Windows, Android)"
@@ -34,10 +35,11 @@ affects:
 adrs: []
 scope:
   - "src/styles/global.css"
-verified_at: null
+verified_at: "2026-05-12"
 
 created: "2026-05-11"
-updated: "2026-05-11"
+updated: "2026-05-12"
+archived: "2026-05-12"
 tags: [capability-spec, i18n, typography, fonts, cjk, devanagari, arabic]
 ---
 

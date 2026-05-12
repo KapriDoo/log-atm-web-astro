@@ -7,16 +7,18 @@ domain: "feature"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on:
   - "[[i18n-routing-locale-prefixes]]"
   - "[[i18n-translations-json-structure]]"
+  - "[[i18n-typography-system-fonts]]"
 change_ref: "[[multi-language-support]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/multi-language-support"
+feature_branch: "feature/multi-language-support"
+commits:
+  - "76664bf"
 mr: ""
 acceptance_criteria:
   - "[ ] En rutas /ar/, el documento HTML tiene el atributo dir='rtl' en la etiqueta html"
@@ -37,10 +39,11 @@ scope:
   - "src/components/ui/Navbar.astro"
   - "src/layouts/BaseLayout.astro"
   - "src/styles/global.css"
-verified_at: null
+verified_at: "2026-05-12"
 
 created: "2026-05-11"
-updated: "2026-05-11"
+updated: "2026-05-12"
+archived: "2026-05-12"
 tags: [capability-spec, i18n, rtl, arabic, layout]
 ---
 

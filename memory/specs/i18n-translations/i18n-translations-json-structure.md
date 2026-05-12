@@ -7,15 +7,16 @@ domain: "feature"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: completed
 assigned_agent: "sdd-apply"
 priority: critical
 depends_on:
   - "[[i18n-routing-locale-prefixes]]"
 change_ref: "[[multi-language-support]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/multi-language-support"
+feature_branch: "feature/multi-language-support"
+commits:
+  - "76664bf"
 mr: ""
 acceptance_criteria:
   - "[ ] Existe un archivo JSON por cada uno de los seis idiomas (es, en, zh, hi, ar, pt)"
@@ -41,10 +42,11 @@ scope:
   - "src/i18n/translations/*.json"
   - "src/i18n/utils.ts"
   - "src/lib/constants.ts"
-verified_at: null
+verified_at: "2026-05-12"
 
 created: "2026-05-11"
-updated: "2026-05-11"
+updated: "2026-05-12"
+archived: "2026-05-12"
 tags: [capability-spec, i18n, translations]
 ---
 
