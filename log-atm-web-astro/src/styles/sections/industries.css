@@ -1,7 +1,7 @@
 /* ─── Industries Section ────────────────────────────────── */
 .industries {
   padding-block: var(--section-pad);
-  background: var(--color-surface-alt);
+  background: var(--color-surface);
 }
 
 .industries__head {
@@ -57,7 +57,7 @@
   object-fit: cover;
   transition: transform 400ms ease;
 }
-.ind-card:hover .ind-card__media img { transform: scale(1.04); }
+.ind-card:hover .ind-card__media img { transform: scale(1.02); }
 
 .ind-card__overlay {
   position: absolute;

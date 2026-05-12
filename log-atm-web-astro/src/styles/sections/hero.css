@@ -55,8 +55,18 @@
   margin: 0 0 1.5rem;
 }
 .hero-b__title-accent {
-  color: var(--color-primary-200);
   font-weight: 800;
+  background: linear-gradient(90deg, var(--color-accent-400), var(--color-accent-500));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+@supports not ((background-clip: text) or (-webkit-background-clip: text)) {
+  .hero-b__title-accent {
+    color: var(--color-accent-400);
+    -webkit-text-fill-color: var(--color-accent-400);
+  }
 }
 
 .hero-b__lead {
