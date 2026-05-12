@@ -1,5 +1,8 @@
 /* ── LOG ATM — Estilos adicionales para subpáginas ─────────── */
 
+/* Importar estilos del CTA Final (usado al pie de servicios/industrias/nosotros) */
+@import '../sections/cta.css';
+
 /* Industrias · directory editorial ─────────────────────── */
 .ind-directory-section {
   background: var(--color-primary-900);
