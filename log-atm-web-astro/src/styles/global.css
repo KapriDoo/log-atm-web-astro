@@ -9,6 +9,8 @@
 @import '@fontsource/outfit/700.css';
 @import '@fontsource/outfit/800.css';
 @import '@fontsource/outfit/900.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
 
 @import "tailwindcss";
 
@@ -112,25 +114,25 @@
     transform: translateY(0);
   }
 
-  /* Botón CTA — ámbar */
+  /* Botón CTA — azul marca */
   .btn-cta {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.75rem;
-    background-color: var(--color-cta);
+    background-color: var(--color-brand);
     color: var(--color-text-inverse);
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 0.9375rem;
     border-radius: var(--radius-pill);
     border: 2px solid transparent;
-    box-shadow: var(--shadow-cta);
+    box-shadow: 0 4px 20px 0 color-mix(in srgb, var(--color-brand) 35%, transparent);
     transition: background-color 150ms ease, transform 100ms ease, box-shadow 150ms ease;
   }
   .btn-cta:hover {
-    background-color: var(--color-accent-600);
-    box-shadow: 0 6px 24px 0 color-mix(in srgb, var(--color-accent-500) 45%, transparent);
+    background-color: var(--color-primary-700);
+    box-shadow: 0 6px 24px 0 color-mix(in srgb, var(--color-brand) 45%, transparent);
     transform: translateY(-1px);
   }
   .btn-cta:active {

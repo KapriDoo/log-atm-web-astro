@@ -3,133 +3,78 @@ import { Icon } from 'astro-icon/components';
 import { WHY_ITEMS } from '../../lib/constants';
 ---
 
-<section class="why" aria-labelledby="why-heading">
-  <div class="container why__inner">
-    <div class="why__visual">
-      <div class="why__img-wrap">
-        <div class="why__video-wrap">
-          <video
-            class="why__video"
-            src="/videos/hero-port.mp4"
-            muted
-            autoplay
-            playsinline
-            aria-label="Camión en ruta costera — operación logística LOG ATM"
-          ></video>
-          <div class="why__logo-overlay" aria-hidden="true">
-            <img src="/logo.svg" alt="" width="180" height="198" />
-          </div>
-        </div>
-        <div class="why__badge">
-          <span class="why__badge-icon">🇨🇱</span>
-          <div>
-            <p class="why__badge-title">Empresa chilena</p>
-            <p class="why__badge-sub">con red global</p>
-          </div>
-        </div>
+<section class="why" id="why" aria-label="Por qué LOG ATM">
+  <div class="container">
+    <div class="why__head">
+      <div class="why__head-left">
+        <span class="eyebrow">Por qué LOG ATM</span>
+        <h2 class="why__title">El operador que opera contigo</h2>
       </div>
+      <p class="why__desc">
+        Somos un partner logístico, no un proveedor más. Conocemos tu negocio
+        y diseñamos la operación a tu medida.
+      </p>
     </div>
 
-    <div class="why__content">
-      <span class="eyebrow" data-scroll-animate>Por qué LOG ATM</span>
-      <h2 id="why-heading" class="section-title" data-scroll-animate data-scroll-delay="0.1">
-        Personas. Confianza.<br/>Resultados.
-      </h2>
-      <p class="section-lead why__lead" data-scroll-animate data-scroll-delay="0.2">
-        No somos una multinacional anónima. Somos un equipo chileno con
-        conexiones globales y el compromiso de tratarte como nuestro único cliente.
-      </p>
+    <div class="why__grid">
+      <div class="why__video">
+        <video
+          class="why__video-el"
+          poster="/images/services/svc-maritima.jpeg"
+          muted
+          autoplay
+          loop
+          playsinline
+          preload="auto"
+        >
+          <source src="/video/intro.mp4" type="video/mp4" />
+        </video>
 
-      <ul class="why__list" role="list">
-        {WHY_ITEMS.map(({ icon, title, desc, anim }, i) => (
-          <li class="why__item" data-scroll-animate data-scroll-delay={`${0.3 + i * 0.1}`}>
-            <div class:list={['why__item-icon', anim && `why__item-icon--${anim}`]} aria-hidden="true">
-              <Icon name={icon} width="22" height="22" />
+        <div class="why__video-logo" aria-hidden="true">
+          <img src="/logo.png" alt="" />
+          <span class="why__video-logo-tag">Logística a tu medida</span>
+        </div>
+
+        <div class="why__video-caption">
+          <span class="why__video-eyebrow">Conoce LOG ATM</span>
+          <span class="why__video-title">2 minutos para entender cómo trabajamos</span>
+        </div>
+      </div>
+
+      <div class="why__items">
+        {WHY_ITEMS.map((w) => (
+          <article class="why-card">
+            <span class="why-card__icon" aria-hidden="true">
+              <Icon name={w.icon} width={22} height={22} />
+            </span>
+            <div class="why-card__body">
+              <h3 class="why-card__title">{w.title}</h3>
+              <p class="why-card__desc">{w.desc}</p>
             </div>
-            <div>
-              <strong class="why__item-title">{title}</strong>
-              <p class="why__item-desc">{desc}</p>
+            <div class="why-card__metric">
+              <span class="why-card__metric-value">{w.metric}</span>
+              <span class="why-card__metric-sub">{w.sub}</span>
             </div>
-          </li>
+          </article>
         ))}
-      </ul>
-
-      <a href="#nosotros" class="why__btn" data-scroll-animate data-scroll-delay="0.7">Conoce al equipo</a>
+      </div>
     </div>
   </div>
 </section>
 
 <script>
-  // --- Animación GSAP: clip-path reveal ---
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-  import { prefersReducedMotion } from '../../scripts/scroll-animations';
-
-  if (!prefersReducedMotion) {
-    const imgWrap = document.querySelector('.why__img-wrap');
-
-    if (imgWrap) {
-      // Estado inicial: recortado desde los bordes
-      gsap.set(imgWrap, { clipPath: 'inset(15% 15% 15% 15%)' });
-
-      gsap.to(imgWrap, {
-        clipPath: 'inset(0% 0% 0% 0%)',
-        duration: 1.2,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.why',
-          start: 'top 75%',
-          once: true,
-        },
-      });
-    }
-  }
-
-  // --- Video loop con pausa para mostrar el logo al final ---
-  const LOGO_DISPLAY_MS = 2500;
-  let cleanupWhyVideo: (() => void) | null = null;
-
-  function initWhyVideo() {
-    // Limpiar instancia anterior (protege contra view transitions)
-    cleanupWhyVideo?.();
-
-    const video = document.querySelector<HTMLVideoElement>('.why__video');
-    const overlay = document.querySelector<HTMLElement>('.why__logo-overlay');
-    if (!video || !overlay) return;
-
-    // Respetar prefers-reduced-motion
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
-
-    let timerId: ReturnType<typeof setTimeout> | null = null;
-
-    function onVideoEnded() {
-      overlay!.classList.add('is-visible');
-      timerId = setTimeout(() => {
-        overlay!.classList.remove('is-visible');
-        video!.play();
-        timerId = null;
-      }, LOGO_DISPLAY_MS);
-    }
-
-    video.addEventListener('ended', onVideoEnded);
-
-    // Función de cleanup para evitar memory leaks
-    cleanupWhyVideo = () => {
-      video.removeEventListener('ended', onVideoEnded);
-      if (timerId !== null) {
-        clearTimeout(timerId);
-        timerId = null;
-      }
-      cleanupWhyVideo = null;
+  const video = document.querySelector<HTMLVideoElement>('.why__video-el');
+  const logo  = document.querySelector<HTMLElement>('.why__video-logo');
+  if (video && logo) {
+    const update = () => {
+      if (!video.duration || !isFinite(video.duration)) return;
+      const remain = video.duration - video.currentTime;
+      logo.classList.toggle('is-visible', remain <= 1.0 && video.currentTime > 0.2);
     };
+    video.addEventListener('timeupdate', update);
+    video.addEventListener('seeked', () => {
+      if (video.currentTime < 0.2) logo.classList.remove('is-visible');
+    });
+    video.play().catch(() => { /* autoplay blocked: noop */ });
   }
-
-  // Ejecutar cuando el DOM esté listo (compatible con Astro view transitions)
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initWhyVideo);
-  } else {
-    initWhyVideo();
-  }
-  document.addEventListener('astro:after-swap', initWhyVideo);
 </script>
