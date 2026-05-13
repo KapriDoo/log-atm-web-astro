@@ -190,28 +190,57 @@ const isMobile = variant === 'mobile';
 </style>
 
 <script>
-  // Dropdown toggle accesible para variante desktop.
-  document.querySelectorAll<HTMLButtonElement>('.lang-selector--desktop .lang-selector__trigger').forEach((trigger) => {
-    const root = trigger.closest('.lang-selector') as HTMLElement | null;
-    if (!root) return;
+  /**
+   * Dropdown toggle accesible para variante desktop.
+   * Se inicializa tras DOMContentLoaded para garantizar que los elementos
+   * existen aunque el módulo se ejecute antes del parse final (defensa
+   * contra timing en re-hidrataciones / scripts inlineados de Astro).
+   */
+  function initLanguageSelector() {
+    const triggers = document.querySelectorAll<HTMLButtonElement>(
+      '.lang-selector--desktop .lang-selector__trigger'
+    );
+    triggers.forEach((trigger) => {
+      if (trigger.dataset.langInit === '1') return; // idempotente
+      trigger.dataset.langInit = '1';
 
-    trigger.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = trigger.getAttribute('aria-expanded') === 'true';
-      trigger.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
-    });
+      const root = trigger.closest('.lang-selector') as HTMLElement | null;
+      if (!root) return;
 
-    document.addEventListener('click', (e) => {
-      if (!root.contains(e.target as Node)) {
-        trigger.setAttribute('aria-expanded', 'false');
-      }
-    });
+      const setExpanded = (open: boolean) => {
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      };
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && trigger.getAttribute('aria-expanded') === 'true') {
-        trigger.setAttribute('aria-expanded', 'false');
-        trigger.focus();
-      }
+      // Toggle al click (sin stopPropagation: el outside-click usa contains()
+      // para distinguir clicks dentro/fuera).
+      trigger.addEventListener('click', () => {
+        const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+        setExpanded(!isOpen);
+      });
+
+      // Cerrar al seleccionar una opción (mejora UX antes de la navegación).
+      root.querySelectorAll<HTMLAnchorElement>('a.lang-selector__option').forEach((a) => {
+        a.addEventListener('click', () => setExpanded(false));
+      });
+
+      // Outside-click cierra el dropdown.
+      document.addEventListener('click', (e) => {
+        if (!root.contains(e.target as Node)) setExpanded(false);
+      });
+
+      // Escape cierra y devuelve foco al trigger.
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && trigger.getAttribute('aria-expanded') === 'true') {
+          setExpanded(false);
+          trigger.focus();
+        }
+      });
     });
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLanguageSelector, { once: true });
+  } else {
+    initLanguageSelector();
+  }
 </script>
