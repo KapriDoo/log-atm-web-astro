@@ -1,0 +1,183 @@
+{
+  "meta": {
+    "siteName": "[zh] LOG ATM",
+    "tagline": "[zh] Logística a tu medida",
+    "taglineUpper": "[zh] LOGÍSTICA A TU MEDIDA",
+    "defaultTitle": "[zh] LOG ATM — Logística a tu medida",
+    "defaultDescription": "[zh] Logística aérea y marítima a tu medida. Carga internacional, aduana, almacenaje y consultoría desde Vitacura, Santiago, Chile.",
+    "home": {
+      "title": "[zh] Logística Aérea y Marítima",
+      "description": "[zh] LOG ATM — Soluciones de carga aérea, carga marítima, aduana y almacenaje personalizadas para empresas chilenas. Cotiza ahora."
+    },
+    "servicios": {
+      "title": "[zh] Servicios",
+      "description": "[zh] Catálogo completo de servicios logísticos de LOG ATM."
+    },
+    "industrias": {
+      "title": "[zh] Industrias",
+      "description": "[zh] Sectores que LOG ATM opera con experiencia."
+    },
+    "nosotros": {
+      "title": "[zh] Nosotros",
+      "description": "[zh] Conoce LOG ATM: empresa chilena de logística internacional con 20+ años de experiencia en carga aérea, marítima y aduanas."
+    },
+    "contacto": {
+      "title": "[zh] Contacto",
+      "description": "[zh] Contacta a LOG ATM para tu próxima operación logística."
+    },
+    "cotizar": {
+      "title": "[zh] Cotizar",
+      "description": "[zh] Solicita una cotización personalizada de carga aérea, marítima o courier."
+    },
+    "notFound": {
+      "title": "[zh] Página no encontrada",
+      "description": "[zh] La página que buscas no existe. Vuelve al inicio de LOG ATM."
+    },
+    "cargaAerea": {
+      "title": "[zh] Carga Aérea",
+      "description": "[zh] Servicio de carga aérea LOG ATM: express, courier internacional y chárter aéreo con tiempos garantizados."
+    },
+    "cargaMaritima": {
+      "title": "[zh] Carga Marítima",
+      "description": "[zh] Servicio de carga marítima LOG ATM: FCL y LCL a 80+ puertos con consolidación semanal."
+    }
+  },
+  "nav": {
+    "servicios": "[zh] Servicios",
+    "industrias": "[zh] Industrias",
+    "nosotros": "[zh] Nosotros",
+    "contacto": "[zh] Contacto",
+    "quoteCta": "[zh] Cotiza ahora"
+  },
+  "footer": {
+    "brandTagline": "[zh] Conectamos Chile con el mundo, a tu medida.",
+    "brandDesc": "[zh] Operador logístico chileno con 20+ años de experiencia en carga aérea, marítima, aduana y supply chain.",
+    "colAbout": "[zh] Nosotros",
+    "colContact": "[zh] Contacto",
+    "linkAbout": "[zh] Nosotros",
+    "copyright": "[zh] © {year} {name} · Todos los derechos reservados"
+  },
+  "common": {
+    "learnMore": "[zh] Conocer más",
+    "viewAllServices": "[zh] Ver los {count} servicios",
+    "submit": "[zh] Enviar",
+    "close": "[zh] Cerrar",
+    "backHome": "[zh] Volver al inicio",
+    "whatsapp": "[zh] WhatsApp",
+    "email": "[zh] Email",
+    "openInNewTab": "[zh]  (se abre en nueva pestaña)"
+  },
+  "a11y": {
+    "skipLink": "[zh] Saltar al contenido principal",
+    "brandHome": "[zh] LOG ATM — Inicio",
+    "mainNav": "[zh] Navegación principal",
+    "openMenu": "[zh] Abrir menú",
+    "closeMenu": "[zh] Cerrar menú",
+    "menuDialog": "[zh] Menú",
+    "languageSelector": "[zh] Seleccionar idioma",
+    "languageCurrent": "[zh] Idioma actual: {lang}",
+    "heroAria": "[zh] Hero LOG ATM",
+    "routesAria": "[zh] Rutas frecuentes",
+    "servicesAria": "[zh] Servicios LOG ATM",
+    "industriesAria": "[zh] Industrias atendidas",
+    "whyAria": "[zh] Por qué LOG ATM",
+    "ctaAria": "[zh] Cotización rápida",
+    "videoAria": "[zh] Video institucional LOG ATM (silencioso, 2 minutos)",
+    "playVideo": "[zh] Reproducir video",
+    "pauseVideo": "[zh] Pausar video"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "[zh] Operador logístico chileno · 20+ años",
+      "title1": "[zh] Chile con el mundo,",
+      "title2": "[zh] a tu medida.",
+      "leadHtml": "[zh] Carga aérea, marítima y aduana <em>sin intermediarios</em>: un ejecutivo dedicado que conoce tu operación de extremo a extremo.",
+      "ctaQuote": "[zh] Cotiza ahora",
+      "liveTitle": "[zh] Rutas frecuentes",
+      "livePill": "[zh] Cobertura"
+    },
+    "services": {
+      "eyebrow": "[zh] Qué hacemos",
+      "title": "[zh] Soluciones para cada necesidad",
+      "desc": "[zh] Desde el despacho urgente hasta la consultoría de supply chain completa. Cada cuenta tiene un ejecutivo dedicado que diseña la ruta a tu medida.",
+      "numPrefix": "[zh] Servicio"
+    },
+    "industries": {
+      "eyebrow": "[zh] Industrias",
+      "title": "[zh] Sectores que movemos",
+      "desc": "[zh] 12 industrias con operaciones especializadas, regulaciones particulares y rutas optimizadas.",
+      "indexLabel": "[zh] Sector"
+    },
+    "why": {
+      "eyebrow": "[zh] Por qué LOG ATM",
+      "title": "[zh] El operador que opera contigo",
+      "desc": "[zh] Somos un partner logístico, no un proveedor más. Conocemos tu negocio y diseñamos la operación a tu medida.",
+      "videoEyebrow": "[zh] Conoce LOG ATM",
+      "videoTitle": "[zh] 2 minutos para entender cómo trabajamos",
+      "videoLogoTag": "[zh] Logística a tu medida"
+    },
+    "cta": {
+      "eyebrow": "[zh] Empieza hoy",
+      "title1": "[zh] Tu próximo envío,",
+      "title2Html": "[zh] con <em>visibilidad total</em>.",
+      "lead": "[zh] Cotiza en menos de 24 horas con un ejecutivo dedicado. Sin intermediarios, sin sorpresas.",
+      "formTitle": "[zh] Cotización rápida · 60 seg",
+      "formMode": "[zh] Modalidad",
+      "formOrigin": "[zh] Origen",
+      "formDest": "[zh] Destino",
+      "formVolume": "[zh] Volumen",
+      "formEmail": "[zh] Email",
+      "formPhone": "[zh] Teléfono / WhatsApp",
+      "emailPlaceholder": "[zh] tu@empresa.cl",
+      "phonePlaceholder": "[zh] +56 9 1234 5678",
+      "contactHint": "[zh] Completa al menos uno para que te contactemos.",
+      "channelQuestion": "[zh] ¿Cómo prefieres recibirla?",
+      "submit": "[zh] Cotizar ahora",
+      "errorNoContact": "[zh] Necesitamos un email o teléfono para contactarte.",
+      "errorEmail": "[zh] Revisa el formato del email.",
+      "openingWhatsapp": "[zh] Abriendo WhatsApp…",
+      "openingEmail": "[zh] Abriendo tu correo…"
+    }
+  },
+  "servicios": {
+    "eyebrow": "[zh] Servicios",
+    "title": "[zh] Servicios",
+    "desc": "[zh] Catálogo completo de servicios logísticos LOG ATM.",
+    "carga": {
+      "aerea": {
+        "title": "[zh] Carga Aérea",
+        "desc": "[zh] Express, courier internacional y chárter aéreo con tiempos garantizados."
+      },
+      "maritima": {
+        "title": "[zh] Carga Marítima",
+        "desc": "[zh] FCL y LCL a 80+ puertos. Consolidamos para reducir costos."
+      }
+    }
+  },
+  "industrias": {
+    "eyebrow": "[zh] Industrias",
+    "title": "[zh] Sectores que movemos",
+    "desc": "[zh] 12 industrias con operaciones especializadas, regulaciones particulares y rutas optimizadas."
+  },
+  "nosotros": {
+    "eyebrow": "[zh] Nosotros",
+    "title": "[zh] Personas. Confianza. Resultados.",
+    "lead": "[zh] Somos un equipo chileno con conexiones globales y el compromiso de tratarte como nuestro único cliente."
+  },
+  "contacto": {
+    "eyebrow": "[zh] Contacto",
+    "title": "[zh] Hablemos de tu próximo envío",
+    "lead": "[zh] Cuéntanos qué necesitas mover y un ejecutivo te contacta en menos de 24 horas."
+  },
+  "cotizar": {
+    "eyebrow": "[zh] Cotización",
+    "title": "[zh] Cotiza en 4 pasos",
+    "lead": "[zh] Cuéntanos tu operación y recibe una propuesta clara en menos de 24 horas."
+  },
+  "notFound": {
+    "code": "[zh] 404",
+    "title": "[zh] Página no encontrada",
+    "lead": "[zh] Lo sentimos, la página que buscas no existe o ha sido movida.",
+    "backHome": "[zh] Volver al inicio"
+  }
+}
