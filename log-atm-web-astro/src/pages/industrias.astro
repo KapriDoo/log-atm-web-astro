@@ -4,8 +4,8 @@ import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
 import CTASection from '../components/sections/CTASection.astro';
 import { Icon } from 'astro-icon/components';
-import { SITE, INDUSTRIES, IND_TAGS_MAP, SERVICES_PER_IND } from '../lib/constants';
-import { useTranslations, getLangFromUrl } from '../i18n/utils';
+import { SITE, INDUSTRIES } from '../lib/constants';
+import { useTranslations, getLangFromUrl, tList } from '../i18n/utils';
 import '../styles/pages/shared.css';
 
 const currentLang = getLangFromUrl(Astro.url);
@@ -14,8 +14,22 @@ const title = t('meta.industrias.title');
 const description = t('meta.industrias.description');
 const canonical = `${SITE.url}/industrias`;
 
-const spotlight = INDUSTRIES[0]; // Minería
-const spotlightTags = IND_TAGS_MAP[spotlight.name] || [];
+type IndName = { name: string; sub: string };
+const indNames = tList<IndName>(currentLang, 'industrias.names');
+const indTags = tList<string[]>(currentLang, 'industrias.tags');
+const indServices = tList<string[]>(currentLang, 'industrias.servicesPer');
+
+// Combinar metadata visual (img/color/icon) con copy traducido
+const industries = INDUSTRIES.map((ind, i) => ({
+  ...ind,
+  name: indNames[i]?.name ?? ind.name,
+  sub: indNames[i]?.sub ?? ind.sub,
+  tags: indTags[i] ?? [],
+  services: indServices[i] ?? [],
+}));
+
+const spotlight = industries[0];
+const sectorPrefix = t('industrias.directory.sectorPrefix');
 ---
 
 <BaseLayout title={title} description={description} canonical={canonical}>
@@ -25,52 +39,46 @@ const spotlightTags = IND_TAGS_MAP[spotlight.name] || [];
     <section class="page-hero">
       <div class="container">
         <div class="page-hero__breadcrumb">
-          <a href="/">Inicio</a> <span>/</span> <span>Industrias</span>
+          <a href="/">{t('common.breadcrumbHome')}</a> <span>/</span> <span>{t('industrias.breadcrumb')}</span>
         </div>
         <div class="page-hero__inner">
           <div>
-            <span class="page-hero__eyebrow">Industrias · 12 sectores</span>
-            <h1 class="page-hero__title">Conocemos <em>tu sector</em>.</h1>
-            <p class="page-hero__lead">
-              Operaciones especializadas, regulaciones particulares y rutas optimizadas.
-              Diseñamos la logística según las reglas de tu industria.
-            </p>
+            <span class="page-hero__eyebrow">{t('industrias.heroEyebrow')}</span>
+            <h1 class="page-hero__title" set:html={t('industrias.heroTitleHtml')}></h1>
+            <p class="page-hero__lead">{t('industrias.heroLead')}</p>
           </div>
           <div class="page-hero__meta">
-            <div class="page-hero__meta-item"><span class="v">12</span><span class="k">Sectores</span></div>
-            <div class="page-hero__meta-item"><span class="v">300<em>+</em></span><span class="k">Clientes activos</span></div>
-            <div class="page-hero__meta-item"><span class="v">20<em>+</em></span><span class="k">Años de expertise</span></div>
-            <div class="page-hero__meta-item"><span class="v">98%</span><span class="k">Retención</span></div>
+            <div class="page-hero__meta-item"><span class="v">12</span><span class="k">{t('industrias.metaSectors')}</span></div>
+            <div class="page-hero__meta-item"><span class="v">300<em>+</em></span><span class="k">{t('industrias.metaClients')}</span></div>
+            <div class="page-hero__meta-item"><span class="v">20<em>+</em></span><span class="k">{t('industrias.metaExpertise')}</span></div>
+            <div class="page-hero__meta-item"><span class="v">98%</span><span class="k">{t('industrias.metaRetention')}</span></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Spotlight: Minería (sector destacado) -->
+    <!-- Spotlight: sector destacado -->
     <section class="section">
       <div class="container">
         <div class="section-head">
-          <span class="eyebrow">Sector destacado</span>
-          <h2 class="section-head__title">Cuando la operación define el negocio</h2>
+          <span class="eyebrow">{t('industrias.spotlight.eyebrow')}</span>
+          <h2 class="section-head__title">{t('industrias.spotlight.title')}</h2>
         </div>
         <div class="ind-spotlight">
           <div class="ind-spotlight__media">
             <img src={spotlight.img} alt={spotlight.name} />
             <div class="ind-spotlight__overlay">
-              <span class="ind-spotlight__label">Caso · {spotlight.name}</span>
+              <span class="ind-spotlight__label">{t('industrias.spotlight.caseLabel')} · {spotlight.name}</span>
               <h3 class="ind-spotlight__name">{spotlight.name}</h3>
               <p class="ind-spotlight__sub">{spotlight.sub}</p>
             </div>
           </div>
           <div class="ind-spotlight__panel">
-            <span class="ind-spotlight__panel-eyebrow">Cliente desde 2017</span>
-            <p class="ind-spotlight__quote">
-              Movimos 1.200 contenedores de maquinaria especializada en 8 meses para la
-              expansión de una faena, con cero días de detención fuera de programa.
-            </p>
+            <span class="ind-spotlight__panel-eyebrow">{t('industrias.spotlight.panelEyebrow')}</span>
+            <p class="ind-spotlight__quote">{t('industrias.spotlight.quote')}</p>
             <div class="ind-spotlight__author">
-              <strong>Operación enterprise</strong>
-              Coordinación FCL · Aduana OEA · Última milla al norte
+              <strong>{t('industrias.spotlight.authorTitle')}</strong>
+              {t('industrias.spotlight.authorDetail')}
             </div>
           </div>
         </div>
@@ -83,18 +91,16 @@ const spotlightTags = IND_TAGS_MAP[spotlight.name] || [];
         <div class="section-head">
           <div class="section-head__top">
             <div>
-              <span class="eyebrow">Todas las industrias</span>
-              <h2 class="section-head__title">12 sectores con operación dedicada</h2>
+              <span class="eyebrow">{t('industrias.directory.eyebrow')}</span>
+              <h2 class="section-head__title">{t('industrias.directory.title')}</h2>
             </div>
-            <p class="section-head__desc">
-              Pasa el cursor por cada sector para conocer las operaciones más frecuentes.
-            </p>
+            <p class="section-head__desc">{t('industrias.directory.desc')}</p>
           </div>
         </div>
 
         <div class="ind-directory" id="ind-directory">
           <div class="ind-directory__viewer">
-            {INDUSTRIES.map((it, i) => (
+            {industries.map((it, i) => (
               <div class:list={['ind-directory__slide', { 'is-active': i === 0 }]} data-slide={i}>
                 <img src={it.img} alt={it.name} loading="lazy" />
               </div>
@@ -103,21 +109,21 @@ const spotlightTags = IND_TAGS_MAP[spotlight.name] || [];
               <div class="ind-directory__counter">
                 <span id="dir-counter-active">01</span>
                 <span class="sep">/</span>
-                <span class="total">{String(INDUSTRIES.length).padStart(2, '0')}</span>
+                <span class="total">{String(industries.length).padStart(2, '0')}</span>
               </div>
               <div class="ind-directory__caption">
-                <span class="ind-directory__eyebrow" id="dir-eyebrow">Sector · 01</span>
+                <span class="ind-directory__eyebrow" id="dir-eyebrow">{sectorPrefix} · 01</span>
                 <h3 class="ind-directory__name" id="dir-name">{spotlight.name}</h3>
                 <p class="ind-directory__sub" id="dir-sub">{spotlight.sub}</p>
                 <div class="ind-directory__tags" id="dir-tags">
-                  {spotlightTags.map((t) => <span class="ind-directory__tag">{t}</span>)}
+                  {spotlight.tags.map((tag) => <span class="ind-directory__tag">{tag}</span>)}
                 </div>
               </div>
             </div>
           </div>
 
           <ol class="ind-directory__list">
-            {INDUSTRIES.map((it, i) => (
+            {industries.map((it, i) => (
               <li>
                 <button
                   type="button"
@@ -141,30 +147,28 @@ const spotlightTags = IND_TAGS_MAP[spotlight.name] || [];
         <div class="section-head">
           <div class="section-head__top">
             <div>
-              <span class="eyebrow">Por servicio</span>
-              <h2 class="section-head__title">Qué movemos en cada sector</h2>
+              <span class="eyebrow">{t('industrias.services.eyebrow')}</span>
+              <h2 class="section-head__title">{t('industrias.services.title')}</h2>
             </div>
-            <p class="section-head__desc">
-              Combinaciones más frecuentes de servicios por industria.
-            </p>
+            <p class="section-head__desc">{t('industrias.services.desc')}</p>
           </div>
         </div>
         <div class="ind-services">
           <div class="ind-services__row ind-services__head">
-            <div>Industria</div>
-            <div>Servicios habituales</div>
-            <div>Cotizar</div>
+            <div>{t('industrias.services.colIndustry')}</div>
+            <div>{t('industrias.services.colServices')}</div>
+            <div>{t('industrias.services.colCta')}</div>
           </div>
-          {INDUSTRIES.map((ind) => (
+          {industries.map((ind) => (
             <div class="ind-services__row">
               <div class="ind-services__name">{ind.name}</div>
               <div class="ind-services__tags">
-                {(SERVICES_PER_IND[ind.name] || []).map((t) => (
-                  <span class="ind-services__tag">{t}</span>
+                {ind.services.map((s) => (
+                  <span class="ind-services__tag">{s}</span>
                 ))}
               </div>
               <a class="ind-services__cta" href="/contacto">
-                Hablar
+                {t('industrias.services.rowCta')}
                 <Icon name="lucide:arrow-right" width={12} height={12} aria-hidden="true" />
               </a>
             </div>
@@ -179,7 +183,7 @@ const spotlightTags = IND_TAGS_MAP[spotlight.name] || [];
   <Footer />
 </BaseLayout>
 
-<script define:vars={{ INDUSTRIES, IND_TAGS_MAP }}>
+<script define:vars={{ industries, sectorPrefix }}>
   const root      = document.getElementById('ind-directory');
   if (root) {
     const slides    = root.querySelectorAll('.ind-directory__slide');
@@ -189,7 +193,7 @@ const spotlightTags = IND_TAGS_MAP[spotlight.name] || [];
     const nameEl    = document.getElementById('dir-name');
     const subEl     = document.getElementById('dir-sub');
     const tagsEl    = document.getElementById('dir-tags');
-    const total     = INDUSTRIES.length;
+    const total     = industries.length;
 
     let active = 0;
     let paused = false;
@@ -198,11 +202,11 @@ const spotlightTags = IND_TAGS_MAP[spotlight.name] || [];
     function render(i) {
       slides.forEach((s, idx) => s.classList.toggle('is-active', idx === i));
       items.forEach((it, idx)  => it.classList.toggle('is-active', idx === i));
-      const ind = INDUSTRIES[i];
-      const tags = IND_TAGS_MAP[ind.name] || [];
+      const ind = industries[i];
+      const tags = ind.tags || [];
       const pad = String(i + 1).padStart(2, '0');
       if (counter)   counter.textContent = pad;
-      if (eyebrowEl) eyebrowEl.textContent = `Sector · ${pad}`;
+      if (eyebrowEl) eyebrowEl.textContent = `${sectorPrefix} · ${pad}`;
       if (nameEl)    nameEl.textContent = ind.name;
       if (subEl)     subEl.textContent  = ind.sub;
       if (tagsEl)    tagsEl.innerHTML = tags.map((t) => `<span class="ind-directory__tag">${t}</span>`).join('');
