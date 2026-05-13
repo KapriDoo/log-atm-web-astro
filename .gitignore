@@ -33,3 +33,4 @@ npm-debug.log*
 
 # Lock files (managed by package manager)
 skills-lock.json
+log-atm-web-astro/chrome/

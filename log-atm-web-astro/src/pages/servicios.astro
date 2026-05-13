@@ -43,8 +43,9 @@ const detailedServices = SERVICES.filter((s) => SERVICE_DETAILS[s.n as keyof typ
       </div>
     </section>
 
-    <section class="services section" id="servicios">
+    <section class="services section" id="servicios" aria-labelledby="services-catalog-title">
       <div class="container">
+        <h2 id="services-catalog-title" class="sr-only">Catálogo de servicios</h2>
         <div class="svc-filters" role="tablist" aria-label="Categorías de servicios">
           {SERVICE_FILTERS.map((c, i) => (
             <button
