@@ -5,22 +5,29 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
 import cloudflare from '@astrojs/cloudflare';
+import { spawnSync } from 'node:child_process';
 
 /**
  * Integration mínima que valida la paridad de claves i18n antes de cada build.
  * No bloquea el dev server; sólo se ejecuta en `astro build`.
+ *
+ * Nota: se invoca el validador `.ts` via `tsx` en subproceso para soportar
+ * entornos sin loader TS en runtime (p. ej. Cloudflare Pages build), donde
+ * un `import()` directo del `.ts` falla con "Unknown file extension".
  */
 function i18nValidator() {
   return {
     name: 'log-atm:i18n-validator',
     hooks: {
-      'astro:build:start': async ({ logger }) => {
-        const { validate } = await import('./scripts/validate-i18n.ts');
-        const { ok, report } = validate();
-        logger.info(report.join('\n'));
-        if (!ok) {
+      'astro:build:start': ({ logger }) => {
+        logger.info('[i18n] Validando paridad de claves...');
+        const result = spawnSync('npx', ['tsx', 'scripts/validate-i18n.ts'], {
+          stdio: 'inherit',
+          shell: true,
+        });
+        if (result.status !== 0) {
           throw new Error(
-            '[i18n] Paridad de claves rota entre traducciones. Ver detalles arriba.'
+            `[i18n] Paridad de claves rota entre traducciones (exit ${result.status}). Ver detalles arriba.`
           );
         }
       },
