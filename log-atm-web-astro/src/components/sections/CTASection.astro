@@ -1,95 +1,330 @@
 ---
-import { Icon } from 'astro-icon/components';
-import { SITE } from '../../lib/constants';
+import { Icon } from "astro-icon/components";
+import {
+    SITE,
+    QUICK_QUOTE_MODES,
+    QUICK_QUOTE_ORIGINS,
+    QUICK_QUOTE_DESTINATIONS,
+    QUICK_QUOTE_VOLUMES,
+} from "../../lib/constants";
 ---
 
 <section class="cta-final" id="contacto" aria-label="Cotización rápida">
-  <div class="container cta-final__inner">
-    <div class="cta-final__copy">
-      <span class="eyebrow eyebrow--light">Empieza hoy</span>
-      <h2 class="cta-final__title">
-        Tu próximo envío,<br />
-        con <em>visibilidad total</em>.
-      </h2>
-      <p class="cta-final__lead">
-        Cotiza en menos de 24 horas con un ejecutivo dedicado.
-        Sin intermediarios, sin sorpresas.
-      </p>
-      <div class="cta-final__ctas">
-        <a class="btn-cta" href="/cotizar">
-          Cotiza ahora
-          <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
-        </a>
-        <a class="btn-ghost-light" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
-          <Icon name="lucide:message-circle" width={16} height={16} aria-hidden="true" />
-          WhatsApp
-        </a>
-      </div>
+    <div class="container cta-final__inner">
+        <div>
+            <span class="eyebrow eyebrow--light">Empieza hoy</span>
+            <h2 class="cta-final__title">
+                Tu próximo envío,<br />
+                con <em>visibilidad total</em>.
+            </h2>
+            <p class="cta-final__lead">
+                Cotiza en menos de 24 horas con un ejecutivo dedicado. Sin
+                intermediarios, sin sorpresas.
+            </p>
+            <div class="hero-b__ctas">
+                <a class="btn btn--cta" href="/cotizar">
+                    Cotiza ahora
+                    <Icon
+                        name="lucide:arrow-right"
+                        width={16}
+                        height={16}
+                        aria-hidden="true"
+                    />
+                </a>
+                <a
+                    class="btn btn--wa"
+                    href={SITE.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <Icon
+                        name="lucide:message-circle"
+                        width={16}
+                        height={16}
+                        aria-hidden="true"
+                    />
+                    WhatsApp
+                    <span class="sr-only"> (se abre en nueva pestaña)</span>
+                </a>
+            </div>
+        </div>
+
+        <form
+            class="cta-final__form"
+            id="cta-quick-quote"
+            data-wa-number={SITE.phone}
+            data-email={SITE.email}
+            novalidate
+        >
+            <p class="cta-final__form-title">Cotización rápida · 60 seg</p>
+
+            <div class="cta-final__row">
+                <div class="cta-final__field">
+                    <label class="cta-final__label" for="qq-mode">Modalidad</label>
+                    <select class="cta-final__select" id="qq-mode" name="mode">
+                        {QUICK_QUOTE_MODES.map((m) => (
+                            <option value={m}>{m}</option>
+                        ))}
+                    </select>
+                </div>
+                <div class="cta-final__field">
+                    <label class="cta-final__label" for="qq-origin">Origen</label>
+                    <select
+                        class="cta-final__select"
+                        id="qq-origin"
+                        name="origin"
+                    >
+                        {QUICK_QUOTE_ORIGINS.map((o) => (
+                            <option value={o}>{o}</option>
+                        ))}
+                    </select>
+                </div>
+            </div>
+
+            <div class="cta-final__row">
+                <div class="cta-final__field">
+                    <label class="cta-final__label" for="qq-dest">Destino</label>
+                    <select
+                        class="cta-final__select"
+                        id="qq-dest"
+                        name="destination"
+                    >
+                        {QUICK_QUOTE_DESTINATIONS.map((d) => (
+                            <option value={d}>{d}</option>
+                        ))}
+                    </select>
+                </div>
+                <div class="cta-final__field">
+                    <label class="cta-final__label" for="qq-volume">Volumen</label>
+                    <select
+                        class="cta-final__select"
+                        id="qq-volume"
+                        name="volume"
+                    >
+                        {QUICK_QUOTE_VOLUMES.map((v) => (
+                            <option value={v}>{v}</option>
+                        ))}
+                    </select>
+                </div>
+            </div>
+
+            <div class="cta-final__row">
+                <div class="cta-final__field">
+                    <label class="cta-final__label" for="qq-email">Email</label>
+                    <input
+                        class="cta-final__input"
+                        id="qq-email"
+                        name="email"
+                        type="email"
+                        inputmode="email"
+                        placeholder="tu@empresa.cl"
+                        autocomplete="email"
+                        aria-describedby="qq-contact-hint"
+                    />
+                </div>
+                <div class="cta-final__field">
+                    <label class="cta-final__label" for="qq-phone">Teléfono / WhatsApp</label>
+                    <input
+                        class="cta-final__input"
+                        id="qq-phone"
+                        name="phone"
+                        type="tel"
+                        inputmode="tel"
+                        placeholder="+56 9 1234 5678"
+                        autocomplete="tel"
+                        aria-describedby="qq-contact-hint"
+                    />
+                </div>
+            </div>
+            <p id="qq-contact-hint" class="cta-final__hint">
+                Completa al menos uno para que te contactemos.
+            </p>
+
+            <div class="cta-final__field">
+                <span class="cta-final__label" id="qq-channel-label">¿Cómo prefieres recibirla?</span>
+                <div
+                    class="cta-final__channels"
+                    id="qq-channels"
+                    role="radiogroup"
+                    aria-labelledby="qq-channel-label"
+                >
+                    <button
+                        type="button"
+                        class="cta-final__channel is-active"
+                        data-channel="whatsapp"
+                        role="radio"
+                        aria-checked="true"
+                        tabindex="0"
+                    >
+                        <Icon
+                            name="lucide:message-circle"
+                            width={14}
+                            height={14}
+                            aria-hidden="true"
+                        />
+                        WhatsApp
+                    </button>
+                    <button
+                        type="button"
+                        class="cta-final__channel"
+                        data-channel="email"
+                        role="radio"
+                        aria-checked="false"
+                        tabindex="-1"
+                    >
+                        <Icon
+                            name="lucide:mail"
+                            width={14}
+                            height={14}
+                            aria-hidden="true"
+                        />
+                        Email
+                    </button>
+                </div>
+            </div>
+
+            <p
+                class="cta-final__status"
+                id="qq-status"
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
+            ></p>
+
+            <button class="cta-final__btn" type="submit">
+                Cotizar ahora
+                <Icon
+                    name="lucide:arrow-right"
+                    width={16}
+                    height={16}
+                    aria-hidden="true"
+                />
+            </button>
+        </form>
     </div>
-
-    <form class="cta-final__form" id="cta-form" novalidate>
-      <p class="cta-final__form-title">Cotización rápida · 30 seg</p>
-
-      <div class="cta-final__row">
-        <div class="cta-final__field">
-          <label class="cta-final__label" for="cta-mode">Modalidad</label>
-          <select class="cta-final__select" id="cta-mode" name="mode">
-            <option>Marítimo · FCL</option>
-            <option>Marítimo · LCL</option>
-            <option>Aéreo</option>
-            <option>Courier</option>
-          </select>
-        </div>
-        <div class="cta-final__field">
-          <label class="cta-final__label" for="cta-origin">Origen</label>
-          <select class="cta-final__select" id="cta-origin" name="origin">
-            <option>Shanghai, CN</option>
-            <option>Miami, US</option>
-            <option>Rotterdam, NL</option>
-            <option>Dubai, AE</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="cta-final__row">
-        <div class="cta-final__field">
-          <label class="cta-final__label" for="cta-dest">Destino</label>
-          <select class="cta-final__select" id="cta-dest" name="dest">
-            <option>Santiago, CL</option>
-            <option>San Antonio, CL</option>
-            <option>Iquique, CL</option>
-          </select>
-        </div>
-        <div class="cta-final__field">
-          <label class="cta-final__label" for="cta-vol">Volumen</label>
-          <select class="cta-final__select" id="cta-vol" name="volume">
-            <option>1 CBM o menos</option>
-            <option>1 – 15 CBM</option>
-            <option>1 contenedor 20'</option>
-            <option>1 contenedor 40'</option>
-          </select>
-        </div>
-      </div>
-
-      <button class="cta-final__btn" type="submit">
-        Obtener cotización
-        <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
-      </button>
-
-      <p class="cta-final__alt">
-        O escríbenos a <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
-      </p>
-    </form>
-  </div>
 </section>
 
 <script>
-  const form = document.getElementById('cta-form') as HTMLFormElement | null;
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-    const params = new URLSearchParams();
-    data.forEach((v, k) => params.set(k, String(v)));
-    window.location.href = `/cotizar?${params.toString()}`;
-  });
+    const form = document.getElementById(
+        "cta-quick-quote",
+    ) as HTMLFormElement | null;
+    if (form) {
+        const waNumber = form.dataset.waNumber ?? "";
+        const email = form.dataset.email ?? "";
+        const status = form.querySelector<HTMLElement>("#qq-status");
+        const emailInput = form.querySelector<HTMLInputElement>("#qq-email");
+        const phoneInput = form.querySelector<HTMLInputElement>("#qq-phone");
+
+        // Radiogroup canal: roving tabindex + arrow keys (WAI-ARIA APG).
+        let channel: "whatsapp" | "email" = "whatsapp";
+        const channelBtns = Array.from(
+            form.querySelectorAll<HTMLButtonElement>(".cta-final__channel"),
+        );
+
+        function selectChannel(idx: number, focus = true) {
+            channelBtns.forEach((b, i) => {
+                const active = i === idx;
+                b.classList.toggle("is-active", active);
+                b.setAttribute("aria-checked", String(active));
+                b.setAttribute("tabindex", active ? "0" : "-1");
+                if (active && focus) b.focus();
+            });
+            channel =
+                (channelBtns[idx].dataset.channel as "whatsapp" | "email") ??
+                "whatsapp";
+        }
+
+        channelBtns.forEach((btn, i) => {
+            btn.addEventListener("click", () => selectChannel(i));
+            btn.addEventListener("keydown", (e) => {
+                if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+                    e.preventDefault();
+                    selectChannel((i + 1) % channelBtns.length);
+                } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+                    e.preventDefault();
+                    selectChannel(
+                        (i - 1 + channelBtns.length) % channelBtns.length,
+                    );
+                } else if (e.key === " " || e.key === "Enter") {
+                    e.preventDefault();
+                    selectChannel(i);
+                }
+            });
+        });
+
+        function setStatus(msg: string, kind: "error" | "success" | "" = "") {
+            if (!status) return;
+            status.textContent = msg;
+            status.dataset.kind = kind;
+        }
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const data = new FormData(form);
+            const mode = String(data.get("mode") ?? "");
+            const origin = String(data.get("origin") ?? "");
+            const dest = String(data.get("destination") ?? "");
+            const vol = String(data.get("volume") ?? "");
+            const emailVal = String(data.get("email") ?? "").trim();
+            const phoneVal = String(data.get("phone") ?? "").trim();
+
+            if (!emailVal && !phoneVal) {
+                setStatus(
+                    "Necesitamos un email o teléfono para contactarte.",
+                    "error",
+                );
+                (emailInput ?? phoneInput)?.focus();
+                return;
+            }
+            if (emailVal && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
+                setStatus("Revisa el formato del email.", "error");
+                emailInput?.focus();
+                return;
+            }
+
+            const contact = [emailVal, phoneVal].filter(Boolean).join(" · ");
+            const lines = [
+                "Hola, me interesa una cotización LOG ATM:",
+                `• Modalidad: ${mode}`,
+                `• Origen: ${origin}`,
+                `• Destino: ${dest}`,
+                `• Volumen: ${vol}`,
+                `• Contacto: ${contact}`,
+            ];
+            const message = lines.join("\n");
+
+            if (channel === "whatsapp") {
+                const digits = waNumber.replace(/\D/g, "");
+                if (digits) {
+                    setStatus("Abriendo WhatsApp…", "success");
+                    const url = `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
+                    window.open(url, "_blank", "noopener,noreferrer");
+                    return;
+                }
+            }
+            setStatus("Abriendo tu correo…", "success");
+            const subject = encodeURIComponent("Cotización LOG ATM");
+            const body = encodeURIComponent(message);
+            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        });
+    }
 </script>
+
+<style>
+    .cta-final__hint {
+        font-size: 0.8125rem;
+        color: var(--color-text-muted);
+        margin: 0.25rem 0 0.75rem;
+    }
+    .cta-final__status {
+        margin: 0.25rem 0 0;
+        font-size: 0.875rem;
+        min-height: 1.25rem;
+    }
+    .cta-final__status[data-kind="error"]   { color: #c0392b; }
+    .cta-final__status[data-kind="success"] { color: #2d9b6f; }
+    .cta-final__channel:focus-visible {
+        outline: 2px solid var(--color-brand);
+        outline-offset: 2px;
+    }
+</style>

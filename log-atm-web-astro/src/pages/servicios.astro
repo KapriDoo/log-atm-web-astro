@@ -2,390 +2,176 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
+import CTASection from '../components/sections/CTASection.astro';
 import { Icon } from 'astro-icon/components';
-import { SITE } from '../lib/constants';
+import { SITE, SERVICES, SERVICE_DETAILS, SERVICE_FILTERS, PROCESS_STEPS, FAQ } from '../lib/constants';
+import '../styles/pages/shared.css';
+import '../styles/sections/services.css';
 
-const pageTitle = 'Nuestros Servicios de Logística Internacional';
-const pageDesc = 'Descubre todos los servicios de logística que LOG ATM ofrece: carga aérea, marítima, aduana, almacenaje, courier, seguros y más. Soluciones a tu medida.';
+const title = 'Servicios';
+const description = 'Cobertura logística end-to-end: carga aérea, marítima, aduana OEA, almacenaje, consultoría supply chain y rutas Medio Oriente. 11 soluciones a tu medida.';
+const canonical = `${SITE.url}/servicios`;
 
-const services = [
-  {
-    icon: 'lucide:plane-takeoff',
-    title: 'Carga Aérea',
-    description: 'Cuando el tiempo es crítico, nuestra carga aérea es tu mejor aliada. Gestionamos envíos urgentes, courier internacional y chárter aéreo con cobertura global. Desde documentos urgentes hasta mercancía de alto valor, encontramos la ruta aérea más eficiente para tu necesidad. Nuestra red de agentes en más de 70 países garantiza despachos ágiles y seguimiento en cada etapa del vuelo.',
-    features: ['Envíos urgentes 24-72h', 'Chárter aéreo dedicado', 'Courier internacional', 'Carga consolidada'],
-  },
-  {
-    icon: 'lucide:ship',
-    title: 'Carga Marítima',
-    description: 'La columna vertebral del comercio internacional. Ofrecemos soluciones FCL (Full Container Load) y LCL (Less than Container Load) a los principales puertos del mundo. Consolidamos tu carga para optimizar costos sin comprometer plazos. Ya sea que necesites un contenedor completo o compartir espacio, diseñamos la ruta marítima más conveniente para tu presupuesto y calendario.',
-    features: ['FCL - Contenedor completo', 'LCL - Carga consolidada', 'Rutas globales', 'Seguimiento portuario'],
-  },
-  {
-    icon: 'lucide:file-check',
-    title: 'Aduana y Documentación',
-    description: 'Navegar la complejidad aduanera es nuestro expertise. Gestionamos integralmente trámites aduaneros, DUS (Declaración Única de Salida), certificados de origen, clasificación arancelaria y todos los documentos requeridos para importaciones y exportaciones. Nuestros operadores certificados por el Servicio Nacional de Aduanas de Chile aseguran cumplimiento normativo y despachos sin contratiempos.',
-    features: ['Gestión de trámites', 'Clasificación arancelaria', 'Certificados de origen', 'Asesoría normativa'],
-  },
-  {
-    icon: 'lucide:warehouse',
-    title: 'Almacenaje y Distribución',
-    description: 'Tu mercancía en las mejores manos. Ofrecemos bodegaje seguro, servicios de fulfillment y distribución de última milla con gestión de inventario en tiempo real. Desde recepción hasta entrega final, controlamos cada movimiento. Ideal para e-commerce y empresas que necesitan flexibilidad logística sin invertir en infraestructura propia.',
-    features: ['Bodegaje seguro', 'Fulfillment integral', 'Última milla', 'Inventario en tiempo real'],
-  },
-  {
-    icon: 'lucide:compass',
-    title: 'Consultoría Logística',
-    description: 'No todas las cadenas de suministro son iguales. Diseñamos soluciones logísticas a medida analizando tu operación actual, identificando cuellos de botella y proponiendo mejoras concretas. Reducimos costos, optimizamos plazos y aumentamos la eficiencia de tu supply chain con un enfoque personalizado que las grandes multinacionales no pueden ofrecer.',
-    features: ['Análisis de supply chain', 'Reducción de costos', 'Optimización de plazos', 'Plan a medida'],
-  },
-  {
-    icon: 'lucide:package-check',
-    title: 'Courier Internacional',
-    description: 'Envíos exprés puerta a puerta con seguimiento internacional y entregas ágiles a cualquier destino. Perfecto para muestras, documentos urgentes y e-commerce cross-border. Gestionamos el proceso completo: recolección, transporte, aduana y entrega final, con un solo punto de contacto para todo el proceso.',
-    features: ['Puerta a puerta', 'Seguimiento internacional', 'Entregas exprés', 'E-commerce cross-border'],
-  },
-  {
-    icon: 'lucide:shield-check',
-    title: 'Seguros de Carga',
-    description: 'Tu tranquilidad es nuestra prioridad. Ofrecemos protección integral para tu mercancía durante todo el trayecto, con coberturas flexibles adaptadas al valor y naturaleza de tu carga. Desde seguros básicos hasta coberturas todo riesgo con respaldo de aseguradoras globales. No dejes que un imprevisto ponga en riesgo tu inversión.',
-    features: ['Cobertura integral', 'Todo riesgo disponible', 'Respaldo global', 'Trámites simplificados'],
-  },
-  {
-    icon: 'lucide:container',
-    title: 'Desconsolidado',
-    description: 'Especialistas en la recepción, fraccionamiento y distribución de carga consolidada desde los principales puertos. Cuando tu mercancía llega en contenedores compartidos, nos encargamos de separar, verificar y distribuir cada parte según tus instrucciones. Ideal para importadores que no llenan contenedores completos pero necesitan agilidad en la entrega.',
-    features: ['Recepción portuaria', 'Fraccionamiento', 'Verificación de carga', 'Distribución nacional'],
-  },
-  {
-    icon: 'lucide:mail',
-    title: 'Servicio de Casillero USA',
-    description: 'Compra en Estados Unidos como si vivieras allí. Te proporcionamos una dirección propia en USA para recibir tus compras online y las traemos a Chile de forma rápida y segura. Ideal para compras en Amazon, eBay y tiendas que no envían directamente a Chile. Consolidamos tus paquetes para reducir costos de envío y gestionamos todo el trámite aduanero.',
-    features: ['Dirección en USA', 'Consolidación de paquetes', 'Gestión aduanera', 'Entrega a domicilio'],
-  },
-  {
-    icon: 'lucide:handshake',
-    title: 'Asesoría en Compras Internacionales',
-    description: 'Comprar en el extranjero puede ser complejo. Te guiamos en todo el proceso: identificación de proveedores confiables, métodos de pago seguros, negociación de términos, logística internacional y entrega final en Chile. Evita fraudes, malentendidos culturales y problemas aduaneros con el respaldo de nuestros años de experiencia en comercio internacional.',
-    features: ['Identificación de proveedores', 'Negociación', 'Pagos internacionales', 'Logística integral'],
-  },
-  {
-    icon: 'lucide:globe-2',
-    title: 'Te Conectamos con el Medio Oriente',
-    description: 'Rutas especializadas hacia y desde el Medio Oriente con socios locales de confianza. Facilitamos el comercio con Emiratos Árabes, Arabia Saudita, Qatar y toda la región GCC. Conocemos las particularidades culturales, regulatorias y logísticas de esta región para garantizar operaciones fluidas y exitosas en uno de los mercados más dinámicos del mundo.',
-    features: ['Cobertura GCC completa', 'Socios locales', 'Expertise cultural', 'Rutas directas'],
-  },
-];
+const detailedServices = SERVICES.filter((s) => SERVICE_DETAILS[s.n as keyof typeof SERVICE_DETAILS]);
 ---
 
-<BaseLayout title={pageTitle} description={pageDesc}>
+<BaseLayout title={title} description={description} canonical={canonical}>
   <Navbar />
-  
+
   <main id="main-content">
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero__container">
-        <div class="hero__content">
-          <p class="hero__eyebrow">Soluciones integrales</p>
-          <h1 class="hero__title">Nuestros Servicios de Logística</h1>
-          <p class="hero__desc">
-            Más de 20 años conectando Chile con el mundo. Ofrecemos soluciones logísticas 
-            completas, desde la recolección hasta la entrega final, adaptadas a las necesidades 
-            específicas de tu negocio.
-          </p>
-          <div class="hero__cta">
-            <a href={`https://wa.me/${SITE.phone.replace('+', '')}?text=Hola%2C%20me%20interesa%20cotizar%20un%20servicio`} class="btn-primary" target="_blank" rel="noopener">
-              Habla con un ejecutivo
-            </a>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__breadcrumb">
+          <a href="/">Inicio</a> <span>/</span> <span>Servicios</span>
+        </div>
+        <div class="page-hero__inner">
+          <div>
+            <span class="page-hero__eyebrow">Servicios · 11 soluciones</span>
+            <h1 class="page-hero__title">Cobertura logística <em>end-to-end</em>.</h1>
+            <p class="page-hero__lead">
+              Desde el despacho urgente hasta la consultoría de supply chain completa.
+              Una sola contraparte, una sola factura, visibilidad total.
+            </p>
+          </div>
+          <div class="page-hero__meta">
+            <div class="page-hero__meta-item"><span class="v">11</span><span class="k">Servicios activos</span></div>
+            <div class="page-hero__meta-item"><span class="v">70<em>+</em></span><span class="k">Países en red</span></div>
+            <div class="page-hero__meta-item"><span class="v">24/7</span><span class="k">Operación</span></div>
+            <div class="page-hero__meta-item"><span class="v">OEA</span><span class="k">Aduanas Chile</span></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Services Grid -->
-    <section class="services-section" aria-labelledby="services-heading">
-      <div class="services__container">
-        <h2 id="services-heading" class="services__title" data-scroll-animate>Servicios que impulsan tu negocio</h2>
-        <p class="services__subtitle" data-scroll-animate data-scroll-delay="0.1">
-          Cada servicio está diseñado para resolver un desafío específico de tu cadena de suministro.
-          Seleccionamos las mejores rutas, modalidades y socios para entregar resultados superiores.
-        </p>
+    <section class="services section" id="servicios" aria-labelledby="services-catalog-title">
+      <div class="container">
+        <h2 id="services-catalog-title" class="sr-only">Catálogo de servicios</h2>
+        <div class="svc-filters" role="tablist" aria-label="Categorías de servicios">
+          {SERVICE_FILTERS.map((c, i) => (
+            <button
+              type="button"
+              class:list={['svc-filter', { 'svc-filter--active': i === 0 }]}
+              data-filter={c.k}
+              role="tab"
+              aria-selected={i === 0 ? 'true' : 'false'}
+            >{c.label}</button>
+          ))}
+        </div>
 
-        <div class="services__grid" data-scroll-batch>
-          {services.map((service, index) => (
-            <article class="service-card" data-scroll-animate>
-              <div class="service-card__header">
-                <div class="service-card__icon">
-                  <Icon name={service.icon} size={32} />
-                </div>
-                <h3 class="service-card__title">{service.title}</h3>
+        <div class="services__grid">
+          {SERVICES.map((s) => (
+            <a class:list={[`svc-card`, `svc-card--${s.size}`]} href={s.href}>
+              <div class="svc-card__media">
+                <img src={s.img} alt={s.title} loading="lazy" decoding="async" />
+                <div class="svc-card__overlay"></div>
               </div>
-              
-              <p class="service-card__desc">{service.description}</p>
-              
-              <ul class="service-card__features" role="list">
-                {service.features.map(feature => (
-                  <li class="service-card__feature">
-                    <span class="check-mark">✓</span>
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </article>
+              <span class:list={['svc-card__tag', { 'svc-card__tag--cta': s.isCta }]}>{s.tag}</span>
+              <span class="svc-card__icon-pill" aria-hidden="true">
+                <Icon name={s.icon} width={18} height={18} />
+              </span>
+              <div class="svc-card__body">
+                <span class="svc-card__num">{s.n} · Servicio</span>
+                <h3 class="svc-card__title">{s.title}</h3>
+                <p class="svc-card__desc">{s.desc}</p>
+                <span class="svc-card__cta">
+                  Conocer más
+                  <Icon name="lucide:arrow-right" width={14} height={14} aria-hidden="true" />
+                </span>
+              </div>
+            </a>
           ))}
         </div>
       </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section" aria-labelledby="cta-heading">
-      <div class="cta__container">
-        <h2 id="cta-heading" class="cta__title">¿Listo para optimizar tu logística?</h2>
-        <p class="cta__desc">
-          Cuéntanos sobre tu necesidad y te propondremos la solución más eficiente 
-          para tu presupuesto y plazos. Sin compromisos, sin sorpresas.
-        </p>
-        <div class="cta__buttons">
-          <a href={`https://wa.me/${SITE.phone.replace('+', '')}?text=Hola%2C%20me%20interesa%20cotizar`} class="btn-primary btn-large" target="_blank" rel="noopener">
-            Cotiza ahora vía WhatsApp
-          </a>
-          <a href="/contacto" class="btn-secondary btn-large">
-            Déjanos tus datos
-          </a>
+    <section class="section section--surface">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Detalle por servicio</span>
+          <h2 class="section-head__title">Lo que incluye cada uno</h2>
+        </div>
+        {detailedServices.map((s, i) => {
+          const detail = SERVICE_DETAILS[s.n as keyof typeof SERVICE_DETAILS]!;
+          return (
+            <div class:list={['svc-detail-row', { 'svc-detail-row--reverse': i % 2 === 1 }]}>
+              <div class="svc-detail__media">
+                <span class="svc-detail__badge">{detail.badge}</span>
+                <img src={s.img} alt={s.title} loading="lazy" />
+              </div>
+              <div>
+                <div class="svc-detail__num">{s.n} · {s.tag}</div>
+                <h3 class="svc-detail__title">{s.title}</h3>
+                <p class="svc-detail__desc">{s.desc}</p>
+                <ul class="svc-detail__features">
+                  {detail.features.map((f) => <li>{f}</li>)}
+                </ul>
+                <a href="/contacto" class="btn btn--brand btn--sm">
+                  Cotizar este servicio
+                  <Icon name="lucide:arrow-right" width={14} height={14} aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+
+    <section class="process-strip">
+      <div class="container">
+        <div class="process-strip__head">
+          <div>
+            <span class="eyebrow">Cómo trabajamos</span>
+            <h2 class="process-strip__title">Un proceso predecible en 6 pasos.</h2>
+          </div>
+          <p class="process-strip__desc">
+            De la cotización al cierre con KPIs. Un solo ejecutivo dedicado coordina cada etapa.
+          </p>
+        </div>
+        <div class="process-grid">
+          {PROCESS_STEPS.map((p) => (
+            <div class="process-step">
+              <span class="process-step__n">{p.n}</span>
+              <h3 class="process-step__title">{p.title}</h3>
+              <p class="process-step__desc">{p.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
+
+    <section class="section section--alt section--narrow">
+      <div class="container">
+        <div class="section-head section-head--centered">
+          <span class="eyebrow">Preguntas frecuentes</span>
+          <h2 class="section-head__title">Resolvemos lo que más nos preguntan</h2>
+        </div>
+        <div class="faq-list">
+          {FAQ.map((f, i) => (
+            <details class="faq-item" open={i === 0}>
+              <summary>{f.q}</summary>
+              <div class="faq-item__body">{f.a}</div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <CTASection />
   </main>
 
   <Footer />
 </BaseLayout>
 
-<style>
-  /* Hero */
-  .hero {
-    background: linear-gradient(135deg, var(--color-primary-900) 0%, var(--color-primary-700) 100%);
-    color: var(--color-text-inverse);
-    padding: 6rem 1.5rem 4rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    opacity: 0.5;
-  }
-  .hero__container {
-    max-width: 1280px;
-    margin-inline: auto;
-    position: relative;
-    z-index: 1;
-  }
-  .hero__content {
-    max-width: 700px;
-  }
-  .hero__eyebrow {
-    font-size: 0.875rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-accent-400);
-    margin-bottom: 1rem;
-  }
-  .hero__title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-  }
-  .hero__desc {
-    font-size: 1.125rem;
-    line-height: 1.7;
-    color: var(--color-primary-200);
-    margin-bottom: 2rem;
-  }
-  .hero__cta {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  /* Services Section */
-  .services-section {
-    padding: 5rem 1.5rem;
-    background: var(--color-bg);
-  }
-  .services__container {
-    max-width: 1280px;
-    margin-inline: auto;
-  }
-  .services__title {
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    font-weight: 700;
-    text-align: center;
-    color: var(--color-text);
-    margin-bottom: 1rem;
-  }
-  .services__subtitle {
-    font-size: 1.125rem;
-    line-height: 1.7;
-    text-align: center;
-    color: var(--color-neutral-600);
-    max-width: 700px;
-    margin-inline: auto;
-    margin-bottom: 3.5rem;
-  }
-  .services__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 1.5rem;
-  }
-  @media (max-width: 400px) {
-    .services__grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* Service Card */
-  .service-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: 2rem;
-    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
-  }
-  .service-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px color-mix(in srgb, var(--color-primary-900) 8%, transparent);
-    border-color: var(--color-primary-200);
-  }
-  .service-card__header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  .service-card__icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 52px;
-    height: 52px;
-    background: var(--color-primary-50);
-    color: var(--color-brand);
-    border-radius: var(--radius-md);
-    flex-shrink: 0;
-  }
-  .service-card__title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--color-text);
-    line-height: 1.3;
-  }
-  .service-card__desc {
-    font-size: 0.9375rem;
-    line-height: 1.7;
-    color: var(--color-neutral-600);
-    margin-bottom: 1.25rem;
-  }
-  .service-card__features {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  .service-card__feature {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--color-neutral-700);
-  }
-  .service-card__feature .check-mark {
-    color: var(--color-success);
-    flex-shrink: 0;
-    font-weight: 700;
-    font-size: 1rem;
-  }
-
-  /* CTA Section */
-  .cta-section {
-    padding: 5rem 1.5rem;
-    background: var(--color-primary-900);
-    color: var(--color-text-inverse);
-    text-align: center;
-  }
-  .cta__container {
-    max-width: 700px;
-    margin-inline: auto;
-  }
-  .cta__title {
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-  .cta__desc {
-    font-size: 1.125rem;
-    line-height: 1.7;
-    color: var(--color-primary-200);
-    margin-bottom: 2rem;
-  }
-  .cta__buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  /* Buttons */
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.875rem 2rem;
-    background: var(--color-cta);
-    color: var(--color-text-inverse);
-    font-weight: 700;
-    font-size: 1rem;
-    border-radius: var(--radius-pill);
-    transition: background 150ms, transform 100ms;
-    text-decoration: none;
-  }
-  .btn-primary:hover {
-    background: var(--color-accent-600);
-    transform: translateY(-2px);
-  }
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.875rem 2rem;
-    background: transparent;
-    color: var(--color-text-inverse);
-    font-weight: 600;
-    font-size: 1rem;
-    border-radius: var(--radius-pill);
-    border: 2px solid var(--color-primary-400);
-    transition: background 150ms, border-color 150ms;
-    text-decoration: none;
-  }
-  .btn-secondary:hover {
-    background: var(--color-primary-800);
-    border-color: var(--color-primary-300);
-  }
-  .btn-large {
-    padding: 1rem 2.5rem;
-    font-size: 1.0625rem;
-  }
-
-  @media (max-width: 640px) {
-    .hero { padding: 4rem 1rem 3rem; }
-    .services-section { padding: 3rem 1rem; }
-    .cta-section { padding: 3rem 1rem; }
-    .service-card { padding: 1.5rem; }
-  }
-</style>
+<script>
+  const filters = document.querySelectorAll<HTMLButtonElement>('.svc-filter');
+  filters.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filters.forEach((b) => {
+        b.classList.remove('svc-filter--active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('svc-filter--active');
+      btn.setAttribute('aria-selected', 'true');
+    });
+  });
+</script>

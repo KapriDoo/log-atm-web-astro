@@ -1,17 +1,16 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { SITE, LIVE_ROUTES, STATS } from '../../lib/constants';
+import { SITE, LIVE_ROUTES, HERO_STRIP_STATS } from '../../lib/constants';
 ---
 
-<header class="hero-b" aria-label="Hero LOG ATM">
+<header class="hero hero-b" aria-label="Hero LOG ATM">
   <div class="hero-b__media" aria-hidden="true">
     <img src="/images/services/svc-maritima.jpeg" alt="" fetchpriority="high" />
-    <div class="hero-b__overlay"></div>
   </div>
 
   <div class="container hero-b__inner">
     <div class="hero-b__grid">
-      <div class="hero-b__copy">
+      <div>
         <span class="eyebrow eyebrow--light">Operador logístico chileno · 20+ años</span>
         <h1 class="hero-b__title">
           Chile con el mundo,<br />
@@ -22,11 +21,11 @@ import { SITE, LIVE_ROUTES, STATS } from '../../lib/constants';
           un ejecutivo dedicado que conoce tu operación de extremo a extremo.
         </p>
         <div class="hero-b__ctas">
-          <a class="btn-cta" href="/cotizar">
+          <a class="btn btn--cta" href="/cotizar">
             Cotiza ahora
             <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
           </a>
-          <a class="btn-ghost-light" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
+          <a class="btn btn--ghost-light" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
             <Icon name="lucide:message-circle" width={14} height={14} aria-hidden="true" />
             WhatsApp
           </a>
@@ -34,30 +33,29 @@ import { SITE, LIVE_ROUTES, STATS } from '../../lib/constants';
       </div>
 
       <aside class="hero-b__live" aria-label="Rutas frecuentes">
-        <header class="hero-b__live-head">
+        <div class="hero-b__live-head">
           <span class="hero-b__live-title">Rutas frecuentes</span>
           <span class="hero-b__live-pill">Cobertura</span>
-        </header>
-        <ul class="hero-b__live-rows" role="list">
+        </div>
+        <div class="hero-b__live-rows">
           {LIVE_ROUTES.map((r) => (
-            <li class="hero-b__live-row">
-              <span class="hero-b__live-icon" aria-hidden="true">
+            <div class="hero-b__live-row">
+              <div class="hero-b__live-icon" aria-hidden="true">
                 <Icon name={r.mode === 'air' ? 'lucide:plane' : 'lucide:ship'} width={14} height={14} />
-              </span>
-              <span class="hero-b__live-route">
+              </div>
+              <div class="hero-b__live-route">
                 {r.from} <span class="hero-b__live-arrow">→</span> {r.to}
-              </span>
-              <span class="hero-b__live-eta">{r.eta}</span>
-            </li>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       </aside>
     </div>
 
     <div class="hero-b__strip">
-      {STATS.map((s) => (
+      {HERO_STRIP_STATS.map((s) => (
         <div class="hero-b__strip-item">
-          <span class="hero-b__strip-num">{s.value}</span>
+          <span class="hero-b__strip-num">{s.num}</span>
           <span class="hero-b__strip-label">{s.label}</span>
         </div>
       ))}

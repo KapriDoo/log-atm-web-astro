@@ -4,9 +4,10 @@ import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
 import { Icon } from 'astro-icon/components';
 import { SITE } from '../lib/constants';
+import '../styles/pages/shared.css';
 
 const title = 'Contacto';
-const description = 'Contáctanos para cotizar tu envío internacional. Atención personalizada 24/7 vía WhatsApp, email o teléfono.';
+const description = 'Hablemos de tu próximo envío. Respuesta en menos de 24 horas hábiles con tu ejecutivo dedicado. WhatsApp, teléfono o email — Vitacura, Santiago.';
 const canonical = `${SITE.url}/contacto`;
 ---
 
@@ -14,102 +15,152 @@ const canonical = `${SITE.url}/contacto`;
   <Navbar />
 
   <main id="main-content">
-    <!-- Hero -->
-    <section class="page-hero" aria-labelledby="page-title">
-      <div class="container page-hero__inner">
-        <span class="eyebrow">Contacto</span>
-        <h1 id="page-title" class="page-hero__title">Hablemos de tu carga</h1>
-        <p class="page-hero__lead">
-          Estamos aquí para ayudarte. Cotiza tu envío o haz cualquier consulta.
-        </p>
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__breadcrumb">
+          <a href="/">Inicio</a> <span>/</span> <span>Contacto</span>
+        </div>
+        <div class="page-hero__inner">
+          <div>
+            <span class="page-hero__eyebrow">Contacto · Respuesta en 24h</span>
+            <h1 class="page-hero__title">
+              Hablemos de tu <em>próximo envío</em>.
+            </h1>
+            <p class="page-hero__lead">
+              Cuéntanos qué necesitas mover. Un ejecutivo dedicado te responde con una
+              propuesta clara, en menos de 24 horas hábiles.
+            </p>
+          </div>
+          <div class="page-hero__meta">
+            <div class="page-hero__meta-item"><span class="v">24<em>h</em></span><span class="k">Tiempo de respuesta</span></div>
+            <div class="page-hero__meta-item"><span class="v">1:1</span><span class="k">Ejecutivo dedicado</span></div>
+            <div class="page-hero__meta-item"><span class="v">24/7</span><span class="k">Soporte operativo</span></div>
+            <div class="page-hero__meta-item"><span class="v">CL</span><span class="k">Santiago, Vitacura</span></div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Contact Grid -->
-    <section class="contact-section" aria-labelledby="contact-title">
+    <section class="section section--alt">
       <div class="container">
         <div class="contact-grid">
-          <!-- Info -->
-          <div class="contact-info" data-scroll-animate>
-            <h2 id="contact-title" class="contact-info__title">Información de contacto</h2>
-            
-            <div class="contact-method">
-              <div class="contact-method__icon" aria-hidden="true">
-                <Icon name="lucide:phone" width="24" height="24" />
-              </div>
+          <form class="contact-form-card" id="contact-form" novalidate>
+            <div class="contact-form-card__head">
               <div>
-                <strong>Teléfono</strong>
-                <a href={`tel:${SITE.phone}`}>{SITE.phone}</a>
+                <h2 class="contact-form-card__title">Cuéntanos qué necesitas mover</h2>
+                <p class="contact-form-card__sub">Respondemos en menos de 24h hábiles · sin spam.</p>
+              </div>
+              <span class="contact-form-card__pill">En línea ahora</span>
+            </div>
+
+            <div class="form-row form-row--2">
+              <div class="form-field">
+                <label for="cn">Nombre</label>
+                <input id="cn" name="name" type="text" placeholder="Tu nombre" autocomplete="name" required />
+              </div>
+              <div class="form-field">
+                <label for="ce">Empresa</label>
+                <input id="ce" name="company" type="text" placeholder="Razón social" autocomplete="organization" />
               </div>
             </div>
 
-            <div class="contact-method">
-              <div class="contact-method__icon" aria-hidden="true">
-                <Icon name="lucide:mail" width="24" height="24" />
+            <div class="form-row form-row--2">
+              <div class="form-field">
+                <label for="cm">Email</label>
+                <input id="cm" name="email" type="email" placeholder="nombre@empresa.cl" autocomplete="email" required />
               </div>
-              <div>
-                <strong>Email</strong>
-                <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
-              </div>
-            </div>
-
-            <div class="contact-method">
-              <div class="contact-method__icon" aria-hidden="true">
-                <Icon name="lucide:map-pin" width="24" height="24" />
-              </div>
-              <div>
-                <strong>Dirección</strong>
-                <span>{SITE.address}</span>
+              <div class="form-field">
+                <label for="cp">Teléfono</label>
+                <input id="cp" name="phone" type="tel" placeholder="+56 9 ..." autocomplete="tel" />
               </div>
             </div>
 
-            <a href={SITE.whatsappUrl} class="contact-whatsapp" target="_blank" rel="noopener noreferrer">
-              <Icon name="lucide:message-circle" width="20" height="20" />
-              Escríbenos por WhatsApp
-            </a>
-          </div>
-
-          <!-- Form -->
-          <div class="contact-form-wrap" data-scroll-animate data-scroll-delay="0.15">
-            <h2 class="contact-form__title">Envíanos un mensaje</h2>
-            <form class="contact-form" action="#" method="POST" aria-label="Formulario de contacto">
-              <div class="form-group">
-                <label for="name">Nombre completo *</label>
-                <input type="text" id="name" name="name" required placeholder="Tu nombre" />
-              </div>
-
-              <div class="form-group">
-                <label for="email">Email *</label>
-                <input type="email" id="email" name="email" required placeholder="tu@email.com" />
-              </div>
-
-              <div class="form-group">
-                <label for="company">Empresa</label>
-                <input type="text" id="company" name="company" placeholder="Nombre de tu empresa" />
-              </div>
-
-              <div class="form-group">
-                <label for="service">Servicio de interés</label>
-                <select id="service" name="service">
-                  <option value="">Selecciona un servicio</option>
-                  <option value="carga-aerea">Carga Aérea</option>
-                  <option value="carga-maritima">Carga Marítima</option>
-                  <option value="aduanas">Aduana y Documentación</option>
-                  <option value="almacenaje">Almacenaje</option>
-                  <option value="consultoria">Consultoría Logística</option>
+            <div class="form-row form-row--2">
+              <div class="form-field">
+                <label for="cs">Servicio</label>
+                <select id="cs" name="service">
+                  <option>Carga Marítima · FCL</option>
+                  <option>Carga Marítima · LCL</option>
+                  <option>Carga Aérea / Courier</option>
+                  <option>Aduana y Documentación</option>
+                  <option>Almacenaje · Fulfillment</option>
+                  <option>Consultoría Supply Chain</option>
+                  <option>Otro · cuéntanos</option>
                 </select>
               </div>
-
-              <div class="form-group">
-                <label for="message">Mensaje *</label>
-                <textarea id="message" name="message" rows="4" required placeholder="Cuéntanos sobre tu envío..."></textarea>
+              <div class="form-field">
+                <label for="co">Origen → Destino</label>
+                <input id="co" name="route" type="text" placeholder="Ej. Shanghai → Santiago" />
               </div>
+            </div>
 
-              <button type="submit" class="btn-submit">
-                Enviar mensaje
-                <Icon name="lucide:send" width="16" height="16" />
-              </button>
-            </form>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="cmsg">Mensaje</label>
+                <textarea id="cmsg" name="message" placeholder="Cuéntanos volumen, plazos, tipo de carga..."></textarea>
+              </div>
+            </div>
+
+            <button class="form-submit" type="submit" id="contact-submit">
+              <span class="form-submit__label">Enviar solicitud</span>
+              <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
+            </button>
+            <p class="form-fineprint">
+              Al enviar aceptas nuestra <a href="#">política de privacidad</a>. No compartimos tus datos.
+            </p>
+          </form>
+
+          <div>
+            <span class="eyebrow">Canales directos</span>
+
+            <div class="contact-channels">
+              <a class="channel channel--wa" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
+                <div class="channel__icon">
+                  <Icon name="lucide:message-circle" width={22} height={22} aria-hidden="true" />
+                </div>
+                <div>
+                  <div class="channel__name">WhatsApp · respuesta inmediata</div>
+                  <div class="channel__value">{SITE.phoneDisplay}</div>
+                </div>
+                <span class="channel__arrow" aria-hidden="true">→</span>
+              </a>
+              <a class="channel" href={`tel:${SITE.phone}`}>
+                <div class="channel__icon">
+                  <Icon name="lucide:phone" width={20} height={20} aria-hidden="true" />
+                </div>
+                <div>
+                  <div class="channel__name">Teléfono</div>
+                  <div class="channel__value">{SITE.phoneDisplay}</div>
+                </div>
+                <span class="channel__arrow" aria-hidden="true">→</span>
+              </a>
+              <a class="channel" href={`mailto:${SITE.email}`}>
+                <div class="channel__icon">
+                  <Icon name="lucide:mail" width={20} height={20} aria-hidden="true" />
+                </div>
+                <div>
+                  <div class="channel__name">Email · operaciones</div>
+                  <div class="channel__value">{SITE.email}</div>
+                </div>
+                <span class="channel__arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+
+            <div class="office-card">
+              <div class="office-card__map" aria-hidden="true">
+                <div class="office-card__map-grid"></div>
+                <div class="office-card__pin"></div>
+              </div>
+              <div class="office-card__body">
+                <h3 class="office-card__name">Oficina Santiago</h3>
+                <p class="office-card__address">{SITE.address}</p>
+                <div class="office-card__hours">
+                  <div class="office-card__hours-row"><span>Lun – Vie</span><strong>09:00 – 18:30</strong></div>
+                  <div class="office-card__hours-row"><span>Sábado</span><strong>10:00 – 13:00</strong></div>
+                  <div class="office-card__hours-row"><span>Soporte op.</span><strong>24/7</strong></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -119,138 +170,15 @@ const canonical = `${SITE.url}/contacto`;
   <Footer />
 </BaseLayout>
 
-<style>
-  /* .page-hero, .page-hero__* → global.css */
-
-  .contact-section {
-    padding: clamp(4rem, 8vw, 6rem) 0;
-    background: var(--color-bg);
-  }
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 4rem;
-    align-items: start;
-  }
-  @media (max-width: 768px) {
-    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-  }
-
-  .contact-info__title {
-    font-family: var(--font-display);
-    font-size: 1.75rem;
-    font-weight: 700;
-    margin: 0 0 2rem;
-    color: var(--color-neutral-900);
-  }
-  .contact-method {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-    margin-bottom: 1.5rem;
-  }
-  .contact-method__icon {
-    width: 48px; height: 48px;
-    border-radius: var(--radius-md);
-    background: var(--color-primary-50);
-    color: var(--color-brand);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .contact-method strong {
-    display: block;
-    font-size: 0.875rem;
-    color: var(--color-text-muted);
-    margin-bottom: 0.25rem;
-  }
-  .contact-method a {
-    color: var(--color-neutral-900);
-    font-weight: 600;
-    font-size: 1.1rem;
-  }
-  .contact-method span {
-    color: var(--color-neutral-900);
-    font-size: 1.1rem;
-  }
-
-  .contact-whatsapp {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.875rem 1.5rem;
-    border-radius: var(--radius-pill);
-    background: var(--color-whatsapp);
-    color: var(--color-text-inverse);
-    font-weight: 600;
-    margin-top: 1rem;
-    transition: background 150ms;
-  }
-  .contact-whatsapp:hover { background: var(--color-whatsapp-hover-dark); }
-
-  .contact-form-wrap {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    padding: 2.5rem;
-  }
-  .contact-form__title {
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 0 0 1.5rem;
-    color: var(--color-neutral-900);
-  }
-  .form-group {
-    margin-bottom: 1.25rem;
-  }
-  .form-group label {
-    display: block;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--color-neutral-700);
-    margin-bottom: 0.375rem;
-  }
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid var(--color-neutral-200);
-    border-radius: var(--radius-input);
-    font-size: 1rem;
-    color: var(--color-neutral-900);
-    background: var(--color-surface);
-    transition: border-color 150ms, box-shadow 150ms;
-  }
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    outline: none;
-    border-color: var(--color-brand);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary-500) 10%, transparent);
-  }
-  .form-group textarea {
-    resize: vertical;
-    min-height: 120px;
-  }
-
-  .btn-submit {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    width: 100%;
-    justify-content: center;
-    padding: 0.875rem;
-    border-radius: var(--radius-pill);
-    background: var(--color-cta);
-    color: var(--color-text-inverse);
-    font-weight: 700;
-    font-size: 1rem;
-    border: none;
-    cursor: pointer;
-    transition: background 150ms;
-  }
-  .btn-submit:hover { background: var(--color-accent-600); }
-</style>
+<script>
+  const form  = document.getElementById('contact-form') as HTMLFormElement | null;
+  const btn   = document.getElementById('contact-submit') as HTMLButtonElement | null;
+  const label = btn?.querySelector<HTMLSpanElement>('.form-submit__label');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!btn || !label) return;
+    btn.disabled = true;
+    label.textContent = '✓ Recibido — te contactamos hoy';
+    btn.querySelector('svg')?.remove();
+  });
+</script>

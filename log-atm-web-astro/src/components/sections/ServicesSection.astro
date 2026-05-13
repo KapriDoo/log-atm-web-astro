@@ -1,34 +1,49 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { SERVICES } from '../../lib/constants';
+
+// Home muestra 6 servicios principales en bento (paridad target):
+// fila 1: Marítima (wide) izq + Aérea (feature, ocupa 2 filas) der
+// fila 2: Aduana + Almacenaje + Consultoría (std, 3 chicos a la izq)
+// fila 3: Courier (wide)
+const FEATURED = [
+  SERVICES[1], // 02 Carga Marítima (wide)
+  SERVICES[0], // 01 Carga Aérea     (feature, spans 2 filas)
+  SERVICES[2], // 03 Aduana          (std)
+  SERVICES[3], // 04 Almacenaje      (std)
+  SERVICES[4], // 05 Consultoría     (std)
+  SERVICES[5], // 06 Courier         (wide)
+];
+const TOTAL = SERVICES.length;
 ---
 
-<section class="services" id="servicios" aria-label="Servicios LOG ATM">
+<section class="services section" id="servicios" aria-label="Servicios LOG ATM">
   <div class="container">
-    <div class="services__head">
-      <div class="services__head-left">
-        <span class="eyebrow">Qué hacemos</span>
-        <h2 class="services__title">Soluciones para cada necesidad</h2>
+    <div class="section-head">
+      <div class="section-head__top">
+        <div>
+          <span class="eyebrow">Qué hacemos</span>
+          <h2 class="section-head__title">Soluciones para cada necesidad</h2>
+        </div>
+        <p class="section-head__desc">
+          Desde el despacho urgente hasta la consultoría de supply chain completa.
+          Cada cuenta tiene un ejecutivo dedicado que diseña la ruta a tu medida.
+        </p>
       </div>
-      <p class="services__desc">
-        Desde el despacho urgente hasta la consultoría de supply chain completa.
-        Cada cuenta tiene un ejecutivo dedicado que diseña la ruta a tu medida.
-      </p>
     </div>
 
     <div class="services__grid">
-      {SERVICES.map((s) => (
-        <a class:list={[`svc-card`, `svc-card--${s.size}`]} href={s.href}>
+      {FEATURED.map((s) => (
+        <a class:list={['svc-card', `svc-card--${s.size}`]} href={s.href}>
           <div class="svc-card__media">
-            <img src={s.img} alt={s.title} loading="lazy" decoding="async" />
-            <div class="svc-card__overlay"></div>
+            <img src={s.img} alt="" loading="lazy" decoding="async" />
           </div>
           <span class:list={['svc-card__tag', { 'svc-card__tag--cta': s.isCta }]}>{s.tag}</span>
-          <span class="svc-card__icon-pill" aria-hidden="true">
+          <div class="svc-card__icon-pill" aria-hidden="true">
             <Icon name={s.icon} width={18} height={18} />
-          </span>
+          </div>
           <div class="svc-card__body">
-            <span class="svc-card__num">{s.n} · Servicio</span>
+            <div class="svc-card__num">{s.n} · Servicio</div>
             <h3 class="svc-card__title">{s.title}</h3>
             <p class="svc-card__desc">{s.desc}</p>
             <span class="svc-card__cta">
@@ -38,6 +53,13 @@ import { SERVICES } from '../../lib/constants';
           </div>
         </a>
       ))}
+    </div>
+
+    <div class="services__all">
+      <a class="btn btn--brand" href="/servicios">
+        Ver los {TOTAL} servicios
+        <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
+      </a>
     </div>
   </div>
 </section>

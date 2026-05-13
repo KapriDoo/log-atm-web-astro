@@ -1,0 +1,149 @@
+---
+import { Icon } from 'astro-icon/components';
+import { WHY_ITEMS } from '../../lib/constants';
+---
+
+<section class="why section" id="why" aria-label="Por qué LOG ATM">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-head__top">
+        <div>
+          <span class="eyebrow">Por qué LOG ATM</span>
+          <h2 class="section-head__title">El operador que opera contigo</h2>
+        </div>
+        <p class="section-head__desc">
+          Somos un partner logístico, no un proveedor más. Conocemos tu negocio
+          y diseñamos la operación a tu medida.
+        </p>
+      </div>
+    </div>
+
+    <div class="why__grid">
+      <div class="why__video">
+        <video
+          class="why__video-el"
+          poster="/images/services/svc-maritima.jpeg"
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          aria-label="Video institucional LOG ATM (silencioso, 2 minutos)"
+        >
+          <source src="/videos/log-atm-intro.mp4" type="video/mp4" />
+        </video>
+
+        <button
+          type="button"
+          class="why__video-toggle"
+          id="why-video-toggle"
+          aria-label="Reproducir video"
+          aria-pressed="false"
+        >
+          <span class="why__video-toggle-icon" aria-hidden="true" data-state="paused">▶</span>
+        </button>
+
+        <div class="why__video-logo" aria-hidden="true">
+          <img src="/logo.png" alt="" />
+          <span class="why__video-logo-tag">Logística a tu medida</span>
+        </div>
+
+        <div class="why__video-caption">
+          <span class="why__video-eyebrow">Conoce LOG ATM</span>
+          <span class="why__video-title">2 minutos para entender cómo trabajamos</span>
+        </div>
+      </div>
+
+      <div class="why__items">
+        {WHY_ITEMS.map((w) => (
+          <div class="why-card">
+            <div class="why-card__icon" aria-hidden="true">
+              <Icon name={w.icon} width={22} height={22} />
+            </div>
+            <div>
+              <h3 class="why-card__title">{w.title}</h3>
+              <p class="why-card__desc">{w.desc}</p>
+            </div>
+            <div class="why-card__metric">
+              {w.metric}<small>{w.sub}</small>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const video  = document.querySelector<HTMLVideoElement>('.why__video-el');
+  const logo   = document.querySelector<HTMLElement>('.why__video-logo');
+  const toggle = document.getElementById('why-video-toggle') as HTMLButtonElement | null;
+  const icon   = toggle?.querySelector<HTMLElement>('.why__video-toggle-icon') ?? null;
+
+  if (video && logo && toggle && icon) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const update = () => {
+      if (!video.duration || !isFinite(video.duration)) return;
+      const remain = video.duration - video.currentTime;
+      logo.classList.toggle('is-visible', remain <= 1.0 && video.currentTime > 0.2);
+    };
+
+    const syncToggle = () => {
+      const playing = !video.paused && !video.ended;
+      toggle.setAttribute('aria-pressed', String(playing));
+      toggle.setAttribute('aria-label', playing ? 'Pausar video' : 'Reproducir video');
+      icon.textContent = playing ? '❚❚' : '▶';
+      icon.dataset.state = playing ? 'playing' : 'paused';
+    };
+
+    toggle.addEventListener('click', () => {
+      if (video.paused) video.play().catch(() => { /* noop */ });
+      else video.pause();
+    });
+
+    video.addEventListener('timeupdate', update);
+    video.addEventListener('seeked', () => {
+      if (video.currentTime < 0.2) logo.classList.remove('is-visible');
+    });
+    video.addEventListener('play', syncToggle);
+    video.addEventListener('pause', syncToggle);
+    video.addEventListener('ended', syncToggle);
+
+    // Autoplay sólo si el usuario no pidió reducir movimiento (WCAG 2.2.2).
+    if (!reduceMotion) {
+      video.play().catch(() => { /* noop — Safari iOS estricto */ });
+    }
+    syncToggle();
+  }
+</script>
+
+<style>
+  .why__video-toggle {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 3;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: 1px solid rgb(255 255 255 / 0.4);
+    background: rgb(0 0 0 / 0.55);
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: background 150ms, transform 150ms;
+  }
+  .why__video-toggle:hover { background: rgb(0 0 0 / 0.75); }
+  .why__video-toggle:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+  .why__video-toggle-icon {
+    font-size: 0.875rem;
+    line-height: 1;
+  }
+</style>
