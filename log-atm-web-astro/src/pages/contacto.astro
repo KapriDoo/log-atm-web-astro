@@ -45,6 +45,15 @@ const canonical = `${SITE.url}/contacto`;
       <div class="container">
         <div class="contact-grid">
           <form class="contact-form-card" id="contact-form" novalidate>
+            {/* Honeypot anti-spam (no tocar) */}
+            <input
+              type="text"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+              style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;"
+            />
             <div class="contact-form-card__head">
               <div>
                 <h2 class="contact-form-card__title">Cuéntanos qué necesitas mover</h2>
@@ -105,6 +114,14 @@ const canonical = `${SITE.url}/contacto`;
               <span class="form-submit__label">Enviar solicitud</span>
               <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
             </button>
+            <p
+              class="form-status"
+              id="contact-status"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+              style="margin:0.5rem 0 0;font-size:0.875rem;min-height:1.25rem;"
+            ></p>
             <p class="form-fineprint">
               Al enviar aceptas nuestra <a href="#">política de privacidad</a>. No compartimos tus datos.
             </p>
@@ -171,14 +188,56 @@ const canonical = `${SITE.url}/contacto`;
 </BaseLayout>
 
 <script>
-  const form  = document.getElementById('contact-form') as HTMLFormElement | null;
-  const btn   = document.getElementById('contact-submit') as HTMLButtonElement | null;
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const btn = document.getElementById('contact-submit') as HTMLButtonElement | null;
   const label = btn?.querySelector<HTMLSpanElement>('.form-submit__label');
-  form?.addEventListener('submit', (e) => {
+  const status = document.getElementById('contact-status') as HTMLElement | null;
+
+  function setStatus(msg: string, kind: '' | 'error' | 'success' = '') {
+    if (!status) return;
+    status.textContent = msg;
+    status.style.color =
+      kind === 'error' ? '#c0392b' : kind === 'success' ? '#2d9b6f' : '';
+  }
+
+  form?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    if (!btn || !label) return;
+    if (!form || !btn || !label) return;
+
+    const original = label.textContent ?? 'Enviar solicitud';
     btn.disabled = true;
-    label.textContent = '✓ Recibido — te contactamos hoy';
-    btn.querySelector('svg')?.remove();
+    label.textContent = 'Enviando…';
+    setStatus('Enviando tu mensaje…');
+
+    const fd = new FormData(form);
+    const payload: Record<string, string> = {};
+    fd.forEach((v, k) => { payload[k] = String(v); });
+
+    try {
+      const r = await fetch('/api/contacto', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (r.ok && data.ok) {
+        setStatus('✓ Recibido — te contactamos hoy.', 'success');
+        label.textContent = '✓ Enviado';
+        form.reset();
+        return;
+      }
+      if (r.status === 400 && data.fields) {
+        const first = Object.values(data.fields)[0] as string;
+        setStatus(`Revisa los datos: ${first}`, 'error');
+      } else {
+        setStatus('No pudimos enviar tu mensaje. Reintenta o escríbenos por WhatsApp.', 'error');
+      }
+      label.textContent = original;
+      btn.disabled = false;
+    } catch {
+      setStatus('Error de conexión. Reintenta en unos segundos.', 'error');
+      label.textContent = original;
+      btn.disabled = false;
+    }
   });
 </script>
