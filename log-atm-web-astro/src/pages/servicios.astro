@@ -4,8 +4,8 @@ import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
 import CTASection from '../components/sections/CTASection.astro';
 import { Icon } from 'astro-icon/components';
-import { SITE, SERVICES, SERVICE_DETAILS, SERVICE_FILTERS, PROCESS_STEPS, FAQ } from '../lib/constants';
-import { useTranslations, getLangFromUrl } from '../i18n/utils';
+import { SITE, SERVICES } from '../lib/constants';
+import { useTranslations, getLangFromUrl, tList } from '../i18n/utils';
 import '../styles/pages/shared.css';
 import '../styles/sections/services.css';
 
@@ -15,7 +15,25 @@ const title = t('meta.servicios.title');
 const description = t('meta.servicios.description');
 const canonical = `${SITE.url}/servicios`;
 
-const detailedServices = SERVICES.filter((s) => SERVICE_DETAILS[s.n as keyof typeof SERVICE_DETAILS]);
+type ServiceCopy = { title: string; desc: string; tag: string };
+type ServiceFilter = { k: string; label: string };
+type ServiceDetail = { n: string; badge: string; features: string[] };
+type FaqItem = { q: string; a: string };
+type ProcessStep = { title: string; desc: string };
+
+const serviceCopies = tList<ServiceCopy>(currentLang, 'servicios.list');
+const serviceFilters = tList<ServiceFilter>(currentLang, 'servicios.filters');
+const serviceDetails = tList<ServiceDetail>(currentLang, 'servicios.details.items');
+const processSteps = tList<ProcessStep>(currentLang, 'servicios.process.steps');
+const faqItems = tList<FaqItem>(currentLang, 'servicios.faq.items');
+
+const services = SERVICES.map((s, i) => ({ ...s, ...(serviceCopies[i] ?? { title: s.title, desc: s.desc, tag: s.tag }) }));
+const detailedServices = services
+  .map((s) => {
+    const detail = serviceDetails.find((d) => d.n === s.n);
+    return detail ? { service: s, detail } : null;
+  })
+  .filter((x): x is { service: typeof services[number]; detail: ServiceDetail } => x !== null);
 ---
 
 <BaseLayout title={title} description={description} canonical={canonical}>
@@ -25,22 +43,19 @@ const detailedServices = SERVICES.filter((s) => SERVICE_DETAILS[s.n as keyof typ
     <section class="page-hero">
       <div class="container">
         <div class="page-hero__breadcrumb">
-          <a href="/">Inicio</a> <span>/</span> <span>Servicios</span>
+          <a href="/">{t('common.breadcrumbHome')}</a> <span>/</span> <span>{t('servicios.breadcrumb')}</span>
         </div>
         <div class="page-hero__inner">
           <div>
-            <span class="page-hero__eyebrow">Servicios · 11 soluciones</span>
-            <h1 class="page-hero__title">Cobertura logística <em>end-to-end</em>.</h1>
-            <p class="page-hero__lead">
-              Desde el despacho urgente hasta la consultoría de supply chain completa.
-              Una sola contraparte, una sola factura, visibilidad total.
-            </p>
+            <span class="page-hero__eyebrow">{t('servicios.heroEyebrow')}</span>
+            <h1 class="page-hero__title" set:html={t('servicios.heroTitleHtml')}></h1>
+            <p class="page-hero__lead">{t('servicios.heroLead')}</p>
           </div>
           <div class="page-hero__meta">
-            <div class="page-hero__meta-item"><span class="v">11</span><span class="k">Servicios activos</span></div>
-            <div class="page-hero__meta-item"><span class="v">70<em>+</em></span><span class="k">Países en red</span></div>
-            <div class="page-hero__meta-item"><span class="v">24/7</span><span class="k">Operación</span></div>
-            <div class="page-hero__meta-item"><span class="v">OEA</span><span class="k">Aduanas Chile</span></div>
+            <div class="page-hero__meta-item"><span class="v">11</span><span class="k">{t('servicios.metaActive')}</span></div>
+            <div class="page-hero__meta-item"><span class="v">70<em>+</em></span><span class="k">{t('servicios.metaCountries')}</span></div>
+            <div class="page-hero__meta-item"><span class="v">24/7</span><span class="k">{t('servicios.metaOps')}</span></div>
+            <div class="page-hero__meta-item"><span class="v">OEA</span><span class="k">{t('servicios.metaCustoms')}</span></div>
           </div>
         </div>
       </div>
@@ -48,9 +63,9 @@ const detailedServices = SERVICES.filter((s) => SERVICE_DETAILS[s.n as keyof typ
 
     <section class="services section" id="servicios" aria-labelledby="services-catalog-title">
       <div class="container">
-        <h2 id="services-catalog-title" class="sr-only">Catálogo de servicios</h2>
-        <div class="svc-filters" role="tablist" aria-label="Categorías de servicios">
-          {SERVICE_FILTERS.map((c, i) => (
+        <h2 id="services-catalog-title" class="sr-only">{t('a11y.servicesCatalog')}</h2>
+        <div class="svc-filters" role="tablist" aria-label={t('a11y.serviceCategories')}>
+          {serviceFilters.map((c, i) => (
             <button
               type="button"
               class:list={['svc-filter', { 'svc-filter--active': i === 0 }]}
@@ -62,7 +77,7 @@ const detailedServices = SERVICES.filter((s) => SERVICE_DETAILS[s.n as keyof typ
         </div>
 
         <div class="services__grid">
-          {SERVICES.map((s) => (
+          {services.map((s) => (
             <a class:list={[`svc-card`, `svc-card--${s.size}`]} href={s.href}>
               <div class="svc-card__media">
                 <img src={s.img} alt={s.title} loading="lazy" decoding="async" />
@@ -73,11 +88,11 @@ const detailedServices = SERVICES.filter((s) => SERVICE_DETAILS[s.n as keyof typ
                 <Icon name={s.icon} width={18} height={18} />
               </span>
               <div class="svc-card__body">
-                <span class="svc-card__num">{s.n} · Servicio</span>
+                <span class="svc-card__num">{s.n} · {t('home.services.numPrefix')}</span>
                 <h3 class="svc-card__title">{s.title}</h3>
                 <p class="svc-card__desc">{s.desc}</p>
                 <span class="svc-card__cta">
-                  Conocer más
+                  {t('common.learnMore')}
                   <Icon name="lucide:arrow-right" width={14} height={14} aria-hidden="true" />
                 </span>
               </div>
@@ -90,32 +105,29 @@ const detailedServices = SERVICES.filter((s) => SERVICE_DETAILS[s.n as keyof typ
     <section class="section section--surface">
       <div class="container">
         <div class="section-head">
-          <span class="eyebrow">Detalle por servicio</span>
-          <h2 class="section-head__title">Lo que incluye cada uno</h2>
+          <span class="eyebrow">{t('servicios.details.sectionEyebrow')}</span>
+          <h2 class="section-head__title">{t('servicios.details.sectionTitle')}</h2>
         </div>
-        {detailedServices.map((s, i) => {
-          const detail = SERVICE_DETAILS[s.n as keyof typeof SERVICE_DETAILS]!;
-          return (
-            <div class:list={['svc-detail-row', { 'svc-detail-row--reverse': i % 2 === 1 }]}>
-              <div class="svc-detail__media">
-                <span class="svc-detail__badge">{detail.badge}</span>
-                <img src={s.img} alt={s.title} loading="lazy" />
-              </div>
-              <div>
-                <div class="svc-detail__num">{s.n} · {s.tag}</div>
-                <h3 class="svc-detail__title">{s.title}</h3>
-                <p class="svc-detail__desc">{s.desc}</p>
-                <ul class="svc-detail__features">
-                  {detail.features.map((f) => <li>{f}</li>)}
-                </ul>
-                <a href="/contacto" class="btn btn--brand btn--sm">
-                  Cotizar este servicio
-                  <Icon name="lucide:arrow-right" width={14} height={14} aria-hidden="true" />
-                </a>
-              </div>
+        {detailedServices.map(({ service: s, detail }, i) => (
+          <div class:list={['svc-detail-row', { 'svc-detail-row--reverse': i % 2 === 1 }]}>
+            <div class="svc-detail__media">
+              <span class="svc-detail__badge">{detail.badge}</span>
+              <img src={s.img} alt={s.title} loading="lazy" />
             </div>
-          );
-        })}
+            <div>
+              <div class="svc-detail__num">{s.n} · {s.tag}</div>
+              <h3 class="svc-detail__title">{s.title}</h3>
+              <p class="svc-detail__desc">{s.desc}</p>
+              <ul class="svc-detail__features">
+                {detail.features.map((f) => <li>{f}</li>)}
+              </ul>
+              <a href="/contacto" class="btn btn--brand btn--sm">
+                {t('servicios.details.cardCta')}
+                <Icon name="lucide:arrow-right" width={14} height={14} aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
 
@@ -123,17 +135,15 @@ const detailedServices = SERVICES.filter((s) => SERVICE_DETAILS[s.n as keyof typ
       <div class="container">
         <div class="process-strip__head">
           <div>
-            <span class="eyebrow">Cómo trabajamos</span>
-            <h2 class="process-strip__title">Un proceso predecible en 6 pasos.</h2>
+            <span class="eyebrow">{t('servicios.process.eyebrow')}</span>
+            <h2 class="process-strip__title">{t('servicios.process.title')}</h2>
           </div>
-          <p class="process-strip__desc">
-            De la cotización al cierre con KPIs. Un solo ejecutivo dedicado coordina cada etapa.
-          </p>
+          <p class="process-strip__desc">{t('servicios.process.desc')}</p>
         </div>
         <div class="process-grid">
-          {PROCESS_STEPS.map((p) => (
+          {processSteps.map((p, i) => (
             <div class="process-step">
-              <span class="process-step__n">{p.n}</span>
+              <span class="process-step__n">{String(i + 1).padStart(2, '0')}</span>
               <h3 class="process-step__title">{p.title}</h3>
               <p class="process-step__desc">{p.desc}</p>
             </div>
@@ -145,11 +155,11 @@ const detailedServices = SERVICES.filter((s) => SERVICE_DETAILS[s.n as keyof typ
     <section class="section section--alt section--narrow">
       <div class="container">
         <div class="section-head section-head--centered">
-          <span class="eyebrow">Preguntas frecuentes</span>
-          <h2 class="section-head__title">Resolvemos lo que más nos preguntan</h2>
+          <span class="eyebrow">{t('servicios.faq.eyebrow')}</span>
+          <h2 class="section-head__title">{t('servicios.faq.title')}</h2>
         </div>
         <div class="faq-list">
-          {FAQ.map((f, i) => (
+          {faqItems.map((f, i) => (
             <details class="faq-item" open={i === 0}>
               <summary>{f.q}</summary>
               <div class="faq-item__body">{f.a}</div>

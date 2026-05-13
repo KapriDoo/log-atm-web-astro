@@ -65,7 +65,8 @@
     "backHome": "[hi] Volver al inicio",
     "whatsapp": "[hi] WhatsApp",
     "email": "[hi] Email",
-    "openInNewTab": "[hi]  (se abre en nueva pestaña)"
+    "openInNewTab": "[hi]  (se abre en nueva pestaña)",
+    "breadcrumbHome": "[hi] Inicio"
   },
   "a11y": {
     "skipLink": "[hi] Saltar al contenido principal",
@@ -84,7 +85,10 @@
     "ctaAria": "[hi] Cotización rápida",
     "videoAria": "[hi] Video institucional LOG ATM (silencioso, 2 minutos)",
     "playVideo": "[hi] Reproducir video",
-    "pauseVideo": "[hi] Pausar video"
+    "pauseVideo": "[hi] Pausar video",
+    "servicesCatalog": "[hi] Catálogo de servicios",
+    "serviceCategories": "[hi] Categorías de servicios",
+    "quoteSummary": "[hi] Resumen de cotización"
   },
   "home": {
     "hero": {
@@ -143,36 +147,832 @@
     "eyebrow": "[hi] Servicios",
     "title": "[hi] Servicios",
     "desc": "[hi] Catálogo completo de servicios logísticos LOG ATM.",
+    "breadcrumb": "[hi] Servicios",
+    "heroEyebrow": "[hi] Servicios · 11 soluciones",
+    "heroTitleHtml": "[hi] Cobertura logística <em>end-to-end</em>.",
+    "heroLead": "[hi] Desde el despacho urgente hasta la consultoría de supply chain completa. Una sola contraparte, una sola factura, visibilidad total.",
+    "metaActive": "[hi] Servicios activos",
+    "metaCountries": "[hi] Países en red",
+    "metaOps": "[hi] Operación",
+    "metaCustoms": "[hi] Aduanas Chile",
+    "filters": [
+      {
+        "k": "[hi] all",
+        "label": "[hi] Todos · 11"
+      },
+      {
+        "k": "[hi] aereo",
+        "label": "[hi] Aéreo"
+      },
+      {
+        "k": "[hi] mar",
+        "label": "[hi] Marítimo"
+      },
+      {
+        "k": "[hi] aduana",
+        "label": "[hi] Aduana"
+      },
+      {
+        "k": "[hi] alm",
+        "label": "[hi] Almacenaje"
+      },
+      {
+        "k": "[hi] cons",
+        "label": "[hi] Consultoría"
+      }
+    ],
+    "list": [
+      {
+        "title": "[hi] Carga Aérea",
+        "desc": "[hi] Express, courier internacional y chárter aéreo con tiempos garantizados.",
+        "tag": "[hi] Express · 48h"
+      },
+      {
+        "title": "[hi] Carga Marítima",
+        "desc": "[hi] FCL y LCL a 80+ puertos. Consolidamos para reducir costos.",
+        "tag": "[hi] FCL · LCL"
+      },
+      {
+        "title": "[hi] Aduana y Documentación",
+        "desc": "[hi] DUS, certificados de origen y clasificación arancelaria.",
+        "tag": "[hi] OEA Chile"
+      },
+      {
+        "title": "[hi] Almacenaje",
+        "desc": "[hi] Bodegaje, fulfillment y última milla con inventario en tiempo real.",
+        "tag": "[hi] 24/7"
+      },
+      {
+        "title": "[hi] Consultoría Logística",
+        "desc": "[hi] Supply chain a medida que reduce costos y plazos.",
+        "tag": "[hi] A tu medida"
+      },
+      {
+        "title": "[hi] Courier Internacional",
+        "desc": "[hi] Envíos exprés puerta a puerta con cobertura global.",
+        "tag": "[hi] D2D"
+      },
+      {
+        "title": "[hi] Seguros de Carga",
+        "desc": "[hi] Cobertura integral durante todo el trayecto.",
+        "tag": "[hi] Global"
+      },
+      {
+        "title": "[hi] Desconsolidado",
+        "desc": "[hi] Recepción, fraccionamiento y distribución desde puerto.",
+        "tag": "[hi] LCL"
+      },
+      {
+        "title": "[hi] Casillero USA",
+        "desc": "[hi] Dirección propia en EE.UU. para compras online.",
+        "tag": "[hi] Miami"
+      },
+      {
+        "title": "[hi] Compras Internacionales",
+        "desc": "[hi] Asesoría completa: proveedores, pagos y logística.",
+        "tag": "[hi] Asesoría"
+      },
+      {
+        "title": "[hi] Ruta Medio Oriente",
+        "desc": "[hi] Conexión especializada con socios locales de confianza.",
+        "tag": "[hi] DXB · JED"
+      }
+    ],
+    "details": {
+      "sectionEyebrow": "[hi] Detalle por servicio",
+      "sectionTitle": "[hi] Lo que incluye cada uno",
+      "numPrefix": "[hi] Servicio",
+      "cardCta": "[hi] Cotizar este servicio",
+      "items": [
+        {
+          "n": "[hi] 01",
+          "badge": "[hi] IATA · CASS",
+          "features": [
+            "[hi] Express 48h a 70+ países",
+            "[hi] Chárter aéreo dedicado",
+            "[hi] Cadena de frío y dangerous goods",
+            "[hi] Tracking unificado en una sola URL"
+          ]
+        },
+        {
+          "n": "[hi] 02",
+          "badge": "[hi] FIATA · BIMCO",
+          "features": [
+            "[hi] FCL/LCL a 80+ puertos",
+            "[hi] Consolidación semanal Asia-Chile",
+            "[hi] Reefer y open-top disponibles",
+            "[hi] Negociación de tarifas por contrato"
+          ]
+        },
+        {
+          "n": "[hi] 03",
+          "badge": "[hi] OEA · Aduanas Chile",
+          "features": [
+            "[hi] Clasificación arancelaria precisa",
+            "[hi] DUS, certificados de origen, fumigación",
+            "[hi] Operador Económico Autorizado",
+            "[hi] Revisión documental anti-multas"
+          ]
+        },
+        {
+          "n": "[hi] 04",
+          "badge": "[hi] WMS integrado",
+          "features": [
+            "[hi] Bodegaje 24/7 con CCTV",
+            "[hi] Fulfillment para e-commerce",
+            "[hi] Inventario en tiempo real (API)",
+            "[hi] Cross-docking y última milla"
+          ]
+        },
+        {
+          "n": "[hi] 05",
+          "badge": "[hi] A tu medida",
+          "features": [
+            "[hi] Diagnóstico de supply chain",
+            "[hi] Diseño de red logística óptima",
+            "[hi] Negociación con navieras y aerolíneas",
+            "[hi] KPI dashboard mensual"
+          ]
+        },
+        {
+          "n": "[hi] 11",
+          "badge": "[hi] DXB · JED hub",
+          "features": [
+            "[hi] Hub Dubai (DXB) y Jeddah (JED)",
+            "[hi] Socios locales certificados",
+            "[hi] Documentación islámica/halal",
+            "[hi] Conexión Asia-África-LATAM"
+          ]
+        }
+      ]
+    },
+    "process": {
+      "eyebrow": "[hi] Cómo trabajamos",
+      "title": "[hi] Un proceso predecible en 6 pasos.",
+      "desc": "[hi] De la cotización al cierre con KPIs. Un solo ejecutivo dedicado coordina cada etapa.",
+      "steps": [
+        {
+          "title": "[hi] Diagnóstico",
+          "desc": "[hi] Entendemos tu negocio, cargas y temporalidad."
+        },
+        {
+          "title": "[hi] Diseño de ruta",
+          "desc": "[hi] Modal, transbordos y tiempos optimizados."
+        },
+        {
+          "title": "[hi] Cotización",
+          "desc": "[hi] Propuesta clara y desglosada en 24h."
+        },
+        {
+          "title": "[hi] Ejecución",
+          "desc": "[hi] Coordinación con todos los actores en origen."
+        },
+        {
+          "title": "[hi] Aduana",
+          "desc": "[hi] OEA y revisión documental anticipada."
+        },
+        {
+          "title": "[hi] Entrega",
+          "desc": "[hi] Última milla y cierre con KPIs."
+        }
+      ]
+    },
+    "faq": {
+      "eyebrow": "[hi] Preguntas frecuentes",
+      "title": "[hi] Resolvemos lo que más nos preguntan",
+      "items": [
+        {
+          "q": "[hi] ¿Cómo cotizan un envío?",
+          "a": "[hi] Recibes una propuesta en menos de 24 horas con tu ejecutivo dedicado. Necesitamos: origen, destino, tipo de carga, volumen y plazo deseado. Cotizamos tarifa total puerta a puerta sin sorpresas."
+        },
+        {
+          "q": "[hi] ¿Trabajan con cargas peligrosas (DG)?",
+          "a": "[hi] Sí. Manejamos las 9 clases IMO/IATA con la documentación, etiquetado y embalaje certificado. Coordinamos con líneas y aerolíneas autorizadas para tu carga específica."
+        },
+        {
+          "q": "[hi] ¿Tienen oficinas fuera de Chile?",
+          "a": "[hi] No directamente, pero nuestra red de agentes corresponsales cubre 70+ países. Trabajamos con socios verificados que operan bajo los mismos estándares que aplicamos en Chile."
+        },
+        {
+          "q": "[hi] ¿Cuánto demora un despacho aduanero?",
+          "a": "[hi] Entre 24 y 72 horas hábiles desde la disponibilidad de carga, según régimen y producto. Como OEA tenemos canal verde preferente y revisamos documentos antes de la llegada para evitar demoras."
+        },
+        {
+          "q": "[hi] ¿Pueden manejar mi cadena completa?",
+          "a": "[hi] Sí. Diseñamos supply chains end-to-end: desde la compra al proveedor en origen hasta la entrega final al cliente. Un solo punto de contacto, una sola cuenta consolidada."
+        },
+        {
+          "q": "[hi] ¿Cómo monitorean el envío?",
+          "a": "[hi] Plataforma propia que unifica datos de líneas, aerolíneas y agentes en una sola URL compartible. Recibes alertas automáticas en cada hito y tu ejecutivo está disponible 24/7."
+        }
+      ]
+    },
     "carga": {
       "aerea": {
         "title": "[hi] Carga Aérea",
-        "desc": "[hi] Express, courier internacional y chárter aéreo con tiempos garantizados."
+        "desc": "[hi] Express, courier internacional y chárter aéreo con tiempos garantizados.",
+        "eyebrow": "[hi] Servicios",
+        "lead": "[hi] Envíos urgentes, courier internacional y chárter aéreo con cobertura global. Llegamos a cualquier destino en tiempo récord.",
+        "ctaQuote": "[hi] Cotizar ahora",
+        "ctaWhatsapp": "[hi] Consultar por WhatsApp",
+        "featuresTitle": "[hi] ¿Por qué elegir nuestra carga aérea?",
+        "features": [
+          {
+            "title": "[hi] 48h garantizado",
+            "desc": "[hi] Envíos urgentes con tiempos de tránsito comprometidos."
+          },
+          {
+            "title": "[hi] Cobertura global",
+            "desc": "[hi] Alianzas con las principales aerolíneas de carga del mundo."
+          },
+          {
+            "title": "[hi] Seguro incluido",
+            "desc": "[hi] Todas las cargas aseguradas durante el tránsito."
+          },
+          {
+            "title": "[hi] Ejecutivo dedicado",
+            "desc": "[hi] Un solo punto de contacto para todo tu envío."
+          }
+        ],
+        "ctaTitle": "[hi] ¿Necesitas enviar carga aérea urgente?",
+        "ctaDesc": "[hi] Cotiza en 2 minutos y recibe una propuesta en menos de 24 horas.",
+        "ctaButton": "[hi] Solicitar cotización",
+        "schemaPriceDesc": "[hi] Cotización personalizada"
       },
       "maritima": {
         "title": "[hi] Carga Marítima",
-        "desc": "[hi] FCL y LCL a 80+ puertos. Consolidamos para reducir costos."
+        "desc": "[hi] FCL y LCL a 80+ puertos. Consolidamos para reducir costos.",
+        "eyebrow": "[hi] Servicios",
+        "lead": "[hi] FCL y LCL a los principales puertos del mundo. Consolidamos tu carga para reducir costos sin comprometer los plazos.",
+        "ctaQuote": "[hi] Cotizar ahora",
+        "ctaWhatsapp": "[hi] Consultar por WhatsApp",
+        "featuresTitle": "[hi] ¿Por qué elegir nuestra carga marítima?",
+        "features": [
+          {
+            "title": "[hi] FCL y LCL",
+            "desc": "[hi] Contenedor completo o carga consolidada según tus necesidades."
+          },
+          {
+            "title": "[hi] 80+ puertos",
+            "desc": "[hi] Cobertura en los principales puertos de Asia, Europa y América."
+          },
+          {
+            "title": "[hi] Consolidación",
+            "desc": "[hi] Agrupamos tu carga con otros clientes para reducir costos."
+          },
+          {
+            "title": "[hi] Ejecutivo dedicado",
+            "desc": "[hi] Un solo punto de contacto para todo tu envío."
+          }
+        ],
+        "ctaTitle": "[hi] ¿Necesitas enviar carga marítima?",
+        "ctaDesc": "[hi] Cotiza en 2 minutos y recibe una propuesta en menos de 24 horas.",
+        "ctaButton": "[hi] Solicitar cotización",
+        "schemaPriceDesc": "[hi] Cotización personalizada"
       }
     }
   },
   "industrias": {
     "eyebrow": "[hi] Industrias",
     "title": "[hi] Sectores que movemos",
-    "desc": "[hi] 12 industrias con operaciones especializadas, regulaciones particulares y rutas optimizadas."
+    "desc": "[hi] 12 industrias con operaciones especializadas, regulaciones particulares y rutas optimizadas.",
+    "breadcrumb": "[hi] Industrias",
+    "heroEyebrow": "[hi] Industrias · 12 sectores",
+    "heroTitleHtml": "[hi] Conocemos <em>tu sector</em>.",
+    "heroLead": "[hi] Operaciones especializadas, regulaciones particulares y rutas optimizadas. Diseñamos la logística según las reglas de tu industria.",
+    "metaSectors": "[hi] Sectores",
+    "metaClients": "[hi] Clientes activos",
+    "metaExpertise": "[hi] Años de expertise",
+    "metaRetention": "[hi] Retención",
+    "spotlight": {
+      "eyebrow": "[hi] Sector destacado",
+      "title": "[hi] Cuando la operación define el negocio",
+      "caseLabel": "[hi] Caso",
+      "panelEyebrow": "[hi] Cliente desde 2017",
+      "quote": "[hi] Movimos 1.200 contenedores de maquinaria especializada en 8 meses para la expansión de una faena, con cero días de detención fuera de programa.",
+      "authorTitle": "[hi] Operación enterprise",
+      "authorDetail": "[hi] Coordinación FCL · Aduana OEA · Última milla al norte"
+    },
+    "directory": {
+      "eyebrow": "[hi] Todas las industrias",
+      "title": "[hi] 12 sectores con operación dedicada",
+      "desc": "[hi] Pasa el cursor por cada sector para conocer las operaciones más frecuentes.",
+      "sectorPrefix": "[hi] Sector"
+    },
+    "services": {
+      "eyebrow": "[hi] Por servicio",
+      "title": "[hi] Qué movemos en cada sector",
+      "desc": "[hi] Combinaciones más frecuentes de servicios por industria.",
+      "colIndustry": "[hi] Industria",
+      "colServices": "[hi] Servicios habituales",
+      "colCta": "[hi] Cotizar",
+      "rowCta": "[hi] Hablar"
+    },
+    "names": [
+      {
+        "name": "[hi] Minería",
+        "sub": "[hi] Cobre, litio, maquinaria"
+      },
+      {
+        "name": "[hi] Retail",
+        "sub": "[hi] Moda, consumo, temporada"
+      },
+      {
+        "name": "[hi] Agroindustria",
+        "sub": "[hi] Fruta, vinos, granos"
+      },
+      {
+        "name": "[hi] Farmacéutica",
+        "sub": "[hi] Cadena de frío, reactivos"
+      },
+      {
+        "name": "[hi] E-commerce",
+        "sub": "[hi] Cross-border, fulfillment"
+      },
+      {
+        "name": "[hi] Construcción",
+        "sub": "[hi] Maquinaria, materiales"
+      },
+      {
+        "name": "[hi] Chatarra Ferrosa",
+        "sub": "[hi] Reciclaje y exportación"
+      },
+      {
+        "name": "[hi] Iluminarias",
+        "sub": "[hi] LED e industrial"
+      },
+      {
+        "name": "[hi] Vehículos Usados",
+        "sub": "[hi] Importación y trámites"
+      },
+      {
+        "name": "[hi] Efectos Personales",
+        "sub": "[hi] Mudanzas internacionales"
+      },
+      {
+        "name": "[hi] Maquinaria",
+        "sub": "[hi] Industrial y agrícola"
+      },
+      {
+        "name": "[hi] Textil",
+        "sub": "[hi] Prendas, telas, accesorios"
+      }
+    ],
+    "tags": [
+      [
+        "[hi] Cobre",
+        "[hi] Litio",
+        "[hi] OEA"
+      ],
+      [
+        "[hi] Moda",
+        "[hi] Consumo",
+        "[hi] Temporada alta"
+      ],
+      [
+        "[hi] Fruta fresca",
+        "[hi] Vinos",
+        "[hi] Granos"
+      ],
+      [
+        "[hi] Cadena de frío",
+        "[hi] GDP",
+        "[hi] Reactivos"
+      ],
+      [
+        "[hi] Cross-border",
+        "[hi] Fulfillment",
+        "[hi] Última milla"
+      ],
+      [
+        "[hi] Maquinaria",
+        "[hi] Materiales",
+        "[hi] Open-top"
+      ],
+      [
+        "[hi] Reciclaje",
+        "[hi] Exportación",
+        "[hi] Bulk"
+      ],
+      [
+        "[hi] LED",
+        "[hi] Industrial",
+        "[hi] Consolidado Asia"
+      ],
+      [
+        "[hi] Ro-Ro",
+        "[hi] Trámites",
+        "[hi] Almacenaje"
+      ],
+      [
+        "[hi] Mudanzas",
+        "[hi] Door-to-door"
+      ],
+      [
+        "[hi] Industrial",
+        "[hi] Agrícola",
+        "[hi] Project cargo"
+      ],
+      [
+        "[hi] Prendas",
+        "[hi] Telas",
+        "[hi] Aéreo + Marítimo"
+      ]
+    ],
+    "servicesPer": [
+      [
+        "[hi] FCL",
+        "[hi] Maquinaria",
+        "[hi] OEA",
+        "[hi] Reefer"
+      ],
+      [
+        "[hi] LCL",
+        "[hi] Courier",
+        "[hi] Fulfillment"
+      ],
+      [
+        "[hi] Reefer",
+        "[hi] Certificación SAG",
+        "[hi] Aéreo"
+      ],
+      [
+        "[hi] Cadena frío",
+        "[hi] Validación GDP",
+        "[hi] Aéreo express"
+      ],
+      [
+        "[hi] Fulfillment",
+        "[hi] Casillero USA",
+        "[hi] Última milla"
+      ],
+      [
+        "[hi] FCL",
+        "[hi] Open-top",
+        "[hi] Maquinaria"
+      ],
+      [
+        "[hi] FCL",
+        "[hi] Exportación",
+        "[hi] Aduana"
+      ],
+      [
+        "[hi] LCL",
+        "[hi] Consolidación Asia"
+      ],
+      [
+        "[hi] Ro-Ro",
+        "[hi] Trámites",
+        "[hi] Almacenaje"
+      ],
+      [
+        "[hi] Mudanza intl.",
+        "[hi] Door-to-door"
+      ],
+      [
+        "[hi] FCL",
+        "[hi] Open-top",
+        "[hi] Project cargo"
+      ],
+      [
+        "[hi] LCL",
+        "[hi] Consolidación Asia",
+        "[hi] Aéreo"
+      ]
+    ]
   },
   "nosotros": {
     "eyebrow": "[hi] Nosotros",
     "title": "[hi] Personas. Confianza. Resultados.",
-    "lead": "[hi] Somos un equipo chileno con conexiones globales y el compromiso de tratarte como nuestro único cliente."
+    "lead": "[hi] Somos un equipo chileno con conexiones globales y el compromiso de tratarte como nuestro único cliente.",
+    "breadcrumb": "[hi] Nosotros",
+    "heroEyebrow": "[hi] Nosotros · Desde 2003",
+    "heroTitleHtml": "[hi] 20+ años conectando <em>Chile con el mundo</em>.",
+    "heroLead": "[hi] Somos un operador logístico chileno. No vendemos un servicio: operamos con cada cliente como si fuera nuestra propia operación.",
+    "metaYears": "[hi] Años de operación",
+    "metaCapital": "[hi] Capital chileno",
+    "metaCert": "[hi] Operador autorizado",
+    "metaFocus": "[hi] Foco corporativo",
+    "manifesto": {
+      "titleHtml": "[hi] La logística es una <em>relación</em>, no un commodity.",
+      "p1Html": "[hi] Llevamos más de dos décadas operando en el mundo logístico chileno y aprendimos algo simple: <em>las cargas no se mueven solas</em>. Detrás de cada contenedor, cada AWB, cada DUS, hay personas decidiendo bajo presión.",
+      "p2": "[hi] Por eso construimos LOG ATM al revés que la industria. En lugar de un call center que rota agentes, asignamos un ejecutivo dedicado por cuenta. En lugar de tarifas ocultas, mostramos cada componente del costo. En lugar de prometer todo, decimos primero lo que va a fallar.",
+      "p3Html": "[hi] Hoy operamos en <em>70+ países</em>, con clientes en 12 industrias y una retención del 98%. Pero seguimos midiéndonos con la misma pregunta del primer día: ¿el cliente sentiría que esta operación es suya?"
+    },
+    "timeline": {
+      "eyebrow": "[hi] Trayectoria",
+      "title": "[hi] Hitos de 20+ años",
+      "items": [
+        {
+          "year": "[hi] 2003",
+          "milestone": "[hi] Fundación",
+          "desc": "[hi] Nace LOG ATM con foco en aduana y carga aérea desde Santiago."
+        },
+        {
+          "year": "[hi] 2009",
+          "milestone": "[hi] Marítima FCL",
+          "desc": "[hi] Apertura de la unidad marítima con primeros contratos en Asia."
+        },
+        {
+          "year": "[hi] 2014",
+          "milestone": "[hi] OEA Chile",
+          "desc": "[hi] Obtenemos la certificación de Operador Económico Autorizado."
+        },
+        {
+          "year": "[hi] 2020",
+          "milestone": "[hi] Plataforma digital",
+          "desc": "[hi] Lanzamos la plataforma de visibilidad de carga end-to-end."
+        },
+        {
+          "year": "[hi] 2024",
+          "milestone": "[hi] Hub Medio Oriente",
+          "desc": "[hi] Conexión especializada Dubai · Jeddah con socios locales."
+        }
+      ]
+    },
+    "values": {
+      "eyebrow": "[hi] Cómo trabajamos",
+      "title": "[hi] 4 valores que defienden la operación",
+      "desc": "[hi] Los principios que aplicamos en cada decisión, desde cotizar hasta resolver una contingencia a las 3 AM.",
+      "items": [
+        {
+          "title": "[hi] Cercanía operativa",
+          "desc": "[hi] No somos un proveedor: somos tu equipo logístico extendido."
+        },
+        {
+          "title": "[hi] A tu medida",
+          "desc": "[hi] Cada cuenta tiene una operación diseñada para su realidad."
+        },
+        {
+          "title": "[hi] Transparencia total",
+          "desc": "[hi] Tarifas claras, sin sorpresas. Si algo falla, lo decimos primero."
+        },
+        {
+          "title": "[hi] Mejora continua",
+          "desc": "[hi] KPIs medibles y revisión trimestral con cada cliente."
+        }
+      ]
+    },
+    "how": {
+      "eyebrow": "[hi] Cómo trabajamos",
+      "title": "[hi] Un modelo simple, transparente y a tu medida",
+      "desc": "[hi] No vendemos paquetes cerrados. Diseñamos cada operación desde cero siguiendo cuatro pasos claros, con un ejecutivo que te acompaña de principio a fin.",
+      "items": [
+        {
+          "title": "[hi] Ejecutivo dedicado",
+          "desc": "[hi] Una persona asignada a tu cuenta que conoce tu operación, productos y tiempos. Punto único de contacto, sin call centers."
+        },
+        {
+          "title": "[hi] Diagnóstico operativo",
+          "desc": "[hi] Mapeamos tu cadena actual: orígenes, destinos, volúmenes, tiempos críticos y dolores. Detectamos sobrecostos y cuellos de botella."
+        },
+        {
+          "title": "[hi] Diseño de ruta a medida",
+          "desc": "[hi] Proponemos modos, navieras, aerolíneas y agentes según costo, tiempo y riesgo. Negociamos tarifas y dejamos todo documentado."
+        },
+        {
+          "title": "[hi] Operación y reporte",
+          "desc": "[hi] Ejecutamos cada embarque con visibilidad completa, alertas proactivas ante desvíos y reporte semanal de carga en tránsito."
+        }
+      ]
+    },
+    "certs": {
+      "eyebrow": "[hi] Certificaciones",
+      "title": "[hi] Operamos bajo estándares globales",
+      "items": [
+        {
+          "name": "[hi] OEA Chile",
+          "desc": "[hi] Operador Económico Autorizado"
+        },
+        {
+          "name": "[hi] IATA · CASS",
+          "desc": "[hi] Agente de carga aérea certificado"
+        },
+        {
+          "name": "[hi] FIATA",
+          "desc": "[hi] Federación Internacional de Asociaciones de Transitarios"
+        },
+        {
+          "name": "[hi] ISO 9001",
+          "desc": "[hi] Sistema de gestión de calidad"
+        }
+      ]
+    }
   },
   "contacto": {
     "eyebrow": "[hi] Contacto",
     "title": "[hi] Hablemos de tu próximo envío",
-    "lead": "[hi] Cuéntanos qué necesitas mover y un ejecutivo te contacta en menos de 24 horas."
+    "lead": "[hi] Cuéntanos qué necesitas mover y un ejecutivo te contacta en menos de 24 horas.",
+    "breadcrumb": "[hi] Contacto",
+    "heroEyebrow": "[hi] Contacto · Respuesta en 24h",
+    "heroTitleHtml": "[hi] Hablemos de tu <em>próximo envío</em>.",
+    "heroLead": "[hi] Cuéntanos qué necesitas mover. Un ejecutivo dedicado te responde con una propuesta clara, en menos de 24 horas hábiles.",
+    "metaResponse": "[hi] Tiempo de respuesta",
+    "metaExec": "[hi] Ejecutivo dedicado",
+    "metaSupport": "[hi] Soporte operativo",
+    "metaOffice": "[hi] Santiago, Vitacura",
+    "form": {
+      "title": "[hi] Cuéntanos qué necesitas mover",
+      "sub": "[hi] Respondemos en menos de 24h hábiles · sin spam.",
+      "pill": "[hi] En línea ahora",
+      "labelName": "[hi] Nombre",
+      "labelCompany": "[hi] Empresa",
+      "labelEmail": "[hi] Email",
+      "labelPhone": "[hi] Teléfono",
+      "labelService": "[hi] Servicio",
+      "labelRoute": "[hi] Origen → Destino",
+      "labelMessage": "[hi] Mensaje",
+      "placeholderName": "[hi] Tu nombre",
+      "placeholderCompany": "[hi] Razón social",
+      "placeholderEmail": "[hi] nombre@empresa.cl",
+      "placeholderPhone": "[hi] +56 9 ...",
+      "placeholderRoute": "[hi] Ej. Shanghai → Santiago",
+      "placeholderMessage": "[hi] Cuéntanos volumen, plazos, tipo de carga...",
+      "submit": "[hi] Enviar solicitud",
+      "submitSuccess": "[hi] ✓ Recibido — te contactamos hoy",
+      "fineprintHtml": "[hi] Al enviar aceptas nuestra <a href=\"#\">política de privacidad</a>. No compartimos tus datos.",
+      "services": [
+        "[hi] Carga Marítima · FCL",
+        "[hi] Carga Marítima · LCL",
+        "[hi] Carga Aérea / Courier",
+        "[hi] Aduana y Documentación",
+        "[hi] Almacenaje · Fulfillment",
+        "[hi] Consultoría Supply Chain",
+        "[hi] Otro · cuéntanos"
+      ]
+    },
+    "channels": {
+      "eyebrow": "[hi] Canales directos",
+      "whatsappName": "[hi] WhatsApp · respuesta inmediata",
+      "phoneName": "[hi] Teléfono",
+      "emailName": "[hi] Email · operaciones"
+    },
+    "office": {
+      "name": "[hi] Oficina Santiago",
+      "rowWeek": "[hi] Lun – Vie",
+      "rowSat": "[hi] Sábado",
+      "rowSupport": "[hi] Soporte op.",
+      "hoursWeek": "[hi] 09:00 – 18:30",
+      "hoursSat": "[hi] 10:00 – 13:00",
+      "hoursSupport": "[hi] 24/7"
+    }
   },
   "cotizar": {
     "eyebrow": "[hi] Cotización",
     "title": "[hi] Cotiza en 4 pasos",
-    "lead": "[hi] Cuéntanos tu operación y recibe una propuesta clara en menos de 24 horas."
+    "lead": "[hi] Cuéntanos tu operación y recibe una propuesta clara en menos de 24 horas.",
+    "breadcrumb": "[hi] Cotizar",
+    "heroTitleHtml": "[hi] Cotiza en <em>4 pasos</em>.",
+    "heroLead": "[hi] Recibe una propuesta clara y desglosada en menos de 24 horas hábiles, con tu ejecutivo dedicado asignado.",
+    "chips": [
+      "[hi] Respuesta < 24h",
+      "[hi] Sin compromiso",
+      "[hi] Ejecutivo 1:1"
+    ],
+    "stepLabel": "[hi] Paso",
+    "steps": [
+      {
+        "label": "[hi] Servicio",
+        "name": "[hi] Modalidad"
+      },
+      {
+        "label": "[hi] Ruta",
+        "name": "[hi] Origen → Destino"
+      },
+      {
+        "label": "[hi] Carga",
+        "name": "[hi] Tipo y volumen"
+      },
+      {
+        "label": "[hi] Contacto",
+        "name": "[hi] Tus datos"
+      }
+    ],
+    "step1": {
+      "num": "[hi] Paso 01 · Modalidad",
+      "title": "[hi] ¿Cómo movemos tu carga?",
+      "sub": "[hi] Si no estás seguro, elige una y lo ajustamos en la propuesta."
+    },
+    "step2": {
+      "num": "[hi] Paso 02 · Ruta",
+      "title": "[hi] ¿De dónde a dónde?",
+      "sub": "[hi] Si tu origen no aparece, escríbelo en notas más adelante.",
+      "labelOrigin": "[hi] Origen",
+      "labelDest": "[hi] Destino",
+      "placeholderOrigin": "[hi] Selecciona origen...",
+      "labelIncoterm": "[hi] Incoterm",
+      "labelDate": "[hi] Fecha estimada de salida",
+      "incotermUnsure": "[hi] No estoy seguro"
+    },
+    "step3": {
+      "num": "[hi] Paso 03 · Carga",
+      "title": "[hi] ¿Qué vamos a mover?",
+      "sub": "[hi] Marca todos los tipos que apliquen — pueden combinarse.",
+      "labelCargo": "[hi] Tipo de carga",
+      "labelVolume": "[hi] Volumen / dimensiones",
+      "unitCbm": "[hi] m³ / kg",
+      "unitFcl20": "[hi] 20' FCL",
+      "unitFcl40": "[hi] 40' FCL",
+      "labelVol": "[hi] Volumen (m³)",
+      "labelWeight": "[hi] Peso bruto (kg)",
+      "labelCount": "[hi] Cantidad de contenedores",
+      "labelExtras": "[hi] Servicios adicionales",
+      "placeholderVol": "[hi] Ej. 12.5",
+      "placeholderWeight": "[hi] Ej. 3500",
+      "placeholderCount": "[hi] Ej. 2"
+    },
+    "step4": {
+      "num": "[hi] Paso 04 · Contacto",
+      "title": "[hi] ¿A quién enviamos la propuesta?",
+      "sub": "[hi] Te responde un ejecutivo dedicado, no un bot.",
+      "labelName": "[hi] Nombre completo",
+      "labelCompany": "[hi] Empresa",
+      "labelEmail": "[hi] Email",
+      "labelPhone": "[hi] Teléfono / WhatsApp",
+      "labelNotes": "[hi] Notas adicionales (opcional)",
+      "placeholderName": "[hi] Tu nombre",
+      "placeholderCompany": "[hi] Razón social",
+      "placeholderEmail": "[hi] nombre@empresa.cl",
+      "placeholderPhone": "[hi] +56 9 ...",
+      "placeholderNotes": "[hi] Detalles del producto, plazos críticos, requisitos especiales..."
+    },
+    "nav": {
+      "back": "[hi] ← Anterior",
+      "next": "[hi] Continuar",
+      "submit": "[hi] Enviar solicitud"
+    },
+    "summary": {
+      "title": "[hi] Tu cotización",
+      "sub": "[hi] Resumen en vivo",
+      "kMode": "[hi] Modalidad",
+      "kOrigin": "[hi] Origen",
+      "kDest": "[hi] Destino",
+      "kIncoterm": "[hi] Incoterm",
+      "kCargo": "[hi] Carga",
+      "kVolume": "[hi] Volumen",
+      "kExtras": "[hi] Extras",
+      "empty": "[hi] Por definir",
+      "sla": "[hi] Respuesta garantizada en < 24h hábiles"
+    },
+    "modes": [
+      {
+        "name": "[hi] Marítimo",
+        "desc": "[hi] FCL/LCL, 80+ puertos. Best ratio costo/plazo."
+      },
+      {
+        "name": "[hi] Aéreo",
+        "desc": "[hi] Express 48h–7d. Ideal para urgencias y alto valor."
+      },
+      {
+        "name": "[hi] Courier",
+        "desc": "[hi] Door-to-door internacional. Hasta 70kg."
+      },
+      {
+        "name": "[hi] Multimodal",
+        "desc": "[hi] Combinación aéreo + marítimo + terrestre."
+      }
+    ],
+    "cargoTypes": [
+      "[hi] Carga general",
+      "[hi] Reefer (frío)",
+      "[hi] Peligrosa (IMO)",
+      "[hi] Sobredimensionada",
+      "[hi] Maquinaria",
+      "[hi] Textil",
+      "[hi] E-commerce",
+      "[hi] Documentos"
+    ],
+    "extras": [
+      "[hi] Aduana",
+      "[hi] Seguro de carga",
+      "[hi] Almacenaje destino",
+      "[hi] Última milla",
+      "[hi] Inspección origen"
+    ],
+    "success": {
+      "title": "[hi] Solicitud recibida",
+      "folioPrefix": "[hi] Folio",
+      "folioPlaceholder": "[hi] Folio · LA-—",
+      "desc": "[hi] Gracias. Tu ejecutivo dedicado revisó la información y te contacta en menos de 24 horas hábiles.",
+      "descPersonal": "[hi] Gracias {name}. Tu ejecutivo dedicado revisó la información y te contacta en menos de 24 horas hábiles al correo {email}.",
+      "nextLabel": "[hi] SIGUIENTE",
+      "steps": [
+        {
+          "title": "[hi] Asignación",
+          "desc": "[hi] Te asignamos un ejecutivo según tu industria y ruta."
+        },
+        {
+          "title": "[hi] Propuesta",
+          "desc": "[hi] Recibes tarifa total desglosada y plazos por modalidad."
+        },
+        {
+          "title": "[hi] Ejecución",
+          "desc": "[hi] Aprobada la propuesta, coordinamos la operación."
+        }
+      ],
+      "backHome": "[hi] Volver al inicio",
+      "whatsapp": "[hi] Hablar por WhatsApp"
+    }
   },
   "notFound": {
     "code": "[hi] 404",

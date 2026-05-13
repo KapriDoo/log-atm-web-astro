@@ -101,6 +101,39 @@ export function useTranslations(lang: Locale) {
   };
 }
 
+/**
+ * Resuelve una clave que apunta a un array u objeto. Devuelve el valor del
+ * locale solicitado o, si no existe, el del master español. Si tampoco existe
+ * o el tipo no coincide, retorna `fallback` (por defecto un array vacío).
+ *
+ * Útil para colecciones traducibles (listas de FAQ, tabs, timelines, etc.).
+ */
+export function tList<T = unknown>(
+  lang: Locale,
+  key: string,
+  fallback: T[] = [] as unknown as T[],
+): T[] {
+  const primary = dictionaries[lang] ?? dictionaries[DEFAULT_LOCALE];
+  const direct = resolveKey(primary, key);
+  if (Array.isArray(direct)) return direct as T[];
+  const fb = resolveKey(dictionaries[DEFAULT_LOCALE], key);
+  if (Array.isArray(fb)) return fb as T[];
+  return fallback;
+}
+
+export function tObj<T extends Record<string, unknown> = Record<string, unknown>>(
+  lang: Locale,
+  key: string,
+  fallback: T = {} as T,
+): T {
+  const primary = dictionaries[lang] ?? dictionaries[DEFAULT_LOCALE];
+  const direct = resolveKey(primary, key);
+  if (direct && typeof direct === 'object' && !Array.isArray(direct)) return direct as T;
+  const fb = resolveKey(dictionaries[DEFAULT_LOCALE], key);
+  if (fb && typeof fb === 'object' && !Array.isArray(fb)) return fb as T;
+  return fallback;
+}
+
 /** Indica si el locale se renderiza de derecha a izquierda. */
 export function isRTL(lang: Locale): boolean {
   return (RTL_LOCALES as readonly Locale[]).includes(lang);
