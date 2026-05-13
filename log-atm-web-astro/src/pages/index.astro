@@ -7,16 +7,18 @@ import ServicesSection from '../components/sections/ServicesSection.astro';
 import WhyVideoSection from '../components/sections/WhyVideoSection.astro';
 import IndustriesSection from '../components/sections/IndustriesSection.astro';
 import CTASection from '../components/sections/CTASection.astro';
-import { useTranslations, getLangFromUrl } from '../i18n/utils';
+import { useTranslations, getLangFromUrl, type Locale } from '../i18n/utils';
 import '../styles/sections.css';
 
-const currentLang = getLangFromUrl(Astro.url);
+const { lang: langProp } = Astro.props as { lang?: Locale };
+const currentLang = langProp ?? getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
 ---
 
 <BaseLayout
   title={t('meta.home.title')}
   description={t('meta.home.description')}
+  lang={currentLang}
 >
   <Navbar />
 

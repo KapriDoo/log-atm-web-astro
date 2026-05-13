@@ -4,12 +4,13 @@ import {
   useTranslations,
   getLangFromUrl,
   stripLocaleFromPath,
+  buildLocaleUrl,
   getAlternateLinks,
   isRTL,
   getHtmlLang,
   getOgLocale,
 } from '../i18n/utils';
-import { LOCALES, OG_LOCALE } from '../i18n/config';
+import { LOCALES, OG_LOCALE, type Locale } from '../i18n/config';
 
 interface Props {
   title?: string;
@@ -17,27 +18,44 @@ interface Props {
   image?: string;
   canonical?: string;
   noindex?: boolean;
+  /** Locale explícito (preferido cuando la página `[lang]/*.astro` delega vía import). */
+  lang?: Locale;
 }
 
 const SITE_NAME = 'LOG ATM';
 const SITE_URL  = 'https://logatm.com';
 
-const currentLang = getLangFromUrl(Astro.url);
+// Fuente del locale, en orden de prioridad:
+// 1) prop `lang` (cuando la página `[lang]/*.astro` delega y propaga
+//    `Astro.params.lang` explícitamente — único método 100% fiable);
+// 2) `Astro.currentLocale` (inyectado por el routing i18n cuando aplica);
+// 3) `getLangFromUrl(Astro.url)` (fallback al primer segmento del path).
+const langProp = (Astro.props as Props).lang;
+const currentLang = (langProp ?? (Astro.currentLocale as Locale | undefined) ?? getLangFromUrl(Astro.url)) as Locale;
 const t = useTranslations(currentLang);
 const DEFAULT_DESC = t('meta.defaultDescription');
 const DEFAULT_IMG  = `${SITE_URL}/og-default.svg`;
+
+const htmlLang = getHtmlLang(currentLang);
+const dir = isRTL(currentLang) ? 'rtl' : 'ltr';
+const cleanPath = stripLocaleFromPath(Astro.url.pathname);
+
+// Canonical/og:url reconstruidos desde `currentLang + cleanPath` para evitar
+// la inconsistencia de `Astro.url.pathname` cuando una página `[lang]/foo.astro`
+// delega vía `import` en `pages/foo.astro` (en ese caso, Astro.url puede no
+// reflejar el segmento de locale en la subruta). Esto asegura URLs localizadas
+// y con trailing slash, alineadas con sitemap y hreflang.
+const computedCanonicalPath = buildLocaleUrl(currentLang, cleanPath);
+const computedCanonical = new URL(computedCanonicalPath, SITE_URL).href;
 
 const {
   title,
   description = DEFAULT_DESC,
   image = DEFAULT_IMG,
-  canonical = new URL(Astro.url.pathname, SITE_URL).href,
+  canonical = computedCanonical,
   noindex = false,
 } = Astro.props;
 
-const htmlLang = getHtmlLang(currentLang);
-const dir = isRTL(currentLang) ? 'rtl' : 'ltr';
-const cleanPath = stripLocaleFromPath(Astro.url.pathname);
 const alternates = getAlternateLinks(cleanPath).map((a) => ({
   hreflang: a.hreflang,
   href: new URL(a.href, SITE_URL).href,

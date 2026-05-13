@@ -4,13 +4,13 @@ import Navbar from '../../components/ui/Navbar.astro';
 import Footer from '../../components/ui/Footer.astro';
 import { Icon } from 'astro-icon/components';
 import { SITE } from '../../lib/constants';
-import { useTranslations, getLangFromUrl, tList } from '../../i18n/utils';
+import { useTranslations, getLangFromUrl, tList, type Locale } from '../../i18n/utils';
 
-const currentLang = getLangFromUrl(Astro.url);
+const { lang: langProp } = Astro.props as { lang?: Locale };
+const currentLang = langProp ?? getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
 const title = t('meta.cargaMaritima.title');
 const description = t('meta.cargaMaritima.description');
-const canonical = `${SITE.url}/servicios/carga-maritima`;
 
 const features = tList<{ title: string; desc: string }>(currentLang, 'servicios.carga.maritima.features');
 const featureIcons = ['lucide:ship', 'lucide:globe', 'lucide:package', 'lucide:headphones'];
@@ -40,7 +40,7 @@ const schemaService = JSON.stringify({
 });
 ---
 
-<BaseLayout title={title} description={description} canonical={canonical}>
+<BaseLayout title={title} description={description} lang={currentLang}>
   <Navbar />
 
   <main id="main-content">

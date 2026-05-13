@@ -51,13 +51,21 @@ export function stripLocaleFromPath(pathname: string): string {
   return '/' + parts.join('/');
 }
 
-/** Construye la URL pública para un locale dado, partiendo del path "limpio". */
+/** Construye la URL pública para un locale dado, partiendo del path "limpio".
+ *  Garantiza trailing slash consistente con cómo Astro emite las páginas
+ *  estáticas (directory format), para que canonical, hreflang y sitemap
+ *  coincidan exactamente. */
 export function buildLocaleUrl(lang: Locale, cleanPath: string): string {
-  const safePath = cleanPath.startsWith('/') ? cleanPath : `/${cleanPath}`;
-  if (lang === DEFAULT_LOCALE) {
-    return safePath === '/' ? '/' : safePath;
+  let safePath = cleanPath.startsWith('/') ? cleanPath : `/${cleanPath}`;
+  // Normaliza: asegura trailing slash en subrutas no vacías.
+  if (safePath !== '/' && !safePath.endsWith('/')) {
+    safePath = `${safePath}/`;
   }
-  return `/${lang}${safePath === '/' ? '' : safePath}` || `/${lang}/`;
+  if (lang === DEFAULT_LOCALE) {
+    return safePath; // '/' o '/foo/'
+  }
+  // Home localizada: '/<lang>/'. Subruta: '/<lang>/foo/'.
+  return safePath === '/' ? `/${lang}/` : `/${lang}${safePath}`;
 }
 
 /** Resuelve `a.b.c` dentro de un dict; retorna `undefined` si falta. */

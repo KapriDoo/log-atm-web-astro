@@ -6,4 +6,4 @@ export function getStaticPaths() {
   return NON_DEFAULT_LOCALES.map((lang) => ({ params: { lang } }));
 }
 ---
-<IndexPage />
+<IndexPage lang={Astro.params.lang} />

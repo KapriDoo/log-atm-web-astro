@@ -2,9 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
-import { useTranslations, getLangFromUrl, buildLocaleUrl } from '../i18n/utils';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, type Locale } from '../i18n/utils';
 
-const currentLang = getLangFromUrl(Astro.url);
+const { lang: langProp } = Astro.props as { lang?: Locale };
+const currentLang = langProp ?? getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
 const homeHref = buildLocaleUrl(currentLang, '/');
 ---
@@ -13,6 +14,7 @@ const homeHref = buildLocaleUrl(currentLang, '/');
   title={t('meta.notFound.title')}
   description={t('meta.notFound.description')}
   noindex={true}
+  lang={currentLang}
 >
   <Navbar />
   <main id="main-content" class="error-page" role="main">
