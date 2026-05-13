@@ -63,6 +63,15 @@ const quickQuoteVolumes = QUICK_QUOTE_VOLUMES.map((v, i) => ({ value: v, label: 
             data-email={SITE.email}
             novalidate
         >
+            {/* Honeypot anti-spam (no tocar) */}
+            <input
+                type="text"
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+                aria-hidden="true"
+                style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;"
+            />
             <p class="cta-final__form-title">{t('home.cta.formTitle')}</p>
 
             <div class="cta-final__row">
@@ -201,6 +210,11 @@ const quickQuoteVolumes = QUICK_QUOTE_VOLUMES.map((v, i) => ({ value: v, label: 
                 data-msg-bad-email={t('home.cta.errorEmail')}
                 data-msg-wa={t('home.cta.openingWhatsapp')}
                 data-msg-email={t('home.cta.openingEmail')}
+                data-msg-sending={t('home.cta.sending')}
+                data-msg-sent={t('home.cta.sent')}
+                data-msg-review-prefix={t('home.cta.reviewPrefix')}
+                data-msg-send-fail={t('home.cta.sendFail')}
+                data-msg-conn-error={t('home.cta.connError')}
             >
                 {t('home.cta.submit')}
                 <Icon
@@ -220,7 +234,6 @@ const quickQuoteVolumes = QUICK_QUOTE_VOLUMES.map((v, i) => ({ value: v, label: 
     ) as HTMLFormElement | null;
     if (form) {
         const waNumber = form.dataset.waNumber ?? "";
-        const email = form.dataset.email ?? "";
         const status = form.querySelector<HTMLElement>("#qq-status");
         const emailInput = form.querySelector<HTMLInputElement>("#qq-email");
         const phoneInput = form.querySelector<HTMLInputElement>("#qq-phone");
@@ -230,6 +243,11 @@ const quickQuoteVolumes = QUICK_QUOTE_VOLUMES.map((v, i) => ({ value: v, label: 
             badEmail:  submitBtn?.dataset.msgBadEmail  ?? "Revisa el formato del email.",
             wa:        submitBtn?.dataset.msgWa        ?? "Abriendo WhatsApp…",
             email:     submitBtn?.dataset.msgEmail     ?? "Abriendo tu correo…",
+            sending:   submitBtn?.dataset.msgSending   ?? "Enviando…",
+            sent:      submitBtn?.dataset.msgSent      ?? "✓ Recibido. Te contactamos por email muy pronto.",
+            reviewPrefix: submitBtn?.dataset.msgReviewPrefix ?? "Revisa los datos:",
+            sendFail:  submitBtn?.dataset.msgSendFail  ?? "No pudimos enviar. Reintenta o usa WhatsApp.",
+            connError: submitBtn?.dataset.msgConnError ?? "Error de conexión. Reintenta.",
         };
 
         // Radiogroup canal: roving tabindex + arrow keys (WAI-ARIA APG).
@@ -275,7 +293,7 @@ const quickQuoteVolumes = QUICK_QUOTE_VOLUMES.map((v, i) => ({ value: v, label: 
             status.dataset.kind = kind;
         }
 
-        form.addEventListener("submit", (e) => {
+        form.addEventListener("submit", async (e) => {
             e.preventDefault();
             const data = new FormData(form);
             const mode = String(data.get("mode") ?? "");
@@ -296,18 +314,18 @@ const quickQuoteVolumes = QUICK_QUOTE_VOLUMES.map((v, i) => ({ value: v, label: 
                 return;
             }
 
-            const contact = [emailVal, phoneVal].filter(Boolean).join(" · ");
-            const lines = [
-                "Hola, me interesa una cotización LOG ATM:",
-                `• Modalidad: ${mode}`,
-                `• Origen: ${origin}`,
-                `• Destino: ${dest}`,
-                `• Volumen: ${vol}`,
-                `• Contacto: ${contact}`,
-            ];
-            const message = lines.join("\n");
-
+            // Rama WhatsApp: comportamiento existente (wa.me) intacto.
             if (channel === "whatsapp") {
+                const contact = [emailVal, phoneVal].filter(Boolean).join(" · ");
+                const lines = [
+                    "Hola, me interesa una cotización LOG ATM:",
+                    `• Modalidad: ${mode}`,
+                    `• Origen: ${origin}`,
+                    `• Destino: ${dest}`,
+                    `• Volumen: ${vol}`,
+                    `• Contacto: ${contact}`,
+                ];
+                const message = lines.join("\n");
                 const digits = waNumber.replace(/\D/g, "");
                 if (digits) {
                     setStatus(MSG.wa, "success");
@@ -316,10 +334,39 @@ const quickQuoteVolumes = QUICK_QUOTE_VOLUMES.map((v, i) => ({ value: v, label: 
                     return;
                 }
             }
-            setStatus(MSG.email, "success");
-            const subject = encodeURIComponent("Cotización LOG ATM");
-            const body = encodeURIComponent(message);
-            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+
+            // Rama Email: enviar al endpoint en lugar de mailto.
+            const payload: Record<string, string> = {};
+            data.forEach((v, k) => {
+                payload[k] = String(v);
+            });
+            payload.preference = "Email";
+
+            setStatus(MSG.sending);
+            if (submitBtn) submitBtn.disabled = true;
+            try {
+                const r = await fetch("/api/cotizacion-rapida", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload),
+                });
+                const res = await r.json().catch(() => ({}));
+                if (r.ok && res.ok) {
+                    setStatus(MSG.sent, "success");
+                    form.reset();
+                    return;
+                }
+                if (r.status === 400 && res.fields) {
+                    const first = Object.values(res.fields)[0] as string;
+                    setStatus(`${MSG.reviewPrefix} ${first}`, "error");
+                } else {
+                    setStatus(MSG.sendFail, "error");
+                }
+            } catch {
+                setStatus(MSG.connError, "error");
+            } finally {
+                if (submitBtn) submitBtn.disabled = false;
+            }
         });
     }
 </script>

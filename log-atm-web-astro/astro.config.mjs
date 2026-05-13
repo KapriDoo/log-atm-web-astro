@@ -4,6 +4,7 @@ import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import icon from 'astro-icon';
+import cloudflare from '@astrojs/cloudflare';
 
 /**
  * Integration mínima que valida la paridad de claves i18n antes de cada build.
@@ -29,6 +30,10 @@ function i18nValidator() {
 
 export default defineConfig({
   site: 'https://logatm.com',
+  output: 'static',
+  adapter: cloudflare({
+    platformProxy: { enabled: true },
+  }),
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en', 'pt'],
@@ -71,5 +76,13 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
+    ssr: {
+      // worker-mailer ships dual CJS+ESM sin campo `exports`. Forzar bundling
+      // ESM para que no se cargue el index.js (CJS) en el runtime de Workers.
+      noExternal: ['worker-mailer'],
+      resolve: {
+        conditions: ['workerd', 'worker', 'import', 'module', 'default'],
+      },
+    },
   },
 });

@@ -1,0 +1,9 @@
+# SMTP — completar con credenciales reales de ioh.
+# Copiar este archivo a `.dev.vars` (no comiteado) antes de levantar `astro dev`.
+# En Cloudflare Pages productivo, estas variables se configuran en el dashboard.
+SMTP_HOST=mail.logatm.com
+SMTP_PORT=465
+SMTP_SECURE=true
+SMTP_USER=web@logatm.com
+SMTP_PASS=
+MAIL_TO=contacto@logatm.com
