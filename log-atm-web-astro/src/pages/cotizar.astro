@@ -8,19 +8,45 @@ import {
   QUOTE_MODES,
   QUOTE_ORIGINS,
   QUOTE_DESTS,
-  QUOTE_CARGO_TYPES,
-  QUOTE_EXTRAS,
   QUOTE_STEPS,
 } from '../lib/constants';
+import { useTranslations, getLangFromUrl, tList, type Locale } from '../i18n/utils';
 import '../styles/pages/shared.css';
 import '../styles/pages/cotizar.css';
 
-const title = 'Cotizar';
-const description = 'Cotiza tu envío internacional en 4 pasos. Modalidad, ruta, carga y contacto — propuesta clara en menos de 24h hábiles con tu ejecutivo dedicado.';
-const canonical = `${SITE.url}/cotizar`;
+const { lang: langProp } = Astro.props as { lang?: Locale };
+const currentLang = langProp ?? getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const title = t('meta.cotizar.title');
+const description = t('meta.cotizar.description');
+
+type ModeCopy = { name: string; desc: string };
+type StepCopy = { label: string; name: string };
+type SuccessStep = { title: string; desc: string };
+
+const chips = tList<string>(currentLang, 'cotizar.chips');
+const modeCopies = tList<ModeCopy>(currentLang, 'cotizar.modes');
+const stepCopies = tList<StepCopy>(currentLang, 'cotizar.steps');
+const cargoTypes = tList<string>(currentLang, 'cotizar.cargoTypes');
+const extras = tList<string>(currentLang, 'cotizar.extras');
+const successSteps = tList<SuccessStep>(currentLang, 'cotizar.success.steps');
+
+const modes = QUOTE_MODES.map((m, i) => ({ ...m, ...(modeCopies[i] ?? { name: m.name, desc: m.desc }) }));
+const steps = QUOTE_STEPS.map((s, i) => ({ ...s, ...(stepCopies[i] ?? { label: s.label, name: s.name }) }));
+
+// Strings consumidos por el script inline (cliente)
+const clientStrings = {
+  empty: t('cotizar.summary.empty'),
+  submit: t('cotizar.nav.submit'),
+  next: t('cotizar.nav.next'),
+  folioPrefix: t('cotizar.success.folioPrefix'),
+  descPersonal: t('cotizar.success.descPersonal'),
+  unitFcl20: t('cotizar.step3.unitFcl20'),
+  unitFcl40: t('cotizar.step3.unitFcl40'),
+};
 ---
 
-<BaseLayout title={title} description={description} canonical={canonical}>
+<BaseLayout title={title} description={description} lang={currentLang}>
   <Navbar />
 
   <main id="main-content">
@@ -28,20 +54,13 @@ const canonical = `${SITE.url}/cotizar`;
       <div class="container quote-hero__inner">
         <div>
           <div class="page-hero__breadcrumb">
-            <a href="/">Inicio</a> <span>/</span> <span>Cotizar</span>
+            <a href="/">{t('common.breadcrumbHome')}</a> <span>/</span> <span>{t('cotizar.breadcrumb')}</span>
           </div>
-          <h1 class="quote-hero__title">
-            Cotiza en <em>4 pasos</em>.
-          </h1>
-          <p class="quote-hero__lead">
-            Recibe una propuesta clara y desglosada en menos de 24 horas hábiles,
-            con tu ejecutivo dedicado asignado.
-          </p>
+          <h1 class="quote-hero__title" set:html={t('cotizar.heroTitleHtml')}></h1>
+          <p class="quote-hero__lead">{t('cotizar.heroLead')}</p>
         </div>
         <div class="quote-hero__chips">
-          <span class="quote-chip">Respuesta &lt; 24h</span>
-          <span class="quote-chip">Sin compromiso</span>
-          <span class="quote-chip">Ejecutivo 1:1</span>
+          {chips.map((c) => <span class="quote-chip">{c}</span>)}
         </div>
       </div>
     </section>
@@ -49,14 +68,14 @@ const canonical = `${SITE.url}/cotizar`;
     <div class="stepper" id="stepper">
       <div class="container">
         <div class="stepper__track">
-          {QUOTE_STEPS.map((s, i) => (
+          {steps.map((s, i) => (
             <div
               class:list={['stepper__step', { 'stepper__step--active': i === 0 }]}
               data-step={i}
             >
-              <div class="stepper__bullet">{s.n}</div>
+              <div class="stepper__bullet">{QUOTE_STEPS[i].n}</div>
               <div class="stepper__meta">
-                <span class="stepper__label">Paso {s.n}</span>
+                <span class="stepper__label">{t('cotizar.stepLabel')} {QUOTE_STEPS[i].n}</span>
                 <span class="stepper__name">{s.name}</span>
               </div>
             </div>
@@ -72,12 +91,12 @@ const canonical = `${SITE.url}/cotizar`;
           <!-- Step 0: Modalidad -->
           <div class="quote-step" data-step-panel="0">
             <div class="quote-step__head">
-              <div class="quote-step__num">Paso 01 · Modalidad</div>
-              <h2 class="quote-step__title">¿Cómo movemos tu carga?</h2>
-              <p class="quote-step__sub">Si no estás seguro, elige una y lo ajustamos en la propuesta.</p>
+              <div class="quote-step__num">{t('cotizar.step1.num')}</div>
+              <h2 class="quote-step__title">{t('cotizar.step1.title')}</h2>
+              <p class="quote-step__sub">{t('cotizar.step1.sub')}</p>
             </div>
             <div class="mode-grid">
-              {QUOTE_MODES.map((m) => (
+              {modes.map((m) => (
                 <button
                   class="mode-tile"
                   type="button"
@@ -100,21 +119,21 @@ const canonical = `${SITE.url}/cotizar`;
           <!-- Step 1: Ruta -->
           <div class="quote-step" data-step-panel="1" hidden>
             <div class="quote-step__head">
-              <div class="quote-step__num">Paso 02 · Ruta</div>
-              <h2 class="quote-step__title">¿De dónde a dónde?</h2>
-              <p class="quote-step__sub">Si tu origen no aparece, escríbelo en notas más adelante.</p>
+              <div class="quote-step__num">{t('cotizar.step2.num')}</div>
+              <h2 class="quote-step__title">{t('cotizar.step2.title')}</h2>
+              <p class="quote-step__sub">{t('cotizar.step2.sub')}</p>
             </div>
             <div class="route-pair">
               <div class="form-field">
-                <label for="q-origin">Origen</label>
+                <label for="q-origin">{t('cotizar.step2.labelOrigin')}</label>
                 <select id="q-origin" name="origin">
-                  <option value="">Selecciona origen...</option>
+                  <option value="">{t('cotizar.step2.placeholderOrigin')}</option>
                   {QUOTE_ORIGINS.map((o) => <option value={o}>{o}</option>)}
                 </select>
               </div>
               <div class="route-pair__arrow" aria-hidden="true">→</div>
               <div class="form-field">
-                <label for="q-dest">Destino</label>
+                <label for="q-dest">{t('cotizar.step2.labelDest')}</label>
                 <select id="q-dest" name="dest">
                   {QUOTE_DESTS.map((d, i) => <option value={d} selected={i === 0}>{d}</option>)}
                 </select>
@@ -122,18 +141,18 @@ const canonical = `${SITE.url}/cotizar`;
             </div>
             <div class="form-row form-row--2" style="margin-top: 1.5rem;">
               <div class="form-field">
-                <label for="q-incoterm">Incoterm</label>
+                <label for="q-incoterm">{t('cotizar.step2.labelIncoterm')}</label>
                 <select id="q-incoterm" name="incoterm">
                   <option>FOB</option>
                   <option>CIF</option>
                   <option>EXW</option>
                   <option>DAP</option>
                   <option>DDP</option>
-                  <option>No estoy seguro</option>
+                  <option>{t('cotizar.step2.incotermUnsure')}</option>
                 </select>
               </div>
               <div class="form-field">
-                <label for="q-date">Fecha estimada de salida</label>
+                <label for="q-date">{t('cotizar.step2.labelDate')}</label>
                 <input id="q-date" name="date" type="month" />
               </div>
             </div>
@@ -142,48 +161,48 @@ const canonical = `${SITE.url}/cotizar`;
           <!-- Step 2: Carga -->
           <div class="quote-step" data-step-panel="2" hidden>
             <div class="quote-step__head">
-              <div class="quote-step__num">Paso 03 · Carga</div>
-              <h2 class="quote-step__title">¿Qué vamos a mover?</h2>
-              <p class="quote-step__sub">Marca todos los tipos que apliquen — pueden combinarse.</p>
+              <div class="quote-step__num">{t('cotizar.step3.num')}</div>
+              <h2 class="quote-step__title">{t('cotizar.step3.title')}</h2>
+              <p class="quote-step__sub">{t('cotizar.step3.sub')}</p>
             </div>
 
             <div class="form-field" style="margin-bottom: 1.5rem;">
-              <label>Tipo de carga</label>
+              <label>{t('cotizar.step3.labelCargo')}</label>
               <div class="chips-multi" id="cargo-chips">
-                {QUOTE_CARGO_TYPES.map((c) => (
+                {cargoTypes.map((c) => (
                   <button type="button" class="chip-multi" data-cargo={c}>{c}</button>
                 ))}
               </div>
             </div>
 
             <div class="form-field" style="margin-bottom: 0.5rem;">
-              <label>Volumen / dimensiones</label>
+              <label>{t('cotizar.step3.labelVolume')}</label>
               <div class="unit-toggle" id="unit-toggle">
-                <button type="button" class="unit-toggle__btn unit-toggle__btn--active" data-unit="cbm">m³ / kg</button>
-                <button type="button" class="unit-toggle__btn" data-unit="fcl20">20' FCL</button>
-                <button type="button" class="unit-toggle__btn" data-unit="fcl40">40' FCL</button>
+                <button type="button" class="unit-toggle__btn unit-toggle__btn--active" data-unit="cbm">{t('cotizar.step3.unitCbm')}</button>
+                <button type="button" class="unit-toggle__btn" data-unit="fcl20">{t('cotizar.step3.unitFcl20')}</button>
+                <button type="button" class="unit-toggle__btn" data-unit="fcl40">{t('cotizar.step3.unitFcl40')}</button>
               </div>
             </div>
 
             <div id="cbm-fields" class="form-row form-row--2">
               <div class="form-field">
-                <label for="q-volume">Volumen (m³)</label>
-                <input id="q-volume" name="volume" type="number" min="0" step="0.1" placeholder="Ej. 12.5" />
+                <label for="q-volume">{t('cotizar.step3.labelVol')}</label>
+                <input id="q-volume" name="volume" type="number" min="0" step="0.1" placeholder={t('cotizar.step3.placeholderVol')} />
               </div>
               <div class="form-field">
-                <label for="q-weight">Peso bruto (kg)</label>
-                <input id="q-weight" name="weight" type="number" min="0" placeholder="Ej. 3500" />
+                <label for="q-weight">{t('cotizar.step3.labelWeight')}</label>
+                <input id="q-weight" name="weight" type="number" min="0" placeholder={t('cotizar.step3.placeholderWeight')} />
               </div>
             </div>
             <div id="fcl-fields" class="form-field" hidden>
-              <label for="q-count">Cantidad de contenedores</label>
-              <input id="q-count" name="containerCount" type="number" min="1" placeholder="Ej. 2" />
+              <label for="q-count">{t('cotizar.step3.labelCount')}</label>
+              <input id="q-count" name="containerCount" type="number" min="1" placeholder={t('cotizar.step3.placeholderCount')} />
             </div>
 
             <div class="form-field" style="margin-top: 1.5rem;">
-              <label>Servicios adicionales</label>
+              <label>{t('cotizar.step3.labelExtras')}</label>
               <div class="chips-multi" id="extras-chips">
-                {QUOTE_EXTRAS.map((s) => (
+                {extras.map((s) => (
                   <button type="button" class="chip-multi" data-extra={s}>{s}</button>
                 ))}
               </div>
@@ -193,9 +212,9 @@ const canonical = `${SITE.url}/cotizar`;
           <!-- Step 3: Contacto -->
           <div class="quote-step" data-step-panel="3" hidden>
             <div class="quote-step__head">
-              <div class="quote-step__num">Paso 04 · Contacto</div>
-              <h2 class="quote-step__title">¿A quién enviamos la propuesta?</h2>
-              <p class="quote-step__sub">Te responde un ejecutivo dedicado, no un bot.</p>
+              <div class="quote-step__num">{t('cotizar.step4.num')}</div>
+              <h2 class="quote-step__title">{t('cotizar.step4.title')}</h2>
+              <p class="quote-step__sub">{t('cotizar.step4.sub')}</p>
             </div>
             {/* Honeypot anti-spam (no tocar) */}
             <input
@@ -209,36 +228,36 @@ const canonical = `${SITE.url}/cotizar`;
             />
             <div class="form-row form-row--2">
               <div class="form-field">
-                <label for="q-name">Nombre completo</label>
-                <input id="q-name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" required />
+                <label for="q-name">{t('cotizar.step4.labelName')}</label>
+                <input id="q-name" name="name" type="text" autocomplete="name" placeholder={t('cotizar.step4.placeholderName')} required />
               </div>
               <div class="form-field">
-                <label for="q-company">Empresa</label>
-                <input id="q-company" name="company" type="text" autocomplete="organization" placeholder="Razón social" />
+                <label for="q-company">{t('cotizar.step4.labelCompany')}</label>
+                <input id="q-company" name="company" type="text" autocomplete="organization" placeholder={t('cotizar.step4.placeholderCompany')} />
               </div>
             </div>
             <div class="form-row form-row--2">
               <div class="form-field">
-                <label for="q-email">Email</label>
-                <input id="q-email" name="email" type="email" autocomplete="email" placeholder="nombre@empresa.cl" required />
+                <label for="q-email">{t('cotizar.step4.labelEmail')}</label>
+                <input id="q-email" name="email" type="email" autocomplete="email" placeholder={t('cotizar.step4.placeholderEmail')} required />
               </div>
               <div class="form-field">
-                <label for="q-phone">Teléfono / WhatsApp</label>
-                <input id="q-phone" name="phone" type="tel" autocomplete="tel" placeholder="+56 9 ..." />
+                <label for="q-phone">{t('cotizar.step4.labelPhone')}</label>
+                <input id="q-phone" name="phone" type="tel" autocomplete="tel" placeholder={t('cotizar.step4.placeholderPhone')} />
               </div>
             </div>
             <div class="form-row">
               <div class="form-field">
-                <label for="q-notes">Notas adicionales (opcional)</label>
-                <textarea id="q-notes" name="notes" placeholder="Detalles del producto, plazos críticos, requisitos especiales..."></textarea>
+                <label for="q-notes">{t('cotizar.step4.labelNotes')}</label>
+                <textarea id="q-notes" name="notes" placeholder={t('cotizar.step4.placeholderNotes')}></textarea>
               </div>
             </div>
           </div>
 
           <div class="quote-nav">
-            <button class="btn-ghost" id="btn-back" type="button" disabled>← Anterior</button>
+            <button class="btn-ghost" id="btn-back" type="button" disabled>{t('cotizar.nav.back')}</button>
             <button class="btn-primary-lg" id="btn-next" type="button" disabled>
-              <span id="btn-next-label">Continuar</span>
+              <span id="btn-next-label">{t('cotizar.nav.next')}</span>
               <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
             </button>
           </div>
@@ -253,43 +272,43 @@ const canonical = `${SITE.url}/cotizar`;
         </div>
 
         <!-- Live summary -->
-        <div class="quote-summary" id="quote-summary" aria-label="Resumen de cotización">
+        <div class="quote-summary" id="quote-summary" aria-label={t('a11y.quoteSummary')}>
           <div class="quote-summary__head">
-            <h3 class="quote-summary__title">Tu cotización</h3>
-            <p class="quote-summary__sub">Resumen en vivo</p>
+            <h3 class="quote-summary__title">{t('cotizar.summary.title')}</h3>
+            <p class="quote-summary__sub">{t('cotizar.summary.sub')}</p>
           </div>
           <div class="quote-summary__body">
             <div class="quote-summary__row">
-              <span class="k">Modalidad</span>
-              <span class="v empty" id="sum-mode">Por definir</span>
+              <span class="k">{t('cotizar.summary.kMode')}</span>
+              <span class="v empty" id="sum-mode">{t('cotizar.summary.empty')}</span>
             </div>
             <div class="quote-summary__row">
-              <span class="k">Origen</span>
-              <span class="v empty" id="sum-origin">Por definir</span>
+              <span class="k">{t('cotizar.summary.kOrigin')}</span>
+              <span class="v empty" id="sum-origin">{t('cotizar.summary.empty')}</span>
             </div>
             <div class="quote-summary__row">
-              <span class="k">Destino</span>
+              <span class="k">{t('cotizar.summary.kDest')}</span>
               <span class="v" id="sum-dest">{QUOTE_DESTS[0]}</span>
             </div>
             <div class="quote-summary__row">
-              <span class="k">Incoterm</span>
+              <span class="k">{t('cotizar.summary.kIncoterm')}</span>
               <span class="v" id="sum-incoterm">FOB</span>
             </div>
             <div class="quote-summary__row">
-              <span class="k">Carga</span>
-              <span class="v empty" id="sum-cargo">Por definir</span>
+              <span class="k">{t('cotizar.summary.kCargo')}</span>
+              <span class="v empty" id="sum-cargo">{t('cotizar.summary.empty')}</span>
             </div>
             <div class="quote-summary__row">
-              <span class="k">Volumen</span>
-              <span class="v empty" id="sum-volume">Por definir</span>
+              <span class="k">{t('cotizar.summary.kVolume')}</span>
+              <span class="v empty" id="sum-volume">{t('cotizar.summary.empty')}</span>
             </div>
             <div class="quote-summary__row" id="sum-extras-row" hidden>
-              <span class="k">Extras</span>
+              <span class="k">{t('cotizar.summary.kExtras')}</span>
               <span class="v" id="sum-extras"></span>
             </div>
           </div>
           <div class="quote-summary__foot">
-            <div class="quote-summary__sla">Respuesta garantizada en &lt; 24h hábiles</div>
+            <div class="quote-summary__sla">{t('cotizar.summary.sla')}</div>
           </div>
         </div>
 
@@ -297,34 +316,23 @@ const canonical = `${SITE.url}/cotizar`;
         <div class="quote-card" id="quote-success" style="grid-column: 1 / -1;" hidden>
           <div class="quote-success">
             <div class="quote-success__seal" aria-hidden="true">✓</div>
-            <h2 class="quote-success__title">Solicitud recibida</h2>
-            <span class="quote-success__id" id="success-id">Folio · LA-—</span>
-            <p class="quote-success__desc" id="success-desc">
-              Gracias. Tu ejecutivo dedicado revisó la información
-              y te contacta en menos de 24 horas hábiles.
-            </p>
+            <h2 class="quote-success__title">{t('cotizar.success.title')}</h2>
+            <span class="quote-success__id" id="success-id">{t('cotizar.success.folioPlaceholder')}</span>
+            <p class="quote-success__desc" id="success-desc">{t('cotizar.success.desc')}</p>
             <div class="quote-success__next">
-              <div class="quote-success__step">
-                <div class="quote-success__step-n">SIGUIENTE · 01</div>
-                <h4 class="quote-success__step-t">Asignación</h4>
-                <p class="quote-success__step-d">Te asignamos un ejecutivo según tu industria y ruta.</p>
-              </div>
-              <div class="quote-success__step">
-                <div class="quote-success__step-n">SIGUIENTE · 02</div>
-                <h4 class="quote-success__step-t">Propuesta</h4>
-                <p class="quote-success__step-d">Recibes tarifa total desglosada y plazos por modalidad.</p>
-              </div>
-              <div class="quote-success__step">
-                <div class="quote-success__step-n">SIGUIENTE · 03</div>
-                <h4 class="quote-success__step-t">Ejecución</h4>
-                <p class="quote-success__step-d">Aprobada la propuesta, coordinamos la operación.</p>
-              </div>
+              {successSteps.map((s, i) => (
+                <div class="quote-success__step">
+                  <div class="quote-success__step-n">{t('cotizar.success.nextLabel')} · {String(i + 1).padStart(2, '0')}</div>
+                  <h4 class="quote-success__step-t">{s.title}</h4>
+                  <p class="quote-success__step-d">{s.desc}</p>
+                </div>
+              ))}
             </div>
             <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
-              <a class="btn btn--brand" href="/">Volver al inicio</a>
+              <a class="btn btn--brand" href="/">{t('cotizar.success.backHome')}</a>
               <a class="btn btn--wa" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
                 <Icon name="lucide:message-circle" width={16} height={16} aria-hidden="true" />
-                Hablar por WhatsApp
+                {t('cotizar.success.whatsapp')}
               </a>
             </div>
           </div>
@@ -336,7 +344,7 @@ const canonical = `${SITE.url}/cotizar`;
   <Footer />
 </BaseLayout>
 
-<script>
+<script define:vars={{ clientStrings }}>
   type Unit = 'cbm' | 'fcl20' | 'fcl40';
 
   const state = {
@@ -392,20 +400,21 @@ const canonical = `${SITE.url}/cotizar`;
   }
 
   function renderSummary() {
-    setText(sum.mode,   state.modeName || 'Por definir', !state.modeName);
-    setText(sum.origin, state.origin   || 'Por definir', !state.origin);
+    const EMPTY = clientStrings.empty;
+    setText(sum.mode,   state.modeName || EMPTY, !state.modeName);
+    setText(sum.origin, state.origin   || EMPTY, !state.origin);
     setText(sum.dest,   state.dest, false);
     setText(sum.incoterm, state.incoterm, false);
-    setText(sum.cargo,  state.cargo.length ? state.cargo.join(', ') : 'Por definir', state.cargo.length === 0);
+    setText(sum.cargo,  state.cargo.length ? state.cargo.join(', ') : EMPTY, state.cargo.length === 0);
 
     let vol = '';
     if (state.unit === 'cbm') {
       vol = state.volume ? `${state.volume} m³` : '';
     } else {
-      const label = state.unit === 'fcl20' ? "20' FCL" : "40' FCL";
+      const label = state.unit === 'fcl20' ? clientStrings.unitFcl20 : clientStrings.unitFcl40;
       vol = state.volume ? `${state.volume} × ${label}` : '';
     }
-    setText(sum.volume, vol || 'Por definir', !vol);
+    setText(sum.volume, vol || EMPTY, !vol);
 
     if (state.extras.length) {
       sum.extrasRow?.removeAttribute('hidden');
@@ -436,7 +445,7 @@ const canonical = `${SITE.url}/cotizar`;
     });
     if (btnBack)      btnBack.disabled = state.step === 0;
     if (btnNext)      btnNext.disabled = !canAdvance();
-    if (btnNextLabel) btnNextLabel.textContent = state.step === 3 ? 'Enviar solicitud' : 'Continuar';
+    if (btnNextLabel) btnNextLabel.textContent = state.step === 3 ? clientStrings.submit : clientStrings.next;
   }
 
   // ── Step 0: mode tiles ────────────────────────────────────
@@ -613,10 +622,11 @@ const canonical = `${SITE.url}/cotizar`;
     const id = 'LA-' + String(Date.now()).slice(-6);
     const idEl   = $('#success-id');
     const descEl = $('#success-desc');
-    if (idEl)   idEl.textContent = `Folio · ${id}`;
+    if (idEl)   idEl.textContent = `${clientStrings.folioPrefix} · ${id}`;
     const firstName = state.name.split(' ')[0] || '';
-    if (descEl) descEl.textContent =
-      `Gracias ${firstName}. Tu ejecutivo dedicado revisó la información y te contacta en menos de 24 horas hábiles al correo ${state.email}.`;
+    if (descEl) descEl.textContent = clientStrings.descPersonal
+      .replace('{name}', firstName)
+      .replace('{email}', state.email);
     stepperRoot?.setAttribute('hidden', '');
     quoteCard?.setAttribute('hidden', '');
     summary?.setAttribute('hidden', '');

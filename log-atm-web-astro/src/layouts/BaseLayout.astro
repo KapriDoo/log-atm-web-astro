@@ -1,5 +1,16 @@
 ---
 import '../styles/global.css';
+import {
+  useTranslations,
+  getLangFromUrl,
+  stripLocaleFromPath,
+  buildLocaleUrl,
+  getAlternateLinks,
+  isRTL,
+  getHtmlLang,
+  getOgLocale,
+} from '../i18n/utils';
+import { LOCALES, OG_LOCALE, type Locale } from '../i18n/config';
 
 interface Props {
   title?: string;
@@ -7,20 +18,50 @@ interface Props {
   image?: string;
   canonical?: string;
   noindex?: boolean;
+  /** Locale explícito (preferido cuando la página `[lang]/*.astro` delega vía import). */
+  lang?: Locale;
 }
 
 const SITE_NAME = 'LOG ATM';
 const SITE_URL  = 'https://logatm.com';
-const DEFAULT_DESC = 'Logística aérea y marítima a tu medida. Carga internacional, aduana, almacenaje y consultoría desde Vitacura, Santiago, Chile.';
+
+// Fuente del locale, en orden de prioridad:
+// 1) prop `lang` (cuando la página `[lang]/*.astro` delega y propaga
+//    `Astro.params.lang` explícitamente — único método 100% fiable);
+// 2) `Astro.currentLocale` (inyectado por el routing i18n cuando aplica);
+// 3) `getLangFromUrl(Astro.url)` (fallback al primer segmento del path).
+const langProp = (Astro.props as Props).lang;
+const currentLang = (langProp ?? (Astro.currentLocale as Locale | undefined) ?? getLangFromUrl(Astro.url)) as Locale;
+const t = useTranslations(currentLang);
+const DEFAULT_DESC = t('meta.defaultDescription');
 const DEFAULT_IMG  = `${SITE_URL}/og-default.svg`;
+
+const htmlLang = getHtmlLang(currentLang);
+const dir = isRTL(currentLang) ? 'rtl' : 'ltr';
+const cleanPath = stripLocaleFromPath(Astro.url.pathname);
+
+// Canonical/og:url reconstruidos desde `currentLang + cleanPath` para evitar
+// la inconsistencia de `Astro.url.pathname` cuando una página `[lang]/foo.astro`
+// delega vía `import` en `pages/foo.astro` (en ese caso, Astro.url puede no
+// reflejar el segmento de locale en la subruta). Esto asegura URLs localizadas
+// y con trailing slash, alineadas con sitemap y hreflang.
+const computedCanonicalPath = buildLocaleUrl(currentLang, cleanPath);
+const computedCanonical = new URL(computedCanonicalPath, SITE_URL).href;
 
 const {
   title,
   description = DEFAULT_DESC,
   image = DEFAULT_IMG,
-  canonical = new URL(Astro.url.pathname, SITE_URL).href,
+  canonical = computedCanonical,
   noindex = false,
 } = Astro.props;
+
+const alternates = getAlternateLinks(cleanPath).map((a) => ({
+  hreflang: a.hreflang,
+  href: new URL(a.href, SITE_URL).href,
+}));
+const ogLocale = getOgLocale(currentLang);
+const ogAlternateLocales = LOCALES.filter((l) => l !== currentLang).map((l) => OG_LOCALE[l]);
 
 const pageTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} — Logística a tu medida`;
 
@@ -89,7 +130,7 @@ const breadcrumbSchema = Astro.url.pathname !== '/' ? JSON.stringify({
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={htmlLang} dir={dir}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -101,6 +142,11 @@ const breadcrumbSchema = Astro.url.pathname !== '/' ? JSON.stringify({
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
+    <!-- hreflang alternates (5 locales + x-default) -->
+    {alternates.map((a) => (
+      <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+    ))}
+
     <!-- Open Graph -->
     <meta property="og:type"        content="website" />
     <meta property="og:url"         content={canonical} />
@@ -108,7 +154,10 @@ const breadcrumbSchema = Astro.url.pathname !== '/' ? JSON.stringify({
     <meta property="og:description" content={description} />
     <meta property="og:image"       content={image} />
     <meta property="og:site_name"   content={SITE_NAME} />
-    <meta property="og:locale"      content="es_CL" />
+    <meta property="og:locale"      content={ogLocale} />
+    {ogAlternateLocales.map((l) => (
+      <meta property="og:locale:alternate" content={l} />
+    ))}
     <meta property="og:image:width"  content="1200" />
     <meta property="og:image:height" content="630" />
 
@@ -134,7 +183,7 @@ const breadcrumbSchema = Astro.url.pathname !== '/' ? JSON.stringify({
     {breadcrumbSchema && <script type="application/ld+json" set:html={breadcrumbSchema} />}
   </head>
   <body>
-    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+    <a href="#main-content" class="skip-link">{t('a11y.skipLink')}</a>
     <slot />
     <script>
       import '../scripts/scroll-animations';

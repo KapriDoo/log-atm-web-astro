@@ -4,39 +4,50 @@ import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
 import CTASection from '../components/sections/CTASection.astro';
 import { Icon } from 'astro-icon/components';
-import { SITE, TIMELINE, VALUES, HOW_WE_WORK, CERTS } from '../lib/constants';
+import { VALUES, HOW_WE_WORK } from '../lib/constants';
+import { useTranslations, getLangFromUrl, tList, type Locale } from '../i18n/utils';
 import '../styles/pages/shared.css';
 
-const title = 'Nosotros';
-const description = '20+ años conectando Chile con el mundo. Operador chileno OEA, foco corporativo y atención 1:1. Trayectoria, valores, equipo y certificaciones.';
-const canonical = `${SITE.url}/nosotros`;
+const { lang: langProp } = Astro.props as { lang?: Locale };
+const currentLang = langProp ?? getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const title = t('meta.nosotros.title');
+const description = t('meta.nosotros.description');
+
+type TimelineItem = { year: string; milestone: string; desc: string };
+type ValueItem = { title: string; desc: string };
+type HowItem = { title: string; desc: string };
+type CertItem = { name: string; desc: string };
+
+const timeline = tList<TimelineItem>(currentLang, 'nosotros.timeline.items');
+const valuesCopy = tList<ValueItem>(currentLang, 'nosotros.values.items');
+const howCopy = tList<HowItem>(currentLang, 'nosotros.how.items');
+const certs = tList<CertItem>(currentLang, 'nosotros.certs.items');
+
+const values = VALUES.map((v, i) => ({ ...v, ...(valuesCopy[i] ?? { title: v.title, desc: v.desc }) }));
+const how = HOW_WE_WORK.map((h, i) => ({ ...h, ...(howCopy[i] ?? { title: h.title, desc: h.desc }) }));
 ---
 
-<BaseLayout title={title} description={description} canonical={canonical}>
+<BaseLayout title={title} description={description} lang={currentLang}>
   <Navbar />
 
   <main id="main-content">
     <section class="page-hero">
       <div class="container">
         <div class="page-hero__breadcrumb">
-          <a href="/">Inicio</a> <span>/</span> <span>Nosotros</span>
+          <a href="/">{t('common.breadcrumbHome')}</a> <span>/</span> <span>{t('nosotros.breadcrumb')}</span>
         </div>
         <div class="page-hero__inner">
           <div>
-            <span class="page-hero__eyebrow">Nosotros · Desde 2003</span>
-            <h1 class="page-hero__title">
-              20+ años conectando <em>Chile con el mundo</em>.
-            </h1>
-            <p class="page-hero__lead">
-              Somos un operador logístico chileno. No vendemos un servicio: operamos
-              con cada cliente como si fuera nuestra propia operación.
-            </p>
+            <span class="page-hero__eyebrow">{t('nosotros.heroEyebrow')}</span>
+            <h1 class="page-hero__title" set:html={t('nosotros.heroTitleHtml')}></h1>
+            <p class="page-hero__lead">{t('nosotros.heroLead')}</p>
           </div>
           <div class="page-hero__meta">
-            <div class="page-hero__meta-item"><span class="v">20<em>+</em></span><span class="k">Años de operación</span></div>
-            <div class="page-hero__meta-item"><span class="v">CL</span><span class="k">Capital chileno</span></div>
-            <div class="page-hero__meta-item"><span class="v">OEA</span><span class="k">Operador autorizado</span></div>
-            <div class="page-hero__meta-item"><span class="v">B2B</span><span class="k">Foco corporativo</span></div>
+            <div class="page-hero__meta-item"><span class="v">20<em>+</em></span><span class="k">{t('nosotros.metaYears')}</span></div>
+            <div class="page-hero__meta-item"><span class="v">CL</span><span class="k">{t('nosotros.metaCapital')}</span></div>
+            <div class="page-hero__meta-item"><span class="v">OEA</span><span class="k">{t('nosotros.metaCert')}</span></div>
+            <div class="page-hero__meta-item"><span class="v">B2B</span><span class="k">{t('nosotros.metaFocus')}</span></div>
           </div>
         </div>
       </div>
@@ -45,26 +56,11 @@ const canonical = `${SITE.url}/nosotros`;
     <section class="manifesto">
       <div class="container">
         <div class="manifesto__grid">
-          <h2 class="manifesto__title">
-            La logística es una <em>relación</em>, no un commodity.
-          </h2>
+          <h2 class="manifesto__title" set:html={t('nosotros.manifesto.titleHtml')}></h2>
           <div class="manifesto__body">
-            <p>
-              Llevamos más de dos décadas operando en el mundo logístico chileno y aprendimos
-              algo simple: <em>las cargas no se mueven solas</em>. Detrás de cada contenedor,
-              cada AWB, cada DUS, hay personas decidiendo bajo presión.
-            </p>
-            <p>
-              Por eso construimos LOG ATM al revés que la industria. En lugar de un call center
-              que rota agentes, asignamos un ejecutivo dedicado por cuenta. En lugar de tarifas
-              ocultas, mostramos cada componente del costo. En lugar de prometer todo, decimos
-              primero lo que va a fallar.
-            </p>
-            <p>
-              Hoy operamos en <em>70+ países</em>, con clientes en 12 industrias y una retención
-              del 98%. Pero seguimos midiéndonos con la misma pregunta del primer día: ¿el cliente
-              sentiría que esta operación es suya?
-            </p>
+            <p set:html={t('nosotros.manifesto.p1Html')}></p>
+            <p>{t('nosotros.manifesto.p2')}</p>
+            <p set:html={t('nosotros.manifesto.p3Html')}></p>
           </div>
         </div>
       </div>
@@ -73,18 +69,18 @@ const canonical = `${SITE.url}/nosotros`;
     <section class="timeline">
       <div class="container">
         <div class="section-head">
-          <span class="eyebrow">Trayectoria</span>
-          <h2 class="section-head__title">Hitos de 20+ años</h2>
+          <span class="eyebrow">{t('nosotros.timeline.eyebrow')}</span>
+          <h2 class="section-head__title">{t('nosotros.timeline.title')}</h2>
         </div>
         <div class="timeline__track">
           <div class="timeline__line"></div>
           <div class="timeline__items">
-            {TIMELINE.map((t) => (
+            {timeline.map((item) => (
               <div class="timeline__item">
                 <div class="timeline__dot"></div>
-                <div class="timeline__year">{t.year}</div>
-                <h3 class="timeline__milestone">{t.milestone}</h3>
-                <p class="timeline__desc">{t.desc}</p>
+                <div class="timeline__year">{item.year}</div>
+                <h3 class="timeline__milestone">{item.milestone}</h3>
+                <p class="timeline__desc">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -97,17 +93,14 @@ const canonical = `${SITE.url}/nosotros`;
         <div class="section-head">
           <div class="section-head__top">
             <div>
-              <span class="eyebrow">Cómo trabajamos</span>
-              <h2 class="section-head__title">4 valores que defienden la operación</h2>
+              <span class="eyebrow">{t('nosotros.values.eyebrow')}</span>
+              <h2 class="section-head__title">{t('nosotros.values.title')}</h2>
             </div>
-            <p class="section-head__desc">
-              Los principios que aplicamos en cada decisión, desde cotizar hasta resolver
-              una contingencia a las 3 AM.
-            </p>
+            <p class="section-head__desc">{t('nosotros.values.desc')}</p>
           </div>
         </div>
         <div class="values-grid">
-          {VALUES.map((v) => (
+          {values.map((v) => (
             <div class="value-card">
               <div class="value-card__icon">
                 <Icon name={v.icon} width={22} height={22} />
@@ -125,18 +118,14 @@ const canonical = `${SITE.url}/nosotros`;
         <div class="section-head">
           <div class="section-head__top">
             <div>
-              <span class="eyebrow">Cómo trabajamos</span>
-              <h2 class="section-head__title">Un modelo simple, transparente y a tu medida</h2>
+              <span class="eyebrow">{t('nosotros.how.eyebrow')}</span>
+              <h2 class="section-head__title">{t('nosotros.how.title')}</h2>
             </div>
-            <p class="section-head__desc">
-              No vendemos paquetes cerrados. Diseñamos cada operación desde cero
-              siguiendo cuatro pasos claros, con un ejecutivo que te acompaña de
-              principio a fin.
-            </p>
+            <p class="section-head__desc">{t('nosotros.how.desc')}</p>
           </div>
         </div>
         <div class="howwork-grid">
-          {HOW_WE_WORK.map((s) => (
+          {how.map((s) => (
             <div class="howwork-card">
               <div class="howwork-card__media">
                 <img src={s.img} alt="" loading="lazy" />
@@ -158,11 +147,11 @@ const canonical = `${SITE.url}/nosotros`;
     <section class="section section--surface">
       <div class="container">
         <div class="section-head">
-          <span class="eyebrow">Certificaciones</span>
-          <h2 class="section-head__title">Operamos bajo estándares globales</h2>
+          <span class="eyebrow">{t('nosotros.certs.eyebrow')}</span>
+          <h2 class="section-head__title">{t('nosotros.certs.title')}</h2>
         </div>
         <div class="certs">
-          {CERTS.map((c) => (
+          {certs.map((c) => (
             <div class="cert">
               <div class="cert__seal">{c.name.split(' ')[0].slice(0, 4).toUpperCase()}</div>
               <h3 class="cert__name">{c.name}</h3>

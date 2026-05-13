@@ -2,23 +2,28 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, type Locale } from '../i18n/utils';
+
+const { lang: langProp } = Astro.props as { lang?: Locale };
+const currentLang = langProp ?? getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const homeHref = buildLocaleUrl(currentLang, '/');
 ---
 
 <BaseLayout
-  title="Página no encontrada"
-  description="La página que buscas no existe. Vuelve al inicio de LOG ATM."
+  title={t('meta.notFound.title')}
+  description={t('meta.notFound.description')}
   noindex={true}
+  lang={currentLang}
 >
   <Navbar />
   <main id="main-content" class="error-page" role="main">
     <div class="error-page__container">
-      <span class="error-page__code" aria-hidden="true">404</span>
-      <h1 class="error-page__title">Página no encontrada</h1>
-      <p class="error-page__lead">
-        Lo sentimos, la página que buscas no existe o ha sido movida.
-      </p>
-      <a href="/" class="error-page__cta">
-        Volver al inicio
+      <span class="error-page__code" aria-hidden="true">{t('notFound.code')}</span>
+      <h1 class="error-page__title">{t('notFound.title')}</h1>
+      <p class="error-page__lead">{t('notFound.lead')}</p>
+      <a href={homeHref} class="error-page__cta">
+        {t('notFound.backHome')}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
