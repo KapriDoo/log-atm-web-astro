@@ -1,5 +1,15 @@
 ---
 import '../styles/global.css';
+import {
+  useTranslations,
+  getLangFromUrl,
+  stripLocaleFromPath,
+  getAlternateLinks,
+  isRTL,
+  getHtmlLang,
+  getOgLocale,
+} from '../i18n/utils';
+import { LOCALES, OG_LOCALE } from '../i18n/config';
 
 interface Props {
   title?: string;
@@ -11,7 +21,10 @@ interface Props {
 
 const SITE_NAME = 'LOG ATM';
 const SITE_URL  = 'https://logatm.com';
-const DEFAULT_DESC = 'Logística aérea y marítima a tu medida. Carga internacional, aduana, almacenaje y consultoría desde Vitacura, Santiago, Chile.';
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const DEFAULT_DESC = t('meta.defaultDescription');
 const DEFAULT_IMG  = `${SITE_URL}/og-default.svg`;
 
 const {
@@ -21,6 +34,16 @@ const {
   canonical = new URL(Astro.url.pathname, SITE_URL).href,
   noindex = false,
 } = Astro.props;
+
+const htmlLang = getHtmlLang(currentLang);
+const dir = isRTL(currentLang) ? 'rtl' : 'ltr';
+const cleanPath = stripLocaleFromPath(Astro.url.pathname);
+const alternates = getAlternateLinks(cleanPath).map((a) => ({
+  hreflang: a.hreflang,
+  href: new URL(a.href, SITE_URL).href,
+}));
+const ogLocale = getOgLocale(currentLang);
+const ogAlternateLocales = LOCALES.filter((l) => l !== currentLang).map((l) => OG_LOCALE[l]);
 
 const pageTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} — Logística a tu medida`;
 
@@ -89,7 +112,7 @@ const breadcrumbSchema = Astro.url.pathname !== '/' ? JSON.stringify({
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={htmlLang} dir={dir}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -101,6 +124,11 @@ const breadcrumbSchema = Astro.url.pathname !== '/' ? JSON.stringify({
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
+    <!-- hreflang alternates (5 locales + x-default) -->
+    {alternates.map((a) => (
+      <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+    ))}
+
     <!-- Open Graph -->
     <meta property="og:type"        content="website" />
     <meta property="og:url"         content={canonical} />
@@ -108,7 +136,10 @@ const breadcrumbSchema = Astro.url.pathname !== '/' ? JSON.stringify({
     <meta property="og:description" content={description} />
     <meta property="og:image"       content={image} />
     <meta property="og:site_name"   content={SITE_NAME} />
-    <meta property="og:locale"      content="es_CL" />
+    <meta property="og:locale"      content={ogLocale} />
+    {ogAlternateLocales.map((l) => (
+      <meta property="og:locale:alternate" content={l} />
+    ))}
     <meta property="og:image:width"  content="1200" />
     <meta property="og:image:height" content="630" />
 
@@ -134,7 +165,7 @@ const breadcrumbSchema = Astro.url.pathname !== '/' ? JSON.stringify({
     {breadcrumbSchema && <script type="application/ld+json" set:html={breadcrumbSchema} />}
   </head>
   <body>
-    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+    <a href="#main-content" class="skip-link">{t('a11y.skipLink')}</a>
     <slot />
     <script>
       import '../scripts/scroll-animations';
