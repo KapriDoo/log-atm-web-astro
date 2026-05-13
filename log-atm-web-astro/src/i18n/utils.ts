@@ -18,17 +18,11 @@ import type { TranslationKey, Translations } from './types';
 
 import es from './translations/es.json';
 import en from './translations/en.json';
-import zh from './translations/zh.json';
-import hi from './translations/hi.json';
-import ar from './translations/ar.json';
 import pt from './translations/pt.json';
 
 const dictionaries: Record<Locale, Translations> = {
   es: es as Translations,
   en: en as Translations,
-  zh: zh as Translations,
-  hi: hi as Translations,
-  ar: ar as Translations,
   pt: pt as Translations,
 };
 

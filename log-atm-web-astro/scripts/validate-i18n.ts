@@ -17,7 +17,7 @@ import { fileURLToPath } from 'node:url';
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..', 'src', 'i18n', 'translations');
 
-const LOCALES = ['es', 'en', 'zh', 'hi', 'ar', 'pt'] as const;
+const LOCALES = ['es', 'en', 'pt'] as const;
 const MASTER = 'es' as const;
 /** Claves de metadata que no deben validarse para paridad. */
 const META_KEYS = new Set(['__needs_native_review', '__note']);

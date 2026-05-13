@@ -31,7 +31,7 @@ export default defineConfig({
   site: 'https://logatm.com',
   i18n: {
     defaultLocale: 'es',
-    locales: ['es', 'en', 'zh', 'hi', 'ar', 'pt'],
+    locales: ['es', 'en', 'pt'],
     routing: {
       prefixDefaultLocale: false,
     },
@@ -48,9 +48,6 @@ export default defineConfig({
         locales: {
           es: 'es-CL',
           en: 'en-US',
-          zh: 'zh-CN',
-          hi: 'hi-IN',
-          ar: 'ar',
           pt: 'pt-BR',
         },
       },
