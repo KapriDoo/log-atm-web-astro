@@ -17,8 +17,8 @@ spec_refs:
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/rescue-multi-language-support"
 feature_branch: "feature/rescue-multi-language-support"
 integration_target: "main"
-mr: ""
-mr_status: pending
+mr: "https://github.com/KapriDoo/log-atm-web-astro/pull/13"
+mr_status: open
 mr_error: ""
 require_judgment: false
 skip_judgment: false
