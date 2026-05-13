@@ -4,7 +4,7 @@ import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
 import { Icon } from 'astro-icon/components';
 import { SITE } from '../lib/constants';
-import { useTranslations, getLangFromUrl } from '../i18n/utils';
+import { useTranslations, getLangFromUrl, tList } from '../i18n/utils';
 import '../styles/pages/shared.css';
 
 const currentLang = getLangFromUrl(Astro.url);
@@ -12,6 +12,9 @@ const t = useTranslations(currentLang);
 const title = t('meta.contacto.title');
 const description = t('meta.contacto.description');
 const canonical = `${SITE.url}/contacto`;
+
+const formServices = tList<string>(currentLang, 'contacto.form.services');
+const submitSuccessText = t('contacto.form.submitSuccess');
 ---
 
 <BaseLayout title={title} description={description} canonical={canonical}>
@@ -21,24 +24,19 @@ const canonical = `${SITE.url}/contacto`;
     <section class="page-hero">
       <div class="container">
         <div class="page-hero__breadcrumb">
-          <a href="/">Inicio</a> <span>/</span> <span>Contacto</span>
+          <a href="/">{t('common.breadcrumbHome')}</a> <span>/</span> <span>{t('contacto.breadcrumb')}</span>
         </div>
         <div class="page-hero__inner">
           <div>
-            <span class="page-hero__eyebrow">Contacto · Respuesta en 24h</span>
-            <h1 class="page-hero__title">
-              Hablemos de tu <em>próximo envío</em>.
-            </h1>
-            <p class="page-hero__lead">
-              Cuéntanos qué necesitas mover. Un ejecutivo dedicado te responde con una
-              propuesta clara, en menos de 24 horas hábiles.
-            </p>
+            <span class="page-hero__eyebrow">{t('contacto.heroEyebrow')}</span>
+            <h1 class="page-hero__title" set:html={t('contacto.heroTitleHtml')}></h1>
+            <p class="page-hero__lead">{t('contacto.heroLead')}</p>
           </div>
           <div class="page-hero__meta">
-            <div class="page-hero__meta-item"><span class="v">24<em>h</em></span><span class="k">Tiempo de respuesta</span></div>
-            <div class="page-hero__meta-item"><span class="v">1:1</span><span class="k">Ejecutivo dedicado</span></div>
-            <div class="page-hero__meta-item"><span class="v">24/7</span><span class="k">Soporte operativo</span></div>
-            <div class="page-hero__meta-item"><span class="v">CL</span><span class="k">Santiago, Vitacura</span></div>
+            <div class="page-hero__meta-item"><span class="v">24<em>h</em></span><span class="k">{t('contacto.metaResponse')}</span></div>
+            <div class="page-hero__meta-item"><span class="v">1:1</span><span class="k">{t('contacto.metaExec')}</span></div>
+            <div class="page-hero__meta-item"><span class="v">24/7</span><span class="k">{t('contacto.metaSupport')}</span></div>
+            <div class="page-hero__meta-item"><span class="v">CL</span><span class="k">{t('contacto.metaOffice')}</span></div>
           </div>
         </div>
       </div>
@@ -47,74 +45,66 @@ const canonical = `${SITE.url}/contacto`;
     <section class="section section--alt">
       <div class="container">
         <div class="contact-grid">
-          <form class="contact-form-card" id="contact-form" novalidate>
+          <form class="contact-form-card" id="contact-form" novalidate data-success={submitSuccessText}>
             <div class="contact-form-card__head">
               <div>
-                <h2 class="contact-form-card__title">Cuéntanos qué necesitas mover</h2>
-                <p class="contact-form-card__sub">Respondemos en menos de 24h hábiles · sin spam.</p>
+                <h2 class="contact-form-card__title">{t('contacto.form.title')}</h2>
+                <p class="contact-form-card__sub">{t('contacto.form.sub')}</p>
               </div>
-              <span class="contact-form-card__pill">En línea ahora</span>
+              <span class="contact-form-card__pill">{t('contacto.form.pill')}</span>
             </div>
 
             <div class="form-row form-row--2">
               <div class="form-field">
-                <label for="cn">Nombre</label>
-                <input id="cn" name="name" type="text" placeholder="Tu nombre" autocomplete="name" required />
+                <label for="cn">{t('contacto.form.labelName')}</label>
+                <input id="cn" name="name" type="text" placeholder={t('contacto.form.placeholderName')} autocomplete="name" required />
               </div>
               <div class="form-field">
-                <label for="ce">Empresa</label>
-                <input id="ce" name="company" type="text" placeholder="Razón social" autocomplete="organization" />
-              </div>
-            </div>
-
-            <div class="form-row form-row--2">
-              <div class="form-field">
-                <label for="cm">Email</label>
-                <input id="cm" name="email" type="email" placeholder="nombre@empresa.cl" autocomplete="email" required />
-              </div>
-              <div class="form-field">
-                <label for="cp">Teléfono</label>
-                <input id="cp" name="phone" type="tel" placeholder="+56 9 ..." autocomplete="tel" />
+                <label for="ce">{t('contacto.form.labelCompany')}</label>
+                <input id="ce" name="company" type="text" placeholder={t('contacto.form.placeholderCompany')} autocomplete="organization" />
               </div>
             </div>
 
             <div class="form-row form-row--2">
               <div class="form-field">
-                <label for="cs">Servicio</label>
+                <label for="cm">{t('contacto.form.labelEmail')}</label>
+                <input id="cm" name="email" type="email" placeholder={t('contacto.form.placeholderEmail')} autocomplete="email" required />
+              </div>
+              <div class="form-field">
+                <label for="cp">{t('contacto.form.labelPhone')}</label>
+                <input id="cp" name="phone" type="tel" placeholder={t('contacto.form.placeholderPhone')} autocomplete="tel" />
+              </div>
+            </div>
+
+            <div class="form-row form-row--2">
+              <div class="form-field">
+                <label for="cs">{t('contacto.form.labelService')}</label>
                 <select id="cs" name="service">
-                  <option>Carga Marítima · FCL</option>
-                  <option>Carga Marítima · LCL</option>
-                  <option>Carga Aérea / Courier</option>
-                  <option>Aduana y Documentación</option>
-                  <option>Almacenaje · Fulfillment</option>
-                  <option>Consultoría Supply Chain</option>
-                  <option>Otro · cuéntanos</option>
+                  {formServices.map((s) => <option>{s}</option>)}
                 </select>
               </div>
               <div class="form-field">
-                <label for="co">Origen → Destino</label>
-                <input id="co" name="route" type="text" placeholder="Ej. Shanghai → Santiago" />
+                <label for="co">{t('contacto.form.labelRoute')}</label>
+                <input id="co" name="route" type="text" placeholder={t('contacto.form.placeholderRoute')} />
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-field">
-                <label for="cmsg">Mensaje</label>
-                <textarea id="cmsg" name="message" placeholder="Cuéntanos volumen, plazos, tipo de carga..."></textarea>
+                <label for="cmsg">{t('contacto.form.labelMessage')}</label>
+                <textarea id="cmsg" name="message" placeholder={t('contacto.form.placeholderMessage')}></textarea>
               </div>
             </div>
 
             <button class="form-submit" type="submit" id="contact-submit">
-              <span class="form-submit__label">Enviar solicitud</span>
+              <span class="form-submit__label">{t('contacto.form.submit')}</span>
               <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
             </button>
-            <p class="form-fineprint">
-              Al enviar aceptas nuestra <a href="#">política de privacidad</a>. No compartimos tus datos.
-            </p>
+            <p class="form-fineprint" set:html={t('contacto.form.fineprintHtml')}></p>
           </form>
 
           <div>
-            <span class="eyebrow">Canales directos</span>
+            <span class="eyebrow">{t('contacto.channels.eyebrow')}</span>
 
             <div class="contact-channels">
               <a class="channel channel--wa" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
@@ -122,7 +112,7 @@ const canonical = `${SITE.url}/contacto`;
                   <Icon name="lucide:message-circle" width={22} height={22} aria-hidden="true" />
                 </div>
                 <div>
-                  <div class="channel__name">WhatsApp · respuesta inmediata</div>
+                  <div class="channel__name">{t('contacto.channels.whatsappName')}</div>
                   <div class="channel__value">{SITE.phoneDisplay}</div>
                 </div>
                 <span class="channel__arrow" aria-hidden="true">→</span>
@@ -132,7 +122,7 @@ const canonical = `${SITE.url}/contacto`;
                   <Icon name="lucide:phone" width={20} height={20} aria-hidden="true" />
                 </div>
                 <div>
-                  <div class="channel__name">Teléfono</div>
+                  <div class="channel__name">{t('contacto.channels.phoneName')}</div>
                   <div class="channel__value">{SITE.phoneDisplay}</div>
                 </div>
                 <span class="channel__arrow" aria-hidden="true">→</span>
@@ -142,7 +132,7 @@ const canonical = `${SITE.url}/contacto`;
                   <Icon name="lucide:mail" width={20} height={20} aria-hidden="true" />
                 </div>
                 <div>
-                  <div class="channel__name">Email · operaciones</div>
+                  <div class="channel__name">{t('contacto.channels.emailName')}</div>
                   <div class="channel__value">{SITE.email}</div>
                 </div>
                 <span class="channel__arrow" aria-hidden="true">→</span>
@@ -155,12 +145,12 @@ const canonical = `${SITE.url}/contacto`;
                 <div class="office-card__pin"></div>
               </div>
               <div class="office-card__body">
-                <h3 class="office-card__name">Oficina Santiago</h3>
+                <h3 class="office-card__name">{t('contacto.office.name')}</h3>
                 <p class="office-card__address">{SITE.address}</p>
                 <div class="office-card__hours">
-                  <div class="office-card__hours-row"><span>Lun – Vie</span><strong>09:00 – 18:30</strong></div>
-                  <div class="office-card__hours-row"><span>Sábado</span><strong>10:00 – 13:00</strong></div>
-                  <div class="office-card__hours-row"><span>Soporte op.</span><strong>24/7</strong></div>
+                  <div class="office-card__hours-row"><span>{t('contacto.office.rowWeek')}</span><strong>{t('contacto.office.hoursWeek')}</strong></div>
+                  <div class="office-card__hours-row"><span>{t('contacto.office.rowSat')}</span><strong>{t('contacto.office.hoursSat')}</strong></div>
+                  <div class="office-card__hours-row"><span>{t('contacto.office.rowSupport')}</span><strong>{t('contacto.office.hoursSupport')}</strong></div>
                 </div>
               </div>
             </div>
@@ -177,11 +167,12 @@ const canonical = `${SITE.url}/contacto`;
   const form  = document.getElementById('contact-form') as HTMLFormElement | null;
   const btn   = document.getElementById('contact-submit') as HTMLButtonElement | null;
   const label = btn?.querySelector<HTMLSpanElement>('.form-submit__label');
+  const successText = form?.dataset.success ?? '';
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!btn || !label) return;
     btn.disabled = true;
-    label.textContent = '✓ Recibido — te contactamos hoy';
+    label.textContent = successText;
     btn.querySelector('svg')?.remove();
   });
 </script>
