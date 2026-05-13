@@ -1,46 +1,61 @@
 ---
-import { NAV_LINKS, SITE } from '../../lib/constants';
+import { SITE } from '../../lib/constants';
+import { useTranslations, getLangFromUrl, stripLocaleFromPath, buildLocaleUrl, isRTL } from '../../i18n/utils';
+import LanguageSelector from './LanguageSelector.astro';
+
+const currentLang = getLangFromUrl(Astro.url);
 const currentPath = Astro.url.pathname;
+const cleanPath = stripLocaleFromPath(currentPath);
+const t = useTranslations(currentLang);
+
+// Construye links localizados para los 4 ítems principales de navegación.
+const NAV_ITEMS = [
+  { key: 'servicios', path: '/servicios' },
+  { key: 'industrias', path: '/industrias' },
+  { key: 'nosotros', path: '/nosotros' },
+  { key: 'contacto', path: '/contacto' },
+] as const;
+
+const navLinks = NAV_ITEMS.map((item) => ({
+  href: buildLocaleUrl(currentLang, item.path),
+  label: t(`nav.${item.key}`),
+  matchPath: item.path,
+}));
+
+const homeHref = buildLocaleUrl(currentLang, '/');
+const quoteHref = buildLocaleUrl(currentLang, '/cotizar');
+const rtl = isRTL(currentLang);
 ---
 
-<nav class="nav" id="navbar" aria-label="Navegación principal">
+<nav class="nav" id="navbar" aria-label={t('a11y.mainNav')}>
   <div class="container nav__inner">
-    <a href="/" class="nav__brand" aria-label="LOG ATM — Inicio">
+    <a href={homeHref} class="nav__brand" aria-label={t('a11y.brandHome')}>
       <img class="nav__brand-logo" src="/logo.png" alt="" width="38" height="38" loading="eager" fetchpriority="high" />
       <span>
-        <span class="nav__brand-name">LOG ATM</span>
-        <span class="nav__brand-sub">Logística a tu medida</span>
+        <span class="nav__brand-name">{t('meta.siteName')}</span>
+        <span class="nav__brand-sub">{t('meta.tagline')}</span>
       </span>
     </a>
 
     <ul class="nav__links" role="list">
-      {NAV_LINKS.map((l) => (
+      {navLinks.map((l) => (
         <li>
           <a
-            class:list={['nav__link', { 'is-active': currentPath.startsWith(l.href) }]}
+            class:list={['nav__link', { 'is-active': cleanPath.startsWith(l.matchPath) }]}
             href={l.href}
-            aria-current={currentPath.startsWith(l.href) ? 'page' : undefined}
+            aria-current={cleanPath.startsWith(l.matchPath) ? 'page' : undefined}
           >{l.label}</a>
         </li>
       ))}
     </ul>
 
     <div class="nav__cta-group">
-      <span class="nav__lang" aria-hidden="true">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/>
-        </svg>
-        ES
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-          <path d="m6 9 6 6 6-6"/>
-        </svg>
-      </span>
-      <a href="/cotizar" class="btn btn--brand btn--sm">Cotiza ahora</a>
+      <LanguageSelector currentLang={currentLang} currentPath={cleanPath} variant="desktop" />
+      <a href={quoteHref} class="btn btn--brand btn--sm">{t('nav.quoteCta')}</a>
     </div>
 
     <!-- Hamburger (visible <880px) -->
-    <button class="nav__burger" id="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-drawer">
+    <button class="nav__burger" id="nav-burger" type="button" aria-label={t('a11y.openMenu')} aria-expanded="false" aria-controls="nav-drawer" data-label-open={t('a11y.openMenu')} data-label-close={t('a11y.closeMenu')}>
       <span class="nav__burger-bar"></span>
       <span class="nav__burger-bar"></span>
       <span class="nav__burger-bar"></span>
@@ -49,32 +64,33 @@ const currentPath = Astro.url.pathname;
 </nav>
 
 <!-- Drawer (mobile) -->
-<div class="nav-drawer" id="nav-drawer" aria-hidden="true">
+<div class:list={['nav-drawer', { 'is-rtl': rtl }]} id="nav-drawer" aria-hidden="true">
   <div class="nav-drawer__backdrop" id="nav-drawer-backdrop"></div>
-  <div class="nav-drawer__panel" role="dialog" aria-modal="true" aria-label="Menú">
+  <div class="nav-drawer__panel" role="dialog" aria-modal="true" aria-label={t('a11y.menuDialog')}>
     <div class="nav-drawer__header">
-      <a href="/" class="nav__brand">
+      <a href={homeHref} class="nav__brand">
         <img class="nav__brand-logo" src="/logo.png" alt="" width="38" height="38" />
         <span>
-          <span class="nav__brand-name">LOG ATM</span>
-          <span class="nav__brand-sub">Logística a tu medida</span>
+          <span class="nav__brand-name">{t('meta.siteName')}</span>
+          <span class="nav__brand-sub">{t('meta.tagline')}</span>
         </span>
       </a>
-      <button class="nav-drawer__close" id="nav-drawer-close" type="button" aria-label="Cerrar menú">
+      <button class="nav-drawer__close" id="nav-drawer-close" type="button" aria-label={t('a11y.closeMenu')}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
           <path d="M18 6 6 18M6 6l12 12"/>
         </svg>
       </button>
     </div>
     <ul class="nav-drawer__links" role="list">
-      {NAV_LINKS.map((l) => (
+      {navLinks.map((l) => (
         <li><a class="nav-drawer__link" href={l.href}>{l.label}</a></li>
       ))}
     </ul>
     <div class="nav-drawer__ctas">
-      <a class="btn btn--cta" href="/cotizar">Cotiza ahora</a>
-      <a class="btn btn--wa" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a class="btn btn--cta" href={quoteHref}>{t('nav.quoteCta')}</a>
+      <a class="btn btn--wa" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">{t('common.whatsapp')}</a>
     </div>
+    <LanguageSelector currentLang={currentLang} currentPath={cleanPath} variant="mobile" />
   </div>
 </div>
 
@@ -228,8 +244,8 @@ const currentPath = Astro.url.pathname;
   .nav-drawer[aria-hidden="false"] .nav-drawer__backdrop { opacity: 1; }
   .nav-drawer__panel {
     position: absolute;
-    top: 0;
-    right: 0;
+    inset-block-start: 0;
+    inset-inline-end: 0;
     width: min(320px, 88vw);
     height: 100dvh;
     background: var(--color-surface);
@@ -238,9 +254,19 @@ const currentPath = Astro.url.pathname;
     flex-direction: column;
     padding: 1.5rem;
     gap: 1rem;
-    transform: translateX(100%);
+    /* `--drawer-offset` permite invertir el origen del slide en RTL */
+    --drawer-offset: 100%;
+    transform: translateX(var(--drawer-offset));
     transition: transform 250ms cubic-bezier(0.32, 0.72, 0, 1);
     overflow-y: auto;
+  }
+  /* En RTL el drawer entra desde el inicio lógico (izquierda visual). */
+  [dir="rtl"] .nav-drawer__panel,
+  .nav-drawer.is-rtl .nav-drawer__panel {
+    inset-inline-end: auto;
+    inset-inline-start: 0;
+    --drawer-offset: -100%;
+    box-shadow: 8px 0 48px rgb(15 30 55 / 0.18);
   }
   .nav-drawer[aria-hidden="false"] .nav-drawer__panel { transform: translateX(0); }
   .nav-drawer__header {
@@ -317,7 +343,7 @@ const currentPath = Astro.url.pathname;
     if (!drawer || !burger || !panel) return;
     drawer.setAttribute('aria-hidden', 'false');
     burger.setAttribute('aria-expanded', 'true');
-    burger.setAttribute('aria-label', 'Cerrar menú');
+    burger.setAttribute('aria-label', burger.dataset.labelClose ?? 'Cerrar menú');
     document.body.style.overflow = 'hidden';
     setInert(true);
     // Foco al primer elemento focusable del panel (botón cerrar).
@@ -330,7 +356,7 @@ const currentPath = Astro.url.pathname;
     if (!drawer || !burger) return;
     drawer.setAttribute('aria-hidden', 'true');
     burger.setAttribute('aria-expanded', 'false');
-    burger.setAttribute('aria-label', 'Abrir menú');
+    burger.setAttribute('aria-label', burger.dataset.labelOpen ?? 'Abrir menú');
     document.body.style.overflow = '';
     setInert(false);
     burger.focus();
