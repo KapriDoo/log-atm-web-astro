@@ -1,1 +1,25 @@
+# Cloudflare Worker config para dev local + deploy.
+#
+# Notas:
+# - El adapter @astrojs/cloudflare v13 genera `dist/server/wrangler.json`
+#   con `name`, `main` y `assets` durante el build. NO los duplicamos acá
+#   para evitar (a) divergencia y (b) catch-22 al inicio del build
+#   cuando `dist/` aún no existe.
+# - SMTP_PASS NO va acá. Está como Secret en el dashboard del Worker.
+#   Para dev local, crear `.dev.vars` (gitignored) con SMTP_PASS="...".
+# - En deploy, las vars del dashboard pisan estas para Production/Preview;
+#   tener las plaintext acá mantiene `wrangler dev` / `astro dev` funcional.
+
 compatibility_flags = ["nodejs_compat"]
+
+# Cerramos el subdominio workers.dev y preview URLs para que el tráfico entre
+# solo por logatm.com / www.logatm.com (evita SEO duplicado).
+workers_dev = false
+preview_urls = false
+
+[vars]
+SMTP_HOST = "mail.logatm.com"
+SMTP_PORT = "465"
+SMTP_SECURE = "true"
+SMTP_USER = "web@logatm.com"
+MAIL_TO = "contacto@logatm.com"
