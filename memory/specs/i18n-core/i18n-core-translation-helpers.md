@@ -7,13 +7,13 @@ domain: "feature"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
 change_ref: "[[rescue-multi-language-support]]"
-worktree: ""
-feature_branch: ""
+worktree: ".sdd/worktrees/rescue-multi-language-support"
+feature_branch: "feature/rescue-multi-language-support"
 commits: []
 mr: ""
 acceptance_criteria:

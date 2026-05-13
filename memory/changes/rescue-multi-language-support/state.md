@@ -2,10 +2,10 @@
 type: change-state
 change_name: "rescue-multi-language-support"
 domain: "feature"
-status: active
+status: archived
 fast_path: "full"
-current_phase: sdd-apply
-phases_completed: [sdd-init, sdd-explore, sdd-propose, sdd-design, sdd-spec, sdd-tasks]
+current_phase: completed
+phases_completed: [sdd-init, sdd-explore, sdd-propose, sdd-design, sdd-spec, sdd-tasks, sdd-apply, sdd-verify, sdd-judgment, sdd-archive]
 spec_refs:
   - "[[i18n-core-translation-helpers]]"
   - "[[i18n-routing-locale-prefixes]]"
