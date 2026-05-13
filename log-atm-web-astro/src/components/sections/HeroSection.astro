@@ -1,9 +1,14 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { SITE, LIVE_ROUTES, HERO_STRIP_STATS } from '../../lib/constants';
+import { useTranslations, getLangFromUrl, buildLocaleUrl } from '../../i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const quoteHref = buildLocaleUrl(currentLang, '/cotizar');
 ---
 
-<header class="hero hero-b" aria-label="Hero LOG ATM">
+<header class="hero hero-b" aria-label={t('a11y.heroAria')}>
   <div class="hero-b__media" aria-hidden="true">
     <img src="/images/services/svc-maritima.jpeg" alt="" fetchpriority="high" />
   </div>
@@ -11,31 +16,28 @@ import { SITE, LIVE_ROUTES, HERO_STRIP_STATS } from '../../lib/constants';
   <div class="container hero-b__inner">
     <div class="hero-b__grid">
       <div>
-        <span class="eyebrow eyebrow--light">Operador logístico chileno · 20+ años</span>
+        <span class="eyebrow eyebrow--light">{t('home.hero.eyebrow')}</span>
         <h1 class="hero-b__title">
-          Chile con el mundo,<br />
-          <span class="hero-b__title-accent">a tu medida.</span>
+          {t('home.hero.title1')}<br />
+          <span class="hero-b__title-accent">{t('home.hero.title2')}</span>
         </h1>
-        <p class="hero-b__lead">
-          Carga aérea, marítima y aduana <em>sin intermediarios</em>:
-          un ejecutivo dedicado que conoce tu operación de extremo a extremo.
-        </p>
+        <p class="hero-b__lead" set:html={t('home.hero.leadHtml')} />
         <div class="hero-b__ctas">
-          <a class="btn btn--cta" href="/cotizar">
-            Cotiza ahora
+          <a class="btn btn--cta" href={quoteHref}>
+            {t('home.hero.ctaQuote')}
             <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
           </a>
           <a class="btn btn--ghost-light" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
             <Icon name="lucide:message-circle" width={14} height={14} aria-hidden="true" />
-            WhatsApp
+            {t('common.whatsapp')}
           </a>
         </div>
       </div>
 
-      <aside class="hero-b__live" aria-label="Rutas frecuentes">
+      <aside class="hero-b__live" aria-label={t('a11y.routesAria')}>
         <div class="hero-b__live-head">
-          <span class="hero-b__live-title">Rutas frecuentes</span>
-          <span class="hero-b__live-pill">Cobertura</span>
+          <span class="hero-b__live-title">{t('home.hero.liveTitle')}</span>
+          <span class="hero-b__live-pill">{t('home.hero.livePill')}</span>
         </div>
         <div class="hero-b__live-rows">
           {LIVE_ROUTES.map((r) => (

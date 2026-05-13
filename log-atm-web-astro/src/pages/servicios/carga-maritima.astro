@@ -4,9 +4,12 @@ import Navbar from '../../components/ui/Navbar.astro';
 import Footer from '../../components/ui/Footer.astro';
 import { Icon } from 'astro-icon/components';
 import { SITE } from '../../lib/constants';
+import { useTranslations, getLangFromUrl } from '../../i18n/utils';
 
-const title = 'Carga Marítima';
-const description = 'Servicios de carga marítima internacional: FCL, LCL y consolidación. Conectamos Chile con los principales puertos del mundo. Cotiza con LOG ATM.';
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const title = t('meta.cargaMaritima.title');
+const description = t('meta.cargaMaritima.description');
 const canonical = `${SITE.url}/servicios/carga-maritima`;
 
 const schemaService = JSON.stringify({

@@ -1,20 +1,21 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { WHY_ITEMS } from '../../lib/constants';
+import { useTranslations, getLangFromUrl } from '../../i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
 ---
 
-<section class="why section" id="why" aria-label="Por qué LOG ATM">
+<section class="why section" id="why" aria-label={t('a11y.whyAria')}>
   <div class="container">
     <div class="section-head">
       <div class="section-head__top">
         <div>
-          <span class="eyebrow">Por qué LOG ATM</span>
-          <h2 class="section-head__title">El operador que opera contigo</h2>
+          <span class="eyebrow">{t('home.why.eyebrow')}</span>
+          <h2 class="section-head__title">{t('home.why.title')}</h2>
         </div>
-        <p class="section-head__desc">
-          Somos un partner logístico, no un proveedor más. Conocemos tu negocio
-          y diseñamos la operación a tu medida.
-        </p>
+        <p class="section-head__desc">{t('home.why.desc')}</p>
       </div>
     </div>
 
@@ -27,7 +28,7 @@ import { WHY_ITEMS } from '../../lib/constants';
           loop
           playsinline
           preload="metadata"
-          aria-label="Video institucional LOG ATM (silencioso, 2 minutos)"
+          aria-label={t('a11y.videoAria')}
         >
           <source src="/videos/log-atm-intro.mp4" type="video/mp4" />
         </video>
@@ -36,20 +37,22 @@ import { WHY_ITEMS } from '../../lib/constants';
           type="button"
           class="why__video-toggle"
           id="why-video-toggle"
-          aria-label="Reproducir video"
+          aria-label={t('a11y.playVideo')}
           aria-pressed="false"
+          data-label-play={t('a11y.playVideo')}
+          data-label-pause={t('a11y.pauseVideo')}
         >
           <span class="why__video-toggle-icon" aria-hidden="true" data-state="paused">▶</span>
         </button>
 
         <div class="why__video-logo" aria-hidden="true">
           <img src="/logo.png" alt="" />
-          <span class="why__video-logo-tag">Logística a tu medida</span>
+          <span class="why__video-logo-tag">{t('home.why.videoLogoTag')}</span>
         </div>
 
         <div class="why__video-caption">
-          <span class="why__video-eyebrow">Conoce LOG ATM</span>
-          <span class="why__video-title">2 minutos para entender cómo trabajamos</span>
+          <span class="why__video-eyebrow">{t('home.why.videoEyebrow')}</span>
+          <span class="why__video-title">{t('home.why.videoTitle')}</span>
         </div>
       </div>
 
@@ -91,7 +94,7 @@ import { WHY_ITEMS } from '../../lib/constants';
     const syncToggle = () => {
       const playing = !video.paused && !video.ended;
       toggle.setAttribute('aria-pressed', String(playing));
-      toggle.setAttribute('aria-label', playing ? 'Pausar video' : 'Reproducir video');
+      toggle.setAttribute('aria-label', playing ? (toggle.dataset.labelPause ?? 'Pausar video') : (toggle.dataset.labelPlay ?? 'Reproducir video'));
       icon.textContent = playing ? '❚❚' : '▶';
       icon.dataset.state = playing ? 'playing' : 'paused';
     };

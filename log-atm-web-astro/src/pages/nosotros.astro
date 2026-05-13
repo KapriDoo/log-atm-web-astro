@@ -5,10 +5,13 @@ import Footer from '../components/ui/Footer.astro';
 import CTASection from '../components/sections/CTASection.astro';
 import { Icon } from 'astro-icon/components';
 import { SITE, TIMELINE, VALUES, HOW_WE_WORK, CERTS } from '../lib/constants';
+import { useTranslations, getLangFromUrl } from '../i18n/utils';
 import '../styles/pages/shared.css';
 
-const title = 'Nosotros';
-const description = '20+ años conectando Chile con el mundo. Operador chileno OEA, foco corporativo y atención 1:1. Trayectoria, valores, equipo y certificaciones.';
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const title = t('meta.nosotros.title');
+const description = t('meta.nosotros.description');
 const canonical = `${SITE.url}/nosotros`;
 ---
 

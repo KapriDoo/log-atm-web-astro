@@ -12,11 +12,14 @@ import {
   QUOTE_EXTRAS,
   QUOTE_STEPS,
 } from '../lib/constants';
+import { useTranslations, getLangFromUrl } from '../i18n/utils';
 import '../styles/pages/shared.css';
 import '../styles/pages/cotizar.css';
 
-const title = 'Cotizar';
-const description = 'Cotiza tu envío internacional en 4 pasos. Modalidad, ruta, carga y contacto — propuesta clara en menos de 24h hábiles con tu ejecutivo dedicado.';
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const title = t('meta.cotizar.title');
+const description = t('meta.cotizar.description');
 const canonical = `${SITE.url}/cotizar`;
 ---
 

@@ -5,11 +5,14 @@ import Footer from '../components/ui/Footer.astro';
 import CTASection from '../components/sections/CTASection.astro';
 import { Icon } from 'astro-icon/components';
 import { SITE, SERVICES, SERVICE_DETAILS, SERVICE_FILTERS, PROCESS_STEPS, FAQ } from '../lib/constants';
+import { useTranslations, getLangFromUrl } from '../i18n/utils';
 import '../styles/pages/shared.css';
 import '../styles/sections/services.css';
 
-const title = 'Servicios';
-const description = 'Cobertura logística end-to-end: carga aérea, marítima, aduana OEA, almacenaje, consultoría supply chain y rutas Medio Oriente. 11 soluciones a tu medida.';
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const title = t('meta.servicios.title');
+const description = t('meta.servicios.description');
 const canonical = `${SITE.url}/servicios`;
 
 const detailedServices = SERVICES.filter((s) => SERVICE_DETAILS[s.n as keyof typeof SERVICE_DETAILS]);

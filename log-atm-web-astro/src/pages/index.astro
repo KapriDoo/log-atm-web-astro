@@ -7,12 +7,16 @@ import ServicesSection from '../components/sections/ServicesSection.astro';
 import WhyVideoSection from '../components/sections/WhyVideoSection.astro';
 import IndustriesSection from '../components/sections/IndustriesSection.astro';
 import CTASection from '../components/sections/CTASection.astro';
+import { useTranslations, getLangFromUrl } from '../i18n/utils';
 import '../styles/sections.css';
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
 ---
 
 <BaseLayout
-  title="Logística Aérea y Marítima"
-  description="LOG ATM — Soluciones de carga aérea, carga marítima, aduana y almacenaje personalizadas para empresas chilenas. Cotiza ahora."
+  title={t('meta.home.title')}
+  description={t('meta.home.description')}
 >
   <Navbar />
 

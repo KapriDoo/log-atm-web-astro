@@ -1,6 +1,11 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { SERVICES } from '../../lib/constants';
+import { useTranslations, getLangFromUrl, buildLocaleUrl } from '../../i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const servicesHref = buildLocaleUrl(currentLang, '/servicios');
 
 // Home muestra 6 servicios principales en bento (paridad target):
 // fila 1: Marítima (wide) izq + Aérea (feature, ocupa 2 filas) der
@@ -17,18 +22,15 @@ const FEATURED = [
 const TOTAL = SERVICES.length;
 ---
 
-<section class="services section" id="servicios" aria-label="Servicios LOG ATM">
+<section class="services section" id="servicios" aria-label={t('a11y.servicesAria')}>
   <div class="container">
     <div class="section-head">
       <div class="section-head__top">
         <div>
-          <span class="eyebrow">Qué hacemos</span>
-          <h2 class="section-head__title">Soluciones para cada necesidad</h2>
+          <span class="eyebrow">{t('home.services.eyebrow')}</span>
+          <h2 class="section-head__title">{t('home.services.title')}</h2>
         </div>
-        <p class="section-head__desc">
-          Desde el despacho urgente hasta la consultoría de supply chain completa.
-          Cada cuenta tiene un ejecutivo dedicado que diseña la ruta a tu medida.
-        </p>
+        <p class="section-head__desc">{t('home.services.desc')}</p>
       </div>
     </div>
 
@@ -43,11 +45,11 @@ const TOTAL = SERVICES.length;
             <Icon name={s.icon} width={18} height={18} />
           </div>
           <div class="svc-card__body">
-            <div class="svc-card__num">{s.n} · Servicio</div>
+            <div class="svc-card__num">{s.n} · {t('home.services.numPrefix')}</div>
             <h3 class="svc-card__title">{s.title}</h3>
             <p class="svc-card__desc">{s.desc}</p>
             <span class="svc-card__cta">
-              Conocer más
+              {t('common.learnMore')}
               <Icon name="lucide:arrow-right" width={14} height={14} aria-hidden="true" />
             </span>
           </div>
@@ -56,8 +58,8 @@ const TOTAL = SERVICES.length;
     </div>
 
     <div class="services__all">
-      <a class="btn btn--brand" href="/servicios">
-        Ver los {TOTAL} servicios
+      <a class="btn btn--brand" href={servicesHref}>
+        {t('common.viewAllServices', { count: TOTAL })}
         <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
       </a>
     </div>

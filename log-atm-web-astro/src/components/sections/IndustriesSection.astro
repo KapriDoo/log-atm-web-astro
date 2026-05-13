@@ -1,20 +1,22 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { INDUSTRIES } from '../../lib/constants';
+import { useTranslations, getLangFromUrl, buildLocaleUrl } from '../../i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const industriesHref = buildLocaleUrl(currentLang, '/industrias');
 ---
 
-<section class="industries section" id="industrias" aria-label="Industrias atendidas">
+<section class="industries section" id="industrias" aria-label={t('a11y.industriesAria')}>
   <div class="container">
     <div class="section-head">
       <div class="section-head__top" data-comment-anchor="10ee8c5d14-div-155-9">
         <div>
-          <span class="eyebrow">Industrias</span>
-          <h2 class="section-head__title">Sectores que movemos</h2>
+          <span class="eyebrow">{t('home.industries.eyebrow')}</span>
+          <h2 class="section-head__title">{t('home.industries.title')}</h2>
         </div>
-        <p class="section-head__desc">
-          12 industrias con operaciones especializadas, regulaciones particulares
-          y rutas optimizadas.
-        </p>
+        <p class="section-head__desc">{t('home.industries.desc')}</p>
       </div>
     </div>
 
@@ -22,14 +24,14 @@ import { INDUSTRIES } from '../../lib/constants';
       {INDUSTRIES.map((ind, i) => (
         <a
           class="ind-card ind-card--photo"
-          href="/industrias"
+          href={industriesHref}
           style={`--ind-color: ${ind.color}`}
         >
           <div class="ind-card__media">
             <img src={ind.img} alt="" loading="lazy" decoding="async" />
           </div>
           <div class="ind-card__top">
-            <span class="ind-card__index">{String(i + 1).padStart(2, '0')} · Sector</span>
+            <span class="ind-card__index">{String(i + 1).padStart(2, '0')} · {t('home.industries.indexLabel')}</span>
             <div class="ind-card__icon" aria-hidden="true">
               <Icon name={ind.icon} width={18} height={18} />
             </div>

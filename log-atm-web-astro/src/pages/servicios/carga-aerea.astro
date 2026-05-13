@@ -4,9 +4,12 @@ import Navbar from '../../components/ui/Navbar.astro';
 import Footer from '../../components/ui/Footer.astro';
 import { Icon } from 'astro-icon/components';
 import { SITE } from '../../lib/constants';
+import { useTranslations, getLangFromUrl } from '../../i18n/utils';
 
-const title = 'Carga Aérea';
-const description = 'Servicios de carga aérea internacional: envíos urgentes, courier y chárter aéreo. Conectamos Chile con el mundo en 48h. Cotiza con LOG ATM.';
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const title = t('meta.cargaAerea.title');
+const description = t('meta.cargaAerea.description');
 const canonical = `${SITE.url}/servicios/carga-aerea`;
 
 const schemaService = JSON.stringify({

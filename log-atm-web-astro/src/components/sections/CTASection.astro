@@ -7,23 +7,25 @@ import {
     QUICK_QUOTE_DESTINATIONS,
     QUICK_QUOTE_VOLUMES,
 } from "../../lib/constants";
+import { useTranslations, getLangFromUrl, buildLocaleUrl } from "../../i18n/utils";
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const quoteHref = buildLocaleUrl(currentLang, '/cotizar');
 ---
 
-<section class="cta-final" id="contacto" aria-label="Cotización rápida">
+<section class="cta-final" id="contacto" aria-label={t('a11y.ctaAria')}>
     <div class="container cta-final__inner">
         <div>
-            <span class="eyebrow eyebrow--light">Empieza hoy</span>
+            <span class="eyebrow eyebrow--light">{t('home.cta.eyebrow')}</span>
             <h2 class="cta-final__title">
-                Tu próximo envío,<br />
-                con <em>visibilidad total</em>.
+                {t('home.cta.title1')}<br />
+                <span set:html={t('home.cta.title2Html')} />
             </h2>
-            <p class="cta-final__lead">
-                Cotiza en menos de 24 horas con un ejecutivo dedicado. Sin
-                intermediarios, sin sorpresas.
-            </p>
+            <p class="cta-final__lead">{t('home.cta.lead')}</p>
             <div class="hero-b__ctas">
-                <a class="btn btn--cta" href="/cotizar">
-                    Cotiza ahora
+                <a class="btn btn--cta" href={quoteHref}>
+                    {t('home.hero.ctaQuote')}
                     <Icon
                         name="lucide:arrow-right"
                         width={16}
@@ -43,8 +45,8 @@ import {
                         height={16}
                         aria-hidden="true"
                     />
-                    WhatsApp
-                    <span class="sr-only"> (se abre en nueva pestaña)</span>
+                    {t('common.whatsapp')}
+                    <span class="sr-only">{t('common.openInNewTab')}</span>
                 </a>
             </div>
         </div>
@@ -56,11 +58,11 @@ import {
             data-email={SITE.email}
             novalidate
         >
-            <p class="cta-final__form-title">Cotización rápida · 60 seg</p>
+            <p class="cta-final__form-title">{t('home.cta.formTitle')}</p>
 
             <div class="cta-final__row">
                 <div class="cta-final__field">
-                    <label class="cta-final__label" for="qq-mode">Modalidad</label>
+                    <label class="cta-final__label" for="qq-mode">{t('home.cta.formMode')}</label>
                     <select class="cta-final__select" id="qq-mode" name="mode">
                         {QUICK_QUOTE_MODES.map((m) => (
                             <option value={m}>{m}</option>
@@ -68,7 +70,7 @@ import {
                     </select>
                 </div>
                 <div class="cta-final__field">
-                    <label class="cta-final__label" for="qq-origin">Origen</label>
+                    <label class="cta-final__label" for="qq-origin">{t('home.cta.formOrigin')}</label>
                     <select
                         class="cta-final__select"
                         id="qq-origin"
@@ -83,7 +85,7 @@ import {
 
             <div class="cta-final__row">
                 <div class="cta-final__field">
-                    <label class="cta-final__label" for="qq-dest">Destino</label>
+                    <label class="cta-final__label" for="qq-dest">{t('home.cta.formDest')}</label>
                     <select
                         class="cta-final__select"
                         id="qq-dest"
@@ -95,7 +97,7 @@ import {
                     </select>
                 </div>
                 <div class="cta-final__field">
-                    <label class="cta-final__label" for="qq-volume">Volumen</label>
+                    <label class="cta-final__label" for="qq-volume">{t('home.cta.formVolume')}</label>
                     <select
                         class="cta-final__select"
                         id="qq-volume"
@@ -110,38 +112,36 @@ import {
 
             <div class="cta-final__row">
                 <div class="cta-final__field">
-                    <label class="cta-final__label" for="qq-email">Email</label>
+                    <label class="cta-final__label" for="qq-email">{t('home.cta.formEmail')}</label>
                     <input
                         class="cta-final__input"
                         id="qq-email"
                         name="email"
                         type="email"
                         inputmode="email"
-                        placeholder="tu@empresa.cl"
+                        placeholder={t('home.cta.emailPlaceholder')}
                         autocomplete="email"
                         aria-describedby="qq-contact-hint"
                     />
                 </div>
                 <div class="cta-final__field">
-                    <label class="cta-final__label" for="qq-phone">Teléfono / WhatsApp</label>
+                    <label class="cta-final__label" for="qq-phone">{t('home.cta.formPhone')}</label>
                     <input
                         class="cta-final__input"
                         id="qq-phone"
                         name="phone"
                         type="tel"
                         inputmode="tel"
-                        placeholder="+56 9 1234 5678"
+                        placeholder={t('home.cta.phonePlaceholder')}
                         autocomplete="tel"
                         aria-describedby="qq-contact-hint"
                     />
                 </div>
             </div>
-            <p id="qq-contact-hint" class="cta-final__hint">
-                Completa al menos uno para que te contactemos.
-            </p>
+            <p id="qq-contact-hint" class="cta-final__hint">{t('home.cta.contactHint')}</p>
 
             <div class="cta-final__field">
-                <span class="cta-final__label" id="qq-channel-label">¿Cómo prefieres recibirla?</span>
+                <span class="cta-final__label" id="qq-channel-label">{t('home.cta.channelQuestion')}</span>
                 <div
                     class="cta-final__channels"
                     id="qq-channels"
@@ -162,7 +162,7 @@ import {
                             height={14}
                             aria-hidden="true"
                         />
-                        WhatsApp
+                        {t('common.whatsapp')}
                     </button>
                     <button
                         type="button"
@@ -178,7 +178,7 @@ import {
                             height={14}
                             aria-hidden="true"
                         />
-                        Email
+                        {t('common.email')}
                     </button>
                 </div>
             </div>
@@ -191,8 +191,13 @@ import {
                 aria-atomic="true"
             ></p>
 
-            <button class="cta-final__btn" type="submit">
-                Cotizar ahora
+            <button class="cta-final__btn" type="submit"
+                data-msg-no-contact={t('home.cta.errorNoContact')}
+                data-msg-bad-email={t('home.cta.errorEmail')}
+                data-msg-wa={t('home.cta.openingWhatsapp')}
+                data-msg-email={t('home.cta.openingEmail')}
+            >
+                {t('home.cta.submit')}
                 <Icon
                     name="lucide:arrow-right"
                     width={16}
@@ -214,6 +219,13 @@ import {
         const status = form.querySelector<HTMLElement>("#qq-status");
         const emailInput = form.querySelector<HTMLInputElement>("#qq-email");
         const phoneInput = form.querySelector<HTMLInputElement>("#qq-phone");
+        const submitBtn = form.querySelector<HTMLButtonElement>(".cta-final__btn");
+        const MSG = {
+            noContact: submitBtn?.dataset.msgNoContact ?? "Necesitamos un email o teléfono para contactarte.",
+            badEmail:  submitBtn?.dataset.msgBadEmail  ?? "Revisa el formato del email.",
+            wa:        submitBtn?.dataset.msgWa        ?? "Abriendo WhatsApp…",
+            email:     submitBtn?.dataset.msgEmail     ?? "Abriendo tu correo…",
+        };
 
         // Radiogroup canal: roving tabindex + arrow keys (WAI-ARIA APG).
         let channel: "whatsapp" | "email" = "whatsapp";
@@ -269,15 +281,12 @@ import {
             const phoneVal = String(data.get("phone") ?? "").trim();
 
             if (!emailVal && !phoneVal) {
-                setStatus(
-                    "Necesitamos un email o teléfono para contactarte.",
-                    "error",
-                );
+                setStatus(MSG.noContact, "error");
                 (emailInput ?? phoneInput)?.focus();
                 return;
             }
             if (emailVal && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal)) {
-                setStatus("Revisa el formato del email.", "error");
+                setStatus(MSG.badEmail, "error");
                 emailInput?.focus();
                 return;
             }
@@ -296,13 +305,13 @@ import {
             if (channel === "whatsapp") {
                 const digits = waNumber.replace(/\D/g, "");
                 if (digits) {
-                    setStatus("Abriendo WhatsApp…", "success");
+                    setStatus(MSG.wa, "success");
                     const url = `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
                     window.open(url, "_blank", "noopener,noreferrer");
                     return;
                 }
             }
-            setStatus("Abriendo tu correo…", "success");
+            setStatus(MSG.email, "success");
             const subject = encodeURIComponent("Cotización LOG ATM");
             const body = encodeURIComponent(message);
             window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;

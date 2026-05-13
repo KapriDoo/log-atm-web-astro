@@ -1,35 +1,39 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { CURRENT_YEAR, SITE } from '../../lib/constants';
+import { useTranslations, getLangFromUrl, buildLocaleUrl } from '../../i18n/utils';
+
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const homeHref = buildLocaleUrl(currentLang, '/');
+const aboutHref = buildLocaleUrl(currentLang, '/nosotros');
+const contactHref = buildLocaleUrl(currentLang, '/contacto');
 ---
 
 <footer class="footer" role="contentinfo">
   <div class="container footer__inner">
     <div class="footer__top">
       <div class="footer__brand-block">
-        <a href="/" class="nav__brand nav__brand--footer">
+        <a href={homeHref} class="nav__brand nav__brand--footer">
           <img class="nav__brand-logo nav__brand-logo--light" src="/logo.png" alt="" width="38" height="38" />
           <span>
-            <span class="nav__brand-name">LOG ATM</span>
-            <span class="nav__brand-sub nav__brand-sub--footer">Logística a tu medida</span>
+            <span class="nav__brand-name">{t('meta.siteName')}</span>
+            <span class="nav__brand-sub nav__brand-sub--footer">{t('meta.tagline')}</span>
           </span>
         </a>
-        <p class="footer__tagline">Conectamos Chile con el mundo, a tu medida.</p>
-        <p class="footer__desc">
-          Operador logístico chileno con 20+ años de experiencia en carga aérea,
-          marítima, aduana y supply chain.
-        </p>
+        <p class="footer__tagline">{t('footer.brandTagline')}</p>
+        <p class="footer__desc">{t('footer.brandDesc')}</p>
       </div>
 
       <div>
-        <h3 class="footer__col-title">Nosotros</h3>
+        <h3 class="footer__col-title">{t('footer.colAbout')}</h3>
         <ul class="footer__links" role="list">
-          <li><a href="/nosotros">Nosotros</a></li>
+          <li><a href={aboutHref}>{t('footer.linkAbout')}</a></li>
         </ul>
       </div>
 
       <div>
-        <h3 class="footer__col-title">Contacto</h3>
+        <h3 class="footer__col-title">{t('footer.colContact')}</h3>
         <div class="footer__contact">
           <a href={`tel:${SITE.phone}`}>
             <Icon name="lucide:phone" width={14} height={14} aria-hidden="true" />&nbsp;{SITE.phoneDisplay}
@@ -37,7 +41,7 @@ import { CURRENT_YEAR, SITE } from '../../lib/constants';
           <a href={`mailto:${SITE.email}`}>
             <Icon name="lucide:mail" width={14} height={14} aria-hidden="true" />&nbsp;{SITE.email}
           </a>
-          <a href="/contacto" class="footer__contact-address">
+          <a href={contactHref} class="footer__contact-address">
             <Icon name="lucide:map-pin" width={14} height={14} aria-hidden="true" />
             <span>{SITE.address}</span>
           </a>
@@ -46,7 +50,7 @@ import { CURRENT_YEAR, SITE } from '../../lib/constants';
     </div>
 
     <div class="footer__bottom">
-      <span>© {CURRENT_YEAR} {SITE.name} · Todos los derechos reservados</span>
+      <span set:html={t('footer.copyright', { year: CURRENT_YEAR, name: SITE.name })} />
     </div>
   </div>
 </footer>

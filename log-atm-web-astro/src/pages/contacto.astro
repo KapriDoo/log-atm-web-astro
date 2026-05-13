@@ -4,10 +4,13 @@ import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
 import { Icon } from 'astro-icon/components';
 import { SITE } from '../lib/constants';
+import { useTranslations, getLangFromUrl } from '../i18n/utils';
 import '../styles/pages/shared.css';
 
-const title = 'Contacto';
-const description = 'Hablemos de tu próximo envío. Respuesta en menos de 24 horas hábiles con tu ejecutivo dedicado. WhatsApp, teléfono o email — Vitacura, Santiago.';
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const title = t('meta.contacto.title');
+const description = t('meta.contacto.description');
 const canonical = `${SITE.url}/contacto`;
 ---
 

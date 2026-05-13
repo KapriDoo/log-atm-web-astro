@@ -5,10 +5,13 @@ import Footer from '../components/ui/Footer.astro';
 import CTASection from '../components/sections/CTASection.astro';
 import { Icon } from 'astro-icon/components';
 import { SITE, INDUSTRIES, IND_TAGS_MAP, SERVICES_PER_IND } from '../lib/constants';
+import { useTranslations, getLangFromUrl } from '../i18n/utils';
 import '../styles/pages/shared.css';
 
-const title = 'Industrias';
-const description = '12 sectores con operaciones especializadas, regulaciones particulares y rutas optimizadas. Minería, retail, agro, farma, e-commerce y más.';
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+const title = t('meta.industrias.title');
+const description = t('meta.industrias.description');
 const canonical = `${SITE.url}/industrias`;
 
 const spotlight = INDUSTRIES[0]; // Minería

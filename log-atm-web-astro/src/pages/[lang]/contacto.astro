@@ -1,0 +1,9 @@
+---
+import { NON_DEFAULT_LOCALES } from '../../i18n/config';
+import RootPage from '../contacto.astro';
+
+export function getStaticPaths() {
+  return NON_DEFAULT_LOCALES.map((lang) => ({ params: { lang } }));
+}
+---
+<RootPage />
