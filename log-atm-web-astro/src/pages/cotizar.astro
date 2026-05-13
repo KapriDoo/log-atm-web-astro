@@ -197,6 +197,16 @@ const canonical = `${SITE.url}/cotizar`;
               <h2 class="quote-step__title">¿A quién enviamos la propuesta?</h2>
               <p class="quote-step__sub">Te responde un ejecutivo dedicado, no un bot.</p>
             </div>
+            {/* Honeypot anti-spam (no tocar) */}
+            <input
+              type="text"
+              id="q-website"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+              aria-hidden="true"
+              style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;"
+            />
             <div class="form-row form-row--2">
               <div class="form-field">
                 <label for="q-name">Nombre completo</label>
@@ -232,6 +242,14 @@ const canonical = `${SITE.url}/cotizar`;
               <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
             </button>
           </div>
+          <p
+            class="quote-nav__status"
+            id="quote-status"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            style="margin:0.5rem 0 0;font-size:0.875rem;min-height:1.25rem;"
+          ></p>
         </div>
 
         <!-- Live summary -->
@@ -508,13 +526,76 @@ const canonical = `${SITE.url}/cotizar`;
     }
   });
 
+  const statusEl = $('#quote-status');
+  function setQuoteStatus(msg: string, kind: '' | 'error' | 'success' = '') {
+    if (!statusEl) return;
+    statusEl.textContent = msg;
+    (statusEl as HTMLElement).style.color =
+      kind === 'error' ? '#c0392b' : kind === 'success' ? '#2d9b6f' : '';
+  }
+
+  async function submitQuote(): Promise<void> {
+    const hp = ($('#q-website') as HTMLInputElement | null)?.value ?? '';
+    const payload = {
+      name: state.name,
+      company: state.company,
+      email: state.email,
+      phone: state.phone,
+      notes: state.notes,
+      modality: state.modeName || state.mode,
+      origin: state.origin,
+      dest: state.dest,
+      incoterm: state.incoterm,
+      cargoType: state.cargo.join(', '),
+      volume: state.volume,
+      weight: state.weight,
+      containerCount: state.unit === 'cbm' ? '' : state.volume,
+      containerType: state.unit === 'fcl20' ? "20' FCL" : state.unit === 'fcl40' ? "40' FCL" : '',
+      services: state.extras,
+      website: hp,
+    };
+
+    btnNext.disabled = true;
+    setQuoteStatus('Enviando tu solicitud…');
+    try {
+      const r = await fetch('/api/cotizacion', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const res = await r.json().catch(() => ({}));
+      if (r.ok && res.ok) {
+        setQuoteStatus('');
+        showSuccess();
+        // Reset state silenciosamente para que un eventual "atrás" no muestre datos viejos.
+        Object.assign(state, {
+          step: 0, mode: '', modeName: '', origin: '', dest: '',
+          incoterm: 'FOB', unit: 'cbm', volume: '', weight: '',
+          cargo: [], extras: [],
+          name: '', company: '', email: '', phone: '', notes: '',
+        });
+        return;
+      }
+      if (r.status === 400 && res.fields) {
+        const first = Object.values(res.fields)[0] as string;
+        setQuoteStatus(`Revisa los datos: ${first}`, 'error');
+      } else {
+        setQuoteStatus('No pudimos enviar. Reintenta o escríbenos por WhatsApp.', 'error');
+      }
+    } catch {
+      setQuoteStatus('Error de conexión. Reintenta en unos segundos.', 'error');
+    } finally {
+      btnNext.disabled = !canAdvance();
+    }
+  }
+
   btnNext?.addEventListener('click', () => {
     if (!canAdvance()) return;
     if (state.step < 3) {
       state.step += 1;
       renderStep();
     } else {
-      showSuccess();
+      void submitQuote();
     }
   });
 
