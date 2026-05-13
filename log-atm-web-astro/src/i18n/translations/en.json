@@ -98,7 +98,13 @@
       "leadHtml": "Air, ocean and customs <em>with no middlemen</em>: a dedicated account manager who knows your operation end to end.",
       "ctaQuote": "Get a quote",
       "liveTitle": "Frequent routes",
-      "livePill": "Coverage"
+      "livePill": "Coverage",
+      "stripStats": [
+        "Years in operation",
+        "Countries connected",
+        "Satisfaction",
+        "Dedicated manager"
+      ]
     },
     "services": {
       "eyebrow": "What we do",
@@ -118,7 +124,13 @@
       "desc": "We are a logistics partner, not just another provider. We know your business and design the operation tailored to your needs.",
       "videoEyebrow": "Meet LOG ATM",
       "videoTitle": "2 minutes to understand how we work",
-      "videoLogoTag": "Logistics tailored to you"
+      "videoLogoTag": "Logistics tailored to you",
+      "items": [
+        { "title": "Dedicated manager", "desc": "A single person who knows your business and anticipates your needs.", "sub": "account" },
+        { "title": "Verified partners", "desc": "Operating network in 70+ countries with audited local partners.", "sub": "countries" },
+        { "title": "24/7 support", "desc": "Direct access to your account manager whenever you need it.", "sub": "support" },
+        { "title": "True multimodal", "desc": "Air, ocean, ground and courier handled by a single team.", "sub": "modes" }
+      ]
     },
     "cta": {
       "eyebrow": "Start today",
@@ -140,7 +152,19 @@
       "errorNoContact": "We need an email or phone to contact you.",
       "errorEmail": "Please check the email format.",
       "openingWhatsapp": "Opening WhatsApp…",
-      "openingEmail": "Opening your email…"
+      "openingEmail": "Opening your email…",
+      "modeOptions": [
+        "Ocean · FCL",
+        "Ocean · LCL",
+        "Air",
+        "Courier"
+      ],
+      "volumeOptions": [
+        "1 CBM or less",
+        "1 – 15 CBM",
+        "1 x 20' container",
+        "1 x 40' container"
+      ]
     }
   },
   "servicios": {

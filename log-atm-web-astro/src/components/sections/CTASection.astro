@@ -7,11 +7,16 @@ import {
     QUICK_QUOTE_DESTINATIONS,
     QUICK_QUOTE_VOLUMES,
 } from "../../lib/constants";
-import { useTranslations, getLangFromUrl, buildLocaleUrl } from "../../i18n/utils";
+import { useTranslations, getLangFromUrl, buildLocaleUrl, tList } from "../../i18n/utils";
 
 const currentLang = getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
 const quoteHref = buildLocaleUrl(currentLang, '/cotizar');
+
+const modeOptions = tList<string>(currentLang, 'home.cta.modeOptions');
+const volumeOptions = tList<string>(currentLang, 'home.cta.volumeOptions');
+const quickQuoteModes = QUICK_QUOTE_MODES.map((m, i) => ({ value: m, label: modeOptions[i] ?? m }));
+const quickQuoteVolumes = QUICK_QUOTE_VOLUMES.map((v, i) => ({ value: v, label: volumeOptions[i] ?? v }));
 ---
 
 <section class="cta-final" id="contacto" aria-label={t('a11y.ctaAria')}>
@@ -64,8 +69,8 @@ const quoteHref = buildLocaleUrl(currentLang, '/cotizar');
                 <div class="cta-final__field">
                     <label class="cta-final__label" for="qq-mode">{t('home.cta.formMode')}</label>
                     <select class="cta-final__select" id="qq-mode" name="mode">
-                        {QUICK_QUOTE_MODES.map((m) => (
-                            <option value={m}>{m}</option>
+                        {quickQuoteModes.map((m) => (
+                            <option value={m.value}>{m.label}</option>
                         ))}
                     </select>
                 </div>
@@ -103,8 +108,8 @@ const quoteHref = buildLocaleUrl(currentLang, '/cotizar');
                         id="qq-volume"
                         name="volume"
                     >
-                        {QUICK_QUOTE_VOLUMES.map((v) => (
-                            <option value={v}>{v}</option>
+                        {quickQuoteVolumes.map((v) => (
+                            <option value={v.value}>{v.label}</option>
                         ))}
                     </select>
                 </div>

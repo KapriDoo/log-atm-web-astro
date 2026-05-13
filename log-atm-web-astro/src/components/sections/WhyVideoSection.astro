@@ -1,10 +1,17 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { WHY_ITEMS } from '../../lib/constants';
-import { useTranslations, getLangFromUrl } from '../../i18n/utils';
+import { useTranslations, getLangFromUrl, tList } from '../../i18n/utils';
 
 const currentLang = getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
+
+type WhyCopy = { title: string; desc: string; sub: string };
+const whyCopy = tList<WhyCopy>(currentLang, 'home.why.items');
+const whyItems = WHY_ITEMS.map((w, i) => ({
+  ...w,
+  ...(whyCopy[i] ?? { title: w.title, desc: w.desc, sub: w.sub }),
+}));
 ---
 
 <section class="why section" id="why" aria-label={t('a11y.whyAria')}>
@@ -57,7 +64,7 @@ const t = useTranslations(currentLang);
       </div>
 
       <div class="why__items">
-        {WHY_ITEMS.map((w) => (
+        {whyItems.map((w) => (
           <div class="why-card">
             <div class="why-card__icon" aria-hidden="true">
               <Icon name={w.icon} width={22} height={22} />

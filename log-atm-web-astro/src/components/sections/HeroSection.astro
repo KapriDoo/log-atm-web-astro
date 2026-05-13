@@ -1,11 +1,17 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { SITE, LIVE_ROUTES, HERO_STRIP_STATS } from '../../lib/constants';
-import { useTranslations, getLangFromUrl, buildLocaleUrl } from '../../i18n/utils';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, tList } from '../../i18n/utils';
 
 const currentLang = getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
 const quoteHref = buildLocaleUrl(currentLang, '/cotizar');
+
+const stripLabels = tList<string>(currentLang, 'home.hero.stripStats');
+const heroStripStats = HERO_STRIP_STATS.map((s, i) => ({
+  num: s.num,
+  label: stripLabels[i] ?? s.label,
+}));
 ---
 
 <header class="hero hero-b" aria-label={t('a11y.heroAria')}>
@@ -55,7 +61,7 @@ const quoteHref = buildLocaleUrl(currentLang, '/cotizar');
     </div>
 
     <div class="hero-b__strip">
-      {HERO_STRIP_STATS.map((s) => (
+      {heroStripStats.map((s) => (
         <div class="hero-b__strip-item">
           <span class="hero-b__strip-num">{s.num}</span>
           <span class="hero-b__strip-label">{s.label}</span>

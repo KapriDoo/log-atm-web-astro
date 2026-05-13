@@ -98,7 +98,13 @@
       "leadHtml": "Carga aérea, marítima y aduana <em>sin intermediarios</em>: un ejecutivo dedicado que conoce tu operación de extremo a extremo.",
       "ctaQuote": "Cotiza ahora",
       "liveTitle": "Rutas frecuentes",
-      "livePill": "Cobertura"
+      "livePill": "Cobertura",
+      "stripStats": [
+        "Años de operación",
+        "Países conectados",
+        "Satisfacción",
+        "Ejecutivo dedicado"
+      ]
     },
     "services": {
       "eyebrow": "Qué hacemos",
@@ -118,7 +124,13 @@
       "desc": "Somos un partner logístico, no un proveedor más. Conocemos tu negocio y diseñamos la operación a tu medida.",
       "videoEyebrow": "Conoce LOG ATM",
       "videoTitle": "2 minutos para entender cómo trabajamos",
-      "videoLogoTag": "Logística a tu medida"
+      "videoLogoTag": "Logística a tu medida",
+      "items": [
+        { "title": "Ejecutivo dedicado", "desc": "Una persona que conoce tu negocio y anticipa tus necesidades.", "sub": "cuenta" },
+        { "title": "Alianzas verificadas", "desc": "Red operativa en 70+ países con partners locales auditados.", "sub": "países" },
+        { "title": "Atención 24/7", "desc": "Soporte directo con tu ejecutivo cuando lo necesites.", "sub": "soporte" },
+        { "title": "Multimodal real", "desc": "Aéreo, marítimo, terrestre y courier bajo un mismo equipo.", "sub": "modalidades" }
+      ]
     },
     "cta": {
       "eyebrow": "Empieza hoy",
@@ -140,7 +152,19 @@
       "errorNoContact": "Necesitamos un email o teléfono para contactarte.",
       "errorEmail": "Revisa el formato del email.",
       "openingWhatsapp": "Abriendo WhatsApp…",
-      "openingEmail": "Abriendo tu correo…"
+      "openingEmail": "Abriendo tu correo…",
+      "modeOptions": [
+        "Marítimo · FCL",
+        "Marítimo · LCL",
+        "Aéreo",
+        "Courier"
+      ],
+      "volumeOptions": [
+        "1 CBM o menos",
+        "1 – 15 CBM",
+        "1 contenedor 20'",
+        "1 contenedor 40'"
+      ]
     }
   },
   "servicios": {

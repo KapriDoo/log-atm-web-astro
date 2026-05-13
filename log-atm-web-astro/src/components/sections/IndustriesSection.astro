@@ -1,11 +1,18 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { INDUSTRIES } from '../../lib/constants';
-import { useTranslations, getLangFromUrl, buildLocaleUrl } from '../../i18n/utils';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, tList } from '../../i18n/utils';
 
 const currentLang = getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
 const industriesHref = buildLocaleUrl(currentLang, '/industrias');
+
+type IndCopy = { name: string; sub: string };
+const indCopy = tList<IndCopy>(currentLang, 'industrias.names');
+const industries = INDUSTRIES.map((ind, i) => ({
+  ...ind,
+  ...(indCopy[i] ?? { name: ind.name, sub: ind.sub }),
+}));
 ---
 
 <section class="industries section" id="industrias" aria-label={t('a11y.industriesAria')}>
@@ -21,7 +28,7 @@ const industriesHref = buildLocaleUrl(currentLang, '/industrias');
     </div>
 
     <div class="industries__grid">
-      {INDUSTRIES.map((ind, i) => (
+      {industries.map((ind, i) => (
         <a
           class="ind-card ind-card--photo"
           href={industriesHref}

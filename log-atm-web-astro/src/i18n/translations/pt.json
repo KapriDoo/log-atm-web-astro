@@ -98,7 +98,13 @@
       "leadHtml": "Carga aérea, marítima e aduana <em>sem intermediários</em>: um executivo dedicado que conhece sua operação de ponta a ponta.",
       "ctaQuote": "Cote agora",
       "liveTitle": "Rotas frequentes",
-      "livePill": "Cobertura"
+      "livePill": "Cobertura",
+      "stripStats": [
+        "Anos de operação",
+        "Países conectados",
+        "Satisfação",
+        "Executivo dedicado"
+      ]
     },
     "services": {
       "eyebrow": "O que fazemos",
@@ -118,7 +124,13 @@
       "desc": "Somos um parceiro logístico, não apenas mais um fornecedor. Conhecemos seu negócio e desenhamos a operação sob medida.",
       "videoEyebrow": "Conheça a LOG ATM",
       "videoTitle": "2 minutos para entender como trabalhamos",
-      "videoLogoTag": "Logística sob medida"
+      "videoLogoTag": "Logística sob medida",
+      "items": [
+        { "title": "Executivo dedicado", "desc": "Uma pessoa que conhece seu negócio e antecipa suas necessidades.", "sub": "conta" },
+        { "title": "Parcerias verificadas", "desc": "Rede operacional em 70+ países com parceiros locais auditados.", "sub": "países" },
+        { "title": "Atendimento 24/7", "desc": "Suporte direto com seu executivo sempre que precisar.", "sub": "suporte" },
+        { "title": "Multimodal de verdade", "desc": "Aéreo, marítimo, terrestre e courier sob o mesmo time.", "sub": "modalidades" }
+      ]
     },
     "cta": {
       "eyebrow": "Comece hoje",
@@ -140,7 +152,19 @@
       "errorNoContact": "Precisamos de um e-mail ou telefone para entrar em contato.",
       "errorEmail": "Verifique o formato do e-mail.",
       "openingWhatsapp": "Abrindo o WhatsApp…",
-      "openingEmail": "Abrindo seu e-mail…"
+      "openingEmail": "Abrindo seu e-mail…",
+      "modeOptions": [
+        "Marítimo · FCL",
+        "Marítimo · LCL",
+        "Aéreo",
+        "Courier"
+      ],
+      "volumeOptions": [
+        "1 CBM ou menos",
+        "1 – 15 CBM",
+        "1 contêiner 20'",
+        "1 contêiner 40'"
+      ]
     }
   },
   "servicios": {
