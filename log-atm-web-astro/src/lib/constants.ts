@@ -208,9 +208,9 @@ export const WHY_ITEMS = [
   {
     icon: 'lucide:globe',
     title: 'Alianzas verificadas',
-    desc: 'Partners locales auditados en cada nodo crítico de la ruta.',
-    metric: '80+',
-    sub: 'partners',
+    desc: 'Red operativa en 70+ países con partners locales auditados.',
+    metric: '70+',
+    sub: 'países',
   },
   {
     icon: 'lucide:map-pin',

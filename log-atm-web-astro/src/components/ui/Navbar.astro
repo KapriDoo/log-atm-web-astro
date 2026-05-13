@@ -26,13 +26,13 @@ const currentPath = Astro.url.pathname;
     </ul>
 
     <div class="nav__cta-group">
-      <span class="nav__lang" aria-label="Idioma (placeholder)">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <span class="nav__lang" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10"/>
           <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/>
         </svg>
         ES
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
           <path d="m6 9 6 6 6-6"/>
         </svg>
       </span>
@@ -296,26 +296,69 @@ const currentPath = Astro.url.pathname;
 <script>
   const burger     = document.getElementById('nav-burger') as HTMLButtonElement | null;
   const drawer     = document.getElementById('nav-drawer');
+  const panel      = drawer?.querySelector<HTMLElement>('.nav-drawer__panel') ?? null;
   const backdrop   = document.getElementById('nav-drawer-backdrop');
-  const closeBtn   = document.getElementById('nav-drawer-close');
+  const closeBtn   = document.getElementById('nav-drawer-close') as HTMLButtonElement | null;
+  // Marca el resto del documento como inert mientras el drawer está abierto.
+  const mainContent = document.getElementById('main-content');
+  const nav         = document.getElementById('navbar');
+  const inertTargets: HTMLElement[] = [mainContent, nav].filter((el): el is HTMLElement => !!el);
+
+  const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"]), input, select, textarea';
+
+  function setInert(on: boolean) {
+    inertTargets.forEach((el) => {
+      if (on) el.setAttribute('inert', '');
+      else el.removeAttribute('inert');
+    });
+  }
 
   function openDrawer() {
-    if (!drawer || !burger) return;
+    if (!drawer || !burger || !panel) return;
     drawer.setAttribute('aria-hidden', 'false');
     burger.setAttribute('aria-expanded', 'true');
+    burger.setAttribute('aria-label', 'Cerrar menú');
     document.body.style.overflow = 'hidden';
+    setInert(true);
+    // Foco al primer elemento focusable del panel (botón cerrar).
+    requestAnimationFrame(() => {
+      const first = panel.querySelector<HTMLElement>(FOCUSABLE);
+      first?.focus();
+    });
   }
   function closeDrawer() {
     if (!drawer || !burger) return;
     drawer.setAttribute('aria-hidden', 'true');
     burger.setAttribute('aria-expanded', 'false');
+    burger.setAttribute('aria-label', 'Abrir menú');
     document.body.style.overflow = '';
+    setInert(false);
+    burger.focus();
+  }
+
+  // Focus trap: Tab cíclico dentro del panel.
+  function trapFocus(e: KeyboardEvent) {
+    if (e.key !== 'Tab' || !panel || drawer?.getAttribute('aria-hidden') !== 'false') return;
+    const focusables = Array.from(panel.querySelectorAll<HTMLElement>(FOCUSABLE))
+      .filter((el) => !el.hasAttribute('disabled') && el.offsetParent !== null);
+    if (focusables.length === 0) return;
+    const first = focusables[0];
+    const last  = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
   }
 
   burger?.addEventListener('click', openDrawer);
   closeBtn?.addEventListener('click', closeDrawer);
   backdrop?.addEventListener('click', closeDrawer);
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && drawer?.getAttribute('aria-hidden') === 'false') closeDrawer();
+    if (drawer?.getAttribute('aria-hidden') !== 'false') return;
+    if (e.key === 'Escape') closeDrawer();
+    else trapFocus(e);
   });
 </script>

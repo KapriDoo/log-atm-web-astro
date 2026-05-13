@@ -36,7 +36,7 @@ const TOTAL = SERVICES.length;
       {FEATURED.map((s) => (
         <a class:list={['svc-card', `svc-card--${s.size}`]} href={s.href}>
           <div class="svc-card__media">
-            <img src={s.img} alt={s.title} loading="lazy" decoding="async" />
+            <img src={s.img} alt="" loading="lazy" decoding="async" />
           </div>
           <span class:list={['svc-card__tag', { 'svc-card__tag--cta': s.isCta }]}>{s.tag}</span>
           <div class="svc-card__icon-pill" aria-hidden="true">

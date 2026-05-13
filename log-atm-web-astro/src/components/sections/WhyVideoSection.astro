@@ -24,16 +24,26 @@ import { WHY_ITEMS } from '../../lib/constants';
           class="why__video-el"
           poster="/images/services/svc-maritima.jpeg"
           muted
-          autoplay
           loop
           playsinline
-          preload="auto"
+          preload="metadata"
+          aria-label="Video institucional LOG ATM (silencioso, 2 minutos)"
         >
           <source src="/videos/log-atm-intro.mp4" type="video/mp4" />
         </video>
 
+        <button
+          type="button"
+          class="why__video-toggle"
+          id="why-video-toggle"
+          aria-label="Reproducir video"
+          aria-pressed="false"
+        >
+          <span class="why__video-toggle-icon" aria-hidden="true" data-state="paused">▶</span>
+        </button>
+
         <div class="why__video-logo" aria-hidden="true">
-          <img src="/logo.png" alt="LOG ATM" />
+          <img src="/logo.png" alt="" />
           <span class="why__video-logo-tag">Logística a tu medida</span>
         </div>
 
@@ -64,19 +74,76 @@ import { WHY_ITEMS } from '../../lib/constants';
 </section>
 
 <script>
-  const video = document.querySelector<HTMLVideoElement>('.why__video-el');
-  const logo  = document.querySelector<HTMLElement>('.why__video-logo');
-  if (video && logo) {
+  const video  = document.querySelector<HTMLVideoElement>('.why__video-el');
+  const logo   = document.querySelector<HTMLElement>('.why__video-logo');
+  const toggle = document.getElementById('why-video-toggle') as HTMLButtonElement | null;
+  const icon   = toggle?.querySelector<HTMLElement>('.why__video-toggle-icon') ?? null;
+
+  if (video && logo && toggle && icon) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const update = () => {
       if (!video.duration || !isFinite(video.duration)) return;
       const remain = video.duration - video.currentTime;
       logo.classList.toggle('is-visible', remain <= 1.0 && video.currentTime > 0.2);
     };
+
+    const syncToggle = () => {
+      const playing = !video.paused && !video.ended;
+      toggle.setAttribute('aria-pressed', String(playing));
+      toggle.setAttribute('aria-label', playing ? 'Pausar video' : 'Reproducir video');
+      icon.textContent = playing ? '❚❚' : '▶';
+      icon.dataset.state = playing ? 'playing' : 'paused';
+    };
+
+    toggle.addEventListener('click', () => {
+      if (video.paused) video.play().catch(() => { /* noop */ });
+      else video.pause();
+    });
+
     video.addEventListener('timeupdate', update);
     video.addEventListener('seeked', () => {
       if (video.currentTime < 0.2) logo.classList.remove('is-visible');
     });
-    // muted autoplay should be allowed; ignore failures (Safari iOS strict mode)
-    video.play().catch(() => { /* noop */ });
+    video.addEventListener('play', syncToggle);
+    video.addEventListener('pause', syncToggle);
+    video.addEventListener('ended', syncToggle);
+
+    // Autoplay sólo si el usuario no pidió reducir movimiento (WCAG 2.2.2).
+    if (!reduceMotion) {
+      video.play().catch(() => { /* noop — Safari iOS estricto */ });
+    }
+    syncToggle();
   }
 </script>
+
+<style>
+  .why__video-toggle {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 3;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: 1px solid rgb(255 255 255 / 0.4);
+    background: rgb(0 0 0 / 0.55);
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: background 150ms, transform 150ms;
+  }
+  .why__video-toggle:hover { background: rgb(0 0 0 / 0.75); }
+  .why__video-toggle:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+  .why__video-toggle-icon {
+    font-size: 0.875rem;
+    line-height: 1;
+  }
+</style>
