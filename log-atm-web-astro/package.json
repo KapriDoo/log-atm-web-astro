@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "validate-i18n": "tsx scripts/validate-i18n.ts"
+    "validate-i18n": "tsx scripts/validate-i18n.ts",
+    "favicons": "node scripts/generate-favicons.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.5.0",
