@@ -30,7 +30,7 @@ scope:
   - "log-atm-web-astro/src/pages/nosotros.astro"
   - "log-atm-web-astro/src/pages/contacto.astro"
 verified_at: "2026-05-19"
-mr: ""
+mr: "https://github.com/KapriDoo/log-atm-web-astro/pull/19"
 updated: "2026-05-20"
 ---
 

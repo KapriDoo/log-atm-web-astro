@@ -27,7 +27,7 @@ scope:
   - "log-atm-web-astro/src/styles/pages/cotizar.css"
   - "log-atm-web-astro/src/pages/cotizar.astro"
 verified_at: "2026-05-19"
-mr: ""
+mr: "https://github.com/KapriDoo/log-atm-web-astro/pull/19"
 updated: "2026-05-20"
 ---
 

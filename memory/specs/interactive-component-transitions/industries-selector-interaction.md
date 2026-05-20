@@ -27,7 +27,7 @@ scope:
   - "log-atm-web-astro/src/pages/industrias.astro"
   - "log-atm-web-astro/src/scripts/gsap-ind-directory.ts"
 verified_at: "2026-05-19"
-mr: ""
+mr: "https://github.com/KapriDoo/log-atm-web-astro/pull/19"
 updated: "2026-05-20"
 ---
 
