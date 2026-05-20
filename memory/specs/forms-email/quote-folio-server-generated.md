@@ -7,7 +7,7 @@ domain: "fix"
 delta_type: "behavior-correction"
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 feature_branch: "feature/fix-ux-multipage-bugs"
 commits: ["9696674", "b4ab389"]
 worktree: "fix-ux-multipage-bugs"
@@ -21,12 +21,14 @@ acceptance_criteria:
   - "[x] El folio es único por envío (dos envíos simultáneos no producen el mismo folio)"
   - "[x] El folio nunca es generado por lógica en el navegador del usuario"
 related: ["[[forms-email/spec]]"]
-affects: []
+affects: ["[[forms-email/quote-email-delivery]]"]
 adrs: []
 scope:
   - "log-atm-web-astro/src/pages/api/cotizacion.ts"
   - "log-atm-web-astro/src/pages/cotizar.astro"
-verified_at: null
+verified_at: "2026-05-19"
+mr: ""
+updated: "2026-05-20"
 ---
 
 ## Purpose

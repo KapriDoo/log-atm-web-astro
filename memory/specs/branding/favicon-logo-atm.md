@@ -7,7 +7,7 @@ domain: "fix"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 feature_branch: "feature/fix-ux-multipage-bugs"
 commits: ["83dbedb"]
 worktree: "fix-ux-multipage-bugs"
@@ -28,7 +28,9 @@ scope:
   - "log-atm-web-astro/public/favicon.ico"
   - "log-atm-web-astro/public/logo.svg"
   - "log-atm-web-astro/src/layouts/BaseLayout.astro"
-verified_at: null
+verified_at: "2026-05-19"
+mr: ""
+updated: "2026-05-20"
 ---
 
 ## Purpose

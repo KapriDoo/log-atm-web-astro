@@ -2,12 +2,13 @@
 type: change-state
 change_name: "fix-ux-multipage-bugs"
 domain: "fix"
-status: active
+status: completed
 fast_path: "full"
-current_phase: sdd-verify
-phases_completed: [sdd-init, sdd-explore, sdd-propose, sdd-spec, sdd-design, sdd-tasks, sdd-apply, sdd-verify, sdd-judgment, sdd-apply-iter2]
-judgment_iteration: 1
+current_phase: ""
+phases_completed: [sdd-init, sdd-explore, sdd-propose, sdd-spec, sdd-design, sdd-tasks, sdd-apply, sdd-verify, sdd-judgment, sdd-apply-iter2, sdd-verify-iter2, sdd-judgment-iter2, sdd-archive]
+judgment_iteration: 2
 judgment_verdict_iter1: CONFIRMED_ISSUES
+judgment_verdict_iter2: PASS
 spec_refs:
   - "[[sections/internal-pages-vertical-rhythm]]"
   - "[[internal-page-heroes/hero-title-contrast]]"
@@ -22,10 +23,11 @@ worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-ux-multi
 feature_branch: "feature/fix-ux-multipage-bugs"
 integration_target: "main"
 mr: ""
-mr_status: pending
+mr_status: created
 mr_error: ""
 created: "2026-05-19"
-updated: "2026-05-19"
+updated: "2026-05-20"
+verify_iter2_verdict: PASS
 tasks_ref: "[[changes/fix-ux-multipage-bugs/tasks]]"
 design_ref: "[[changes/fix-ux-multipage-bugs/design]]"
 adr_refs:

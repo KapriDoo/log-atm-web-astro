@@ -7,7 +7,7 @@ domain: "fix"
 delta_type: "additive"
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 feature_branch: "feature/fix-ux-multipage-bugs"
 commits: ["2b35b92"]
 worktree: "fix-ux-multipage-bugs"
@@ -29,7 +29,9 @@ scope:
   - "log-atm-web-astro/src/pages/industrias.astro"
   - "log-atm-web-astro/src/pages/nosotros.astro"
   - "log-atm-web-astro/src/pages/contacto.astro"
-verified_at: null
+verified_at: "2026-05-19"
+mr: ""
+updated: "2026-05-20"
 ---
 
 ## Purpose

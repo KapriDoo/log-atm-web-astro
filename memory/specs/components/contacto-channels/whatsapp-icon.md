@@ -7,7 +7,7 @@ domain: "fix"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 feature_branch: "feature/fix-ux-multipage-bugs"
 commits: ["a1748e0"]
 worktree: "fix-ux-multipage-bugs"
@@ -25,7 +25,9 @@ affects: []
 adrs: []
 scope:
   - "log-atm-web-astro/src/pages/contacto.astro"
-verified_at: null
+verified_at: "2026-05-19"
+mr: ""
+updated: "2026-05-20"
 ---
 
 ## Purpose

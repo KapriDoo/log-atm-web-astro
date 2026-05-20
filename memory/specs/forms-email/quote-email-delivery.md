@@ -7,7 +7,7 @@ domain: "fix"
 delta_type: "behavior-correction"
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 feature_branch: "feature/fix-ux-multipage-bugs"
 commits: ["b4ab389", "059ee81"]
 worktree: "fix-ux-multipage-bugs"
@@ -26,7 +26,9 @@ adrs: []
 scope:
   - "log-atm-web-astro/src/pages/api/cotizacion.ts"
   - "log-atm-web-astro/src/lib/mailer.ts"
-verified_at: null
+verified_at: "2026-05-19"
+mr: ""
+updated: "2026-05-20"
 ---
 
 ## Purpose
