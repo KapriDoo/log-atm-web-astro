@@ -1,4 +1,5 @@
 /* ─── Services (handoff paridad 1:1) ────────────────────── */
+/* También en shared.css — se mantiene aquí para /index que no importa shared.css (Plan B DRY-laxo) */
 .section { padding-block: var(--section-pad); }
 
 .services {
