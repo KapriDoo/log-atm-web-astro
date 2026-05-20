@@ -6,10 +6,13 @@
  *
  * API de data attributes:
  *   data-scroll-animate — marca elemento para animación de entrada
- *   data-scroll-type    — fade-up (default), fade-left, fade-right, scale-in
+ *   data-scroll-type    — fade-up (default), fade-left, fade-right, scale-in, fade-in
  *   data-scroll-delay   — delay en segundos
  *   data-scroll-duration — duración en segundos
  *   data-scroll-batch   — en el CONTENEDOR padre para batch mode
+ *
+ * Funciones exportadas:
+ *   animatePageHero(rootSelector, opts?) — anima elementos [data-hero-animate] al cargar
  */
 
 import { gsap } from 'gsap';
@@ -33,7 +36,7 @@ const DEFAULTS = {
 } as const;
 
 // --- Tipos de animación ---
-type AnimationType = 'fade-up' | 'fade-left' | 'fade-right' | 'scale-in';
+type AnimationType = 'fade-up' | 'fade-left' | 'fade-right' | 'scale-in' | 'fade-in';
 
 function getFromVars(type: AnimationType): gsap.TweenVars {
   switch (type) {
@@ -45,11 +48,33 @@ function getFromVars(type: AnimationType): gsap.TweenVars {
       return { opacity: 0, x: DEFAULTS.x };
     case 'scale-in':
       return { opacity: 0, scale: 0.9 };
+    case 'fade-in':
+      return { opacity: 0 };
   }
 }
 
-function getToVars(type: AnimationType): gsap.TweenVars {
-  return { opacity: 1, y: 0, x: 0, scale: 1, clearProps: 'transform' };
+function getToVars(_type: AnimationType): gsap.TweenVars {
+  return { opacity: 1, y: 0, x: 0, scale: 1, clearProps: 'transform,opacity' };
+}
+
+// --- Animación hero above-the-fold (D7: gsap.from para evitar ocultamiento si JS falla) ---
+export function animatePageHero(
+  rootSelector: string,
+  opts?: { stagger?: number; y?: number; duration?: number }
+): void {
+  if (prefersReducedMotion) return;
+  const root = document.querySelector(rootSelector);
+  if (!root) return;
+  const elements = root.querySelectorAll<HTMLElement>('[data-hero-animate]');
+  if (elements.length === 0) return;
+  gsap.from(elements, {
+    opacity: 0,
+    y: opts?.y ?? 24,
+    stagger: opts?.stagger ?? 0.12,
+    duration: opts?.duration ?? 0.6,
+    ease: 'power2.out',
+    clearProps: 'transform,opacity',
+  });
 }
 
 // --- Inicialización ---

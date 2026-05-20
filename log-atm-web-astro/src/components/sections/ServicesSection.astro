@@ -41,9 +41,9 @@ const TOTAL = SERVICES.length;
       </div>
     </div>
 
-    <div class="services__grid">
+    <div class="services__grid" data-scroll-batch>
       {FEATURED.map((s) => (
-        <a class:list={['svc-card', `svc-card--${s.size}`]} href={s.href}>
+        <a class:list={['svc-card', `svc-card--${s.size}`]} href={s.href} data-scroll-animate data-scroll-type="fade-up">
           <div class="svc-card__media">
             <img src={s.img} alt="" loading="lazy" decoding="async" />
           </div>

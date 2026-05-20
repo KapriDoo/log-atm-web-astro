@@ -27,7 +27,7 @@ const whyItems = WHY_ITEMS.map((w, i) => ({
     </div>
 
     <div class="why__grid">
-      <div class="why__video">
+      <div class="why__video" data-scroll-animate data-scroll-type="fade-in">
         <video
           class="why__video-el"
           poster="/images/services/svc-maritima.jpeg"
@@ -63,9 +63,9 @@ const whyItems = WHY_ITEMS.map((w, i) => ({
         </div>
       </div>
 
-      <div class="why__items">
+      <div class="why__items" data-scroll-batch>
         {whyItems.map((w) => (
-          <div class="why-card">
+          <div class="why-card" data-scroll-animate data-scroll-type="fade-left">
             <div class="why-card__icon" aria-hidden="true">
               <Icon name={w.icon} width={22} height={22} />
             </div>

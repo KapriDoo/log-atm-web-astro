@@ -27,12 +27,14 @@ const industries = INDUSTRIES.map((ind, i) => ({
       </div>
     </div>
 
-    <div class="industries__grid">
+    <div class="industries__grid" data-scroll-batch>
       {industries.map((ind, i) => (
         <a
           class="ind-card ind-card--photo"
           href={industriesHref}
           style={`--ind-color: ${ind.color}`}
+          data-scroll-animate
+          data-scroll-type="scale-in"
         >
           <div class="ind-card__media">
             <img src={ind.img} alt="" loading="lazy" decoding="async" />
