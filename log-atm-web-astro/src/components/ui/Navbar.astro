@@ -104,6 +104,14 @@ const rtl = isRTL(currentLang);
     backdrop-filter: saturate(180%) blur(14px);
     -webkit-backdrop-filter: saturate(180%) blur(14px);
     border-bottom: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+  }
+  .nav.navbar--scrolled {
+    box-shadow: 0 4px 24px color-mix(in srgb, var(--color-primary-900) 12%, transparent);
+    background: rgba(248, 247, 246, 0.95);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nav { transition: none; }
   }
   .nav__inner {
     display: flex;
@@ -320,6 +328,25 @@ const rtl = isRTL(currentLang);
 </style>
 
 <script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Scroll state de la navbar: añade clase .navbar--scrolled al pasar 80px
+  const navEl = document.getElementById('navbar');
+  if (navEl) {
+    ScrollTrigger.create({
+      start: 'top -80',
+      onToggle: (self) => navEl.classList.toggle('navbar--scrolled', self.isActive),
+    });
+  }
+
+  // Limpiar ScrollTriggers al navegar con View Transitions
+  document.addEventListener('astro:before-swap', () => {
+    ScrollTrigger.getAll().forEach((t) => t.kill());
+  });
+
   const burger     = document.getElementById('nav-burger') as HTMLButtonElement | null;
   const drawer     = document.getElementById('nav-drawer');
   const panel      = drawer?.querySelector<HTMLElement>('.nav-drawer__panel') ?? null;

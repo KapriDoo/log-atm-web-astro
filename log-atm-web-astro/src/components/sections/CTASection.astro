@@ -21,7 +21,7 @@ const quickQuoteVolumes = QUICK_QUOTE_VOLUMES.map((v, i) => ({ value: v, label: 
 
 <section class="cta-final" id="contacto" aria-label={t('a11y.ctaAria')}>
     <div class="container cta-final__inner">
-        <div>
+        <div data-scroll-animate data-scroll-type="fade-right">
             <span class="eyebrow eyebrow--light">{t('home.cta.eyebrow')}</span>
             <h2 class="cta-final__title">
                 {t('home.cta.title1')}<br />
@@ -59,6 +59,8 @@ const quickQuoteVolumes = QUICK_QUOTE_VOLUMES.map((v, i) => ({ value: v, label: 
         <form
             class="cta-final__form"
             id="cta-quick-quote"
+            data-scroll-animate
+            data-scroll-type="fade-left"
             data-wa-number={SITE.phone}
             data-email={SITE.email}
             novalidate

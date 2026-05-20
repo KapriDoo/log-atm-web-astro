@@ -22,13 +22,13 @@ const heroStripStats = HERO_STRIP_STATS.map((s, i) => ({
   <div class="container hero-b__inner">
     <div class="hero-b__grid">
       <div>
-        <span class="eyebrow eyebrow--light">{t('home.hero.eyebrow')}</span>
-        <h1 class="hero-b__title">
+        <span class="eyebrow eyebrow--light" data-hero-animate>{t('home.hero.eyebrow')}</span>
+        <h1 class="hero-b__title" data-hero-animate>
           {t('home.hero.title1')}<br />
           <span class="hero-b__title-accent">{t('home.hero.title2')}</span>
         </h1>
-        <p class="hero-b__lead" set:html={t('home.hero.leadHtml')} />
-        <div class="hero-b__ctas">
+        <p class="hero-b__lead" data-hero-animate set:html={t('home.hero.leadHtml')} />
+        <div class="hero-b__ctas" data-hero-animate>
           <a class="btn btn--cta" href={quoteHref}>
             {t('home.hero.ctaQuote')}
             <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
@@ -63,10 +63,20 @@ const heroStripStats = HERO_STRIP_STATS.map((s, i) => ({
     <div class="hero-b__strip">
       {heroStripStats.map((s) => (
         <div class="hero-b__strip-item">
-          <span class="hero-b__strip-num">{s.num}</span>
+          <span class="hero-b__strip-num" data-counter>{s.num}</span>
           <span class="hero-b__strip-label">{s.label}</span>
         </div>
       ))}
     </div>
   </div>
 </header>
+
+<script>
+  import { animatePageHero } from '../../scripts/scroll-animations';
+  import { initCounters } from '../../scripts/gsap-counters';
+
+  document.addEventListener('astro:page-load', () => {
+    animatePageHero('.hero-b');
+    initCounters('[data-counter]');
+  });
+</script>

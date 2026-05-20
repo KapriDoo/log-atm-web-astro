@@ -12,8 +12,8 @@ const contactHref = buildLocaleUrl(currentLang, '/contacto');
 
 <footer class="footer" role="contentinfo">
   <div class="container footer__inner">
-    <div class="footer__top">
-      <div class="footer__brand-block">
+    <div class="footer__top" data-scroll-batch>
+      <div class="footer__brand-block" data-scroll-animate data-scroll-type="fade-up">
         <a href={homeHref} class="nav__brand nav__brand--footer">
           <img class="nav__brand-logo nav__brand-logo--light" src="/logo.png" alt="" width="38" height="38" />
           <span>
@@ -25,14 +25,14 @@ const contactHref = buildLocaleUrl(currentLang, '/contacto');
         <p class="footer__desc">{t('footer.brandDesc')}</p>
       </div>
 
-      <div>
+      <div data-scroll-animate data-scroll-type="fade-up">
         <h3 class="footer__col-title">{t('footer.colAbout')}</h3>
         <ul class="footer__links" role="list">
           <li><a href={aboutHref}>{t('footer.linkAbout')}</a></li>
         </ul>
       </div>
 
-      <div>
+      <div data-scroll-animate data-scroll-type="fade-up">
         <h3 class="footer__col-title">{t('footer.colContact')}</h3>
         <div class="footer__contact">
           <a href={`tel:${SITE.phone}`}>
