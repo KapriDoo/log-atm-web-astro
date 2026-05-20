@@ -56,10 +56,10 @@ const clientStrings = {
           <div class="page-hero__breadcrumb">
             <a href="/">{t('common.breadcrumbHome')}</a> <span>/</span> <span>{t('cotizar.breadcrumb')}</span>
           </div>
-          <h1 class="quote-hero__title" set:html={t('cotizar.heroTitleHtml')}></h1>
-          <p class="quote-hero__lead">{t('cotizar.heroLead')}</p>
+          <h1 class="quote-hero__title" set:html={t('cotizar.heroTitleHtml')} data-hero-animate></h1>
+          <p class="quote-hero__lead" data-hero-animate>{t('cotizar.heroLead')}</p>
         </div>
-        <div class="quote-hero__chips">
+        <div class="quote-hero__chips" data-hero-animate>
           {chips.map((c) => <span class="quote-chip">{c}</span>)}
         </div>
       </div>
@@ -432,20 +432,75 @@ const clientStrings = {
     return true;
   }
 
-  function renderStep() {
+  // Tracking del paso anterior para detectar cambios y determinar la dirección
+  let previousStep = state.step;
+
+  function updateStepperUI(): void {
     stepperSteps.forEach((el, i) => {
       el.classList.toggle('stepper__step--active', i === state.step);
       el.classList.toggle('stepper__step--done',   i <  state.step);
       const bullet = el.querySelector('.stepper__bullet');
       if (bullet) bullet.textContent = (i < state.step) ? '✓' : String(i + 1).padStart(2, '0');
     });
-    stepPanels.forEach((p, i) => {
-      if (i === state.step) p.removeAttribute('hidden');
-      else                  p.setAttribute('hidden', '');
-    });
     if (btnBack)      btnBack.disabled = state.step === 0;
     if (btnNext)      btnNext.disabled = !canAdvance();
     if (btnNextLabel) btnNextLabel.textContent = state.step === 3 ? clientStrings.submit : clientStrings.next;
+  }
+
+  function renderStep(): void {
+    // Guard contra desincronización: si hay un tween en curso y el usuario logró
+    // cambiar state.step (click en bullet, btnBack, btnNext), revertir al paso
+    // anterior y esperar a que la animación termine. Evita estado inconsistente
+    // entre state.step y el panel visible.
+    const isAnimating = (window as Window & { __stepperIsAnimating?: () => boolean }).__stepperIsAnimating?.();
+    if (isAnimating && previousStep !== state.step) {
+      state.step = previousStep;
+      updateStepperUI();
+      return;
+    }
+
+    // Actualizar bullets y controles del stepper siempre
+    updateStepperUI();
+
+    if (previousStep === state.step) {
+      // Sin cambio de paso — solo asegurar que el panel correcto esté visible
+      stepPanels.forEach((p, i) => {
+        if (i === state.step) p.removeAttribute('hidden');
+        else                  p.setAttribute('hidden', '');
+      });
+      return;
+    }
+
+    const from = previousStep;
+    const to = state.step;
+    previousStep = state.step;
+
+    // Obtener transitionStep del contexto window (inyectado por el script GSAP)
+    const doTransition = (window as Window & { __stepperTransition?: (opts: unknown) => void }).__stepperTransition;
+    if (!doTransition) {
+      // Fallback sin GSAP: swap directo
+      stepPanels.forEach((p, i) => {
+        if (i === to) p.removeAttribute('hidden');
+        else          p.setAttribute('hidden', '');
+      });
+      return;
+    }
+
+    doTransition({
+      panels: stepPanels,
+      fromIndex: from,
+      toIndex: to,
+      onMidpoint: () => {
+        stepPanels.forEach((p, i) => {
+          if (i === to) p.removeAttribute('hidden');
+          else          p.setAttribute('hidden', '');
+        });
+      },
+      onComplete: () => {
+        // Actualizar controles tras completar la animación
+        if (btnNext) btnNext.disabled = !canAdvance();
+      },
+    });
   }
 
   // ── Step 0: mode tiles ────────────────────────────────────
@@ -637,4 +692,18 @@ const clientStrings = {
   // Initial render
   renderSummary();
   renderStep();
+</script>
+
+<script>
+  import { transitionStep, isStepperAnimating } from '../scripts/gsap-stepper';
+
+  // Exponer en window para que el script define:vars los consuma
+  (window as Window & {
+    __stepperTransition?: typeof transitionStep;
+    __stepperIsAnimating?: typeof isStepperAnimating;
+  }).__stepperTransition = transitionStep;
+  (window as Window & {
+    __stepperTransition?: typeof transitionStep;
+    __stepperIsAnimating?: typeof isStepperAnimating;
+  }).__stepperIsAnimating = isStepperAnimating;
 </script>
