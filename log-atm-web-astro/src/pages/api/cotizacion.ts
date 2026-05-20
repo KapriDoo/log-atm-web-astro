@@ -9,6 +9,7 @@ import {
   type FieldErrors,
 } from "../../lib/validate";
 import { buildCotizacion4Email } from "../../lib/email-templates";
+import { generateFolio } from "../../lib/folio";
 
 export const prerender = false;
 
@@ -82,14 +83,16 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   try {
+    const folio = generateFolio();
     const meta = {
       ip: clientIP(request),
       userAgent: request.headers.get("user-agent") ?? "desconocido",
       formType: "Cotización (4 pasos)",
+      folio,
     };
     const mail = buildCotizacion4Email(data, meta);
     await sendMail(resolveMailEnv(), mail);
-    return json(200, { ok: true });
+    return json(200, { ok: true, folio });
   } catch (err) {
     console.error("[/api/cotizacion] error:", err);
     return json(500, { ok: false, error: "server" });

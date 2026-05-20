@@ -28,7 +28,7 @@ function renderRows(rows: Row[]): { html: string; text: string } {
   return { html, text };
 }
 
-type Meta = { ip: string; userAgent: string; formType: string };
+type Meta = { ip: string; userAgent: string; formType: string; folio?: string };
 
 function wrap(
   title: string,
@@ -132,13 +132,15 @@ export function buildCotizacion4Email(
   },
   meta: Meta,
 ): { subject: string; html: string; text: string; replyTo: string } {
-  const subject = `[Web · Cotización 4 pasos] ${d.name} — ${d.modality || "—"} · ${d.origin || "—"} → ${d.dest || "—"}`;
+  const folioSuffix = meta.folio ? ` — Folio ${meta.folio}` : "";
+  const subject = `[Web · Cotización 4 pasos] ${d.name} — ${d.modality || "—"} · ${d.origin || "—"} → ${d.dest || "—"}${folioSuffix}`;
   const servicesStr = Array.isArray(d.services)
     ? d.services.join(", ")
     : typeof d.services === "string"
       ? d.services
       : "";
   const rows: Row[] = [
+    ...(meta.folio ? [["Folio", meta.folio] as Row] : []),
     ["Modalidad", d.modality],
     ["Origen", d.origin],
     ["Destino", d.dest],
