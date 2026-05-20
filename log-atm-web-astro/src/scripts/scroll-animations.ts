@@ -142,5 +142,18 @@ function initIndividualElements(): void {
   });
 }
 
-// Ejecutar al cargar
+// Ejecutar al cargar (primera navegación, sin View Transitions)
 init();
+
+// Auto-init tras navegación con View Transitions de Astro
+document.addEventListener('astro:page-load', () => {
+  // Re-inicializar animaciones de scroll (ScrollTrigger fue destruido en astro:before-swap)
+  init();
+  // Auto-init de page heroes en cualquier página que los tenga
+  if (document.querySelector('.page-hero')) {
+    animatePageHero('.page-hero');
+  }
+  if (document.querySelector('.quote-hero')) {
+    animatePageHero('.quote-hero');
+  }
+});

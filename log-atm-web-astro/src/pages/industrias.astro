@@ -43,15 +43,15 @@ const sectorPrefix = t('industrias.directory.sectorPrefix');
         </div>
         <div class="page-hero__inner">
           <div>
-            <span class="page-hero__eyebrow">{t('industrias.heroEyebrow')}</span>
-            <h1 class="page-hero__title" set:html={t('industrias.heroTitleHtml')}></h1>
-            <p class="page-hero__lead">{t('industrias.heroLead')}</p>
+            <span class="page-hero__eyebrow" data-hero-animate>{t('industrias.heroEyebrow')}</span>
+            <h1 class="page-hero__title" set:html={t('industrias.heroTitleHtml')} data-hero-animate></h1>
+            <p class="page-hero__lead" data-hero-animate>{t('industrias.heroLead')}</p>
           </div>
           <div class="page-hero__meta">
-            <div class="page-hero__meta-item"><span class="v">12</span><span class="k">{t('industrias.metaSectors')}</span></div>
-            <div class="page-hero__meta-item"><span class="v">300<em>+</em></span><span class="k">{t('industrias.metaClients')}</span></div>
-            <div class="page-hero__meta-item"><span class="v">20<em>+</em></span><span class="k">{t('industrias.metaExpertise')}</span></div>
-            <div class="page-hero__meta-item"><span class="v">98%</span><span class="k">{t('industrias.metaRetention')}</span></div>
+            <div class="page-hero__meta-item" data-hero-animate><span class="v">12</span><span class="k">{t('industrias.metaSectors')}</span></div>
+            <div class="page-hero__meta-item" data-hero-animate><span class="v">300<em>+</em></span><span class="k">{t('industrias.metaClients')}</span></div>
+            <div class="page-hero__meta-item" data-hero-animate><span class="v">20<em>+</em></span><span class="k">{t('industrias.metaExpertise')}</span></div>
+            <div class="page-hero__meta-item" data-hero-animate><span class="v">98%</span><span class="k">{t('industrias.metaRetention')}</span></div>
           </div>
         </div>
       </div>
@@ -184,54 +184,37 @@ const sectorPrefix = t('industrias.directory.sectorPrefix');
 </BaseLayout>
 
 <script define:vars={{ industries, sectorPrefix }}>
-  const root      = document.getElementById('ind-directory');
-  if (root) {
-    const slides    = root.querySelectorAll('.ind-directory__slide');
-    const items     = root.querySelectorAll('.ind-directory__item');
-    const counter   = document.getElementById('dir-counter-active');
-    const eyebrowEl = document.getElementById('dir-eyebrow');
-    const nameEl    = document.getElementById('dir-name');
-    const subEl     = document.getElementById('dir-sub');
-    const tagsEl    = document.getElementById('dir-tags');
-    const total     = industries.length;
+  // Datos del DOM para las captions (counter, eyebrow, name, sub, tags)
+  const counter   = document.getElementById('dir-counter-active');
+  const eyebrowEl = document.getElementById('dir-eyebrow');
+  const nameEl    = document.getElementById('dir-name');
+  const subEl     = document.getElementById('dir-sub');
+  const tagsEl    = document.getElementById('dir-tags');
 
-    let active = 0;
-    let paused = false;
-    let timer  = null;
-
-    function render(i) {
-      slides.forEach((s, idx) => s.classList.toggle('is-active', idx === i));
-      items.forEach((it, idx)  => it.classList.toggle('is-active', idx === i));
-      const ind = industries[i];
-      const tags = ind.tags || [];
-      const pad = String(i + 1).padStart(2, '0');
-      if (counter)   counter.textContent = pad;
-      if (eyebrowEl) eyebrowEl.textContent = `${sectorPrefix} · ${pad}`;
-      if (nameEl)    nameEl.textContent = ind.name;
-      if (subEl)     subEl.textContent  = ind.sub;
-      if (tagsEl)    tagsEl.innerHTML = tags.map((t) => `<span class="ind-directory__tag">${t}</span>`).join('');
-    }
-
-    function next() {
-      active = (active + 1) % total;
-      render(active);
-    }
-
-    function start() {
-      if (timer) return;
-      timer = window.setInterval(() => { if (!paused) next(); }, 3500);
-    }
-
-    items.forEach((it, idx) => {
-      it.addEventListener('mouseenter', () => { active = idx; render(active); });
-      it.addEventListener('focus',      () => { active = idx; render(active); });
-      it.addEventListener('click',      () => { active = idx; render(active); });
-    });
-    root.addEventListener('mouseenter', () => { paused = true;  });
-    root.addEventListener('mouseleave', () => { paused = false; });
-
-    // Respect prefers-reduced-motion
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (!mq.matches) start();
+  // Callback que actualiza el texto de caption y counter al cambiar de slide
+  function onRender(i) {
+    const ind = industries[i];
+    const tags = ind.tags || [];
+    const pad = String(i + 1).padStart(2, '0');
+    if (counter)   counter.textContent = pad;
+    if (eyebrowEl) eyebrowEl.textContent = `${sectorPrefix} · ${pad}`;
+    if (nameEl)    nameEl.textContent = ind.name;
+    if (subEl)     subEl.textContent  = ind.sub;
+    if (tagsEl)    tagsEl.innerHTML = tags.map((t) => `<span class="ind-directory__tag">${t}</span>`).join('');
   }
+
+  // Exponer callback para que el script GSAP lo consuma
+  window.__indDirectoryOnRender = onRender;
+</script>
+
+<script>
+  import { initIndDirectory } from '../scripts/gsap-ind-directory';
+
+  document.addEventListener('astro:page-load', () => {
+    const onRender = (window as Window & { __indDirectoryOnRender?: (i: number) => void }).__indDirectoryOnRender;
+    initIndDirectory('#ind-directory', {
+      intervalMs: 3500,
+      onRender,
+    });
+  });
 </script>
