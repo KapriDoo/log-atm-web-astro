@@ -7,3 +7,11 @@ SMTP_SECURE=true
 SMTP_USER=web@logatm.com
 SMTP_PASS=
 MAIL_TO=contacto@logatm.com
+
+# Para QA sin SMTP real, usar Ethereal Email (https://ethereal.email/create)
+# Genera credenciales gratuitas que capturan el correo sin enviarlo realmente.
+# SMTP_HOST=smtp.ethereal.email
+# SMTP_PORT=587
+# SMTP_SECURE=false
+# SMTP_USER=<generado por Ethereal>
+# SMTP_PASS=<generado por Ethereal>

@@ -184,27 +184,29 @@ const sectorPrefix = t('industrias.directory.sectorPrefix');
 </BaseLayout>
 
 <script define:vars={{ industries, sectorPrefix }}>
-  // Datos del DOM para las captions (counter, eyebrow, name, sub, tags)
-  const counter   = document.getElementById('dir-counter-active');
-  const eyebrowEl = document.getElementById('dir-eyebrow');
-  const nameEl    = document.getElementById('dir-name');
-  const subEl     = document.getElementById('dir-sub');
-  const tagsEl    = document.getElementById('dir-tags');
+  // Registrar callback de caption dentro de astro:page-load para que sobreviva
+  // View Transitions (se re-ejecuta en cada navegación a esta página).
+  document.addEventListener('astro:page-load', () => {
+    // Obtener refs del DOM en cada carga (el DOM se reconstruye en cada transición)
+    const counter   = document.getElementById('dir-counter-active');
+    const eyebrowEl = document.getElementById('dir-eyebrow');
+    const nameEl    = document.getElementById('dir-name');
+    const subEl     = document.getElementById('dir-sub');
+    const tagsEl    = document.getElementById('dir-tags');
 
-  // Callback que actualiza el texto de caption y counter al cambiar de slide
-  function onRender(i) {
-    const ind = industries[i];
-    const tags = ind.tags || [];
-    const pad = String(i + 1).padStart(2, '0');
-    if (counter)   counter.textContent = pad;
-    if (eyebrowEl) eyebrowEl.textContent = `${sectorPrefix} · ${pad}`;
-    if (nameEl)    nameEl.textContent = ind.name;
-    if (subEl)     subEl.textContent  = ind.sub;
-    if (tagsEl)    tagsEl.innerHTML = tags.map((t) => `<span class="ind-directory__tag">${t}</span>`).join('');
-  }
-
-  // Exponer callback para que el script GSAP lo consuma
-  window.__indDirectoryOnRender = onRender;
+    // Callback que actualiza el texto de caption y counter al cambiar de slide
+    // Se asigna ANTES de que initIndDirectory lo consuma (orden crítico)
+    window.__indDirectoryOnRender = (i) => {
+      const ind = industries[i];
+      const tags = ind.tags || [];
+      const pad = String(i + 1).padStart(2, '0');
+      if (counter)   counter.textContent = pad;
+      if (eyebrowEl) eyebrowEl.textContent = `${sectorPrefix} · ${pad}`;
+      if (nameEl)    nameEl.textContent = ind.name;
+      if (subEl)     subEl.textContent  = ind.sub;
+      if (tagsEl)    tagsEl.innerHTML = tags.map((t) => `<span class="ind-directory__tag">${t}</span>`).join('');
+    };
+  });
 </script>
 
 <script>

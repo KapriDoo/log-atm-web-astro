@@ -3,6 +3,12 @@
 /* Importar estilos del CTA Final (usado al pie de servicios/industrias/nosotros) */
 @import '../sections/cta.css';
 
+/* ─── Layout base ────────────────────────────────────────── */
+/* Regla base de spacing para todas las secciones de subpáginas.
+   index.astro no importa shared.css (importa sections.css → services.css),
+   por eso se mantiene también en services.css (Plan B DRY-laxo). */
+.section { padding-block: var(--section-pad); }
+
 /* ─── Section modifiers (reutilizables) ─────────────────── */
 /* Reemplazan los inline style="background: ..." dispersos en sub-pages.   */
 .section--surface { background: var(--color-surface); }

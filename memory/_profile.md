@@ -2,7 +2,7 @@
 name: "log-atm-web-astro"
 description: "Sitio web de servicios de logística aérea y marítima con soporte multiidioma"
 created: "2026-05-19"
-updated: "2026-05-19"
+updated: "2026-05-20"
 ---
 
 ## Stack

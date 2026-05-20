@@ -12,3 +12,25 @@ Se decide usar `astro:assets` con Sharp para procesar las 14 imágenes de indust
 **Ubicación**: `log-atm-web-astro/default.conf`, `log-atm-web-astro/nginx.conf`
 **Descripción**: las páginas `/[lang]/404.astro` se generan estáticamente, pero la regla nginx actual `try_files $uri $uri/index.html /index.html` redirige cualquier URL inexistente al index español con status 200, produciendo soft-404 para URLs `/en/foo`, `/ar/bar`, etc. Las páginas 404 multilingües nunca se sirven.
 **Promoción sugerida**: `sdd new fix-nginx-404-per-locale --domain fix` — añadir `error_page 404 /[lang]/404.html` por bloque location y propagar `try_files` con fallback al 404 del locale.
+
+## 2026-05-19 | debt | fix-ux-multipage-bugs | N-1: contacto.astro pasa ariaLabel a WhatsAppIcon (doble anuncio)
+**Severidad**: Low — Detectado por sdd-judgment iter2 (Juez A y B coincidieron).
+**Ubicación**: `log-atm-web-astro/src/pages/contacto.astro:141`
+**Descripción**: El componente `WhatsAppIcon.astro` quedó tras iter2 con soporte de modo decorativo (aria-hidden default), pero el caller en contacto.astro:141 aún pasa `ariaLabel="WhatsApp"` explícito, reactivando el doble anuncio en lectores porque el texto adyacente "WhatsApp · respuesta inmediata" ya nombra el bloque.
+**Promoción sugerida**: fix trivial — eliminar `ariaLabel` en el caller o pasar `decorative={true}`.
+
+## 2026-05-19 | debt | fix-ux-multipage-bugs | N-2: potrace en dependencies (debería ser devDep)
+**Severidad**: Low — Detectado por sdd-judgment iter2 (Juez B).
+**Ubicación**: `log-atm-web-astro/package.json`
+**Descripción**: Tras mover sharp a devDependencies por simetría con su uso solo en scripts de build, potrace quedó en dependencies aunque también es solo para build.
+**Promoción sugerida**: incluir en próximo housekeeping de deps.
+
+## 2026-05-19 | debt | fix-ux-multipage-bugs | N-3: type-loss en wizard.ts:196
+**Severidad**: Nit — Detectado por sdd-judgment iter2 (Juez B).
+**Ubicación**: `log-atm-web-astro/src/scripts/wizard.ts:196`
+**Descripción**: `__stepperTransition` tipado como `(opts: unknown) => void` en el módulo nuevo. Type-loss menor; idealmente con interfaz tipada compartida.
+
+## 2026-05-19 | pre-adr | fix-ux-multipage-bugs | Verify reforzado: grep de TS leak en HTML/JS producido
+**Categoría**: lección del pipeline.
+**Descripción**: Iter1 de sdd-verify reportó PASS basado solo en build estático sin grep del HTML/JS producido. El issue H-1 (sintaxis TS sin transpilar en `<script define:vars>`) fue invisible para typecheck/build pero rompía el wizard en runtime. Judgment lo detectó con `node --check` sobre el HTML construido. Recomendación: `sdd-verify` para changes que tocan `<script define:vars>` debe incluir explícitamente `grep -rE '(as [A-Z]\w+|type \w+ =|: \w+ =|<[A-Z]\w+>)' dist/client/**/*.html dist/_astro/*.js`.
+**Promoción sugerida**: si este patrón se repite ≥3 veces → ADR formal sobre el contrato de verify para scripts inline.

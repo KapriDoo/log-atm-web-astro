@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "validate-i18n": "tsx scripts/validate-i18n.ts"
+    "validate-i18n": "tsx scripts/validate-i18n.ts",
+    "favicons": "node scripts/generate-favicons.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.5.0",
@@ -24,7 +25,6 @@
     "potrace": "^2.1.8",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "sharp": "^0.34.5",
     "tailwindcss": "^4.2.2",
     "worker-mailer": "^1.2.1"
   },
@@ -35,6 +35,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "astro-icon": "^1.1.5",
+    "sharp": "^0.34.5",
     "svgo": "^4.0.1",
     "tsx": "^4.20.6"
   }

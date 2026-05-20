@@ -5,6 +5,7 @@ import Footer from '../components/ui/Footer.astro';
 import { Icon } from 'astro-icon/components';
 import { SITE } from '../lib/constants';
 import { useTranslations, getLangFromUrl, tList, type Locale } from '../i18n/utils';
+import WhatsAppIcon from '../components/icons/WhatsAppIcon.astro';
 import '../styles/pages/shared.css';
 
 const { lang: langProp } = Astro.props as { lang?: Locale };
@@ -136,9 +137,9 @@ const submitSuccessText = t('contacto.form.submitSuccess');
 
             <div class="contact-channels">
               <a class="channel channel--wa" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
-                <div class="channel__icon">
-                  <Icon name="lucide:message-circle" width={22} height={22} aria-hidden="true" />
-                </div>
+                <span class="channel__icon">
+                  <WhatsAppIcon width={22} height={22} ariaLabel="WhatsApp" />
+                </span>
                 <div>
                   <div class="channel__name">{t('contacto.channels.whatsappName')}</div>
                   <div class="channel__value">{SITE.phoneDisplay}</div>
@@ -192,66 +193,72 @@ const submitSuccessText = t('contacto.form.submitSuccess');
 </BaseLayout>
 
 <script>
-  const form = document.getElementById('contact-form') as HTMLFormElement | null;
-  const btn = document.getElementById('contact-submit') as HTMLButtonElement | null;
-  const label = btn?.querySelector<HTMLSpanElement>('.form-submit__label');
-  const successText = form?.dataset.success ?? '';
-  const MSG = {
-    sending:      form?.dataset.msgSending      ?? 'Enviando tu mensaje…',
-    sent:         form?.dataset.msgSent         ?? successText,
-    sentLabel:    form?.dataset.msgSentLabel    ?? '✓ Enviado',
-    reviewPrefix: form?.dataset.msgReviewPrefix ?? 'Revisa los datos:',
-    sendFail:     form?.dataset.msgSendFail     ?? 'No pudimos enviar tu mensaje. Reintenta o escríbenos por WhatsApp.',
-    connError:    form?.dataset.msgConnError    ?? 'Error de conexión. Reintenta en unos segundos.',
-  };
-  const status = document.getElementById('contact-status') as HTMLElement | null;
+  // Envuelto en astro:page-load para que los listeners sobrevivan View Transitions
+  document.addEventListener('astro:page-load', () => {
+    const controller = new AbortController();
+    document.addEventListener('astro:before-swap', () => controller.abort(), { once: true });
 
-  function setStatus(msg: string, kind: '' | 'error' | 'success' = '') {
-    if (!status) return;
-    status.textContent = msg;
-    status.style.color =
-      kind === 'error' ? '#c0392b' : kind === 'success' ? '#2d9b6f' : '';
-  }
+    const form = document.getElementById('contact-form') as HTMLFormElement | null;
+    const btn = document.getElementById('contact-submit') as HTMLButtonElement | null;
+    const label = btn?.querySelector<HTMLSpanElement>('.form-submit__label');
+    const successText = form?.dataset.success ?? '';
+    const MSG = {
+      sending:      form?.dataset.msgSending      ?? 'Enviando tu mensaje…',
+      sent:         form?.dataset.msgSent         ?? successText,
+      sentLabel:    form?.dataset.msgSentLabel    ?? '✓ Enviado',
+      reviewPrefix: form?.dataset.msgReviewPrefix ?? 'Revisa los datos:',
+      sendFail:     form?.dataset.msgSendFail     ?? 'No pudimos enviar tu mensaje. Reintenta o escríbenos por WhatsApp.',
+      connError:    form?.dataset.msgConnError    ?? 'Error de conexión. Reintenta en unos segundos.',
+    };
+    const status = document.getElementById('contact-status') as HTMLElement | null;
 
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    if (!form || !btn || !label) return;
-
-    const original = label.textContent ?? 'Enviar solicitud';
-    btn.disabled = true;
-    label.textContent = MSG.sending;
-    setStatus(MSG.sending);
-
-    const fd = new FormData(form);
-    const payload: Record<string, string> = {};
-    fd.forEach((v, k) => { payload[k] = String(v); });
-
-    try {
-      const r = await fetch('/api/contacto', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      const data = await r.json().catch(() => ({}));
-      if (r.ok && data.ok) {
-        setStatus(MSG.sent, 'success');
-        label.textContent = MSG.sentLabel;
-        btn.querySelector('svg')?.remove();
-        form.reset();
-        return;
-      }
-      if (r.status === 400 && data.fields) {
-        const first = Object.values(data.fields)[0] as string;
-        setStatus(`${MSG.reviewPrefix} ${first}`, 'error');
-      } else {
-        setStatus(MSG.sendFail, 'error');
-      }
-      label.textContent = original;
-      btn.disabled = false;
-    } catch {
-      setStatus(MSG.connError, 'error');
-      label.textContent = original;
-      btn.disabled = false;
+    function setStatus(msg: string, kind: '' | 'error' | 'success' = '') {
+      if (!status) return;
+      status.textContent = msg;
+      status.style.color =
+        kind === 'error' ? '#c0392b' : kind === 'success' ? '#2d9b6f' : '';
     }
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form || !btn || !label) return;
+
+      const original = label.textContent ?? 'Enviar solicitud';
+      btn.disabled = true;
+      label.textContent = MSG.sending;
+      setStatus(MSG.sending);
+
+      const fd = new FormData(form);
+      const payload: Record<string, string> = {};
+      fd.forEach((v, k) => { payload[k] = String(v); });
+
+      try {
+        const r = await fetch('/api/contacto', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const data = await r.json().catch(() => ({}));
+        if (r.ok && data.ok) {
+          setStatus(MSG.sent, 'success');
+          label.textContent = MSG.sentLabel;
+          btn.querySelector('svg')?.remove();
+          form.reset();
+          return;
+        }
+        if (r.status === 400 && data.fields) {
+          const first = Object.values(data.fields)[0] as string;
+          setStatus(`${MSG.reviewPrefix} ${first}`, 'error');
+        } else {
+          setStatus(MSG.sendFail, 'error');
+        }
+        label.textContent = original;
+        btn.disabled = false;
+      } catch {
+        setStatus(MSG.connError, 'error');
+        label.textContent = original;
+        btn.disabled = false;
+      }
+    }, { signal: controller.signal });
   });
 </script>

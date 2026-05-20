@@ -385,3 +385,26 @@
   margin: 0 0 0.25rem;
 }
 .quote-success__step-d { font-size: 0.8125rem; color: var(--color-text-muted); margin: 0; }
+
+/* ── Breakpoint mobile chico — wizard (TX-2) ─────────────── */
+@media (max-width: 480px) {
+  .stepper__track {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-1, 0.25rem);
+  }
+  .stepper__bullet {
+    width: 28px;
+    height: 28px;
+    font-size: 0.875rem;
+  }
+  .stepper__name { display: none; }
+  .quote-card { padding: var(--space-3, 1rem); }
+
+  /* Touch targets mínimos 44px (WCAG 2.2 AA) */
+  .mode-tile { min-height: 44px; min-width: 44px; }
+  #btn-next { min-height: 44px; min-width: 44px; }
+  #btn-back { min-height: 44px; min-width: 44px; }
+
+  /* Evitar scroll horizontal */
+  .quote-layout { overflow-x: hidden; }
+}
