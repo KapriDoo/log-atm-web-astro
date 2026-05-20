@@ -3,9 +3,10 @@ interface Props {
   width?: number;
   height?: number;
   class?: string;
+  /** Pasar ariaLabel solo si el icono está solo sin texto adyacente. */
   ariaLabel?: string;
 }
-const { width = 24, height = 24, class: cls = "", ariaLabel = "WhatsApp" } = Astro.props;
+const { width = 24, height = 24, class: cls = "", ariaLabel } = Astro.props;
 ---
 <svg
   viewBox="0 0 24 24"
@@ -13,8 +14,9 @@ const { width = 24, height = 24, class: cls = "", ariaLabel = "WhatsApp" } = Ast
   height={height}
   class={cls}
   xmlns="http://www.w3.org/2000/svg"
-  role="img"
+  role={ariaLabel ? "img" : undefined}
   aria-label={ariaLabel}
+  aria-hidden={ariaLabel ? undefined : "true"}
 >
   <path
     fill="currentColor"
