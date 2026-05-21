@@ -67,6 +67,8 @@
   cursor: pointer;
   transition: background 0.18s;
   position: relative;
+  touch-action: manipulation;               /* nuevo */
+  -webkit-tap-highlight-color: transparent; /* nuevo */
 }
 .stepper__step:last-child { border-right: 0; }
 .stepper__step:hover { background: var(--color-neutral-50); }
@@ -158,6 +160,8 @@
   background: var(--color-surface);
   transition: all 0.18s;
   text-align: left;
+  touch-action: manipulation;               /* nuevo */
+  -webkit-tap-highlight-color: transparent; /* nuevo */
 }
 .mode-tile:hover { border-color: var(--color-primary-400); }
 .mode-tile--active {
@@ -282,6 +286,13 @@
 }
 .btn-primary-lg:hover { transform: translateY(-1px); }
 
+/* Respuesta táctil inmediata en iOS Safari (sin delay 300ms ni highlight nativo) */
+#btn-next,
+#btn-back {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Sticky summary */
 .quote-summary {
   position: sticky; top: 140px;
@@ -386,25 +397,33 @@
 }
 .quote-success__step-d { font-size: 0.8125rem; color: var(--color-text-muted); margin: 0; }
 
-/* ── Breakpoint mobile chico — wizard (TX-2) ─────────────── */
-@media (max-width: 480px) {
+/* ── Breakpoint mobile — wizard (cubre todos los iPhones modernos en portrait) ── */
+@media (max-width: 640px) {
   .stepper__track {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--space-1, 0.25rem);
+    overflow-x: clip; /* guard rail: bloquea desbordamiento residual del stepper */
   }
+  /* Modo compacto: solo bullets numerados, sin etiquetas de texto */
+  .stepper__step {
+    padding: 0.5rem 0.25rem;
+    gap: 0.25rem;
+    justify-content: center;
+  }
+  .stepper__label { display: none; }
+  .stepper__name  { display: none; }
   .stepper__bullet {
     width: 28px;
     height: 28px;
     font-size: 0.875rem;
   }
-  .stepper__name { display: none; }
   .quote-card { padding: var(--space-3, 1rem); }
 
   /* Touch targets mínimos 44px (WCAG 2.2 AA) */
   .mode-tile { min-height: 44px; min-width: 44px; }
-  #btn-next { min-height: 44px; min-width: 44px; }
-  #btn-back { min-height: 44px; min-width: 44px; }
+  #btn-next  { min-height: 44px; min-width: 44px; }
+  #btn-back  { min-height: 44px; min-width: 44px; }
 
-  /* Evitar scroll horizontal */
+  /* Evitar scroll horizontal en el layout del wizard */
   .quote-layout { overflow-x: hidden; }
 }
