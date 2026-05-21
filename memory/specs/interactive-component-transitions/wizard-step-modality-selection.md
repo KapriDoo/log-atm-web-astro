@@ -6,7 +6,7 @@ slug: "wizard-step-modality-selection"
 domain: "fix"
 delta_type: "behavior-correction"
 supersedes: null
-superseded_by: null
+superseded_by: "[[forms-email/wizard-modality-tap-ios]]"
 status: completed
 feature_branch: "feature/fix-ux-multipage-bugs"
 commits: ["b4ab389"]

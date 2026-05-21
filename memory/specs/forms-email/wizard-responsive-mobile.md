@@ -6,7 +6,7 @@ slug: "wizard-responsive-mobile"
 domain: "fix"
 delta_type: "additive"
 supersedes: null
-superseded_by: null
+superseded_by: "[[forms-email/wizard-responsive-mobile-v2]]"
 status: completed
 feature_branch: "feature/fix-ux-multipage-bugs"
 commits: ["bac1e9b"]

@@ -105,10 +105,28 @@ document.addEventListener('astro:page-load', () => {
   if (destSel)     state.dest     = destSel.value || destSel.options[0]?.value || '';
   if (incotermSel) state.incoterm = incotermSel.value || 'FOB';
 
-  // Usar AbortController para limpiar listeners en astro:before-swap
-  const controller = new AbortController();
-  document.addEventListener('astro:before-swap', () => controller.abort(), { once: true });
-  const sig = { signal: controller.signal };
+  // Cleanup manual de listeners — compatible con iOS Safari < 15.4
+  // (AbortSignal en addEventListener no soportado en esas versiones).
+  type Cleanup = () => void;
+  const cleanups: Cleanup[] = [];
+
+  /** Registra un listener y memoriza su removeEventListener para before-swap. */
+  function on<E extends Event>(
+    target: EventTarget | null | undefined,
+    type: string,
+    handler: (ev: E) => void,
+  ): void {
+    if (!target) return;
+    const h = handler as EventListener;
+    target.addEventListener(type, h);
+    cleanups.push(() => target.removeEventListener(type, h));
+  }
+
+  document.addEventListener(
+    'astro:before-swap',
+    () => { cleanups.forEach((fn) => fn()); cleanups.length = 0; },
+    { once: true },
+  );
 
   function setText(el: Element | null, txt: string, empty = false) {
     if (!el) return;
@@ -222,7 +240,7 @@ document.addEventListener('astro:page-load', () => {
 
   // ── Step 0: mode tiles ────────────────────────────────────
   $$<HTMLButtonElement>('.mode-tile').forEach((btn) => {
-    btn.addEventListener('click', () => {
+    on(btn, 'click', () => {
       const mode = btn.dataset.mode || '';
       const name = btn.dataset.modeName || '';
       state.mode = mode;
@@ -230,17 +248,17 @@ document.addEventListener('astro:page-load', () => {
       $$<HTMLButtonElement>('.mode-tile').forEach((b) => b.classList.toggle('mode-tile--active', b === btn));
       renderSummary();
       renderStep();
-    }, sig);
+    });
   });
 
   // ── Step 1: route + incoterm + date ────────────────────────
-  $('#q-origin')?.addEventListener('change',   (e) => { state.origin   = (e.target as HTMLSelectElement).value; renderSummary(); renderStep(); }, sig);
-  $('#q-dest')?.addEventListener('change',     (e) => { state.dest     = (e.target as HTMLSelectElement).value; renderSummary(); renderStep(); }, sig);
-  $('#q-incoterm')?.addEventListener('change', (e) => { state.incoterm = (e.target as HTMLSelectElement).value; renderSummary(); }, sig);
+  on($('#q-origin'),   'change', (e: Event) => { state.origin   = (e.target as HTMLSelectElement).value; renderSummary(); renderStep(); });
+  on($('#q-dest'),     'change', (e: Event) => { state.dest     = (e.target as HTMLSelectElement).value; renderSummary(); renderStep(); });
+  on($('#q-incoterm'), 'change', (e: Event) => { state.incoterm = (e.target as HTMLSelectElement).value; renderSummary(); });
 
   // ── Step 2: cargo chips + unit toggle + volume fields ──────
   $$<HTMLButtonElement>('#cargo-chips .chip-multi').forEach((btn) => {
-    btn.addEventListener('click', () => {
+    on(btn, 'click', () => {
       const v = btn.dataset.cargo || '';
       const idx = state.cargo.indexOf(v);
       if (idx >= 0) state.cargo.splice(idx, 1);
@@ -248,24 +266,24 @@ document.addEventListener('astro:page-load', () => {
       btn.classList.toggle('chip-multi--active');
       renderSummary();
       renderStep();
-    }, sig);
+    });
   });
 
   $$<HTMLButtonElement>('#extras-chips .chip-multi').forEach((btn) => {
-    btn.addEventListener('click', () => {
+    on(btn, 'click', () => {
       const v = btn.dataset.extra || '';
       const idx = state.extras.indexOf(v);
       if (idx >= 0) state.extras.splice(idx, 1);
       else          state.extras.push(v);
       btn.classList.toggle('chip-multi--active');
       renderSummary();
-    }, sig);
+    });
   });
 
   const cbmFields = $('#cbm-fields');
   const fclFields = $('#fcl-fields');
   $$<HTMLButtonElement>('#unit-toggle .unit-toggle__btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
+    on(btn, 'click', () => {
       const u = (btn.dataset.unit || 'cbm') as Unit;
       state.unit   = u;
       state.volume = '';
@@ -285,27 +303,27 @@ document.addEventListener('astro:page-load', () => {
       }
       renderSummary();
       renderStep();
-    }, sig);
+    });
   });
 
-  $('#q-volume')?.addEventListener('input', (e) => { state.volume = (e.target as HTMLInputElement).value; renderSummary(); renderStep(); }, sig);
-  $('#q-weight')?.addEventListener('input', (e) => { state.weight = (e.target as HTMLInputElement).value; renderSummary(); renderStep(); }, sig);
-  $('#q-count')?.addEventListener('input',  (e) => { state.volume = (e.target as HTMLInputElement).value; renderSummary(); renderStep(); }, sig);
+  on($('#q-volume'), 'input', (e: Event) => { state.volume = (e.target as HTMLInputElement).value; renderSummary(); renderStep(); });
+  on($('#q-weight'), 'input', (e: Event) => { state.weight = (e.target as HTMLInputElement).value; renderSummary(); renderStep(); });
+  on($('#q-count'),  'input', (e: Event) => { state.volume = (e.target as HTMLInputElement).value; renderSummary(); renderStep(); });
 
   // ── Step 3: contact ────────────────────────────────────────
-  $('#q-name')?.addEventListener('input',    (e) => { state.name    = (e.target as HTMLInputElement).value; renderStep(); }, sig);
-  $('#q-company')?.addEventListener('input', (e) => { state.company = (e.target as HTMLInputElement).value; }, sig);
-  $('#q-email')?.addEventListener('input',   (e) => { state.email   = (e.target as HTMLInputElement).value; renderStep(); }, sig);
-  $('#q-phone')?.addEventListener('input',   (e) => { state.phone   = (e.target as HTMLInputElement).value; }, sig);
-  $('#q-notes')?.addEventListener('input',   (e) => { state.notes   = (e.target as HTMLInputElement).value; }, sig);
+  on($('#q-name'),    'input', (e: Event) => { state.name    = (e.target as HTMLInputElement).value; renderStep(); });
+  on($('#q-company'), 'input', (e: Event) => { state.company = (e.target as HTMLInputElement).value; });
+  on($('#q-email'),   'input', (e: Event) => { state.email   = (e.target as HTMLInputElement).value; renderStep(); });
+  on($('#q-phone'),   'input', (e: Event) => { state.phone   = (e.target as HTMLInputElement).value; });
+  on($('#q-notes'),   'input', (e: Event) => { state.notes   = (e.target as HTMLInputElement).value; });
 
   // ── Navigation ─────────────────────────────────────────────
-  btnBack?.addEventListener('click', () => {
+  on(btnBack, 'click', () => {
     if (state.step > 0) {
       state.step -= 1;
       renderStep();
     }
-  }, sig);
+  });
 
   const statusEl = $('#quote-status');
   function setQuoteStatus(msg: string, kind: '' | 'error' | 'success' = '') {
@@ -368,7 +386,7 @@ document.addEventListener('astro:page-load', () => {
     }
   }
 
-  btnNext?.addEventListener('click', () => {
+  on(btnNext, 'click', () => {
     if (!canAdvance()) return;
     if (state.step < 3) {
       state.step += 1;
@@ -376,16 +394,16 @@ document.addEventListener('astro:page-load', () => {
     } else {
       void submitQuote();
     }
-  }, sig);
+  });
 
   // Permite click en bullet del stepper para volver a un paso completado
   stepperSteps.forEach((el, i) => {
-    el.addEventListener('click', () => {
+    on(el, 'click', () => {
       if (i <= state.step) {
         state.step = i;
         renderStep();
       }
-    }, sig);
+    });
   });
 
   function showSuccess() {
