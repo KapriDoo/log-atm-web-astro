@@ -31,6 +31,8 @@ adrs: []
 scope:
   - "log-atm-web-astro/src/styles/pages/cotizar.css"
   - "log-atm-web-astro/src/pages/cotizar.astro"
+mr: "https://github.com/KapriDoo/log-atm-web-astro/pull/20"
+updated: "2026-05-20"
 verified_at: "2026-05-20"
 ---
 
