@@ -7,7 +7,7 @@ domain: "fix"
 delta_type: "behavior-correction"
 supersedes: "[[forms-email/wizard-responsive-mobile]]"
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
@@ -31,7 +31,7 @@ adrs: []
 scope:
   - "log-atm-web-astro/src/styles/pages/cotizar.css"
   - "log-atm-web-astro/src/pages/cotizar.astro"
-verified_at: null
+verified_at: "2026-05-20"
 ---
 
 ## Purpose

@@ -4,8 +4,10 @@ change_name: "fix-cotizar-mobile-wizard-stepper"
 domain: "fix"
 status: active
 fast_path: "full"
-current_phase: sdd-verify
-phases_completed: [sdd-init, sdd-explore, sdd-propose, sdd-spec, sdd-design, sdd-tasks, sdd-apply]
+current_phase: sdd-archive
+phases_completed: [sdd-init, sdd-explore, sdd-propose, sdd-spec, sdd-design, sdd-tasks, sdd-apply, sdd-verify, sdd-judgment]
+judgment_iteration: 1
+judgment_verdict_iter1: PASS
 spec_refs:
   - "forms-email/wizard-responsive-mobile-v2"
   - "forms-email/wizard-modality-tap-ios"
@@ -17,6 +19,7 @@ mr_status: pending
 mr_error: ""
 created: "2026-05-20"
 updated: "2026-05-20"
+verified_at: "2026-05-20"
 apply_phase_completed: "2026-05-20"
 apply_commits:
   - "f01efbc fix(cotizar): compact stepper layout on mobile ≤640px"

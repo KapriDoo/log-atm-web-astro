@@ -7,7 +7,7 @@ domain: "fix"
 delta_type: "behavior-correction"
 supersedes: "[[interactive-component-transitions/wizard-step-modality-selection]]"
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
@@ -31,7 +31,7 @@ scope:
   - "log-atm-web-astro/src/styles/pages/cotizar.css"
   - "log-atm-web-astro/src/scripts/wizard.ts"
   - "log-atm-web-astro/src/pages/cotizar.astro"
-verified_at: null
+verified_at: "2026-05-20"
 ---
 
 ## Purpose
