@@ -1,0 +1,58 @@
+---
+/**
+ * Icon.astro — Reemplazo local de astro-icon (incompatible con Astro 6 + workerd).
+ *
+ * Inlina el SVG leyendo directamente el set `@iconify-json/lucide` (solo datos
+ * JSON, sin runtime CJS), por lo que es seguro en el dev runner de workerd y no
+ * requiere `prerenderEnvironment: 'node'`.
+ *
+ * Uso (drop-in): <Icon name="lucide:ship" width={20} height={20} aria-hidden="true" />
+ * El prefijo `lucide:` es opcional. Acepta class y atributos arbitrarios.
+ */
+import lucide from '@iconify-json/lucide/icons.json';
+
+type IconEntry = {
+  body: string;
+  width?: number;
+  height?: number;
+  left?: number;
+  top?: number;
+};
+
+interface Props {
+  name: string;
+  width?: number | string;
+  height?: number | string;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { name, width, height, class: className, ...rest } = Astro.props;
+
+const key = name.includes(':') ? name.slice(name.indexOf(':') + 1) : name;
+const icons = lucide.icons as Record<string, IconEntry>;
+const icon = icons[key];
+
+if (!icon && import.meta.env.DEV) {
+  console.warn(`[Icon] Ícono no encontrado en el set lucide: "${name}"`);
+}
+
+const setW = lucide.width ?? 24;
+const setH = lucide.height ?? 24;
+const vbL = icon?.left ?? 0;
+const vbT = icon?.top ?? 0;
+const vbW = icon?.width ?? setW;
+const vbH = icon?.height ?? setH;
+const viewBox = `${vbL} ${vbT} ${vbW} ${vbH}`;
+---
+{icon && (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox={viewBox}
+    width={width ?? setW}
+    height={height ?? setH}
+    class={className}
+    set:html={icon.body}
+    {...rest}
+  />
+)}
