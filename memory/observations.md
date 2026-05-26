@@ -4,6 +4,13 @@ Log de hallazgos operacionales del pipeline SDD.
 Categorías permitidas: ver `@global/skills/_shared/obsidian-persistence-convention#observations-md-policy`.
 Formato: ## YYYY-MM-DD | <tag> | <change|global> | <summary>
 
+## 2026-05-26 | architecture | fix-cotizar-wizard-init | Bug site-wide: astro:page-load sin ClientRouter montado
+**Severidad**: High — wizard /cotizar/ completamente inerte en carga directa de URL; alcance site-wide (7 archivos afectados).
+**Descripción**: Todos los scripts del sitio usan `document.addEventListener('astro:page-load', ...)` pero `<ClientRouter />` (el único emisor de ese evento) no está montado en `BaseLayout.astro`. En carga directa, el evento nunca se dispara. Bug preexistente en `main`, no regresión del refactor de iconos.
+**Evidencia**: `document.dispatchEvent(new Event('astro:page-load'))` manual en consola reactiva el wizard; flujo completo de 4 pasos funciona.
+**Dos enfoques candidatos**: (1) montar `<ClientRouter />` en BaseLayout; (2) migrar listeners a patrón `DOMContentLoaded` (como LanguageSelector). Decisión pendiente en sdd-propose.
+**Change**: fix-cotizar-wizard-init
+
 ## 2026-05-20 | debt | fix-cotizar-mobile-wizard-stepper | A11y: stepper__label oculto a screen readers en mobile
 **Severidad**: Low — Detectado por sdd-judgment iter1 (Juez A y B coincidieron).
 **Ubicación**: `log-atm-web-astro/src/styles/pages/cotizar.css` (media `max-width: 640px`)
@@ -45,3 +52,21 @@ Se decide usar `astro:assets` con Sharp para procesar las 14 imágenes de indust
 **Categoría**: lección del pipeline.
 **Descripción**: Iter1 de sdd-verify reportó PASS basado solo en build estático sin grep del HTML/JS producido. El issue H-1 (sintaxis TS sin transpilar en `<script define:vars>`) fue invisible para typecheck/build pero rompía el wizard en runtime. Judgment lo detectó con `node --check` sobre el HTML construido. Recomendación: `sdd-verify` para changes que tocan `<script define:vars>` debe incluir explícitamente `grep -rE '(as [A-Z]\w+|type \w+ =|: \w+ =|<[A-Z]\w+>)' dist/client/**/*.html dist/_astro/*.js`.
 **Promoción sugerida**: si este patrón se repite ≥3 veces → ADR formal sobre el contrato de verify para scripts inline.
+
+## 2026-05-26 | tasks | fix-cotizar-wizard-init | scroll-animations.ts confirmado Grupo A — no modificar
+**Confirmado**: `scroll-animations.ts` llama `init()` en module-load (l.146) ANTES del handler `astro:page-load` (l.149). Ya funciona en carga directa. NO se incluye en las tareas de corrección.
+**Decisión de diseño**: `define:vars` en `industrias.astro` primer bloque no soporta imports — se usa el patrón `ready()` inline (4 líneas) en lugar de importar el helper.
+**Creado**: `tasks.md` con 7 tareas de implementación + 7 escenarios de verificación Playwright.
+
+## sdd-propose — fix-cotizar-wizard-init (2026-05-26)
+- Codebase en estado MIXTO de init: Grupo A (Navbar ScrollTrigger, scroll-animations init() l.146, gsap-stepper wiring en cotizar.astro l.363-382, LanguageSelector) inicializa en module-load y YA funciona en carga directa. Grupo B (wizard.ts, HeroSection, contacto, servicios, nosotros, industrias) gatea todo tras astro:page-load → roto en carga directa.
+- Montar ClientRouter (Opción 1) provocaría DOBLE init del Grupo A (module-load + astro:page-load) y activaría por primera vez cleanups astro:before-swap nunca probados (Navbar l.346, wizard l.126, gsap-ind-directory l.120). Riesgo alto no medible sin CI.
+- wizard.ts funciona end-to-end en carga directa con SOLO desacoplarlo: gsap-stepper helpers ya en window via module-load, y wizard tiene fallback sin GSAP (l.215-222).
+- Recomendado: Opción 2 (desacoplar init con patrón ready() estilo LanguageSelector), scope = los 7 puntos del Grupo B. Esfuerzo M. No tocar Grupo A.
+
+## 2026-05-26 — fix-cotizar-wizard-init — post sdd-verify
+
+- **PASS verificado**: wizard `/cotizar/` y scripts de sitio inicializan correctamente en carga directa con el helper `ready.ts`.
+- **3 páginas con evidencia indirecta** (código correcto, no probadas en navegador): `/contacto/` (formulario), `/nosotros/` (timeline scroll), `/industrias/` (directorio/autorotación). Recomendado spot-check manual antes de merge.
+- **Riesgo futuro**: cuando se monte `ClientRouter`, los listeners `astro:page-load` registrados a nivel `document` (sin scope de ruta) necesitarán scoping para evitar re-inicialización en páginas no relevantes.
+- **Grafo de specs**: 3 slugs referenciados en `related[]` aún no existen en el corpus (`interactive-component-transitions/wizard-step-modality-selection`, `scroll-animations/scroll-inner-pages`, `nosotros-timeline-reveal/spec`). WARN de metadata, no FAIL funcional.
