@@ -184,18 +184,14 @@ const sectorPrefix = t('industrias.directory.sectorPrefix');
 </BaseLayout>
 
 <script define:vars={{ industries, sectorPrefix }}>
-  // Registrar callback de caption dentro de astro:page-load para que sobreviva
-  // View Transitions (se re-ejecuta en cada navegación a esta página).
-  document.addEventListener('astro:page-load', () => {
-    // Obtener refs del DOM en cada carga (el DOM se reconstruye en cada transición)
+  function initIndCaption() {
     const counter   = document.getElementById('dir-counter-active');
     const eyebrowEl = document.getElementById('dir-eyebrow');
     const nameEl    = document.getElementById('dir-name');
     const subEl     = document.getElementById('dir-sub');
     const tagsEl    = document.getElementById('dir-tags');
 
-    // Callback que actualiza el texto de caption y counter al cambiar de slide
-    // Se asigna ANTES de que initIndDirectory lo consuma (orden crítico)
+    // Asignar ANTES de que initIndDirectory lo consuma (orden crítico)
     window.__indDirectoryOnRender = (i) => {
       const ind = industries[i];
       const tags = ind.tags || [];
@@ -206,17 +202,29 @@ const sectorPrefix = t('industrias.directory.sectorPrefix');
       if (subEl)     subEl.textContent  = ind.sub;
       if (tagsEl)    tagsEl.innerHTML = tags.map((t) => `<span class="ind-directory__tag">${t}</span>`).join('');
     };
-  });
+  }
+
+  // Patrón ready() inline (define:vars no soporta imports)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initIndCaption, { once: true });
+  } else {
+    initIndCaption();
+  }
+  document.addEventListener('astro:page-load', initIndCaption);
 </script>
 
 <script>
   import { initIndDirectory } from '../scripts/gsap-ind-directory';
+  import { ready } from '../lib/ready';
 
-  document.addEventListener('astro:page-load', () => {
+  function initIndustrias(): void {
     const onRender = (window as Window & { __indDirectoryOnRender?: (i: number) => void }).__indDirectoryOnRender;
     initIndDirectory('#ind-directory', {
       intervalMs: 3500,
       onRender,
     });
-  });
+  }
+
+  ready(initIndustrias);
+  document.addEventListener('astro:page-load', initIndustrias);
 </script>
