@@ -193,8 +193,9 @@ const submitSuccessText = t('contacto.form.submitSuccess');
 </BaseLayout>
 
 <script>
-  // Envuelto en astro:page-load para que los listeners sobrevivan View Transitions
-  document.addEventListener('astro:page-load', () => {
+  import { ready } from '../lib/ready';
+
+  function initContactForm(): void {
     const controller = new AbortController();
     document.addEventListener('astro:before-swap', () => controller.abort(), { once: true });
 
@@ -260,5 +261,8 @@ const submitSuccessText = t('contacto.form.submitSuccess');
         btn.disabled = false;
       }
     }, { signal: controller.signal });
-  });
+  }
+
+  ready(initContactForm);
+  document.addEventListener('astro:page-load', initContactForm);
 </script>

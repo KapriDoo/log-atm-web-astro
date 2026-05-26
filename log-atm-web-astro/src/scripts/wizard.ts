@@ -13,6 +13,8 @@
  *                  [[forms-email/wizard-responsive-mobile]]
  */
 
+import { ready } from '../lib/ready';
+
 type Unit = 'cbm' | 'fcl20' | 'fcl40';
 
 interface ClientStrings {
@@ -58,7 +60,7 @@ function makeState() {
   };
 }
 
-document.addEventListener('astro:page-load', () => {
+function initWizard(): void {
   // Reset flag de animación colgado de posibles navegaciones interrumpidas
   const resetFn = (window as Window & { __stepperReset?: () => void }).__stepperReset;
   if (resetFn) resetFn();
@@ -425,4 +427,8 @@ document.addEventListener('astro:page-load', () => {
   // Initial render
   renderSummary();
   renderStep();
-});
+}
+
+// Inicializar en carga directa Y en navegación interna futura (View Transitions)
+ready(initWizard);
+document.addEventListener('astro:page-load', initWizard);

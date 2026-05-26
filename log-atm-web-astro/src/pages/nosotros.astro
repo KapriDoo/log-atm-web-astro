@@ -170,7 +170,12 @@ const how = HOW_WE_WORK.map((h, i) => ({ ...h, ...(howCopy[i] ?? { title: h.titl
 
 <script>
   import { initTimelineReveal } from '../scripts/gsap-timeline-reveal';
-  document.addEventListener('astro:page-load', () => {
+  import { ready } from '../lib/ready';
+
+  function initNosotrosTimeline(): void {
     initTimelineReveal('.timeline__track');
-  });
+  }
+
+  ready(initNosotrosTimeline);
+  document.addEventListener('astro:page-load', initNosotrosTimeline);
 </script>

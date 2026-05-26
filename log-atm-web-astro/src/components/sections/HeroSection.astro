@@ -74,9 +74,13 @@ const heroStripStats = HERO_STRIP_STATS.map((s, i) => ({
 <script>
   import { animatePageHero } from '../../scripts/scroll-animations';
   import { initCounters } from '../../scripts/gsap-counters';
+  import { ready } from '../../lib/ready';
 
-  document.addEventListener('astro:page-load', () => {
+  function initHero(): void {
     animatePageHero('.hero-b');
     initCounters('[data-counter]');
-  });
+  }
+
+  ready(initHero);
+  document.addEventListener('astro:page-load', initHero);
 </script>
