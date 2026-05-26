@@ -1,6 +1,9 @@
 # Multi-stage build para Astro static site
 # Etapa 1: Build con Node.js 22
-FROM node:22-alpine AS builder
+# Nota: se usa Debian (glibc), no Alpine (musl), porque `workerd` —invocado por
+# el adapter de Cloudflare con platformProxy durante `astro build`— solo
+# distribuye binario glibc (@cloudflare/workerd-linux-64). En Alpine falla con ENOENT.
+FROM node:22-slim AS builder
 
 WORKDIR /app
 
@@ -44,8 +47,11 @@ FROM nginx:alpine
 # Copiar módulos Brotli compilados
 COPY --from=nginx-builder /etc/nginx/modules/ngx_http_brotli_*.so /etc/nginx/modules/
 
-# Copiar los archivos estáticos generados
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Copiar los archivos estáticos generados.
+# El adapter de Cloudflare divide el output en dist/client (estático) y
+# dist/server (worker para rutas on-demand). nginx solo sirve lo estático,
+# por lo que se copia dist/client como root del sitio.
+COPY --from=builder /app/dist/client /usr/share/nginx/html
 
 # Copiar configuración de nginx
 COPY nginx.conf /etc/nginx/nginx.conf
