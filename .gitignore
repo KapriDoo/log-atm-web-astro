@@ -30,6 +30,7 @@ npm-debug.log*
 
 # Agent skills cache
 .agents/
+.claude/
 
 # Lock files (managed by package manager)
 skills-lock.json
