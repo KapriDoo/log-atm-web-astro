@@ -34,7 +34,6 @@
     "@iconify-json/lucide": "^1.2.102",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "astro-icon": "^1.1.5",
     "sharp": "^0.34.5",
     "svgo": "^4.0.1",
     "tsx": "^4.20.6"
