@@ -5,8 +5,10 @@ fast_path: full
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/redesign-form-email-templates"
 feature_branch: "feature/redesign-form-email-templates"
 integration_target: "main"
-status: active
-current_phase: sdd-archive
+status: completed
+current_phase: ""
+pr: "https://github.com/KapriDoo/log-atm-web-astro/pull/23"
+mr_status: created
 phases_completed:
   - sdd-init
   - sdd-explore

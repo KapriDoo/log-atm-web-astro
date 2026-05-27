@@ -7,7 +7,9 @@ domain: "feature"
 delta_type: "ADD"
 supersedes: null
 superseded_by: null
-status: review
+status: completed
+mr: "https://github.com/KapriDoo/log-atm-web-astro/pull/23"
+updated: "2026-05-26"
 assigned_agent: null
 priority: high
 depends_on: []
