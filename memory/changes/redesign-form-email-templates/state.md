@@ -6,7 +6,7 @@ worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/redesign-for
 feature_branch: "feature/redesign-form-email-templates"
 integration_target: "main"
 status: active
-current_phase: sdd-verify
+current_phase: sdd-archive
 phases_completed:
   - sdd-init
   - sdd-explore
@@ -15,6 +15,7 @@ phases_completed:
   - sdd-design
   - sdd-tasks
   - sdd-apply
+  - sdd-verify
 spec_refs:
   - "[[forms-email/email-brand-identity]]"
   - "[[forms-email/email-visual-hierarchy]]"

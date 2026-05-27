@@ -26,11 +26,12 @@ acceptance_criteria:
 related:
   - "[[forms-email/quote-email-delivery]]"
   - "[[forms-email/quote-folio-server-generated]]"
+  - "[[forms-email/email-visual-hierarchy]]"
 affects: []
 adrs: []
 scope:
   - "log-atm-web-astro/src/lib/email-templates.ts"
-verified_at: null
+verified_at: "2026-05-26"
 ---
 
 # Identidad de marca LOG ATM en emails de formularios

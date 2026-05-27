@@ -32,7 +32,7 @@ affects: []
 adrs: []
 scope:
   - "log-atm-web-astro/src/lib/email-templates.ts"
-verified_at: null
+verified_at: "2026-05-26"
 ---
 
 # Jerarquía visual y agrupación de campos en emails de formularios

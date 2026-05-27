@@ -64,9 +64,28 @@ Se decide usar `astro:assets` con Sharp para procesar las 14 imágenes de indust
 - wizard.ts funciona end-to-end en carga directa con SOLO desacoplarlo: gsap-stepper helpers ya en window via module-load, y wizard tiene fallback sin GSAP (l.215-222).
 - Recomendado: Opción 2 (desacoplar init con patrón ready() estilo LanguageSelector), scope = los 7 puntos del Grupo B. Esfuerzo M. No tocar Grupo A.
 
+## 2026-05-26 | init | redesign-form-email-templates | Nuevo cambio: rediseño de templates HTML de email
+**Cambio iniciado**: `feature/redesign-form-email-templates`
+**Alcance**: `src/lib/email-templates.ts`, `src/lib/mailer.ts`, `src/pages/api/contacto.ts`, `src/pages/api/cotizacion-rapida.ts`, `src/pages/api/cotizacion.ts`
+**Objetivo**: rediseñar el HTML enviado por correo desde los 3 formularios del sitio. El diseño actual usa tablas simples sin identidad de marca.
+**Contexto previo**: existe specs directory `memory/specs/forms-email/` y un change anterior `forms-email-sending` — revisar en sdd-explore para detectar specs reutilizables.
+
 ## 2026-05-26 — fix-cotizar-wizard-init — post sdd-verify
 
 - **PASS verificado**: wizard `/cotizar/` y scripts de sitio inicializan correctamente en carga directa con el helper `ready.ts`.
 - **3 páginas con evidencia indirecta** (código correcto, no probadas en navegador): `/contacto/` (formulario), `/nosotros/` (timeline scroll), `/industrias/` (directorio/autorotación). Recomendado spot-check manual antes de merge.
 - **Riesgo futuro**: cuando se monte `ClientRouter`, los listeners `astro:page-load` registrados a nivel `document` (sin scope de ruta) necesitarán scoping para evitar re-inicialización en páginas no relevantes.
 - **Grafo de specs**: 3 slugs referenciados en `related[]` aún no existen en el corpus (`interactive-component-transitions/wizard-step-modality-selection`, `scroll-animations/scroll-inner-pages`, `nosotros-timeline-reveal/spec`). WARN de metadata, no FAIL funcional.
+
+## 2026-05-26 — sdd-explore — redesign-form-email-templates
+
+- **Scope confirmado**: el rediseño toca **1 solo archivo** (`src/lib/email-templates.ts`). Endpoints y mailer no se modifican.
+- **3 formularios confirman envío de email**: contacto, cotización-rápida, cotización 4 pasos. Todos usan `sendMail()` — no hay formulario sin envío de email.
+- **Logo disponible** en `public/logo.png` (monocolor azul `#4A7BB5`). URL pública: `https://logatm.com/logo.png`. Válido para uso en email HTML como `<img>` con fallback alt text.
+- **Specs previas relevantes**: `quote-folio-server-generated` (status: completed) y `quote-email-delivery` (status: completed) imponen constraints: folio en email, datos completos preservados, footer técnico obligatorio.
+- **Restricción de compatibilidad email**: tablas + inline CSS (sin CSS vars, sin flexbox, sin grid). Outlook ignora `border-radius` — aceptable. Gmail bloquea imágenes por defecto — mitigar con alt text.
+- **Approach recomendado**: A — wrapper con header de marca (banda dark `#112236`, logo, nombre empresa), tabla con filas alternadas en color primario, footer técnico colapsado. Esfuerzo M. Scope: solo `email-templates.ts`.
+
+## 2026-05-26 | architecture | Diseño rediseño email templates (presentacional, sin ADR nuevo)
+Decisión: contener el rediseño en `src/lib/email-templates.ts` únicamente. `wrap()` cambia firma interna (recibe cuerpo pre-compuesto en vez de `rowsBlock`); nuevos helpers `renderSection`, `brandHeader`, `corporateFooter`, `techMeta`; `renderRows` gana fondo alternado por índice de fila visible. Firmas públicas `build*` INTACTAS → cero impacto en endpoints. Paleta hex en const `C` (sin CSS vars). Logo via `${SITE.url}/logo.png` + wordmark/tagline de texto como fallback. Folio preservado en sección "Detalle de envío" (ADR-0004 referenciado, no alterado). Sin ADR nuevo: decisiones de presentación, no arquitectónicas.
+Quirk spec↔código: la spec email-visual-hierarchy lista campos inexistentes (dimensiones/temperatura/aduana); prevalece el payload real del código (cargoType, volume, weight, containerCount, containerType, services).
