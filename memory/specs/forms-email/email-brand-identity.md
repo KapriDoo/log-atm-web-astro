@@ -7,7 +7,9 @@ domain: feature
 delta_type: null
 supersedes: null
 superseded_by: null
-status: verified
+status: completed
+mr: https://github.com/KapriDoo/log-atm-web-astro/pull/24
+updated: 2026-05-26
 assigned_agent: sdd-apply
 priority: high
 depends_on: []

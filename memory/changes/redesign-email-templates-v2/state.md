@@ -2,8 +2,10 @@
 change_name: redesign-email-templates-v2
 domain: feature
 fast_path: full
-status: active
+status: completed
 current_phase: ""
+mr: https://github.com/KapriDoo/log-atm-web-astro/pull/24
+mr_status: created
 phases_completed:
   - sdd-init
   - sdd-explore
@@ -13,6 +15,7 @@ phases_completed:
   - sdd-tasks
   - sdd-apply
   - sdd-verify
+  - sdd-archive
 spec_refs:
   - "[[forms-email/email-brand-identity]]"
   - "[[forms-email/email-section-structure]]"
@@ -23,6 +26,7 @@ feature_branch: feature/redesign-email-templates-v2
 integration_target: main
 created: "2026-05-26"
 updated: "2026-05-26"
+archived_at: "2026-05-26"
 verified_at: "2026-05-26"
 apply_commit: "2d1a16d"
 tasks_generated_at: "2026-05-26"
