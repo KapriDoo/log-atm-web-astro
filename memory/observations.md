@@ -58,6 +58,26 @@ Se decide usar `astro:assets` con Sharp para procesar las 14 imágenes de indust
 **Decisión de diseño**: `define:vars` en `industrias.astro` primer bloque no soporta imports — se usa el patrón `ready()` inline (4 líneas) en lugar de importar el helper.
 **Creado**: `tasks.md` con 7 tareas de implementación + 7 escenarios de verificación Playwright.
 
+## 2026-05-26 | pre-adr | redesign-email-templates-v2 | Email HTML: border-radius/box-shadow/overflow:hidden en Outlook Win
+**Severidad**: Low — Degradación visual aceptable, contenido íntegro.
+**Descripción**: El diseño de referencia usa `border-radius:20px`, `box-shadow` y `overflow:hidden` en el `<table>` contenedor externo. Outlook Win (Word rendering engine) no soporta ninguna de estas propiedades en tablas. El correo se muestra sin redondear y sin sombra, pero el contenido es completamente legible. `overflow:hidden` ignorado puede hacer visible el borde superior recto del header en Outlook (header con gradiente no se clipa). Impacto bajo — compatible con Gmail, Apple Mail, Outlook Mac, clientes móviles.
+**Decisión sugerida**: Aceptar la degradación. No añadir hacks VML para border-radius (complejidad desproporcionada, YAGNI).
+
+## 2026-05-26 | pre-adr | redesign-email-templates-v2 | Estrategia de logo: textual vs. imagen
+**Severidad**: Decisión de diseño.
+**Descripción**: El diseño de referencia usa un div textual ("A" + "LOG ATM") como logo en lugar de `<img>`. El proyecto tiene `public/logo.png` y `public/logo-white.svg`. Opciones: (1) mantener textual (robusto, sin bloqueo de imágenes, sin riesgo de clipping por peso del email), (2) `<img src="https://logatm.com/logo.png">` (visualmente más fiel, pero Gmail y Outlook bloquean imágenes por defecto hasta que el usuario las habilita). El diseño 1:1 es textual.
+**Decisión sugerida**: Mantener logo textual siguiendo el diseño de referencia. Si el cliente en el futuro quiere imagen, se puede añadir con `alt` adecuado.
+
+## 2026-05-26 | pre-adr | redesign-email-templates-v2 | cleanPhone helper para CTAs WhatsApp
+**Severidad**: Técnico — requerido para CTA funcional.
+**Descripción**: El botón "WhatsApp →" construye un link `https://wa.me/{phone}`. El número de teléfono puede llegar con espacios, guiones o paréntesis (ej. "+56 9 8765 4321"). wa.me requiere dígitos únicamente (sin separadores, con código de país). Requiere un helper `cleanPhone()` que elimine todo excepto dígitos y el `+` inicial.
+**Decisión sugerida**: Añadir `cleanPhone()` interno en `email-templates.ts`. Omitir el botón WhatsApp si `cleanPhone()` retorna string vacío.
+
+## 2026-05-26 | pre-adr | redesign-email-templates-v2 | buildContactoEmail: campo route no es par origen/destino
+**Severidad**: Decisión de diseño.
+**Descripción**: El formulario de contacto captura `route` como texto libre (ej. "Shanghai → San Antonio"), no como par separado `{origin, destination}`. El diseño de referencia muestra una sección ROUTE VISUAL con dos celdas separadas (Origen | flecha | Destino). Opciones: (a) omitir ROUTE VISUAL para buildContactoEmail y mostrar route como campo plano en el data grid, (b) intentar parsear el texto libre (frágil), (c) mostrar el route como campo único en la sección visual (caja azul con texto completo). La opción (a) es la más robusta.
+**Decisión sugerida**: Para buildContactoEmail, si existe `d.route`, mostrarlo como fila en el data grid (no como ROUTE VISUAL). Solo buildCotizacionRapidaEmail y buildCotizacion4Email tienen pares origen/destino separados y usan la sección ROUTE VISUAL.
+
 ## sdd-propose — fix-cotizar-wizard-init (2026-05-26)
 - Codebase en estado MIXTO de init: Grupo A (Navbar ScrollTrigger, scroll-animations init() l.146, gsap-stepper wiring en cotizar.astro l.363-382, LanguageSelector) inicializa en module-load y YA funciona en carga directa. Grupo B (wizard.ts, HeroSection, contacto, servicios, nosotros, industrias) gatea todo tras astro:page-load → roto en carga directa.
 - Montar ClientRouter (Opción 1) provocaría DOBLE init del Grupo A (module-load + astro:page-load) y activaría por primera vez cleanups astro:before-swap nunca probados (Navbar l.346, wizard l.126, gsap-ind-directory l.120). Riesgo alto no medible sin CI.
