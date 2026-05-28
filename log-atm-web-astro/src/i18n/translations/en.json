@@ -101,7 +101,6 @@
       "livePill": "Coverage",
       "stripStats": [
         "Years in operation",
-        "Countries connected",
         "Satisfaction",
         "Dedicated manager"
       ]
@@ -127,7 +126,6 @@
       "videoLogoTag": "Logistics tailored to you",
       "items": [
         { "title": "Dedicated manager", "desc": "A single person who knows your business and anticipates your needs.", "sub": "account" },
-        { "title": "Verified partners", "desc": "Operating network in 70+ countries with audited local partners.", "sub": "countries" },
         { "title": "24/7 support", "desc": "Direct access to your account manager whenever you need it.", "sub": "support" },
         { "title": "True multimodal", "desc": "Air, ocean, ground and courier handled by a single team.", "sub": "modes" }
       ]
@@ -181,7 +179,6 @@
     "heroTitleHtml": "<em>End-to-end</em> logistics coverage.",
     "heroLead": "From urgent shipments to full supply chain consulting. A single counterpart, a single invoice, total visibility.",
     "metaActive": "Active services",
-    "metaCountries": "Countries in network",
     "metaOps": "Operation",
     "metaCustoms": "Chile Customs",
     "filters": [
@@ -211,7 +208,7 @@
       "numPrefix": "Service",
       "cardCta": "Quote this service",
       "items": [
-        { "n": "01", "badge": "IATA · CASS", "features": ["Express 48h to 70+ countries", "Dedicated air charter", "Cold chain and dangerous goods", "Unified tracking on a single URL"] },
+        { "n": "01", "badge": "IATA · CASS", "features": ["International express 48h", "Dedicated air charter", "Cold chain and dangerous goods", "Unified tracking on a single URL"] },
         { "n": "02", "badge": "FIATA · BIMCO", "features": ["FCL/LCL to 80+ ports", "Weekly Asia-Chile consolidation", "Reefer and open-top available", "Contract rate negotiation"] },
         { "n": "03", "badge": "AEO · Chile Customs", "features": ["Accurate tariff classification", "DUS, certificates of origin, fumigation", "Authorized Economic Operator", "Document review to prevent fines"] },
         { "n": "04", "badge": "Integrated WMS", "features": ["24/7 warehousing with CCTV", "E-commerce fulfillment", "Real-time inventory (API)", "Cross-docking and last mile"] },
@@ -238,7 +235,7 @@
       "items": [
         { "q": "How do you quote a shipment?", "a": "You get a proposal in less than 24 hours from your dedicated account manager. We need: origin, destination, type of cargo, volume and target lead time. We quote a total door-to-door rate with no surprises." },
         { "q": "Do you handle dangerous goods (DG)?", "a": "Yes. We manage all 9 IMO/IATA classes with certified documentation, labeling and packaging. We coordinate with carriers and airlines authorized for your specific cargo." },
-        { "q": "Do you have offices outside Chile?", "a": "Not directly, but our network of correspondent agents covers 70+ countries. We work with verified partners who operate under the same standards we apply in Chile." },
+        { "q": "Do you have offices outside Chile?", "a": "Not directly, but we have a network of correspondent agents with verified partners who operate under the same standards we apply in Chile." },
         { "q": "How long does customs clearance take?", "a": "Between 24 and 72 business hours from cargo availability, depending on the regime and product. As an AEO we have a preferred green channel and we review documents before arrival to avoid delays." },
         { "q": "Can you manage my full supply chain?", "a": "Yes. We design end-to-end supply chains: from the purchase at the supplier at origin to final delivery to the customer. A single point of contact, a single consolidated account." },
         { "q": "How do you monitor the shipment?", "a": "Our own platform unifies data from carriers, airlines and agents into a single shareable URL. You receive automatic alerts at every milestone and your account manager is available 24/7." }
@@ -380,7 +377,7 @@
       "titleHtml": "Logistics is a <em>relationship</em>, not a commodity.",
       "p1Html": "We have spent more than two decades operating in the Chilean logistics world and we learned something simple: <em>cargo doesn't move by itself</em>. Behind every container, every AWB, every DUS, there are people making decisions under pressure.",
       "p2": "That's why we built LOG ATM the opposite way from the rest of the industry. Instead of a call center rotating agents, we assign a dedicated account manager per client. Instead of hidden fees, we show every cost component. Instead of promising everything, we tell you first what might go wrong.",
-      "p3Html": "Today we operate in <em>70+ countries</em>, with clients across 12 industries and a retention rate of 98%. But we still measure ourselves by the same question from day one: would the client feel that this operation is their own?"
+      "p3Html": "Today we operate with clients across 12 industries and a retention rate of 98%. But we still measure ourselves by the same question from day one: would the client feel that this operation is their own?"
     },
     "timeline": {
       "eyebrow": "Track record",
