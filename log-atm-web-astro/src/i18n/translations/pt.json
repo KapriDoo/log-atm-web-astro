@@ -101,8 +101,6 @@
       "livePill": "Cobertura",
       "stripStats": [
         "Anos de operação",
-        "Países conectados",
-        "Satisfação",
         "Executivo dedicado"
       ]
     },
@@ -127,7 +125,6 @@
       "videoLogoTag": "Logística sob medida",
       "items": [
         { "title": "Executivo dedicado", "desc": "Uma pessoa que conhece seu negócio e antecipa suas necessidades.", "sub": "conta" },
-        { "title": "Parcerias verificadas", "desc": "Rede operacional em 70+ países com parceiros locais auditados.", "sub": "países" },
         { "title": "Atendimento 24/7", "desc": "Suporte direto com seu executivo sempre que precisar.", "sub": "suporte" },
         { "title": "Multimodal de verdade", "desc": "Aéreo, marítimo, terrestre e courier sob o mesmo time.", "sub": "modalidades" }
       ]
@@ -181,7 +178,6 @@
     "heroTitleHtml": "Cobertura logística <em>end-to-end</em>.",
     "heroLead": "Do despacho urgente à consultoria completa de supply chain. Uma única contraparte, uma única fatura, visibilidade total.",
     "metaActive": "Serviços ativos",
-    "metaCountries": "Países na rede",
     "metaOps": "Operação",
     "metaCustoms": "Aduanas Chile",
     "filters": [
@@ -211,7 +207,7 @@
       "numPrefix": "Serviço",
       "cardCta": "Cotar este serviço",
       "items": [
-        { "n": "01", "badge": "IATA · CASS", "features": ["Expresso 48h para mais de 70 países", "Charter aéreo dedicado", "Cadeia de frio e dangerous goods", "Tracking unificado em uma única URL"] },
+        { "n": "01", "badge": "IATA · CASS", "features": ["Expresso 48h internacional", "Charter aéreo dedicado", "Cadeia de frio e dangerous goods", "Tracking unificado em uma única URL"] },
         { "n": "02", "badge": "FIATA · BIMCO", "features": ["FCL/LCL para mais de 80 portos", "Consolidação semanal Ásia-Chile", "Reefer e open-top disponíveis", "Negociação de tarifas por contrato"] },
         { "n": "03", "badge": "OEA · Aduanas Chile", "features": ["Classificação tarifária precisa", "DUS, certificados de origem, fumigação", "Operador Econômico Autorizado", "Revisão documental antimulta"] },
         { "n": "04", "badge": "WMS integrado", "features": ["Armazenagem 24/7 com CFTV", "Fulfillment para e-commerce", "Estoque em tempo real (API)", "Cross-docking e última milha"] },
@@ -238,7 +234,7 @@
       "items": [
         { "q": "Como vocês cotam um embarque?", "a": "Você recebe uma proposta em menos de 24 horas com seu executivo dedicado. Precisamos de: origem, destino, tipo de carga, volume e prazo desejado. Cotamos a tarifa total porta a porta sem surpresas." },
         { "q": "Trabalham com cargas perigosas (DG)?", "a": "Sim. Manuseamos as 9 classes IMO/IATA com documentação, etiquetagem e embalagem certificadas. Coordenamos com armadores e companhias aéreas autorizadas para sua carga específica." },
-        { "q": "Têm escritórios fora do Chile?", "a": "Não diretamente, mas nossa rede de agentes correspondentes cobre mais de 70 países. Trabalhamos com parceiros verificados que operam sob os mesmos padrões que aplicamos no Chile." },
+        { "q": "Têm escritórios fora do Chile?", "a": "Não diretamente, mas contamos com uma rede de agentes correspondentes com parceiros verificados que operam sob os mesmos padrões que aplicamos no Chile." },
         { "q": "Quanto demora um despacho aduaneiro?", "a": "Entre 24 e 72 horas úteis a partir da disponibilidade da carga, conforme regime e produto. Como OEA temos canal verde preferencial e revisamos documentos antes da chegada para evitar atrasos." },
         { "q": "Podem gerenciar minha cadeia inteira?", "a": "Sim. Desenhamos supply chains end-to-end: desde a compra ao fornecedor na origem até a entrega final ao cliente. Um único ponto de contato, uma única conta consolidada." },
         { "q": "Como monitoram o embarque?", "a": "Plataforma própria que unifica dados de armadores, companhias aéreas e agentes em uma única URL compartilhável. Você recebe alertas automáticos em cada marco e seu executivo está disponível 24/7." }
@@ -380,7 +376,7 @@
       "titleHtml": "A logística é uma <em>relação</em>, não uma commodity.",
       "p1Html": "Operamos há mais de duas décadas no mundo logístico chileno e aprendemos algo simples: <em>as cargas não se movem sozinhas</em>. Por trás de cada contêiner, cada AWB, cada DUS, há pessoas tomando decisões sob pressão.",
       "p2": "Por isso construímos a LOG ATM ao contrário da indústria. Em vez de um call center que troca de atendentes, atribuímos um executivo dedicado por conta. Em vez de tarifas ocultas, mostramos cada componente do custo. Em vez de prometer tudo, dizemos primeiro o que pode falhar.",
-      "p3Html": "Hoje operamos em <em>mais de 70 países</em>, com clientes em 12 indústrias e uma retenção de 98%. Mas continuamos nos medindo pela mesma pergunta do primeiro dia: o cliente sentiria que essa operação é dele?"
+      "p3Html": "Hoje operamos com clientes em 12 indústrias e uma retenção de 98%. Mas continuamos nos medindo pela mesma pergunta do primeiro dia: o cliente sentiria que essa operação é dele?"
     },
     "timeline": {
       "eyebrow": "Trajetória",
