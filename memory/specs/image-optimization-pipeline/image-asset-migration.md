@@ -7,7 +7,7 @@ domain: "refactoring"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: critical
 depends_on: []
@@ -27,7 +27,9 @@ acceptance_criteria:
 related:
   - "[[image-optimization-pipeline/image-multiformat-delivery]]"
   - "[[hero-lcp-performance/hero-lcp-priority]]"
-affects: []
+affects:
+  - "[[dead-code-cleanup/asset-dead-code-removal]]"
+  - "[[hero-lcp-performance/hero-lcp-priority]]"
 adrs:
   - "[[0001-image-optimization-astro-assets]]"
   - "[[0006-picture-multiformat-content-images]]"
@@ -39,7 +41,7 @@ scope:
   - "src/assets/images/industries/"
   - "src/assets/images/process/"
   - "src/lib/constants.ts"
-verified_at: null
+verified_at: "2026-05-28"
 
 created: "2026-05-28"
 updated: "2026-05-28"

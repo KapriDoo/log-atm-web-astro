@@ -7,7 +7,7 @@ domain: "refactoring"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: critical
 depends_on: []
@@ -31,6 +31,8 @@ related:
   - "[[hero-lcp-performance]]"
   - "[[dead-code-cleanup]]"
 affects:
+  - "[[dead-code-cleanup/asset-dead-code-removal]]"
+  - "[[hero-lcp-performance/hero-lcp-priority]]"
   - "[[image-optimization-pipeline/image-asset-migration]]"
 adrs:
   - "[[0001-image-optimization-astro-assets]]"
@@ -47,7 +49,7 @@ scope:
   - "src/pages/nosotros.astro"
   - "src/pages/industrias.astro"
   - "astro.config.mjs"
-verified_at: null
+verified_at: "2026-05-28"
 
 created: "2026-05-28"
 updated: "2026-05-28"

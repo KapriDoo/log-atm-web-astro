@@ -7,7 +7,7 @@ domain: "refactoring"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: critical
 depends_on:
@@ -35,7 +35,7 @@ adrs:
 scope:
   - "src/components/sections/HeroSection.astro"
   - "src/assets/images/services/svc-maritima.jpeg"
-verified_at: null
+verified_at: "2026-05-28"
 
 created: "2026-05-28"
 updated: "2026-05-28"

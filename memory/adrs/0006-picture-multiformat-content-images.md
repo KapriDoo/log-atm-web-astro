@@ -61,6 +61,9 @@ Adoptar como **estándar del proyecto para toda imagen raster de contenido**:
 7. **Config**: bloque `image:` en `astro.config.mjs` con servicio Sharp explícito;
    la calidad se controla con el prop `quality` por componente (no existe un campo
    global de calidad por-formato en la config no-experimental de Astro 6).
+   Con el adapter Cloudflare, se requiere `imageService: 'compile'` para que la
+   optimización se resuelva en build-time (Sharp), evitando el endpoint runtime
+   `/_image` incompatible con el output estático.
 
 ## Relación con ADR-0001
 

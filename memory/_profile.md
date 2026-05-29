@@ -88,8 +88,11 @@ updated: "2026-05-28"
 
 ## Image Pipeline (Current)
 
-- Static images: Astro default (Vite import)
+- Static images: `astro:assets` with `<Picture>` (AVIF/WebP + JPEG fallback) — build-time optimization via Sharp
+- Image assets location: `src/assets/images/{services,industries,process}/` (imported as `ImageMetadata`)
 - SVG optimization: via svgo CLI (manual)
-- Raster optimization: via sharp (dev process, not integrated)
+- Raster optimization: Sharp (integrated via `imageService: 'compile'` for Cloudflare adapter)
+- Hero LCP: `priority` prop on `<Picture>` (`fetchpriority="high"`, `loading="eager"`, `decoding="sync"`)
+- Poster generation (video): `getImage()` from `astro:assets`
 
-**Refactoring Target:** astro:assets with WebP/AVIF + dynamic format negotiation
+**Convention:** `constants.ts` is the single source of truth for content data + image assets (no auxiliary key→asset maps).
