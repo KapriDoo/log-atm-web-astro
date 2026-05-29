@@ -129,3 +129,9 @@ Esto permite que Astro resuelva las imágenes en build time mientras mantiene un
 **Accepted** — 2026-05-10
 
 No hay ADRs previos que esta decisión superseda.
+
+> **Extendido por** [[0006-picture-multiformat-content-images]] (2026-05-28): el cambio
+> `optimize-images-webp` generaliza esta decisión desde el feature de industrias a todas
+> las imágenes de contenido del sitio, adopta `<Picture>` (multi-formato AVIF+WebP) sobre
+> `<Image>`, porta `ImageMetadata` en `constants.ts` (en vez de mapa auxiliar), e introduce
+> `priority` para LCP y `getImage()` para el poster de video. ADR-0001 permanece vigente.

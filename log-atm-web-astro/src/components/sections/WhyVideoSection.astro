@@ -1,10 +1,14 @@
 ---
+import { getImage } from 'astro:assets';
+import posterSrc from '../../assets/images/services/svc-maritima.jpeg';
 import Icon from "../ui/Icon.astro";
 import { WHY_ITEMS } from '../../lib/constants';
 import { useTranslations, getLangFromUrl, tList } from '../../i18n/utils';
 
 const currentLang = getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
+
+const poster = await getImage({ src: posterSrc, format: 'webp', width: 1280 });
 
 type WhyCopy = { title: string; desc: string; sub: string };
 const whyCopy = tList<WhyCopy>(currentLang, 'home.why.items');
@@ -30,7 +34,7 @@ const whyItems = WHY_ITEMS.map((w, i) => ({
       <div class="why__video" data-scroll-animate data-scroll-type="fade-in">
         <video
           class="why__video-el"
-          poster="/images/services/svc-maritima.jpeg"
+          poster={poster.src}
           muted
           loop
           playsinline

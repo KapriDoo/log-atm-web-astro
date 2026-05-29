@@ -1,103 +1,100 @@
 ---
-name: "log-atm-web-astro"
+type: project-profile
+name: log-atm-web-astro
 description: "Sitio web de servicios de logística aérea y marítima con soporte multiidioma"
+domain: web
+stack_type: astro-fullstack
+version: 0.0.1
+node_engine: ">=22.12.0"
+status: active
 created: "2026-05-19"
 updated: "2026-05-28"
 ---
 
-## Estructura del Repositorio
-
-> **Estructura anidada**: el proyecto Astro NO vive en la raíz del repo.
-> El repo contiene un worktree padre con configuración Docker/nginx; el proyecto Astro
-> está en el subdirectorio `log-atm-web-astro/`.
-
-```
-repo-root/
-├── docker-compose.yml
-├── fix-wsl2-port.bat
-├── README.md
-├── skills-lock.json
-└── log-atm-web-astro/       ← raíz del proyecto Astro
-    ├── package.json
-    ├── astro.config.mjs
-    ├── tsconfig.json
-    ├── wrangler.toml
-    ├── Dockerfile
-    ├── nginx.conf / default.conf
-    └── src/
-```
-
-**Al referenciar rutas, siempre prefijamos con `log-atm-web-astro/` desde la raíz del worktree.**
-
 ## Stack
 
-- **Framework**: Astro 6.3.1 (static output) — actualizado de 6.1.5
-- **Styling**: Tailwind CSS v4.2.2 + Tailwind Vite plugin
-- **JavaScript**: TypeScript (strict mode)
-- **Components**: React 19.2.5 (islas reactivas)
-- **Animaciones**: GSAP 3.14.2 ✅, Motion (Framer) 12.38.0
-- **Deploy**: Cloudflare Pages (adapter @astrojs/cloudflare ^13.5.0)
-- **Package manager**: npm (Node >=22.12.0 / actual: v24.15.0)
-- **Icon system**: astro-icon 1.1.5 con @iconify-json/lucide
-- **Sitemap**: @astrojs/sitemap 3.7.2
-- **Build tool**: Astro CLI (Vite internamente)
-- **Fonts**: @fontsource/jetbrains-mono, @fontsource/inter, @fontsource/outfit
-- **Test runner**: No configurado
-- **Linter**: No configurado (.eslintrc ausente)
-- **CI**: No detectado (.github/workflows ausente)
+**Framework:** Astro 6.1.5
+**Build Tool:** Vite
+**UI Framework:** React (component islands)
+**Styling:** Tailwind CSS v4 + @tailwindcss/vite
+**Backend:** Cloudflare Workers (via @astrojs/cloudflare)
+**Internationalization:** Astro i18n (es, en, pt)
+**Animation:** GSAP 3.14 + Framer Motion 12.38
 
-## Estructura src/
+## Key Dependencies
 
-```
-src/
-├── assets/          # Imágenes, SVGs
-├── components/      # Componentes reutilizables (React + Astro)
-│   ├── sections/    # HeroSection, etc.
-│   └── ui/          # LanguageSelector, etc.
-├── i18n/            # Traducciones (es, en, pt) y utilidades
-├── layouts/         # BaseLayout.astro (layout principal)
-├── lib/             # Utilidades y helpers
-├── pages/           # Rutas Astro con i18n ([lang]/) + cotizar, contacto, etc.
-├── scripts/         # wizard.ts, scroll-animations.ts, gsap-*.ts
-├── styles/          # Estilos globales y por página
-└── types/           # TypeScript types
-```
+### Core
+- `astro@^6.1.5` — SSG/SSR framework
+- `react@^19.2.5` — React islands for interactive components
+- `react-dom@^19.2.5` — DOM rendering
+- `tailwindcss@^4.2.2` — CSS utility framework
+- `@tailwindcss/vite@^4.2.2` — Vite integration
 
-## Convenciones
+### Integrations
+- `@astrojs/react@^5.0.3` — React component support
+- `@astrojs/cloudflare@^13.5.0` — Cloudflare Workers adapter
+- `@astrojs/sitemap@^3.7.2` — Sitemap generation
 
-- **i18n**: Tres idiomas soportados (es, en, pt) con routing prefixed en idiomas no defecto, fallback manual por clave
-- **Componentes**: Props over inheritance, composición
-- **Naming**: kebab-case para archivos, PascalCase para componentes React
-- **Animaciones**: Siempre respetar `prefers-reduced-motion`
-- **Performance**: Lighthouse ≥95 en todas las páginas
-- **Accesibilidad**: WCAG AA mínimo
-- **Validación**: i18n validator en build hook via `tsx` para evitar colisiones
+### Animation & Motion
+- `gsap@^3.14.2` — GSAP library
+- `motion@^12.38.0` — Framer Motion
+- `potrace@^2.1.8` — Vectorization utility
 
-## Patrón de Inicialización de Scripts — BUG SITE-WIDE (detectado 2026-05-26)
+### Dev Tools
+- `sharp@^0.34.5` — Image processing (native binary)
+- `svgo@^4.0.1` — SVG optimization
+- `tsx@^4.20.6` — TypeScript execution
+- `@types/react@^19.2.14` — React types
+- `@types/react-dom@^19.2.3` — React DOM types
 
-> **CRÍTICO**: todos los scripts del sitio usan `document.addEventListener('astro:page-load', ...)`.
-> Este evento SÓLO lo dispara `ClientRouter` (View Transitions), que **no está montado**
-> en `BaseLayout.astro`. En carga directa de URL, el evento nunca se dispara — los scripts
-> nunca inicializan. Bug PREEXISTENTE en `main`, no regresión del refactor de iconos.
+### Fonts & Icons
+- `@fontsource/jetbrains-mono@^5.2.8` — JetBrains Mono font
+- `@fontsource/inter@^5.2.8` — Inter font
+- `@fontsource/outfit@^5.2.8` — Outfit font
+- `@iconify-json/lucide@^1.2.102` — Lucide icons
 
-Archivos afectados por el bug:
-- `src/scripts/wizard.ts` — wizard de cotizar (línea 61)
-- `src/scripts/scroll-animations.ts` (línea 149)
-- `src/components/sections/HeroSection.astro` (línea 78)
-- `src/pages/contacto.astro` (línea 197)
-- `src/pages/servicios.astro` (línea 180)
-- `src/pages/nosotros.astro` (línea 173)
-- `src/pages/industrias.astro` (líneas 189, 215)
+### Infrastructure
+- `worker-mailer@^1.2.1` — Mailer for Workers
+- `wrangler` — Cloudflare CLI (via package-lock)
 
-Patrón funcional (referencia): `src/components/ui/LanguageSelector.astro` usa `DOMContentLoaded` y funciona.
+## Build & Deploy
 
-## Observaciones
+- **Output:** `output: 'static'` (SSG)
+- **Deploy Target:** Cloudflare Pages
+- **Build Scripts:** `npm run build` (Astro build + i18n validation)
+- **Validation:** Custom i18n validator via tsx at build time
 
-1. **GSAP ya presente**: El proyecto tiene `gsap@3.14.2` y `motion@12.38.0` como deps. No hay restricciones para añadir efectos GSAP.
-2. **Build hooks**: El proyecto usa hooks Astro (`astro:build:start`) para validación i18n con `tsx` subprocess. Útil para pre-builds.
-3. **Cloudflare Pages**: Output es static, deployado en Cloudflare. No hay SSR.
-4. **Multi-idioma**: Rutas i18n implementadas sin fallback automático (por diseño, para evitar colisiones). Las claves en `src/i18n/` deben estar en paridad.
-5. **Componentes React**: Usados como islas reactivas (no full SPA). Mejor para performance.
-6. **Tailwind v4**: Configuración vía Vite plugin, no archivo config tradicional.
-7. **Sitemap automático**: Generado con soporte i18n.
-8. **`<ClientRouter />` ausente**: No existe en `BaseLayout.astro` ni en ningún layout. La decisión de montarlo o no es arquitectónica (scope site-wide vs. fix localizado).
+## Design System & Branding
+
+**AFP Modelo Branding:**
+- Color Primario: #4A7BB5
+- CTA Color: #3EB978
+- Design Tokens: Ver `DESIGN.md`
+- Component Library: Via `afp-modelo-components` skill
+
+## Conventions
+
+- **Language:** Spanish (es), English (en), Portuguese (pt)
+- **Commits:** English + Conventional Commits
+- **Code Comments:** Spanish
+- **Performance:** Lighthouse ≥ 95 (all pages)
+- **Accessibility:** WCAG AA minimum
+- **Animations:** `prefers-reduced-motion` required
+
+## Notable Implementation Details
+
+1. **i18n:** Custom fallback at key-level (not route-level fallback) to avoid collisions with `src/pages/[lang]/*.astro`
+2. **Worker Environment:** Vite `noExternal: ['worker-mailer']` + workerd resolution conditions
+3. **Image Handling:** Uses `sharp` for optimization (image pipeline candidate)
+4. **SVG Optimization:** `svgo` available for SVG assets
+
+## Image Pipeline (Current)
+
+- Static images: `astro:assets` with `<Picture>` (AVIF/WebP + JPEG fallback) — build-time optimization via Sharp
+- Image assets location: `src/assets/images/{services,industries,process}/` (imported as `ImageMetadata`)
+- SVG optimization: via svgo CLI (manual)
+- Raster optimization: Sharp (integrated via `imageService: 'compile'` for Cloudflare adapter)
+- Hero LCP: `priority` prop on `<Picture>` (`fetchpriority="high"`, `loading="eager"`, `decoding="sync"`)
+- Poster generation (video): `getImage()` from `astro:assets`
+
+**Convention:** `constants.ts` is the single source of truth for content data + image assets (no auxiliary key→asset maps).

@@ -1,4 +1,5 @@
 ---
+import { Picture } from 'astro:assets';
 import Icon from "../ui/Icon.astro";
 import { SERVICES } from '../../lib/constants';
 import { useTranslations, getLangFromUrl, buildLocaleUrl, tList } from '../../i18n/utils';
@@ -45,7 +46,7 @@ const TOTAL = SERVICES.length;
       {FEATURED.map((s) => (
         <a class:list={['svc-card', `svc-card--${s.size}`]} href={s.href} data-scroll-animate data-scroll-type="fade-up">
           <div class="svc-card__media">
-            <img src={s.img} alt="" loading="lazy" decoding="async" />
+            <Picture src={s.img} formats={['avif', 'webp']} alt="" quality={80} />
           </div>
           <span class:list={['svc-card__tag', { 'svc-card__tag--cta': s.isCta }]}>{s.tag}</span>
           <div class="svc-card__icon-pill" aria-hidden="true">
