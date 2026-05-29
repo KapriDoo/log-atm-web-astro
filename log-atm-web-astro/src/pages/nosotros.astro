@@ -4,6 +4,7 @@ import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
 import CTASection from '../components/sections/CTASection.astro';
 import Icon from "../components/ui/Icon.astro";
+import { Picture } from 'astro:assets';
 import { VALUES, HOW_WE_WORK } from '../lib/constants';
 import { useTranslations, getLangFromUrl, tList, type Locale } from '../i18n/utils';
 import '../styles/pages/shared.css';
@@ -128,7 +129,7 @@ const how = HOW_WE_WORK.map((h, i) => ({ ...h, ...(howCopy[i] ?? { title: h.titl
           {how.map((s) => (
             <div class="howwork-card">
               <div class="howwork-card__media">
-                <img src={s.img} alt="" loading="lazy" />
+                <Picture src={s.img} formats={['avif', 'webp']} alt={s.title} quality={80} />
                 <span class="howwork-card__step">{s.step}</span>
                 <span class="howwork-card__icon">
                   <Icon name={s.icon} width={18} height={18} />

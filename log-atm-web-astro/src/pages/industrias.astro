@@ -4,6 +4,7 @@ import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
 import CTASection from '../components/sections/CTASection.astro';
 import Icon from "../components/ui/Icon.astro";
+import { Picture } from 'astro:assets';
 import { INDUSTRIES } from '../lib/constants';
 import { useTranslations, getLangFromUrl, tList, type Locale } from '../i18n/utils';
 import '../styles/pages/shared.css';
@@ -66,7 +67,14 @@ const sectorPrefix = t('industrias.directory.sectorPrefix');
         </div>
         <div class="ind-spotlight">
           <div class="ind-spotlight__media">
-            <img src={spotlight.img} alt={spotlight.name} />
+            <Picture
+              src={spotlight.img}
+              formats={['avif', 'webp']}
+              alt={spotlight.name}
+              quality={80}
+              widths={[480, 768, 1024]}
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
             <div class="ind-spotlight__overlay">
               <span class="ind-spotlight__label">{t('industrias.spotlight.caseLabel')} · {spotlight.name}</span>
               <h3 class="ind-spotlight__name">{spotlight.name}</h3>
@@ -102,7 +110,7 @@ const sectorPrefix = t('industrias.directory.sectorPrefix');
           <div class="ind-directory__viewer">
             {industries.map((it, i) => (
               <div class:list={['ind-directory__slide', { 'is-active': i === 0 }]} data-slide={i}>
-                <img src={it.img} alt={it.name} loading="lazy" />
+                <Picture src={it.img} formats={['avif', 'webp']} alt={it.name} quality={80} />
               </div>
             ))}
             <div class="ind-directory__overlay">

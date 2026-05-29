@@ -4,6 +4,7 @@ import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
 import CTASection from '../components/sections/CTASection.astro';
 import Icon from "../components/ui/Icon.astro";
+import { Picture } from 'astro:assets';
 import { SERVICES } from '../lib/constants';
 import { useTranslations, getLangFromUrl, tList, type Locale } from '../i18n/utils';
 import '../styles/pages/shared.css';
@@ -80,7 +81,7 @@ const detailedServices = services
           {services.map((s) => (
             <a class:list={[`svc-card`, `svc-card--${s.size}`]} href={s.href}>
               <div class="svc-card__media">
-                <img src={s.img} alt={s.title} loading="lazy" decoding="async" />
+                <Picture src={s.img} formats={['avif', 'webp']} alt={s.title} quality={80} />
                 <div class="svc-card__overlay"></div>
               </div>
               <span class:list={['svc-card__tag', { 'svc-card__tag--cta': s.isCta }]}>{s.tag}</span>
@@ -112,7 +113,7 @@ const detailedServices = services
           <div class:list={['svc-detail-row', { 'svc-detail-row--reverse': i % 2 === 1 }]}>
             <div class="svc-detail__media">
               <span class="svc-detail__badge">{detail.badge}</span>
-              <img src={s.img} alt={s.title} loading="lazy" />
+              <Picture src={s.img} formats={['avif', 'webp']} alt={s.title} quality={80} />
             </div>
             <div>
               <div class="svc-detail__num">{s.n} · {s.tag}</div>

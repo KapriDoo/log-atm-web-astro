@@ -1,4 +1,6 @@
 ---
+import { Picture } from 'astro:assets';
+import heroImg from '../../assets/images/services/svc-maritima.jpeg';
 import Icon from "../ui/Icon.astro";
 import { SITE, LIVE_ROUTES, HERO_STRIP_STATS } from '../../lib/constants';
 import { useTranslations, getLangFromUrl, buildLocaleUrl, tList } from '../../i18n/utils';
@@ -16,7 +18,16 @@ const heroStripStats = HERO_STRIP_STATS.map((s, i) => ({
 
 <header class="hero hero-b" aria-label={t('a11y.heroAria')}>
   <div class="hero-b__media" aria-hidden="true">
-    <img src="/images/services/svc-maritima.jpeg" alt="" fetchpriority="high" />
+    <Picture
+      src={heroImg}
+      formats={['avif', 'webp']}
+      fallbackFormat="jpeg"
+      priority
+      alt=""
+      widths={[768, 1280, 1920, heroImg.width]}
+      sizes="100vw"
+      quality={80}
+    />
   </div>
 
   <div class="container hero-b__inner">

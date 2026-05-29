@@ -37,8 +37,22 @@ function i18nValidator() {
 export default defineConfig({
   site: 'https://logatm.com',
   output: 'static',
+  image: {
+    // Servicio Sharp explícito (ya en deps). Opciones de codec por formato. Ver ADR-0006.
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        jpeg: { mozjpeg: true },
+        webp: { effort: 4 },
+      },
+    },
+  },
   adapter: cloudflare({
     platformProxy: { enabled: true },
+    // 'compile' pre-optimiza las imágenes en build-time (emite AVIF/WebP/JPEG
+    // estáticos en _astro/) en vez del servicio workerd on-demand por defecto.
+    // Honra el diseño (optimización build-time, coste runtime cero). Ver ADR-0006.
+    imageService: 'compile',
   }),
   i18n: {
     defaultLocale: 'es',
