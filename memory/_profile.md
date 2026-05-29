@@ -1,11 +1,13 @@
 ---
 type: project-profile
 name: log-atm-web-astro
+description: "Sitio web de servicios de logística aérea y marítima con soporte multiidioma"
 domain: web
 stack_type: astro-fullstack
 version: 0.0.1
 node_engine: ">=22.12.0"
 status: active
+created: "2026-05-19"
 updated: "2026-05-28"
 ---
 

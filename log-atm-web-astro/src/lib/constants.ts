@@ -89,7 +89,6 @@ export const FOOTER_COMPANY = [
 // Stats band (sección bajo el hero) — etiquetas largas del handoff
 export const STATS = [
   { value: '20+', label: 'Años conectando Chile con el mundo', icon: 'lucide:award',    isText: false },
-  { value: '70+', label: 'Países en nuestra red operativa',     icon: 'lucide:globe',    isText: false },
   { value: '98%', label: 'Clientes que repiten con nosotros',   icon: 'lucide:sparkles', isText: false },
   { value: '1:1', label: 'Ejecutivo dedicado en cada cuenta',   icon: 'lucide:user',     isText: true  },
 ] as const;
@@ -97,8 +96,6 @@ export const STATS = [
 // Strip de stats dentro del hero — etiquetas cortas del handoff (hero-b.jsx)
 export const HERO_STRIP_STATS = [
   { num: '20+', label: 'Años de operación' },
-  { num: '70+', label: 'Países conectados' },
-  { num: '98%', label: 'Satisfacción' },
   { num: '1:1', label: 'Ejecutivo dedicado' },
 ] as const;
 
@@ -238,13 +235,6 @@ export const WHY_ITEMS = [
     sub: 'cuenta',
   },
   {
-    icon: 'lucide:globe',
-    title: 'Alianzas verificadas',
-    desc: 'Red operativa en 70+ países con partners locales auditados.',
-    metric: '70+',
-    sub: 'países',
-  },
-  {
     icon: 'lucide:map-pin',
     title: 'Atención 24/7',
     desc: 'Soporte directo con tu ejecutivo cuando lo necesites.',
@@ -316,7 +306,7 @@ export const QUICK_QUOTE_VOLUMES = [
 // Detalles por servicio — sólo los servicios con detalle expandido
 export const SERVICE_DETAILS: Record<string, { features: string[]; badge: string }> = {
   '01': {
-    features: ['Express 48h a 70+ países', 'Chárter aéreo dedicado', 'Cadena de frío y dangerous goods', 'Tracking unificado en una sola URL'],
+    features: ['Express 48h internacional', 'Chárter aéreo dedicado', 'Cadena de frío y dangerous goods', 'Tracking unificado en una sola URL'],
     badge: 'IATA · CASS',
   },
   '02': {
@@ -358,7 +348,7 @@ export const FAQ = [
   { q: '¿Trabajan con cargas peligrosas (DG)?',
     a: 'Sí. Manejamos las 9 clases IMO/IATA con la documentación, etiquetado y embalaje certificado. Coordinamos con líneas y aerolíneas autorizadas para tu carga específica.' },
   { q: '¿Tienen oficinas fuera de Chile?',
-    a: 'No directamente, pero nuestra red de agentes corresponsales cubre 70+ países. Trabajamos con socios verificados que operan bajo los mismos estándares que aplicamos en Chile.' },
+    a: 'No directamente, pero contamos con una red de agentes corresponsales con socios verificados que operan bajo los mismos estándares que aplicamos en Chile.' },
   { q: '¿Cuánto demora un despacho aduanero?',
     a: 'Entre 24 y 72 horas hábiles desde la disponibilidad de carga, según régimen y producto. Como OEA tenemos canal verde preferente y revisamos documentos antes de la llegada para evitar demoras.' },
   { q: '¿Pueden manejar mi cadena completa?',
