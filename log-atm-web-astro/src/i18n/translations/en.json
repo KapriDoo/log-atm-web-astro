@@ -217,18 +217,6 @@
         { "title": "Customs", "desc": "AEO and document review in advance." },
         { "title": "Delivery", "desc": "Last mile and closing with KPIs." }
       ]
-    },
-    "faq": {
-      "eyebrow": "Frequently asked questions",
-      "title": "We answer what we are asked most",
-      "items": [
-        { "q": "How do you quote a shipment?", "a": "You get a proposal in less than 24 hours from your dedicated account manager. We need: origin, destination, type of cargo, volume and target lead time. We quote a total door-to-door rate with no surprises." },
-        { "q": "Do you handle dangerous goods (DG)?", "a": "Yes. We manage all 9 IMO/IATA classes with certified documentation, labeling and packaging. We coordinate with carriers and airlines authorized for your specific cargo." },
-        { "q": "Do you have offices outside Chile?", "a": "Not directly, but we have a network of correspondent agents with verified partners who operate under the same standards we apply in Chile." },
-        { "q": "How long does customs clearance take?", "a": "Between 24 and 72 business hours from cargo availability, depending on the regime and product. As an AEO we have a preferred green channel and we review documents before arrival to avoid delays." },
-        { "q": "Can you manage my full supply chain?", "a": "Yes. We design end-to-end supply chains: from the purchase at the supplier at origin to final delivery to the customer. A single point of contact, a single consolidated account." },
-        { "q": "How do you monitor the shipment?", "a": "Our own platform unifies data from carriers, airlines and agents into a single shareable URL. You receive automatic alerts at every milestone and your account manager is available 24/7." }
-      ]
     }
   },
   "industrias": {
@@ -243,15 +231,6 @@
     "metaClients": "Active clients",
     "metaExpertise": "Years of expertise",
     "metaRetention": "Retention",
-    "spotlight": {
-      "eyebrow": "Featured sector",
-      "title": "When operations define the business",
-      "caseLabel": "Case",
-      "panelEyebrow": "Client since 2017",
-      "quote": "We moved 1,200 containers of specialized machinery in 8 months for a mining site expansion, with zero days of unplanned detention.",
-      "authorTitle": "Enterprise operation",
-      "authorDetail": "FCL coordination · AEO customs · Last mile to the north"
-    },
     "directory": {
       "eyebrow": "All industries",
       "title": "12 sectors with dedicated operations",
@@ -328,17 +307,6 @@
       "p2": "That's why we built LOG ATM the opposite way from the rest of the industry. Instead of a call center rotating agents, we assign a dedicated account manager per client. Instead of hidden fees, we show every cost component. Instead of promising everything, we tell you first what might go wrong.",
       "p3Html": "Today we operate with clients across 12 industries and a retention rate of 98%. But we still measure ourselves by the same question from day one: would the client feel that this operation is their own?"
     },
-    "timeline": {
-      "eyebrow": "Track record",
-      "title": "20+ years of milestones",
-      "items": [
-        { "year": "2003", "milestone": "Founding", "desc": "LOG ATM is born with a focus on customs and air freight from Santiago." },
-        { "year": "2009", "milestone": "FCL Ocean", "desc": "Launch of our ocean unit with the first contracts in Asia." },
-        { "year": "2014", "milestone": "AEO Chile", "desc": "We obtain the Authorized Economic Operator certification." },
-        { "year": "2020", "milestone": "Digital platform", "desc": "We launch our end-to-end cargo visibility platform." },
-        { "year": "2024", "milestone": "Middle East hub", "desc": "Specialized Dubai · Jeddah connection with local partners." }
-      ]
-    },
     "values": {
       "eyebrow": "How we work",
       "title": "4 values that defend the operation",
@@ -359,16 +327,6 @@
         { "title": "Operational diagnosis", "desc": "We map your current chain: origins, destinations, volumes, critical times and pain points. We detect cost overruns and bottlenecks." },
         { "title": "Tailored route design", "desc": "We propose modes, carriers, airlines and agents based on cost, time and risk. We negotiate rates and document everything." },
         { "title": "Operation and reporting", "desc": "We execute every shipment with full visibility, proactive alerts on deviations and weekly cargo-in-transit reports." }
-      ]
-    },
-    "certs": {
-      "eyebrow": "Certifications",
-      "title": "We operate under global standards",
-      "items": [
-        { "name": "AEO Chile", "desc": "Authorized Economic Operator" },
-        { "name": "IATA · CASS", "desc": "Certified air cargo agent" },
-        { "name": "FIATA", "desc": "International Federation of Freight Forwarders Associations" },
-        { "name": "ISO 9001", "desc": "Quality management system" }
       ]
     }
   },

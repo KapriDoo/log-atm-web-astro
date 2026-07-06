@@ -534,94 +534,7 @@
 }
 .process-step__desc { font-size: 0.875rem; color: var(--color-neutral-400); line-height: 1.5; margin: 0; }
 
-/* FAQ */
-.faq-list { display: grid; gap: 0.75rem; }
-.faq-item {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background: var(--color-surface);
-  overflow: hidden;
-  transition: border-color 0.18s, box-shadow 0.18s;
-}
-.faq-item[open] { border-color: var(--color-primary-300); box-shadow: var(--shadow-sm); }
-.faq-item summary {
-  list-style: none; cursor: pointer;
-  padding: 1.25rem 1.5rem;
-  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
-  font-family: var(--font-display); font-size: 1.0625rem; font-weight: 600;
-  color: var(--color-text);
-}
-.faq-item summary::-webkit-details-marker { display: none; }
-.faq-item summary::after {
-  content: '+'; font-family: var(--font-mono); font-size: 1.5rem; font-weight: 300;
-  color: var(--color-primary-500); transition: transform 0.2s;
-}
-.faq-item[open] summary::after { content: '−'; transform: rotate(0); }
-.faq-item__body {
-  padding: 0 1.5rem 1.5rem;
-  color: var(--color-text-muted);
-  line-height: 1.6;
-  font-size: 0.9375rem;
-  max-width: 70ch;
-}
-
 /* ── Industrias page: big card + sector table ───────────────── */
-.ind-spotlight {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-  margin-bottom: 3rem;
-}
-@media (max-width: 900px) { .ind-spotlight { grid-template-columns: 1fr; } }
-.ind-spotlight__media {
-  position: relative; border-radius: var(--radius-xl); overflow: hidden;
-  aspect-ratio: 16/10; background: var(--color-neutral-200);
-}
-.ind-spotlight__media img { width: 100%; height: 100%; object-fit: cover; }
-.ind-spotlight__media::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(180deg, transparent 30%, rgba(17,34,54,0.85) 100%);
-}
-.ind-spotlight__overlay {
-  position: absolute; left: 1.5rem; right: 1.5rem; bottom: 1.5rem;
-  color: #fff; z-index: 1;
-}
-.ind-spotlight__label {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  font-family: var(--font-mono); font-size: 0.7rem;
-  background: rgba(62,185,120,0.95); color: #fff;
-  padding: 0.4rem 0.75rem; border-radius: var(--radius-sm);
-  letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
-  margin-bottom: 1rem;
-}
-.ind-spotlight__name {
-  font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700; line-height: 1; letter-spacing: -0.02em; margin: 0 0 0.5rem;
-}
-.ind-spotlight__sub {
-  font-size: 1.0625rem; color: rgba(255,255,255,0.85); margin: 0;
-  max-width: 36ch;
-}
-.ind-spotlight__panel {
-  background: var(--color-surface); border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl); padding: clamp(1.5rem, 3vw, 2.25rem);
-  display: flex; flex-direction: column; justify-content: center;
-}
-.ind-spotlight__panel-eyebrow {
-  font-family: var(--font-mono); font-size: 0.7rem;
-  text-transform: uppercase; letter-spacing: 0.1em;
-  color: var(--color-accent-600); margin-bottom: 1.5rem;
-}
-.ind-spotlight__quote {
-  font-family: var(--font-display); font-size: clamp(1.25rem, 1.8vw, 1.5rem);
-  font-weight: 500; line-height: 1.4; letter-spacing: -0.01em;
-  color: var(--color-text); margin: 0 0 1.5rem;
-}
-.ind-spotlight__quote::before { content: '"'; color: var(--color-accent-500); }
-.ind-spotlight__quote::after  { content: '"'; color: var(--color-accent-500); }
-.ind-spotlight__author { font-size: 0.875rem; color: var(--color-text-muted); }
-.ind-spotlight__author strong { color: var(--color-text); display: block; font-weight: 600; }
-
 .ind-services {
   display: grid; gap: 0;
   border: 1px solid var(--color-border);
@@ -699,43 +612,6 @@
   font-style: normal; padding: 0 0.2rem;
 }
 
-/* Timeline */
-.timeline {
-  background: var(--color-neutral-50);
-  padding-block: var(--section-pad);
-}
-.timeline__track {
-  position: relative;
-  padding-top: 2rem;
-}
-.timeline__line {
-  position: absolute; top: 3rem; left: 0; right: 0; height: 1px;
-  background: var(--color-border);
-}
-.timeline__items {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1rem;
-  position: relative;
-}
-@media (max-width: 900px) { .timeline__items { grid-template-columns: 1fr; } }
-.timeline__item { position: relative; padding-top: 1.5rem; }
-.timeline__dot {
-  position: absolute; top: -8px; left: 0;
-  width: 16px; height: 16px; border-radius: 50%;
-  background: var(--color-primary-500);
-  border: 3px solid var(--color-neutral-50);
-  box-shadow: 0 0 0 1px var(--color-primary-300);
-}
-.timeline__year {
-  font-family: var(--font-mono); font-size: 0.95rem; font-weight: 600;
-  color: var(--color-primary-700); margin-bottom: 0.5rem;
-}
-.timeline__milestone {
-  font-family: var(--font-display); font-size: 1rem; font-weight: 600;
-  line-height: 1.25; margin: 0 0 0.5rem; color: var(--color-text);
-}
-.timeline__desc { font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.5; margin: 0; }
 
 /* Values */
 .values-grid {
@@ -888,31 +764,6 @@
   text-transform: uppercase; letter-spacing: 0.06em;
 }
 .team-card__bio { font-size: 0.875rem; color: var(--color-neutral-700); line-height: 1.5; margin: 0.25rem 0 0; }
-
-/* Certifications strip */
-.certs {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-}
-@media (max-width: 900px) { .certs { grid-template-columns: repeat(2, 1fr); } }
-.cert {
-  padding: 1.5rem; border: 1px solid var(--color-border);
-  border-radius: var(--radius-md); background: var(--color-surface);
-  text-align: center;
-}
-.cert__seal {
-  width: 56px; height: 56px; margin: 0 auto 0.75rem;
-  border-radius: 50%; border: 2px dashed var(--color-primary-300);
-  display: grid; place-items: center;
-  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
-  color: var(--color-primary-700); letter-spacing: 0.05em;
-}
-.cert__name {
-  font-family: var(--font-display); font-weight: 600; font-size: 0.95rem;
-  margin: 0 0 0.25rem;
-}
-.cert__desc { font-size: 0.8125rem; color: var(--color-text-muted); margin: 0; }
 
 /* ── Contacto page ──────────────────────────────────────────── */
 .contact-grid {

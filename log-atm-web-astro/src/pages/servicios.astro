@@ -19,14 +19,12 @@ const description = t('meta.servicios.description');
 type ServiceCopy = { title: string; desc: string; tag: string };
 type ServiceFilter = { k: string; label: string };
 type ServiceDetail = { n: string; badge: string; features: string[] };
-type FaqItem = { q: string; a: string };
 type ProcessStep = { title: string; desc: string };
 
 const serviceCopies = tList<ServiceCopy>(currentLang, 'servicios.list');
 const serviceFilters = tList<ServiceFilter>(currentLang, 'servicios.filters');
 const serviceDetails = tList<ServiceDetail>(currentLang, 'servicios.details.items');
 const processSteps = tList<ProcessStep>(currentLang, 'servicios.process.steps');
-const faqItems = tList<FaqItem>(currentLang, 'servicios.faq.items');
 
 const services = SERVICES.map((s, i) => ({ ...s, ...(serviceCopies[i] ?? { title: s.title, desc: s.desc, tag: s.tag }) }));
 const detailedServices = services
@@ -149,23 +147,6 @@ const detailedServices = services
               <h3 class="process-step__title">{p.title}</h3>
               <p class="process-step__desc">{p.desc}</p>
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--alt section--narrow">
-      <div class="container">
-        <div class="section-head section-head--centered">
-          <span class="eyebrow">{t('servicios.faq.eyebrow')}</span>
-          <h2 class="section-head__title">{t('servicios.faq.title')}</h2>
-        </div>
-        <div class="faq-list">
-          {faqItems.map((f, i) => (
-            <details class="faq-item" open={i === 0}>
-              <summary>{f.q}</summary>
-              <div class="faq-item__body">{f.a}</div>
-            </details>
           ))}
         </div>
       </div>

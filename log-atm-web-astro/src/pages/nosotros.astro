@@ -15,15 +15,11 @@ const t = useTranslations(currentLang);
 const title = t('meta.nosotros.title');
 const description = t('meta.nosotros.description');
 
-type TimelineItem = { year: string; milestone: string; desc: string };
 type ValueItem = { title: string; desc: string };
 type HowItem = { title: string; desc: string };
-type CertItem = { name: string; desc: string };
 
-const timeline = tList<TimelineItem>(currentLang, 'nosotros.timeline.items');
 const valuesCopy = tList<ValueItem>(currentLang, 'nosotros.values.items');
 const howCopy = tList<HowItem>(currentLang, 'nosotros.how.items');
-const certs = tList<CertItem>(currentLang, 'nosotros.certs.items');
 
 const values = VALUES.map((v, i) => ({ ...v, ...(valuesCopy[i] ?? { title: v.title, desc: v.desc }) }));
 const how = HOW_WE_WORK.map((h, i) => ({ ...h, ...(howCopy[i] ?? { title: h.title, desc: h.desc }) }));
@@ -62,28 +58,6 @@ const how = HOW_WE_WORK.map((h, i) => ({ ...h, ...(howCopy[i] ?? { title: h.titl
             <p set:html={t('nosotros.manifesto.p1Html')}></p>
             <p>{t('nosotros.manifesto.p2')}</p>
             <p set:html={t('nosotros.manifesto.p3Html')}></p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="timeline">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">{t('nosotros.timeline.eyebrow')}</span>
-          <h2 class="section-head__title">{t('nosotros.timeline.title')}</h2>
-        </div>
-        <div class="timeline__track">
-          <div class="timeline__line"></div>
-          <div class="timeline__items">
-            {timeline.map((item) => (
-              <div class="timeline__item">
-                <div class="timeline__dot"></div>
-                <div class="timeline__year">{item.year}</div>
-                <h3 class="timeline__milestone">{item.milestone}</h3>
-                <p class="timeline__desc">{item.desc}</p>
-              </div>
-            ))}
           </div>
         </div>
       </div>
@@ -145,38 +119,8 @@ const how = HOW_WE_WORK.map((h, i) => ({ ...h, ...(howCopy[i] ?? { title: h.titl
       </div>
     </section>
 
-    <section class="section section--surface">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">{t('nosotros.certs.eyebrow')}</span>
-          <h2 class="section-head__title">{t('nosotros.certs.title')}</h2>
-        </div>
-        <div class="certs">
-          {certs.map((c) => (
-            <div class="cert">
-              <div class="cert__seal">{c.name.split(' ')[0].slice(0, 4).toUpperCase()}</div>
-              <h3 class="cert__name">{c.name}</h3>
-              <p class="cert__desc">{c.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-
     <CTASection />
   </main>
 
   <Footer />
 </BaseLayout>
-
-<script>
-  import { initTimelineReveal } from '../scripts/gsap-timeline-reveal';
-  import { ready } from '../lib/ready';
-
-  function initNosotrosTimeline(): void {
-    initTimelineReveal('.timeline__track');
-  }
-
-  ready(initNosotrosTimeline);
-  document.addEventListener('astro:page-load', initNosotrosTimeline);
-</script>

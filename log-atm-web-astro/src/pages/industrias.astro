@@ -58,41 +58,6 @@ const sectorPrefix = t('industrias.directory.sectorPrefix');
       </div>
     </section>
 
-    <!-- Spotlight: sector destacado -->
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <span class="eyebrow">{t('industrias.spotlight.eyebrow')}</span>
-          <h2 class="section-head__title">{t('industrias.spotlight.title')}</h2>
-        </div>
-        <div class="ind-spotlight">
-          <div class="ind-spotlight__media">
-            <Picture
-              src={spotlight.img}
-              formats={['avif', 'webp']}
-              alt={spotlight.name}
-              quality={80}
-              widths={[480, 768, 1024]}
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
-            <div class="ind-spotlight__overlay">
-              <span class="ind-spotlight__label">{t('industrias.spotlight.caseLabel')} · {spotlight.name}</span>
-              <h3 class="ind-spotlight__name">{spotlight.name}</h3>
-              <p class="ind-spotlight__sub">{spotlight.sub}</p>
-            </div>
-          </div>
-          <div class="ind-spotlight__panel">
-            <span class="ind-spotlight__panel-eyebrow">{t('industrias.spotlight.panelEyebrow')}</span>
-            <p class="ind-spotlight__quote">{t('industrias.spotlight.quote')}</p>
-            <div class="ind-spotlight__author">
-              <strong>{t('industrias.spotlight.authorTitle')}</strong>
-              {t('industrias.spotlight.authorDetail')}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Directory editorial (rotación automática + lista) -->
     <section class="section ind-directory-section">
       <div class="container">

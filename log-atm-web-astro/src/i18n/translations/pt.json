@@ -217,18 +217,6 @@
         { "title": "Aduana", "desc": "OEA e revisão documental antecipada." },
         { "title": "Entrega", "desc": "Última milha e fechamento com KPIs." }
       ]
-    },
-    "faq": {
-      "eyebrow": "Perguntas frequentes",
-      "title": "Respondemos o que mais nos perguntam",
-      "items": [
-        { "q": "Como vocês cotam um embarque?", "a": "Você recebe uma proposta em menos de 24 horas com seu executivo dedicado. Precisamos de: origem, destino, tipo de carga, volume e prazo desejado. Cotamos a tarifa total porta a porta sem surpresas." },
-        { "q": "Trabalham com cargas perigosas (DG)?", "a": "Sim. Manuseamos as 9 classes IMO/IATA com documentação, etiquetagem e embalagem certificadas. Coordenamos com armadores e companhias aéreas autorizadas para sua carga específica." },
-        { "q": "Têm escritórios fora do Chile?", "a": "Não diretamente, mas contamos com uma rede de agentes correspondentes com parceiros verificados que operam sob os mesmos padrões que aplicamos no Chile." },
-        { "q": "Quanto demora um despacho aduaneiro?", "a": "Entre 24 e 72 horas úteis a partir da disponibilidade da carga, conforme regime e produto. Como OEA temos canal verde preferencial e revisamos documentos antes da chegada para evitar atrasos." },
-        { "q": "Podem gerenciar minha cadeia inteira?", "a": "Sim. Desenhamos supply chains end-to-end: desde a compra ao fornecedor na origem até a entrega final ao cliente. Um único ponto de contato, uma única conta consolidada." },
-        { "q": "Como monitoram o embarque?", "a": "Plataforma própria que unifica dados de armadores, companhias aéreas e agentes em uma única URL compartilhável. Você recebe alertas automáticos em cada marco e seu executivo está disponível 24/7." }
-      ]
     }
   },
   "industrias": {
@@ -243,15 +231,6 @@
     "metaClients": "Clientes ativos",
     "metaExpertise": "Anos de expertise",
     "metaRetention": "Retenção",
-    "spotlight": {
-      "eyebrow": "Setor em destaque",
-      "title": "Quando a operação define o negócio",
-      "caseLabel": "Caso",
-      "panelEyebrow": "Cliente desde 2017",
-      "quote": "Movimentamos 1.200 contêineres de maquinário especializado em 8 meses para a expansão de uma operação, com zero dias de detenção fora do programado.",
-      "authorTitle": "Operação enterprise",
-      "authorDetail": "Coordenação FCL · Aduana OEA · Última milha ao norte"
-    },
     "directory": {
       "eyebrow": "Todas as indústrias",
       "title": "12 setores com operação dedicada",
@@ -328,17 +307,6 @@
       "p2": "Por isso construímos a LOG ATM ao contrário da indústria. Em vez de um call center que troca de atendentes, atribuímos um executivo dedicado por conta. Em vez de tarifas ocultas, mostramos cada componente do custo. Em vez de prometer tudo, dizemos primeiro o que pode falhar.",
       "p3Html": "Hoje operamos com clientes em 12 indústrias e uma retenção de 98%. Mas continuamos nos medindo pela mesma pergunta do primeiro dia: o cliente sentiria que essa operação é dele?"
     },
-    "timeline": {
-      "eyebrow": "Trajetória",
-      "title": "Marcos de mais de 20 anos",
-      "items": [
-        { "year": "2003", "milestone": "Fundação", "desc": "Nasce a LOG ATM com foco em aduana e carga aérea a partir de Santiago." },
-        { "year": "2009", "milestone": "Marítima FCL", "desc": "Abertura da unidade marítima com os primeiros contratos na Ásia." },
-        { "year": "2014", "milestone": "OEA Chile", "desc": "Obtemos a certificação de Operador Econômico Autorizado." },
-        { "year": "2020", "milestone": "Plataforma digital", "desc": "Lançamos a plataforma de visibilidade de carga end-to-end." },
-        { "year": "2024", "milestone": "Hub Oriente Médio", "desc": "Conexão especializada Dubai · Jeddah com parceiros locais." }
-      ]
-    },
     "values": {
       "eyebrow": "Como trabalhamos",
       "title": "4 valores que defendem a operação",
@@ -359,16 +327,6 @@
         { "title": "Diagnóstico operacional", "desc": "Mapeamos sua cadeia atual: origens, destinos, volumes, prazos críticos e dores. Detectamos sobrecustos e gargalos." },
         { "title": "Desenho de rota sob medida", "desc": "Propomos modais, armadores, companhias aéreas e agentes conforme custo, tempo e risco. Negociamos tarifas e documentamos tudo." },
         { "title": "Operação e relatório", "desc": "Executamos cada embarque com visibilidade total, alertas proativos diante de desvios e relatório semanal de carga em trânsito." }
-      ]
-    },
-    "certs": {
-      "eyebrow": "Certificações",
-      "title": "Operamos sob padrões globais",
-      "items": [
-        { "name": "OEA Chile", "desc": "Operador Econômico Autorizado" },
-        { "name": "IATA · CASS", "desc": "Agente de carga aérea certificado" },
-        { "name": "FIATA", "desc": "Federação Internacional de Associações de Transitários" },
-        { "name": "ISO 9001", "desc": "Sistema de gestão da qualidade" }
       ]
     }
   },
