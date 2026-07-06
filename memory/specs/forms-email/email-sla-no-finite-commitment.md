@@ -27,7 +27,7 @@ affects: []
 adrs: []
 scope:
   - "log-atm-web-astro/src/lib/email-templates.ts"
-verified_at: null
+verified_at: "2026-07-05"
 created: "2026-07-05"
 updated: "2026-07-05"
 tags: [capability-spec]

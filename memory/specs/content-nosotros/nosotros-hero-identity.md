@@ -14,7 +14,7 @@ depends_on: []
 change_ref: "[[content-cleanup-mensajes]]"
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/content-cleanup-mensajes/log-atm-web-astro"
 feature_branch: "feature/content-cleanup-mensajes"
-commits: ["c960637"]
+commits: ["c960637", "86fe114"]
 mr: ""
 acceptance_criteria:
   - "[x] El hero de Nosotros muestra 'Nosotros · Desde 2023' en lugar de 'Desde 2003'"
@@ -29,7 +29,7 @@ scope:
   - "log-atm-web-astro/src/i18n/translations/en.json"
   - "log-atm-web-astro/src/i18n/translations/pt.json"
   - "log-atm-web-astro/src/pages/nosotros.astro"
-verified_at: null
+verified_at: "2026-07-05"
 created: "2026-07-05"
 updated: "2026-07-05"
 tags: [capability-spec]

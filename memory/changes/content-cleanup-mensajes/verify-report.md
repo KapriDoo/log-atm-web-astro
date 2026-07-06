@@ -1,7 +1,21 @@
 # Verify Report: content-cleanup-mensajes
 
 **Fecha**: 2026-07-05
-**Veredicto**: ⚠️ FAIL (parcial — 15/16 specs PASS, 1 spec FAIL)
+**Veredicto**: ✅ PASS (17/17 specs, iteración 2)
+
+## Iteración 2 — Re-verificación post-corrección
+
+Tras el FAIL de la iteración 1 (`content-nosotros/years-experience-narrative-consistency`, superseded por la spec delta `content-nosotros/nosotros-manifesto-founding-year-consistency`), `sdd-apply` corrigió `nosotros.manifesto.p1Html` en los 3 idiomas. Re-verificación confirma:
+
+1. **Build**: `npm run build` — exit code 0. Validador i18n: `en: OK (536 claves)`, `pt: OK (536 claves)`. Paridad es/en/pt confirmada, sin regresiones.
+2. **Corrección del FAIL confirmada** en los 3 idiomas — `p1Html` ya no afirma antigüedad de la empresa, reencuadrado a experiencia del equipo:
+   - `es.json:302`: "Somos profesionales con más de 20 años de experiencia en el mundo logístico chileno y aprendimos algo simple..."
+   - `en.json:302`: "We are professionals with more than 20 years of experience in the Chilean logistics world, and we learned something simple..."
+   - `pt.json:302`: "Somos profissionais com mais de 20 anos de experiência no mundo logístico chileno e aprendemos algo simples..."
+   - Ninguna variante de "dos décadas" / "two decades" / "duas décadas" / "más de 20 años operando" (referida a la empresa) encontrada. Coherente con "Nosotros · Desde 2023" del hero.
+3. **Barrido de términos prohibidos** (grep sobre `src/`, repetido de la iteración 1): mismos resultados — cero ocurrencias en copy renderizado. Todas las coincidencias residuales de `OEA`, `48h`/`24h`, `98%` siguen confinadas a arrays de `src/lib/constants.ts` sin `import` vivo fuera del propio archivo (re-confirmado: `SERVICE_DETAILS`, `PROCESS_STEPS`, `IND_TAGS_MAP`, `SERVICES_PER_IND`, `STATS` — cero referencias en `.astro`/`.tsx`/`.ts` de páginas o componentes). `Hong Kong`/`Iquique` solo aparecen como opciones de ciudad en `QUOTE_ORIGINS`/`QUOTE_DESTS` del wizard de cotización (`cotizar.astro`, `CTASection.astro` — vivos pero fuera de alcance según `design.md`). Cero `300+`, `Conocer más`, teléfono/email antiguos, `Última milla` (fuera del wizard). Sin cambios respecto a la iteración 1: ningún hallazgo nuevo, ninguna regresión.
+
+**Veredicto final: 17/17 specs PASS.** Ver tabla actualizada más abajo.
 
 ## 1. Build
 
@@ -99,7 +113,8 @@ No se ejecuta corrección automática de metadata (reservada a validación princ
 | `content-home/home-frequent-routes` | ✅ PASS | `LIVE_ROUTES[3]` = Manzanillo→Valparaíso |
 | `content-industries/industries-page-content` | ✅ PASS | Sin 300+/98%, sin sector destacado, sin OEA/Última milla en tags/servicesPer |
 | `content-nosotros/nosotros-hero-identity` | ✅ PASS | "Desde 2023", "Profesionales 20+ años...", sin OEA/B2B en meta |
-| `content-nosotros/years-experience-narrative-consistency` | ❌ **FAIL** | `nosotros.manifesto.p1Html` (es/en/pt) afirma "Llevamos más de dos décadas operando en el mundo logístico chileno" — contradice "Desde 2023" del hero de la misma página. No fue tocado por `sdd-apply` (design.md D10 solo incluyó `titleHtml`/`p3Html`, omitiendo `p1Html`). Ver spec delta `content-nosotros/nosotros-manifesto-founding-year-consistency` |
+| `content-nosotros/years-experience-narrative-consistency` | ➡️ **SUPERSEDED** | Superseded por `content-nosotros/nosotros-manifesto-founding-year-consistency` (delta). El hallazgo original (`p1Html` afirmaba "dos décadas") quedó corregido vía la spec delta — ver fila siguiente |
+| `content-nosotros/nosotros-manifesto-founding-year-consistency` | ✅ PASS (iter. 2) | `nosotros.manifesto.p1Html` corregido en es/en/pt a "profesionales con más de 20 años de experiencia" — ya no afirma antigüedad de la empresa, coherente con "Desde 2023" |
 | `content-nosotros/nosotros-manifesto-messaging` | ✅ PASS | Sin "12 industrias"/"98% retención"; `p3Html` con mensaje de logística a medida |
 | `content-nosotros/nosotros-no-timeline-section` | ✅ PASS | Sección + script + CSS eliminados |
 | `content-nosotros/nosotros-values-feedback` | ✅ PASS | Valor 4 = "Nos preocupamos del feedback de nuestros clientes" (3 idiomas) |
@@ -109,7 +124,7 @@ No se ejecuta corrección automática de metadata (reservada a validación princ
 | `ui-contrast/services-process-step-title-contrast` | ✅ PASS | Contraste ≈16.5:1, sin regresión en /nosotros |
 | `forms-email/email-sla-no-finite-commitment` | ✅ PASS | Email SLA usa "a la brevedad", sin "24 h" |
 
-**Scenarios verificados**: 15/16 specs con todos sus scenarios cumplidos; 1 spec (`years-experience-narrative-consistency`) con el scenario "Visitante compara la fecha de fundación con la experiencia declarada" **incumplido** por el párrafo del manifiesto.
+**Scenarios verificados**: 17/17 specs de `spec_refs` con todos sus scenarios cumplidos (iteración 2). El scenario "Visitante compara la fecha de fundación con la experiencia declarada" (spec delta `nosotros-manifesto-founding-year-consistency`), incumplido en la iteración 1, queda cumplido tras la corrección de `p1Html`.
 
 ### Tests
 
@@ -121,5 +136,6 @@ No aplica (`domain: feature`, sin superficie de seguridad tocada).
 
 ## Acciones Requeridas
 
-1. **Bloqueante**: corregir `nosotros.manifesto.p1Html` en `src/i18n/translations/{es,en,pt}.json` para que no afirme que la empresa opera desde hace más de dos décadas, siguiendo el patrón "profesionales con 20+ años de experiencia" ya aplicado en el resto del sitio. Ver spec `content-nosotros/nosotros-manifesto-founding-year-consistency.md` (nueva, delta que supersede a `years-experience-narrative-consistency`).
-2. No bloqueante: considerar declarar `affects: [[forms-email/email-sla-no-finite-commitment]]` en `forms-email/email-cta-conditional` para simetría de grafo (diferido — spec preexistente fuera del alcance de este cambio).
+Ninguna bloqueante. El único hallazgo de la iteración 1 (`nosotros.manifesto.p1Html`) fue corregido y re-verificado.
+
+1. No bloqueante (diferido): considerar declarar `affects: [[forms-email/email-sla-no-finite-commitment]]` en `forms-email/email-cta-conditional` para simetría de grafo — spec preexistente fuera del alcance de este cambio.

@@ -37,7 +37,7 @@ scope:
   - "log-atm-web-astro/src/pages/[lang]/servicios/carga-maritima.astro"
   - "log-atm-web-astro/src/components/sections/ServicesSection.astro"
   - "log-atm-web-astro/src/lib/constants.ts"
-verified_at: null
+verified_at: "2026-07-05"
 created: "2026-07-05"
 updated: "2026-07-05"
 tags: [capability-spec]

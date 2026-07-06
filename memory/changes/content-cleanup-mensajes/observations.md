@@ -198,3 +198,50 @@
   a `status: review` con `commits: ["88c02a8"]` y sus 3 acceptance criteria
   marcados. `current_phase` avanza a `sdd-verify` para re-verificación del
   ciclo completo.
+
+## sdd-verify (2026-07-05) — iteración 2, veredicto PASS
+
+- Re-verificación enfocada tras el fix de `sdd-apply` (commit `88c02a8`). `npm
+  run build`: exit 0, validador i18n confirma paridad exacta (536 claves en
+  es/en/pt) — sin regresiones respecto a la iteración 1.
+- Corrección de `nosotros.manifesto.p1Html` confirmada en los 3 idiomas: ya
+  no afirma "dos décadas"/"two decades"/"duas décadas" operando la empresa;
+  reencuadrado a "profesionales con más de 20 años de experiencia", coherente
+  con "Nosotros · Desde 2023". Barrido `décadas`/`decades`/`years` en los 3
+  JSON no encuentra otras ocurrencias equivalentes.
+- Re-barrido de términos prohibidos (`OEA`, `48h`/`24h`, `300+`, `98%`,
+  teléfono/email viejos, `Hong Kong`/`Iquique`, `Conocer más`) sobre `src/`:
+  mismos resultados que la iteración 1, sin hallazgos nuevos. Todas las
+  coincidencias residuales re-confirmadas como dead code en `constants.ts`
+  (`SERVICE_DETAILS`, `PROCESS_STEPS`, `IND_TAGS_MAP`, `SERVICES_PER_IND`,
+  `STATS` — cero imports vivos fuera del propio archivo) o fuera de alcance
+  explícito (`QUOTE_ORIGINS`/`QUOTE_DESTS` del wizard de cotización, vivos en
+  `cotizar.astro`/`CTASection.astro` pero fuera del scope declarado en
+  `design.md`).
+- **Veredicto: 17/17 specs PASS.** `verified_at: "2026-07-05"` aplicado a las
+  17 specs de `spec_refs` (incluida la spec delta
+  `content-nosotros/nosotros-manifesto-founding-year-consistency` y la
+  superseded `years-experience-narrative-consistency`). `status` de cada spec
+  se deja en `review` — la transición a `completed` corresponde a
+  `sdd-archive`, no a `sdd-verify`. `state.md`: `phases_completed` incluye
+  `sdd-verify`, `current_phase: ""` (routing post-verify a cargo del
+  orquestador).
+- WARN de metadata pendiente sin cambios (no bloqueante, diferido):
+  `forms-email/email-cta-conditional` no declara `affects`/`related` de
+  vuelta hacia `forms-email/email-sla-no-finite-commitment` — spec
+  preexistente fuera de alcance de este cambio.
+
+## sdd-apply (2026-07-05) — pulido de redacción post-judgment
+
+- Ajustado `nosotros.heroTitleHtml` en `es.json`: "Profesionales <em>20+ años
+  de experiencia</em>." → "Profesionales con <em>20+ años de experiencia</em>."
+  (se agregó la preposición "con" faltante, detectada por Judge B como lectura
+  telegráfica). EN (`Professionals with <em>20+ years of experience</em>.`) y
+  PT (`Profissionais com <em>mais de 20 anos de experiência</em>.`) ya
+  colocaban la preposición fuera del `<em>` — ES quedó alineado al mismo
+  patrón exacto, sin tocarlos.
+  `npm run build` verde: exit 0, sin mismatches de claves entre es/en/pt.
+  Commit `86fe114` (`content(nosotros): add preposition to ES hero title for
+  natural phrasing`). Spec `content-nosotros/nosotros-hero-identity`
+  actualizada con `commits: ["c960637", "86fe114"]`. `current_phase` de
+  `state.md` no se toca (queda a cargo del orquestador post-judgment).

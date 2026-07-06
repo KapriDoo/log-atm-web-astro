@@ -4,8 +4,8 @@ change_name: "content-cleanup-mensajes"
 domain: feature
 fast_path: full
 status: active
-current_phase: sdd-verify
-phases_completed: [sdd-init, sdd-explore, sdd-propose, sdd-spec, sdd-design, sdd-tasks, sdd-apply]
+current_phase: sdd-archive
+phases_completed: [sdd-init, sdd-explore, sdd-propose, sdd-spec, sdd-design, sdd-tasks, sdd-apply, sdd-verify, sdd-judgment]
 spec_refs:
   - "[[content-services/services-catalog-cta-and-detail-pages]]"
   - "[[content-services/services-descriptions-bullets]]"
