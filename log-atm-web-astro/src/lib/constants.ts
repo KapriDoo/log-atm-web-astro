@@ -60,39 +60,6 @@ export const SEO = {
   twitterHandle: '@logatm',
 } as const;
 
-// Navegación principal — rutas hacia sub-páginas (paridad con handoff data.jsx)
-export const NAV_LINKS = [
-  { href: '/servicios', label: 'Servicios' },
-  { href: '/industrias', label: 'Industrias' },
-  { href: '/nosotros', label: 'Nosotros' },
-  { href: '/contacto', label: 'Contacto' },
-] as const;
-
-// Links del footer — Servicios (sub-páginas reales)
-export const FOOTER_SERVICES = [
-  { href: '/servicios/carga-aerea', label: 'Carga Aérea' },
-  { href: '/servicios/carga-maritima', label: 'Carga Marítima' },
-  { href: '#servicios', label: 'Aduana y Documentación' },
-  { href: '#servicios', label: 'Almacenaje' },
-  { href: '#contacto', label: 'Consultoría Logística' },
-] as const;
-
-// Links del footer — Empresa
-export const FOOTER_COMPANY = [
-  { href: '/nosotros', label: 'Nosotros' },
-  { href: '#industrias', label: 'Industrias' },
-  { href: '#why', label: 'Por qué elegirnos' },
-  { href: '/cotizar', label: 'Cotizar' },
-  { href: '/contacto', label: 'Contacto' },
-] as const;
-
-// Stats band (sección bajo el hero) — etiquetas largas del handoff
-export const STATS = [
-  { value: '20+', label: 'Años conectando Chile con el mundo', icon: 'lucide:award',    isText: false },
-  { value: '98%', label: 'Clientes que repiten con nosotros',   icon: 'lucide:sparkles', isText: false },
-  { value: '1:1', label: 'Ejecutivo dedicado en cada cuenta',   icon: 'lucide:user',     isText: true  },
-] as const;
-
 // Strip de stats dentro del hero — etiquetas cortas del handoff (hero-b.jsx)
 export const HERO_STRIP_STATS = [
   { num: '20+', label: 'Años de experiencia del equipo' },
@@ -303,54 +270,6 @@ export const QUICK_QUOTE_VOLUMES = [
 // Datos de sub-páginas (handoff design_handoff_pages)
 // ──────────────────────────────────────────────────────────
 
-// Detalles por servicio — sólo los servicios con detalle expandido
-export const SERVICE_DETAILS: Record<string, { features: string[]; badge: string }> = {
-  '01': {
-    features: ['Express 48h internacional', 'Chárter aéreo dedicado', 'Cadena de frío y dangerous goods', 'Tracking unificado en una sola URL'],
-    badge: 'IATA · CASS',
-  },
-  '02': {
-    features: ['FCL/LCL a 80+ puertos', 'Consolidación semanal Asia-Chile', 'Reefer y open-top disponibles', 'Negociación de tarifas por contrato'],
-    badge: 'FIATA · BIMCO',
-  },
-  '03': {
-    features: ['Clasificación arancelaria precisa', 'DUS, certificados de origen, fumigación', 'Operador Económico Autorizado', 'Revisión documental anti-multas'],
-    badge: 'OEA · Aduanas Chile',
-  },
-  '04': {
-    features: ['Bodegaje 24/7 con CCTV', 'Fulfillment para e-commerce', 'Inventario en tiempo real (API)', 'Cross-docking y última milla'],
-    badge: 'WMS integrado',
-  },
-  '05': {
-    features: ['Diagnóstico de supply chain', 'Diseño de red logística óptima', 'Negociación con navieras y aerolíneas', 'KPI dashboard mensual'],
-    badge: 'A tu medida',
-  },
-  '11': {
-    features: ['Hub Dubai (DXB) y Jeddah (JED)', 'Socios locales certificados', 'Documentación islámica/halal', 'Conexión Asia-África-LATAM'],
-    badge: 'DXB · JED hub',
-  },
-};
-
-// Filtros de la página /servicios
-export const SERVICE_FILTERS = [
-  { k: 'all',    label: 'Todos · 11' },
-  { k: 'aereo',  label: 'Aéreo' },
-  { k: 'mar',    label: 'Marítimo' },
-  { k: 'aduana', label: 'Aduana' },
-  { k: 'alm',    label: 'Almacenaje' },
-  { k: 'cons',   label: 'Consultoría' },
-] as const;
-
-// Proceso de trabajo (6 pasos en /servicios)
-export const PROCESS_STEPS = [
-  { n: '01', title: 'Diagnóstico',    desc: 'Entendemos tu negocio, cargas y temporalidad.' },
-  { n: '02', title: 'Diseño de ruta', desc: 'Modal, transbordos y tiempos optimizados.' },
-  { n: '03', title: 'Cotización',     desc: 'Propuesta clara y desglosada en 24h.' },
-  { n: '04', title: 'Ejecución',      desc: 'Coordinación con todos los actores en origen.' },
-  { n: '05', title: 'Aduana',         desc: 'OEA y revisión documental anticipada.' },
-  { n: '06', title: 'Entrega',        desc: 'Última milla y cierre con KPIs.' },
-] as const;
-
 // Valores (en /nosotros)
 export const VALUES = [
   { icon: 'lucide:user-round-check', title: 'Cercanía operativa', desc: 'No somos un proveedor: somos tu equipo logístico extendido.' },
@@ -366,38 +285,6 @@ export const HOW_WE_WORK = [
   { step: '03', icon: 'lucide:compass',          img: how03,        title: 'Diseño de ruta a medida', desc: 'Proponemos modos, navieras, aerolíneas y agentes según costo, tiempo y riesgo. Negociamos tarifas y dejamos todo documentado.' },
   { step: '04', icon: 'lucide:package',          img: how04,   title: 'Operación y reporte',    desc: 'Ejecutamos cada embarque con visibilidad completa, alertas proactivas ante desvíos y reporte semanal de carga en tránsito.' },
 ] as const;
-
-// Tags por industria (en /industrias)
-export const IND_TAGS_MAP: Record<string, string[]> = {
-  'Minería':            ['Cobre', 'Litio', 'OEA'],
-  'Retail':             ['Moda', 'Consumo', 'Temporada alta'],
-  'Agroindustria':      ['Fruta fresca', 'Vinos', 'Granos'],
-  'Farmacéutica':       ['Cadena de frío', 'GDP', 'Reactivos'],
-  'E-commerce':         ['Cross-border', 'Fulfillment', 'Última milla'],
-  'Construcción':       ['Maquinaria', 'Materiales', 'Open-top'],
-  'Chatarra Ferrosa':   ['Reciclaje', 'Exportación', 'Bulk'],
-  'Iluminarias':        ['LED', 'Industrial', 'Consolidado Asia'],
-  'Vehículos Usados':   ['Ro-Ro', 'Trámites', 'Almacenaje'],
-  'Efectos Personales': ['Mudanzas', 'Door-to-door'],
-  'Maquinaria':         ['Industrial', 'Agrícola', 'Project cargo'],
-  'Textil':             ['Prendas', 'Telas', 'Aéreo + Marítimo'],
-};
-
-// Servicios por industria (en /industrias tabla)
-export const SERVICES_PER_IND: Record<string, string[]> = {
-  'Minería':            ['FCL', 'Maquinaria', 'OEA', 'Reefer'],
-  'Retail':             ['LCL', 'Courier', 'Fulfillment'],
-  'Agroindustria':      ['Reefer', 'Certificación SAG', 'Aéreo'],
-  'Farmacéutica':       ['Cadena frío', 'Validación GDP', 'Aéreo express'],
-  'E-commerce':         ['Fulfillment', 'Casillero USA', 'Última milla'],
-  'Construcción':       ['FCL', 'Open-top', 'Maquinaria'],
-  'Chatarra Ferrosa':   ['FCL', 'Exportación', 'Aduana'],
-  'Iluminarias':        ['LCL', 'Consolidación Asia'],
-  'Vehículos Usados':   ['Ro-Ro', 'Trámites', 'Almacenaje'],
-  'Efectos Personales': ['Mudanza intl.', 'Door-to-door'],
-  'Maquinaria':         ['FCL', 'Open-top', 'Project cargo'],
-  'Textil':             ['LCL', 'Consolidación Asia', 'Aéreo'],
-};
 
 // Cotización (multi-step en /cotizar)
 export const QUOTE_MODES = [
@@ -418,15 +305,6 @@ export const QUOTE_ORIGINS = [
 export const QUOTE_DESTS = [
   'Santiago, CL', 'San Antonio, CL', 'Valparaíso, CL',
   'Iquique, CL', 'Antofagasta, CL', 'Punta Arenas, CL',
-] as const;
-
-export const QUOTE_CARGO_TYPES = [
-  'Carga general', 'Reefer (frío)', 'Peligrosa (IMO)', 'Sobredimensionada',
-  'Maquinaria', 'Textil', 'E-commerce', 'Documentos',
-] as const;
-
-export const QUOTE_EXTRAS = [
-  'Aduana', 'Seguro de carga', 'Almacenaje destino', 'Última milla', 'Inspección origen',
 ] as const;
 
 export const QUOTE_STEPS = [
