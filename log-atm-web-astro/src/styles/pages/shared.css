@@ -531,6 +531,7 @@
 .process-step__title {
   font-family: var(--font-display); font-weight: 600;
   font-size: 1.0625rem; line-height: 1.2; margin: 0 0 0.5rem;
+  color: var(--color-text-inverse); /* #ffffff — vence h1..h6{color:neutral-900} sobre .process-strip oscuro */
 }
 .process-step__desc { font-size: 0.875rem; color: var(--color-neutral-400); line-height: 1.5; margin: 0; }
 
