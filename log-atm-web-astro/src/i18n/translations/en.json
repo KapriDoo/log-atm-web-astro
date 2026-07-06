@@ -228,9 +228,7 @@
     "heroTitleHtml": "We know <em>your industry</em>.",
     "heroLead": "Specialized operations, specific regulations and optimized routes. We design logistics around the rules of your industry.",
     "metaSectors": "Sectors",
-    "metaClients": "Active clients",
     "metaExpertise": "Years of expertise",
-    "metaRetention": "Retention",
     "directory": {
       "eyebrow": "All industries",
       "title": "12 sectors with dedicated operations",
@@ -261,11 +259,11 @@
       { "name": "Textile", "sub": "Garments, fabrics, accessories" }
     ],
     "tags": [
-      ["Copper", "Lithium", "AEO"],
+      ["Copper", "Lithium"],
       ["Fashion", "Consumer", "Peak season"],
       ["Fresh fruit", "Wines", "Grains"],
       ["Cold chain", "GDP", "Reagents"],
-      ["Cross-border", "Fulfillment", "Last mile"],
+      ["Cross-border", "Fulfillment"],
       ["Machinery", "Materials", "Open-top"],
       ["Recycling", "Export", "Bulk"],
       ["LED", "Industrial", "Asia consolidation"],
@@ -275,11 +273,11 @@
       ["Garments", "Fabrics", "Air + Ocean"]
     ],
     "servicesPer": [
-      ["FCL", "Machinery", "AEO", "Reefer"],
+      ["FCL", "Machinery", "Reefer"],
       ["LCL", "Courier", "Fulfillment"],
       ["Reefer", "SAG certification", "Air"],
       ["Cold chain", "GDP validation", "Air express"],
-      ["Fulfillment", "USA mailbox", "Last mile"],
+      ["Fulfillment", "USA mailbox"],
       ["FCL", "Open-top", "Machinery"],
       ["FCL", "Export", "Customs"],
       ["LCL", "Asia consolidation"],

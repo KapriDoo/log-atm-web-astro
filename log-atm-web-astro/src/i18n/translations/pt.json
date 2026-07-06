@@ -228,9 +228,7 @@
     "heroTitleHtml": "Conhecemos <em>o seu setor</em>.",
     "heroLead": "Operações especializadas, regulamentações específicas e rotas otimizadas. Desenhamos a logística conforme as regras da sua indústria.",
     "metaSectors": "Setores",
-    "metaClients": "Clientes ativos",
     "metaExpertise": "Anos de expertise",
-    "metaRetention": "Retenção",
     "directory": {
       "eyebrow": "Todas as indústrias",
       "title": "12 setores com operação dedicada",
@@ -261,11 +259,11 @@
       { "name": "Têxtil", "sub": "Roupas, tecidos, acessórios" }
     ],
     "tags": [
-      ["Cobre", "Lítio", "OEA"],
+      ["Cobre", "Lítio"],
       ["Moda", "Consumo", "Alta temporada"],
       ["Fruta fresca", "Vinhos", "Grãos"],
       ["Cadeia de frio", "GDP", "Reagentes"],
-      ["Cross-border", "Fulfillment", "Última milha"],
+      ["Cross-border", "Fulfillment"],
       ["Maquinário", "Materiais", "Open-top"],
       ["Reciclagem", "Exportação", "Bulk"],
       ["LED", "Industrial", "Consolidado Ásia"],
@@ -275,11 +273,11 @@
       ["Roupas", "Tecidos", "Aéreo + Marítimo"]
     ],
     "servicesPer": [
-      ["FCL", "Maquinário", "OEA", "Reefer"],
+      ["FCL", "Maquinário", "Reefer"],
       ["LCL", "Courier", "Fulfillment"],
       ["Reefer", "Certificação SAG", "Aéreo"],
       ["Cadeia de frio", "Validação GDP", "Aéreo expresso"],
-      ["Fulfillment", "Caixa postal EUA", "Última milha"],
+      ["Fulfillment", "Caixa postal EUA"],
       ["FCL", "Open-top", "Maquinário"],
       ["FCL", "Exportação", "Aduana"],
       ["LCL", "Consolidação Ásia"],

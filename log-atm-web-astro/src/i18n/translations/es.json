@@ -228,9 +228,7 @@
     "heroTitleHtml": "Conocemos <em>tu sector</em>.",
     "heroLead": "Operaciones especializadas, regulaciones particulares y rutas optimizadas. Diseñamos la logística según las reglas de tu industria.",
     "metaSectors": "Sectores",
-    "metaClients": "Clientes activos",
     "metaExpertise": "Años de expertise",
-    "metaRetention": "Retención",
     "directory": {
       "eyebrow": "Todas las industrias",
       "title": "12 sectores con operación dedicada",
@@ -261,11 +259,11 @@
       { "name": "Textil", "sub": "Prendas, telas, accesorios" }
     ],
     "tags": [
-      ["Cobre", "Litio", "OEA"],
+      ["Cobre", "Litio"],
       ["Moda", "Consumo", "Temporada alta"],
       ["Fruta fresca", "Vinos", "Granos"],
       ["Cadena de frío", "GDP", "Reactivos"],
-      ["Cross-border", "Fulfillment", "Última milla"],
+      ["Cross-border", "Fulfillment"],
       ["Maquinaria", "Materiales", "Open-top"],
       ["Reciclaje", "Exportación", "Bulk"],
       ["LED", "Industrial", "Consolidado Asia"],
@@ -275,11 +273,11 @@
       ["Prendas", "Telas", "Aéreo + Marítimo"]
     ],
     "servicesPer": [
-      ["FCL", "Maquinaria", "OEA", "Reefer"],
+      ["FCL", "Maquinaria", "Reefer"],
       ["LCL", "Courier", "Fulfillment"],
       ["Reefer", "Certificación SAG", "Aéreo"],
       ["Cadena frío", "Validación GDP", "Aéreo express"],
-      ["Fulfillment", "Casillero USA", "Última milla"],
+      ["Fulfillment", "Casillero USA"],
       ["FCL", "Open-top", "Maquinaria"],
       ["FCL", "Exportación", "Aduana"],
       ["LCL", "Consolidación Asia"],
