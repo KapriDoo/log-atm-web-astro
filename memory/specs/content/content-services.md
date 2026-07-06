@@ -6,7 +6,7 @@ slug: content-services
 domain: feature
 delta_type: add
 supersedes: null
-superseded_by: null
+superseded_by: "[[content-services/services-catalog-cta-and-detail-pages]]"
 status: completed
 assigned_agent: null
 priority: high
@@ -15,7 +15,7 @@ change_ref: alinear-contenido-notion
 commits: [c5d7002]
 feature_branch: feature/alinear-contenido-notion
 mr: ""
-updated: "2026-05-08"
+updated: "2026-07-05"
 acceptance_criteria:
   - "[x] El array SERVICES contiene 11 items (5 originales + 6 nuevos)"
   - "[x] Los 6 servicios nuevos son: Courier internacional, Seguros de Carga, Desconsolidado, Servicio de Casillero USA, Asesoria en Compras Internacionales, Te conectamos con el Medio Oriente"

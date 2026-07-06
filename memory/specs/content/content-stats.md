@@ -6,7 +6,7 @@ slug: content-stats
 domain: feature
 delta_type: update
 supersedes: null
-superseded_by: null
+superseded_by: "[[content-nosotros/years-experience-narrative-consistency]]"
 status: completed
 assigned_agent: null
 priority: high
@@ -15,7 +15,7 @@ change_ref: alinear-contenido-notion
 commits: [c5d7002]
 feature_branch: feature/alinear-contenido-notion
 mr: ""
-updated: "2026-05-08"
+updated: "2026-07-05"
 acceptance_criteria:
   - "[x] El array STATS contiene exactamente 4 items"
   - "[x] Los valores son: 20+ años, 70+ países, 98% satisfacción, Atendemos de manera personalizada"
