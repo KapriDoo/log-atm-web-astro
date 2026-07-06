@@ -19,7 +19,7 @@
     },
     "nosotros": {
       "title": "About Us",
-      "description": "Learn about LOG ATM: a Chilean international logistics company with 20+ years of experience in air, ocean and customs operations."
+      "description": "Learn about LOG ATM: a Chilean international logistics company with professionals with 20+ years of experience in air, ocean and customs operations."
     },
     "contacto": {
       "title": "Contact",
@@ -43,7 +43,7 @@
   },
   "footer": {
     "brandTagline": "We connect Chile with the world, tailored to you.",
-    "brandDesc": "Chilean logistics operator with 20+ years of experience in air freight, ocean freight, customs and supply chain.",
+    "brandDesc": "Chilean logistics operator with professionals with 20+ years of experience in air freight, ocean freight, customs and supply chain.",
     "colAbout": "About",
     "colContact": "Contact",
     "linkAbout": "About",
@@ -83,7 +83,7 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Chilean logistics operator · 20+ years",
+      "eyebrow": "Chilean logistics operator · Professionals with 20+ years of experience",
       "title1": "Chile with the world,",
       "title2": "tailored to you.",
       "leadHtml": "Air, ocean and customs <em>with no middlemen</em>: a dedicated account manager who knows your operation end to end.",
@@ -292,18 +292,16 @@
     "title": "People. Trust. Results.",
     "lead": "We are a Chilean team with global connections and a commitment to treat you as our only client.",
     "breadcrumb": "About",
-    "heroEyebrow": "About us · Since 2003",
-    "heroTitleHtml": "20+ years connecting <em>Chile with the world</em>.",
+    "heroEyebrow": "About us · Since 2023",
+    "heroTitleHtml": "Professionals with <em>20+ years of experience</em>.",
     "heroLead": "We are a Chilean logistics operator. We don't sell a service: we operate with every client as if it were our own operation.",
     "metaYears": "Years in operation",
     "metaCapital": "Chilean capital",
-    "metaCert": "Authorized operator",
-    "metaFocus": "Corporate focus",
     "manifesto": {
       "titleHtml": "Logistics is a <em>relationship</em>, not a commodity.",
       "p1Html": "We have spent more than two decades operating in the Chilean logistics world and we learned something simple: <em>cargo doesn't move by itself</em>. Behind every container, every AWB, every DUS, there are people making decisions under pressure.",
       "p2": "That's why we built LOG ATM the opposite way from the rest of the industry. Instead of a call center rotating agents, we assign a dedicated account manager per client. Instead of hidden fees, we show every cost component. Instead of promising everything, we tell you first what might go wrong.",
-      "p3Html": "Today we operate with clients across 12 industries and a retention rate of 98%. But we still measure ourselves by the same question from day one: would the client feel that this operation is their own?"
+      "p3Html": "Our goal is simple: that you feel this operation is yours. That's why we design logistics tailored to you, with no generic formulas, measuring ourselves by the same question from day one: would the client feel that this operation is their own?"
     },
     "values": {
       "eyebrow": "How we work",
@@ -313,7 +311,7 @@
         { "title": "Operational closeness", "desc": "We are not a provider: we are your extended logistics team." },
         { "title": "Tailored to you", "desc": "Every account has an operation designed for its reality." },
         { "title": "Full transparency", "desc": "Clear rates, no surprises. If anything fails, we say it first." },
-        { "title": "Continuous improvement", "desc": "Measurable KPIs and quarterly reviews with every client." }
+        { "title": "Continuous improvement", "desc": "We care about our clients' feedback." }
       ]
     },
     "how": {

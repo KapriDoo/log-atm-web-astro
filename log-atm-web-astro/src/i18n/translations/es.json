@@ -19,7 +19,7 @@
     },
     "nosotros": {
       "title": "Nosotros",
-      "description": "Conoce LOG ATM: empresa chilena de logística internacional con 20+ años de experiencia en carga aérea, marítima y aduanas."
+      "description": "Conoce LOG ATM: empresa chilena de logística internacional con profesionales con 20+ años de experiencia en carga aérea, marítima y aduanas."
     },
     "contacto": {
       "title": "Contacto",
@@ -43,7 +43,7 @@
   },
   "footer": {
     "brandTagline": "Conectamos Chile con el mundo, a tu medida.",
-    "brandDesc": "Operador logístico chileno con 20+ años de experiencia en carga aérea, marítima, aduana y supply chain.",
+    "brandDesc": "Operador logístico chileno con profesionales con 20+ años de experiencia en carga aérea, marítima, aduana y supply chain.",
     "colAbout": "Nosotros",
     "colContact": "Contacto",
     "linkAbout": "Nosotros",
@@ -83,7 +83,7 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Operador logístico chileno · 20+ años",
+      "eyebrow": "Operador logístico chileno · Profesionales con 20+ años de experiencia",
       "title1": "Chile con el mundo,",
       "title2": "a tu medida.",
       "leadHtml": "Carga aérea, marítima y aduana <em>sin intermediarios</em>: un ejecutivo dedicado que conoce tu operación de extremo a extremo.",
@@ -292,18 +292,16 @@
     "title": "Personas. Confianza. Resultados.",
     "lead": "Somos un equipo chileno con conexiones globales y el compromiso de tratarte como nuestro único cliente.",
     "breadcrumb": "Nosotros",
-    "heroEyebrow": "Nosotros · Desde 2003",
-    "heroTitleHtml": "20+ años conectando <em>Chile con el mundo</em>.",
+    "heroEyebrow": "Nosotros · Desde 2023",
+    "heroTitleHtml": "Profesionales <em>20+ años de experiencia</em>.",
     "heroLead": "Somos un operador logístico chileno. No vendemos un servicio: operamos con cada cliente como si fuera nuestra propia operación.",
     "metaYears": "Años de operación",
     "metaCapital": "Capital chileno",
-    "metaCert": "Operador autorizado",
-    "metaFocus": "Foco corporativo",
     "manifesto": {
       "titleHtml": "La logística es una <em>relación</em>, no un commodity.",
       "p1Html": "Llevamos más de dos décadas operando en el mundo logístico chileno y aprendimos algo simple: <em>las cargas no se mueven solas</em>. Detrás de cada contenedor, cada AWB, cada DUS, hay personas decidiendo bajo presión.",
       "p2": "Por eso construimos LOG ATM al revés que la industria. En lugar de un call center que rota agentes, asignamos un ejecutivo dedicado por cuenta. En lugar de tarifas ocultas, mostramos cada componente del costo. En lugar de prometer todo, decimos primero lo que va a fallar.",
-      "p3Html": "Hoy operamos con clientes en 12 industrias y una retención del 98%. Pero seguimos midiéndonos con la misma pregunta del primer día: ¿el cliente sentiría que esta operación es suya?"
+      "p3Html": "Nuestro objetivo es simple: que sientas que esta operación es tuya. Por eso diseñamos una logística hecha a tu medida, sin fórmulas genéricas, midiéndonos con la misma pregunta del primer día: ¿el cliente sentiría que esta operación es suya?"
     },
     "values": {
       "eyebrow": "Cómo trabajamos",
@@ -313,7 +311,7 @@
         { "title": "Cercanía operativa", "desc": "No somos un proveedor: somos tu equipo logístico extendido." },
         { "title": "A tu medida", "desc": "Cada cuenta tiene una operación diseñada para su realidad." },
         { "title": "Transparencia total", "desc": "Tarifas claras, sin sorpresas. Si algo falla, lo decimos primero." },
-        { "title": "Mejora continua", "desc": "KPIs medibles y revisión trimestral con cada cliente." }
+        { "title": "Mejora continua", "desc": "Nos preocupamos del feedback de nuestros clientes." }
       ]
     },
     "how": {
