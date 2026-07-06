@@ -95,7 +95,7 @@ export const STATS = [
 
 // Strip de stats dentro del hero — etiquetas cortas del handoff (hero-b.jsx)
 export const HERO_STRIP_STATS = [
-  { num: '20+', label: 'Años de operación' },
+  { num: '20+', label: 'Años de experiencia del equipo' },
   { num: '1:1', label: 'Ejecutivo dedicado' },
 ] as const;
 
