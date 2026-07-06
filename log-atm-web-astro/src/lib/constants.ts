@@ -271,7 +271,7 @@ export const LIVE_ROUTES = [
   { from: 'Shanghai',  to: 'San Antonio', mode: 'sea', eta: '12d', status: 'transit' },
   { from: 'Miami',     to: 'Santiago',    mode: 'air', eta: '36h', status: 'transit' },
   { from: 'Rotterdam', to: 'Valparaíso',  mode: 'sea', eta: '21d', status: 'port' },
-  { from: 'Hong Kong', to: 'Iquique',     mode: 'sea', eta: '18d', status: 'transit' },
+  { from: 'Manzanillo', to: 'Valparaíso', mode: 'sea', eta: '18d', status: 'transit' },
 ] as const;
 
 // Opciones del formulario "Cotización rápida · 30 seg" del CtaFinal (handoff sections.jsx)
