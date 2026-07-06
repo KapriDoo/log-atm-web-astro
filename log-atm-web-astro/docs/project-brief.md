@@ -12,9 +12,9 @@
 | Empresa | LOG ATM |
 | Tagline | "LOGÍSTICA A TU MEDIDA" |
 | CEO | Maria Paz Rivera Zapata |
-| Teléfono | +569 421 62739 |
+| Teléfono | +56 9 8270 8492 |
 | Dirección | Av. Pdte Kennedy 5600, Of. 507, Vitacura, Santiago, Chile |
-| Email corporativo | mpazrivera@logatm.com |
+| Email corporativo | contacto@logatm.com |
 | Redes sociales | Facebook, Twitter/X, Instagram |
 | Color principal | ~#4A7BB5 (azul plano único) |
 | Logo fuente | `/mnt/c/Users/cipri/Downloads/logatmlogo.png` |

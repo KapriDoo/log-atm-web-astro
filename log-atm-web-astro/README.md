@@ -116,4 +116,4 @@ Antes de proponer cambios, leer:
 ## Contacto
 
 **LOG ATM** · Av. Pdte. Kennedy 5600, Of. 507, Vitacura, Santiago, Chile
-[mpazrivera@logatm.com](mailto:mpazrivera@logatm.com) · +56 9 4216 2739
+[contacto@logatm.com](mailto:contacto@logatm.com) · +56 9 8270 8492
