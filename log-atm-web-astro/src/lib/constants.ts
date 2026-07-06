@@ -96,7 +96,7 @@ export const SERVICES = [
     title: 'Aduana y Documentación',
     img: svcAduana,
     desc: 'DUS, certificados de origen y clasificación arancelaria.',
-    tag: 'OEA Chile',
+    tag: 'Aduana Chile',
     icon: 'lucide:file-check',
     size: 'std',
     isCta: false,
