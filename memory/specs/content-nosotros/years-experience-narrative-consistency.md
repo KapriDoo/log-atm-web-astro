@@ -6,7 +6,7 @@ slug: "years-experience-narrative-consistency"
 domain: "feature"
 delta_type: "MODIFY"
 supersedes: "[[content/content-stats]]"
-superseded_by: null
+superseded_by: "[[content-nosotros/nosotros-manifesto-founding-year-consistency]]"
 status: review
 assigned_agent: "sdd-apply"
 priority: medium

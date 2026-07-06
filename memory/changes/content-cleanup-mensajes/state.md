@@ -15,6 +15,7 @@ spec_refs:
   - "[[content-industries/industries-page-content]]"
   - "[[content-nosotros/nosotros-hero-identity]]"
   - "[[content-nosotros/years-experience-narrative-consistency]]"
+  - "[[content-nosotros/nosotros-manifesto-founding-year-consistency]]"
   - "[[content-nosotros/nosotros-manifesto-messaging]]"
   - "[[content-nosotros/nosotros-no-timeline-section]]"
   - "[[content-nosotros/nosotros-values-feedback]]"

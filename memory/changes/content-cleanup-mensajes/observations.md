@@ -128,3 +128,73 @@
   haberlas verificado en sdd-design) — si sdd-apply encuentra desvíos de línea, debe
   ubicar el bloque por contenido (selector CSS, nombre de sección/const), no por
   número de línea literal.
+
+## sdd-verify (2026-07-05) — veredicto FAIL parcial
+
+- Build limpio (`npm run build`, exit 0) con validador i18n confirmando paridad
+  exacta (536 claves en es/en/pt). Cero 404 (páginas de detalle borradas, hrefs
+  null), cero secciones huérfanas (FAQ/Trayectoria/Certificaciones/Sector
+  destacado), contraste `.process-step__title` ≈16.5:1 (WCAG AA), contacto
+  global (`+56 9 8270 8492` / `contacto@logatm.com`) consistente en
+  SITE/JSON-LD/README/docs sin rastro de los valores anteriores.
+- 15/16 specs en PASS. **1 spec en FAIL**:
+  `content-nosotros/years-experience-narrative-consistency` —
+  `nosotros.manifesto.p1Html` (es/en/pt) quedó sin tocar por `sdd-apply` y dice
+  "Llevamos más de dos décadas operando en el mundo logístico chileno...",
+  contradiciendo "Nosotros · Desde 2023" del hero de la misma página. Bug
+  presente en el código desde antes del cambio, nunca detectado en
+  explore/propose/spec/design/tasks (ninguno de esos artefactos menciona
+  `p1Html` ni "dos décadas"); `design.md` D10 acotó la edición del manifiesto
+  solo a `titleHtml`/`p3Html`, dejando fuera `p1Html` por alcance incompleto en
+  el diseño. Es la única superficie del sitio que rompe el patrón de
+  reencuadre "profesionales con 20+ años de experiencia" aplicado
+  consistentemente en `home.hero.eyebrow`, `footer.brandDesc`,
+  `meta.nosotros.description` y `nosotros.heroTitleHtml`.
+- Términos "prohibidos" residuales (OEA, 48h/24h, 98%, KPI dashboard,
+  negociación de tarifas, Última milla) confirmados como dead code en
+  `constants.ts` (arrays `SERVICE_DETAILS`, `PROCESS_STEPS`, `STATS`,
+  `IND_TAGS_MAP`/`SERVICES_PER_IND` — sin import vivo, JSON i18n master siempre
+  gana el merge por índice) o fuera de alcance explícito (`cotizar.extras[3]`
+  "Última milla" en el wizard, `docs/project-brief.md` OEA en referencias de
+  certificaciones del brief interno). Ninguno visible para un visitante.
+- Coherencia de grafo: todos los `depends_on` resuelven a specs existentes. 1
+  WARN de metadata (no bloqueante, no auto-corregido porque la validación
+  principal no es PASS): `forms-email/email-cta-conditional` (spec
+  preexistente, `status: completed`, fuera de alcance de este cambio) no
+  declara `affects`/`related` de vuelta hacia
+  `forms-email/email-sla-no-finite-commitment` que la referencia en
+  `depends_on`.
+- Spec delta creada: `content-nosotros/nosotros-manifesto-founding-year-consistency`
+  (`delta_type: MODIFY`, `supersedes: years-experience-narrative-consistency`)
+  con el requirement exacto de reescribir `p1Html` en los 3 idiomas siguiendo
+  el patrón "profesionales con 20+ años". `years-experience-narrative-consistency`
+  actualizada con `superseded_by` apuntando a la nueva spec. Agregada a
+  `spec_refs` de `state.md`.
+- `verified_at` **no** se actualizó en ninguna de las 16 specs (el contrato
+  solo lo permite en un ciclo PASS completo). `current_phase` vuelve a
+  `sdd-apply` para que se aplique el fix puntual antes de re-verificar.
+
+## sdd-apply (2026-07-05) — fix puntual del FAIL de sdd-verify
+
+- Reescrito `nosotros.manifesto.p1Html` en `es.json`/`en.json`/`pt.json`: se
+  reemplazó la voz de primera persona plural de la empresa ("Llevamos más de
+  dos décadas operando"/"We have spent more than two decades
+  operating"/"Operamos há mais de duas décadas") por una atribución explícita
+  a la experiencia del equipo ("Somos profesionales con más de 20 años de
+  experiencia"/"We are professionals with more than 20 years of
+  experience"/"Somos profissionais com mais de 20 anos de experiência"),
+  siguiendo el mismo patrón de reencuadre ya usado en `home.hero.eyebrow`,
+  `footer.brandDesc`, `meta.nosotros.description` y `nosotros.heroTitleHtml`.
+  Se conservó íntegro el resto del párrafo (`<em>las cargas no se mueven
+  solas</em>` y la mención a las personas detrás de cada contenedor/AWB/DUS).
+- Barrido de `décadas`/`decades` en los 3 JSON confirma que `p1Html` era la
+  única ocurrencia; no se detectaron otras menciones equivalentes de
+  antigüedad de la empresa que requirieran el mismo ajuste.
+- `npm run build` verde: validador i18n confirma paridad exacta (536 claves
+  en es/en/pt), sin errores TS.
+- Commit `88c02a8` (`content(nosotros): reframe manifesto p1 as team
+  experience, not company age`). Spec delta
+  `content-nosotros/nosotros-manifesto-founding-year-consistency` actualizada
+  a `status: review` con `commits: ["88c02a8"]` y sus 3 acceptance criteria
+  marcados. `current_phase` avanza a `sdd-verify` para re-verificación del
+  ciclo completo.
