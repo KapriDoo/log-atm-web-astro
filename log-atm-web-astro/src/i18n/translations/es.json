@@ -91,7 +91,7 @@
       "liveTitle": "Rutas frecuentes",
       "livePill": "Cobertura",
       "stripStats": [
-        "Años de operación",
+        "Años de experiencia del equipo",
         "Ejecutivo dedicado"
       ]
     },
@@ -228,7 +228,7 @@
     "heroTitleHtml": "Conocemos <em>tu sector</em>.",
     "heroLead": "Operaciones especializadas, regulaciones particulares y rutas optimizadas. Diseñamos la logística según las reglas de tu industria.",
     "metaSectors": "Sectores",
-    "metaExpertise": "Años de expertise",
+    "metaExpertise": "Años de experiencia del equipo",
     "directory": {
       "eyebrow": "Todas las industrias",
       "title": "12 sectores con operación dedicada",
@@ -295,7 +295,7 @@
     "heroEyebrow": "Nosotros · Desde 2023",
     "heroTitleHtml": "Profesionales con <em>20+ años de experiencia</em>.",
     "heroLead": "Somos un operador logístico chileno. No vendemos un servicio: operamos con cada cliente como si fuera nuestra propia operación.",
-    "metaYears": "Años de operación",
+    "metaYears": "Años de experiencia del equipo",
     "metaCapital": "Capital chileno",
     "manifesto": {
       "titleHtml": "La logística es una <em>relación</em>, no un commodity.",

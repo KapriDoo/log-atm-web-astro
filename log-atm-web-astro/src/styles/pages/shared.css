@@ -507,6 +507,7 @@
   font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 2.75rem);
   font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin: 0;
   max-width: 18ch;
+  color: var(--color-text-inverse); /* vence h1..h6{color:neutral-900} sobre .process-strip oscuro */
 }
 .process-strip__desc { color: var(--color-neutral-400); max-width: 40ch; margin: 0; font-size: 1rem; }
 .process-grid {

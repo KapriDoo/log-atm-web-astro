@@ -110,3 +110,46 @@ Se adopta `astro:assets` con `<Picture formats={['avif','webp']}>` + fallback JP
 - **Término elegido para "sin compromiso de tiempo finito"**: se usó consistentemente "a la brevedad" (es) / "as soon as possible" (en) / "o mais breve possível" (pt) en `/contacto`, `/cotizar`, `home.cta.lead` y el SLA de `email-templates.ts` (es, literal no-i18n del template de correo).
 - **Build**: se corrió `npm run build` tras cada grupo (11 veces en total); todos verdes, sin error de paridad i18n ni TypeScript. Barrido final (`grep -riE '48h|24 ?h|\bOEA\b|300\+|98%|Negociación de tarifas|Conocer más|carga-aerea|carga-maritima' dist/`) da **cero** coincidencias (mejor que el mínimo esperado: no quedó ninguna de las excepciones documentadas en design.md porque ninguna era necesaria retener literal salvo las ya excluidas explícitamente: "FCL/LCL" en `cotizar.modes.0.desc`, "Última milla" en `cotizar.extras.3`, "12 industrias" factual — todas verificadas intactas).
 - **Sin tests unitarios**: verificación end-to-end fue build + greps sobre `dist/` + spot-checks de contenido renderizado en es/en/pt (hero de nosotros, ausencia de "24h" en contacto, badge de aduana). Revisión visual completa en navegador (T11.6) queda para `sdd-verify`.
+
+## 2026-07-05 | observation | fix-content-followups | sdd-init sin drift de stack detectado
+Versiones en `package.json` (astro@^6.1.5, react@^19.2.5, tailwindcss@^4.2.2, @astrojs/cloudflare@^13.5.0) coinciden con `_profile.md` (updated 2026-05-28) — no se refrescó. `changes/fix-content-followups/state.md` creado con intent literal (5 ítems de contraste, contenido y deuda DRY post PR #28); fast_path=apply-only, siguiente fase sdd-apply.
+
+## 2026-07-05 — fix-content-followups / sdd-apply
+
+- **`node_modules` no venía instalado** en este worktree (igual que en `optimize-images-webp`) → `npm install` (442 paquetes) antes del primer build.
+- **T1 (contraste)**: `.process-strip__title` recibió `color: var(--color-text-inverse)` explícito, mismo patrón que `.process-step__title` (comentario inline análogo).
+- **T3 (DRY JSON-LD)**: confirmado `SITE.phone === '+56982708492'` (formato correcto para `telephone` de schema.org, sin transformación necesaria) y `SITE.email === 'contacto@logatm.com'` en `src/lib/constants.ts`. Import agregado; JSON-LD renderizado sigue emitiendo los mismos valores literales, ahora vía SSOT.
+- **T4/T5 (reencuadre "20+ años")**: etiqueta final "Años de experiencia del equipo" / "Years of team experience" / "Anos de experiência da equipe" aplicada de forma idéntica en `nosotros.metaYears`, `home.hero.stripStats[0]`, `industrias.metaExpertise` (es/en/pt) y `HERO_STRIP_STATS[0].label` (constants.ts). `STATS[0].label` (dead code) no se tocó, según instrucción explícita.
+- **Verificación**: `npm run build` verde (exit 0) tras todas las ediciones — valida paridad i18n (validador build-time) sin errores. Greps de barrido (`OEA`, "Años/Years/Anos de operación", "expertise", literales de teléfono/email en BaseLayout) devuelven cero coincidencias.
+- **4 commits atómicos**: `docs: remove OEA mention...` (b87f943), `fix(a11y): fix process-strip section title contrast` (03d077c), `refactor(seo): source JSON-LD contact from SITE constant (DRY)` (5e1d2a4), `content(nosotros,home,industrias): reframe "20+ years" stat as team experience` (a19596f).
+
+## 2026-07-05 — fix-content-followups / sdd-apply (T7 — dead code)
+
+- **T7 (limpieza de `constants.ts`)**: se removieron 11 `export const` confirmados como dead code — `NAV_LINKS`, `FOOTER_SERVICES`, `FOOTER_COMPANY`, `STATS`, `SERVICE_DETAILS`, `SERVICE_FILTERS`, `PROCESS_STEPS`, `IND_TAGS_MAP`, `SERVICES_PER_IND`, `QUOTE_CARGO_TYPES`, `QUOTE_EXTRAS` — tras reconfirmar con `grep -rnw "<NOMBRE>" src/` (excluyendo `constants.ts`) cero usos para cada uno, uno por uno, antes de borrar.
+- **`HERO_STRIP_STATS` no se tocó** (lo consume `HeroSection.astro`), tal como indicaba la task.
+- **Sin imports huérfanos**: los 11 arrays removidos no consumían ningún `import` de imagen/ícono exclusivo suyo; los 15 imports de `svc-*`/`ind-*`/`how-0*` en la cabecera de `constants.ts` siguen usados por `SERVICES`, `INDUSTRIES` y `HOW_WE_WORK` (arrays vivos) — verificado por lectura completa del archivo tras el borrado, no quedó ninguna línea `import` sin consumidor.
+- **Verificación**: `npm run build` verde (exit 0), validador de paridad i18n sin errores. `npx astro check` no está instalado en este worktree (`@astrojs/check` ausente) y no se instaló por estar fuera de alcance de T7; el build de Astro ya ejercita el TS de `constants.ts` (import/uso real en `.astro`) sin señalar errores.
+- **Commit atómico**: `refactor(constants): remove dead code arrays no longer referenced` (de3b0d2).
+- **tasks.md**: checklist de T7 marcado `[x]` (los 3 ítems de Acceptance).
+
+## 2026-07-05 — fix-content-followups / sdd-verify
+
+- **Veredicto: PASS.** `npm run build` exit 0 con validador i18n build-time confirmando paridad (`en: OK 536 claves`, `pt: OK 536 claves` vs. `es`).
+- Verificados por CSS/grep estático los 7 ítems de `tasks.md` (T1-T5, T7; T6 es la verificación integral): contraste `.process-strip__title` (T1), ausencia de "OEA" en `docs/project-brief.md` (T2), `SITE.phone`/`SITE.email` como SSOT del JSON-LD en `BaseLayout.astro` (T3), reencuadre "20+ años" → "experiencia del equipo" consistente en `nosotros.metaYears`/`home.hero.stripStats[0]`/`HERO_STRIP_STATS[0].label` (T4) e `industrias.metaExpertise` (T5), y remoción limpia de los 11 `export const` dead code sin imports huérfanos ni referencias colgantes en el repo (T7).
+- **Hallazgo no bloqueante**: `SERVICES[2].tag` en `constants.ts:99` conserva el literal `'OEA Chile'` (badge de UI, no copy renderizado como texto de marketing en `docs/project-brief.md`). T2 apuntaba explícitamente al doc interno; este valor queda fuera de alcance — se documenta para visibilidad, no bloquea el archive.
+- Artefacto: `changes/fix-content-followups/verify-report.md`. `state.md` actualizado: `phases_completed: [sdd-init, sdd-apply, sdd-verify]`, `current_phase: ""`.
+
+## 2026-07-05 — fix-content-followups / sdd-apply (follow-up post-verify)
+
+- **Cierre del hallazgo no bloqueante de sdd-verify**: `SERVICES[2].tag` en `constants.ts:99` cambiado de `'OEA Chile'` a `'Aduana Chile'` (consistente con `servicios.list[2].tag` i18n, que ya gana en el merge). Era la única mención "OEA" restante en `src/` o `docs/`.
+- **Verificación**: `grep -rn "OEA" src/ docs/` → cero resultados en todo el proyecto. `npm run build` → exit 0, paridad i18n intacta.
+- **Commit atómico**: `content(services): drop residual OEA label from services fallback tag`.
+
+## 2026-07-05 — fix-content-followups / sdd-verify (re-verificación final)
+
+- **Veredicto: PASS.** Re-confirmado tras el follow-up del hallazgo no bloqueante: `npm run build` exit 0, validador i18n build-time `en: OK (536 claves)` / `pt: OK (536 claves)` vs. `es`.
+- `grep -rn "OEA" src/ docs/` → cero resultados en todo el proyecto (confirma commit `0bc3d3e`; `SERVICES[2].tag` ahora `'Aduana Chile'`).
+- Barridos "Años/Years/Anos de operación" y "de expertise" (es/en/pt) → cero resultados en `src/`.
+- Dead code (T7): los 11 `export const` (`NAV_LINKS`, `FOOTER_SERVICES`, `FOOTER_COMPANY`, `STATS`, `SERVICE_DETAILS`, `SERVICE_FILTERS`, `PROCESS_STEPS`, `IND_TAGS_MAP`, `SERVICES_PER_IND`, `QUOTE_CARGO_TYPES`, `QUOTE_EXTRAS`) siguen ausentes de `constants.ts` y sin referencias colgantes en `src/`.
+- T1/T3 reconfirmados estáticamente: `.process-strip__title` fija `color: var(--color-text-inverse)` (`#ffffff` en `tokens.css:76`) sobre fondo `--color-neutral-900`; `BaseLayout.astro` importa `SITE` y el JSON-LD usa `SITE.phone`/`SITE.email` (sin literales).
+- Sin hallazgos pendientes. `verify-report.md` actualizado a PASS final. Ruteo: `sdd-archive`.

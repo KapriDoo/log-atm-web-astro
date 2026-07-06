@@ -54,7 +54,7 @@ Minería, retail, agro, farmacia, e-commerce cross-border, construcción.
 - Clientes satisfechos
 
 ### Certificaciones/acreditaciones a mostrar
-A definir con cliente. Referencias del sector: IATA, FIATA, BASC, ISO 9001, Aduana Chile (OEA).
+A definir con cliente. Referencias del sector: IATA, FIATA, BASC, ISO 9001, Aduana Chile.
 
 ---
 

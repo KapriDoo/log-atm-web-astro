@@ -91,7 +91,7 @@
       "liveTitle": "Frequent routes",
       "livePill": "Coverage",
       "stripStats": [
-        "Years in operation",
+        "Years of team experience",
         "Dedicated manager"
       ]
     },
@@ -228,7 +228,7 @@
     "heroTitleHtml": "We know <em>your industry</em>.",
     "heroLead": "Specialized operations, specific regulations and optimized routes. We design logistics around the rules of your industry.",
     "metaSectors": "Sectors",
-    "metaExpertise": "Years of expertise",
+    "metaExpertise": "Years of team experience",
     "directory": {
       "eyebrow": "All industries",
       "title": "12 sectors with dedicated operations",
@@ -295,7 +295,7 @@
     "heroEyebrow": "About us · Since 2023",
     "heroTitleHtml": "Professionals with <em>20+ years of experience</em>.",
     "heroLead": "We are a Chilean logistics operator. We don't sell a service: we operate with every client as if it were our own operation.",
-    "metaYears": "Years in operation",
+    "metaYears": "Years of team experience",
     "metaCapital": "Chilean capital",
     "manifesto": {
       "titleHtml": "Logistics is a <em>relationship</em>, not a commodity.",
