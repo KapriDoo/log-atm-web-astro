@@ -298,7 +298,7 @@ function buildCTAButtons(args: {
   return (
     `<tr><td style="padding:8px 32px 28px;">` +
     buttonsHtml +
-    `<p style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;color:#898580;text-align:center;margin:14px 0 0;letter-spacing:.04em;">SLA cliente &middot; responder antes de 24 h hábiles</p>` +
+    `<p style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;color:#898580;text-align:center;margin:14px 0 0;letter-spacing:.04em;">SLA cliente &middot; responder a la brevedad</p>` +
     `</td></tr>`
   );
 }
