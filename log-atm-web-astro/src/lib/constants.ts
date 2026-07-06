@@ -39,11 +39,11 @@ export const SITE = {
   name: 'LOG ATM',
   url: 'https://logatm.com',
   tagline: 'Logística a tu medida',
-  phone: '+56942162739',
-  phoneDisplay: '+56 9 4216 2739',
-  email: 'mpazrivera@logatm.com',
+  phone: '+56982708492',
+  phoneDisplay: '+56 9 8270 8492',
+  email: 'contacto@logatm.com',
   address: 'Av. Pdte Kennedy 5600, Of. 507, Vitacura, Santiago, Chile',
-  whatsappUrl: 'https://wa.me/56942162739?text=Hola%2C%20me%20interesa%20cotizar',
+  whatsappUrl: 'https://wa.me/56982708492?text=Hola%2C%20me%20interesa%20cotizar',
   social: {
     facebook: 'https://facebook.com/logatm',
     twitter: 'https://twitter.com/logatm',
@@ -111,7 +111,7 @@ export const SERVICES = [
     icon: 'lucide:plane',
     size: 'feature',
     isCta: false,
-    href: '/servicios/carga-aerea',
+    href: null as string | null,
   },
   {
     n: '02',
@@ -122,7 +122,7 @@ export const SERVICES = [
     icon: 'lucide:ship',
     size: 'wide',
     isCta: false,
-    href: '/servicios/carga-maritima',
+    href: null as string | null,
   },
   {
     n: '03',
@@ -271,7 +271,7 @@ export const LIVE_ROUTES = [
   { from: 'Shanghai',  to: 'San Antonio', mode: 'sea', eta: '12d', status: 'transit' },
   { from: 'Miami',     to: 'Santiago',    mode: 'air', eta: '36h', status: 'transit' },
   { from: 'Rotterdam', to: 'Valparaíso',  mode: 'sea', eta: '21d', status: 'port' },
-  { from: 'Hong Kong', to: 'Iquique',     mode: 'sea', eta: '18d', status: 'transit' },
+  { from: 'Manzanillo', to: 'Valparaíso', mode: 'sea', eta: '18d', status: 'transit' },
 ] as const;
 
 // Opciones del formulario "Cotización rápida · 30 seg" del CtaFinal (handoff sections.jsx)
@@ -341,22 +341,6 @@ export const SERVICE_FILTERS = [
   { k: 'cons',   label: 'Consultoría' },
 ] as const;
 
-// FAQ (página /servicios)
-export const FAQ = [
-  { q: '¿Cómo cotizan un envío?',
-    a: 'Recibes una propuesta en menos de 24 horas con tu ejecutivo dedicado. Necesitamos: origen, destino, tipo de carga, volumen y plazo deseado. Cotizamos tarifa total puerta a puerta sin sorpresas.' },
-  { q: '¿Trabajan con cargas peligrosas (DG)?',
-    a: 'Sí. Manejamos las 9 clases IMO/IATA con la documentación, etiquetado y embalaje certificado. Coordinamos con líneas y aerolíneas autorizadas para tu carga específica.' },
-  { q: '¿Tienen oficinas fuera de Chile?',
-    a: 'No directamente, pero contamos con una red de agentes corresponsales con socios verificados que operan bajo los mismos estándares que aplicamos en Chile.' },
-  { q: '¿Cuánto demora un despacho aduanero?',
-    a: 'Entre 24 y 72 horas hábiles desde la disponibilidad de carga, según régimen y producto. Como OEA tenemos canal verde preferente y revisamos documentos antes de la llegada para evitar demoras.' },
-  { q: '¿Pueden manejar mi cadena completa?',
-    a: 'Sí. Diseñamos supply chains end-to-end: desde la compra al proveedor en origen hasta la entrega final al cliente. Un solo punto de contacto, una sola cuenta consolidada.' },
-  { q: '¿Cómo monitorean el envío?',
-    a: 'Plataforma propia que unifica datos de líneas, aerolíneas y agentes en una sola URL compartible. Recibes alertas automáticas en cada hito y tu ejecutivo está disponible 24/7.' },
-] as const;
-
 // Proceso de trabajo (6 pasos en /servicios)
 export const PROCESS_STEPS = [
   { n: '01', title: 'Diagnóstico',    desc: 'Entendemos tu negocio, cargas y temporalidad.' },
@@ -365,15 +349,6 @@ export const PROCESS_STEPS = [
   { n: '04', title: 'Ejecución',      desc: 'Coordinación con todos los actores en origen.' },
   { n: '05', title: 'Aduana',         desc: 'OEA y revisión documental anticipada.' },
   { n: '06', title: 'Entrega',        desc: 'Última milla y cierre con KPIs.' },
-] as const;
-
-// Línea de tiempo (en /nosotros)
-export const TIMELINE = [
-  { year: '2003', milestone: 'Fundación',           desc: 'Nace LOG ATM con foco en aduana y carga aérea desde Santiago.' },
-  { year: '2009', milestone: 'Marítima FCL',        desc: 'Apertura de la unidad marítima con primeros contratos en Asia.' },
-  { year: '2014', milestone: 'OEA Chile',           desc: 'Obtenemos la certificación de Operador Económico Autorizado.' },
-  { year: '2020', milestone: 'Plataforma digital',  desc: 'Lanzamos la plataforma de visibilidad de carga end-to-end.' },
-  { year: '2024', milestone: 'Hub Medio Oriente',   desc: 'Conexión especializada Dubai · Jeddah con socios locales.' },
 ] as const;
 
 // Valores (en /nosotros)
@@ -390,14 +365,6 @@ export const HOW_WE_WORK = [
   { step: '02', icon: 'lucide:file-check',       img: how02, title: 'Diagnóstico operativo',  desc: 'Mapeamos tu cadena actual: orígenes, destinos, volúmenes, tiempos críticos y dolores. Detectamos sobrecostos y cuellos de botella.' },
   { step: '03', icon: 'lucide:compass',          img: how03,        title: 'Diseño de ruta a medida', desc: 'Proponemos modos, navieras, aerolíneas y agentes según costo, tiempo y riesgo. Negociamos tarifas y dejamos todo documentado.' },
   { step: '04', icon: 'lucide:package',          img: how04,   title: 'Operación y reporte',    desc: 'Ejecutamos cada embarque con visibilidad completa, alertas proactivas ante desvíos y reporte semanal de carga en tránsito.' },
-] as const;
-
-// Certificaciones (en /nosotros)
-export const CERTS = [
-  { name: 'OEA Chile',   desc: 'Operador Económico Autorizado' },
-  { name: 'IATA · CASS', desc: 'Agente de carga aérea certificado' },
-  { name: 'FIATA',       desc: 'Federación Internacional de Asociaciones de Transitarios' },
-  { name: 'ISO 9001',    desc: 'Sistema de gestión de calidad' },
 ] as const;
 
 // Tags por industria (en /industrias)

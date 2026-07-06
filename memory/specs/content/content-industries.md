@@ -6,7 +6,7 @@ slug: content-industries
 domain: feature
 delta_type: add
 supersedes: null
-superseded_by: null
+superseded_by: "[[content-industries/industries-page-content]]"
 status: completed
 assigned_agent: null
 priority: high
@@ -15,7 +15,7 @@ change_ref: alinear-contenido-notion
 commits: [c5d7002]
 feature_branch: feature/alinear-contenido-notion
 mr: ""
-updated: "2026-05-08"
+updated: "2026-07-05"
 acceptance_criteria:
   - "[x] El array INDUSTRIES contiene 14 items (6 originales + 8 nuevas)"
   - "[x] Las 8 industrias nuevas son: Chatarra Ferrosa, Iluminarias, Vehiculos Usados, Efectos Personales, Maquinaria, Repuestos Automotrices y de maquinaria Pesada, Textil, Proyectos"

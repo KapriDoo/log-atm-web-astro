@@ -4,6 +4,9 @@ change_name: gsap-pr2-internal-pages
 status: draft
 created: "2026-05-19"
 related: [internal-page-heroes]
+supersedes: null
+superseded_by: "[[content-nosotros/nosotros-no-timeline-section]]"
+updated: "2026-07-05"
 ---
 
 # Nosotros Timeline Reveal

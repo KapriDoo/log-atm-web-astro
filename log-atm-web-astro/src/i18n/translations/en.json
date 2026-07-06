@@ -19,7 +19,7 @@
     },
     "nosotros": {
       "title": "About Us",
-      "description": "Learn about LOG ATM: a Chilean international logistics company with 20+ years of experience in air, ocean and customs operations."
+      "description": "Learn about LOG ATM: a Chilean international logistics company with professionals with 20+ years of experience in air, ocean and customs operations."
     },
     "contacto": {
       "title": "Contact",
@@ -32,14 +32,6 @@
     "notFound": {
       "title": "Page not found",
       "description": "The page you are looking for does not exist. Return to the LOG ATM home page."
-    },
-    "cargaAerea": {
-      "title": "Air Freight",
-      "description": "LOG ATM air freight service: express, international courier and air charter with guaranteed transit times."
-    },
-    "cargaMaritima": {
-      "title": "Ocean Freight",
-      "description": "LOG ATM ocean freight service: FCL and LCL to 80+ ports with weekly consolidation."
     }
   },
   "nav": {
@@ -51,14 +43,13 @@
   },
   "footer": {
     "brandTagline": "We connect Chile with the world, tailored to you.",
-    "brandDesc": "Chilean logistics operator with 20+ years of experience in air freight, ocean freight, customs and supply chain.",
+    "brandDesc": "Chilean logistics operator with professionals with 20+ years of experience in air freight, ocean freight, customs and supply chain.",
     "colAbout": "About",
     "colContact": "Contact",
     "linkAbout": "About",
     "copyright": "© {year} {name} · All rights reserved"
   },
   "common": {
-    "learnMore": "Learn more",
     "viewAllServices": "View all {count} services",
     "submit": "Send",
     "close": "Close",
@@ -92,7 +83,7 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Chilean logistics operator · 20+ years",
+      "eyebrow": "Chilean logistics operator · Professionals with 20+ years of experience",
       "title1": "Chile with the world,",
       "title2": "tailored to you.",
       "leadHtml": "Air, ocean and customs <em>with no middlemen</em>: a dedicated account manager who knows your operation end to end.",
@@ -133,7 +124,7 @@
       "eyebrow": "Start today",
       "title1": "Your next shipment,",
       "title2Html": "with <em>full visibility</em>.",
-      "lead": "Get a quote in less than 24 hours with a dedicated account manager. No middlemen, no surprises.",
+      "lead": "Get a quote as soon as possible with a dedicated account manager. No middlemen, no surprises.",
       "formTitle": "Quick quote · 60 sec",
       "formMode": "Mode",
       "formOrigin": "Origin",
@@ -179,7 +170,6 @@
     "heroLead": "From urgent shipments to full supply chain consulting. A single counterpart, a single invoice, total visibility.",
     "metaActive": "Active services",
     "metaOps": "Operation",
-    "metaCustoms": "Chile Customs",
     "filters": [
       { "k": "all", "label": "All · 11" },
       { "k": "aereo", "label": "Air" },
@@ -189,10 +179,10 @@
       { "k": "cons", "label": "Consulting" }
     ],
     "list": [
-      { "title": "Air Freight", "desc": "Express, international courier and air charter with guaranteed transit times.", "tag": "Express · 48h" },
+      { "title": "Air Freight", "desc": "International courier and air charter, general cargo, passenger flight.", "tag": "Air" },
       { "title": "Ocean Freight", "desc": "FCL and LCL to 80+ ports. We consolidate to reduce costs.", "tag": "FCL · LCL" },
-      { "title": "Customs & Documentation", "desc": "DUS, certificates of origin and tariff classification.", "tag": "AEO Chile" },
-      { "title": "Warehousing", "desc": "Storage, fulfillment and last mile with real-time inventory.", "tag": "24/7" },
+      { "title": "Customs & Documentation", "desc": "DUS, certificates of origin and tariff classification.", "tag": "Chile Customs" },
+      { "title": "Warehousing", "desc": "General cargo storage.", "tag": "24/7" },
       { "title": "Logistics Consulting", "desc": "Tailored supply chain that reduces costs and lead times.", "tag": "Tailored" },
       { "title": "International Courier", "desc": "Door-to-door express shipments with global coverage.", "tag": "D2D" },
       { "title": "Cargo Insurance", "desc": "Comprehensive coverage throughout the entire route.", "tag": "Global" },
@@ -207,78 +197,26 @@
       "numPrefix": "Service",
       "cardCta": "Quote this service",
       "items": [
-        { "n": "01", "badge": "IATA · CASS", "features": ["International express 48h", "Dedicated air charter", "Cold chain and dangerous goods", "Unified tracking on a single URL"] },
-        { "n": "02", "badge": "FIATA · BIMCO", "features": ["FCL/LCL to 80+ ports", "Weekly Asia-Chile consolidation", "Reefer and open-top available", "Contract rate negotiation"] },
-        { "n": "03", "badge": "AEO · Chile Customs", "features": ["Accurate tariff classification", "DUS, certificates of origin, fumigation", "Authorized Economic Operator", "Document review to prevent fines"] },
-        { "n": "04", "badge": "Integrated WMS", "features": ["24/7 warehousing with CCTV", "E-commerce fulfillment", "Real-time inventory (API)", "Cross-docking and last mile"] },
-        { "n": "05", "badge": "Tailored", "features": ["Supply chain diagnostics", "Optimal logistics network design", "Carrier and airline negotiation", "Monthly KPI dashboard"] },
-        { "n": "11", "badge": "DXB · JED hub", "features": ["Dubai (DXB) and Jeddah (JED) hub", "Certified local partners", "Islamic / halal documentation", "Asia-Africa-LATAM connection"] }
+        { "n": "01", "badge": "IATA · CASS", "features": ["International courier", "Air charter", "Cold chain and dangerous goods", "General cargo", "Passenger flight"] },
+        { "n": "02", "badge": "FIATA · BIMCO", "features": ["FCL/FCL, LCL/LCL to 80+ ports", "Weekly Asia-Chile consolidation", "General cargo, reefer and open-top available"] },
+        { "n": "03", "badge": "Chile Customs", "features": ["Accurate tariff classification", "DUS, DIN, certificates of origin, fumigation", "Document review to prevent fines"] },
+        { "n": "04", "badge": "Integrated WMS", "features": ["Warehousing", "Deconsolidation", "Container consolidation"] },
+        { "n": "05", "badge": "Tailored", "features": ["Supply chain diagnostics", "Optimal logistics network design", "Carrier and airline negotiation"] },
+        { "n": "11", "badge": "DXB · JED hub", "features": ["We take your business to the Middle East", "Broker service"] }
       ]
     },
     "process": {
       "eyebrow": "How we work",
       "title": "A predictable process in 6 steps.",
-      "desc": "From quote to closing with KPIs. A single dedicated account manager coordinates every stage.",
+      "desc": "From quote to closing. A single dedicated account manager coordinates every stage.",
       "steps": [
         { "title": "Diagnosis", "desc": "We understand your business, cargo and timing." },
         { "title": "Route design", "desc": "Mode, transshipments and optimized times." },
-        { "title": "Quote", "desc": "A clear, itemized proposal within 24h." },
+        { "title": "Quote", "desc": "A clear, itemized proposal." },
         { "title": "Execution", "desc": "Coordination with every stakeholder at origin." },
-        { "title": "Customs", "desc": "AEO and document review in advance." },
-        { "title": "Delivery", "desc": "Last mile and closing with KPIs." }
+        { "title": "Customs", "desc": "Advance document review." },
+        { "title": "Delivery", "desc": "Cargo delivery at the warehouse and documentary closing of the customs process." }
       ]
-    },
-    "faq": {
-      "eyebrow": "Frequently asked questions",
-      "title": "We answer what we are asked most",
-      "items": [
-        { "q": "How do you quote a shipment?", "a": "You get a proposal in less than 24 hours from your dedicated account manager. We need: origin, destination, type of cargo, volume and target lead time. We quote a total door-to-door rate with no surprises." },
-        { "q": "Do you handle dangerous goods (DG)?", "a": "Yes. We manage all 9 IMO/IATA classes with certified documentation, labeling and packaging. We coordinate with carriers and airlines authorized for your specific cargo." },
-        { "q": "Do you have offices outside Chile?", "a": "Not directly, but we have a network of correspondent agents with verified partners who operate under the same standards we apply in Chile." },
-        { "q": "How long does customs clearance take?", "a": "Between 24 and 72 business hours from cargo availability, depending on the regime and product. As an AEO we have a preferred green channel and we review documents before arrival to avoid delays." },
-        { "q": "Can you manage my full supply chain?", "a": "Yes. We design end-to-end supply chains: from the purchase at the supplier at origin to final delivery to the customer. A single point of contact, a single consolidated account." },
-        { "q": "How do you monitor the shipment?", "a": "Our own platform unifies data from carriers, airlines and agents into a single shareable URL. You receive automatic alerts at every milestone and your account manager is available 24/7." }
-      ]
-    },
-    "carga": {
-      "aerea": {
-        "title": "Air Freight",
-        "desc": "Express, international courier and air charter with guaranteed transit times.",
-        "eyebrow": "Services",
-        "lead": "Urgent shipments, international courier and air charter with global coverage. We reach any destination in record time.",
-        "ctaQuote": "Get a quote now",
-        "ctaWhatsapp": "Ask via WhatsApp",
-        "featuresTitle": "Why choose our air freight?",
-        "features": [
-          { "title": "48h guaranteed", "desc": "Urgent shipments with committed transit times." },
-          { "title": "Global coverage", "desc": "Alliances with the world's leading cargo airlines." },
-          { "title": "Insurance included", "desc": "All cargo insured during transit." },
-          { "title": "Dedicated account manager", "desc": "A single point of contact for your entire shipment." }
-        ],
-        "ctaTitle": "Need to send urgent air freight?",
-        "ctaDesc": "Get a quote in 2 minutes and receive a proposal in less than 24 hours.",
-        "ctaButton": "Request a quote",
-        "schemaPriceDesc": "Personalized quote"
-      },
-      "maritima": {
-        "title": "Ocean Freight",
-        "desc": "FCL and LCL to 80+ ports. We consolidate to reduce costs.",
-        "eyebrow": "Services",
-        "lead": "FCL and LCL to the world's main ports. We consolidate your cargo to reduce costs without compromising lead times.",
-        "ctaQuote": "Get a quote now",
-        "ctaWhatsapp": "Ask via WhatsApp",
-        "featuresTitle": "Why choose our ocean freight?",
-        "features": [
-          { "title": "FCL and LCL", "desc": "Full container or consolidated cargo to fit your needs." },
-          { "title": "80+ ports", "desc": "Coverage at the main ports of Asia, Europe and the Americas." },
-          { "title": "Consolidation", "desc": "We group your cargo with other clients to reduce costs." },
-          { "title": "Dedicated account manager", "desc": "A single point of contact for your entire shipment." }
-        ],
-        "ctaTitle": "Need to send ocean freight?",
-        "ctaDesc": "Get a quote in 2 minutes and receive a proposal in less than 24 hours.",
-        "ctaButton": "Request a quote",
-        "schemaPriceDesc": "Personalized quote"
-      }
     }
   },
   "industrias": {
@@ -290,18 +228,7 @@
     "heroTitleHtml": "We know <em>your industry</em>.",
     "heroLead": "Specialized operations, specific regulations and optimized routes. We design logistics around the rules of your industry.",
     "metaSectors": "Sectors",
-    "metaClients": "Active clients",
     "metaExpertise": "Years of expertise",
-    "metaRetention": "Retention",
-    "spotlight": {
-      "eyebrow": "Featured sector",
-      "title": "When operations define the business",
-      "caseLabel": "Case",
-      "panelEyebrow": "Client since 2017",
-      "quote": "We moved 1,200 containers of specialized machinery in 8 months for a mining site expansion, with zero days of unplanned detention.",
-      "authorTitle": "Enterprise operation",
-      "authorDetail": "FCL coordination · AEO customs · Last mile to the north"
-    },
     "directory": {
       "eyebrow": "All industries",
       "title": "12 sectors with dedicated operations",
@@ -332,11 +259,11 @@
       { "name": "Textile", "sub": "Garments, fabrics, accessories" }
     ],
     "tags": [
-      ["Copper", "Lithium", "AEO"],
+      ["Copper", "Lithium"],
       ["Fashion", "Consumer", "Peak season"],
       ["Fresh fruit", "Wines", "Grains"],
       ["Cold chain", "GDP", "Reagents"],
-      ["Cross-border", "Fulfillment", "Last mile"],
+      ["Cross-border", "Fulfillment"],
       ["Machinery", "Materials", "Open-top"],
       ["Recycling", "Export", "Bulk"],
       ["LED", "Industrial", "Asia consolidation"],
@@ -346,11 +273,11 @@
       ["Garments", "Fabrics", "Air + Ocean"]
     ],
     "servicesPer": [
-      ["FCL", "Machinery", "AEO", "Reefer"],
+      ["FCL", "Machinery", "Reefer"],
       ["LCL", "Courier", "Fulfillment"],
       ["Reefer", "SAG certification", "Air"],
       ["Cold chain", "GDP validation", "Air express"],
-      ["Fulfillment", "USA mailbox", "Last mile"],
+      ["Fulfillment", "USA mailbox"],
       ["FCL", "Open-top", "Machinery"],
       ["FCL", "Export", "Customs"],
       ["LCL", "Asia consolidation"],
@@ -365,29 +292,16 @@
     "title": "People. Trust. Results.",
     "lead": "We are a Chilean team with global connections and a commitment to treat you as our only client.",
     "breadcrumb": "About",
-    "heroEyebrow": "About us · Since 2003",
-    "heroTitleHtml": "20+ years connecting <em>Chile with the world</em>.",
+    "heroEyebrow": "About us · Since 2023",
+    "heroTitleHtml": "Professionals with <em>20+ years of experience</em>.",
     "heroLead": "We are a Chilean logistics operator. We don't sell a service: we operate with every client as if it were our own operation.",
     "metaYears": "Years in operation",
     "metaCapital": "Chilean capital",
-    "metaCert": "Authorized operator",
-    "metaFocus": "Corporate focus",
     "manifesto": {
       "titleHtml": "Logistics is a <em>relationship</em>, not a commodity.",
-      "p1Html": "We have spent more than two decades operating in the Chilean logistics world and we learned something simple: <em>cargo doesn't move by itself</em>. Behind every container, every AWB, every DUS, there are people making decisions under pressure.",
+      "p1Html": "We are professionals with more than 20 years of experience in the Chilean logistics world, and we learned something simple: <em>cargo doesn't move by itself</em>. Behind every container, every AWB, every DUS, there are people making decisions under pressure.",
       "p2": "That's why we built LOG ATM the opposite way from the rest of the industry. Instead of a call center rotating agents, we assign a dedicated account manager per client. Instead of hidden fees, we show every cost component. Instead of promising everything, we tell you first what might go wrong.",
-      "p3Html": "Today we operate with clients across 12 industries and a retention rate of 98%. But we still measure ourselves by the same question from day one: would the client feel that this operation is their own?"
-    },
-    "timeline": {
-      "eyebrow": "Track record",
-      "title": "20+ years of milestones",
-      "items": [
-        { "year": "2003", "milestone": "Founding", "desc": "LOG ATM is born with a focus on customs and air freight from Santiago." },
-        { "year": "2009", "milestone": "FCL Ocean", "desc": "Launch of our ocean unit with the first contracts in Asia." },
-        { "year": "2014", "milestone": "AEO Chile", "desc": "We obtain the Authorized Economic Operator certification." },
-        { "year": "2020", "milestone": "Digital platform", "desc": "We launch our end-to-end cargo visibility platform." },
-        { "year": "2024", "milestone": "Middle East hub", "desc": "Specialized Dubai · Jeddah connection with local partners." }
-      ]
+      "p3Html": "Our goal is simple: that you feel this operation is yours. That's why we design logistics tailored to you, with no generic formulas, measuring ourselves by the same question from day one: would the client feel that this operation is their own?"
     },
     "values": {
       "eyebrow": "How we work",
@@ -397,7 +311,7 @@
         { "title": "Operational closeness", "desc": "We are not a provider: we are your extended logistics team." },
         { "title": "Tailored to you", "desc": "Every account has an operation designed for its reality." },
         { "title": "Full transparency", "desc": "Clear rates, no surprises. If anything fails, we say it first." },
-        { "title": "Continuous improvement", "desc": "Measurable KPIs and quarterly reviews with every client." }
+        { "title": "Continuous improvement", "desc": "We care about our clients' feedback." }
       ]
     },
     "how": {
@@ -410,33 +324,22 @@
         { "title": "Tailored route design", "desc": "We propose modes, carriers, airlines and agents based on cost, time and risk. We negotiate rates and document everything." },
         { "title": "Operation and reporting", "desc": "We execute every shipment with full visibility, proactive alerts on deviations and weekly cargo-in-transit reports." }
       ]
-    },
-    "certs": {
-      "eyebrow": "Certifications",
-      "title": "We operate under global standards",
-      "items": [
-        { "name": "AEO Chile", "desc": "Authorized Economic Operator" },
-        { "name": "IATA · CASS", "desc": "Certified air cargo agent" },
-        { "name": "FIATA", "desc": "International Federation of Freight Forwarders Associations" },
-        { "name": "ISO 9001", "desc": "Quality management system" }
-      ]
     }
   },
   "contacto": {
     "eyebrow": "Contact",
     "title": "Let's talk about your next shipment",
-    "lead": "Tell us what you need to move and an account manager will contact you in less than 24 hours.",
+    "lead": "Tell us what you need to move and an account manager will contact you as soon as possible.",
     "breadcrumb": "Contact",
-    "heroEyebrow": "Contact · Reply within 24h",
+    "heroEyebrow": "Contact · Fast reply",
     "heroTitleHtml": "Let's talk about your <em>next shipment</em>.",
-    "heroLead": "Tell us what you need to move. A dedicated account manager will respond with a clear proposal in less than 24 business hours.",
-    "metaResponse": "Response time",
+    "heroLead": "Tell us what you need to move. A dedicated account manager will respond with a clear proposal as soon as possible.",
     "metaExec": "Dedicated account manager",
     "metaSupport": "Operational support",
     "metaOffice": "Santiago, Vitacura",
     "form": {
       "title": "Tell us what you need to move",
-      "sub": "We reply in less than 24 business hours · no spam.",
+      "sub": "We reply as soon as possible · no spam.",
       "pill": "Online now",
       "labelName": "Name",
       "labelCompany": "Company",
@@ -489,12 +392,12 @@
   "cotizar": {
     "eyebrow": "Quote",
     "title": "Get a quote in 4 steps",
-    "lead": "Tell us about your operation and receive a clear proposal in less than 24 hours.",
+    "lead": "Tell us about your operation and receive a clear proposal as soon as possible.",
     "breadcrumb": "Get a quote",
     "heroTitleHtml": "Get a quote in <em>4 steps</em>.",
-    "heroLead": "Receive a clear, itemized proposal in less than 24 business hours, with your dedicated account manager assigned.",
+    "heroLead": "Receive a clear, itemized proposal as soon as possible, with your dedicated account manager assigned.",
     "chips": [
-      "Reply < 24h",
+      "Fast reply",
       "No commitment",
       "1:1 account manager"
     ],
@@ -569,11 +472,11 @@
       "kVolume": "Volume",
       "kExtras": "Extras",
       "empty": "To be defined",
-      "sla": "Reply guaranteed in < 24 business hours"
+      "sla": "Guaranteed reply as soon as possible"
     },
     "modes": [
       { "name": "Ocean", "desc": "FCL/LCL, 80+ ports. Best cost/time ratio." },
-      { "name": "Air", "desc": "Express 48h–7d. Ideal for urgent and high-value cargo." },
+      { "name": "Air", "desc": "Ideal for urgent and high-value cargo." },
       { "name": "Courier", "desc": "International door-to-door. Up to 70kg." },
       { "name": "Multimodal", "desc": "Combination of air + ocean + ground." }
     ],
@@ -598,8 +501,8 @@
       "title": "Request received",
       "folioPrefix": "Folio",
       "folioPlaceholder": "Folio · LA-—",
-      "desc": "Thank you. Your dedicated account manager has reviewed the information and will contact you in less than 24 business hours.",
-      "descPersonal": "Thank you {name}. Your dedicated account manager has reviewed the information and will contact you in less than 24 business hours at {email}.",
+      "desc": "Thank you. Your dedicated account manager has reviewed the information and will contact you as soon as possible.",
+      "descPersonal": "Thank you {name}. Your dedicated account manager has reviewed the information and will contact you as soon as possible at {email}.",
       "nextLabel": "NEXT",
       "steps": [
         { "title": "Assignment", "desc": "We assign an account manager based on your industry and route." },

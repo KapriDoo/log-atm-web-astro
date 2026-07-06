@@ -43,26 +43,31 @@ const TOTAL = SERVICES.length;
     </div>
 
     <div class="services__grid" data-scroll-batch>
-      {FEATURED.map((s) => (
-        <a class:list={['svc-card', `svc-card--${s.size}`]} href={s.href} data-scroll-animate data-scroll-type="fade-up">
-          <div class="svc-card__media">
-            <Picture src={s.img} formats={['avif', 'webp']} alt="" quality={80} />
-          </div>
-          <span class:list={['svc-card__tag', { 'svc-card__tag--cta': s.isCta }]}>{s.tag}</span>
-          <div class="svc-card__icon-pill" aria-hidden="true">
-            <Icon name={s.icon} width={18} height={18} />
-          </div>
-          <div class="svc-card__body">
-            <div class="svc-card__num">{s.n} · {t('home.services.numPrefix')}</div>
-            <h3 class="svc-card__title">{s.title}</h3>
-            <p class="svc-card__desc">{s.desc}</p>
-            <span class="svc-card__cta">
-              {t('common.learnMore')}
-              <Icon name="lucide:arrow-right" width={14} height={14} aria-hidden="true" />
-            </span>
-          </div>
-        </a>
-      ))}
+      {FEATURED.map((s) => {
+        const isLink = Boolean(s.href);
+        const CardTag = isLink ? 'a' : 'div';
+        return (
+          <CardTag
+            class:list={['svc-card', `svc-card--${s.size}`, { 'svc-card--static': !isLink }]}
+            href={isLink ? s.href : undefined}
+            data-scroll-animate
+            data-scroll-type="fade-up"
+          >
+            <div class="svc-card__media">
+              <Picture src={s.img} formats={['avif', 'webp']} alt="" quality={80} />
+            </div>
+            <span class:list={['svc-card__tag', { 'svc-card__tag--cta': s.isCta }]}>{s.tag}</span>
+            <div class="svc-card__icon-pill" aria-hidden="true">
+              <Icon name={s.icon} width={18} height={18} />
+            </div>
+            <div class="svc-card__body">
+              <div class="svc-card__num">{s.n} · {t('home.services.numPrefix')}</div>
+              <h3 class="svc-card__title">{s.title}</h3>
+              <p class="svc-card__desc">{s.desc}</p>
+            </div>
+          </CardTag>
+        );
+      })}
     </div>
 
     <div class="services__all">
