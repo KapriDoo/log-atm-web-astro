@@ -124,7 +124,7 @@
       "eyebrow": "Comece hoje",
       "title1": "Seu próximo embarque,",
       "title2Html": "com <em>visibilidade total</em>.",
-      "lead": "Cote em menos de 24 horas com um executivo dedicado. Sem intermediários, sem surpresas.",
+      "lead": "Cote o mais breve possível com um executivo dedicado. Sem intermediários, sem surpresas.",
       "formTitle": "Cotação rápida · 60 seg",
       "formMode": "Modalidade",
       "formOrigin": "Origem",
@@ -329,18 +329,17 @@
   "contacto": {
     "eyebrow": "Contato",
     "title": "Vamos falar do seu próximo embarque",
-    "lead": "Conte-nos o que você precisa movimentar e um executivo entra em contato em menos de 24 horas.",
+    "lead": "Conte-nos o que você precisa movimentar e um executivo entra em contato o mais breve possível.",
     "breadcrumb": "Contato",
-    "heroEyebrow": "Contato · Resposta em 24h",
+    "heroEyebrow": "Contato · Resposta rápida",
     "heroTitleHtml": "Vamos falar do seu <em>próximo embarque</em>.",
-    "heroLead": "Conte-nos o que precisa movimentar. Um executivo dedicado responde com uma proposta clara em menos de 24 horas úteis.",
-    "metaResponse": "Tempo de resposta",
+    "heroLead": "Conte-nos o que precisa movimentar. Um executivo dedicado responde com uma proposta clara o mais breve possível.",
     "metaExec": "Executivo dedicado",
     "metaSupport": "Suporte operacional",
     "metaOffice": "Santiago, Vitacura",
     "form": {
       "title": "Conte-nos o que precisa movimentar",
-      "sub": "Respondemos em menos de 24h úteis · sem spam.",
+      "sub": "Respondemos o mais breve possível · sem spam.",
       "pill": "Online agora",
       "labelName": "Nome",
       "labelCompany": "Empresa",
@@ -393,12 +392,12 @@
   "cotizar": {
     "eyebrow": "Cotação",
     "title": "Cote em 4 passos",
-    "lead": "Conte-nos sua operação e receba uma proposta clara em menos de 24 horas.",
+    "lead": "Conte-nos sua operação e receba uma proposta clara o mais breve possível.",
     "breadcrumb": "Cotar",
     "heroTitleHtml": "Cote em <em>4 passos</em>.",
-    "heroLead": "Receba uma proposta clara e detalhada em menos de 24 horas úteis, com seu executivo dedicado já designado.",
+    "heroLead": "Receba uma proposta clara e detalhada o mais breve possível, com seu executivo dedicado já designado.",
     "chips": [
-      "Resposta < 24h",
+      "Resposta rápida",
       "Sem compromisso",
       "Executivo 1:1"
     ],
@@ -473,11 +472,11 @@
       "kVolume": "Volume",
       "kExtras": "Extras",
       "empty": "A definir",
-      "sla": "Resposta garantida em < 24h úteis"
+      "sla": "Resposta garantida o mais breve possível"
     },
     "modes": [
       { "name": "Marítimo", "desc": "FCL/LCL, mais de 80 portos. Melhor relação custo/prazo." },
-      { "name": "Aéreo", "desc": "Expresso 48h–7d. Ideal para urgências e alto valor." },
+      { "name": "Aéreo", "desc": "Ideal para urgências e alto valor." },
       { "name": "Courier", "desc": "Door-to-door internacional. Até 70kg." },
       { "name": "Multimodal", "desc": "Combinação aéreo + marítimo + terrestre." }
     ],
@@ -502,8 +501,8 @@
       "title": "Solicitação recebida",
       "folioPrefix": "Protocolo",
       "folioPlaceholder": "Protocolo · LA-—",
-      "desc": "Obrigado. Seu executivo dedicado revisou as informações e entra em contato em menos de 24 horas úteis.",
-      "descPersonal": "Obrigado {name}. Seu executivo dedicado revisou as informações e entra em contato em menos de 24 horas úteis pelo e-mail {email}.",
+      "desc": "Obrigado. Seu executivo dedicado revisou as informações e entra em contato o mais breve possível.",
+      "descPersonal": "Obrigado {name}. Seu executivo dedicado revisou as informações e entra em contato o mais breve possível pelo e-mail {email}.",
       "nextLabel": "PRÓXIMO",
       "steps": [
         { "title": "Atribuição", "desc": "Atribuímos um executivo conforme sua indústria e rota." },

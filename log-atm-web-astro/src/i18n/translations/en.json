@@ -124,7 +124,7 @@
       "eyebrow": "Start today",
       "title1": "Your next shipment,",
       "title2Html": "with <em>full visibility</em>.",
-      "lead": "Get a quote in less than 24 hours with a dedicated account manager. No middlemen, no surprises.",
+      "lead": "Get a quote as soon as possible with a dedicated account manager. No middlemen, no surprises.",
       "formTitle": "Quick quote · 60 sec",
       "formMode": "Mode",
       "formOrigin": "Origin",
@@ -329,18 +329,17 @@
   "contacto": {
     "eyebrow": "Contact",
     "title": "Let's talk about your next shipment",
-    "lead": "Tell us what you need to move and an account manager will contact you in less than 24 hours.",
+    "lead": "Tell us what you need to move and an account manager will contact you as soon as possible.",
     "breadcrumb": "Contact",
-    "heroEyebrow": "Contact · Reply within 24h",
+    "heroEyebrow": "Contact · Fast reply",
     "heroTitleHtml": "Let's talk about your <em>next shipment</em>.",
-    "heroLead": "Tell us what you need to move. A dedicated account manager will respond with a clear proposal in less than 24 business hours.",
-    "metaResponse": "Response time",
+    "heroLead": "Tell us what you need to move. A dedicated account manager will respond with a clear proposal as soon as possible.",
     "metaExec": "Dedicated account manager",
     "metaSupport": "Operational support",
     "metaOffice": "Santiago, Vitacura",
     "form": {
       "title": "Tell us what you need to move",
-      "sub": "We reply in less than 24 business hours · no spam.",
+      "sub": "We reply as soon as possible · no spam.",
       "pill": "Online now",
       "labelName": "Name",
       "labelCompany": "Company",
@@ -393,12 +392,12 @@
   "cotizar": {
     "eyebrow": "Quote",
     "title": "Get a quote in 4 steps",
-    "lead": "Tell us about your operation and receive a clear proposal in less than 24 hours.",
+    "lead": "Tell us about your operation and receive a clear proposal as soon as possible.",
     "breadcrumb": "Get a quote",
     "heroTitleHtml": "Get a quote in <em>4 steps</em>.",
-    "heroLead": "Receive a clear, itemized proposal in less than 24 business hours, with your dedicated account manager assigned.",
+    "heroLead": "Receive a clear, itemized proposal as soon as possible, with your dedicated account manager assigned.",
     "chips": [
-      "Reply < 24h",
+      "Fast reply",
       "No commitment",
       "1:1 account manager"
     ],
@@ -473,11 +472,11 @@
       "kVolume": "Volume",
       "kExtras": "Extras",
       "empty": "To be defined",
-      "sla": "Reply guaranteed in < 24 business hours"
+      "sla": "Guaranteed reply as soon as possible"
     },
     "modes": [
       { "name": "Ocean", "desc": "FCL/LCL, 80+ ports. Best cost/time ratio." },
-      { "name": "Air", "desc": "Express 48h–7d. Ideal for urgent and high-value cargo." },
+      { "name": "Air", "desc": "Ideal for urgent and high-value cargo." },
       { "name": "Courier", "desc": "International door-to-door. Up to 70kg." },
       { "name": "Multimodal", "desc": "Combination of air + ocean + ground." }
     ],
@@ -502,8 +501,8 @@
       "title": "Request received",
       "folioPrefix": "Folio",
       "folioPlaceholder": "Folio · LA-—",
-      "desc": "Thank you. Your dedicated account manager has reviewed the information and will contact you in less than 24 business hours.",
-      "descPersonal": "Thank you {name}. Your dedicated account manager has reviewed the information and will contact you in less than 24 business hours at {email}.",
+      "desc": "Thank you. Your dedicated account manager has reviewed the information and will contact you as soon as possible.",
+      "descPersonal": "Thank you {name}. Your dedicated account manager has reviewed the information and will contact you as soon as possible at {email}.",
       "nextLabel": "NEXT",
       "steps": [
         { "title": "Assignment", "desc": "We assign an account manager based on your industry and route." },
