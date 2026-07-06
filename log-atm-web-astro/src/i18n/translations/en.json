@@ -32,14 +32,6 @@
     "notFound": {
       "title": "Page not found",
       "description": "The page you are looking for does not exist. Return to the LOG ATM home page."
-    },
-    "cargaAerea": {
-      "title": "Air Freight",
-      "description": "LOG ATM air freight service: express, international courier and air charter with guaranteed transit times."
-    },
-    "cargaMaritima": {
-      "title": "Ocean Freight",
-      "description": "LOG ATM ocean freight service: FCL and LCL to 80+ ports with weekly consolidation."
     }
   },
   "nav": {
@@ -58,7 +50,6 @@
     "copyright": "© {year} {name} · All rights reserved"
   },
   "common": {
-    "learnMore": "Learn more",
     "viewAllServices": "View all {count} services",
     "submit": "Send",
     "close": "Close",
@@ -179,7 +170,6 @@
     "heroLead": "From urgent shipments to full supply chain consulting. A single counterpart, a single invoice, total visibility.",
     "metaActive": "Active services",
     "metaOps": "Operation",
-    "metaCustoms": "Chile Customs",
     "filters": [
       { "k": "all", "label": "All · 11" },
       { "k": "aereo", "label": "Air" },
@@ -239,46 +229,6 @@
         { "q": "Can you manage my full supply chain?", "a": "Yes. We design end-to-end supply chains: from the purchase at the supplier at origin to final delivery to the customer. A single point of contact, a single consolidated account." },
         { "q": "How do you monitor the shipment?", "a": "Our own platform unifies data from carriers, airlines and agents into a single shareable URL. You receive automatic alerts at every milestone and your account manager is available 24/7." }
       ]
-    },
-    "carga": {
-      "aerea": {
-        "title": "Air Freight",
-        "desc": "Express, international courier and air charter with guaranteed transit times.",
-        "eyebrow": "Services",
-        "lead": "Urgent shipments, international courier and air charter with global coverage. We reach any destination in record time.",
-        "ctaQuote": "Get a quote now",
-        "ctaWhatsapp": "Ask via WhatsApp",
-        "featuresTitle": "Why choose our air freight?",
-        "features": [
-          { "title": "48h guaranteed", "desc": "Urgent shipments with committed transit times." },
-          { "title": "Global coverage", "desc": "Alliances with the world's leading cargo airlines." },
-          { "title": "Insurance included", "desc": "All cargo insured during transit." },
-          { "title": "Dedicated account manager", "desc": "A single point of contact for your entire shipment." }
-        ],
-        "ctaTitle": "Need to send urgent air freight?",
-        "ctaDesc": "Get a quote in 2 minutes and receive a proposal in less than 24 hours.",
-        "ctaButton": "Request a quote",
-        "schemaPriceDesc": "Personalized quote"
-      },
-      "maritima": {
-        "title": "Ocean Freight",
-        "desc": "FCL and LCL to 80+ ports. We consolidate to reduce costs.",
-        "eyebrow": "Services",
-        "lead": "FCL and LCL to the world's main ports. We consolidate your cargo to reduce costs without compromising lead times.",
-        "ctaQuote": "Get a quote now",
-        "ctaWhatsapp": "Ask via WhatsApp",
-        "featuresTitle": "Why choose our ocean freight?",
-        "features": [
-          { "title": "FCL and LCL", "desc": "Full container or consolidated cargo to fit your needs." },
-          { "title": "80+ ports", "desc": "Coverage at the main ports of Asia, Europe and the Americas." },
-          { "title": "Consolidation", "desc": "We group your cargo with other clients to reduce costs." },
-          { "title": "Dedicated account manager", "desc": "A single point of contact for your entire shipment." }
-        ],
-        "ctaTitle": "Need to send ocean freight?",
-        "ctaDesc": "Get a quote in 2 minutes and receive a proposal in less than 24 hours.",
-        "ctaButton": "Request a quote",
-        "schemaPriceDesc": "Personalized quote"
-      }
     }
   },
   "industrias": {

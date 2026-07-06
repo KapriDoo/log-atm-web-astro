@@ -111,7 +111,7 @@ export const SERVICES = [
     icon: 'lucide:plane',
     size: 'feature',
     isCta: false,
-    href: '/servicios/carga-aerea',
+    href: null as string | null,
   },
   {
     n: '02',
@@ -122,7 +122,7 @@ export const SERVICES = [
     icon: 'lucide:ship',
     size: 'wide',
     isCta: false,
-    href: '/servicios/carga-maritima',
+    href: null as string | null,
   },
   {
     n: '03',

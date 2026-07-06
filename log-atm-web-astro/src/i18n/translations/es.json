@@ -32,14 +32,6 @@
     "notFound": {
       "title": "Página no encontrada",
       "description": "La página que buscas no existe. Vuelve al inicio de LOG ATM."
-    },
-    "cargaAerea": {
-      "title": "Carga Aérea",
-      "description": "Servicio de carga aérea LOG ATM: express, courier internacional y chárter aéreo con tiempos garantizados."
-    },
-    "cargaMaritima": {
-      "title": "Carga Marítima",
-      "description": "Servicio de carga marítima LOG ATM: FCL y LCL a 80+ puertos con consolidación semanal."
     }
   },
   "nav": {
@@ -58,7 +50,6 @@
     "copyright": "© {year} {name} · Todos los derechos reservados"
   },
   "common": {
-    "learnMore": "Conocer más",
     "viewAllServices": "Ver los {count} servicios",
     "submit": "Enviar",
     "close": "Cerrar",
@@ -179,7 +170,6 @@
     "heroLead": "Desde el despacho urgente hasta la consultoría de supply chain completa. Una sola contraparte, una sola factura, visibilidad total.",
     "metaActive": "Servicios activos",
     "metaOps": "Operación",
-    "metaCustoms": "Aduanas Chile",
     "filters": [
       { "k": "all", "label": "Todos · 11" },
       { "k": "aereo", "label": "Aéreo" },
@@ -239,46 +229,6 @@
         { "q": "¿Pueden manejar mi cadena completa?", "a": "Sí. Diseñamos supply chains end-to-end: desde la compra al proveedor en origen hasta la entrega final al cliente. Un solo punto de contacto, una sola cuenta consolidada." },
         { "q": "¿Cómo monitorean el envío?", "a": "Plataforma propia que unifica datos de líneas, aerolíneas y agentes en una sola URL compartible. Recibes alertas automáticas en cada hito y tu ejecutivo está disponible 24/7." }
       ]
-    },
-    "carga": {
-      "aerea": {
-        "title": "Carga Aérea",
-        "desc": "Express, courier internacional y chárter aéreo con tiempos garantizados.",
-        "eyebrow": "Servicios",
-        "lead": "Envíos urgentes, courier internacional y chárter aéreo con cobertura global. Llegamos a cualquier destino en tiempo récord.",
-        "ctaQuote": "Cotizar ahora",
-        "ctaWhatsapp": "Consultar por WhatsApp",
-        "featuresTitle": "¿Por qué elegir nuestra carga aérea?",
-        "features": [
-          { "title": "48h garantizado", "desc": "Envíos urgentes con tiempos de tránsito comprometidos." },
-          { "title": "Cobertura global", "desc": "Alianzas con las principales aerolíneas de carga del mundo." },
-          { "title": "Seguro incluido", "desc": "Todas las cargas aseguradas durante el tránsito." },
-          { "title": "Ejecutivo dedicado", "desc": "Un solo punto de contacto para todo tu envío." }
-        ],
-        "ctaTitle": "¿Necesitas enviar carga aérea urgente?",
-        "ctaDesc": "Cotiza en 2 minutos y recibe una propuesta en menos de 24 horas.",
-        "ctaButton": "Solicitar cotización",
-        "schemaPriceDesc": "Cotización personalizada"
-      },
-      "maritima": {
-        "title": "Carga Marítima",
-        "desc": "FCL y LCL a 80+ puertos. Consolidamos para reducir costos.",
-        "eyebrow": "Servicios",
-        "lead": "FCL y LCL a los principales puertos del mundo. Consolidamos tu carga para reducir costos sin comprometer los plazos.",
-        "ctaQuote": "Cotizar ahora",
-        "ctaWhatsapp": "Consultar por WhatsApp",
-        "featuresTitle": "¿Por qué elegir nuestra carga marítima?",
-        "features": [
-          { "title": "FCL y LCL", "desc": "Contenedor completo o carga consolidada según tus necesidades." },
-          { "title": "80+ puertos", "desc": "Cobertura en los principales puertos de Asia, Europa y América." },
-          { "title": "Consolidación", "desc": "Agrupamos tu carga con otros clientes para reducir costos." },
-          { "title": "Ejecutivo dedicado", "desc": "Un solo punto de contacto para todo tu envío." }
-        ],
-        "ctaTitle": "¿Necesitas enviar carga marítima?",
-        "ctaDesc": "Cotiza en 2 minutos y recibe una propuesta en menos de 24 horas.",
-        "ctaButton": "Solicitar cotización",
-        "schemaPriceDesc": "Cotización personalizada"
-      }
     }
   },
   "industrias": {
