@@ -7,7 +7,7 @@ domain: "feature"
 delta_type: "MODIFY"
 supersedes: "[[content/content-stats]]"
 superseded_by: "[[content-nosotros/nosotros-manifesto-founding-year-consistency]]"
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
@@ -16,7 +16,7 @@ change_ref: "[[content-cleanup-mensajes]]"
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/content-cleanup-mensajes/log-atm-web-astro"
 feature_branch: "feature/content-cleanup-mensajes"
 commits: ["c960637"]
-mr: ""
+mr: "https://github.com/KapriDoo/log-atm-web-astro/pull/28"
 acceptance_criteria:
   - "[x] Ninguna mención a los años de experiencia de la empresa contradice 'Desde 2023' en ninguna página"
   - "[x] El eyebrow del hero de Home es coherente con la nueva fecha de fundación"

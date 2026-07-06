@@ -7,7 +7,7 @@ domain: "feature"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
@@ -16,7 +16,7 @@ change_ref: "[[content-cleanup-mensajes]]"
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/content-cleanup-mensajes/log-atm-web-astro"
 feature_branch: "feature/content-cleanup-mensajes"
 commits: ["e8aef42"]
-mr: ""
+mr: "https://github.com/KapriDoo/log-atm-web-astro/pull/28"
 acceptance_criteria:
   - "[x] El correo transaccional de notificación no promete un plazo de respuesta expresado en horas"
   - "[x] El texto de recordatorio de tiempo de respuesta usa un término general sin comprometer un número de horas"

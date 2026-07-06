@@ -7,7 +7,7 @@ domain: "feature"
 delta_type: "MODIFY"
 supersedes: "[[content-nosotros/years-experience-narrative-consistency]]"
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
@@ -16,7 +16,7 @@ change_ref: "[[content-cleanup-mensajes]]"
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/content-cleanup-mensajes/log-atm-web-astro"
 feature_branch: "feature/content-cleanup-mensajes"
 commits: ["88c02a8"]
-mr: ""
+mr: "https://github.com/KapriDoo/log-atm-web-astro/pull/28"
 acceptance_criteria:
   - "[x] El primer párrafo del manifiesto de Nosotros (p1Html) no afirma que la empresa (LOG ATM) opera desde hace más de dos décadas"
   - "[x] El párrafo reescrito conserva el mensaje sobre la experiencia colectiva del equipo sin contradecir 'Nosotros · Desde 2023'"

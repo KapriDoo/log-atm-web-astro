@@ -7,7 +7,7 @@ domain: "feature"
 delta_type: "MODIFY"
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on: []
@@ -15,7 +15,7 @@ change_ref: "[[content-cleanup-mensajes]]"
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/content-cleanup-mensajes/log-atm-web-astro"
 feature_branch: "feature/content-cleanup-mensajes"
 commits: ["c086b40"]
-mr: ""
+mr: "https://github.com/KapriDoo/log-atm-web-astro/pull/28"
 acceptance_criteria:
   - "[x] Carga Aérea muestra la descripción y los 5 bullets exactos definidos, sin bullets adicionales"
   - "[x] Carga Marítima corrige el bullet FCL/LCL, incluye 'Carga general, Reefer y open-top disponibles' y no menciona negociación de tarifas por contrato"

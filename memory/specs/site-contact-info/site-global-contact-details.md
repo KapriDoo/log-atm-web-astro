@@ -7,7 +7,7 @@ domain: "feature"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
@@ -15,7 +15,7 @@ change_ref: "[[content-cleanup-mensajes]]"
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/content-cleanup-mensajes/log-atm-web-astro"
 feature_branch: "feature/content-cleanup-mensajes"
 commits: ["ffaa4c8"]
-mr: ""
+mr: "https://github.com/KapriDoo/log-atm-web-astro/pull/28"
 acceptance_criteria:
   - "[x] El teléfono de contacto mostrado en cualquier página del sitio es '+56 9 8270 8492'"
   - "[x] El email de contacto mostrado en cualquier página del sitio es 'contacto@logatm.com'"

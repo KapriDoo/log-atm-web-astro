@@ -7,7 +7,7 @@ domain: "feature"
 delta_type: "MODIFY"
 supersedes: "[[content/content-industries]]"
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on: []
@@ -15,7 +15,7 @@ change_ref: "[[content-cleanup-mensajes]]"
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/content-cleanup-mensajes/log-atm-web-astro"
 feature_branch: "feature/content-cleanup-mensajes"
 commits: ["84f5369", "5236635"]
-mr: ""
+mr: "https://github.com/KapriDoo/log-atm-web-astro/pull/28"
 acceptance_criteria:
   - "[x] La página de industrias no muestra la cifra '300+ clientes activos'"
   - "[x] La página de industrias no muestra la cifra '98% retención'"

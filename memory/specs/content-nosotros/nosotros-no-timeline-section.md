@@ -7,7 +7,7 @@ domain: "feature"
 delta_type: "DEPRECATE"
 supersedes: "[[nosotros-timeline-reveal/spec]]"
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: low
 depends_on: []
@@ -15,7 +15,7 @@ change_ref: "[[content-cleanup-mensajes]]"
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/content-cleanup-mensajes/log-atm-web-astro"
 feature_branch: "feature/content-cleanup-mensajes"
 commits: ["84f5369"]
-mr: ""
+mr: "https://github.com/KapriDoo/log-atm-web-astro/pull/28"
 acceptance_criteria:
   - "[x] La página Nosotros no muestra ninguna sección de 'Trayectoria' ni línea de tiempo histórica"
   - "[x] No queda ningún rastro visual, de estilo ni de script dedicado exclusivamente a la sección retirada"

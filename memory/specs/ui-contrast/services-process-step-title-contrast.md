@@ -7,7 +7,7 @@ domain: "fix"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
@@ -15,7 +15,7 @@ change_ref: "[[content-cleanup-mensajes]]"
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/content-cleanup-mensajes/log-atm-web-astro"
 feature_branch: "feature/content-cleanup-mensajes"
 commits: ["f84cdf8"]
-mr: ""
+mr: "https://github.com/KapriDoo/log-atm-web-astro/pull/28"
 acceptance_criteria:
   - "[x] El título de cada paso de 'Cómo trabajamos' en /servicios es legible sobre su fondo, en cualquier navegador moderno"
   - "[x] El contraste entre el título y el fondo cumple WCAG AA (ratio ≥ 4.5:1)"

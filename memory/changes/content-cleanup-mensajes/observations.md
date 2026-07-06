@@ -245,3 +245,23 @@
   natural phrasing`). Spec `content-nosotros/nosotros-hero-identity`
   actualizada con `commits: ["c960637", "86fe114"]`. `current_phase` de
   `state.md` no se toca (queda a cargo del orquestador post-judgment).
+
+## sdd-archive (2026-07-05) — cierre del cambio
+
+- Commit `a7b71e5` (`chore(sdd): record verify and judgment results for
+  content-cleanup-mensajes`): persistidos `verify-report.md` (PASS 17/17,
+  iteración 2) y `judgment-report.md` (veredicto pass) en el worktree antes
+  del cierre.
+- Push exitoso de `feature/content-cleanup-mensajes` a `origin` (14+1
+  commits). PR creado en GitHub: `#28`
+  (https://github.com/KapriDoo/log-atm-web-astro/pull/28), target `main`.
+- 17 specs de `spec_refs` marcadas `status: completed`, `mr` con la URL del
+  PR #28, `updated: "2026-07-05"` (incluye la spec superseded
+  `years-experience-narrative-consistency` y la delta
+  `nosotros-manifesto-founding-year-consistency`).
+- `_profile.md` no se tocó — sin cambios de stack en este ciclo.
+- `state.md`: `status: completed`, `current_phase: ""`, `phases_completed`
+  incluye `sdd-archive`, `mr`/`mr_status: created` registrados.
+- Cleanup workspace pendiente (ADR-0008): se elimina
+  `memory/changes/content-cleanup-mensajes/` en el siguiente commit; historial
+  completo preservado vía `git log --follow feature/content-cleanup-mensajes`.
