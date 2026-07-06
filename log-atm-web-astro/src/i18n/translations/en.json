@@ -179,10 +179,10 @@
       { "k": "cons", "label": "Consulting" }
     ],
     "list": [
-      { "title": "Air Freight", "desc": "Express, international courier and air charter with guaranteed transit times.", "tag": "Express · 48h" },
+      { "title": "Air Freight", "desc": "International courier and air charter, general cargo, passenger flight.", "tag": "Air" },
       { "title": "Ocean Freight", "desc": "FCL and LCL to 80+ ports. We consolidate to reduce costs.", "tag": "FCL · LCL" },
-      { "title": "Customs & Documentation", "desc": "DUS, certificates of origin and tariff classification.", "tag": "AEO Chile" },
-      { "title": "Warehousing", "desc": "Storage, fulfillment and last mile with real-time inventory.", "tag": "24/7" },
+      { "title": "Customs & Documentation", "desc": "DUS, certificates of origin and tariff classification.", "tag": "Chile Customs" },
+      { "title": "Warehousing", "desc": "General cargo storage.", "tag": "24/7" },
       { "title": "Logistics Consulting", "desc": "Tailored supply chain that reduces costs and lead times.", "tag": "Tailored" },
       { "title": "International Courier", "desc": "Door-to-door express shipments with global coverage.", "tag": "D2D" },
       { "title": "Cargo Insurance", "desc": "Comprehensive coverage throughout the entire route.", "tag": "Global" },
@@ -197,25 +197,25 @@
       "numPrefix": "Service",
       "cardCta": "Quote this service",
       "items": [
-        { "n": "01", "badge": "IATA · CASS", "features": ["International express 48h", "Dedicated air charter", "Cold chain and dangerous goods", "Unified tracking on a single URL"] },
-        { "n": "02", "badge": "FIATA · BIMCO", "features": ["FCL/LCL to 80+ ports", "Weekly Asia-Chile consolidation", "Reefer and open-top available", "Contract rate negotiation"] },
-        { "n": "03", "badge": "AEO · Chile Customs", "features": ["Accurate tariff classification", "DUS, certificates of origin, fumigation", "Authorized Economic Operator", "Document review to prevent fines"] },
-        { "n": "04", "badge": "Integrated WMS", "features": ["24/7 warehousing with CCTV", "E-commerce fulfillment", "Real-time inventory (API)", "Cross-docking and last mile"] },
-        { "n": "05", "badge": "Tailored", "features": ["Supply chain diagnostics", "Optimal logistics network design", "Carrier and airline negotiation", "Monthly KPI dashboard"] },
-        { "n": "11", "badge": "DXB · JED hub", "features": ["Dubai (DXB) and Jeddah (JED) hub", "Certified local partners", "Islamic / halal documentation", "Asia-Africa-LATAM connection"] }
+        { "n": "01", "badge": "IATA · CASS", "features": ["International courier", "Air charter", "Cold chain and dangerous goods", "General cargo", "Passenger flight"] },
+        { "n": "02", "badge": "FIATA · BIMCO", "features": ["FCL/FCL, LCL/LCL to 80+ ports", "Weekly Asia-Chile consolidation", "General cargo, reefer and open-top available"] },
+        { "n": "03", "badge": "Chile Customs", "features": ["Accurate tariff classification", "DUS, DIN, certificates of origin, fumigation", "Document review to prevent fines"] },
+        { "n": "04", "badge": "Integrated WMS", "features": ["Warehousing", "Deconsolidation", "Container consolidation"] },
+        { "n": "05", "badge": "Tailored", "features": ["Supply chain diagnostics", "Optimal logistics network design", "Carrier and airline negotiation"] },
+        { "n": "11", "badge": "DXB · JED hub", "features": ["We take your business to the Middle East", "Broker service"] }
       ]
     },
     "process": {
       "eyebrow": "How we work",
       "title": "A predictable process in 6 steps.",
-      "desc": "From quote to closing with KPIs. A single dedicated account manager coordinates every stage.",
+      "desc": "From quote to closing. A single dedicated account manager coordinates every stage.",
       "steps": [
         { "title": "Diagnosis", "desc": "We understand your business, cargo and timing." },
         { "title": "Route design", "desc": "Mode, transshipments and optimized times." },
-        { "title": "Quote", "desc": "A clear, itemized proposal within 24h." },
+        { "title": "Quote", "desc": "A clear, itemized proposal." },
         { "title": "Execution", "desc": "Coordination with every stakeholder at origin." },
-        { "title": "Customs", "desc": "AEO and document review in advance." },
-        { "title": "Delivery", "desc": "Last mile and closing with KPIs." }
+        { "title": "Customs", "desc": "Advance document review." },
+        { "title": "Delivery", "desc": "Cargo delivery at the warehouse and documentary closing of the customs process." }
       ]
     }
   },

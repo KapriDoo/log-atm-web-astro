@@ -179,10 +179,10 @@
       { "k": "cons", "label": "Consultoría" }
     ],
     "list": [
-      { "title": "Carga Aérea", "desc": "Express, courier internacional y chárter aéreo con tiempos garantizados.", "tag": "Express · 48h" },
+      { "title": "Carga Aérea", "desc": "Courier internacional y chárter aéreo, carga general, vuelo pasajero.", "tag": "Aéreo" },
       { "title": "Carga Marítima", "desc": "FCL y LCL a 80+ puertos. Consolidamos para reducir costos.", "tag": "FCL · LCL" },
-      { "title": "Aduana y Documentación", "desc": "DUS, certificados de origen y clasificación arancelaria.", "tag": "OEA Chile" },
-      { "title": "Almacenaje", "desc": "Bodegaje, fulfillment y última milla con inventario en tiempo real.", "tag": "24/7" },
+      { "title": "Aduana y Documentación", "desc": "DUS, certificados de origen y clasificación arancelaria.", "tag": "Aduana Chile" },
+      { "title": "Almacenaje", "desc": "Bodegaje de carga general.", "tag": "24/7" },
       { "title": "Consultoría Logística", "desc": "Supply chain a medida que reduce costos y plazos.", "tag": "A tu medida" },
       { "title": "Courier Internacional", "desc": "Envíos exprés puerta a puerta con cobertura global.", "tag": "D2D" },
       { "title": "Seguros de Carga", "desc": "Cobertura integral durante todo el trayecto.", "tag": "Global" },
@@ -197,25 +197,25 @@
       "numPrefix": "Servicio",
       "cardCta": "Cotizar este servicio",
       "items": [
-        { "n": "01", "badge": "IATA · CASS", "features": ["Express 48h internacional", "Chárter aéreo dedicado", "Cadena de frío y dangerous goods", "Tracking unificado en una sola URL"] },
-        { "n": "02", "badge": "FIATA · BIMCO", "features": ["FCL/LCL a 80+ puertos", "Consolidación semanal Asia-Chile", "Reefer y open-top disponibles", "Negociación de tarifas por contrato"] },
-        { "n": "03", "badge": "OEA · Aduanas Chile", "features": ["Clasificación arancelaria precisa", "DUS, certificados de origen, fumigación", "Operador Económico Autorizado", "Revisión documental anti-multas"] },
-        { "n": "04", "badge": "WMS integrado", "features": ["Bodegaje 24/7 con CCTV", "Fulfillment para e-commerce", "Inventario en tiempo real (API)", "Cross-docking y última milla"] },
-        { "n": "05", "badge": "A tu medida", "features": ["Diagnóstico de supply chain", "Diseño de red logística óptima", "Negociación con navieras y aerolíneas", "KPI dashboard mensual"] },
-        { "n": "11", "badge": "DXB · JED hub", "features": ["Hub Dubai (DXB) y Jeddah (JED)", "Socios locales certificados", "Documentación islámica/halal", "Conexión Asia-África-LATAM"] }
+        { "n": "01", "badge": "IATA · CASS", "features": ["Courier internacional", "Chárter aéreo", "Cadena de frío y dangerous goods", "Carga general", "Vuelo pasajero"] },
+        { "n": "02", "badge": "FIATA · BIMCO", "features": ["FCL/FCL, LCL/LCL a 80+ puertos", "Consolidación semanal Asia-Chile", "Carga general, Reefer y open-top disponibles"] },
+        { "n": "03", "badge": "Aduanas Chile", "features": ["Clasificación arancelaria precisa", "DUS, DIN, certificados de origen, fumigación", "Revisión documental anti-multas"] },
+        { "n": "04", "badge": "WMS integrado", "features": ["Bodegaje", "Desconsolidado", "Consolidado de contenedores"] },
+        { "n": "05", "badge": "A tu medida", "features": ["Diagnóstico de supply chain", "Diseño de red logística óptima", "Negociación con navieras y aerolíneas"] },
+        { "n": "11", "badge": "DXB · JED hub", "features": ["Llevamos tu negocio al medio oriente", "Servicio Broker"] }
       ]
     },
     "process": {
       "eyebrow": "Cómo trabajamos",
       "title": "Un proceso predecible en 6 pasos.",
-      "desc": "De la cotización al cierre con KPIs. Un solo ejecutivo dedicado coordina cada etapa.",
+      "desc": "De la cotización al cierre. Un solo ejecutivo dedicado coordina cada etapa.",
       "steps": [
         { "title": "Diagnóstico", "desc": "Entendemos tu negocio, cargas y temporalidad." },
         { "title": "Diseño de ruta", "desc": "Modal, transbordos y tiempos optimizados." },
-        { "title": "Cotización", "desc": "Propuesta clara y desglosada en 24h." },
+        { "title": "Cotización", "desc": "Propuesta clara y desglosada." },
         { "title": "Ejecución", "desc": "Coordinación con todos los actores en origen." },
-        { "title": "Aduana", "desc": "OEA y revisión documental anticipada." },
-        { "title": "Entrega", "desc": "Última milla y cierre con KPIs." }
+        { "title": "Aduana", "desc": "Revisión documental anticipada." },
+        { "title": "Entrega", "desc": "Entrega de carga en bodega y cierre documental del proceso aduanero." }
       ]
     }
   },
