@@ -11,6 +11,7 @@ import {
   getOgLocale,
 } from '../i18n/utils';
 import { LOCALES, OG_LOCALE, type Locale } from '../i18n/config';
+import { SITE } from '../lib/constants';
 
 interface Props {
   title?: string;
@@ -71,8 +72,8 @@ const schemaLocalBusiness = JSON.stringify({
   name: 'LOG ATM',
   description: DEFAULT_DESC,
   url: SITE_URL,
-  telephone: '+56982708492',
-  email: 'contacto@logatm.com',
+  telephone: SITE.phone,
+  email: SITE.email,
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Av. Pdte Kennedy 5600, Of. 507',
