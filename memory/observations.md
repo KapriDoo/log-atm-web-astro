@@ -176,3 +176,29 @@ Versiones en `package.json` (astro@^6.1.5, react@^19.2.5, tailwindcss@^4.2.2, @a
 
 ## 2026-10-02 | measure | fix-email-reply-to | preflight sdd-archive INICIO 19:21:44 outcome=ready
 
+## 2026-10-02 | measure | fix-industries-directory | preflight sdd-init INICIO 19:48:17 outcome=ready
+
+## 2026-10-02 | measure | fix-industries-directory | post-dispatch sdd-init FIN 19:48:55 outcome=advance
+
+## 2026-10-02 | measure | fix-industries-directory | preflight sdd-apply INICIO 19:49:46 outcome=ready
+
+## 2026-10-02 | decision | fix-industries-directory | sdd-apply: spec interactive-component-transitions queda en review, no completed
+
+`tasks.md` (T3) pedía pasar la spec de `draft` a `completed`; §D del protocolo reserva `completed` a `sdd-archive`, así que `sdd-apply` la deja en `review`. El cambio es `apply-only` con `spec_refs: []`: para que el cierre la marque `completed`, la spec debe entrar en `spec_refs` o el cierre debe tratarla explícitamente.
+
+## 2026-10-02 | pattern | fix-industries-directory | gsap.set inline anula el estado CSS de .is-active
+
+En `gsap-ind-directory.ts`, cualquier `gsap.set` de opacidad sobre un slide deja estilo inline que prevalece sobre `.ind-directory__slide.is-active`; la rama de `prefers-reduced-motion` fija también saliente y entrante inline para no dejar el activo invisible.
+
+## 2026-10-02 | measure | fix-industries-directory | post-dispatch sdd-apply FIN 19:59:37 outcome=advance
+
+## 2026-10-02 | measure | fix-industries-directory | preflight sdd-verify INICIO 19:59:42 outcome=ready
+
+
+## 2026-10-02 | decision | fix-industries-directory | sdd-verify: verdict PASS; ACs de la spec marcados sin tocar status ni verified_at
+
+Verificación empírica en es/en/pt (30 comprobaciones PASS). Se marcaron `[x]` los AC de `interactive-component-transitions` que la fase midió (A2 AC4, A3 completo, A4 AC1-2). `spec_refs` vacío: no se actualizó `verified_at`; la spec sigue en `review` y, con `spec_refs: []`, `sdd-archive` no la marcará `completed` salvo que el orquestador la trate explícitamente.
+## 2026-10-02 | measure | fix-industries-directory | post-dispatch sdd-verify FIN 20:04:51 outcome=advance
+
+## 2026-10-02 | measure | fix-industries-directory | preflight sdd-archive INICIO 20:05:05 outcome=ready
+

@@ -162,7 +162,8 @@ const sectorPrefix = t('industrias.directory.sectorPrefix');
     const subEl     = document.getElementById('dir-sub');
     const tagsEl    = document.getElementById('dir-tags');
 
-    // Asignar ANTES de que initIndDirectory lo consuma (orden crítico)
+    // El módulo de abajo resuelve este callback en cada render (lookup lazy):
+    // el orden de asignación entre este script inline y el módulo no importa.
     window.__indDirectoryOnRender = (i) => {
       const ind = industries[i];
       const tags = ind.tags || [];
@@ -189,10 +190,10 @@ const sectorPrefix = t('industrias.directory.sectorPrefix');
   import { ready } from '../lib/ready';
 
   function initIndustrias(): void {
-    const onRender = (window as Window & { __indDirectoryOnRender?: (i: number) => void }).__indDirectoryOnRender;
     initIndDirectory('#ind-directory', {
       intervalMs: 3500,
-      onRender,
+      // Lookup lazy: el script inline puede asignar el global después de que este módulo inicializa
+      onRender: (i) => (window as Window & { __indDirectoryOnRender?: (i: number) => void }).__indDirectoryOnRender?.(i),
     });
   }
 

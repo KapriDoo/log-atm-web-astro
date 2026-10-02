@@ -52,7 +52,16 @@ export function initIndDirectory(
     // Cancelar tweens pendientes para evitar acumulación
     gsap.killTweensOf(slides);
 
-    if (!prefersReducedMotion) {
+    // killTweensOf congela a media opacidad los slides cuyo tween quedó cortado:
+    // los que no participan en esta transición se ocultan de inmediato.
+    gsap.set(slides.filter((s) => s !== previousSlide && s !== newSlide), { opacity: 0 });
+
+    if (prefersReducedMotion) {
+      // Cambio instantáneo, sin tween; el estilo inline debe reflejar el estado
+      // porque un set previo prevalece sobre .is-active del CSS
+      if (previousSlide) gsap.set(previousSlide, { opacity: 0, scale: 1.06 });
+      gsap.set(newSlide, { opacity: 1, scale: 1 });
+    } else {
       // Animar salida del slide activo
       if (previousSlide) {
         gsap.to(previousSlide, {
