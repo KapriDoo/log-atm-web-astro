@@ -66,7 +66,7 @@ Reemplazar las transiciones CSS del directorio de industrias (`/industrias`) y l
 - [ ] El slide entrante aparece con un zoom-in de escala de `1.06 → 1` sincronizado con el fade-in de `0 → 1`
 - [ ] La duración del tween IN es ~0.6s con ease `power2.out`
 - [ ] El crossfade completo (saliente + entrante) se percibe como una transición fluida sin parpadeo ni salto visual
-- [ ] Transiciones rápidas entre industrias (clicks consecutivos rápidos) no producen slides visibles en estado inconsistente
+- [x] Transiciones rápidas entre industrias (clicks consecutivos rápidos) no producen slides visibles en estado inconsistente
 
 ### Behavior A3 — Coordinación de la autorotación con la interacción del usuario
 
@@ -79,11 +79,11 @@ Reemplazar las transiciones CSS del directorio de industrias (`/industrias`) y l
 - `destroy()` limpia el interval y cancela los tweens del directorio; el módulo lo registra en `astro:before-swap`, evento que solo existe con el router de View Transitions (`<ClientRouter />`), que el sitio no usa: en el sitio actual el directorio vive mientras dura la página
 
 **Acceptance criteria**:
-- [ ] Durante el hover sobre `#ind-directory` no hay rotación automática: el slide activo se mantiene durante al menos dos intervalos (≥ 7 s)
-- [ ] Al salir del hover, la rotación se reanuda en ≤ 3,5 s y avanza al slide siguiente
-- [ ] Hay un solo interval de autorotación activo: tras interacciones manuales repetidas, dos rotaciones consecutivas siguen separadas por ~3,5 s
-- [ ] `destroy()` limpia el interval de autorotación y cancela los tweens de los slides
-- [ ] Con `prefers-reduced-motion: reduce`, la autorotación nunca arranca (guard `prefersReducedMotion` existente)
+- [x] Durante el hover sobre `#ind-directory` no hay rotación automática: el slide activo se mantiene durante al menos dos intervalos (≥ 7 s)
+- [x] Al salir del hover, la rotación se reanuda en ≤ 3,5 s y avanza al slide siguiente
+- [x] Hay un solo interval de autorotación activo: tras interacciones manuales repetidas, dos rotaciones consecutivas siguen separadas por ~3,5 s
+- [x] `destroy()` limpia el interval de autorotación y cancela los tweens de los slides
+- [x] Con `prefers-reduced-motion: reduce`, la autorotación nunca arranca (guard `prefersReducedMotion` existente)
 
 ### Behavior A4 — Fallback sin JS para ind-directory
 
@@ -96,8 +96,8 @@ Reemplazar las transiciones CSS del directorio de industrias (`/industrias`) y l
 - Sin JS, no hay crossfade; el slide inicial permanece visible estáticamente
 
 **Acceptance criteria**:
-- [ ] Con JS deshabilitado, `/industrias` muestra el primer slide del directorio visible sin animación
-- [ ] Con JS deshabilitado, no hay elementos visualmente rotos (ningún slide queda en `opacity:0` permanente)
+- [x] Con JS deshabilitado, `/industrias` muestra el primer slide del directorio visible sin animación
+- [x] Con JS deshabilitado, no hay elementos visualmente rotos (ningún slide queda en `opacity:0` permanente)
 - [ ] La eliminación de `transition` en CSS no afecta otros elementos de `shared.css`
 
 ### Behavior B1 — Stepper: tween OUT del panel saliente
