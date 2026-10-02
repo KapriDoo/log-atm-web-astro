@@ -182,3 +182,11 @@ Versiones en `package.json` (astro@^6.1.5, react@^19.2.5, tailwindcss@^4.2.2, @a
 
 ## 2026-10-02 | measure | fix-industries-directory | preflight sdd-apply INICIO 19:49:46 outcome=ready
 
+## 2026-10-02 | decision | fix-industries-directory | sdd-apply: spec interactive-component-transitions queda en review, no completed
+
+`tasks.md` (T3) pedía pasar la spec de `draft` a `completed`; §D del protocolo reserva `completed` a `sdd-archive`, así que `sdd-apply` la deja en `review`. El cambio es `apply-only` con `spec_refs: []`: para que el cierre la marque `completed`, la spec debe entrar en `spec_refs` o el cierre debe tratarla explícitamente.
+
+## 2026-10-02 | pattern | fix-industries-directory | gsap.set inline anula el estado CSS de .is-active
+
+En `gsap-ind-directory.ts`, cualquier `gsap.set` de opacidad sobre un slide deja estilo inline que prevalece sobre `.ind-directory__slide.is-active`; la rama de `prefers-reduced-motion` fija también saliente y entrante inline para no dejar el activo invisible.
+
