@@ -1,0 +1,5 @@
+Ejecutar el cambio SDD fix-industries-directory: en /industrias el caption queda congelado en "Minería · 01" y quedan slides fantasma tras hovers rápidos.
+- B1 (Alta): corregir src/pages/industrias.astro:192, que lee window.__indDirectoryOnRender dentro de ready() antes de que el inline (:179-184) lo asigne en DOMContentLoaded; usar lookup lazy `onRender: (i) => window.__indDirectoryOnRender?.(i)` y corregir el comentario falso de :165.
+- N2 (Media): en src/scripts/gsap-ind-directory.ts:53, killTweensOf deja opacidad intermedia en los slides que no son ni el entrante ni el saliente (hovers 5→2→8→1 cada 120 ms dejan los slides 2 y 5 en 0,46); forzar con gsap.set opacity 0 al resto.
+- AC A3 de memory/specs/interactive-component-transitions/spec.md (draft): si el flag `paused` (:104-107) da el comportamiento observable correcto, ajustar el AC en vez de reescribir el timer.
+Verificación empírica en es/en/pt contra astro preview (caption tras clic y tras autorrotación de 3,5 s; opacidad computada tras la secuencia de hovers). Fuera de alcance: CTAs /contacto sin locale (industrias.astro:141) y comentario de colores en constants.ts.

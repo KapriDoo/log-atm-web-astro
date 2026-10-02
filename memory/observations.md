@@ -176,3 +176,9 @@ Versiones en `package.json` (astro@^6.1.5, react@^19.2.5, tailwindcss@^4.2.2, @a
 
 ## 2026-10-02 | measure | fix-email-reply-to | preflight sdd-archive INICIO 19:21:44 outcome=ready
 
+## 2026-10-02 | measure | fix-industries-directory | preflight sdd-init INICIO 19:48:17 outcome=ready
+
+## 2026-10-02 | measure | fix-industries-directory | post-dispatch sdd-init FIN 19:48:55 outcome=advance
+
+## 2026-10-02 | measure | fix-industries-directory | preflight sdd-apply INICIO 19:49:46 outcome=ready
+
