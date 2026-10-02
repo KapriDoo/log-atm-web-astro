@@ -12,7 +12,7 @@ affects: []
 adrs: []
 scope:
   - "log-atm-web-astro/src/scripts/scroll-animations.ts"
-verified_at: null
+verified_at: "2026-10-02"
 ---
 
 # Internal Page Heroes
@@ -51,10 +51,10 @@ Animar consistentemente los heroes de las 5 páginas internas del sitio, en sus 
 - El guard `prefersReducedMotion` dentro de `animatePageHero` aplica automáticamente en ambas invocaciones
 
 **Acceptance criteria**:
-- [ ] Al cargar directamente `/servicios`, `/industrias`, `/nosotros` o `/contacto` (y sus variantes `/en/...` y `/pt/...`), los elementos del `.page-hero` aparecen con la animación staggered una sola vez
-- [ ] Al cargar directamente `/cotizar` (y `/en/cotizar`, `/pt/cotizar`), los elementos del `.quote-hero` aparecen con la misma animación staggered una sola vez
-- [ ] En páginas sin `.page-hero` ni `.quote-hero` (por ejemplo `/`), el módulo no lanza errores ni efectos secundarios
-- [ ] Con `prefers-reduced-motion: reduce` activo, los elementos son visibles inmediatamente sin animación en todas las páginas
+- [x] Al cargar directamente `/servicios`, `/industrias`, `/nosotros` o `/contacto` (y sus variantes `/en/...` y `/pt/...`), los elementos del `.page-hero` aparecen con la animación staggered una sola vez
+- [x] Al cargar directamente `/cotizar` (y `/en/cotizar`, `/pt/cotizar`), los elementos del `.quote-hero` aparecen con la misma animación staggered una sola vez
+- [x] En páginas sin `.page-hero` ni `.quote-hero` (por ejemplo `/`), el módulo no lanza errores ni efectos secundarios
+- [x] Con `prefers-reduced-motion: reduce` activo, los elementos son visibles inmediatamente sin animación en todas las páginas
 
 ### Behavior 2 — Markup data-hero-animate en páginas con .page-hero
 
@@ -70,12 +70,12 @@ Animar consistentemente los heroes de las 5 páginas internas del sitio, en sus 
 - El orden DOM determina el orden de aparición en el stagger
 
 **Acceptance criteria**:
-- [ ] `servicios.astro` tiene `data-hero-animate` en eyebrow, H1, lead y los 2 meta-items de su `.page-hero`
-- [ ] `industrias.astro` tiene `data-hero-animate` en eyebrow, H1, lead y los 2 meta-items de su `.page-hero`
-- [ ] `nosotros.astro` tiene `data-hero-animate` en eyebrow, H1, lead y los 2 meta-items de su `.page-hero`
-- [ ] `contacto.astro` tiene `data-hero-animate` en eyebrow, H1, lead y los 3 meta-items de su `.page-hero`
-- [ ] Los elementos aparecen uno tras otro con stagger visible (no simultáneamente)
-- [ ] Ningún elemento hero permanece invisible si JS no carga (fallback CSS sin opacity:0 inicial above-the-fold)
+- [x] `servicios.astro` tiene `data-hero-animate` en eyebrow, H1, lead y los 2 meta-items de su `.page-hero`
+- [x] `industrias.astro` tiene `data-hero-animate` en eyebrow, H1, lead y los 2 meta-items de su `.page-hero`
+- [x] `nosotros.astro` tiene `data-hero-animate` en eyebrow, H1, lead y los 2 meta-items de su `.page-hero`
+- [x] `contacto.astro` tiene `data-hero-animate` en eyebrow, H1, lead y los 3 meta-items de su `.page-hero`
+- [x] Los elementos aparecen uno tras otro con stagger visible (no simultáneamente)
+- [x] Ningún elemento hero permanece invisible si JS no carga (fallback CSS sin opacity:0 inicial above-the-fold)
 
 ### Behavior 3 — Markup data-hero-animate en .quote-hero de /cotizar
 
@@ -89,10 +89,10 @@ Animar consistentemente los heroes de las 5 páginas internas del sitio, en sus 
 - `animatePageHero('.quote-hero')` anima los elementos `[data-hero-animate]` del `.quote-hero` en orden DOM
 
 **Acceptance criteria**:
-- [ ] Al cargar `/cotizar`, el H1 y el lead del `.quote-hero` aparecen con fade-up staggered
-- [ ] Los chips del `.quote-hero` aparecen animados tras el lead
-- [ ] El stepper de pasos (fuera del `.quote-hero`) no se ve afectado por esta animación
-- [ ] La animación del hero no interfiere con el estado inicial del stepper (paso 0 visible, pasos 1-3 con `hidden`)
+- [x] Al cargar `/cotizar`, el H1 y el lead del `.quote-hero` aparecen con fade-up staggered
+- [x] Los chips del `.quote-hero` aparecen animados tras el lead
+- [x] El stepper de pasos (fuera del `.quote-hero`) no se ve afectado por esta animación
+- [x] La animación del hero no interfiere con el estado inicial del stepper (paso 0 visible, pasos 1-3 con `hidden`)
 
 ## Constraints transversales
 

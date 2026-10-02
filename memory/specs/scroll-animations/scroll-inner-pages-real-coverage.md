@@ -32,7 +32,7 @@ scope:
   - "log-atm-web-astro/src/scripts/scroll-animations.ts"
   - "log-atm-web-astro/src/components/sections/CTASection.astro"
   - "log-atm-web-astro/src/components/ui/Footer.astro"
-verified_at: null
+verified_at: "2026-10-02"
 created: "2026-10-02"
 updated: "2026-10-02"
 tags: [capability-spec]
@@ -80,10 +80,10 @@ La spec base declara entradas por scroll en las secciones de contenido de 7 pág
 
 ## Acceptance Criteria
 
-- [ ] Las 5 páginas internas (servicios, industrias, nosotros, contacto y cotizar), en es/en/pt, muestran la entrada escalonada del hero al cargar la página
-- [ ] Las secciones de llamada a la acción (servicios, industrias y nosotros) y el pie de página (las 5 páginas) aparecen con animación de entrada al hacer scroll
-- [ ] El contenido de las páginas internas es visible sin JavaScript
-- [ ] La preferencia de movimiento reducido se respeta en las 5 páginas internas
+- [x] Las 5 páginas internas (servicios, industrias, nosotros, contacto y cotizar), en es/en/pt, muestran la entrada escalonada del hero al cargar la página
+- [x] Las secciones de llamada a la acción (servicios, industrias y nosotros) y el pie de página (las 5 páginas) aparecen con animación de entrada al hacer scroll
+- [x] El contenido de las páginas internas es visible sin JavaScript
+- [x] La preferencia de movimiento reducido se respeta en las 5 páginas internas
 
 ## Related
 
