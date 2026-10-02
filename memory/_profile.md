@@ -8,7 +8,7 @@ version: 0.0.1
 node_engine: ">=22.12.0"
 status: active
 created: "2026-05-19"
-updated: "2026-05-28"
+updated: "2026-10-02"
 ---
 
 ## Stack
@@ -61,7 +61,7 @@ updated: "2026-05-28"
 
 - **Output:** `output: 'static'` (SSG)
 - **Deploy Target:** Cloudflare Pages
-- **Build Scripts:** `npm run build` (Astro build + i18n validation)
+- **Build Scripts:** `npm run build` (`astro build`, sin type-check); `npm run validate-i18n` (validador i18n vía tsx, ejecución separada)
 - **Validation:** Custom i18n validator via tsx at build time
 
 ## Design System & Branding

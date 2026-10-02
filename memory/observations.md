@@ -1,3 +1,8 @@
+# Observations SDD
+
+Log de hallazgos operacionales del pipeline SDD.
+Categorías permitidas: ver `@global/skills/_shared/obsidian-persistence-convention#observations-md-policy`.
+Formato: ## YYYY-MM-DD | <tag> | <change|global> | <summary>
 ---
 title: Observaciones — optimize-images-webp
 created_at: 2026-05-28
@@ -153,3 +158,13 @@ Versiones en `package.json` (astro@^6.1.5, react@^19.2.5, tailwindcss@^4.2.2, @a
 - Dead code (T7): los 11 `export const` (`NAV_LINKS`, `FOOTER_SERVICES`, `FOOTER_COMPANY`, `STATS`, `SERVICE_DETAILS`, `SERVICE_FILTERS`, `PROCESS_STEPS`, `IND_TAGS_MAP`, `SERVICES_PER_IND`, `QUOTE_CARGO_TYPES`, `QUOTE_EXTRAS`) siguen ausentes de `constants.ts` y sin referencias colgantes en `src/`.
 - T1/T3 reconfirmados estáticamente: `.process-strip__title` fija `color: var(--color-text-inverse)` (`#ffffff` en `tokens.css:76`) sobre fondo `--color-neutral-900`; `BaseLayout.astro` importa `SITE` y el JSON-LD usa `SITE.phone`/`SITE.email` (sin literales).
 - Sin hallazgos pendientes. `verify-report.md` actualizado a PASS final. Ruteo: `sdd-archive`.
+## 2026-10-02 | measure | fix-email-reply-to | preflight sdd-init INICIO 19:10:45 outcome=ready
+
+## 2026-10-02 | measure | fix-email-reply-to | post-dispatch sdd-init FIN 19:11:42 outcome=advance
+
+## 2026-10-02 | measure | fix-email-reply-to | preflight sdd-apply INICIO 19:12:09 outcome=ready
+
+## 2026-10-02 | env-quirk | fix-email-reply-to | el proyecto no trae typescript; tsc --noEmit tiene 4 errores previos al cambio
+
+`sdd-apply` instaló `typescript@5` con `npm install --no-save` en el worktree para verificar T1. Errores previos ajenos al cambio: `cloudflare:workers` sin tipos (`mailer.ts:2`), `platformProxy` y `logger` implícito en `astro.config.mjs`, `Timeout` en `gsap-ind-directory.ts:90`. Un gate de type-check (brief 10) debe partir de esa línea base.
+
