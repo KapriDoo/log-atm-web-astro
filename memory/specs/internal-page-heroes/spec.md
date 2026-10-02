@@ -1,7 +1,8 @@
 ---
 capability: internal-page-heroes
 change_name: gsap-pr2-internal-pages
-status: review
+status: completed
+mr: ""
 created: "2026-05-19"
 updated: "2026-10-02"
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-internal-heroes-animation"

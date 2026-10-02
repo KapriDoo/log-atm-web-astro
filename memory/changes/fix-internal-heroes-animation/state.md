@@ -2,10 +2,10 @@
 type: change-state
 change_name: "fix-internal-heroes-animation"
 domain: "fix"
-status: active
+status: completed
 fast_path: "apply-only"
-current_phase: sdd-apply
-phases_completed: [sdd-init]
+current_phase: ""
+phases_completed: [sdd-init, sdd-apply, sdd-verify]
 spec_refs:
   - "[[internal-page-heroes/spec]]"
   - "[[scroll-animations/scroll-inner-pages-real-coverage]]"
@@ -15,7 +15,7 @@ integration_target: "main"
 require_judgment: false
 skip_judgment: false
 jira_key: ""
-mr: ""
+mr_url: ""
 mr_status: pending
 mr_error: ""
 created: "2026-10-02"

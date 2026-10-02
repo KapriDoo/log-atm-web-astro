@@ -240,3 +240,7 @@ Verify midió `/cotizar/` en performance 90 (mediana de 5 corridas, CLS 0.137 en
 ## 2026-10-02 | finding | fix-internal-heroes-animation | WARN de metadata: scroll-entrance-utility no declara la delta scroll-inner-pages-real-coverage
 
 `scroll-inner-pages-real-coverage` declara `depends_on: [[scroll-entrance-utility]]`, pero `scroll-entrance-utility` no la lista en `related` ni en `affects` (su `affects` contiene rutas de archivo, no slugs). La corrección requiere decidir entre `affects` y `related`, así que sdd-verify no la aplicó.
+## 2026-10-02 | measure | fix-internal-heroes-animation | post-dispatch sdd-verify FIN 20:38:21 outcome=advance
+
+## 2026-10-02 | measure | fix-internal-heroes-animation | preflight sdd-archive INICIO 20:38:24 outcome=ready
+

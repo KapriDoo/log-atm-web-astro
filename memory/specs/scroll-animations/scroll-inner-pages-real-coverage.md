@@ -7,7 +7,7 @@ domain: "fix"
 delta_type: "MODIFY"
 supersedes: "[[scroll-animations/scroll-inner-pages]]"
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
