@@ -1,4 +1,0 @@
-Encargo P0: ejecutar el cambio SDD `fix-email-reply-to` (bug en producción: el header Reply-To de los correos de formulario nunca se envía).
-- Causa: log-atm-web-astro/src/lib/mailer.ts:55 pasa `replyTo`, pero worker-mailer@1.2.1 solo reconoce `reply` (node_modules/worker-mailer/dist/index.d.ts:9). Al responder el correo, la respuesta va a web@logatm.com en vez de al cliente.
-- Alcance secundario: extender la validación anti header-injection a los campos que se interpolan en el Subject (email-templates.ts:346,439,540).
-- Verificación: envío SMTP real con .dev.vars (SMTP_PASS) y revisión de los headers del correo recibido. Si no hay credenciales disponibles, indicarlo en el reporte en vez de darlo por verificado.
