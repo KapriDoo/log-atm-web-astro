@@ -1,25 +1,34 @@
 ---
 capability: internal-page-heroes
 change_name: gsap-pr2-internal-pages
-status: draft
+status: review
 created: "2026-05-19"
+updated: "2026-10-02"
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-internal-heroes-animation"
+feature_branch: "feature/fix-internal-heroes-animation"
+commits: ["3cb43dc"]
 related: [nosotros-timeline-reveal, interactive-component-transitions]
+affects: []
+adrs: []
+scope:
+  - "log-atm-web-astro/src/scripts/scroll-animations.ts"
+verified_at: null
 ---
 
 # Internal Page Heroes
 
 ## Propósito
 
-Animar consistentemente los heroes de las 5 páginas internas del sitio reutilizando `animatePageHero` ya exportada por PR1. El módulo global `scroll-animations.ts` detecta automáticamente `.page-hero` y `.quote-hero` al cargar, eliminando scripts duplicados por página (Opción B aprobada en HITL). El usuario percibe el mismo lenguaje de entrada staggered en todas las páginas internas.
+Animar consistentemente los heroes de las 5 páginas internas del sitio, en sus tres idiomas (es, en, pt), reutilizando `animatePageHero` ya exportada por PR1. El módulo global `scroll-animations.ts` detecta automáticamente `.page-hero` y `.quote-hero` al cargarse, una vez por carga de página, eliminando scripts duplicados por página (Opción B aprobada en HITL). El usuario percibe el mismo lenguaje de entrada staggered en todas las páginas internas.
 
 ## Alcance
 
 ### En scope
 - Auto-init en `scroll-animations.ts`: detectar `.page-hero` y `.quote-hero` al cargar el módulo y llamar `animatePageHero` si existen
-- Atributo `data-hero-animate` aplicado a los elementos internos del hero en 4 páginas con `.page-hero`: eyebrow, H1, lead, meta-items
-- Atributo `data-hero-animate` aplicado a los elementos internos del `.quote-hero` en `/cotizar`: H1, lead, chips
+- Atributo `data-hero-animate` aplicado a los elementos internos del hero en 4 páginas con `.page-hero`: eyebrow, H1, lead y los 2-3 meta-items de cada página
+- Atributo `data-hero-animate` aplicado a los elementos internos del `.quote-hero` en `/cotizar`: H1, lead y el contenedor de chips
 - Guard `prefersReducedMotion` heredado de la implementación de PR1 en `animatePageHero`
-- Páginas cubiertas: `/servicios`, `/industrias`, `/nosotros`, `/contacto` (via `.page-hero`) y `/cotizar` (via `.quote-hero`)
+- Páginas cubiertas: `/servicios`, `/industrias`, `/nosotros`, `/contacto` (via `.page-hero`) y `/cotizar` (via `.quote-hero`), con sus variantes `/en/...` y `/pt/...`
 
 ### Fuera de scope
 - Crear un componente `PageHero.astro` compartido (deuda técnica separada)
@@ -31,19 +40,19 @@ Animar consistentemente los heroes de las 5 páginas internas del sitio reutiliz
 
 ### Behavior 1 — Auto-init global en scroll-animations.ts
 
-**Trigger**: carga del módulo `scroll-animations.ts` en cualquier página del sitio (via `BaseLayout.astro` L189)
+**Trigger**: carga del módulo `scroll-animations.ts` en cualquier página del sitio (via `BaseLayout.astro`). El auto-init corre en el nivel superior del módulo, una vez por carga de página, y no depende de eventos de navegación de un router cliente (el sitio no monta uno).
 
 **Comportamiento**:
 - Al inicializar el módulo, verificar si existe `.page-hero` en el documento actual
-- Si existe, invocar `animatePageHero('.page-hero')` con los defaults de PR1 (eyebrow → H1 → lead → meta-items, stagger 80ms, opacity 0→1, y 16→0, 450ms por elemento)
+- Si existe, invocar `animatePageHero('.page-hero')` con los defaults de `animatePageHero` (eyebrow → H1 → lead → meta-items, stagger 120ms, opacity 0→1, y 24px→0, 600ms por elemento)
 - Verificar si existe `.quote-hero` en el documento actual
-- Si existe, invocar `animatePageHero('.quote-hero')` con selectores adaptados al markup de `/cotizar`
+- Si existe, invocar `animatePageHero('.quote-hero')` con los mismos defaults; los targets son los elementos `[data-hero-animate]` del markup de `/cotizar`
 - Si ninguno de los dos selectores existe en la página, no ejecutar ninguna acción (comportamiento idempotente)
 - El guard `prefersReducedMotion` dentro de `animatePageHero` aplica automáticamente en ambas invocaciones
 
 **Acceptance criteria**:
-- [ ] Al navegar a `/servicios`, `/industrias`, `/nosotros` o `/contacto`, los elementos del `.page-hero` aparecen con la animación staggered al cargar la página
-- [ ] Al navegar a `/cotizar`, los elementos del `.quote-hero` aparecen con la misma animación staggered al cargar la página
+- [ ] Al cargar directamente `/servicios`, `/industrias`, `/nosotros` o `/contacto` (y sus variantes `/en/...` y `/pt/...`), los elementos del `.page-hero` aparecen con la animación staggered una sola vez
+- [ ] Al cargar directamente `/cotizar` (y `/en/cotizar`, `/pt/cotizar`), los elementos del `.quote-hero` aparecen con la misma animación staggered una sola vez
 - [ ] En páginas sin `.page-hero` ni `.quote-hero` (por ejemplo `/`), el módulo no lanza errores ni efectos secundarios
 - [ ] Con `prefers-reduced-motion: reduce` activo, los elementos son visibles inmediatamente sin animación en todas las páginas
 
@@ -56,15 +65,15 @@ Animar consistentemente los heroes de las 5 páginas internas del sitio reutiliz
   - `.page-hero__eyebrow` — primer elemento en animar
   - `.page-hero__title` — segundo elemento (H1)
   - `.page-hero__lead` — tercer elemento
-  - Cada `.page-hero__meta-item` — animados en stagger tras lead
+  - Cada `.page-hero__meta-item` — animados en stagger tras lead (2-3 por página: 2 en `/servicios`, `/industrias` y `/nosotros`; 3 en `/contacto`)
 - Los elementos con `data-hero-animate` son detectados por `animatePageHero` como targets de la animación
 - El orden DOM determina el orden de aparición en el stagger
 
 **Acceptance criteria**:
-- [ ] `servicios.astro` tiene `data-hero-animate` en eyebrow, H1, lead y los 4 meta-items de su `.page-hero`
-- [ ] `industrias.astro` tiene `data-hero-animate` en eyebrow, H1, lead y los 4 meta-items de su `.page-hero`
-- [ ] `nosotros.astro` tiene `data-hero-animate` en eyebrow, H1, lead y los 4 meta-items de su `.page-hero`
-- [ ] `contacto.astro` tiene `data-hero-animate` en eyebrow, H1, lead y los 4 meta-items de su `.page-hero`
+- [ ] `servicios.astro` tiene `data-hero-animate` en eyebrow, H1, lead y los 2 meta-items de su `.page-hero`
+- [ ] `industrias.astro` tiene `data-hero-animate` en eyebrow, H1, lead y los 2 meta-items de su `.page-hero`
+- [ ] `nosotros.astro` tiene `data-hero-animate` en eyebrow, H1, lead y los 2 meta-items de su `.page-hero`
+- [ ] `contacto.astro` tiene `data-hero-animate` en eyebrow, H1, lead y los 3 meta-items de su `.page-hero`
 - [ ] Los elementos aparecen uno tras otro con stagger visible (no simultáneamente)
 - [ ] Ningún elemento hero permanece invisible si JS no carga (fallback CSS sin opacity:0 inicial above-the-fold)
 
@@ -76,8 +85,8 @@ Animar consistentemente los heroes de las 5 páginas internas del sitio reutiliz
 - El atributo `data-hero-animate` se aplica a:
   - `.quote-hero__title` — H1 de la página de cotización
   - `.quote-hero__lead` — subtítulo/descripción
-  - `.quote-hero__chips` — contenedor de chips de selección de servicio, o cada `.quote-chip` individualmente (según implementación de `animatePageHero`)
-- La variante de `animatePageHero('.quote-hero')` utiliza los selectores correspondientes al markup de `/cotizar`
+  - `.quote-hero__chips` — contenedor de chips de selección de servicio (anima como un único elemento)
+- `animatePageHero('.quote-hero')` anima los elementos `[data-hero-animate]` del `.quote-hero` en orden DOM
 
 **Acceptance criteria**:
 - [ ] Al cargar `/cotizar`, el H1 y el lead del `.quote-hero` aparecen con fade-up staggered
