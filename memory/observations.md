@@ -202,3 +202,9 @@ Verificación empírica en es/en/pt (30 comprobaciones PASS). Se marcaron `[x]` 
 
 ## 2026-10-02 | measure | fix-industries-directory | preflight sdd-archive INICIO 20:05:05 outcome=ready
 
+## 2026-10-02 | measure | fix-internal-heroes-animation | preflight sdd-init INICIO 20:11:08 outcome=ready
+
+## 2026-10-02 | measure | fix-internal-heroes-animation | post-dispatch sdd-init FIN 20:11:42 outcome=advance
+
+## 2026-10-02 | measure | fix-internal-heroes-animation | preflight sdd-apply INICIO 20:12:25 outcome=ready
+
