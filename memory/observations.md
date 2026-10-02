@@ -202,3 +202,17 @@ Verificación empírica en es/en/pt (30 comprobaciones PASS). Se marcaron `[x]` 
 
 ## 2026-10-02 | measure | fix-industries-directory | preflight sdd-archive INICIO 20:05:05 outcome=ready
 
+## 2026-10-02 | measure | fix-a11y-and-icons | preflight sdd-init INICIO 20:40:04 outcome=ready
+
+## 2026-10-02 | measure | fix-a11y-and-icons | post-dispatch sdd-init FIN 20:40:46 outcome=advance
+
+## 2026-10-02 | measure | fix-a11y-and-icons | preflight sdd-apply INICIO 20:41:08 outcome=ready
+
+## 2026-10-02 | bug | fix-a11y-and-icons | color-contrast preexistente en el selector de idioma (WCAG 1.4.3)
+
+axe-core en Chrome real, acotado al selector, reporta `color-contrast` en desktop (opción activa/hover y trigger expandido: primary-500 sobre primary-50 / neutral-50) y en el drawer móvil (encabezado neutral-500 sobre blanco), en es/en/pt. Es anterior a este cambio (las reglas CSS no se tocaron) y su corrección no está en `tasks.md`; queda como decisión de alcance. Detalle y razones de contraste: `changes/fix-a11y-and-icons/apply-evidence.md` (§T4, bloques 9, 11-13).
+
+## 2026-10-02 | bug | fix-a11y-and-icons | scripts/axe-audit.mjs sale con exit 1 aunque no haya violaciones
+
+La última línea, `dom?.window.close?.()`, referencia `dom` fuera del bloque `for` donde está declarado y lanza `ReferenceError` después del resumen, así que el exit code del script no refleja el umbral `totalWeight > 30`. Además, sus rutas fijas `dist/<página>/index.html` no calzan con la salida del adaptador de Cloudflare (`dist/client/`), sus dependencias `jsdom` y `axe-core` no están en `package.json`, y en jsdom no detecta `color-contrast`.
+
