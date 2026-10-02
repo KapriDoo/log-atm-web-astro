@@ -168,3 +168,11 @@ Versiones en `package.json` (astro@^6.1.5, react@^19.2.5, tailwindcss@^4.2.2, @a
 
 `sdd-apply` instaló `typescript@5` con `npm install --no-save` en el worktree para verificar T1. Errores previos ajenos al cambio: `cloudflare:workers` sin tipos (`mailer.ts:2`), `platformProxy` y `logger` implícito en `astro.config.mjs`, `Timeout` en `gsap-ind-directory.ts:90`. Un gate de type-check (brief 10) debe partir de esa línea base.
 
+## 2026-10-02 | measure | fix-email-reply-to | post-dispatch sdd-apply FIN 19:18:51 outcome=advance
+
+## 2026-10-02 | measure | fix-email-reply-to | preflight sdd-verify INICIO 19:18:56 outcome=ready
+
+## 2026-10-02 | measure | fix-email-reply-to | post-dispatch sdd-verify FIN 19:21:41 outcome=advance
+
+## 2026-10-02 | measure | fix-email-reply-to | preflight sdd-archive INICIO 19:21:44 outcome=ready
+
