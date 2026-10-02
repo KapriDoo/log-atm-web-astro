@@ -1,8 +1,12 @@
 ---
 capability: interactive-component-transitions
 change_name: gsap-pr2-internal-pages
-status: draft
+status: review
 created: "2026-05-19"
+updated: "2026-10-02"
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-industries-directory"
+feature_branch: "feature/fix-industries-directory"
+commits: ["9c08a6c", "a725d87"]
 related: [internal-page-heroes, nosotros-timeline-reveal]
 ---
 
@@ -64,22 +68,22 @@ Reemplazar las transiciones CSS del directorio de industrias (`/industrias`) y l
 - [ ] El crossfade completo (saliente + entrante) se percibe como una transición fluida sin parpadeo ni salto visual
 - [ ] Transiciones rápidas entre industrias (clicks consecutivos rápidos) no producen slides visibles en estado inconsistente
 
-### Behavior A3 — Fix bug clearInterval y coordinación con autorotación
+### Behavior A3 — Coordinación de la autorotación con la interacción del usuario
 
-**Trigger**: el usuario interactúa con el directorio (hover, click) mientras la autorotación está activa; o el componente se desmonta
+**Trigger**: el usuario interactúa con el directorio (puntero o foco dentro de `#ind-directory`) mientras la autorotación está activa; o el componente se destruye
 
 **Comportamiento**:
-- La variable `timer` (retorno de `setInterval`) se guarda correctamente y se llama `clearInterval(timer)` cuando corresponda:
-  - Al recibir `mouseenter` en `#ind-directory` (la pausa vía `paused = true` no es suficiente si el interval sigue activo)
-  - Al destruir el componente / navegar fuera (cleanup de ViewTransitions)
-- La autorotación se reanuda con un nuevo `setInterval` tras `mouseleave` si `prefersReducedMotion` no está activo
-- El flag `paused` permanece como control semántico de estado (pausa lógica vs limpieza del timer)
+- La autorotación usa un único interval: `startAutoRotation()` limpia el timer previo antes de crear uno nuevo, de modo que la cadencia de rotación es siempre de un slide cada `intervalMs` (3500 ms)
+- Mientras el puntero o el foco están dentro de `#ind-directory` (`mouseenter`/`focusin`), la autorotación no avanza de slide; al salir (`mouseleave`/`focusout`), la rotación se reanuda en el siguiente tick del interval
+- El contrato es el comportamiento observable; el mecanismo de pausa (flag `paused` consultado en cada tick) es un detalle de implementación
+- `destroy()` limpia el interval y cancela los tweens del directorio; el módulo lo registra en `astro:before-swap`, evento que solo existe con el router de View Transitions (`<ClientRouter />`), que el sitio no usa: en el sitio actual el directorio vive mientras dura la página
 
 **Acceptance criteria**:
-- [ ] Después de una interacción manual, la autorotación no dispara múltiples timers simultáneos (verificable en DevTools: un solo interval activo)
-- [ ] Al hacer `mouseenter` en el componente, la autorotación se detiene; al hacer `mouseleave`, se reanuda
-- [ ] No hay console warnings de timers no limpiados al navegar entre páginas con ViewTransitions
-- [ ] Con `prefers-reduced-motion: reduce`, la autorotación nunca arranca (`!mq.matches` guard existente)
+- [ ] Durante el hover sobre `#ind-directory` no hay rotación automática: el slide activo se mantiene durante al menos dos intervalos (≥ 7 s)
+- [ ] Al salir del hover, la rotación se reanuda en ≤ 3,5 s y avanza al slide siguiente
+- [ ] Hay un solo interval de autorotación activo: tras interacciones manuales repetidas, dos rotaciones consecutivas siguen separadas por ~3,5 s
+- [ ] `destroy()` limpia el interval de autorotación y cancela los tweens de los slides
+- [ ] Con `prefers-reduced-motion: reduce`, la autorotación nunca arranca (guard `prefersReducedMotion` existente)
 
 ### Behavior A4 — Fallback sin JS para ind-directory
 
