@@ -382,3 +382,224 @@ Lectura: las tres combinaciones actuales quedan bajo 4.5:1 (bloque 13) y explica
 
 Estado de los criterios de T4: la prueba de teclado cumple (bloque 10); "axe sin violaciones atribuibles al selector" no se cumple por `color-contrast`, y queda pendiente de una decisión de alcance (ver el envelope de la fase).
 
+
+## T5 — Contraste del selector de idioma (re-despacho tras la decisión de alcance del 2026-10-02)
+
+Commit: `8d3d413` — `fix(a11y): raise language selector text contrast to WCAG AA`.
+
+El diff de `src/` de la tarea toca solo el bloque `<style>` de `LanguageSelector.astro` y usa dos tokens funcionales ya definidos en `src/styles/tokens.css` (`--color-brand-dark: var(--color-primary-700)` y `--color-text-muted: var(--color-neutral-600)`), sin valores hex nuevos:
+
+| Estado | Antes (token → valor) | Después (token → valor) | Fondo |
+|---|---|---|---|
+| Opción activa (desktop y drawer), texto y código | `--color-brand` → primary-500 `#4a7bb5` | `--color-brand-dark` → primary-700 `#2b4e78` | `--color-primary-50` `#eef4fb` |
+| Opción hover / focus-visible | `--color-brand` → `#4a7bb5` | `--color-brand-dark` → `#2b4e78` | `--color-primary-50` `#eef4fb` |
+| Trigger expandido (y hover, misma regla), texto y borde | `--color-brand` → `#4a7bb5` | `--color-brand-dark` → `#2b4e78` | navbar `#f8f7f6` (neutral-50) |
+| Encabezado del drawer móvil | `--color-neutral-500` → `#898580` | `--color-text-muted` → neutral-600 `#6e6963` | `--color-surface` `#ffffff` |
+
+El trigger comparte una sola regla para `:hover` y `[aria-expanded="true"]`; se sustituyó el token en esa regla completa (color y borde), así que el hover del trigger también queda en `--color-brand-dark`. El código de idioma de las opciones no activas conserva `--color-text-muted`, que ya cumplía (ver bloque 19). Las razones medidas antes y después están en los bloques 18 y 19.
+
+Build de HEAD (con T5) en una copia aislada, base del `astro preview` del puerto 4402 usado en el resto de esta sección (la copia de `ddc120b`, previa a T5, sirve en el puerto 4401):
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.14","forma":"argv","argv":["bash","-c","npm run build 2\u003e&1 | tail -n 5; exit ${PIPESTATUS[0]}"],"texto":null,"cwd":"/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-a11y-and-icons/sdd-apply-gu6e15xm/after.d9MA2ren/log-atm-web-astro","head":null,"fecha":"2026-10-02T20:53:52-03:00","exit":0,"sha256":"01f3196137de1f98700844cb1c9acb4aa6b699e5a579c30d65b207bef00a04bc","lineas":5,"omitidas":0,"no_recomprobable":"corre en una copia aislada de HEAD bajo el directorio de temporales del despacho, que no persiste tras la fase"} -->
+**Evidencia `apply-evidence.14`** · exit 0 · 5 líneas, 0 omitidas · HEAD `sin-git` · 2026-10-02T20:53:52-03:00 · `/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-a11y-and-icons/sdd-apply-gu6e15xm/after.d9MA2ren/log-atm-web-astro`
+No re-comprobable: corre en una copia aislada de HEAD bajo el directorio de temporales del despacho, que no persiste tras la fase
+
+```text
+bash -c 'npm run build 2>&1 | tail -n 5; exit ${PIPESTATUS[0]}'
+```
+
+```text
+20:53:52 [build] Rearranging server assets...
+20:53:52 [build] ✓ Completed in 4.75s.
+20:53:52 [@astrojs/sitemap] `sitemap-index.xml` created at `dist/client`
+20:53:52 [build] Server built in 7.23s
+20:53:52 [build] Complete!
+```
+<!-- evidencia:fin apply-evidence.14 -->
+
+El bloque 14 muestra el cierre del build. Alcance del diff de `src/` de la tarea (bloques 15 y 16) y definición de los tokens usados (bloque 17):
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.15","forma":"argv","argv":["git","-C","/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-a11y-and-icons","diff","--stat","ddc120b","8d3d413","--","log-atm-web-astro/src"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-a11y-and-icons","head":"8d3d413c51903973c101c70f16772889e4f79a42","fecha":"2026-10-02T20:54:42-03:00","exit":0,"sha256":"6cf74f02b2c9d8ea35e494e0c74b4b54791fd626abe8440d4af254ef06c3ad2d","lineas":2,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `apply-evidence.15`** · exit 0 · 2 líneas, 0 omitidas · HEAD `8d3d413c5190` · 2026-10-02T20:54:42-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-a11y-and-icons`
+
+```text
+git -C /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-a11y-and-icons diff --stat ddc120b 8d3d413 -- log-atm-web-astro/src
+```
+
+```text
+ log-atm-web-astro/src/components/ui/LanguageSelector.astro | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+```
+<!-- evidencia:fin apply-evidence.15 -->
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.16","forma":"argv","argv":["git","-C","/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-a11y-and-icons","diff","-U0","ddc120b","8d3d413","--","log-atm-web-astro/src"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-a11y-and-icons","head":"8d3d413c51903973c101c70f16772889e4f79a42","fecha":"2026-10-02T20:54:42-03:00","exit":0,"sha256":"e91256c6303e8df5870a6a92e5ff4357f7e8551f65121a5abef02b34fb3130d8","lineas":21,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `apply-evidence.16`** · exit 0 · 21 líneas, 0 omitidas · HEAD `8d3d413c5190` · 2026-10-02T20:54:42-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-a11y-and-icons`
+
+```text
+git -C /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-a11y-and-icons diff -U0 ddc120b 8d3d413 -- log-atm-web-astro/src
+```
+
+```text
+diff --git a/log-atm-web-astro/src/components/ui/LanguageSelector.astro b/log-atm-web-astro/src/components/ui/LanguageSelector.astro
+index b7e2d65..4a3ccd8 100644
+--- a/log-atm-web-astro/src/components/ui/LanguageSelector.astro
++++ b/log-atm-web-astro/src/components/ui/LanguageSelector.astro
+@@ -105,2 +105,2 @@ const isMobile = variant === 'mobile';
+-    border-color: var(--color-brand);
+-    color: var(--color-brand);
++    border-color: var(--color-brand-dark);
++    color: var(--color-brand-dark);
+@@ -147 +147 @@ const isMobile = variant === 'mobile';
+-    color: var(--color-brand);
++    color: var(--color-brand-dark);
+@@ -152 +152 @@ const isMobile = variant === 'mobile';
+-    color: var(--color-brand);
++    color: var(--color-brand-dark);
+@@ -163 +163 @@ const isMobile = variant === 'mobile';
+-  .lang-selector__option.is-active .lang-selector__code { color: var(--color-brand); }
++  .lang-selector__option.is-active .lang-selector__code { color: var(--color-brand-dark); }
+@@ -175 +175 @@ const isMobile = variant === 'mobile';
+-    color: var(--color-neutral-500);
++    color: var(--color-text-muted);
+```
+<!-- evidencia:fin apply-evidence.16 -->
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.17","forma":"argv","argv":["grep","-nE","--","--color-(primary-(50|500|700)|neutral-(50|500|600)|brand|brand-dark|text-muted|surface): ","src/styles/tokens.css"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-a11y-and-icons/log-atm-web-astro","head":"8d3d413c51903973c101c70f16772889e4f79a42","fecha":"2026-10-02T20:54:42-03:00","exit":0,"sha256":"2a1ffedb54e3414c3c16cc2f76b1716b09413dabe8df0cec02549a2130ffce4b","lineas":19,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `apply-evidence.17`** · exit 0 · 19 líneas, 0 omitidas · HEAD `8d3d413c5190` · 2026-10-02T20:54:42-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-a11y-and-icons/log-atm-web-astro`
+
+```text
+grep -nE -- '--color-(primary-(50|500|700)|neutral-(50|500|600)|brand|brand-dark|text-muted|surface): ' src/styles/tokens.css
+```
+
+```text
+13:    --color-primary-50:  #eef4fb;
+18:    --color-primary-500: #4A7BB5; /* ← MARCA */
+20:    --color-primary-700: #2b4e78;
+33:    --color-neutral-50:  #f8f7f6; /* ← background página */
+38:    --color-neutral-500: #898580;
+39:    --color-neutral-600: #6e6963;
+62:    --color-surface:     #ffffff;
+66:    --color-text-muted:  var(--color-neutral-600);
+69:    --color-brand:       var(--color-primary-500);
+71:    --color-brand-dark:  var(--color-primary-700);
+145:  --color-primary-50:  #eef4fb;
+150:  --color-primary-500: #4A7BB5;
+152:  --color-primary-700: #2b4e78;
+165:  --color-neutral-50:  #f8f7f6;
+170:  --color-neutral-500: #898580;
+171:  --color-neutral-600: #6e6963;
+194:  --color-surface:     #ffffff;
+198:  --color-text-muted:  #6e6963;
+199:  --color-brand:       #4A7BB5;
+```
+<!-- evidencia:fin apply-evidence.17 -->
+
+### Contraste por estado, medido en Chrome real (antes y después)
+
+`tools.*/browser-check.mjs contrast` (harness del directorio de temporales del despacho, con `axe-core` y `puppeteer-core` instalados ahí) ejecuta solo la regla `color-contrast` de axe-core sobre cada estado del selector en Chrome 148, con el estado provocado de verdad: hover del trigger cerrado, trigger expandido con el puntero fuera, opción activa, hover del puntero sobre una opción no activa, foco por teclado (Tab, `:focus-visible`) en una opción no activa, y en el drawer móvil (390×844, abierto con `#nav-burger`) el encabezado y la opción activa. Cada línea agrega los nodos de `es`, `en` y `pt` e informa los pares color/fondo que calcula axe y la razón mínima. Primero contra el build de `ddc120b` (antes de T5, puerto 4401) y luego contra el de `8d3d413` (con T5, puerto 4402):
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.18","forma":"argv","argv":["env","CHROME_PATH=/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome","BASE=http://127.0.0.1:4401","node","browser-check.mjs","contrast"],"texto":null,"cwd":"/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-a11y-and-icons/sdd-apply-gu6e15xm/tools.Gq3eaMla","head":null,"fecha":"2026-10-02T20:55:15-03:00","exit":1,"sha256":"b9e7cac0880acca2a19f69a184625da79ed18543e841405381cf91c4c44de42c","lineas":8,"omitidas":0,"no_recomprobable":"depende del astro preview del build previo a T5, levantado por la fase en el directorio de temporales del despacho; su resultado es el estado anterior al cambio"} -->
+**Evidencia `apply-evidence.18`** · exit 1 · 8 líneas, 0 omitidas · HEAD `sin-git` · 2026-10-02T20:55:15-03:00 · `/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-a11y-and-icons/sdd-apply-gu6e15xm/tools.Gq3eaMla`
+No re-comprobable: depende del astro preview del build previo a T5, levantado por la fase en el directorio de temporales del despacho; su resultado es el estado anterior al cambio
+
+```text
+env CHROME_PATH=/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome BASE=http://127.0.0.1:4401 node browser-check.mjs contrast
+```
+
+```text
+FAIL trigger hover (cerrado) — #4a7bb5 sobre #f8f7f6 · mínimo 4.09:1 en 3 nodos (es/en/pt)
+FAIL trigger expandido — #4a7bb5 sobre #f8f7f6 · mínimo 4.09:1 en 3 nodos (es/en/pt)
+FAIL opción activa (desktop) — #4a7bb5 sobre #eef4fb · mínimo 3.95:1 en 6 nodos (es/en/pt)
+FAIL opción hover (desktop) — #4a7bb5 sobre #eef4fb | #6e6963 sobre #eef4fb · mínimo 3.95:1 en 6 nodos (es/en/pt)
+FAIL opción focus-visible (desktop) — #4a7bb5 sobre #eef4fb | #6e6963 sobre #eef4fb · mínimo 3.95:1 en 6 nodos (es/en/pt)
+FAIL encabezado drawer móvil — #898580 sobre #ffffff · mínimo 3.66:1 en 3 nodos (es/en/pt)
+FAIL opción activa (drawer) — #4a7bb5 sobre #eef4fb · mínimo 3.95:1 en 6 nodos (es/en/pt)
+FALLAS: 7 fallas
+```
+<!-- evidencia:fin apply-evidence.18 -->
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.19","forma":"argv","argv":["env","CHROME_PATH=/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome","BASE=http://127.0.0.1:4402","node","browser-check.mjs","contrast"],"texto":null,"cwd":"/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-a11y-and-icons/sdd-apply-gu6e15xm/tools.Gq3eaMla","head":null,"fecha":"2026-10-02T20:55:33-03:00","exit":0,"sha256":"96049690f888268e2314be2bd3ab3774bb0e614a54733b2e4a2516278383fc6a","lineas":8,"omitidas":0,"no_recomprobable":"depende del astro preview levantado por la fase sobre la copia aislada y de herramientas instaladas en el directorio de temporales del despacho"} -->
+**Evidencia `apply-evidence.19`** · exit 0 · 8 líneas, 0 omitidas · HEAD `sin-git` · 2026-10-02T20:55:33-03:00 · `/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-a11y-and-icons/sdd-apply-gu6e15xm/tools.Gq3eaMla`
+No re-comprobable: depende del astro preview levantado por la fase sobre la copia aislada y de herramientas instaladas en el directorio de temporales del despacho
+
+```text
+env CHROME_PATH=/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome BASE=http://127.0.0.1:4402 node browser-check.mjs contrast
+```
+
+```text
+PASS trigger hover (cerrado) — #2b4e78 sobre #f8f7f6 · mínimo 7.96:1 en 3 nodos (es/en/pt)
+PASS trigger expandido — #2b4e78 sobre #f8f7f6 · mínimo 7.96:1 en 3 nodos (es/en/pt)
+PASS opción activa (desktop) — #2b4e78 sobre #eef4fb · mínimo 7.69:1 en 6 nodos (es/en/pt)
+PASS opción hover (desktop) — #6e6963 sobre #eef4fb | #2b4e78 sobre #eef4fb · mínimo 4.9:1 en 6 nodos (es/en/pt)
+PASS opción focus-visible (desktop) — #6e6963 sobre #eef4fb | #2b4e78 sobre #eef4fb · mínimo 4.9:1 en 6 nodos (es/en/pt)
+PASS encabezado drawer móvil — #6e6963 sobre #ffffff · mínimo 5.43:1 en 3 nodos (es/en/pt)
+PASS opción activa (drawer) — #2b4e78 sobre #eef4fb · mínimo 7.69:1 en 6 nodos (es/en/pt)
+OK: 0 fallas
+```
+<!-- evidencia:fin apply-evidence.19 -->
+
+El bloque 18 reproduce, estado por estado, las razones bajo 4.5:1 que explicaban la violación `color-contrast` del bloque 9; el bloque 19 muestra todos los estados sobre 4.5:1 tras T5, incluido el código de idioma de las opciones no activas en hover/focus (`#6e6963` sobre `#eef4fb`), que T5 no tocó.
+
+## T4 (cierre) — axe-core en Chrome real y teclado, después de T5
+
+Misma medición que el bloque 9 (axe-core inyectado en Chrome 148, etiquetas `wcag2a`, `wcag2aa`, `wcag21a`, `wcag21aa`, `wcag22aa`, `best-practice`, `include` acotado al selector; desktop 1280×800 con el panel abierto y móvil 390×844 con el drawer abierto), ahora contra el build con T5:
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.20","forma":"argv","argv":["env","CHROME_PATH=/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome","BASE=http://127.0.0.1:4402","node","browser-check.mjs","axe"],"texto":null,"cwd":"/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-a11y-and-icons/sdd-apply-gu6e15xm/tools.Gq3eaMla","head":null,"fecha":"2026-10-02T20:55:53-03:00","exit":0,"sha256":"6ca922bc437ad04a1fb1069ff5fa28b91d23203d2f9c19da557b4abfe5902acc","lineas":7,"omitidas":0,"no_recomprobable":"depende del astro preview levantado por la fase sobre la copia aislada y de herramientas instaladas en el directorio de temporales del despacho"} -->
+**Evidencia `apply-evidence.20`** · exit 0 · 7 líneas, 0 omitidas · HEAD `sin-git` · 2026-10-02T20:55:53-03:00 · `/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-a11y-and-icons/sdd-apply-gu6e15xm/tools.Gq3eaMla`
+No re-comprobable: depende del astro preview levantado por la fase sobre la copia aislada y de herramientas instaladas en el directorio de temporales del despacho
+
+```text
+env CHROME_PATH=/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome BASE=http://127.0.0.1:4402 node browser-check.mjs axe
+```
+
+```text
+PASS [es] axe desktop (panel abierto) — violations ninguna · passes 21
+PASS [es] axe drawer móvil (abierto) — drawer aria-hidden=false · violations ninguna · passes 16
+PASS [en] axe desktop (panel abierto) — violations ninguna · passes 21
+PASS [en] axe drawer móvil (abierto) — drawer aria-hidden=false · violations ninguna · passes 16
+PASS [pt] axe desktop (panel abierto) — violations ninguna · passes 21
+PASS [pt] axe drawer móvil (abierto) — drawer aria-hidden=false · violations ninguna · passes 16
+OK: 0 fallas
+```
+<!-- evidencia:fin apply-evidence.20 -->
+
+Prueba de teclado del selector desktop repetida sobre el árbol final (los pasos de teclado del bloque 10: Tab hasta el botón, Enter abre, Tab recorre los tres enlaces, Escape cierra y devuelve el foco, Espacio abre, Enter sobre otro idioma navega; la comprobación de `aria-current` de ese bloque no se repite porque T5 no toca el marcado):
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.21","forma":"argv","argv":["env","CHROME_PATH=/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome","BASE=http://127.0.0.1:4402","node","browser-check.mjs","keyboard"],"texto":null,"cwd":"/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-a11y-and-icons/sdd-apply-gu6e15xm/tools.Gq3eaMla","head":null,"fecha":"2026-10-02T20:56:06-03:00","exit":0,"sha256":"06308e40db91ac9ee44c931143538f8414132fea6f42ab26728f32507e6ba004","lineas":19,"omitidas":0,"no_recomprobable":"depende del astro preview levantado por la fase sobre la copia aislada y de herramientas instaladas en el directorio de temporales del despacho"} -->
+**Evidencia `apply-evidence.21`** · exit 0 · 19 líneas, 0 omitidas · HEAD `sin-git` · 2026-10-02T20:56:06-03:00 · `/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-a11y-and-icons/sdd-apply-gu6e15xm/tools.Gq3eaMla`
+No re-comprobable: depende del astro preview levantado por la fase sobre la copia aislada y de herramientas instaladas en el directorio de temporales del despacho
+
+```text
+env CHROME_PATH=/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome BASE=http://127.0.0.1:4402 node browser-check.mjs keyboard
+```
+
+```text
+PASS [es] Tab llega al botón — 7 tabs
+PASS [es] Enter abre
+PASS [es] Tab recorre los links — a[hreflang=es],a[hreflang=en],a[hreflang=pt]
+PASS [es] Escape cierra y devuelve foco
+PASS [es] Espacio abre
+PASS [es] Enter navega a en — /en/
+PASS [en] Tab llega al botón — 7 tabs
+PASS [en] Enter abre
+PASS [en] Tab recorre los links — a[hreflang=es],a[hreflang=en],a[hreflang=pt]
+PASS [en] Escape cierra y devuelve foco
+PASS [en] Espacio abre
+PASS [en] Enter navega a pt — /pt/
+PASS [pt] Tab llega al botón — 7 tabs
+PASS [pt] Enter abre
+PASS [pt] Tab recorre los links — a[hreflang=es],a[hreflang=en],a[hreflang=pt]
+PASS [pt] Escape cierra y devuelve foco
+PASS [pt] Espacio abre
+PASS [pt] Enter navega a en — /en/
+OK: 0 fallas
+```
+<!-- evidencia:fin apply-evidence.21 -->
+
+### Estado de los criterios (re-despacho)
+
+- T5: el bloque 20 muestra axe-core en Chrome real sin violaciones (ninguna regla, incluida `color-contrast`) en desktop y drawer móvil para `es`, `en` y `pt`; el bloque 19, todos los estados medidos sobre 4.5:1; los bloques 15 y 16, un diff de `src/` limitado al `<style>` de `LanguageSelector.astro` con tokens existentes (bloque 17); la tabla de la sección T5 registra antes/después por estado.
+- T4: "axe sin violaciones atribuibles al selector" queda cumplido por el bloque 20 (antes, bloque 9); la prueba de teclado se mantiene en verde sobre el árbol final (bloque 21). `scripts/axe-audit.mjs` (jsdom) ya daba 0 violaciones en el bloque 7 y no evalúa `color-contrast`, por lo que no se repite.
+- Pares de contraste iguales fuera del selector y el resto del barrido de `color-contrast` del sitio: registrados en `memory/observations.md`, sin cambios de código.

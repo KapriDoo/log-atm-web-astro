@@ -53,3 +53,16 @@ Fuente: sección "Tareas sugeridas" de `input.md` (brief 05, auditoría 2026-10)
 **Acceptance**:
 - [ ] axe sin violaciones atribuibles al selector de idioma en desktop y drawer móvil, en `es`, `en` y `pt`
 - [ ] `apply-evidence.md` registra la prueba de teclado (Tab, Enter, Escape con retorno de foco)
+
+## T5 — Corregir el contraste del selector de idioma (ampliación de alcance, decisión 2026-10-02)
+
+**File**: log-atm-web-astro/src/components/ui/LanguageSelector.astro (solo el bloque `<style>`)
+**Líneas/ocurrencias**: reglas de color de texto de la opción activa, hover/focus de las opciones, trigger expandido (`[aria-expanded="true"]`) y encabezado del drawer móvil
+**Acción**: Sustituir `--color-brand` (primary-500) por el token existente `--color-brand-dark` (primary-700) en la opción activa, en hover/focus y en el trigger expandido, y neutral-500 por el token existente `--color-text-muted` (neutral-600) en el encabezado móvil. Solo tokens existentes, sin valores hex nuevos. No tocar otros componentes; si los mismos pares de texto (primary-500 sobre primary-50 o neutral-50, neutral-500 sobre blanco) aparecen en otras partes del sitio, solo registrarlos en `memory/observations.md` con `archivo:línea`. No modificar `scripts/axe-audit.mjs`. Registrar en `apply-evidence.md` el color antes y después de cada estado (token y valor resuelto) para la descripción del PR.
+**Justificación**: axe-core en Chrome marca `color-contrast` (WCAG 1.4.3) en el selector, en desktop y en el drawer móvil, en es/en/pt (3.96:1, 4.10:1 y 3.66:1); el brief exige axe sin violaciones en el selector y el proyecto exige WCAG AA.
+
+**Acceptance**:
+- [ ] axe-core en Chrome real, acotado al selector, sin violaciones `color-contrast` en desktop y drawer móvil, en `es`, `en` y `pt`
+- [ ] Contraste ≥ 4.5:1 medido en cada estado: opción activa, hover, focus, trigger expandido y encabezado del drawer
+- [ ] El diff de `src/` de esta tarea solo toca el `<style>` de `LanguageSelector.astro` y usa únicamente tokens existentes
+- [ ] `apply-evidence.md` registra antes/después del color de cada estado
