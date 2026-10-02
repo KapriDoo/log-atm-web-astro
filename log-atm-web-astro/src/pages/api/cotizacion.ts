@@ -72,9 +72,13 @@ export const POST: APIRoute = async ({ request }) => {
   if (!data.email) fields.email = "Requerido.";
   else if (!isEmail(data.email)) fields.email = "Formato inválido.";
   else if (hasHeaderInjection(data.email)) fields.email = "Caracteres no válidos.";
+  // modality, origin y dest se interpolan en el Subject: mismo rechazo de CR/LF que los headers.
   if (!data.modality) fields.modality = "Requerido.";
+  else if (hasHeaderInjection(data.modality)) fields.modality = "Caracteres no válidos.";
   if (!data.origin) fields.origin = "Requerido.";
+  else if (hasHeaderInjection(data.origin)) fields.origin = "Caracteres no válidos.";
   if (!data.dest) fields.dest = "Requerido.";
+  else if (hasHeaderInjection(data.dest)) fields.dest = "Caracteres no válidos.";
   if (hasHeaderInjection(data.phone)) fields.phone = "Caracteres no válidos.";
   if (hasHeaderInjection(data.company)) fields.company = "Caracteres no válidos.";
 

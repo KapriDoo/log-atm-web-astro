@@ -1,4 +1,4 @@
-import { WorkerMailer } from "worker-mailer";
+import { WorkerMailer, type EmailOptions } from "worker-mailer";
 import { env as cfEnv } from "cloudflare:workers";
 
 export type MailEnv = {
@@ -49,14 +49,18 @@ export async function sendMail(
   });
 
   try {
-    await mailer.send({
+    // `satisfies` ata el objeto a las opciones de worker-mailer: un nombre de campo
+    // que la librería no reconoce (p. ej. `replyTo`) es error de tipos.
+    // Con `reply` undefined, worker-mailer no emite el header Reply-To.
+    const message = {
       from: { name: "Formulario Web", email: user },
       to,
-      replyTo: opts.replyTo,
+      reply: opts.replyTo,
       subject: opts.subject,
       text: opts.text,
       html: opts.html,
-    });
+    } satisfies EmailOptions;
+    await mailer.send(message);
   } finally {
     try {
       // worker-mailer mantiene el socket; cerrarlo libera el conn.
