@@ -1,8 +1,11 @@
 ---
 /**
  * LOG ATM — Selector de idioma accesible.
- * - Variante 'desktop': dropdown con `:focus-within` + click handler.
- * - Variante 'mobile': lista plana dentro del drawer.
+ * - Variante 'desktop': patrón disclosure — botón con `aria-expanded` y `aria-controls`
+ *   que muestra/oculta una lista simple de enlaces; se abre y cierra por click (o
+ *   Enter/Espacio), se cierra con click fuera o con Escape (devolviendo el foco al botón).
+ * - Variante 'mobile': lista plana de enlaces dentro del drawer.
+ * - En ambas, el idioma activo lleva `aria-current="page"`.
  */
 import { LOCALES, LOCALE_LABELS, LOCALE_NAMES } from '../../i18n/config';
 import { buildLocaleUrl, stripLocaleFromPath, useTranslations, type Locale } from '../../i18n/utils';
@@ -31,7 +34,7 @@ const isMobile = variant === 'mobile';
             href={buildLocaleUrl(lang, cleanPath)}
             class:list={['lang-selector__option', { 'is-active': lang === currentLang }]}
             hreflang={lang}
-            aria-current={lang === currentLang ? 'true' : undefined}
+            aria-current={lang === currentLang ? 'page' : undefined}
             lang={lang}
           >
             <span class="lang-selector__code">{LOCALE_LABELS[lang]}</span>
@@ -46,8 +49,8 @@ const isMobile = variant === 'mobile';
     <button
       type="button"
       class="lang-selector__trigger"
-      aria-haspopup="listbox"
       aria-expanded="false"
+      aria-controls="lang-menu"
       aria-label={t('a11y.languageCurrent', { lang: currentName })}
       id="lang-trigger"
     >
@@ -59,13 +62,14 @@ const isMobile = variant === 'mobile';
         <path d="m6 9 6 6 6-6"/>
       </svg>
     </button>
-    <ul class="lang-selector__listbox" role="listbox" aria-labelledby="lang-trigger">
+    <ul class="lang-selector__listbox" id="lang-menu">
       {LOCALES.map((lang) => (
-        <li role="option" aria-selected={lang === currentLang ? 'true' : 'false'}>
+        <li>
           <a
             href={buildLocaleUrl(lang, cleanPath)}
             class:list={['lang-selector__option', { 'is-active': lang === currentLang }]}
             hreflang={lang}
+            aria-current={lang === currentLang ? 'page' : undefined}
             lang={lang}
           >
             <span class="lang-selector__code">{LOCALE_LABELS[lang]}</span>
@@ -186,7 +190,7 @@ const isMobile = variant === 'mobile';
   import { gsap } from 'gsap';
 
   /**
-   * Dropdown toggle accesible para variante desktop.
+   * Toggle del disclosure accesible para la variante desktop.
    * Se inicializa tras DOMContentLoaded para garantizar que los elementos
    * existen aunque el módulo se ejecute antes del parse final (defensa
    * contra timing en re-hidrataciones / scripts inlineados de Astro).
