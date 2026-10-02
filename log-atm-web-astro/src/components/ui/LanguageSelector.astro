@@ -102,8 +102,8 @@ const isMobile = variant === 'mobile';
   }
   .lang-selector--desktop .lang-selector__trigger:hover,
   .lang-selector--desktop .lang-selector__trigger[aria-expanded="true"] {
-    border-color: var(--color-brand);
-    color: var(--color-brand);
+    border-color: var(--color-brand-dark);
+    color: var(--color-brand-dark);
   }
   .lang-selector__chevron { transition: transform 200ms; }
   .lang-selector--desktop .lang-selector__trigger[aria-expanded="true"] .lang-selector__chevron {
@@ -144,12 +144,12 @@ const isMobile = variant === 'mobile';
   .lang-selector__option:hover,
   .lang-selector__option:focus-visible {
     background: var(--color-primary-50);
-    color: var(--color-brand);
+    color: var(--color-brand-dark);
     outline: none;
   }
   .lang-selector__option.is-active {
     background: var(--color-primary-50);
-    color: var(--color-brand);
+    color: var(--color-brand-dark);
     font-weight: 600;
   }
   .lang-selector__code {
@@ -160,7 +160,7 @@ const isMobile = variant === 'mobile';
     color: var(--color-text-muted);
     min-width: 2ch;
   }
-  .lang-selector__option.is-active .lang-selector__code { color: var(--color-brand); }
+  .lang-selector__option.is-active .lang-selector__code { color: var(--color-brand-dark); }
   .lang-selector__name { flex: 1; }
 
   /* ─── Mobile list (en drawer) ────────────────────────── */
@@ -172,7 +172,7 @@ const isMobile = variant === 'mobile';
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--color-neutral-500);
+    color: var(--color-text-muted);
   }
   .lang-selector--mobile .lang-selector__list {
     list-style: none;
