@@ -224,3 +224,7 @@ El script global es un módulo diferido: el hero se pinta visible antes de que `
 
 El audit `largest-contentful-paint-element` ya no existe en Lighthouse 13; el nodo LCP y el `elementRenderDelay` se leen de `audits["lcp-breakdown-insight"].details.items` (ítem `type: node` y tabla de subpartes).
 
+## 2026-10-02 | env-quirk | fix-internal-heroes-animation | Lighthouse en WSL deja perfiles de Chrome en el cwd
+
+`chrome-launcher` detecta WSL y arma el `user-data-dir` con una ruta Windows (`\\wsl.localhost\...\AppData\Local\lighthouse.NNNN`) que en Linux se crea como directorio relativo al cwd: cada corrida deja uno sin trackear dentro de `log-atm-web-astro/`. Tras medir hay que borrarlos (sdd-apply borró los 26 que generó) o correr Lighthouse con cwd en un directorio temporal.
+
