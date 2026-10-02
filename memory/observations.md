@@ -208,3 +208,19 @@ Verificación empírica en es/en/pt (30 comprobaciones PASS). Se marcaron `[x]` 
 
 ## 2026-10-02 | measure | fix-internal-heroes-animation | preflight sdd-apply INICIO 20:12:25 outcome=ready
 
+## 2026-10-02 | decision | fix-internal-heroes-animation | sdd-apply: specs en review y registradas en spec_refs
+
+`tasks.md` T5 pide `status: completed` para `internal-page-heroes/spec.md`; la fase escribe `review` (§D del protocolo: `completed` lo escribe `sdd-archive`). Para que el cierre la marque, `spec_refs` registra `[[internal-page-heroes/spec]]` y la delta nueva `[[scroll-animations/scroll-inner-pages-real-coverage]]` (MODIFY sobre `scroll-inner-pages`, que queda con `superseded_by`).
+
+## 2026-10-02 | debt | fix-internal-heroes-animation | /cotizar/ bajo Lighthouse performance 95 antes y después del cambio
+
+Medición móvil (Lighthouse 13.3.0, 5 corridas, `astro preview`): la mediana de performance de `/cotizar/` queda bajo 95 con el código previo y con el cambio, sin diferencia material (`apply-evidence.2` y `apply-evidence.6`). El requisito del perfil "Lighthouse ≥ 95 en todas las páginas" no se cumple hoy en `/cotizar/`; queda fuera del alcance de este fix.
+
+## 2026-10-02 | pattern | fix-internal-heroes-animation | gsap.from en heroes: primer pintado visible antes del tween
+
+El script global es un módulo diferido: el hero se pinta visible antes de que `gsap.from` lo lleve a opacidad 0 y lo haga entrar. Por eso el LCP no se retrasa (el candidato LCP ya se pintó), pero en dispositivos lentos puede notarse un parpadeo visible → oculto → entrada. Es el patrón D7 (contenido visible sin JS) y lo comparte el hero del home.
+
+## 2026-10-02 | env-quirk | fix-internal-heroes-animation | Lighthouse 13 publica el elemento LCP en lcp-breakdown-insight
+
+El audit `largest-contentful-paint-element` ya no existe en Lighthouse 13; el nodo LCP y el `elementRenderDelay` se leen de `audits["lcp-breakdown-insight"].details.items` (ítem `type: node` y tabla de subpartes).
+
