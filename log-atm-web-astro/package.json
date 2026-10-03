@@ -11,7 +11,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "validate-i18n": "tsx scripts/validate-i18n.ts",
-    "favicons": "node scripts/generate-favicons.mjs"
+    "favicons": "node scripts/generate-favicons.mjs",
+    "measure:images": "node scripts/measure-home-image-weight.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.5.0",
