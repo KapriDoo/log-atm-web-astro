@@ -70,7 +70,7 @@ Sirve el sitio compilado en `http://localhost:4321` (nginx + Brotli).
 
 ```
 log-atm-web-astro/
-├── public/                  Activos estáticos (favicons, manifest, sitemap)
+├── public/                  Activos estáticos (logo vectorial logo.svg, favicons, manifest, sitemap)
 ├── src/
 │   ├── assets/              Imágenes optimizadas por Astro
 │   ├── components/
@@ -82,7 +82,7 @@ log-atm-web-astro/
 │   ├── scripts/             Animaciones de scroll y utilidades cliente
 │   └── styles/              tokens.css + estilos globales
 ├── docs/                    Brief de proyecto y documentación interna
-├── scripts/                 Utilidades de build (png-to-svg)
+├── scripts/                 Utilidades de build (favicons desde public/logo.svg, validación i18n)
 ├── Dockerfile               Build multi-stage (Astro → nginx + Brotli)
 ├── nginx.conf               Configuración del servidor
 ├── astro.config.mjs         Integraciones y site URL
