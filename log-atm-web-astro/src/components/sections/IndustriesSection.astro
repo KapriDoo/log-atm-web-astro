@@ -38,7 +38,18 @@ const industries = INDUSTRIES.map((ind, i) => ({
           data-scroll-type="scale-in"
         >
           <div class="ind-card__media">
-            <Picture src={ind.img} formats={['avif', 'webp']} alt="" quality={80} />
+            {/* Sobre 640px, sizes sigue el ancho pintado de la foto (object-fit: cover) en las cards
+                altas del bento (2 filas, ~370px de alto → ~665px), que fija la nitidez a DPR 2.
+                Hasta 640px se usa el ancho de la card (2 columnas, 45vw) para que el móvil DPR 3
+                entre en el presupuesto de 2 MB del inicio. */}
+            <Picture
+              src={ind.img}
+              formats={['avif', 'webp']}
+              alt=""
+              quality={80}
+              widths={[300, 450, 600, 700, 1376]}
+              sizes="(max-width: 640px) 45vw, 665px"
+            />
           </div>
           <div class="ind-card__top">
             <span class="ind-card__index">{String(i + 1).padStart(2, '0')} · {t('home.industries.indexLabel')}</span>
