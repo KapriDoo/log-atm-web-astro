@@ -16,6 +16,8 @@ const t = useTranslations(currentLang);
 // Enlaces internos localizados al idioma de la página.
 const homeHref = buildLocaleUrl(currentLang, '/');
 const contactHref = buildLocaleUrl(currentLang, '/contacto');
+// URL del propio catálogo: una tarjeta que llevaría aquí se muestra como contenido estático.
+const catalogHref = buildLocaleUrl(currentLang, '/servicios');
 const title = t('meta.servicios.title');
 const description = t('meta.servicios.description');
 
@@ -78,12 +80,13 @@ const detailedServices = services
 
         <div class="services__grid">
           {services.map((s) => {
-            const isLink = Boolean(s.href);
+            const href = s.href ? buildLocaleUrl(currentLang, s.href) : null;
+            const isLink = href !== null && href !== catalogHref;
             const CardTag = isLink ? 'a' : 'div';
             return (
               <CardTag
                 class:list={['svc-card', `svc-card--${s.size}`, { 'svc-card--static': !isLink }]}
-                href={isLink ? s.href : undefined}
+                href={isLink ? href : undefined}
               >
                 <div class="svc-card__media">
                   <Picture src={s.img} formats={['avif', 'webp']} alt={s.title} quality={80} />
