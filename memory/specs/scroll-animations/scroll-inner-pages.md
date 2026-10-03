@@ -6,7 +6,7 @@ slug: "scroll-inner-pages"
 domain: "feature"
 delta_type: null
 supersedes: null
-superseded_by: null
+superseded_by: "[[scroll-animations/scroll-inner-pages-real-coverage]]"
 status: completed
 assigned_agent: "sdd-apply"
 priority: high
@@ -18,7 +18,7 @@ feature_branch: "feature/gsap-scroll-animations"
 commits: []
 mr: ""
 acceptance_criteria:
-  - "Las 7 páginas internas muestran animaciones de entrada por scroll en sus secciones de contenido"
+  - "Las 5 páginas internas muestran la entrada del hero y animaciones de entrada por scroll en la llamada a la acción y el pie de página (cobertura fijada por [[scroll-animations/scroll-inner-pages-real-coverage]])"
   - "Las páginas de servicios e industrias ya no usan animaciones CSS propias para las entradas"
   - "El contenido de las páginas migradas es visible incluso sin JavaScript"
   - "Las animaciones de entrada son consistentes con las del homepage"
@@ -45,7 +45,7 @@ scope:
 verified_at: "2026-05-10"
 
 created: "2026-05-10"
-updated: "2026-05-10"
+updated: "2026-10-02"
 tags: [capability-spec]
 ---
 
@@ -53,7 +53,7 @@ tags: [capability-spec]
 
 ## Purpose
 
-Las 7 páginas internas del sitio (servicios, industrias, nosotros, cotizar, contacto, carga aérea y carga marítima) carecen de animaciones de entrada por scroll o utilizan animaciones CSS independientes que no son consistentes con el sistema de animación del homepage. Esta spec cubre la aplicación uniforme de entradas por scroll usando la utilidad central y la migración de las animaciones CSS existentes en servicios e industrias hacia el sistema unificado, eliminando conflictos de doble control de visibilidad.
+Las páginas internas del sitio utilizaban animaciones CSS independientes que no eran consistentes con el sistema de animación del homepage. Esta spec cubre la migración de esas animaciones CSS de servicios e industrias hacia el sistema unificado, eliminando conflictos de doble control de visibilidad. La cobertura vigente de animaciones de entrada en las 5 páginas internas (servicios, industrias, nosotros, contacto y cotizar) la fija la delta [[scroll-animations/scroll-inner-pages-real-coverage]]: entrada del hero en las 5 páginas y entradas por scroll en la llamada a la acción y el pie de página.
 
 ## Requirements
 
@@ -98,7 +98,7 @@ Las 7 páginas internas del sitio (servicios, industrias, nosotros, cotizar, con
 
 ## Acceptance Criteria
 
-- [x] Las 7 páginas internas muestran animaciones de entrada por scroll en sus secciones de contenido
+- [x] Las 5 páginas internas muestran la entrada del hero y animaciones de entrada por scroll en la llamada a la acción y el pie de página (cobertura fijada por [[scroll-animations/scroll-inner-pages-real-coverage]])
 - [x] Las páginas de servicios e industrias ya no usan animaciones CSS propias para las entradas
 - [x] El contenido de las páginas migradas es visible incluso sin JavaScript
 - [x] Las animaciones de entrada son consistentes con las del homepage
@@ -107,3 +107,4 @@ Las 7 páginas internas del sitio (servicios, industrias, nosotros, cotizar, con
 ## Related
 
 - [[scroll-entrance-utility]] — Esta spec consume la utilidad base para todas las entradas; es su principal dependencia
+- [[scroll-animations/scroll-inner-pages-real-coverage]] — delta MODIFY que fija la cobertura vigente en las 5 páginas internas
