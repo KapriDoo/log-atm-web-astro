@@ -14,6 +14,10 @@ const industries = INDUSTRIES.map((ind, i) => ({
   ...ind,
   ...(indCopy[i] ?? { name: ind.name, sub: ind.sub }),
 }));
+
+// Posiciones del bento que ocupan 2 filas (Minería, Farmacéutica, Construcción, Chatarra Ferrosa).
+// Fuente única del patrón: la clase ind-card--tall que reciben fija el span en industries.css.
+const TALL_POSITIONS = new Set([0, 3, 5, 6]);
 ---
 
 <section class="industries section" id="industrias" aria-label={t('a11y.industriesAria')}>
@@ -29,29 +33,44 @@ const industries = INDUSTRIES.map((ind, i) => ({
     </div>
 
     <div class="industries__grid" data-scroll-batch>
-      {industries.map((ind, i) => (
-        <a
-          class="ind-card ind-card--photo"
-          href={industriesHref}
-          style={`--ind-color: ${ind.color}`}
-          data-scroll-animate
-          data-scroll-type="scale-in"
-        >
-          <div class="ind-card__media">
-            <Picture src={ind.img} formats={['avif', 'webp']} alt="" quality={80} />
-          </div>
-          <div class="ind-card__top">
-            <span class="ind-card__index">{String(i + 1).padStart(2, '0')} · {t('home.industries.indexLabel')}</span>
-            <div class="ind-card__icon" aria-hidden="true">
-              <Icon name={ind.icon} width={18} height={18} />
+      {industries.map((ind, i) => {
+        const tall = TALL_POSITIONS.has(i);
+        return (
+          <a
+            class:list={['ind-card', 'ind-card--photo', { 'ind-card--tall': tall }]}
+            href={industriesHref}
+            style={`--ind-color: ${ind.color}`}
+            data-scroll-animate
+            data-scroll-type="scale-in"
+          >
+            <div class="ind-card__media">
+              {/* sizes sigue el ancho pintado de la foto 16:9 con object-fit: cover, que fija la nitidez a DPR 2.
+                  Card alta (2 filas, ~370px de alto): pinta ~665px en todo viewport, también en móvil, donde
+                  la card mide ~160px. Su quality es menor para que el móvil DPR 3 entre en el presupuesto de
+                  2 MB del inicio con la variante de 1376px (lo decide npm run measure:images).
+                  Card de 1 fila: sobre 640px, 665px; hasta 640px, el ancho de la card (2 columnas, 45vw). */}
+              <Picture
+                src={ind.img}
+                formats={['avif', 'webp']}
+                alt=""
+                quality={tall ? 55 : 80}
+                widths={[300, 450, 600, 700, 1376]}
+                sizes={tall ? '665px' : '(max-width: 640px) 45vw, 665px'}
+              />
             </div>
-          </div>
-          <div class="ind-card__body">
-            <h3 class="ind-card__name">{ind.name}</h3>
-            <p class="ind-card__sub">{ind.sub}</p>
-          </div>
-        </a>
-      ))}
+            <div class="ind-card__top">
+              <span class="ind-card__index">{String(i + 1).padStart(2, '0')} · {t('home.industries.indexLabel')}</span>
+              <div class="ind-card__icon" aria-hidden="true">
+                <Icon name={ind.icon} width={18} height={18} />
+              </div>
+            </div>
+            <div class="ind-card__body">
+              <h3 class="ind-card__name">{ind.name}</h3>
+              <p class="ind-card__sub">{ind.sub}</p>
+            </div>
+          </a>
+        );
+      })}
     </div>
   </div>
 </section>

@@ -12,7 +12,8 @@
     "astro": "astro",
     "validate-i18n": "tsx scripts/validate-i18n.ts",
     "check-i18n-links": "tsx scripts/check-i18n-links.ts",
-    "favicons": "node scripts/generate-favicons.mjs"
+    "favicons": "node scripts/generate-favicons.mjs",
+    "measure:images": "node scripts/measure-home-image-weight.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.5.0",
@@ -23,7 +24,6 @@
     "astro": "^6.1.5",
     "gsap": "^3.14.2",
     "motion": "^12.38.0",
-    "potrace": "^2.1.8",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "tailwindcss": "^4.2.2",

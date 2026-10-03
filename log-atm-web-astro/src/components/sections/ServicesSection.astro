@@ -1,7 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import Icon from "../ui/Icon.astro";
-import { SERVICES } from '../../lib/constants';
+import { SERVICES, SERVICE_CARD_IMAGE_WIDTHS, SERVICE_CARD_IMAGE_SIZES } from '../../lib/constants';
 import { useTranslations, getLangFromUrl, buildLocaleUrl, tList } from '../../i18n/utils';
 
 const currentLang = getLangFromUrl(Astro.url);
@@ -56,7 +56,14 @@ const TOTAL = SERVICES.length;
             data-scroll-type="fade-up"
           >
             <div class="svc-card__media">
-              <Picture src={s.img} formats={['avif', 'webp']} alt="" quality={80} />
+              <Picture
+                src={s.img}
+                formats={['avif', 'webp']}
+                alt=""
+                quality={80}
+                widths={SERVICE_CARD_IMAGE_WIDTHS}
+                sizes={SERVICE_CARD_IMAGE_SIZES[s.size]}
+              />
             </div>
             <span class:list={['svc-card__tag', { 'svc-card__tag--cta': s.isCta }]}>{s.tag}</span>
             <div class="svc-card__icon-pill" aria-hidden="true">

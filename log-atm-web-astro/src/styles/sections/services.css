@@ -66,7 +66,8 @@
   object-fit: cover;
   transition: transform 400ms ease;
 }
-.svc-card:hover .svc-card__media img { transform: scale(1.04); }
+/* Zoom solo en cards enlazadas: las estáticas no sugieren un clic inexistente */
+.svc-card:not(.svc-card--static):hover .svc-card__media img { transform: scale(1.04); }
 .svc-card__media::after {
   content: '';
   position: absolute;
@@ -169,5 +170,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .svc-card:hover { transform: none; }
-  .svc-card:hover .svc-card__media img { transform: none; }
+  /* Misma especificidad que la regla de zoom para anularla */
+  .svc-card:not(.svc-card--static):hover .svc-card__media img { transform: none; }
 }

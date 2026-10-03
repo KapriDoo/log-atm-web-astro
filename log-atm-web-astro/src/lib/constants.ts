@@ -192,6 +192,20 @@ export const SERVICES = [
   },
 ] as const;
 
+// Variantes de la imagen de card de servicio, compartidas por el bento del inicio y de /servicios
+// (services.css). `sizes` sigue el ancho pintado de la foto (16:9 con object-fit: cover), que en
+// cards más altas que 16:9 supera el ancho de la card: std ~400px y mini ~360px sobre 640px;
+// feature 645px (min-height 360px) en 641–1024px y ~785px (2 filas) sobre 1024px. Hasta 640px
+// (1 columna) se usa el ancho de la card (90vw) para que el móvil DPR 3 entre en el presupuesto
+// de 2 MB del inicio. `widths` cubre hasta ~2× el ancho máximo pintado, con tope en el original.
+export const SERVICE_CARD_IMAGE_WIDTHS = [400, 600, 800, 1200, 1376];
+export const SERVICE_CARD_IMAGE_SIZES = {
+  feature: '(max-width: 640px) 90vw, (max-width: 1024px) 645px, 785px',
+  wide: '(max-width: 640px) 90vw, (max-width: 1280px) 46vw, 592px',
+  std: '(max-width: 640px) 90vw, 400px',
+  mini: '(max-width: 640px) 90vw, (max-width: 1024px) 46vw, 360px',
+} as const;
+
 // Razones para elegir LOG ATM — con métrica destacada (paridad target image)
 export const WHY_ITEMS = [
   {

@@ -33,6 +33,7 @@ related:
 affects:
   - "[[dead-code-cleanup/asset-dead-code-removal]]"
   - "[[hero-lcp-performance/hero-lcp-priority]]"
+  - "[[image-optimization-pipeline/card-image-weight-budget]]"
   - "[[image-optimization-pipeline/image-asset-migration]]"
 adrs:
   - "[[0001-image-optimization-astro-assets]]"
@@ -52,7 +53,7 @@ scope:
 verified_at: "2026-05-28"
 
 created: "2026-05-28"
-updated: "2026-05-28"
+updated: "2026-10-03"
 tags: [capability-spec]
 ---
 

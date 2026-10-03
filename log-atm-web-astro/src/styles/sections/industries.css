@@ -13,11 +13,9 @@
 @media (max-width: 640px) { .industries__grid { grid-template-columns: repeat(2, 1fr); } }
 
 /* Bento: 4 cards "tall" (Minería, Farmacéutica, Construcción, Chatarra Ferrosa)
-   ocupan 2 filas verticales — el resto, 1 fila. Patrón paridad target.            */
-.industries__grid > .ind-card--photo:nth-child(1),
-.industries__grid > .ind-card--photo:nth-child(4),
-.industries__grid > .ind-card--photo:nth-child(6),
-.industries__grid > .ind-card--photo:nth-child(7) {
+   ocupan 2 filas verticales — el resto, 1 fila. Patrón paridad target.
+   Las posiciones viven en IndustriesSection.astro (TALL_POSITIONS → ind-card--tall). */
+.industries__grid > .ind-card--tall {
   grid-row: span 2;
 }
 
