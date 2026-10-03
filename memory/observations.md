@@ -297,3 +297,7 @@ En `astro preview`, un `POST` sin `content-type` lo corta el chequeo de origen d
 
 ## 2026-10-02 | debt | fix-i18n-links-and-404 | sdd-apply: tarjetas estáticas del catálogo conservan el zoom de imagen en hover
 `.svc-card--static` anula el lift (`transform`/`box-shadow`) y el cursor, pero `.svc-card:hover .svc-card__media img { transform: scale(1.04) }` (`services.css:69`) sigue aplicando a toda tarjeta. design.md D6 fija «sin CSS nuevo»; las 10 tarjetas estáticas del catálogo (incluidas Aérea/Marítima, preexistentes) muestran ese zoom sutil. Si se considera parte del «efecto de hover de tarjeta-enlace», basta `.svc-card--static:hover .svc-card__media img { transform: none; }`.
+## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-apply FIN 22:35:19 outcome=advance
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-verify INICIO 22:35:19 outcome=ready
+

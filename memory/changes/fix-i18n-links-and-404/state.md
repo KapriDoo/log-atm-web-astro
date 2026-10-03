@@ -4,8 +4,8 @@ change_name: "fix-i18n-links-and-404"
 domain: "fix"
 status: active
 fast_path: "full"
-current_phase: sdd-apply
-phases_completed: [sdd-init, sdd-explore, sdd-propose, sdd-spec, sdd-design, sdd-tasks]
+current_phase: sdd-verify
+phases_completed: [sdd-init, sdd-explore, sdd-propose, sdd-spec, sdd-design, sdd-tasks, sdd-apply]
 spec_refs: ["[[i18n-internal-links-keep-language]]", "[[services-catalog-no-self-link]]", "[[i18n-not-found-localized]]", "[[i18n-not-found-navigation-and-seo-signals]]"]
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-i18n-links-and-404"
 feature_branch: "feature/fix-i18n-links-and-404"
