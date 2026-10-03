@@ -14,6 +14,7 @@
  */
 
 import { ready } from '../lib/ready';
+import { prefersReducedMotion } from './scroll-animations';
 
 type Unit = 'cbm' | 'fcl20' | 'fcl40';
 
@@ -421,7 +422,8 @@ function initWizard(): void {
     quoteCard?.setAttribute('hidden', '');
     summary?.setAttribute('hidden', '');
     success?.removeAttribute('hidden');
-    success?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Respeta prefers-reduced-motion: el `behavior` explícito prevalece sobre el `scroll-behavior` de CSS.
+    success?.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
   }
 
   // Initial render

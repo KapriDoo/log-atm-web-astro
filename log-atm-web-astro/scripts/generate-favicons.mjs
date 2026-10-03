@@ -1,5 +1,6 @@
 /**
- * generate-favicons.mjs — Script one-shot para generar favicon.svg y favicon.ico
+ * generate-favicons.mjs — Script one-shot para generar favicon.svg, favicon.ico y
+ * apple-touch-icon.png (180x180) desde public/logo.svg
  * Uso: node scripts/generate-favicons.mjs (desde la raíz del proyecto)
  * Output commiteado al repo; no se ejecuta en el build automatizado.
  */
@@ -13,6 +14,7 @@ const ROOT = join(fileURLToPath(import.meta.url), '..', '..');
 const SRC_SVG = join(ROOT, 'public/logo.svg');
 const OUT_SVG = join(ROOT, 'public/favicon.svg');
 const OUT_ICO = join(ROOT, 'public/favicon.ico');
+const OUT_APPLE = join(ROOT, 'public/apple-touch-icon.png');
 
 async function main() {
   // favicon.svg: copia directa del logo
@@ -27,6 +29,14 @@ async function main() {
     .png()
     .toFile(OUT_ICO);
   console.log('[favicons] favicon.ico (32x32 PNG) generado:', OUT_ICO);
+
+  // apple-touch-icon.png: PNG 180x180 opaco (iOS rellena la transparencia con negro)
+  await sharp(SRC_SVG)
+    .resize(180, 180, { fit: 'contain', background: { r: 255, g: 255, b: 255, alpha: 1 } })
+    .flatten({ background: { r: 255, g: 255, b: 255 } })
+    .png()
+    .toFile(OUT_APPLE);
+  console.log('[favicons] apple-touch-icon.png (180x180 PNG) generado:', OUT_APPLE);
 }
 
 main().catch(e => { console.error('[favicons] ERROR:', e); process.exit(1); });

@@ -244,6 +244,49 @@ Verify midió `/cotizar/` en performance 90 (mediana de 5 corridas, CLS 0.137 en
 
 ## 2026-10-02 | measure | fix-internal-heroes-animation | preflight sdd-archive INICIO 20:38:24 outcome=ready
 
+## 2026-10-02 | measure | fix-a11y-and-icons | preflight sdd-init INICIO 20:40:04 outcome=ready
+
+## 2026-10-02 | measure | fix-a11y-and-icons | post-dispatch sdd-init FIN 20:40:46 outcome=advance
+
+## 2026-10-02 | measure | fix-a11y-and-icons | preflight sdd-apply INICIO 20:41:08 outcome=ready
+
+## 2026-10-02 | bug | fix-a11y-and-icons | color-contrast preexistente en el selector de idioma (WCAG 1.4.3)
+
+axe-core en Chrome real, acotado al selector, reporta `color-contrast` en desktop (opción activa/hover y trigger expandido: primary-500 sobre primary-50 / neutral-50) y en el drawer móvil (encabezado neutral-500 sobre blanco), en es/en/pt. Es anterior a este cambio (las reglas CSS no se tocaron) y su corrección no está en `tasks.md`; queda como decisión de alcance. Detalle y razones de contraste: `changes/fix-a11y-and-icons/apply-evidence.md` (§T4, bloques 9, 11-13).
+
+## 2026-10-02 | bug | fix-a11y-and-icons | scripts/axe-audit.mjs sale con exit 1 aunque no haya violaciones
+
+La última línea, `dom?.window.close?.()`, referencia `dom` fuera del bloque `for` donde está declarado y lanza `ReferenceError` después del resumen, así que el exit code del script no refleja el umbral `totalWeight > 30`. Además, sus rutas fijas `dist/<página>/index.html` no calzan con la salida del adaptador de Cloudflare (`dist/client/`), sus dependencias `jsdom` y `axe-core` no están en `package.json`, y en jsdom no detecta `color-contrast`.
+
+## 2026-10-02 | measure | fix-a11y-and-icons | post-dispatch sdd-apply FIN 20:50:08 outcome=blocked
+
+## 2026-10-02 | measure | fix-a11y-and-icons | preflight sdd-apply INICIO 20:50:59 outcome=ready
+
+
+## 2026-10-02 | bug | fix-a11y-and-icons | mismos pares de contraste del selector fuera de él (solo registro, T5)
+
+T5 corrigió el selector con `--color-brand-dark` / `--color-text-muted`. Los mismos pares de texto aparecen fuera de su alcance y quedan sin tocar:
+- `log-atm-web-astro/src/components/ui/Navbar.astro:315` — `.nav-drawer__link:hover`: `--color-brand` (primary-500) sobre `--color-primary-50` (3.95:1), en el drawer móvil; estado hover, que axe estático no detecta.
+- `log-atm-web-astro/src/components/ui/Navbar.astro:171-175` — `.nav__link:hover, .nav__link.is-active`: `--color-brand` sobre `--color-surface-alt` (neutral-100 `#efedeb`), 3.75:1; no es el par exacto (fondo neutral-100, no neutral-50), pero axe-core en Chrome lo marca en el enlace activo de la navbar (`/servicios/`, `/contacto/`).
+- `--color-neutral-500` sobre blanco no aparece fuera del selector: sus otros usos (`Footer.astro:83,105,152`, `styles/pages/shared.css:758`) van sobre fondo oscuro o rayado.
+
+## 2026-10-02 | bug | fix-a11y-and-icons | otras violaciones color-contrast del sitio (fuera de alcance)
+
+Barrido de axe-core `color-contrast` en Chrome (6 páginas `es`, desktop y drawer móvil, build con T5): 43 nodos fuera del selector. Pares: blanco sobre `--color-brand` 4.38:1 (`.btn--brand`, `.skip-link`, `.cta-final__btn`, `.btn--cta` del hero); blanco sobre CTA `#3eb978` 2.49:1 (`.btn--cta`, `.svc-card__tag--cta`, `.form-submit__label`); blanco sobre WhatsApp `#25d366` 1.98:1 (`.btn--wa`); `.eyebrow` / `.quote-step__num` `#339965` sobre `#f8f7f6`/`#ffffff`/`#efedeb` (3.05–3.56:1); `#aaa6a1` sobre blanco 2.41:1 (`#sum-*` en `/cotizar/`); `.quote-summary__title` 1.02:1; `.contact-form-card__pill` y `.quote-summary__sla` 4.41:1. Afecta el criterio WCAG AA del perfil; candidato a un cambio propio.
+
+## 2026-10-02 | bug | fix-a11y-and-icons | opciones del selector con outline: none en :focus-visible
+
+`LanguageSelector.astro` (`.lang-selector__option:focus-visible`) quita el `outline` y marca el foco solo con fondo `--color-primary-50` sobre `--color-surface` (diferencia de fondo muy baja) más el cambio de color del texto. Cumple 2.4.7 de forma débil; no está en el alcance de T5 (solo tokens de color de texto).
+## 2026-10-02 | measure | fix-a11y-and-icons | post-dispatch sdd-apply FIN 20:57:52 outcome=advance
+
+## 2026-10-02 | measure | fix-a11y-and-icons | preflight sdd-verify INICIO 20:57:56 outcome=ready
+
+## 2026-10-02 | measure | fix-a11y-and-icons | post-dispatch sdd-verify FIN 21:06:00 outcome=advance
+
+## 2026-10-02 | measure | fix-a11y-and-icons | preflight sdd-archive INICIO 21:06:01 outcome=ready
+
+## 2026-10-02 | measure | fix-a11y-and-icons | preflight sdd-archive INICIO 21:07:11 outcome=ready
+
 ## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-init INICIO 21:10:28 outcome=ready
 
 ## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-init FIN 21:11:07 outcome=advance
