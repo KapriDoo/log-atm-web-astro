@@ -7,7 +7,7 @@ domain: "fix"
 delta_type: ADD
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on: []
@@ -17,9 +17,9 @@ feature_branch: "feature/fix-i18n-links-and-404"
 commits: ["d8bfa0e", "bbd659c", "84af1c9"]
 mr: ""
 acceptance_criteria:
-  - "En la página 404, el selector de idioma ofrece la home de cada idioma y ninguna dirección derivada de la URL inexistente."
-  - "La página 404 no declara dirección canónica, dirección para redes sociales, enlaces alternativos de idioma ni datos estructurados de migas que apunten a la URL inexistente."
-  - "En las páginas existentes, el selector de idioma y las señales de SEO (canónica, redes sociales, idiomas alternativos, migas) se mantienen como antes."
+  - "[x] En la página 404, el selector de idioma ofrece la home de cada idioma y ninguna dirección derivada de la URL inexistente."
+  - "[x] La página 404 no declara dirección canónica, dirección para redes sociales, enlaces alternativos de idioma ni datos estructurados de migas que apunten a la URL inexistente."
+  - "[x] En las páginas existentes, el selector de idioma y las señales de SEO (canónica, redes sociales, idiomas alternativos, migas) se mantienen como antes."
 related:
   - "[[i18n-not-found-localized]]"
   - "[[i18n-ui-selector-navbar]]"
@@ -30,7 +30,7 @@ scope:
   - "log-atm-web-astro/src/components/ui/Navbar.astro"
   - "log-atm-web-astro/src/layouts/BaseLayout.astro"
   - "log-atm-web-astro/src/pages/404.astro"
-verified_at: null
+verified_at: "2026-10-02"
 created: "2026-10-02"
 updated: "2026-10-02"
 tags: [capability-spec, i18n, seo, 404]
@@ -72,9 +72,9 @@ Como la página 404 se genera según la URL solicitada, el selector de idioma y 
 
 ## Acceptance Criteria
 
-- [ ] El selector de idioma de la 404 ofrece las homes de cada idioma y ninguna dirección derivada de la URL inexistente.
-- [ ] La 404 no emite canónica, dirección social, idiomas alternativos ni migas estructuradas.
-- [ ] Las páginas existentes mantienen selector y señales SEO sin cambios.
+- [x] El selector de idioma de la 404 ofrece las homes de cada idioma y ninguna dirección derivada de la URL inexistente.
+- [x] La 404 no emite canónica, dirección social, idiomas alternativos ni migas estructuradas.
+- [x] Las páginas existentes mantienen selector y señales SEO sin cambios.
 
 ## Related
 

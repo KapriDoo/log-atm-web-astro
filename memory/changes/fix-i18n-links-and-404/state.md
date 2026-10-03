@@ -2,10 +2,10 @@
 type: change-state
 change_name: "fix-i18n-links-and-404"
 domain: "fix"
-status: active
+status: completed
 fast_path: "full"
-current_phase: sdd-verify
-phases_completed: [sdd-init, sdd-explore, sdd-propose, sdd-spec, sdd-design, sdd-tasks, sdd-apply]
+current_phase: ""
+phases_completed: [sdd-init, sdd-explore, sdd-propose, sdd-spec, sdd-design, sdd-tasks, sdd-apply, sdd-verify]
 spec_refs: ["[[i18n-internal-links-keep-language]]", "[[services-catalog-no-self-link]]", "[[i18n-not-found-localized]]", "[[i18n-not-found-navigation-and-seo-signals]]"]
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-i18n-links-and-404"
 feature_branch: "feature/fix-i18n-links-and-404"
@@ -13,7 +13,7 @@ integration_target: "main"
 require_judgment: false
 skip_judgment: false
 jira_key: ""
-mr: ""
+mr_url: ""
 mr_status: pending
 mr_error: ""
 created: "2026-10-02"

@@ -7,7 +7,7 @@ domain: "fix"
 delta_type: ADD
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on: []
@@ -17,10 +17,10 @@ feature_branch: "feature/fix-i18n-links-and-404"
 commits: ["ca35054"]
 mr: ""
 acceptance_criteria:
-  - "En el catálogo de servicios, ninguna tarjeta enlaza al propio catálogo, en español, inglés y portugués."
-  - "Las tarjetas sin destino distinto al catálogo se muestran como contenido no interactivo, sin cursor de enlace ni efecto de hover de tarjeta-enlace."
-  - "La tarjeta de consultoría conserva su enlace al formulario de cotización en el idioma de la página."
-  - "En la home, las tarjetas de servicios que llevan al catálogo siguen siendo enlaces al catálogo en el idioma de la página."
+  - "[x] En el catálogo de servicios, ninguna tarjeta enlaza al propio catálogo, en español, inglés y portugués."
+  - "[x] Las tarjetas sin destino distinto al catálogo se muestran como contenido no interactivo, sin cursor de enlace ni efecto de hover de tarjeta-enlace."
+  - "[x] La tarjeta de consultoría conserva su enlace al formulario de cotización en el idioma de la página."
+  - "[x] En la home, las tarjetas de servicios que llevan al catálogo siguen siendo enlaces al catálogo en el idioma de la página."
 related:
   - "[[services-catalog-cta-and-detail-pages]]"
   - "[[i18n-internal-links-keep-language]]"
@@ -29,7 +29,7 @@ adrs: []
 scope:
   - "log-atm-web-astro/src/pages/servicios.astro"
   - "log-atm-web-astro/src/components/sections/ServicesSection.astro"
-verified_at: null
+verified_at: "2026-10-02"
 created: "2026-10-02"
 updated: "2026-10-02"
 tags: [capability-spec, services]
@@ -71,10 +71,10 @@ En el catálogo de servicios, varias tarjetas llevan al mismo catálogo en el qu
 
 ## Acceptance Criteria
 
-- [ ] Ninguna tarjeta del catálogo enlaza al propio catálogo en es, en y pt.
-- [ ] Las tarjetas sin destino distinto al catálogo no muestran affordance de enlace.
-- [ ] La tarjeta de consultoría conserva su enlace a la cotización en el idioma de la página.
-- [ ] Las tarjetas de la home siguen enlazando al catálogo en el idioma de la página.
+- [x] Ninguna tarjeta del catálogo enlaza al propio catálogo en es, en y pt.
+- [x] Las tarjetas sin destino distinto al catálogo no muestran affordance de enlace.
+- [x] La tarjeta de consultoría conserva su enlace a la cotización en el idioma de la página.
+- [x] Las tarjetas de la home siguen enlazando al catálogo en el idioma de la página.
 
 ## Related
 

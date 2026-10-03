@@ -7,7 +7,7 @@ domain: "fix"
 delta_type: ADD
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
@@ -17,10 +17,10 @@ feature_branch: "feature/fix-i18n-links-and-404"
 commits: ["c50f5df", "4a496a0"]
 mr: ""
 acceptance_criteria:
-  - "En las páginas en inglés y portugués, todo enlace interno de navegación lleva a la versión de la página en el mismo idioma."
-  - "Las tarjetas de servicios de la home y del catálogo, los llamados a contacto de servicios e industrias, la migaja «Inicio» de las cinco páginas internas y el botón «volver al inicio» de la pantalla final de cotización conservan el idioma."
-  - "Una revisión automatizada y repetible de todas las páginas en inglés y portugués no encuentra enlaces internos fuera de su idioma, excluyendo los del selector de idioma."
-  - "Las páginas en español mantienen sus URLs sin prefijo de idioma."
+  - "[x] En las páginas en inglés y portugués, todo enlace interno de navegación lleva a la versión de la página en el mismo idioma."
+  - "[x] Las tarjetas de servicios de la home y del catálogo, los llamados a contacto de servicios e industrias, la migaja «Inicio» de las cinco páginas internas y el botón «volver al inicio» de la pantalla final de cotización conservan el idioma."
+  - "[x] Una revisión automatizada y repetible de todas las páginas en inglés y portugués no encuentra enlaces internos fuera de su idioma, excluyendo los del selector de idioma."
+  - "[x] Las páginas en español mantienen sus URLs sin prefijo de idioma."
 related:
   - "[[i18n-routing-locale-prefixes]]"
   - "[[services-catalog-cta-and-detail-pages]]"
@@ -34,7 +34,7 @@ scope:
   - "log-atm-web-astro/src/pages/nosotros.astro"
   - "log-atm-web-astro/src/pages/cotizar.astro"
   - "log-atm-web-astro/scripts/"
-verified_at: null
+verified_at: "2026-10-02"
 created: "2026-10-02"
 updated: "2026-10-02"
 tags: [capability-spec, i18n, routing]
@@ -101,10 +101,10 @@ Un visitante que lee el sitio en inglés o en portugués espera seguir en ese id
 
 ## Acceptance Criteria
 
-- [ ] En las páginas en inglés y portugués, ningún enlace interno de navegación lleva a una versión en otro idioma, con excepción de los enlaces del selector de idioma.
-- [ ] Las tarjetas de servicios (home y catálogo), los llamados a contacto de servicios e industrias, la migaja «Inicio» de las cinco páginas internas y el botón «volver al inicio» de cotización conservan el idioma en inglés y portugués.
-- [ ] Una revisión automatizada y repetible de todas las páginas en inglés y portugués confirma cero enlaces internos fuera de su idioma, excluyendo el selector de idioma.
-- [ ] Las páginas en español mantienen sus URLs sin prefijo.
+- [x] En las páginas en inglés y portugués, ningún enlace interno de navegación lleva a una versión en otro idioma, con excepción de los enlaces del selector de idioma.
+- [x] Las tarjetas de servicios (home y catálogo), los llamados a contacto de servicios e industrias, la migaja «Inicio» de las cinco páginas internas y el botón «volver al inicio» de cotización conservan el idioma en inglés y portugués.
+- [x] Una revisión automatizada y repetible de todas las páginas en inglés y portugués confirma cero enlaces internos fuera de su idioma, excluyendo el selector de idioma.
+- [x] Las páginas en español mantienen sus URLs sin prefijo.
 
 ## Related
 

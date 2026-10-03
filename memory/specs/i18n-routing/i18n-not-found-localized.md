@@ -7,7 +7,7 @@ domain: "fix"
 delta_type: ADD
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
@@ -17,12 +17,12 @@ feature_branch: "feature/fix-i18n-links-and-404"
 commits: ["84af1c9"]
 mr: ""
 acceptance_criteria:
-  - "Una URL inexistente bajo /en/ responde «no encontrado» con la página 404 en inglés, a cualquier profundidad y con o sin barra final."
-  - "Una URL inexistente bajo /pt/ responde «no encontrado» con la página 404 en portugués, a cualquier profundidad y con o sin barra final."
-  - "Una URL inexistente sin prefijo responde «no encontrado» con la página 404 en español."
-  - "La página 404 declara el idioma que corresponde al prefijo y pide a los buscadores no indexarla."
-  - "Las direcciones /en/404/ y /pt/404/ responden «no encontrado» y no como páginas existentes."
-  - "Las páginas existentes y el servicio del formulario de contacto mantienen su comportamiento."
+  - "[x] Una URL inexistente bajo /en/ responde «no encontrado» con la página 404 en inglés, a cualquier profundidad y con o sin barra final."
+  - "[x] Una URL inexistente bajo /pt/ responde «no encontrado» con la página 404 en portugués, a cualquier profundidad y con o sin barra final."
+  - "[x] Una URL inexistente sin prefijo responde «no encontrado» con la página 404 en español."
+  - "[x] La página 404 declara el idioma que corresponde al prefijo y pide a los buscadores no indexarla."
+  - "[x] Las direcciones /en/404/ y /pt/404/ responden «no encontrado» y no como páginas existentes."
+  - "[x] Las páginas existentes y el servicio del formulario de contacto mantienen su comportamiento."
 related:
   - "[[i18n-routing-locale-prefixes]]"
   - "[[scroll-404-effect]]"
@@ -32,7 +32,7 @@ adrs: []
 scope:
   - "log-atm-web-astro/src/pages/404.astro"
   - "log-atm-web-astro/src/pages/[lang]/404.astro"
-verified_at: null
+verified_at: "2026-10-02"
 created: "2026-10-02"
 updated: "2026-10-02"
 tags: [capability-spec, i18n, routing, 404]
@@ -97,13 +97,13 @@ Un visitante que llega a una dirección inexistente dentro de la versión en ing
 
 ## Acceptance Criteria
 
-- [ ] Una URL inexistente bajo `/en/` y bajo `/pt/` responde 404 con la página en el idioma del prefijo, a cualquier profundidad y con o sin barra final.
-- [ ] Una URL inexistente sin prefijo responde 404 con la página en español.
-- [ ] La página 404 declara el idioma correspondiente y la instrucción de no indexar.
-- [ ] `/en/404/` y `/pt/404/` responden 404.
-- [ ] Páginas existentes y servicio del formulario de contacto sin cambios.
-- [ ] El efecto de rebote del «404» y el movimiento reducido siguen funcionando en es, en y pt.
-- [ ] El comportamiento se verifica en una vista previa local que reproduce el entorno de ejecución del sitio (el criterio de producción se declara en el MR).
+- [x] Una URL inexistente bajo `/en/` y bajo `/pt/` responde 404 con la página en el idioma del prefijo, a cualquier profundidad y con o sin barra final.
+- [x] Una URL inexistente sin prefijo responde 404 con la página en español.
+- [x] La página 404 declara el idioma correspondiente y la instrucción de no indexar.
+- [x] `/en/404/` y `/pt/404/` responden 404.
+- [x] Páginas existentes y servicio del formulario de contacto sin cambios.
+- [x] El efecto de rebote del «404» y el movimiento reducido siguen funcionando en es, en y pt.
+- [x] El comportamiento se verifica en una vista previa local que reproduce el entorno de ejecución del sitio (el criterio de producción se declara en el MR).
 
 ## Related
 

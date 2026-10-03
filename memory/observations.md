@@ -344,3 +344,9 @@ En `astro preview`, un `POST` sin `content-type` lo corta el chequeo de origen d
 
 ## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-verify INICIO 22:35:19 outcome=ready
 
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-verify INICIO 22:35:47 outcome=ready
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-verify FIN 22:41:27 outcome=advance
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-archive INICIO 22:41:31 outcome=ready
+
