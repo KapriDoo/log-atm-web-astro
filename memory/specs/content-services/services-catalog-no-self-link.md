@@ -7,14 +7,14 @@ domain: "fix"
 delta_type: ADD
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on: []
 change_ref: "[[fix-i18n-links-and-404]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-i18n-links-and-404"
+feature_branch: "feature/fix-i18n-links-and-404"
+commits: ["ca35054"]
 mr: ""
 acceptance_criteria:
   - "En el catálogo de servicios, ninguna tarjeta enlaza al propio catálogo, en español, inglés y portugués."

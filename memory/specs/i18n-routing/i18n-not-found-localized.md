@@ -7,14 +7,14 @@ domain: "fix"
 delta_type: ADD
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
 change_ref: "[[fix-i18n-links-and-404]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-i18n-links-and-404"
+feature_branch: "feature/fix-i18n-links-and-404"
+commits: ["84af1c9"]
 mr: ""
 acceptance_criteria:
   - "Una URL inexistente bajo /en/ responde «no encontrado» con la página 404 en inglés, a cualquier profundidad y con o sin barra final."

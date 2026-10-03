@@ -7,14 +7,14 @@ domain: "fix"
 delta_type: ADD
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
 change_ref: "[[fix-i18n-links-and-404]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-i18n-links-and-404"
+feature_branch: "feature/fix-i18n-links-and-404"
+commits: ["c50f5df", "4a496a0"]
 mr: ""
 acceptance_criteria:
   - "En las páginas en inglés y portugués, todo enlace interno de navegación lleva a la versión de la página en el mismo idioma."

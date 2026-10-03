@@ -7,14 +7,14 @@ domain: "fix"
 delta_type: ADD
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on: []
 change_ref: "[[fix-i18n-links-and-404]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-i18n-links-and-404"
+feature_branch: "feature/fix-i18n-links-and-404"
+commits: ["d8bfa0e", "bbd659c", "84af1c9"]
 mr: ""
 acceptance_criteria:
   - "En la página 404, el selector de idioma ofrece la home de cada idioma y ninguna dirección derivada de la URL inexistente."

@@ -285,3 +285,15 @@ Verify midió `/cotizar/` en performance 90 (mediana de 5 corridas, CLS 0.137 en
 
 ## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-apply INICIO 22:20:48 outcome=ready
 
+
+## 2026-10-02 | env-quirk | fix-i18n-links-and-404 | sdd-apply: POST /api/contacto sin content-type responde 403, no 400
+En `astro preview`, un `POST` sin `content-type` lo corta el chequeo de origen de Astro (`security.checkOrigin`) con 403 antes del handler; el 400 del plan corresponde a `content-type: application/json` con cuerpo vacío (`invalid-json`). Idéntico en `main` y en el cambio (apply-evidence.9). Las verificaciones del endpoint deben enviar el content-type JSON.
+
+## 2026-10-02 | env-quirk | fix-i18n-links-and-404 | sdd-apply: Chrome headless `--dump-dom` se cuelga contra astro preview en WSL
+`chrome --headless=new --dump-dom` (con `--virtual-time-budget` o `--timeout`) no retorna contra la 404 de `astro preview`. Funciona lanzar Chrome con `--remote-debugging-port=0` y manejarlo por CDP con el `WebSocket` nativo de Node 24 (leer el puerto de `DevToolsActivePort` del `user-data-dir`), emulando `prefers-reduced-motion` con `Emulation.setEmulatedMedia`.
+
+## 2026-10-02 | risk | fix-i18n-links-and-404 | sdd-apply: main avanzó con el PR #33 durante la fase; merge con conflicto solo en observations.md
+`main` pasó a `78b6b73` (merge del PR #33: `LanguageSelector.astro`, `wizard.ts`, `generate-favicons.mjs`, `apple-touch-icon.png`, `observations.md`). Los archivos de código no se solapan con el cambio; `git merge-tree` reporta conflicto únicamente en `memory/observations.md`, que no tiene `merge=union` (no existe `.gitattributes` en el repo). La sincronización previa a `sdd-verify` debe resolverlo.
+
+## 2026-10-02 | debt | fix-i18n-links-and-404 | sdd-apply: tarjetas estáticas del catálogo conservan el zoom de imagen en hover
+`.svc-card--static` anula el lift (`transform`/`box-shadow`) y el cursor, pero `.svc-card:hover .svc-card__media img { transform: scale(1.04) }` (`services.css:69`) sigue aplicando a toda tarjeta. design.md D6 fija «sin CSS nuevo»; las 10 tarjetas estáticas del catálogo (incluidas Aérea/Marítima, preexistentes) muestran ese zoom sutil. Si se considera parte del «efecto de hover de tarjeta-enlace», basta `.svc-card--static:hover .svc-card__media img { transform: none; }`.
