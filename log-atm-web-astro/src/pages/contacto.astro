@@ -4,13 +4,15 @@ import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
 import Icon from "../components/ui/Icon.astro";
 import { SITE } from '../lib/constants';
-import { useTranslations, getLangFromUrl, tList, type Locale } from '../i18n/utils';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, tList, type Locale } from '../i18n/utils';
 import WhatsAppIcon from '../components/icons/WhatsAppIcon.astro';
 import '../styles/pages/shared.css';
 
 const { lang: langProp } = Astro.props as { lang?: Locale };
 const currentLang = langProp ?? getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
+// Home localizada al idioma de la página.
+const homeHref = buildLocaleUrl(currentLang, '/');
 const title = t('meta.contacto.title');
 const description = t('meta.contacto.description');
 
@@ -25,7 +27,7 @@ const submitSuccessText = t('contacto.form.submitSuccess');
     <section class="page-hero">
       <div class="container">
         <div class="page-hero__breadcrumb">
-          <a href="/">{t('common.breadcrumbHome')}</a> <span>/</span> <span>{t('contacto.breadcrumb')}</span>
+          <a href={homeHref}>{t('common.breadcrumbHome')}</a> <span>/</span> <span>{t('contacto.breadcrumb')}</span>
         </div>
         <div class="page-hero__inner">
           <div>

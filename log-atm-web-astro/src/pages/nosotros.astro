@@ -6,12 +6,14 @@ import CTASection from '../components/sections/CTASection.astro';
 import Icon from "../components/ui/Icon.astro";
 import { Picture } from 'astro:assets';
 import { VALUES, HOW_WE_WORK } from '../lib/constants';
-import { useTranslations, getLangFromUrl, tList, type Locale } from '../i18n/utils';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, tList, type Locale } from '../i18n/utils';
 import '../styles/pages/shared.css';
 
 const { lang: langProp } = Astro.props as { lang?: Locale };
 const currentLang = langProp ?? getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
+// Home localizada al idioma de la página.
+const homeHref = buildLocaleUrl(currentLang, '/');
 const title = t('meta.nosotros.title');
 const description = t('meta.nosotros.description');
 
@@ -32,7 +34,7 @@ const how = HOW_WE_WORK.map((h, i) => ({ ...h, ...(howCopy[i] ?? { title: h.titl
     <section class="page-hero">
       <div class="container">
         <div class="page-hero__breadcrumb">
-          <a href="/">{t('common.breadcrumbHome')}</a> <span>/</span> <span>{t('nosotros.breadcrumb')}</span>
+          <a href={homeHref}>{t('common.breadcrumbHome')}</a> <span>/</span> <span>{t('nosotros.breadcrumb')}</span>
         </div>
         <div class="page-hero__inner">
           <div>

@@ -44,12 +44,14 @@ const TOTAL = SERVICES.length;
 
     <div class="services__grid" data-scroll-batch>
       {FEATURED.map((s) => {
-        const isLink = Boolean(s.href);
+        // href localizado al idioma de la página; `null` → tarjeta estática.
+        const href = s.href ? buildLocaleUrl(currentLang, s.href) : null;
+        const isLink = href !== null;
         const CardTag = isLink ? 'a' : 'div';
         return (
           <CardTag
             class:list={['svc-card', `svc-card--${s.size}`, { 'svc-card--static': !isLink }]}
-            href={isLink ? s.href : undefined}
+            href={href ?? undefined}
             data-scroll-animate
             data-scroll-type="fade-up"
           >

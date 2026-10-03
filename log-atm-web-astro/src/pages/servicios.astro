@@ -6,13 +6,16 @@ import CTASection from '../components/sections/CTASection.astro';
 import Icon from "../components/ui/Icon.astro";
 import { Picture } from 'astro:assets';
 import { SERVICES } from '../lib/constants';
-import { useTranslations, getLangFromUrl, tList, type Locale } from '../i18n/utils';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, tList, type Locale } from '../i18n/utils';
 import '../styles/pages/shared.css';
 import '../styles/sections/services.css';
 
 const { lang: langProp } = Astro.props as { lang?: Locale };
 const currentLang = langProp ?? getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
+// Enlaces internos localizados al idioma de la página.
+const homeHref = buildLocaleUrl(currentLang, '/');
+const contactHref = buildLocaleUrl(currentLang, '/contacto');
 const title = t('meta.servicios.title');
 const description = t('meta.servicios.description');
 
@@ -42,7 +45,7 @@ const detailedServices = services
     <section class="page-hero">
       <div class="container">
         <div class="page-hero__breadcrumb">
-          <a href="/">{t('common.breadcrumbHome')}</a> <span>/</span> <span>{t('servicios.breadcrumb')}</span>
+          <a href={homeHref}>{t('common.breadcrumbHome')}</a> <span>/</span> <span>{t('servicios.breadcrumb')}</span>
         </div>
         <div class="page-hero__inner">
           <div>
@@ -121,7 +124,7 @@ const detailedServices = services
               <ul class="svc-detail__features">
                 {detail.features.map((f) => <li>{f}</li>)}
               </ul>
-              <a href="/contacto" class="btn btn--brand btn--sm">
+              <a href={contactHref} class="btn btn--brand btn--sm">
                 {t('servicios.details.cardCta')}
                 <Icon name="lucide:arrow-right" width={14} height={14} aria-hidden="true" />
               </a>
