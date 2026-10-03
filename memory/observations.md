@@ -235,3 +235,11 @@ Barrido de axe-core `color-contrast` en Chrome (6 páginas `es`, desktop y drawe
 ## 2026-10-02 | bug | fix-a11y-and-icons | opciones del selector con outline: none en :focus-visible
 
 `LanguageSelector.astro` (`.lang-selector__option:focus-visible`) quita el `outline` y marca el foco solo con fondo `--color-primary-50` sobre `--color-surface` (diferencia de fondo muy baja) más el cambio de color del texto. Cumple 2.4.7 de forma débil; no está en el alcance de T5 (solo tokens de color de texto).
+## 2026-10-02 | measure | fix-a11y-and-icons | post-dispatch sdd-apply FIN 20:57:52 outcome=advance
+
+## 2026-10-02 | measure | fix-a11y-and-icons | preflight sdd-verify INICIO 20:57:56 outcome=ready
+
+## 2026-10-02 | measure | fix-a11y-and-icons | post-dispatch sdd-verify FIN 21:06:00 outcome=advance
+
+## 2026-10-02 | measure | fix-a11y-and-icons | preflight sdd-archive INICIO 21:06:01 outcome=ready
+
