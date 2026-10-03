@@ -244,3 +244,44 @@ Verify midió `/cotizar/` en performance 90 (mediana de 5 corridas, CLS 0.137 en
 
 ## 2026-10-02 | measure | fix-internal-heroes-animation | preflight sdd-archive INICIO 20:38:24 outcome=ready
 
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-init INICIO 21:10:28 outcome=ready
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-init FIN 21:11:07 outcome=advance
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-explore INICIO 21:11:08 outcome=ready
+
+
+## 2026-10-02 | debt-candidate | fix-i18n-links-and-404 | JSON-LD BreadcrumbList con "Inicio" fijo en todos los idiomas
+**Detectado por**: sdd-explore en `fix-i18n-links-and-404`
+**Ubicación**: `log-atm-web-astro/src/layouts/BaseLayout.astro:115-122`
+**Descripción**: el `BreadcrumbList` usa `name: 'Inicio'` y `item: SITE_URL` en es/en/pt; en `/en` y `/pt` el primer elemento no está traducido ni apunta a la home localizada.
+**Promoción sugerida**: `sdd new fix-breadcrumb-jsonld-i18n --domain debt`
+## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-explore FIN 21:16:20 outcome=advance
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-propose INICIO 21:16:20 outcome=ready
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-propose FIN 21:17:56 outcome=paused
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-spec INICIO 22:12:44 outcome=ready
+
+
+## 2026-10-02 | decision | fix-i18n-links-and-404 | sdd-spec: specs ADD en lugar de delta sobre specs vigentes
+`i18n-routing-locale-prefixes` ya exige devolver la 404 en el idioma del prefijo, pero abarca seis idiomas y el desfase corresponde al brief 08; `services-catalog-cta-and-detail-pages` trata otro comportamiento (sin CTA de detalle). Se crearon 4 specs `ADD` con `related` hacia ellas, sin editarlas. Las specs nuevas se limitan a es/en/pt, los idiomas vigentes del sitio. Las verificaciones post-deploy y los datos para el MR quedaron en `## Para el MR` de `clarifications.md`.
+## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-spec FIN 22:14:51 outcome=advance
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-design INICIO 22:14:52 outcome=ready
+
+
+## 2026-10-02 | pre-adr | fix-i18n-links-and-404 | Página 404 única renderizada bajo demanda, fuera del patrón [lang]/
+`404.astro` con `prerender = false` deriva el locale de `Astro.url`; se elimina `[lang]/404.astro`. El manejador de error de Astro resuelve siempre `/404` sin locale y, prerenderizada, la sirve desde `ASSETS`; bajo demanda conserva el path real. Registrado en ADR-0007 (extiende ADR-0002 sin supersederlo). Regla asociada: `BaseLayout` omite canonical/hreflang/og:url/BreadcrumbList con `noindex`.
+
+## 2026-10-02 | decision | fix-i18n-links-and-404 | sdd-design: barrido de links como script tsx manual que importa config.ts
+`scripts/check-i18n-links.ts` (`npm run check-i18n-links`) importa los locales desde `src/i18n/config.ts` en lugar de duplicarlos; recorre todo `dist/client` (es incluido) y además exige barra final. `scripts/validate-i18n.ts` mantiene hoy su propia lista `LOCALES` hardcodeada (desvío SSOT preexistente, fuera de alcance).
+## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-design FIN 22:19:29 outcome=advance
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-tasks INICIO 22:19:29 outcome=ready
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-tasks FIN 22:20:48 outcome=advance
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-apply INICIO 22:20:48 outcome=ready
+
