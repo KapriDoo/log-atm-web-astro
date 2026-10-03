@@ -291,6 +291,69 @@ Barrido de axe-core `color-contrast` en Chrome (6 páginas `es`, desktop y drawe
 
 ## 2026-10-02 | measure | fix-a11y-and-icons | preflight sdd-archive INICIO 21:07:11 outcome=ready
 
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-init INICIO 21:10:28 outcome=ready
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-init FIN 21:11:07 outcome=advance
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-explore INICIO 21:11:08 outcome=ready
+
+
+## 2026-10-02 | debt-candidate | fix-i18n-links-and-404 | JSON-LD BreadcrumbList con "Inicio" fijo en todos los idiomas
+**Detectado por**: sdd-explore en `fix-i18n-links-and-404`
+**Ubicación**: `log-atm-web-astro/src/layouts/BaseLayout.astro:115-122`
+**Descripción**: el `BreadcrumbList` usa `name: 'Inicio'` y `item: SITE_URL` en es/en/pt; en `/en` y `/pt` el primer elemento no está traducido ni apunta a la home localizada.
+**Promoción sugerida**: `sdd new fix-breadcrumb-jsonld-i18n --domain debt`
+## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-explore FIN 21:16:20 outcome=advance
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-propose INICIO 21:16:20 outcome=ready
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-propose FIN 21:17:56 outcome=paused
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-spec INICIO 22:12:44 outcome=ready
+
+
+## 2026-10-02 | decision | fix-i18n-links-and-404 | sdd-spec: specs ADD en lugar de delta sobre specs vigentes
+`i18n-routing-locale-prefixes` ya exige devolver la 404 en el idioma del prefijo, pero abarca seis idiomas y el desfase corresponde al brief 08; `services-catalog-cta-and-detail-pages` trata otro comportamiento (sin CTA de detalle). Se crearon 4 specs `ADD` con `related` hacia ellas, sin editarlas. Las specs nuevas se limitan a es/en/pt, los idiomas vigentes del sitio. Las verificaciones post-deploy y los datos para el MR quedaron en `## Para el MR` de `clarifications.md`.
+## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-spec FIN 22:14:51 outcome=advance
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-design INICIO 22:14:52 outcome=ready
+
+
+## 2026-10-02 | pre-adr | fix-i18n-links-and-404 | Página 404 única renderizada bajo demanda, fuera del patrón [lang]/
+`404.astro` con `prerender = false` deriva el locale de `Astro.url`; se elimina `[lang]/404.astro`. El manejador de error de Astro resuelve siempre `/404` sin locale y, prerenderizada, la sirve desde `ASSETS`; bajo demanda conserva el path real. Registrado en ADR-0007 (extiende ADR-0002 sin supersederlo). Regla asociada: `BaseLayout` omite canonical/hreflang/og:url/BreadcrumbList con `noindex`.
+
+## 2026-10-02 | decision | fix-i18n-links-and-404 | sdd-design: barrido de links como script tsx manual que importa config.ts
+`scripts/check-i18n-links.ts` (`npm run check-i18n-links`) importa los locales desde `src/i18n/config.ts` en lugar de duplicarlos; recorre todo `dist/client` (es incluido) y además exige barra final. `scripts/validate-i18n.ts` mantiene hoy su propia lista `LOCALES` hardcodeada (desvío SSOT preexistente, fuera de alcance).
+## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-design FIN 22:19:29 outcome=advance
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-tasks INICIO 22:19:29 outcome=ready
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-tasks FIN 22:20:48 outcome=advance
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-apply INICIO 22:20:48 outcome=ready
+
+
+## 2026-10-02 | env-quirk | fix-i18n-links-and-404 | sdd-apply: POST /api/contacto sin content-type responde 403, no 400
+En `astro preview`, un `POST` sin `content-type` lo corta el chequeo de origen de Astro (`security.checkOrigin`) con 403 antes del handler; el 400 del plan corresponde a `content-type: application/json` con cuerpo vacío (`invalid-json`). Idéntico en `main` y en el cambio (apply-evidence.9). Las verificaciones del endpoint deben enviar el content-type JSON.
+
+## 2026-10-02 | env-quirk | fix-i18n-links-and-404 | sdd-apply: Chrome headless `--dump-dom` se cuelga contra astro preview en WSL
+`chrome --headless=new --dump-dom` (con `--virtual-time-budget` o `--timeout`) no retorna contra la 404 de `astro preview`. Funciona lanzar Chrome con `--remote-debugging-port=0` y manejarlo por CDP con el `WebSocket` nativo de Node 24 (leer el puerto de `DevToolsActivePort` del `user-data-dir`), emulando `prefers-reduced-motion` con `Emulation.setEmulatedMedia`.
+
+## 2026-10-02 | risk | fix-i18n-links-and-404 | sdd-apply: main avanzó con el PR #33 durante la fase; merge con conflicto solo en observations.md
+`main` pasó a `78b6b73` (merge del PR #33: `LanguageSelector.astro`, `wizard.ts`, `generate-favicons.mjs`, `apple-touch-icon.png`, `observations.md`). Los archivos de código no se solapan con el cambio; `git merge-tree` reporta conflicto únicamente en `memory/observations.md`, que no tiene `merge=union` (no existe `.gitattributes` en el repo). La sincronización previa a `sdd-verify` debe resolverlo.
+
+## 2026-10-02 | debt | fix-i18n-links-and-404 | sdd-apply: tarjetas estáticas del catálogo conservan el zoom de imagen en hover
+`.svc-card--static` anula el lift (`transform`/`box-shadow`) y el cursor, pero `.svc-card:hover .svc-card__media img { transform: scale(1.04) }` (`services.css:69`) sigue aplicando a toda tarjeta. design.md D6 fija «sin CSS nuevo»; las 10 tarjetas estáticas del catálogo (incluidas Aérea/Marítima, preexistentes) muestran ese zoom sutil. Si se considera parte del «efecto de hover de tarjeta-enlace», basta `.svc-card--static:hover .svc-card__media img { transform: none; }`.
+## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-apply FIN 22:35:19 outcome=advance
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-verify INICIO 22:35:19 outcome=ready
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-verify INICIO 22:35:47 outcome=ready
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-verify FIN 22:41:27 outcome=advance
+
+## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-archive INICIO 22:41:31 outcome=ready
+
 ## 2026-10-02 | measure | debt-assets-weight | preflight sdd-init INICIO 22:44:22 outcome=ready
 
 ## 2026-10-02 | measure | debt-assets-weight | post-dispatch sdd-init FIN 22:44:59 outcome=advance

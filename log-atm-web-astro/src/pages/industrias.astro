@@ -6,12 +6,15 @@ import CTASection from '../components/sections/CTASection.astro';
 import Icon from "../components/ui/Icon.astro";
 import { Picture } from 'astro:assets';
 import { INDUSTRIES } from '../lib/constants';
-import { useTranslations, getLangFromUrl, tList, type Locale } from '../i18n/utils';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, tList, type Locale } from '../i18n/utils';
 import '../styles/pages/shared.css';
 
 const { lang: langProp } = Astro.props as { lang?: Locale };
 const currentLang = langProp ?? getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
+// Enlaces internos localizados al idioma de la página.
+const homeHref = buildLocaleUrl(currentLang, '/');
+const contactHref = buildLocaleUrl(currentLang, '/contacto');
 const title = t('meta.industrias.title');
 const description = t('meta.industrias.description');
 
@@ -40,7 +43,7 @@ const sectorPrefix = t('industrias.directory.sectorPrefix');
     <section class="page-hero">
       <div class="container">
         <div class="page-hero__breadcrumb">
-          <a href="/">{t('common.breadcrumbHome')}</a> <span>/</span> <span>{t('industrias.breadcrumb')}</span>
+          <a href={homeHref}>{t('common.breadcrumbHome')}</a> <span>/</span> <span>{t('industrias.breadcrumb')}</span>
         </div>
         <div class="page-hero__inner">
           <div>
@@ -148,7 +151,7 @@ const sectorPrefix = t('industrias.directory.sectorPrefix');
                   <span class="ind-services__tag">{s}</span>
                 ))}
               </div>
-              <a class="ind-services__cta" href="/contacto">
+              <a class="ind-services__cta" href={contactHref}>
                 {t('industrias.services.rowCta')}
                 <Icon name="lucide:arrow-right" width={12} height={12} aria-hidden="true" />
               </a>
