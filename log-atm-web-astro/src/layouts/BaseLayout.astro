@@ -57,10 +57,17 @@ const {
   noindex = false,
 } = Astro.props;
 
-const alternates = getAlternateLinks(cleanPath).map((a) => ({
-  hreflang: a.hreflang,
-  href: new URL(a.href, SITE_URL).href,
-}));
+// Una página `noindex` (p. ej. la 404 bajo demanda) no emite señales que apunten a
+// su URL: sin canonical, sin hreflang alternates, sin og:url y sin BreadcrumbList.
+// Declararlas contradiría el `noindex` y, en la 404, apuntarían a una URL inexistente.
+const emitUrlSignals = !noindex;
+
+const alternates = emitUrlSignals
+  ? getAlternateLinks(cleanPath).map((a) => ({
+      hreflang: a.hreflang,
+      href: new URL(a.href, SITE_URL).href,
+    }))
+  : [];
 const ogLocale = getOgLocale(currentLang);
 const ogAlternateLocales = LOCALES.filter((l) => l !== currentLang).map((l) => OG_LOCALE[l]);
 
@@ -110,7 +117,7 @@ const schemaWebSite = JSON.stringify({
   },
 });
 
-const breadcrumbSchema = Astro.url.pathname !== '/' ? JSON.stringify({
+const breadcrumbSchema = emitUrlSignals && Astro.url.pathname !== '/' ? JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
@@ -140,7 +147,7 @@ const breadcrumbSchema = Astro.url.pathname !== '/' ? JSON.stringify({
     <!-- SEO primario -->
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {emitUrlSignals && <link rel="canonical" href={canonical} />}
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- hreflang alternates (5 locales + x-default) -->
@@ -150,7 +157,7 @@ const breadcrumbSchema = Astro.url.pathname !== '/' ? JSON.stringify({
 
     <!-- Open Graph -->
     <meta property="og:type"        content="website" />
-    <meta property="og:url"         content={canonical} />
+    {emitUrlSignals && <meta property="og:url"         content={canonical} />}
     <meta property="og:title"       content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image"       content={image} />

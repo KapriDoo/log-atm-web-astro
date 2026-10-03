@@ -10,13 +10,15 @@ import {
   QUOTE_DESTS,
   QUOTE_STEPS,
 } from '../lib/constants';
-import { useTranslations, getLangFromUrl, tList, type Locale } from '../i18n/utils';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, tList, type Locale } from '../i18n/utils';
 import '../styles/pages/shared.css';
 import '../styles/pages/cotizar.css';
 
 const { lang: langProp } = Astro.props as { lang?: Locale };
 const currentLang = langProp ?? getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
+// Home localizada al idioma de la página.
+const homeHref = buildLocaleUrl(currentLang, '/');
 const title = t('meta.cotizar.title');
 const description = t('meta.cotizar.description');
 
@@ -54,7 +56,7 @@ const clientStrings = {
       <div class="container quote-hero__inner">
         <div>
           <div class="page-hero__breadcrumb">
-            <a href="/">{t('common.breadcrumbHome')}</a> <span>/</span> <span>{t('cotizar.breadcrumb')}</span>
+            <a href={homeHref}>{t('common.breadcrumbHome')}</a> <span>/</span> <span>{t('cotizar.breadcrumb')}</span>
           </div>
           <h1 class="quote-hero__title" set:html={t('cotizar.heroTitleHtml')} data-hero-animate></h1>
           <p class="quote-hero__lead" data-hero-animate>{t('cotizar.heroLead')}</p>
@@ -339,7 +341,7 @@ const clientStrings = {
               ))}
             </div>
             <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
-              <a class="btn btn--brand" href="/">{t('cotizar.success.backHome')}</a>
+              <a class="btn btn--brand" href={homeHref}>{t('cotizar.success.backHome')}</a>
               <a class="btn btn--wa" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
                 <Icon name="lucide:message-circle" width={16} height={16} aria-hidden="true" />
                 {t('cotizar.success.whatsapp')}
