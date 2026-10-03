@@ -4,8 +4,8 @@ change_name: "debt-assets-weight"
 domain: "debt"
 status: active
 fast_path: "spec-first"
-current_phase: sdd-apply
-phases_completed: [sdd-init, sdd-propose, sdd-spec, sdd-tasks]
+current_phase: sdd-verify
+phases_completed: [sdd-init, sdd-propose, sdd-spec, sdd-tasks, sdd-apply]
 spec_refs: ["[[card-image-weight-budget]]", "[[duplicate-video-removal]]", "[[logo-vectorization-residue-removal]]", "[[observations-debt-log-sync]]", "[[services-static-card-no-hover-zoom]]"]
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-assets-weight"
 feature_branch: "feature/debt-assets-weight"

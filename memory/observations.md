@@ -315,3 +315,7 @@ Las cards del bento pintan la foto 16:9 con `object-fit: cover` en recuadros má
 ## 2026-10-03 | env-quirk | debt-assets-weight | `astro preview` (adapter Cloudflare) responde 500 a todo tras un `npm run build` posterior a su arranque
 El servidor de preview queda apuntando al build anterior: hay que detenerlo y relanzarlo después de cada build para verificar en navegador.
 
+## 2026-10-03 | measure | debt-assets-weight | post-dispatch sdd-apply FIN 00:41:10 outcome=advance
+
+## 2026-10-03 | measure | debt-assets-weight | preflight sdd-verify INICIO 00:41:10 outcome=ready
+
