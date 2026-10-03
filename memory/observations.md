@@ -291,3 +291,27 @@ Barrido de axe-core `color-contrast` en Chrome (6 páginas `es`, desktop y drawe
 
 ## 2026-10-02 | measure | fix-a11y-and-icons | preflight sdd-archive INICIO 21:07:11 outcome=ready
 
+## 2026-10-02 | measure | debt-assets-weight | preflight sdd-init INICIO 22:44:22 outcome=ready
+
+## 2026-10-02 | measure | debt-assets-weight | post-dispatch sdd-init FIN 22:44:59 outcome=advance
+
+## 2026-10-02 | measure | debt-assets-weight | preflight sdd-propose INICIO 22:45:00 outcome=ready
+
+## 2026-10-02 | measure | debt-assets-weight | post-dispatch sdd-propose FIN 22:47:04 outcome=paused
+
+## 2026-10-03 | measure | debt-assets-weight | preflight sdd-spec INICIO 00:10:51 outcome=ready
+
+## 2026-10-03 | measure | debt-assets-weight | post-dispatch sdd-spec FIN 00:12:33 outcome=advance
+
+## 2026-10-03 | measure | debt-assets-weight | preflight sdd-tasks INICIO 00:12:33 outcome=ready
+
+## 2026-10-03 | measure | debt-assets-weight | post-dispatch sdd-tasks FIN 00:14:07 outcome=advance
+
+## 2026-10-03 | measure | debt-assets-weight | preflight sdd-apply INICIO 00:14:07 outcome=ready
+
+## 2026-10-03 | pre-adr | debt-assets-weight | Cards altas de industrias del inicio quedan blandas en móvil DPR ≥ 2 por el presupuesto de 2 MB
+Las cards del bento pintan la foto 16:9 con `object-fit: cover` en recuadros más altos que 16:9; las 4 cards altas de industrias (2 filas, ~167×370px a 390px) pintan la foto a ~665px de ancho. En móvil DPR 3, darles una variante a su altura (~1376w) lleva el inicio sobre 2 MB, así que reciben 450–600w y se ven borrosas a DPR 2 y 3. Escritorio queda nítido. Resolverlo pide una decisión de diseño (proporción de esas cards en móvil, o `sizes` por card alta/baja) fuera del alcance del cambio. Evidencia: `apply-evidence.18` y `apply-evidence.21`.
+
+## 2026-10-03 | env-quirk | debt-assets-weight | `astro preview` (adapter Cloudflare) responde 500 a todo tras un `npm run build` posterior a su arranque
+El servidor de preview queda apuntando al build anterior: hay que detenerlo y relanzarlo después de cada build para verificar en navegador.
+
