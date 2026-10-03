@@ -679,3 +679,248 @@ Según `apply-evidence.27`, sobre el árbol final el build (con la validación i
 | `observations-debt-log-sync` | `b38d775` |
 
 Las cinco specs quedan en `status: review` con `commits`, `feature_branch` y `worktree`. Los criterios de aceptación no se marcan en esta fase.
+
+## Redespacho tras verify (PARTIAL, H-1) — card-image-weight-budget, Tareas 4 a 7: cards altas de industrias del inicio en móvil
+
+Corrección de implementación del hallazgo H-1 de `verify-report.md`: en móvil, las cuatro cards altas del bento de industrias del inicio (Minería, Farmacéutica, Construcción y Chatarra Ferrosa, 2 filas) pintan la foto 16:9 a ~665px de ancho con `object-fit: cover` aunque la card mida ~160px, y `sizes="(max-width: 640px) 45vw, 665px"` les asignaba el ancho de la card. El cambio da a esas cards `sizes="665px"` en todo viewport (su ancho pintado, fijado por el alto de 2 filas) y deja las cards de 1 fila con el `sizes` anterior. Para que `IndustriesSection.astro` sea la fuente única de qué posiciones son altas, la card alta recibe la clase `ind-card--tall` y `industries.css` fija el `grid-row: span 2` sobre esa clase en lugar de repetir las posiciones con `nth-child` (mismo layout, mismas cuatro posiciones). Con `sizes` honesto el móvil DPR 3 elige la variante de 1376px en esas cuatro cards; la Tarea 6 (bajar `quality` solo si la medición supera 2 MB) decide la calidad de esas cuatro cards con la medición.
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.28","forma":"archivo","argv":null,"texto":"# Build con sizes=\"665px\" en las cards altas de industrias y quality={80}, y medición del inicio\nnpm run build 2\u003e&1 | grep -E \"i18n\\]|rror|Complete!\" | sed -E 's/^[0-9:]+ //'\necho \"build exit=${PIPESTATUS[0]}\"\nnpm run -s measure:images\necho \"measure exit=$?\"\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-assets-weight/log-atm-web-astro","head":"edbdf5537f17fb242695121311244df65f2fafca","fecha":"2026-10-03T01:06:31-03:00","exit":0,"sha256":"da400a5127082a45570ce83e4d78c281e8fb9a01017c5354202cb46f09cc139c","lineas":8,"omitidas":0,"no_recomprobable":"medición con quality 80 en las cards altas: el paso siguiente de la Tarea 6 cambia la quality y el build medido"} -->
+**Evidencia `apply-evidence.28`** · exit 0 · 8 líneas, 0 omitidas · HEAD `edbdf5537f17` · 2026-10-03T01:06:31-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-assets-weight/log-atm-web-astro`
+No re-comprobable: medición con quality 80 en las cards altas: el paso siguiente de la Tarea 6 cambia la quality y el build medido
+
+```bash
+# Build con sizes="665px" en las cards altas de industrias y quality={80}, y medición del inicio
+npm run build 2>&1 | grep -E "i18n\]|rror|Complete!" | sed -E 's/^[0-9:]+ //'
+echo "build exit=${PIPESTATUS[0]}"
+npm run -s measure:images
+echo "measure exit=$?"
+```
+
+```text
+[log-atm:i18n-validator] [i18n] Validando paridad de claves...
+[i18n] en: OK (536 claves)
+[i18n] pt: OK (536 claves)
+[build] Complete!
+build exit=0
+escritorio 1440x900 DPR 1: total 1429163 bytes (1.363 MB) | avif 1253282 bytes (1.195 MB) | otras 175881 bytes (0.168 MB) | archivos 21 | OK < 2 MB
+movil 390x844 DPR 3: total 2419435 bytes (2.307 MB) | avif 2243554 bytes (2.140 MB) | otras 175881 bytes (0.168 MB) | archivos 21 | EXCEDE 2 MB
+measure exit=1
+```
+<!-- evidencia:fin apply-evidence.28 -->
+
+Según `apply-evidence.28`, con `sizes="665px"` y `quality={80}` en las cards altas el build termina sin errores, pero el escenario móvil DPR 3 supera 2 MB (exit 1 de la medición): las cuatro cards altas pasan a la variante de 1376px. El escritorio no cambia. Corresponde la Tarea 6.
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.29","forma":"archivo","argv":null,"texto":"# Tarea 6: peso AVIF de la variante de 1376px de las 4 cards altas por quality, con el mismo encoder que usa Astro (sharp .avif({quality}));\n# la fila q80 calibra contra el build (debe coincidir con los archivos 1376w de dist/client/_astro). Presupuesto móvil: total medido 2419435 con q80.\nnode /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-assets-weight/sdd-apply-8pbw25bs/sim.3IcFMChe/sizes.mjs \"$PWD\" '[[1376,80],[1376,70],[1376,65],[1376,60],[1376,55]]' \\\n | awk '{print} {for(i=2;i<=NF;i++){split($i,a,\"=\");s[a[1]]+=a[2]}} END{q80=s[\"1376q80\"]; for(k in s) printf \"suma %s=%d  total movil estimado=%d %s\\n\", k, s[k], 2419435-q80+s[k], (2419435-q80+s[k] < 2097152 ? \"< 2 MB\" : \"\u003e= 2 MB\")}' | sort\necho \"--- 1376w de las cards altas en el build (q80)\"\nls -l dist/client/_astro/ | /usr/bin/grep -E \"ind-(mineria|farma|construccion|chatarra)\" | /usr/bin/grep avif | awk '{print $5, $9}' | sort -k2 | awk '$1\u003e110000'\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-assets-weight/log-atm-web-astro","head":"edbdf5537f17fb242695121311244df65f2fafca","fecha":"2026-10-03T01:08:03-03:00","exit":0,"sha256":"dd89e4b6fb8534a34928342619bbcde921ca5d06747518603a7071dab6d806f0","lineas":15,"omitidas":0,"no_recomprobable":"usa un script de simulación del directorio de temporales del despacho y el build con quality 80, que el paso siguiente reemplaza"} -->
+**Evidencia `apply-evidence.29`** · exit 0 · 15 líneas, 0 omitidas · HEAD `edbdf5537f17` · 2026-10-03T01:08:03-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-assets-weight/log-atm-web-astro`
+No re-comprobable: usa un script de simulación del directorio de temporales del despacho y el build con quality 80, que el paso siguiente reemplaza
+
+```bash
+# Tarea 6: peso AVIF de la variante de 1376px de las 4 cards altas por quality, con el mismo encoder que usa Astro (sharp .avif({quality}));
+# la fila q80 calibra contra el build (debe coincidir con los archivos 1376w de dist/client/_astro). Presupuesto móvil: total medido 2419435 con q80.
+node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-assets-weight/sdd-apply-8pbw25bs/sim.3IcFMChe/sizes.mjs "$PWD" '[[1376,80],[1376,70],[1376,65],[1376,60],[1376,55]]' \
+ | awk '{print} {for(i=2;i<=NF;i++){split($i,a,"=");s[a[1]]+=a[2]}} END{q80=s["1376q80"]; for(k in s) printf "suma %s=%d  total movil estimado=%d %s\n", k, s[k], 2419435-q80+s[k], (2419435-q80+s[k] < 2097152 ? "< 2 MB" : ">= 2 MB")}' | sort
+echo "--- 1376w de las cards altas en el build (q80)"
+ls -l dist/client/_astro/ | /usr/bin/grep -E "ind-(mineria|farma|construccion|chatarra)" | /usr/bin/grep avif | awk '{print $5, $9}' | sort -k2 | awk '$1>110000'
+```
+
+```text
+chatarra 1376q80=258916 1376q70=204934 1376q65=186254 1376q60=165811 1376q55=143938
+construccion 1376q80=163561 1376q70=125100 1376q65=112244 1376q60=98163 1376q55=83839
+farma 1376q80=115849 1376q70=83511 1376q65=73246 1376q60=62616 1376q55=51871
+mineria 1376q80=167797 1376q70=128365 1376q65=114790 1376q60=99801 1376q55=84293
+suma 1376q55=363941  total movil estimado=2077253 < 2 MB
+suma 1376q60=426391  total movil estimado=2139703 >= 2 MB
+suma 1376q65=486534  total movil estimado=2199846 >= 2 MB
+suma 1376q70=541910  total movil estimado=2255222 >= 2 MB
+suma 1376q80=706123  total movil estimado=2419435 >= 2 MB
+--- 1376w de las cards altas en el build (q80)
+151728 ind-chatarra.DFRybrIL_2bDGPf.avif
+258916 ind-chatarra.DFRybrIL_aFyro.avif
+163561 ind-construccion.DbAV3UUV_Z1uelTT.avif
+115849 ind-farma.BXogGomO_Z25RNbr.avif
+167797 ind-mineria.ByjgnuJh_ZXF1tc.avif
+```
+<!-- evidencia:fin apply-evidence.29 -->
+
+`apply-evidence.29` simula, con el mismo encoder que usa Astro, el peso de la variante de 1376px de las cuatro cards altas para cada paso de quality; la fila q80 coincide con los archivos del build, lo que calibra la simulación. Según esa tabla, q55 es el único paso de la serie que deja el total móvil estimado bajo 2 MB. La quality se baja solo en las cuatro cards altas: son las que generan el exceso, y bajarla en las demás cards degradaría imágenes que ya cumplen. Una comparación visual en el directorio de temporales (recorte central de 320×752 px, el área que muestra la card a DPR 2) de Minería y Farmacéutica en 450w q80, 1376w q55 y 1376w q80 muestra que 1376w q55 recupera el detalle que pierde 450w y queda muy próxima a 1376w q80.
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.30","forma":"archivo","argv":null,"texto":"# Build con sizes=\"665px\" y quality={55} en las cards altas de industrias (las demás sin cambios), y medición del inicio\nnpm run build 2\u003e&1 | grep -E \"i18n\\]|rror|Complete!\" | sed -E 's/^[0-9:]+ //'\necho \"build exit=${PIPESTATUS[0]}\"\nnpm run -s measure:images\necho \"measure exit=$?\"\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-assets-weight/log-atm-web-astro","head":"edbdf5537f17fb242695121311244df65f2fafca","fecha":"2026-10-03T01:09:06-03:00","exit":0,"sha256":"0555171e098018f3589367b8ed95606fa983dd498934cf9e14590165d4b1159a","lineas":8,"omitidas":0,"no_recomprobable":"build y medición de la tarea; la corrida completa de cierre los repite sobre el árbol final"} -->
+**Evidencia `apply-evidence.30`** · exit 0 · 8 líneas, 0 omitidas · HEAD `edbdf5537f17` · 2026-10-03T01:09:06-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-assets-weight/log-atm-web-astro`
+No re-comprobable: build y medición de la tarea; la corrida completa de cierre los repite sobre el árbol final
+
+```bash
+# Build con sizes="665px" y quality={55} en las cards altas de industrias (las demás sin cambios), y medición del inicio
+npm run build 2>&1 | grep -E "i18n\]|rror|Complete!" | sed -E 's/^[0-9:]+ //'
+echo "build exit=${PIPESTATUS[0]}"
+npm run -s measure:images
+echo "measure exit=$?"
+```
+
+```text
+[log-atm:i18n-validator] [i18n] Validando paridad de claves...
+[i18n] en: OK (536 claves)
+[i18n] pt: OK (536 claves)
+[build] Complete!
+build exit=0
+escritorio 1440x900 DPR 1: total 1304843 bytes (1.244 MB) | avif 1128962 bytes (1.077 MB) | otras 175881 bytes (0.168 MB) | archivos 21 | OK < 2 MB
+movil 390x844 DPR 3: total 2077253 bytes (1.981 MB) | avif 1901372 bytes (1.813 MB) | otras 175881 bytes (0.168 MB) | archivos 21 | OK < 2 MB
+measure exit=0
+```
+<!-- evidencia:fin apply-evidence.30 -->
+
+Según `apply-evidence.30`, con `quality={55}` en las cards altas el build termina sin errores y ambos escenarios quedan bajo 2 MB (exit 0 de la medición), con el total móvil igual al estimado en `apply-evidence.29`.
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.31","forma":"archivo","argv":null,"texto":"# Nitidez a DPR 2 en Chrome headless (CDP) contra astro preview del build: variante elegida (currentSrc) frente al ancho pintado (object-fit: cover) x 2\nT=/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-assets-weight/sdd-apply-8pbw25bs\nexport CHROME_PATH=/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome\nnpx astro preview --port 4342 --host 127.0.0.1 \u003e $T/b/sharp-preview.log 2\u003e&1 &\nPV=$!\ncd $T/b\n\"$CHROME_PATH\" --headless=new --no-sandbox --disable-gpu --remote-debugging-port=9462 --user-data-dir=$T/b/sharp-profile about:blank \u003e $T/b/sharp-chrome.log 2\u003e&1 &\nCH=$!\nsleep 6\necho \"preview http: $(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:4342/)\"\nfor pg in '' servicios/ industrias/ nosotros/; do for vp in '1440 900' '390 844'; do echo \"== DPR 2 /$pg ($vp)\"; node $T/cdp.mjs 9462 http://127.0.0.1:4342/$pg $vp 2 sharp; done; done\necho \"== captura móvil 390x844 DPR 2 del bento de industrias\"; node $T/cdp.mjs 9462 http://127.0.0.1:4342/ 390 844 2 shot:$T/b/industrias-movil-dpr2.png\nkill $CH 2\u003e/dev/null; pkill -P $PV 2\u003e/dev/null; kill $PV 2\u003e/dev/null; wait 2\u003e/dev/null; echo \"servidores detenidos\"\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-assets-weight/log-atm-web-astro","head":"edbdf5537f17fb242695121311244df65f2fafca","fecha":"2026-10-03T01:10:57-03:00","exit":0,"sha256":"28516fb0ddf82cb43fc52e6b17fefb2706362291827a71b46807c2de11da491b","lineas":51,"omitidas":11,"no_recomprobable":"requiere Chrome headless y astro preview levantados durante la fase"} -->
+**Evidencia `apply-evidence.31`** · exit 0 · 51 líneas, 11 omitidas · HEAD `edbdf5537f17` · 2026-10-03T01:10:57-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-assets-weight/log-atm-web-astro`
+No re-comprobable: requiere Chrome headless y astro preview levantados durante la fase
+
+```bash
+# Nitidez a DPR 2 en Chrome headless (CDP) contra astro preview del build: variante elegida (currentSrc) frente al ancho pintado (object-fit: cover) x 2
+T=/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-assets-weight/sdd-apply-8pbw25bs
+export CHROME_PATH=/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome
+npx astro preview --port 4342 --host 127.0.0.1 > $T/b/sharp-preview.log 2>&1 &
+PV=$!
+cd $T/b
+"$CHROME_PATH" --headless=new --no-sandbox --disable-gpu --remote-debugging-port=9462 --user-data-dir=$T/b/sharp-profile about:blank > $T/b/sharp-chrome.log 2>&1 &
+CH=$!
+sleep 6
+echo "preview http: $(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:4342/)"
+for pg in '' servicios/ industrias/ nosotros/; do for vp in '1440 900' '390 844'; do echo "== DPR 2 /$pg ($vp)"; node $T/cdp.mjs 9462 http://127.0.0.1:4342/$pg $vp 2 sharp; done; done
+echo "== captura móvil 390x844 DPR 2 del bento de industrias"; node $T/cdp.mjs 9462 http://127.0.0.1:4342/ 390 844 2 shot:$T/b/industrias-movil-dpr2.png
+kill $CH 2>/dev/null; pkill -P $PV 2>/dev/null; kill $PV 2>/dev/null; wait 2>/dev/null; echo "servidores detenidos"
+```
+
+```text
+preview http: 200
+== DPR 2 / (1440 900)
+ 1x hero-b__media render=1425 pintado=1515 variante=1376w necesaria=1376 OK avif=true
+ 2x svc-card__media render=590 pintado=590 variante=1200w necesaria=1180 OK avif=true
+ 1x svc-card__media render=590 pintado=785 variante=1376w necesaria=1376 OK avif=true
+ 3x svc-card__media render=185 pintado=399 variante=800w necesaria=798 OK avif=true
+ 2x ind-card__media render=289 pintado=663 variante=1376w necesaria=1326 OK avif=true
+ 4x ind-card__media render=289 pintado=319 variante=1376w necesaria=638 OK avif=true
+ 1x ind-card__media render=287 pintado=317 variante=1376w necesaria=634 OK avif=true
+ 1x ind-card__media render=284 pintado=652 variante=1376w necesaria=1304 OK avif=true
+ 1x ind-card__media render=287 pintado=658 variante=1376w necesaria=1316 OK avif=true
+ 1x ind-card__media render=284 pintado=313 variante=1376w necesaria=626 OK avif=true
+ 1x ind-card__media render=279 pintado=308 variante=1376w necesaria=616 OK avif=true
+ 1x ind-card__media render=286 pintado=316 variante=1376w necesaria=632 OK avif=true
+== DPR 2 / (390 844)
+ 1x hero-b__media render=390 pintado=1948 variante=1280w necesaria=1376 BAJO avif=true
+ 6x svc-card__media render=348 pintado=426 variante=800w necesaria=852 BAJO avif=true
+ 2x ind-card__media render=167 pintado=663 variante=1376w necesaria=1326 OK avif=true
+ 1x ind-card__media render=166 pintado=319 variante=450w necesaria=638 BAJO avif=true
+ 1x ind-card__media render=167 pintado=321 variante=450w necesaria=642 BAJO avif=true
+ 1x ind-card__media render=165 pintado=318 variante=450w necesaria=636 BAJO avif=true
+ 1x ind-card__media render=164 pintado=650 variante=1376w necesaria=1300 OK avif=true
+ 1x ind-card__media render=167 pintado=662 variante=1376w necesaria=1324 OK avif=true
+ 1x ind-card__media render=167 pintado=320 variante=450w necesaria=640 BAJO avif=true
+ 1x ind-card__media render=166 pintado=322 variante=450w necesaria=644 BAJO avif=true
+ 1x ind-card__media render=165 pintado=319 variante=450w necesaria=638 BAJO avif=true
+ 1x ind-card__media render=166 pintado=320 variante=450w necesaria=640 BAJO avif=true
+ 1x ind-card__media render=165 pintado=316 variante=450w necesaria=632 BAJO avif=true
+== DPR 2 /servicios/ (1440 900)
+ 1x svc-card__media render=590 pintado=785 variante=1376w necesaria=1376 OK avif=true
+ 3x svc-card__media render=590 pintado=590 variante=1200w necesaria=1180 OK avif=true
+ 3x svc-card__media render=185 pintado=399 variante=800w necesaria=798 OK avif=true
+ 2x svc-card__media render=185 pintado=358 variante=800w necesaria=716 OK avif=true
+ 2x svc-card__media render=286 pintado=355 variante=800w necesaria=710 OK avif=true
+ 6x svc-detail__media render=620 pintado=889 variante=1376w necesaria=1376 OK avif=true
+== DPR 2 /servicios/ (390 844)
+11x svc-card__media render=348 pintado=426 variante=800w necesaria=852 BAJO avif=true
+ 6x svc-detail__media render=350 pintado=503 variante=1376w necesaria=1006 OK avif=true
+== DPR 2 /industrias/ (1440 900)
+11x ind-directory__slide render=638 pintado=1610 variante=1376w necesaria=1376 OK avif=true
+```
+<!-- evidencia:fin apply-evidence.31 -->
+
+`apply-evidence.31` cubre inicio y `/servicios` (la salida se corta en 40 líneas; `apply-evidence.32` registra aparte industrias, nosotros y la captura). En el inicio a 390×844 DPR 2, las cuatro `ind-card` de mayor ancho pintado (las altas) reciben ahora la variante de 1376w y quedan `OK`; las ocho cards de 1 fila mantienen 450w, igual que antes del redespacho (verify no las levanta como hallazgo). Las cards de servicios en móvil y el hero quedan como los dejó la iteración anterior; el hero no está en el alcance. En escritorio todas las cards quedan `OK`.
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.32","forma":"archivo","argv":null,"texto":"# Nitidez a DPR 2 (industrias y nosotros) y captura móvil del bento de industrias del inicio, en Chrome headless (CDP) contra astro preview del build\nT=/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-assets-weight/sdd-apply-8pbw25bs\nexport CHROME_PATH=/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome\nnpx astro preview --port 4343 --host 127.0.0.1 \u003e $T/b/sharp2-preview.log 2\u003e&1 &\nPV=$!\ncd $T/b\n\"$CHROME_PATH\" --headless=new --no-sandbox --disable-gpu --remote-debugging-port=9463 --user-data-dir=$T/b/sharp2-profile about:blank \u003e $T/b/sharp2-chrome.log 2\u003e&1 &\nCH=$!\nsleep 6\necho \"preview http: $(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:4343/)\"\nfor pg in industrias/ nosotros/; do for vp in '1440 900' '390 844'; do echo \"== DPR 2 /$pg ($vp)\"; node $T/cdp.mjs 9463 http://127.0.0.1:4343/$pg $vp 2 sharp; done; done\necho \"== captura móvil 390x844 DPR 2 del bento de industrias\"; node $T/cdp.mjs 9463 http://127.0.0.1:4343/ 390 844 2 shot:$T/b/industrias-movil-dpr2.png\nkill $CH 2\u003e/dev/null; pkill -P $PV 2\u003e/dev/null; kill $PV 2\u003e/dev/null; wait 2\u003e/dev/null; echo \"servidores detenidos\"\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-assets-weight/log-atm-web-astro","head":"edbdf5537f17fb242695121311244df65f2fafca","fecha":"2026-10-03T01:11:43-03:00","exit":0,"sha256":"3d19db5b0d89d11773af5cd5494c6443b733b88916856c21fd08f4306d0e000a","lineas":14,"omitidas":0,"no_recomprobable":"requiere Chrome headless y astro preview levantados durante la fase"} -->
+**Evidencia `apply-evidence.32`** · exit 0 · 14 líneas, 0 omitidas · HEAD `edbdf5537f17` · 2026-10-03T01:11:43-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-assets-weight/log-atm-web-astro`
+No re-comprobable: requiere Chrome headless y astro preview levantados durante la fase
+
+```bash
+# Nitidez a DPR 2 (industrias y nosotros) y captura móvil del bento de industrias del inicio, en Chrome headless (CDP) contra astro preview del build
+T=/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-assets-weight/sdd-apply-8pbw25bs
+export CHROME_PATH=/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome
+npx astro preview --port 4343 --host 127.0.0.1 > $T/b/sharp2-preview.log 2>&1 &
+PV=$!
+cd $T/b
+"$CHROME_PATH" --headless=new --no-sandbox --disable-gpu --remote-debugging-port=9463 --user-data-dir=$T/b/sharp2-profile about:blank > $T/b/sharp2-chrome.log 2>&1 &
+CH=$!
+sleep 6
+echo "preview http: $(curl -s -o /dev/null -w '%{http_code}' http://127.0.0.1:4343/)"
+for pg in industrias/ nosotros/; do for vp in '1440 900' '390 844'; do echo "== DPR 2 /$pg ($vp)"; node $T/cdp.mjs 9463 http://127.0.0.1:4343/$pg $vp 2 sharp; done; done
+echo "== captura móvil 390x844 DPR 2 del bento de industrias"; node $T/cdp.mjs 9463 http://127.0.0.1:4343/ 390 844 2 shot:$T/b/industrias-movil-dpr2.png
+kill $CH 2>/dev/null; pkill -P $PV 2>/dev/null; kill $PV 2>/dev/null; wait 2>/dev/null; echo "servidores detenidos"
+```
+
+```text
+preview http: 200
+== DPR 2 /industrias/ (1440 900)
+11x ind-directory__slide render=638 pintado=1610 variante=1376w necesaria=1376 OK avif=true
+ 1x ind-directory__slide.is-active render=601 pintado=1519 variante=1376w necesaria=1376 OK avif=true
+== DPR 2 /industrias/ (390 844)
+11x ind-directory__slide render=369 pintado=794 variante=1376w necesaria=1376 OK avif=true
+ 1x ind-directory__slide.is-active render=348 pintado=749 variante=1376w necesaria=1376 OK avif=true
+== DPR 2 /nosotros/ (1440 900)
+ 4x howwork-card__media render=283 pintado=380 variante=800w necesaria=760 OK avif=true
+== DPR 2 /nosotros/ (390 844)
+ 4x howwork-card__media render=348 pintado=467 variante=1376w necesaria=934 OK avif=true
+== captura móvil 390x844 DPR 2 del bento de industrias
+captura /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-assets-weight/sdd-apply-8pbw25bs/b/industrias-movil-dpr2.png
+servidores detenidos
+```
+<!-- evidencia:fin apply-evidence.32 -->
+
+Según `apply-evidence.32`, `/industrias` y `/nosotros` quedan `OK` a DPR 2 en escritorio y en móvil. La captura `industrias-movil-dpr2.png` del directorio de temporales muestra Minería y Farmacéutica nítidas, al nivel de Retail y Agroindustria, y el bento con las mismas cuatro cards altas que antes (el `pintado` de ~650–663px de cuatro cards en `apply-evidence.31` lo confirma en los dos viewports).
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.33","forma":"archivo","argv":null,"texto":"# Corrida completa de cierre: build (con la validación i18n del hook de build), validadores i18n, barrido de enlaces y medición del inicio\nnpm run build 2\u003e&1 | grep -E \"i18n\\]|rror|Complete!\" | sed -E 's/^[0-9:]+ //'\necho \"build exit=${PIPESTATUS[0]}\"\nnpm run -s validate-i18n 2\u003e&1 | tail -5\necho \"validate-i18n exit=${PIPESTATUS[0]}\"\nnpm run -s check-i18n-links 2\u003e&1 | tail -8\necho \"check-i18n-links exit=${PIPESTATUS[0]}\"\nnpm run -s measure:images\necho \"measure exit=$?\"\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-assets-weight/log-atm-web-astro","head":"3cbeb00f6f28968638f8b66ffa08a856541ba552","fecha":"2026-10-03T01:12:24-03:00","exit":0,"sha256":"1a485b6105310324a9b4f1a709be4b9f2439df4621288bd3543d1369659a63c1","lineas":13,"omitidas":0,"no_recomprobable":"verify corre la suite completa sobre el mismo árbol con evidencia propia"} -->
+**Evidencia `apply-evidence.33`** · exit 0 · 13 líneas, 0 omitidas · HEAD `3cbeb00f6f28` · 2026-10-03T01:12:24-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-assets-weight/log-atm-web-astro`
+No re-comprobable: verify corre la suite completa sobre el mismo árbol con evidencia propia
+
+```bash
+# Corrida completa de cierre: build (con la validación i18n del hook de build), validadores i18n, barrido de enlaces y medición del inicio
+npm run build 2>&1 | grep -E "i18n\]|rror|Complete!" | sed -E 's/^[0-9:]+ //'
+echo "build exit=${PIPESTATUS[0]}"
+npm run -s validate-i18n 2>&1 | tail -5
+echo "validate-i18n exit=${PIPESTATUS[0]}"
+npm run -s check-i18n-links 2>&1 | tail -8
+echo "check-i18n-links exit=${PIPESTATUS[0]}"
+npm run -s measure:images
+echo "measure exit=$?"
+```
+
+```text
+[log-atm:i18n-validator] [i18n] Validando paridad de claves...
+[i18n] en: OK (536 claves)
+[i18n] pt: OK (536 claves)
+[build] Complete!
+build exit=0
+[i18n] en: OK (536 claves)
+[i18n] pt: OK (536 claves)
+validate-i18n exit=0
+[i18n-links] 18 páginas (es=6, en=6, pt=6), 411 enlaces internos evaluados, 0 violaciones
+check-i18n-links exit=0
+escritorio 1440x900 DPR 1: total 1304843 bytes (1.244 MB) | avif 1128962 bytes (1.077 MB) | otras 175881 bytes (0.168 MB) | archivos 21 | OK < 2 MB
+movil 390x844 DPR 3: total 2077253 bytes (1.981 MB) | avif 1901372 bytes (1.813 MB) | otras 175881 bytes (0.168 MB) | archivos 21 | OK < 2 MB
+measure exit=0
+```
+<!-- evidencia:fin apply-evidence.33 -->
+
+Según `apply-evidence.33`, sobre el árbol final (commit `3cbeb00`) el build con la validación i18n, `validate-i18n` y `check-i18n-links` terminan con exit 0, y la medición del inicio queda bajo 2 MB en ambos escenarios. El margen del escenario móvil es estrecho: un cambio futuro de imágenes del inicio puede superar el presupuesto y la medición lo detecta.
+
+### Commits y specs del redespacho
+
+| Spec | Commits |
+|---|---|
+| `card-image-weight-budget` | `3cbeb00` (cards altas de industrias: `sizes` y quality) |
+
+El hallazgo H-2 de `verify-report.md` (mención de Potrace en `README.md:36`) no es bloqueante y queda fuera de este redespacho, que corrige solo bloqueantes.
+

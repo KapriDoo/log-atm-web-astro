@@ -17,10 +17,10 @@ feature_branch: "feature/debt-assets-weight"
 commits: ["5e28cbd"]
 mr: ""
 acceptance_criteria:
-  - "[ ] Existe una sola copia del video institucional en los archivos públicos del sitio"
-  - "[ ] La carpeta pública de videos duplicada ya no existe"
-  - "[ ] Ninguna referencia rota al video, ni en el código fuente ni en el sitio construido"
-  - "[ ] La sección de video de la página de inicio reproduce el video institucional"
+  - "[x] Existe una sola copia del video institucional en los archivos públicos del sitio"
+  - "[x] La carpeta pública de videos duplicada ya no existe"
+  - "[x] Ninguna referencia rota al video, ni en el código fuente ni en el sitio construido"
+  - "[x] La sección de video de la página de inicio reproduce el video institucional"
 
 related:
   - "[[dead-code-cleanup/asset-dead-code-removal]]"
@@ -73,10 +73,10 @@ El sitio despliega tres copias idénticas del mismo video institucional, de las 
 
 ## Acceptance Criteria
 
-- [ ] Existe una sola copia del video institucional en los archivos públicos del sitio
-- [ ] La carpeta pública de videos duplicada ya no existe
-- [ ] Ninguna referencia rota al video, ni en el código fuente ni en el sitio construido
-- [ ] La sección de video de la página de inicio reproduce el video institucional
+- [x] Existe una sola copia del video institucional en los archivos públicos del sitio
+- [x] La carpeta pública de videos duplicada ya no existe
+- [x] Ninguna referencia rota al video, ni en el código fuente ni en el sitio construido
+- [x] La sección de video de la página de inicio reproduce el video institucional
 
 ## Related
 

@@ -382,3 +382,15 @@ El servidor de preview queda apuntando al build anterior: hay que detenerlo y re
 
 ## 2026-10-03 | measure | debt-assets-weight | preflight sdd-verify INICIO 00:41:10 outcome=ready
 
+## 2026-10-03 | measure | debt-assets-weight | preflight sdd-verify INICIO 00:41:42 outcome=ready
+
+## 2026-10-03 | gotcha | debt-assets-weight | verify confirma en navegador la blandura de las cards altas de industrias en móvil DPR 2
+Una captura Chrome 390×844 DPR 2 del bento de industrias muestra Minería y Farma blandas frente a Retail. El presupuesto no está agotado según la definición de la spec (solo AVIF), así que `sdd-apply` puede probar una variante intermedia para esas 4 cards y re-medir con `npm run measure:images`. Detalle en `verify-report.md` (H-1).
+
+## 2026-10-03 | measure | debt-assets-weight | post-dispatch sdd-verify FIN 00:58:51 outcome=verify-retry
+
+## 2026-10-03 | measure | debt-assets-weight | preflight sdd-apply INICIO 00:58:54 outcome=ready
+
+## 2026-10-03 | decision | debt-assets-weight | Cards altas de industrias del inicio: `sizes` por ancho pintado y quality 55 para entrar en el presupuesto móvil
+Las 4 cards altas declaran `sizes="665px"` (ancho pintado de la foto, fijo por el alto de 2 filas) y reciben 1376w a DPR 2 y 3; con quality 80 el móvil DPR 3 supera 2 MB, y quality 55 solo en esas cards es el paso más alto que entra. El margen móvil queda estrecho (~20 KB bajo el límite que aplica `npm run measure:images` sobre el total): cualquier imagen nueva o más pesada en el inicio puede superar el presupuesto. Las posiciones altas viven en `IndustriesSection.astro` (`ind-card--tall`). Evidencia: `apply-evidence.28` a `apply-evidence.33`.
+

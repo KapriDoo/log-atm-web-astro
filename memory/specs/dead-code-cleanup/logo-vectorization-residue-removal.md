@@ -17,10 +17,10 @@ feature_branch: "feature/debt-assets-weight"
 commits: ["2904775"]
 mr: ""
 acceptance_criteria:
-  - "[ ] Una búsqueda de la ubicación eliminada del logo en los scripts, la documentación y el README no encuentra resultados"
-  - "[ ] La herramienta de vectorización del logo y su dependencia ya no forman parte del proyecto"
-  - "[ ] La documentación del proyecto y el README señalan el logo vectorial vigente como fuente"
-  - "[ ] La generación de favicons y el build del sitio funcionan sin errores"
+  - "[x] Una búsqueda de la ubicación eliminada del logo en los scripts, la documentación y el README no encuentra resultados"
+  - "[x] La herramienta de vectorización del logo y su dependencia ya no forman parte del proyecto"
+  - "[x] La documentación del proyecto y el README señalan el logo vectorial vigente como fuente"
+  - "[x] La generación de favicons y el build del sitio funcionan sin errores"
 
 related:
   - "[[dead-code-cleanup/asset-dead-code-removal]]"
@@ -74,10 +74,10 @@ La limpieza previa de código muerto eliminó el logo vectorial de la carpeta de
 
 ## Acceptance Criteria
 
-- [ ] Una búsqueda de la ubicación eliminada del logo en los scripts, la documentación y el README no encuentra resultados
-- [ ] La herramienta de vectorización del logo y su dependencia ya no forman parte del proyecto
-- [ ] La documentación del proyecto y el README señalan el logo vectorial vigente como fuente
-- [ ] La generación de favicons y el build del sitio funcionan sin errores
+- [x] Una búsqueda de la ubicación eliminada del logo en los scripts, la documentación y el README no encuentra resultados
+- [x] La herramienta de vectorización del logo y su dependencia ya no forman parte del proyecto
+- [x] La documentación del proyecto y el README señalan el logo vectorial vigente como fuente
+- [x] La generación de favicons y el build del sitio funcionan sin errores
 
 ## Related
 

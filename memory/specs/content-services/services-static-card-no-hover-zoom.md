@@ -17,8 +17,8 @@ feature_branch: "feature/debt-assets-weight"
 commits: ["7859ca1"]
 mr: ""
 acceptance_criteria:
-  - "[ ] Al pasar el cursor sobre una tarjeta de servicio no enlazada, su imagen no se amplía"
-  - "[ ] Al pasar el cursor sobre una tarjeta de servicio enlazada del inicio, su imagen se amplía"
+  - "[x] Al pasar el cursor sobre una tarjeta de servicio no enlazada, su imagen no se amplía"
+  - "[x] Al pasar el cursor sobre una tarjeta de servicio enlazada del inicio, su imagen se amplía"
 
 related:
   - "[[content-services/services-catalog-cta-and-detail-pages]]"
@@ -62,8 +62,8 @@ En la página de servicios las tarjetas de carga aérea y marítima dejaron de s
 
 ## Acceptance Criteria
 
-- [ ] Al pasar el cursor sobre una tarjeta de servicio no enlazada, su imagen no se amplía
-- [ ] Al pasar el cursor sobre una tarjeta de servicio enlazada del inicio, su imagen se amplía
+- [x] Al pasar el cursor sobre una tarjeta de servicio no enlazada, su imagen no se amplía
+- [x] Al pasar el cursor sobre una tarjeta de servicio enlazada del inicio, su imagen se amplía
 
 ## Related
 

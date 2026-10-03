@@ -15,15 +15,15 @@ depends_on:
 change_ref: "[[debt-assets-weight]]"
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-assets-weight"
 feature_branch: "feature/debt-assets-weight"
-commits: ["78c66b5", "bb38fc0"]
+commits: ["78c66b5", "bb38fc0", "3cbeb00"]
 mr: ""
 acceptance_criteria:
-  - "[ ] El peso AVIF servido en la página de inicio tras recorrerla completa es menor a 2 MB en escritorio de 1440×900 con densidad de pantalla 1"
-  - "[ ] El peso AVIF servido en la página de inicio tras recorrerla completa es menor a 2 MB en móvil de 390×844 con densidad de pantalla 3"
-  - "[ ] Existe una medición reproducible sobre el build del sitio que simula la elección de variante del navegador y entrega el peso total por escenario"
+  - "[x] El peso AVIF servido en la página de inicio tras recorrerla completa es menor a 2 MB en escritorio de 1440×900 con densidad de pantalla 1"
+  - "[x] El peso AVIF servido en la página de inicio tras recorrerla completa es menor a 2 MB en móvil de 390×844 con densidad de pantalla 3"
+  - "[x] Existe una medición reproducible sobre el build del sitio que simula la elección de variante del navegador y entrega el peso total por escenario"
   - "[ ] Las tarjetas se ven sin pérdida visible de nitidez en pantallas de densidad 2, en escritorio y en móvil"
-  - "[ ] Todas las tarjetas con imagen del sitio (inicio, servicios, industrias y nosotros) declaran variantes de ancho y tamaño de render"
-  - "[ ] La imagen principal del inicio conserva su prioridad de carga y su peso actual"
+  - "[x] Todas las tarjetas con imagen del sitio (inicio, servicios, industrias y nosotros) declaran variantes de ancho y tamaño de render"
+  - "[x] La imagen principal del inicio conserva su prioridad de carga y su peso actual"
 
 related:
   - "[[image-optimization-pipeline/image-multiformat-delivery]]"
@@ -36,6 +36,7 @@ adrs:
 scope:
   - "src/components/sections/ServicesSection.astro"
   - "src/components/sections/IndustriesSection.astro"
+  - "src/styles/sections/industries.css"
   - "src/pages/servicios.astro"
   - "src/pages/nosotros.astro"
   - "src/pages/industrias.astro"
@@ -104,12 +105,12 @@ La entrega multiformato vigente exige que la página de inicio sirva menos de 2 
 
 ## Acceptance Criteria
 
-- [ ] El peso AVIF servido en la página de inicio tras recorrerla completa es menor a 2 MB en escritorio de 1440×900 con densidad de pantalla 1
-- [ ] El peso AVIF servido en la página de inicio tras recorrerla completa es menor a 2 MB en móvil de 390×844 con densidad de pantalla 3
-- [ ] Existe una medición reproducible sobre el build del sitio que simula la elección de variante del navegador y entrega el peso total por escenario
+- [x] El peso AVIF servido en la página de inicio tras recorrerla completa es menor a 2 MB en escritorio de 1440×900 con densidad de pantalla 1
+- [x] El peso AVIF servido en la página de inicio tras recorrerla completa es menor a 2 MB en móvil de 390×844 con densidad de pantalla 3
+- [x] Existe una medición reproducible sobre el build del sitio que simula la elección de variante del navegador y entrega el peso total por escenario
 - [ ] Las tarjetas se ven sin pérdida visible de nitidez en pantallas de densidad 2, en escritorio y en móvil
-- [ ] Todas las tarjetas con imagen del sitio (inicio, servicios, industrias y nosotros) declaran variantes de ancho y tamaño de render
-- [ ] La imagen principal del inicio conserva su prioridad de carga y su peso actual
+- [x] Todas las tarjetas con imagen del sitio (inicio, servicios, industrias y nosotros) declaran variantes de ancho y tamaño de render
+- [x] La imagen principal del inicio conserva su prioridad de carga y su peso actual
 
 ## Related
 

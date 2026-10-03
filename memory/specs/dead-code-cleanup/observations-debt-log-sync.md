@@ -17,10 +17,10 @@ feature_branch: "feature/debt-assets-weight"
 commits: ["b38d775"]
 mr: ""
 acceptance_criteria:
-  - "[ ] Los candidatos de deuda de assets de industrias y de logo duplicado figuran como resueltos e indican el commit que los resolvió"
-  - "[ ] La ruta errónea del logo eliminado queda corregida en el registro"
-  - "[ ] El candidato de videos duplicados figura como cerrado por este cambio"
-  - "[ ] El contenido original de cada entrada se conserva y solo se agrega su estado"
+  - "[x] Los candidatos de deuda de assets de industrias y de logo duplicado figuran como resueltos e indican el commit que los resolvió"
+  - "[x] La ruta errónea del logo eliminado queda corregida en el registro"
+  - "[x] El candidato de videos duplicados figura como cerrado por este cambio"
+  - "[x] El contenido original de cada entrada se conserva y solo se agrega su estado"
 
 related:
   - "[[dead-code-cleanup/asset-dead-code-removal]]"
@@ -78,10 +78,10 @@ El registro de observaciones del proyecto aún presenta como abiertos dos candid
 
 ## Acceptance Criteria
 
-- [ ] Los candidatos de deuda de assets de industrias y de logo duplicado figuran como resueltos e indican el commit que los resolvió
-- [ ] La ruta errónea del logo eliminado queda corregida en el registro
-- [ ] El candidato de videos duplicados figura como cerrado por este cambio
-- [ ] El contenido original de cada entrada se conserva y solo se agrega su estado
+- [x] Los candidatos de deuda de assets de industrias y de logo duplicado figuran como resueltos e indican el commit que los resolvió
+- [x] La ruta errónea del logo eliminado queda corregida en el registro
+- [x] El candidato de videos duplicados figura como cerrado por este cambio
+- [x] El contenido original de cada entrada se conserva y solo se agrega su estado
 
 ## Related
 
