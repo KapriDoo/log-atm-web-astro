@@ -3,9 +3,15 @@ import { SITE } from '../../lib/constants';
 import { useTranslations, getLangFromUrl, stripLocaleFromPath, buildLocaleUrl, isRTL } from '../../i18n/utils';
 import LanguageSelector from './LanguageSelector.astro';
 
+interface Props {
+  /** Path a usar en lugar de `Astro.url.pathname` para el estado activo y el selector.
+   *  Lo usa la 404 bajo demanda (`"/"`) para no derivar enlaces de la URL inexistente. */
+  currentPath?: string;
+}
+
+const { currentPath } = Astro.props;
 const currentLang = getLangFromUrl(Astro.url);
-const currentPath = Astro.url.pathname;
-const cleanPath = stripLocaleFromPath(currentPath);
+const cleanPath = stripLocaleFromPath(currentPath ?? Astro.url.pathname);
 const t = useTranslations(currentLang);
 
 // Construye links localizados para los 4 ítems principales de navegación.
