@@ -2,10 +2,10 @@
 type: change-state
 change_name: "debt-assets-weight"
 domain: "debt"
-status: active
+status: completed
 fast_path: "spec-first"
-current_phase: sdd-apply
-phases_completed: [sdd-init, sdd-propose, sdd-spec, sdd-tasks, sdd-apply]
+current_phase: ""
+phases_completed: [sdd-init, sdd-propose, sdd-spec, sdd-tasks, sdd-apply, sdd-verify, sdd-archive]
 spec_refs: ["[[card-image-weight-budget]]", "[[duplicate-video-removal]]", "[[logo-vectorization-residue-removal]]", "[[observations-debt-log-sync]]", "[[services-static-card-no-hover-zoom]]"]
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-assets-weight"
 feature_branch: "feature/debt-assets-weight"
@@ -14,6 +14,7 @@ require_judgment: false
 skip_judgment: false
 jira_key: ""
 mr: ""
+mr_url: ""
 mr_status: pending
 mr_error: ""
 created: "2026-10-02"

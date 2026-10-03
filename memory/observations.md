@@ -394,3 +394,11 @@ Una captura Chrome 390×844 DPR 2 del bento de industrias muestra Minería y Far
 ## 2026-10-03 | decision | debt-assets-weight | Cards altas de industrias del inicio: `sizes` por ancho pintado y quality 55 para entrar en el presupuesto móvil
 Las 4 cards altas declaran `sizes="665px"` (ancho pintado de la foto, fijo por el alto de 2 filas) y reciben 1376w a DPR 2 y 3; con quality 80 el móvil DPR 3 supera 2 MB, y quality 55 solo en esas cards es el paso más alto que entra. El margen móvil queda estrecho (~20 KB bajo el límite que aplica `npm run measure:images` sobre el total): cualquier imagen nueva o más pesada en el inicio puede superar el presupuesto. Las posiciones altas viven en `IndustriesSection.astro` (`ind-card--tall`). Evidencia: `apply-evidence.28` a `apply-evidence.33`.
 
+## 2026-10-03 | measure | debt-assets-weight | post-dispatch sdd-apply FIN 01:13:24 outcome=advance
+
+## 2026-10-03 | measure | debt-assets-weight | preflight sdd-verify INICIO 01:13:24 outcome=ready
+
+## 2026-10-03 | measure | debt-assets-weight | post-dispatch sdd-verify FIN 01:41:09 outcome=advance
+
+## 2026-10-03 | measure | debt-assets-weight | preflight sdd-archive INICIO 01:41:13 outcome=ready
+

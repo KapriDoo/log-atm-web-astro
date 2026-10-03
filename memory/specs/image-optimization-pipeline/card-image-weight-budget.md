@@ -7,7 +7,7 @@ domain: "debt"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on:
@@ -21,7 +21,7 @@ acceptance_criteria:
   - "[x] El peso AVIF servido en la página de inicio tras recorrerla completa es menor a 2 MB en escritorio de 1440×900 con densidad de pantalla 1"
   - "[x] El peso AVIF servido en la página de inicio tras recorrerla completa es menor a 2 MB en móvil de 390×844 con densidad de pantalla 3"
   - "[x] Existe una medición reproducible sobre el build del sitio que simula la elección de variante del navegador y entrega el peso total por escenario"
-  - "[ ] Las tarjetas se ven sin pérdida visible de nitidez en pantallas de densidad 2, en escritorio y en móvil"
+  - "[x] Las tarjetas se ven sin pérdida visible de nitidez en pantallas de densidad 2, en escritorio y en móvil"
   - "[x] Todas las tarjetas con imagen del sitio (inicio, servicios, industrias y nosotros) declaran variantes de ancho y tamaño de render"
   - "[x] La imagen principal del inicio conserva su prioridad de carga y su peso actual"
 
@@ -41,7 +41,7 @@ scope:
   - "src/pages/nosotros.astro"
   - "src/pages/industrias.astro"
   - "scripts/"
-verified_at: null
+verified_at: "2026-10-03"
 
 created: "2026-10-03"
 updated: "2026-10-03"
@@ -108,7 +108,7 @@ La entrega multiformato vigente exige que la página de inicio sirva menos de 2 
 - [x] El peso AVIF servido en la página de inicio tras recorrerla completa es menor a 2 MB en escritorio de 1440×900 con densidad de pantalla 1
 - [x] El peso AVIF servido en la página de inicio tras recorrerla completa es menor a 2 MB en móvil de 390×844 con densidad de pantalla 3
 - [x] Existe una medición reproducible sobre el build del sitio que simula la elección de variante del navegador y entrega el peso total por escenario
-- [ ] Las tarjetas se ven sin pérdida visible de nitidez en pantallas de densidad 2, en escritorio y en móvil
+- [x] Las tarjetas se ven sin pérdida visible de nitidez en pantallas de densidad 2, en escritorio y en móvil
 - [x] Todas las tarjetas con imagen del sitio (inicio, servicios, industrias y nosotros) declaran variantes de ancho y tamaño de render
 - [x] La imagen principal del inicio conserva su prioridad de carga y su peso actual
 

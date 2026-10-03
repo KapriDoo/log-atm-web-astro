@@ -8,7 +8,7 @@ version: 0.0.1
 node_engine: ">=22.12.0"
 status: active
 created: "2026-05-19"
-updated: "2026-10-02"
+updated: "2026-10-03"
 ---
 
 ## Stack
@@ -38,7 +38,6 @@ updated: "2026-10-02"
 ### Animation & Motion
 - `gsap@^3.14.2` — GSAP library
 - `motion@^12.38.0` — Framer Motion
-- `potrace@^2.1.8` — Vectorization utility
 
 ### Dev Tools
 - `sharp@^0.34.5` — Image processing (native binary)
