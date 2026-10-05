@@ -333,7 +333,7 @@
   font-weight: 500;
   max-width: 60%;
 }
-.quote-summary__row .v.empty { color: var(--color-neutral-400); font-style: italic; font-weight: 400; }
+.quote-summary__row .v.empty { color: var(--color-text-muted); font-style: italic; font-weight: 400; }
 .quote-summary__foot {
   padding: 1.25rem 1.5rem;
   border-top: 1px solid var(--color-border);
