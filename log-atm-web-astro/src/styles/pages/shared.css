@@ -89,6 +89,13 @@
   padding: 1.75rem 2rem 2rem;
   z-index: 2;
 }
+/* Visor bajo (≤ 960px): el caption ocupa desde ~50 % de la altura; el tramo oscuro del
+   degradado sube para que el nombre de industria cumpla ≥ 4.5:1 sobre cualquier foto */
+@media (max-width: 960px) {
+  .ind-directory__overlay {
+    background: linear-gradient(180deg, rgba(15,28,46,0.10) 0%, rgba(15,28,46,0.20) 25%, rgba(15,28,46,0.72) 50%, rgba(15,28,46,0.92) 100%);
+  }
+}
 .ind-directory__counter {
   display: inline-flex; align-items: baseline; gap: 0.4rem;
   font-family: var(--font-mono); font-size: 0.85rem;
