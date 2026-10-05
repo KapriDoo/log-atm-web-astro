@@ -70,7 +70,6 @@
     --color-text-subtle: var(--color-neutral-400);
 
     --color-brand:       var(--color-primary-500);
-    --color-brand-hover: var(--color-primary-600);
     --color-brand-dark:  var(--color-primary-700);
 
     /* Botón azul sólido: texto claro sobre primary-600 (6.08) / primary-700 (8.52) */

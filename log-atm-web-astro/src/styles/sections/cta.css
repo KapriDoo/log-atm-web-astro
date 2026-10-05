@@ -9,13 +9,16 @@
   overflow: hidden;
 }
 
-/* Override del CTA primario en esta sección: brand azul, no verde */
+/* Override del CTA primario en esta sección: brand azul, no verde.
+   Fija fondo y texto del par azul sólido para ganar a .btn--cta en todo estado. */
 .cta-final .btn--cta {
-  background: var(--color-brand);
+  background: var(--color-brand-solid);
+  color: var(--color-brand-solid-text);
   box-shadow: 0 4px 20px 0 rgb(74 123 181 / 0.35);
 }
 .cta-final .btn--cta:hover {
-  background: var(--color-brand-hover);
+  background: var(--color-brand-solid-hover);
+  color: var(--color-brand-solid-text);
   box-shadow: 0 6px 28px rgb(74 123 181 / 0.45);
 }
 
@@ -172,8 +175,8 @@
   gap: 0.5rem;
   width: 100%;
   margin-top: 0.25rem;
-  background: var(--color-brand);
-  color: var(--color-text-inverse);
+  background: var(--color-brand-solid);
+  color: var(--color-brand-solid-text);
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1rem;
@@ -186,7 +189,8 @@
   transition: background 150ms, transform 100ms, box-shadow 150ms;
 }
 .cta-final__btn:hover {
-  background: var(--color-brand-hover);
+  background: var(--color-brand-solid-hover);
+  color: var(--color-brand-solid-text);
   transform: translateY(-1px);
   box-shadow: 0 6px 28px rgb(74 123 181 / 0.45);
 }

@@ -43,8 +43,8 @@
     position: absolute;
     top: -40px;
     left: 0;
-    background: var(--color-brand);
-    color: var(--color-text-inverse);
+    background: var(--color-brand-solid);
+    color: var(--color-brand-solid-text);
     padding: 8px 16px;
     z-index: 1000;
     border-radius: 0 0 var(--radius-xs) 0;
@@ -136,10 +136,10 @@
     box-shadow: 0 6px 28px rgb(62 185 120 / 0.45);
   }
   .btn--brand {
-    background: var(--color-brand);
-    color: var(--color-text-inverse);
+    background: var(--color-brand-solid);
+    color: var(--color-brand-solid-text);
   }
-  .btn--brand:hover { background: var(--color-brand-dark); }
+  .btn--brand:hover { background: var(--color-brand-solid-hover); }
   .btn--ghost-light {
     background: rgba(255,255,255,0.08);
     color: var(--color-text-inverse);
