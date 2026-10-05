@@ -350,3 +350,66 @@ En `astro preview`, un `POST` sin `content-type` lo corta el chequeo de origen d
 
 ## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-archive INICIO 22:41:31 outcome=ready
 
+## 2026-10-03 | measure | fix-color-contrast-sitewide | preflight sdd-init INICIO 01:44:10 outcome=ready
+
+## 2026-10-03 | measure | fix-color-contrast-sitewide | post-dispatch sdd-init FIN 01:44:51 outcome=advance
+
+## 2026-10-03 | measure | fix-color-contrast-sitewide | preflight sdd-explore INICIO 01:44:51 outcome=ready
+
+
+## 2026-10-03 | debt-candidate | fix-color-contrast-sitewide | DESIGN.md con ratios de contraste erróneos
+**Detectado por**: sdd-explore en `fix-color-contrast-sitewide`
+**Ubicación**: log-atm-web-astro/DESIGN.md:77-83
+**Descripción**: "Pares de contraste validados" declara #fff sobre primary-500 ~4.8:1 (real 4.38), accent-500 sobre blanco ~3.1:1 (real 2.50) y #fff sobre accent-600 ~4.5:1 (real 3.56); guía decisiones de diseño con datos falsos.
+**Promoción sugerida**: se corrige dentro de `fix-color-contrast-sitewide`; si se difiere, `sdd new fix-design-md-contrast-pairs --domain debt`
+
+## 2026-10-03 | debt-candidate | fix-color-contrast-sitewide | Color de heading heredado invisible sobre fondos oscuros
+**Detectado por**: sdd-explore en `fix-color-contrast-sitewide`
+**Ubicación**: log-atm-web-astro/src/styles/pages/shared.css:110 (`.ind-directory__name`), log-atm-web-astro/src/styles/pages/cotizar.css:309 (`.quote-summary__title`)
+**Descripción**: los h3 sin `color` explícito toman neutral-900 de la regla global de headings y quedan ilegibles sobre fondo oscuro (1.0-1.02:1); axe lo marca solo en `.quote-summary__title`, el de `/industrias/` queda como `incomplete` por estar sobre foto.
+**Promoción sugerida**: se aborda en `fix-color-contrast-sitewide`; alternativa `sdd new fix-heading-color-inheritance --domain fix`
+
+## 2026-10-03 | debt-candidate | fix-color-contrast-sitewide | Hex literales fuera de tokens.css y tokens WhatsApp huérfanos
+**Detectado por**: sdd-explore en `fix-color-contrast-sitewide`
+**Ubicación**: log-atm-web-astro/src/styles/global.css:158-162, shared.css:864, tokens.css:53-55 y 185-187, src/lib/email-templates.ts:283,295
+**Descripción**: ~34 declaraciones con hex literal fuera de `tokens.css`; `--color-whatsapp*` (#128C7E) no se usa y difiere del verde mostrado (#25D366); `:root` y `@theme` duplican la paleta; el botón WhatsApp de los correos usa #fff sobre #25D366 (1.98:1).
+**Promoción sugerida**: `sdd new tokens-hex-cleanup --domain debt`
+## 2026-10-03 | measure | fix-color-contrast-sitewide | post-dispatch sdd-explore FIN 02:20:03 outcome=advance
+
+## 2026-10-03 | measure | fix-color-contrast-sitewide | preflight sdd-propose INICIO 02:20:03 outcome=ready
+
+## 2026-10-03 | measure | fix-color-contrast-sitewide | post-dispatch sdd-propose FIN 02:22:05 outcome=paused
+
+## 2026-10-04 | measure | fix-color-contrast-sitewide | preflight sdd-propose INICIO 23:45:49 outcome=ready
+
+## 2026-10-04 | measure | fix-color-contrast-sitewide | post-dispatch sdd-propose FIN 23:46:47 outcome=paused
+
+## 2026-10-04 | measure | fix-color-contrast-sitewide | preflight sdd-spec INICIO 23:47:49 outcome=ready
+
+## 2026-10-04 | measure | fix-color-contrast-sitewide | preflight sdd-spec INICIO 23:49:16 outcome=ready
+
+## 2026-10-04 | measure | fix-color-contrast-sitewide | post-dispatch sdd-spec FIN 23:52:35 outcome=advance
+
+## 2026-10-04 | measure | fix-color-contrast-sitewide | preflight sdd-design INICIO 23:52:37 outcome=ready
+
+
+## 2026-10-05 | pre-adr | fix-color-contrast-sitewide | Pares de contraste como tokens funcionales y anillo de foco por contexto
+Cada par texto/fondo validado AA se declara como tokens funcionales de rol en `tokens.css` (`:root` + `@theme`) y los componentes consumen el token del par; el anillo de foco usa `var(--focus-ring-color, var(--color-focus-ring))` y cada superficie oscura con controles enfocables declara `--focus-ring-color: var(--color-focus-ring-inverse)` junto a su fondo, porque ningún color único cumple 3:1 sobre blanco y sobre `primary-700/800`. `email-templates.ts` es la única excepción de hex fuera de `tokens.css`. Registrado en [[0008-contrast-pair-tokens-and-contextual-focus-ring]].
+
+## 2026-10-05 | debt-candidate | fix-color-contrast-sitewide | Contraste del botón de email y del SLA en las plantillas de correo
+**Detectado por**: sdd-design en `fix-color-contrast-sitewide`
+**Ubicación**: log-atm-web-astro/src/lib/email-templates.ts:280,290 (`#ffffff` sobre `#4A7BB5`, 4.38:1) y :301 (`#898580` sobre blanco, ~3.6:1)
+**Descripción**: el botón «Responder por email» y el texto SLA de la sección de CTAs del correo no cumplen AA; ninguna spec de este cambio los cubre (solo el botón WhatsApp). La corrección natural replica el par brand-solid (`#3b6497`, 6.08:1) y `neutral-600` para el SLA, bajo la excepción de hex inline de ADR-0008.
+**Promoción sugerida**: `sdd new fix-email-cta-contrast --domain fix`
+
+## 2026-10-05 | finding | fix-color-contrast-sitewide | extended_context.py no resuelve wikilinks `related[]` con forma `capability/slug`
+**Detectado por**: sdd-design en `fix-color-contrast-sitewide`
+**Descripción**: el modo `reader` reporta «wikilink de `related[]` sin resolver» para los 15 `related[]` de las specs del cambio (p. ej. `[[tokens/consolidate-tokens]]`, `[[ui-contrast/brand-button-contrast]]`), aunque todas existen en `memory/specs/{capability}/{slug}.md`. El resolutor espera `[[slug]]`; las specs emitidas por `sdd-spec` usan `[[capability/slug]]`. La fase leyó las relacionadas por pull.
+## 2026-10-05 | measure | fix-color-contrast-sitewide | post-dispatch sdd-design FIN 00:02:52 outcome=advance
+
+## 2026-10-05 | measure | fix-color-contrast-sitewide | preflight sdd-tasks INICIO 00:02:54 outcome=ready
+
+## 2026-10-05 | measure | fix-color-contrast-sitewide | post-dispatch sdd-tasks FIN 00:05:05 outcome=advance
+
+## 2026-10-05 | measure | fix-color-contrast-sitewide | preflight sdd-apply INICIO 00:05:07 outcome=ready
+
