@@ -190,7 +190,7 @@
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--color-accent-600);
+    color: var(--color-text-accent);
     margin-bottom: 0.875rem;
   }
   .eyebrow::before {

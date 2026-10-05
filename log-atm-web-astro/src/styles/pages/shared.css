@@ -795,7 +795,7 @@
 .contact-form-card__sub { font-size: 0.9rem; color: var(--color-text-muted); margin: 0; }
 .contact-form-card__pill {
   font-family: var(--font-mono); font-size: 0.7rem;
-  background: var(--color-accent-300); color: var(--color-accent-700);
+  background: var(--color-accent-300); color: var(--color-text-accent);
   padding: 0.4rem 0.7rem; border-radius: var(--radius-pill);
   display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap;
 }
