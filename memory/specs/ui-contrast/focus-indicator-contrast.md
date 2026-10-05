@@ -7,14 +7,16 @@ domain: "fix"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
 change_ref: "[[fix-color-contrast-sitewide]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide"
+feature_branch: "feature/fix-color-contrast-sitewide"
+commits:
+  - 3fc9985
+  - 4611441
 mr: ""
 acceptance_criteria:
   - "[ ] El indicador de foco cumple ≥ 3:1 sobre superficies claras y sobre superficies oscuras"
@@ -38,7 +40,7 @@ scope:
 verified_at: null
 
 created: "2026-10-04"
-updated: "2026-10-04"
+updated: "2026-10-05"
 tags: [capability-spec]
 ---
 

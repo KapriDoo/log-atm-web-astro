@@ -413,3 +413,11 @@ Cada par texto/fondo validado AA se declara como tokens funcionales de rol en `t
 
 ## 2026-10-05 | measure | fix-color-contrast-sitewide | preflight sdd-apply INICIO 00:05:07 outcome=ready
 
+
+## 2026-10-05 | pre-adr | fix-color-contrast-sitewide | Overlay del visor de industrias más oscuro en pantallas ≤ 960px
+**Detectado por**: sdd-apply (Tarea 28, muestreo de píxeles) en `fix-color-contrast-sitewide`
+**Descripción**: `design.md` asume que el nombre de industria cae en la «zona inferior del overlay (92 % oscuro)»; en visores ≤ 960px (alto fijo 420px) el nombre ocupa el 55–74 % de la altura, donde el degradado solo oscurece 38–49 %, y tres diapositivas quedaban bajo 4.5:1 en 390px. Se aplicó el mismo criterio de D9 (oscurecimiento determinista detrás del texto): en `@media (max-width: 960px)` el overlay pasa a `0.10 0% · 0.20 25% · 0.72 50% · 0.92 100%` (commit `3bc419b`). Desktop no cambia. Decisión de diseño tomada en apply sin HITL; revisar en verify/archive si se prefiere otra variante (scrim tras el caption).
+
+## 2026-10-05 | finding | fix-color-contrast-sitewide | Herramientas de verificación de contraste en Chrome real
+**Detectado por**: sdd-apply en `fix-color-contrast-sitewide`
+**Descripción**: con `puppeteer-core`, `page.screenshot({clip})` espera coordenadas de documento; `boundingBox()`/`getBoundingClientRect()` devuelven coordenadas de viewport, así que el muestreo de píxeles tras un scroll debe sumar `scrollX/scrollY`. En `/industrias/` desktop, centrar un elemento tras el click desplaza el listado bajo el cursor y su `mouseenter` cambia la diapositiva activa: mover el cursor fuera antes de medir. Scripts de referencia en `apply-evidence.md` (bloques embebidos).

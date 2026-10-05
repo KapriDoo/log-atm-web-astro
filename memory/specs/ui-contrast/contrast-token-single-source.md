@@ -7,14 +7,17 @@ domain: "fix"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on: []
 change_ref: "[[fix-color-contrast-sitewide]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide"
+feature_branch: "feature/fix-color-contrast-sitewide"
+commits:
+  - b08df43
+  - eb4735e
+  - 58cb313
 mr: ""
 acceptance_criteria:
   - "[ ] Cada par validado figura una sola vez en la fuente de tokens y el sitio construye sin errores"
@@ -36,7 +39,7 @@ scope:
 verified_at: null
 
 created: "2026-10-04"
-updated: "2026-10-04"
+updated: "2026-10-05"
 tags: [capability-spec]
 ---
 

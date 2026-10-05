@@ -21,14 +21,14 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Criterio de completado**: cada token nuevo aparece en `:root` y en `@theme`; `--color-whatsapp` vale `#25D366`; `npm run build` termina sin errores de CSS.
 - **Modo**: estándar
 
-- [ ] Agregar `--color-accent-800` y `--color-error-light` a la paleta de `:root`
-- [ ] Repetir ambos con su hex resuelto en `@theme`
-- [ ] Cambiar `--color-cta-text` a `primary-900` y agregar `--color-cta-hover-text` en `:root`
-- [ ] Agregar `--color-cta-hover` y `--color-cta-text` a `@theme` con el hex resuelto
-- [ ] Cambiar `--color-whatsapp` a `#25D366` y agregar `--color-whatsapp-text` en `:root` y `@theme`
-- [ ] Agregar `--color-brand-solid`, `--color-brand-solid-hover` y `--color-brand-solid-text` en `:root` y `@theme`
-- [ ] Agregar `--color-text-accent`, `--color-focus-ring` y `--color-focus-ring-inverse` en `:root` y `@theme`
-- [ ] Ejecutar `npm run build` y confirmar que termina sin errores
+- [x] Agregar `--color-accent-800` y `--color-error-light` a la paleta de `:root`
+- [x] Repetir ambos con su hex resuelto en `@theme`
+- [x] Cambiar `--color-cta-text` a `primary-900` y agregar `--color-cta-hover-text` en `:root`
+- [x] Agregar `--color-cta-hover` y `--color-cta-text` a `@theme` con el hex resuelto
+- [x] Cambiar `--color-whatsapp` a `#25D366` y agregar `--color-whatsapp-text` en `:root` y `@theme`
+- [x] Agregar `--color-brand-solid`, `--color-brand-solid-hover` y `--color-brand-solid-text` en `:root` y `@theme`
+- [x] Agregar `--color-text-accent`, `--color-focus-ring` y `--color-focus-ring-inverse` en `:root` y `@theme`
+- [x] Ejecutar `npm run build` y confirmar que termina sin errores
 
 ### Tarea 2: Documentar tokens, pares validados y excepción de correo en `DESIGN.md`
 
@@ -38,12 +38,12 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Agregar `accent-800` y `error-light` a la tabla de paleta
-- [ ] Actualizar el bloque de tokens funcionales con los tokens de la Tarea 1
-- [ ] Reescribir «Pares de contraste validados» con los ratios del diseño
-- [ ] Documentar botones CTA, WhatsApp y azul sólido con sus pares y estados
-- [ ] Documentar el anillo de foco por contexto y la regla de `--focus-ring-color`
-- [ ] Declarar la excepción de hex inline en `src/lib/email-templates.ts`
+- [x] Agregar `accent-800` y `error-light` a la tabla de paleta
+- [x] Actualizar el bloque de tokens funcionales con los tokens de la Tarea 1
+- [x] Reescribir «Pares de contraste validados» con los ratios del diseño
+- [x] Documentar botones CTA, WhatsApp y azul sólido con sus pares y estados
+- [x] Documentar el anillo de foco por contexto y la regla de `--focus-ring-color`
+- [x] Declarar la excepción de hex inline en `src/lib/email-templates.ts`
 
 ---
 
@@ -57,9 +57,9 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Cambiar color de texto de `.btn--cta` a `var(--color-cta-text)` en `global.css`
-- [ ] Cambiar fondo y texto de `.btn--cta:hover` a `--color-cta-hover` y `--color-cta-hover-text`
-- [ ] Cambiar `.svc-card__tag--cta` en `services.css` a `--color-cta` y `--color-cta-text`
+- [x] Cambiar color de texto de `.btn--cta` a `var(--color-cta-text)` en `global.css`
+- [x] Cambiar fondo y texto de `.btn--cta:hover` a `--color-cta-hover` y `--color-cta-hover-text`
+- [x] Cambiar `.svc-card__tag--cta` en `services.css` a `--color-cta` y `--color-cta-text`
 
 ### Tarea 4: Aplicar el par CTA a contacto y cotizador
 
@@ -69,11 +69,11 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Cambiar `.form-submit` a `--color-cta-text` sobre `--color-cta` en `shared.css`
-- [ ] Cambiar el punto `.office-card__pin::after` a `--color-cta-text` en `shared.css`
-- [ ] Cambiar `.mode-tile--active .mode-tile__check` al par CTA en `cotizar.css`
-- [ ] Cambiar `.btn-primary-lg` al par CTA en `cotizar.css`
-- [ ] Cambiar `.quote-success__seal` al par CTA en `cotizar.css`
+- [x] Cambiar `.form-submit` a `--color-cta-text` sobre `--color-cta` en `shared.css`
+- [x] Cambiar el punto `.office-card__pin::after` a `--color-cta-text` en `shared.css`
+- [x] Cambiar `.mode-tile--active .mode-tile__check` al par CTA en `cotizar.css`
+- [x] Cambiar `.btn-primary-lg` al par CTA en `cotizar.css`
+- [x] Cambiar `.quote-success__seal` al par CTA en `cotizar.css`
 
 ### Tarea 5: Aplicar el par CTA al botón de la página 404
 
@@ -83,8 +83,8 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Cambiar fondo y texto de `.error-page__cta` al par CTA
-- [ ] Cambiar fondo y texto de `.error-page__cta:hover` al par de hover
+- [x] Cambiar fondo y texto de `.error-page__cta` al par CTA
+- [x] Cambiar fondo y texto de `.error-page__cta:hover` al par de hover
 
 ---
 
@@ -98,9 +98,9 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Cambiar fondo y texto de `.btn--brand` al par brand-solid
-- [ ] Cambiar fondo de `.btn--brand:hover` a `--color-brand-solid-hover`
-- [ ] Cambiar fondo y texto de `.skip-link` al par brand-solid
+- [x] Cambiar fondo y texto de `.btn--brand` al par brand-solid
+- [x] Cambiar fondo de `.btn--brand:hover` a `--color-brand-solid-hover`
+- [x] Cambiar fondo y texto de `.skip-link` al par brand-solid
 
 ### Tarea 7: Aplicar el par azul sólido a la sección final y retirar `--color-brand-hover`
 
@@ -110,11 +110,11 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1, Tarea 3
 
-- [ ] Cambiar `.cta-final__btn` y su hover al par brand-solid
-- [ ] Cambiar `.cta-final .btn--cta` fijando fondo y texto del par brand-solid
-- [ ] Cambiar `.cta-final .btn--cta:hover` fijando fondo y texto del par de hover
-- [ ] Buscar con grep `--color-brand-hover` en `src/` y confirmar que no quedan consumidores
-- [ ] Eliminar `--color-brand-hover` de `:root` en `tokens.css`
+- [x] Cambiar `.cta-final__btn` y su hover al par brand-solid
+- [x] Cambiar `.cta-final .btn--cta` fijando fondo y texto del par brand-solid
+- [x] Cambiar `.cta-final .btn--cta:hover` fijando fondo y texto del par de hover
+- [x] Buscar con grep `--color-brand-hover` en `src/` y confirmar que no quedan consumidores
+- [x] Eliminar `--color-brand-hover` de `:root` en `tokens.css`
 
 ---
 
@@ -128,9 +128,9 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Reemplazar el hex de fondo de `.btn--wa` por `var(--color-whatsapp)`
-- [ ] Reemplazar el hex de texto de `.btn--wa` por `var(--color-whatsapp-text)`
-- [ ] Reemplazar el hex de hover de `.btn--wa:hover` por `var(--color-whatsapp-hover)`
+- [x] Reemplazar el hex de fondo de `.btn--wa` por `var(--color-whatsapp)`
+- [x] Reemplazar el hex de texto de `.btn--wa` por `var(--color-whatsapp-text)`
+- [x] Reemplazar el hex de hover de `.btn--wa:hover` por `var(--color-whatsapp-hover)`
 
 ### Tarea 9: Pasar `.channel--wa` a fondo sólido con texto oscuro
 
@@ -140,10 +140,10 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Reemplazar el degradado de `.channel--wa` por `background: var(--color-whatsapp)`
-- [ ] Asignar `--color-whatsapp-text` a `.channel--wa .channel__name`
-- [ ] Asignar `--color-whatsapp-text` a `.channel--wa .channel__value`
-- [ ] Asignar `--color-whatsapp-text` a `.channel--wa .channel__arrow` y `.channel--wa .channel__icon`
+- [x] Reemplazar el degradado de `.channel--wa` por `background: var(--color-whatsapp)`
+- [x] Asignar `--color-whatsapp-text` a `.channel--wa .channel__name`
+- [x] Asignar `--color-whatsapp-text` a `.channel--wa .channel__value`
+- [x] Asignar `--color-whatsapp-text` a `.channel--wa .channel__arrow` y `.channel--wa .channel__icon`
 
 ---
 
@@ -156,10 +156,10 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Criterio de completado**: el par aparece una sola vez en el archivo; `buildContactoEmail` con teléfono muestra el botón con `#111b21`/`#25D366` y sin teléfono no lo muestra.
 - **Modo**: estándar
 
-- [ ] Declarar la constante del par WhatsApp con comentario de tokens de origen
-- [ ] Usar la constante en la primera rama del botón WhatsApp
-- [ ] Usar la constante en la segunda rama del botón WhatsApp
-- [ ] Confirmar que la condición de aparición y el href `wa.me` quedan intactos
+- [x] Declarar la constante del par WhatsApp con comentario de tokens de origen
+- [x] Usar la constante en la primera rama del botón WhatsApp
+- [x] Usar la constante en la segunda rama del botón WhatsApp
+- [x] Confirmar que la condición de aparición y el href `wa.me` quedan intactos
 
 ---
 
@@ -173,10 +173,10 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Cambiar color de `.nav__link:hover` y `.nav__link:focus-visible` a `--color-brand-dark`
-- [ ] Cambiar color de `.nav__link.is-active` a `--color-brand-dark`
-- [ ] Agregar subrayado de 2px con `text-underline-offset: 0.3em` a `.nav__link.is-active`
-- [ ] Cambiar color de `.nav-drawer__link:hover` y `:focus-visible` a `--color-brand-dark`
+- [x] Cambiar color de `.nav__link:hover` y `.nav__link:focus-visible` a `--color-brand-dark`
+- [x] Cambiar color de `.nav__link.is-active` a `--color-brand-dark`
+- [x] Agregar subrayado de 2px con `text-underline-offset: 0.3em` a `.nav__link.is-active`
+- [x] Cambiar color de `.nav-drawer__link:hover` y `:focus-visible` a `--color-brand-dark`
 
 ---
 
@@ -190,8 +190,8 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Cambiar el color de `.eyebrow` a `var(--color-text-accent)`
-- [ ] Confirmar que las variantes oscuras conservan su color propio
+- [x] Cambiar el color de `.eyebrow` a `var(--color-text-accent)`
+- [x] Confirmar que las variantes oscuras conservan su color propio
 
 ### Tarea 13: Aplicar `--color-text-accent` a la pill del formulario
 
@@ -201,7 +201,7 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Cambiar el color de `.contact-form-card__pill` a `var(--color-text-accent)`
+- [x] Cambiar el color de `.contact-form-card__pill` a `var(--color-text-accent)`
 
 ### Tarea 14: Aplicar `--color-text-accent` en el cotizador
 
@@ -211,9 +211,9 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Cambiar el color de `.quote-step__num` a `var(--color-text-accent)`
-- [ ] Cambiar el color de `.quote-summary__sla` a `var(--color-text-accent)`
-- [ ] Cambiar el color de `.quote-success__step-n` a `var(--color-text-accent)`
+- [x] Cambiar el color de `.quote-step__num` a `var(--color-text-accent)`
+- [x] Cambiar el color de `.quote-summary__sla` a `var(--color-text-accent)`
+- [x] Cambiar el color de `.quote-success__step-n` a `var(--color-text-accent)`
 
 ---
 
@@ -227,7 +227,7 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Agregar `color: var(--color-text-inverse)` a `.quote-summary__title`
+- [x] Agregar `color: var(--color-text-inverse)` a `.quote-summary__title`
 
 ### Tarea 16: Dar color claro al nombre de industria del directorio
 
@@ -237,7 +237,7 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Agregar `color: var(--color-text-inverse)` a `.ind-directory__name`
+- [x] Agregar `color: var(--color-text-inverse)` a `.ind-directory__name`
 
 ---
 
@@ -251,8 +251,8 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Cambiar el color de `.quote-summary__row .v.empty` a `var(--color-text-muted)`
-- [ ] Confirmar que itálica y peso 400 se conservan
+- [x] Cambiar el color de `.quote-summary__row .v.empty` a `var(--color-text-muted)`
+- [x] Confirmar que itálica y peso 400 se conservan
 
 ---
 
@@ -266,9 +266,9 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Cambiar el color de `.cta-final__hint` a `var(--color-primary-200)`
-- [ ] Cambiar el color de `.cta-final__status[data-kind=error]` a `var(--color-error-light)`
-- [ ] Cambiar el color de `.cta-final__status[data-kind=success]` a `var(--color-accent-400)`
+- [x] Cambiar el color de `.cta-final__hint` a `var(--color-primary-200)`
+- [x] Cambiar el color de `.cta-final__status[data-kind=error]` a `var(--color-error-light)`
+- [x] Cambiar el color de `.cta-final__status[data-kind=success]` a `var(--color-accent-400)`
 
 ### Tarea 19: Corregir textos de apoyo del directorio, pasos y migas, y pastilla del contador
 
@@ -278,11 +278,11 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Cambiar el color de `.ind-directory__item-num` a `var(--color-primary-200)` sin tocar hover/activo
-- [ ] Cambiar el color de `.howwork-card__step` a `var(--color-brand-dark)`
-- [ ] Retirar `opacity: 0.7` de `.page-hero__breadcrumb a`
-- [ ] Agregar fondo de pastilla, `backdrop-filter`, padding y `border-radius` a `.ind-directory__counter`
-- [ ] Retirar los `rgba` de `.ind-directory__counter .sep` y `.total` para que hereden el blanco
+- [x] Cambiar el color de `.ind-directory__item-num` a `var(--color-primary-200)` sin tocar hover/activo
+- [x] Cambiar el color de `.howwork-card__step` a `var(--color-brand-dark)`
+- [x] Retirar `opacity: 0.7` de `.page-hero__breadcrumb a`
+- [x] Agregar fondo de pastilla, `backdrop-filter`, padding y `border-radius` a `.ind-directory__counter`
+- [x] Retirar los `rgba` de `.ind-directory__counter .sep` y `.total` para que hereden el blanco
 
 ---
 
@@ -296,9 +296,9 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Cambiar el color de `.error-page__code` a `var(--color-brand)`
-- [ ] Fijar `font-size: clamp(6rem, 15vw, 10rem)` y `font-weight: 900`
-- [ ] Confirmar que el markup del código conserva su condición decorativa
+- [x] Cambiar el color de `.error-page__code` a `var(--color-brand)`
+- [x] Fijar `font-size: clamp(6rem, 15vw, 10rem)` y `font-weight: 900`
+- [x] Confirmar que el markup del código conserva su condición decorativa
 
 ---
 
@@ -312,8 +312,8 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Cambiar el selector `.svc-filter:hover` a `.svc-filter:not(.svc-filter--active):hover`
-- [ ] Confirmar que el estilo hover de los filtros inactivos no cambia
+- [x] Cambiar el selector `.svc-filter:hover` a `.svc-filter:not(.svc-filter--active):hover`
+- [x] Confirmar que el estilo hover de los filtros inactivos no cambia
 
 ---
 
@@ -327,7 +327,7 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 1
 
-- [ ] Reemplazar el color del `outline` global por `var(--focus-ring-color, var(--color-focus-ring))`
+- [x] Reemplazar el color del `outline` global por `var(--focus-ring-color, var(--color-focus-ring))`
 
 ### Tarea 23: Declarar `--focus-ring-color` en las superficies oscuras
 
@@ -337,11 +337,11 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 22
 
-- [ ] Declarar `--focus-ring-color` en `.hero-b` de `hero.css`
-- [ ] Declarar `--focus-ring-color` en `.page-hero` y `.ind-directory-section` de `shared.css`
-- [ ] Declarar `--focus-ring-color` en `.quote-hero` de `cotizar.css`
-- [ ] Declarar `--focus-ring-color` en `.cta-final` de `cta.css`
-- [ ] Declarar `--focus-ring-color` en `.footer` de `Footer.astro`
+- [x] Declarar `--focus-ring-color` en `.hero-b` de `hero.css`
+- [x] Declarar `--focus-ring-color` en `.page-hero` y `.ind-directory-section` de `shared.css`
+- [x] Declarar `--focus-ring-color` en `.quote-hero` de `cotizar.css`
+- [x] Declarar `--focus-ring-color` en `.cta-final` de `cta.css`
+- [x] Declarar `--focus-ring-color` en `.footer` de `Footer.astro`
 
 ### Tarea 24: Mostrar el foco en las opciones del selector de idioma
 
@@ -351,8 +351,8 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 22
 
-- [ ] Quitar `outline: none` de la regla compartida hover/foco de `.lang-selector__option`
-- [ ] Agregar `outline-offset: -3px` a `.lang-selector__option:focus-visible`
+- [x] Quitar `outline: none` de la regla compartida hover/foco de `.lang-selector__option`
+- [x] Agregar `outline-offset: -3px` a `.lang-selector__option:focus-visible`
 
 ### Tarea 25: Retirar `outline: none` de campos y overrides de anillo
 
@@ -362,11 +362,11 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 22, Tarea 23
 
-- [ ] Quitar `outline: none` y la sombra al 15 % de `.form-field` en foco y fijar `border-color: var(--color-focus-ring)`
-- [ ] Quitar `outline: none` de `.cta-final__input:focus` y fijar `border-color: var(--color-focus-ring-inverse)`
-- [ ] Eliminar la regla `.cta-final__channel:focus-visible` de `CTASection.astro`
-- [ ] Eliminar la regla `.error-page__cta:focus-visible` de `404.astro`
-- [ ] Buscar con grep `outline: none` en `src/` y confirmar que cada resto tiene indicador alternativo
+- [x] Quitar `outline: none` y la sombra al 15 % de `.form-field` en foco y fijar `border-color: var(--color-focus-ring)`
+- [x] Quitar `outline: none` de `.cta-final__input:focus` y fijar `border-color: var(--color-focus-ring-inverse)`
+- [x] Eliminar la regla `.cta-final__channel:focus-visible` de `CTASection.astro`
+- [x] Eliminar la regla `.error-page__cta:focus-visible` de `404.astro`
+- [x] Buscar con grep `outline: none` en `src/` y confirmar que cada resto tiene indicador alternativo
 
 ---
 
@@ -380,10 +380,10 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tareas 1–25
 
-- [ ] Ejecutar `npm run build` y registrar el resultado
-- [ ] Revisar el diff contra `main` buscando hex literales fuera de `tokens.css` y `email-templates.ts`
-- [ ] Verificar que cada token nuevo figura en `:root` y en `@theme`
-- [ ] Calcular los ratios de los pares de `design.md` y compararlos con sus umbrales
+- [x] Ejecutar `npm run build` y registrar el resultado
+- [x] Revisar el diff contra `main` buscando hex literales fuera de `tokens.css` y `email-templates.ts`
+- [x] Verificar que cada token nuevo figura en `:root` y en `@theme`
+- [x] Calcular los ratios de los pares de `design.md` y compararlos con sus umbrales
 
 ### Tarea 27: Auditar contraste con axe-core en Chrome real
 
@@ -393,10 +393,10 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 26
 
-- [ ] Levantar `astro preview` sobre el build de la Tarea 26
-- [ ] Ejecutar axe `color-contrast` sobre las 21 URL en desktop y móvil
-- [ ] Repetir la auditoría con `prefers-reduced-motion: reduce`
-- [ ] Registrar las violaciones restantes y corregir su origen si las hay
+- [x] Levantar `astro preview` sobre el build de la Tarea 26
+- [x] Ejecutar axe `color-contrast` sobre las 21 URL en desktop y móvil
+- [x] Repetir la auditoría con `prefers-reduced-motion: reduce`
+- [x] Registrar las violaciones restantes y corregir su origen si las hay
 
 ### Tarea 28: Verificar estados interactivos, foco, píxeles y correo
 
@@ -406,12 +406,12 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 26
 
-- [ ] Recorrer hover, foco por teclado y presionado en los controles interactivos
-- [ ] Medir el ratio del anillo de foco en superficies claras y oscuras
-- [ ] Revisar `/industrias/` y `/contacto/` con muestreo de píxeles y capturas
-- [ ] Medir el tamaño computado de `.error-page__code` a 390px y 1440px
-- [ ] Barrer la sección final en las cuatro páginas y tres idiomas
-- [ ] Renderizar `buildContactoEmail` con y sin teléfono y comprobar el botón
+- [x] Recorrer hover, foco por teclado y presionado en los controles interactivos
+- [x] Medir el ratio del anillo de foco en superficies claras y oscuras
+- [x] Revisar `/industrias/` y `/contacto/` con muestreo de píxeles y capturas
+- [x] Medir el tamaño computado de `.error-page__code` a 390px y 1440px
+- [x] Barrer la sección final en las cuatro páginas y tres idiomas
+- [x] Renderizar `buildContactoEmail` con y sin teléfono y comprobar el botón
 
 ### Tarea 29: Reconciliar `DESIGN.md` con los ratios medidos
 
@@ -421,5 +421,5 @@ Rutas relativas a la raíz del worktree; el proyecto vive en `log-atm-web-astro/
 - **Modo**: estándar
 - **Requiere**: Tarea 2, Tarea 26, Tarea 28
 
-- [ ] Comparar cada fila de la tabla de pares con el ratio medido
-- [ ] Corregir en `DESIGN.md` las filas que difieran
+- [x] Comparar cada fila de la tabla de pares con el ratio medido
+- [x] Corregir en `DESIGN.md` las filas que difieran

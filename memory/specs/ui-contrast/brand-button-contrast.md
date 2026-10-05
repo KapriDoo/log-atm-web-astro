@@ -7,14 +7,15 @@ domain: "fix"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
 change_ref: "[[fix-color-contrast-sitewide]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide"
+feature_branch: "feature/fix-color-contrast-sitewide"
+commits:
+  - 58cb313
 mr: ""
 acceptance_criteria:
   - "[ ] Botones azul de marca, enlace de salto y botones de la sección final cumplen ≥ 4.5:1 en reposo, cursor, foco y presionado"
@@ -33,7 +34,7 @@ scope:
 verified_at: null
 
 created: "2026-10-04"
-updated: "2026-10-04"
+updated: "2026-10-05"
 tags: [capability-spec]
 ---
 
