@@ -309,6 +309,7 @@
 .quote-summary__title {
   font-family: var(--font-display); font-size: 1.0625rem; font-weight: 600;
   margin: 0 0 0.2rem;
+  color: var(--color-text-inverse);
 }
 .quote-summary__sub {
   font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase;
