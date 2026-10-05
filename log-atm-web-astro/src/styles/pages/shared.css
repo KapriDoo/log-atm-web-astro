@@ -834,7 +834,7 @@
 }
 .form-field textarea { resize: vertical; min-height: 100px; }
 .form-submit {
-  background: var(--color-cta); color: #fff;
+  background: var(--color-cta); color: var(--color-cta-text);
   font-family: var(--font-body); font-weight: 600; font-size: 1rem;
   padding: 0.95rem 1.5rem; border: 0; border-radius: var(--radius-md);
   cursor: pointer; width: 100%; display: inline-flex; justify-content: center;
@@ -915,7 +915,7 @@
 }
 .office-card__pin::after {
   content: ''; width: 14px; height: 14px; border-radius: 50%;
-  background: #fff;
+  background: var(--color-cta-text);
   transform: rotate(45deg);
 }
 .office-card__body { padding: 1.5rem; display: grid; gap: 0.75rem; }

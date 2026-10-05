@@ -142,8 +142,8 @@
   backdrop-filter: blur(8px);
 }
 .svc-card__tag--cta {
-  background: var(--color-accent-500);
-  color: var(--color-text-inverse);
+  background: var(--color-cta);
+  color: var(--color-cta-text);
 }
 
 .svc-card__icon-pill {

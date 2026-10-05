@@ -127,11 +127,12 @@
   .btn:hover { transform: translateY(-1px); }
   .btn--cta {
     background: var(--color-cta);
-    color: var(--color-text-inverse);
+    color: var(--color-cta-text);
     box-shadow: var(--shadow-cta);
   }
   .btn--cta:hover {
-    background: var(--color-accent-600);
+    background: var(--color-cta-hover);
+    color: var(--color-cta-hover-text);
     box-shadow: 0 6px 28px rgb(62 185 120 / 0.45);
   }
   .btn--brand {

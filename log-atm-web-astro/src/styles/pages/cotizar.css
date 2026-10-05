@@ -189,7 +189,7 @@
   transition: all 0.18s;
 }
 .mode-tile--active .mode-tile__check {
-  background: var(--color-cta); border-color: var(--color-cta); color: #fff;
+  background: var(--color-cta); border-color: var(--color-cta); color: var(--color-cta-text);
 }
 
 /* Origin/Dest with arrow */
@@ -275,7 +275,7 @@
 .btn-ghost:hover { color: var(--color-text); }
 .btn-ghost:disabled { opacity: 0.3; cursor: not-allowed; }
 .btn-primary-lg {
-  background: var(--color-cta); color: #fff;
+  background: var(--color-cta); color: var(--color-cta-text);
   font-family: var(--font-body); font-weight: 600; font-size: 1rem;
   padding: 0.9rem 1.75rem;
   border: 0; border-radius: var(--radius-md);
@@ -357,7 +357,7 @@
 }
 .quote-success__seal {
   width: 80px; height: 80px; border-radius: 50%;
-  background: var(--color-accent-500); color: #fff;
+  background: var(--color-cta); color: var(--color-cta-text);
   display: grid; place-items: center; margin: 0 auto 1.5rem;
   font-size: 2.5rem; font-weight: 600;
   box-shadow: 0 8px 32px rgba(62,185,120,0.4);
