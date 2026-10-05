@@ -421,3 +421,7 @@ Cada par texto/fondo validado AA se declara como tokens funcionales de rol en `t
 ## 2026-10-05 | finding | fix-color-contrast-sitewide | Herramientas de verificación de contraste en Chrome real
 **Detectado por**: sdd-apply en `fix-color-contrast-sitewide`
 **Descripción**: con `puppeteer-core`, `page.screenshot({clip})` espera coordenadas de documento; `boundingBox()`/`getBoundingClientRect()` devuelven coordenadas de viewport, así que el muestreo de píxeles tras un scroll debe sumar `scrollX/scrollY`. En `/industrias/` desktop, centrar un elemento tras el click desplaza el listado bajo el cursor y su `mouseenter` cambia la diapositiva activa: mover el cursor fuera antes de medir. Scripts de referencia en `apply-evidence.md` (bloques embebidos).
+## 2026-10-05 | measure | fix-color-contrast-sitewide | post-dispatch sdd-apply FIN 00:54:48 outcome=advance
+
+## 2026-10-05 | measure | fix-color-contrast-sitewide | preflight sdd-verify INICIO 00:54:53 outcome=ready
+
