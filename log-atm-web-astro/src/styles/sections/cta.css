@@ -132,8 +132,7 @@
   color: color-mix(in srgb, var(--color-text-inverse) 50%, transparent);
 }
 .cta-final__input:focus {
-  outline: none;
-  border-color: var(--color-accent-400);
+  border-color: var(--color-focus-ring-inverse);
   background: rgba(255,255,255,0.10);
 }
 

@@ -145,7 +145,10 @@ const isMobile = variant === 'mobile';
   .lang-selector__option:focus-visible {
     background: var(--color-primary-50);
     color: var(--color-brand-dark);
-    outline: none;
+  }
+  /* Anillo global hacia adentro: no se superpone a la opción vecina */
+  .lang-selector__option:focus-visible {
+    outline-offset: -3px;
   }
   .lang-selector__option.is-active {
     background: var(--color-primary-50);
