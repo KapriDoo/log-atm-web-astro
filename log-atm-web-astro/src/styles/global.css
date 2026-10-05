@@ -67,9 +67,10 @@
     border: 0;
   }
 
-  /* Focus visible accesible */
+  /* Focus visible accesible — el color sale del contexto de superficie:
+     las superficies oscuras declaran --focus-ring-color (ADR-0008) */
   :focus-visible {
-    outline: 3px solid var(--color-accent-500);
+    outline: 3px solid var(--focus-ring-color, var(--color-focus-ring));
     outline-offset: 2px;
     border-radius: var(--radius-xs);
   }

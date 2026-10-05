@@ -30,6 +30,7 @@
 .ind-directory-section {
   background: var(--color-primary-900);
   color: #fff;
+  --focus-ring-color: var(--color-focus-ring-inverse);
   position: relative;
   overflow: hidden;
 }
@@ -311,6 +312,7 @@
   padding: clamp(7rem, 12vw, 10rem) 0 clamp(4rem, 7vw, 6rem);
   background: linear-gradient(180deg, var(--color-primary-900) 0%, var(--color-primary-800) 100%);
   color: #fff;
+  --focus-ring-color: var(--color-focus-ring-inverse);
   overflow: hidden;
   isolation: isolate;
 }

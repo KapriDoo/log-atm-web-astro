@@ -3,6 +3,7 @@
 .quote-hero {
   background: linear-gradient(180deg, var(--color-primary-900) 0%, var(--color-primary-700) 100%);
   color: #fff;
+  --focus-ring-color: var(--color-focus-ring-inverse);
   padding: clamp(6rem, 10vw, 8rem) 0 clamp(2rem, 4vw, 3rem);
   position: relative;
   overflow: hidden;
