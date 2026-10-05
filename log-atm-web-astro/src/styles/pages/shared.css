@@ -444,7 +444,7 @@
   cursor: pointer;
   transition: all 0.18s;
 }
-.svc-filter:hover { color: var(--color-text); border-color: var(--color-primary-300); }
+.svc-filter:not(.svc-filter--active):hover { color: var(--color-text); border-color: var(--color-primary-300); }
 .svc-filter--active { background: var(--color-primary-900); color: #fff; border-color: var(--color-primary-900); }
 
 .svc-detail-row {
