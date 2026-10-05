@@ -157,10 +157,13 @@
   }
   .btn--ghost:hover { background: var(--color-surface); border-color: var(--color-neutral-300); }
   .btn--wa {
-    background: #25D366;
-    color: var(--color-text-inverse);
+    background: var(--color-whatsapp);
+    color: var(--color-whatsapp-text);
   }
-  .btn--wa:hover { background: #1da851; }
+  .btn--wa:hover {
+    background: var(--color-whatsapp-hover);
+    color: var(--color-whatsapp-text);
+  }
   .btn--sm { padding: 0.5rem 1rem; font-size: 0.8125rem; }
 
   /* Card base — estilo lifecare */

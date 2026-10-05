@@ -861,17 +861,17 @@
   transition: border-color 0.18s, transform 0.18s;
 }
 .channel:hover { border-color: var(--color-primary-400); transform: translateY(-1px); }
-.channel--wa { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); border-color: transparent; color: #fff; }
+.channel--wa { background: var(--color-whatsapp); border-color: transparent; color: var(--color-whatsapp-text); }
 .channel--wa:hover { transform: translateY(-1px); }
 .channel--wa .channel__name,
 .channel--wa .channel__value,
-.channel--wa .channel__arrow { color: #fff; }
+.channel--wa .channel__arrow { color: var(--color-whatsapp-text); }
 .channel__icon {
   width: 44px; height: 44px; border-radius: var(--radius-md);
   background: var(--color-primary-50); color: var(--color-primary-700);
   display: grid; place-items: center;
 }
-.channel--wa .channel__icon { background: rgba(255,255,255,0.2); color: #fff; }
+.channel--wa .channel__icon { background: rgba(255,255,255,0.2); color: var(--color-whatsapp-text); }
 .channel__name {
   font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase;
   letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 0.2rem;
