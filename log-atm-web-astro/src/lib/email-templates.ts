@@ -267,6 +267,9 @@ function buildCTAButtons(args: {
   if (!hasEmail && !hasPhone) return "";
 
   const btnStyle = `font-family:'Outfit',Arial,sans-serif;font-weight:700;font-size:15px;text-align:center;text-decoration:none;padding:14px 20px;border-radius:9999px;display:block;`;
+  // Par del botón WhatsApp: espejo de --color-whatsapp / --color-whatsapp-text de tokens.css
+  // (los clientes de correo no leen tokens.css; excepción declarada en DESIGN.md y ADR-0008).
+  const waBtnColors = `background:#25D366;color:#111b21;`;
 
   let buttonsHtml: string;
 
@@ -280,7 +283,7 @@ function buildCTAButtons(args: {
       `<a href="mailto:${escapeHtml(String(args.email))}?subject=${encodeURIComponent(args.mailSubject)}" style="${btnStyle}background:#4A7BB5;color:#ffffff;">Responder por email</a>` +
       `</td>` +
       `<td style="padding-left:8px;width:50%;">` +
-      `<a href="https://wa.me/${waNumber}?text=${encodeURIComponent(args.waText)}" style="${btnStyle}background:#25D366;color:#ffffff;">WhatsApp</a>` +
+      `<a href="https://wa.me/${waNumber}?text=${encodeURIComponent(args.waText)}" style="${btnStyle}${waBtnColors}">WhatsApp</a>` +
       `</td>` +
       `</tr>` +
       `</table>`;
@@ -292,7 +295,7 @@ function buildCTAButtons(args: {
     // Solo WhatsApp — full width
     const waNumber = cleanPhone(String(args.phone)).replace(/^\+/, "");
     buttonsHtml =
-      `<a href="https://wa.me/${waNumber}?text=${encodeURIComponent(args.waText)}" style="${btnStyle}background:#25D366;color:#ffffff;">WhatsApp</a>`;
+      `<a href="https://wa.me/${waNumber}?text=${encodeURIComponent(args.waText)}" style="${btnStyle}${waBtnColors}">WhatsApp</a>`;
   }
 
   return (
