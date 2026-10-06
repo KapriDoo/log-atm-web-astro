@@ -34,11 +34,11 @@ commits:
 mr: ""
 acceptance_criteria:
   - "[x] La auditoría automática en navegador real reporta 0 violaciones de contraste en las 42 combinaciones de página, idioma y tamaño de pantalla"
-  - "[ ] Todos los estados interactivos de texto cumplen ≥ 4.5:1 y los de texto grande o gráficos cumplen ≥ 3:1"
+  - "[x] Todos los estados interactivos de texto cumplen ≥ 4.5:1 y los de texto grande o gráficos cumplen ≥ 3:1"
   - "[x] El resultado se mantiene con movimiento reducido activado"
   - "[x] La revisión visual de industrias y contacto no encuentra textos ilegibles"
   - "[x] La sección final de llamada a la acción es legible en portada, servicios, industrias y nosotros"
-  - "[ ] El mensaje de éxito del formulario de contacto cumple ≥ 4.5:1 sobre la tarjeta del formulario"
+  - "[x] El mensaje de éxito del formulario de contacto cumple ≥ 4.5:1 sobre la tarjeta del formulario"
 
 related:
   - "[[ui-contrast/services-process-step-title-contrast]]"
@@ -100,11 +100,11 @@ El proyecto exige WCAG AA como mínimo en todos los componentes. Esta spec fija 
 ## Acceptance Criteria
 
 - [x] La auditoría automática en navegador real reporta 0 violaciones de contraste en las 42 combinaciones de página, idioma y tamaño de pantalla
-- [ ] Todos los estados interactivos de texto cumplen ≥ 4.5:1 y los de texto grande o gráficos cumplen ≥ 3:1
+- [x] Todos los estados interactivos de texto cumplen ≥ 4.5:1 y los de texto grande o gráficos cumplen ≥ 3:1
 - [x] El resultado se mantiene con movimiento reducido activado
 - [x] La revisión visual de industrias y contacto no encuentra textos ilegibles
 - [x] La sección final de llamada a la acción es legible en portada, servicios, industrias y nosotros
-- [ ] El mensaje de éxito del formulario de contacto cumple ≥ 4.5:1 sobre la tarjeta del formulario
+- [x] El mensaje de éxito del formulario de contacto cumple ≥ 4.5:1 sobre la tarjeta del formulario
 
 ## Related
 

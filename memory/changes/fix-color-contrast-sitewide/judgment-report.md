@@ -2,103 +2,97 @@
 type: judgment-report
 change_name: "fix-color-contrast-sitewide"
 verdict: FAIL
-reviewed_head: "d92da75b074425add83fb8f26efa4e0c45c30d80"
-confirmed_issues: 2
-suspect_issues: 4
+reviewed_head: "6d9dba7f4347936e575ea97e1f3f7deeb44b6d21"
+confirmed_issues: 1
+suspect_issues: 1
 residual_classes:
-  C1: produccion
-  C2: produccion
-  SA1: produccion
-  SA2: produccion
-  SB1: produccion
-  SB2: prosa
+  C1: prosa
+  SA1: prosa
 created: "2026-10-06"
 tags: [judgment]
 ---
 
 # Judgment Report: fix-color-contrast-sitewide
 
-Iteración 1 (`judgment_iterations` ausente → diff completo `main...feature/fix-color-contrast-sitewide`, sin `memory/`). HEAD revisado: `d92da75`. Jueces: Judge A (corrección y cumplimiento) y Judge B (seguridad y robustez), ambos `opus`, independientes. Ninguno reporta las decisiones del usuario del HITL de la propuesta (texto oscuro en CTA y WhatsApp, `accent-800`, `.channel--wa` sólido, `#111b21` inline en el correo, texto claro sobre fotos y video diferido). El coordinador verificó contra el código los hallazgos C1, SA1 y SA2.
+Iteración 2 (`judgment_iterations: 1` → solo el diff de la ronda, `git log -p --first-parent --no-merges d92da75..HEAD`). HEAD revisado: `6d9dba7`. Jueces: Judge A (corrección y cumplimiento) y Judge B (seguridad y robustez), ambos `opus` e independientes. Ninguno reporta las decisiones que el usuario tomó en el HITL de la propuesta. El coordinador verificó contra el código y `DESIGN.md` los hallazgos C1 y SA1, y los dos descartes de triage.
+
+Cómo resolvió la ronda los seis hallazgos de la iteración 1 (ambos jueces coinciden):
+- **C1 (viñeta `✓`)**: resuelto con el par CTA, 6.44:1. Ninguna regla posterior lo pisa.
+- **C2 (degradado ≤ 960px)**: resuelto con `color-mix(… var(--color-primary-950) N%, transparent)`. El nombre de industria sube de 6.79 a 7.32:1 en la parada del 50 %, con foto blanca como peor caso.
+- **SA1 (mensaje de éxito de contacto)**: resuelto con `var(--color-text-accent)`, 6.91:1. Cubre también las páginas en y pt.
+- **SA2 (pastilla del contador)**: resuelto con `align-self: flex-start`, que es lógico y respeta RTL.
+- **SB1 (botón «Responder por email»)**: resuelto con la constante `emailBtnColors` (`#3b6497`/`#fff`, 6.08:1) en las dos ramas. Los escapes y el `mailto` no cambian, así que no hay superficie de inyección nueva.
+- **SB2 (`DESIGN.md`)**: resuelto solo en parte (ver SA1 de esta iteración).
 
 ## Síntesis
 
 | Categoría | Count |
 |-----------|-------|
-| Confirmed (ambos jueces) | 2 |
-| Suspect A (solo Judge A) | 2 |
-| Suspect B (solo Judge B) | 2 |
-| Clean | 0 |
+| Confirmed (ambos jueces) | 1 |
+| Suspect A (solo Judge A) | 1 |
+| Suspect B (solo Judge B) | 0 |
+| Clean | 5 |
 
-Descartado en triage (no cuenta): Judge B señaló `color-mix()` sin `background` de respaldo en `.ind-directory__counter` (`shared.css:104`, low). Tailwind v4, que el sitio exige, ya requiere navegadores con `color-mix()` (Chrome 111+, Safari 16.4+, Firefox 128+), y el sitio usa `color-mix()` sin respaldo en otras hojas. No es un defecto alcanzable.
+Descartados en triage (no cuentan):
+- **Rama `success` de `setQuoteStatus` con `#2d9b6f`** (`src/scripts/wizard.ts:336`).
+  - Lo señalaron ambos jueces, con severidad low y como no bloqueante.
+  - El código es previo al cambio y queda fuera del diff de la ronda.
+  - La rama es inalcanzable: ninguna llamada de las líneas 361-386 pasa `'success'`. El éxito del asistente es una pantalla aparte, verificada en `verify-report.6` y `.8`.
+  - No incumple ningún MUST: la regla de literales cubre colores *nuevos*, y el requisito de los mensajes de éxito cubre los visibles.
+  - Queda registrado como deuda en `observations.md`.
+- **Regla base `a { color: var(--color-brand) }`** (`src/styles/global.css:84`), señalada solo por Judge B.
+  - Es previa al cambio, idéntica en `main` y queda fuera del diff de la ronda.
+  - La iteración 1 la resolvió en la documentación (SB2): `--color-brand` no se presenta como color de enlace.
+  - No hay un consumidor alcanzable que falle: axe `color-contrast` da 0 violaciones en 21 URL (`verify-report.5`).
+  - Queda registrado como deuda en `observations.md`.
 
 ## Hallazgos Confirmados
 
-### C1 — Viñeta de paso completado del asistente con texto blanco sobre verde (high · produccion)
+### C1 — El diseño y el ADR-0008 no reflejan el botón «Responder por email» que la ronda incorporó (low · prosa)
 
-- **Archivo**: `log-atm-web-astro/src/styles/pages/cotizar.css:77-79`
-- **Hallazgo**: la regla `.stepper__step--done .stepper__bullet { background: var(--color-accent-500); color: #fff; }` no se migró al par CTA. `src/scripts/wizard.ts:181` escribe `✓` en la viñeta de cada paso completado (0.85rem). Blanco sobre `#3EB978` mide 2.50:1, bajo 4.5:1 como texto y bajo 3:1 como gráfico. El equivalente `.mode-tile--active .mode-tile__check` (línea 193) sí se migró. La auditoría axe no lo detecta, porque el texto es un único glifo de símbolo.
-- **Incumple**: `cta-button-contrast` (SHALL «toda superficie verde de marca que lleve texto») y `sitewide-contrast-verification` (MUST, «pasos del asistente de cotización»; AC 2).
-- **Corrección**: `background: var(--color-cta); color: var(--color-cta-text); border-color: var(--color-cta)` (6.44:1).
-
-### C2 — Colores literales nuevos en el degradado del visor de industrias (medium · produccion)
-
-- **Archivo**: `log-atm-web-astro/src/styles/pages/shared.css:93-97`
-- **Hallazgo**: la nueva media query `@media (max-width: 960px) .ind-directory__overlay` agrega cuatro literales `rgba(15,28,46,…)` fuera de `tokens.css`, y `#0f1c2e` no corresponde a ningún token (`primary-950` = `#0a1624`, `primary-900` = `#112236`). El chequeo estático del diseño solo buscaba `#hex` y no lo cubrió.
-- **Incumple**: `contrast-token-single-source` (MUST NOT colores literales nuevos fuera de la fuente de tokens; AC 2).
-- **Corrección**: expresar los tramos con `color-mix(in srgb, var(--color-primary-950) N%, transparent)` (el mismo recurso que el contador) y volver a medir el nombre de industria ≥ 4.5:1 en el visor ≤ 960px. No se exige migrar el degradado base preexistente de la línea 86.
+- **Archivos**:
+  - `memory/changes/fix-color-contrast-sitewide/design.md:191`
+  - `memory/adrs/0008-contrast-pair-tokens-and-contextual-focus-ring.md:89`
+  - `memory/specs/ui-contrast/contrast-token-single-source.md:77`
+- **Hallazgo**:
+  - `design.md` sigue clasificando el botón «Responder por email» como «fuera del alcance de las specs» y candidato de deuda, aunque la ronda creó la spec `forms-email/email-reply-button-contrast` y lo corrigió en `84e0c03`.
+  - El apartado «Referencias → Specs» del ADR-0008 no lista esa spec, y el ADR rige la excepción de hex inline del correo que la spec consume.
+  - El scenario «Equipo revisa los estilos tras el cambio» limitaba la excepción al botón WhatsApp.
+- **Incumple**: la coherencia de los artefactos del cambio con el alcance que la ronda incorporó.
+- **Corrección**:
+  - En `design.md:191`, citar la spec `email-reply-button-contrast` y la constante `emailBtnColors`, y dejar como deuda solo el texto SLA `#898580` y el enlace `mailto`.
+  - Agregar `forms-email/email-reply-button-contrast` a las specs del ADR-0008.
+  - El scenario de la spec ya quedó corregido en esta fase (ver «Registro»).
 
 ## Hallazgos Suspect
 
-### SA1 — Mensaje de éxito del formulario de contacto en `#2d9b6f` sobre blanco (high · produccion)
+### SA1 — `DESIGN.md` sigue asignando a texto normal colores que su tabla limita a texto grande (medium · prosa)
 
-- **Archivo**: `log-atm-web-astro/src/pages/contacto.astro:220-221` (`#contact-status`, líneas 124-131)
-- **Hallazgo**: `setStatus` asigna `status.style.color = '#2d9b6f'` al estado `success`, sobre la tarjeta blanca `.contact-form-card` con fuente de 0.875rem: 3.48:1. El diseño (D8) retiró ese mismo hex de `.cta-final__status` sin revisar este otro consumidor. El estado de error (`#c0392b`, 5.44:1) cumple.
-- **Incumple**: `sitewide-contrast-verification` (MUST, «mensajes de éxito del formulario»; AC 2).
-- **Corrección**: el estado `success` toma un token con ≥ 4.5:1 sobre blanco, p. ej. `var(--color-text-accent)` (6.91:1), sin hex nuevo. Coordinador: verificado en el código.
+- **Archivo**: `log-atm-web-astro/DESIGN.md:27, 61, 157-158`
+- **Hallazgo**: la ronda corrigió el comentario de `--color-brand` (línea 71), pero el mismo documento sigue presentando como color de texto normal tonos que no alcanzan 4.5:1:
+  - Línea 27: `primary-400` como «links hover» (`#658fc3` sobre blanco, 3.35:1).
+  - Línea 61: `info` `#4A7BB5` para «Mensajes informativos» (4.38:1).
+  - Línea 157: botón «Outline» `.btn-outline` con `text-primary-500` (4.38:1). La clase no existe en `src/`.
+  - Línea 158: botón «Ghost» con `text-brand` (4.38:1 sobre blanco y 4.10:1 sobre `neutral-50`). El `.btn-ghost` real (`cotizar.css:269-273`) usa `--color-text-muted`.
 
-### SA2 — La pastilla del contador del directorio se estira a todo el ancho (low · produccion)
-
-- **Archivo**: `log-atm-web-astro/src/styles/pages/shared.css:98-108`
-- **Hallazgo**: `.ind-directory__counter` es hijo directo de `.ind-directory__overlay` (`display: flex; flex-direction: column`, sin `align-items`). Como ítem flex se estira (`stretch`), y la pastilla de D9 se dibuja como una franja oscura de todo el ancho superior de la foto, no del tamaño de «01 / 12». El contraste cumple (≥ 5.65:1); el defecto es visual y contradice el contrato D9.
-- **Incumple**: diseño D9; registrado como SHOULD en `secondary-text-dark-surface-contrast`.
-- **Corrección**: `align-self: flex-start` en `.ind-directory__counter` (en RTL, el equivalente lógico que corresponda).
-
-### SB1 — Botón «Responder por email» del correo con 4.38:1 (medium · produccion)
-
-- **Archivo**: `log-atm-web-astro/src/lib/email-templates.ts:283, 293`
-- **Hallazgo**: el botón conserva `background:#4A7BB5;color:#ffffff;` (4.38:1, texto de 15px bold, que no cuenta como texto grande). El mismo cambio declara ese par no válido en `DESIGN.md` y fija que cada par del correo que replica uno del sitio vive en una constante que nombra sus tokens. Este botón replica el azul sólido del sitio (`--color-brand-solid` `#3b6497` / blanco, 6.08:1) y no cumple ninguna de las dos reglas. Las interpolaciones siguen escapadas (`escapeHtml`, `encodeURIComponent`, `cleanPhone`): no hay riesgo de seguridad.
-- **Registro**: ninguna spec vigente documenta este comportamiento, por lo que se crea la spec original `forms-email/email-reply-button-contrast`. El diseño lo había dejado fuera de las specs como candidato de deuda; el juez lo eleva porque contradice la regla que el propio cambio escribe en `DESIGN.md`.
-- **Corrección**: constante local `background:#3b6497;color:#ffffff;` con comentario que nombra `--color-brand-solid` / `--color-brand-solid-text`, consumida en las ramas de las líneas 283 y 293.
-
-### SB2 — `DESIGN.md` se contradice con su tabla y con el anillo de foco (low · prosa)
-
-- **Archivo**: `log-atm-web-astro/DESIGN.md:72, 83, 128`
-- **Hallazgo**:
-  - La línea 72 describe `--color-brand` como color de «enlaces y acentos», pero la tabla (línea 83) lo limita a texto grande (4.10:1 sobre `neutral-50`; 4.38:1 sobre blanco para la regla base `a` de `global.css:84-85`).
-  - La línea 128 afirma que ningún componente fija otro color de anillo, pero `WhyVideoSection.astro:156` conserva `outline: 2px solid #fff`. Ese caso lo mantiene a propósito el diseño D6 y no figura como excepción.
-- **Incumple**: `contrast-token-single-source` (requisito nuevo de coherencia de la documentación).
-- **Corrección**: describir `--color-brand` sin presentarlo como apto para texto normal de enlaces y declarar la excepción `.why__video-toggle` en la sección del anillo de foco.
+  Esas líneas contradicen la línea 123 («No validos para texto normal: … blanco sobre `primary-500` (4.38:1)») y la tabla, que limita `--color-brand` a texto grande. El coordinador lo verificó: las cuatro líneas son previas al cambio, pero el SHALL de coherencia que agregó la iteración 1 las alcanza, y su AC se había marcado cumplido.
+- **Incumple**: `contrast-token-single-source`, en el SHALL «mantener la documentación de diseño coherente con sus propios pares», el scenario «Equipo consulta el uso de un color en la documentación» y su AC 6.
+- **Corrección**:
+  - Describir `.btn-ghost` con sus tokens reales: `--color-text-muted` y hover `--color-text`.
+  - Quitar `.btn-outline`, o describirlo con un par válido si se mantiene como patrón.
+  - Describir `primary-400` y `info` sin asignarlos a texto normal: como acento o ícono, o declararlos no aptos para texto normal.
 
 ## Registro de los hallazgos en specs
 
-- **(a) Corrección en su lugar** (specs del cambio en curso, `status: review`):
-  - `ui-contrast/cta-button-contrast`, por C1: nuevo scenario y AC sin marcar.
-  - `ui-contrast/sitewide-contrast-verification`, por C1 y SA1: nuevo requisito MUST y scenario del mensaje de éxito; AC 2 desmarcado y AC nuevo.
-  - `ui-contrast/contrast-token-single-source`, por C2 y SB2: el requisito de literales se precisa a toda notación de color; nuevo requisito y scenario de coherencia de la documentación; AC 2 desmarcado y AC nuevo.
-  - `ui-contrast/secondary-text-dark-surface-contrast`, por SA2: nuevo SHOULD y AC sin marcar.
-- **(c) Spec original**: `forms-email/email-reply-button-contrast` (SB1), con `tags: [capability-spec, judgment-fix]`, `assigned_agent: sdd-apply` y agregada a `spec_refs`.
+- **(a) Corrección en su lugar**: `ui-contrast/contrast-token-single-source` (cambio en curso, `status: review`).
+  - Por SA1: AC 6 desmarcado en el frontmatter y en el cuerpo, y nuevo `AND` en el scenario «Equipo consulta el uso de un color en la documentación». El `AND` extiende la coherencia a los tonos de la paleta, los colores semánticos y la descripción de los botones, y exige que los botones descritos existan en el código con los tokens indicados.
+  - Por C1: el scenario «Equipo revisa los estilos tras el cambio» nombra ahora los dos botones de los correos (WhatsApp y «Responder por email») como excepción declarada.
+- Sin specs nuevas: no hubo casos (b) ni (c), y `spec_refs` no cambia.
 
 ## Veredicto Final
 
-FAIL. Ambos jueces fallan el cambio de forma independiente:
-- **Producción**: C1 y SA1 son incumplimientos de MUST con contraste medido bajo el umbral (2.50:1 y 3.48:1) en estados que la spec de cierre cubre de forma explícita, y que la auditoría automática no detectó. C2 viola la regla de fuente única de tokens. SA2 y SB1 son correcciones de una línea.
-- **Prosa**: SB2 corrige texto de `DESIGN.md`.
+FAIL. Los dos residuales son de prosa:
+- **SA1**: incumple un SHALL de la spec del cambio con un AC marcado indebidamente como cumplido.
+- **C1**: deja el diseño y el ADR-0008 desalineados con el alcance que la ronda incorporó.
 
-El resto del alcance cumple según ambos jueces:
-- Ratios de todos los pares de la tabla.
-- Cascada de `.cta-final .btn--cta` y `.svc-filter`.
-- Ausencia de `outline: none`.
-- `--focus-ring-color` en todas las superficies oscuras con controles enfocables.
-- Paridad `:root`/`@theme`.
-- Sin consumidores huérfanos de `--color-brand-hover` ni de `--color-whatsapp`.
-- Escapes del correo intactos.
+El código de la ronda cumple, según ambos jueces: los cinco defectos de producción de la iteración 1 están resueltos, sin regresiones de contraste, de cascada ni de seguridad. Judge A falla por SA1 y Judge B aprueba. No queda ningún residual de producción.

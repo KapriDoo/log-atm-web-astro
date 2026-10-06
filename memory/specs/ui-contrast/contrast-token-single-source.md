@@ -23,7 +23,7 @@ commits:
 mr: ""
 acceptance_criteria:
   - "[x] Cada par validado figura una sola vez en la fuente de tokens y el sitio construye sin errores"
-  - "[ ] No existen colores literales nuevos fuera de la fuente de tokens, salvo en las plantillas de correo"
+  - "[x] No existen colores literales nuevos fuera de la fuente de tokens, salvo en las plantillas de correo"
   - "[x] La documentación de diseño declara la excepción de los correos"
   - "[x] Los ratios de la tabla de pares validados de la documentación coinciden con los medidos"
   - "[x] Los tokens de WhatsApp tienen el verde visible del sitio"
@@ -74,13 +74,14 @@ Cada par de color texto/fondo que cumple WCAG AA se define una vez en la fuente 
 
 **GIVEN** una persona del equipo revisa las diferencias de estilos del cambio
 **WHEN** busca colores literales nuevos
-**THEN** no encuentra ninguno fuera de la fuente de tokens, salvo el botón de WhatsApp de los correos, que figura como excepción declarada
+**THEN** no encuentra ninguno fuera de la fuente de tokens, salvo los botones de los correos (WhatsApp y «Responder por email»), que figuran como excepción declarada
 
 ### Scenario: Equipo consulta el uso de un color en la documentación
 
 **GIVEN** una persona del equipo lee la descripción de un color en la documentación de diseño
 **WHEN** la contrasta con la tabla de pares validados y con el anillo de foco del sitio
 **THEN** la descripción no contradice la tabla ni omite una excepción vigente
+**AND** esto vale para toda la documentación de diseño: los tonos de la paleta, los colores semánticos y la descripción de los botones no asignan a texto normal un color que la tabla limita a texto grande o declara no válido, y los botones descritos existen en el código con los tokens que se indican
 
 ### Scenario: Equipo cambia el color de un botón
 
@@ -91,7 +92,7 @@ Cada par de color texto/fondo que cumple WCAG AA se define una vez en la fuente 
 ## Acceptance Criteria
 
 - [x] Cada par validado figura una sola vez en la fuente de tokens y el sitio construye sin errores
-- [ ] No existen colores literales nuevos fuera de la fuente de tokens, salvo en las plantillas de correo
+- [x] No existen colores literales nuevos fuera de la fuente de tokens, salvo en las plantillas de correo
 - [x] La documentación de diseño declara la excepción de los correos
 - [x] Los ratios de la tabla de pares validados de la documentación coinciden con los medidos
 - [x] Los tokens de WhatsApp tienen el verde visible del sitio

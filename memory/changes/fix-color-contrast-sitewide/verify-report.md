@@ -6,31 +6,34 @@ verdict: PASS
 
 **Fecha**: 2026-10-06
 
-Verificación sobre el HEAD integrado con `main` (merge que trae #34 y #35), con evidencia propia: cada cifra y cada salida de este reporte vive en un bloque `verify-report.N` (sección `## Evidencia`) y la prosa los cita por id. La corrida axe sobre las 42 combinaciones se hizo sobre el build de este HEAD (`verify-report.3`), servido con `astro preview` y Chrome 148 vía `playwright-core`; el preview se bajó al terminar. `scripts/axe-audit.mjs` no se usó como evidencia. El proyecto no tiene suite de tests: la «suite» es el conjunto de comandos del perfil (`verify-report.1`, `.2`, `.3`, `.4`), más las comprobaciones por script de esta fase.
+Verificación posterior a la primera corrección de la revisión adversarial, sobre el HEAD `6d9dba7` (integra `main` con #34 y #35), con evidencia propia: cada cifra y salida de este reporte vive en un bloque `verify-report.N` (sección `## Evidencia`) y la prosa los cita por id. No se usó `apply-evidence.md` para dar por cumplido ningún criterio y `scripts/axe-audit.mjs` no se usó. La app se sirvió con `astro preview` (puerto 4331) y Chrome 148 vía `playwright-core`; el preview se bajó al terminar. El proyecto no declara test runner ni instrumento de cobertura: la «suite» es el conjunto de comandos del perfil (`.1` paridad i18n, `.2` enlaces i18n, `.3` build, `.4` peso de imágenes), más las comprobaciones por script de esta fase.
+
+Mapa de bloques: `.5` axe `color-contrast` sobre 21 URL × 2 anchos × 2 preferencias de movimiento; `.6` axe con menú móvil abierto, pasos del asistente, pantalla de éxito y mensajes del formulario de contacto; `.7` estados forzados por CDP (reposo, cursor, foco, presionado) en es/en/pt; `.8` viñeta `✓` del asistente y sello de éxito; `.9` mensaje de estado del formulario de contacto (envío, éxito, error de validación, error de servidor) y botón tras el envío; `.10` botones del correo en los tres builders; `.11` barrido de literales de color (`#hex`, `rgb()`, `rgba()`, `hsl()`, `hsla()`, `oklch()`, colores con nombre); `.12` reglas estáticas (paridad de tokens, huérfanos, `outline: none`, presencia de las correcciones del juicio); `.13` coherencia del grafo; `.14` visor de industrias por píxeles en 9 configuraciones; `.15` muestreo de píxeles de textos sobre degradados; `.16` anillo de foco con teclado real en las 21 URL; `.17` opciones del selector de idioma (escritorio y móvil) y campos de formulario; `.18` código 404; `.19` pares del correo y fondo CTA contra `main`; `.20` CTA de la sección final en las 4 páginas y enlace de página actual; `.21` enlaces de migas de pan sobre el hero por píxeles; `.22` títulos `h1`-`h6` visibles de las 21 URL en dos anchos (texto oscuro heredado sobre fondo oscuro y títulos bajo el umbral); `.23` y `.24` salidas de `comprobar`.
 
 ## Resultados por Spec
 
-Umbrales: 4.5:1 texto normal, 3:1 texto grande y gráficos (los fija cada spec). Bloques de referencia: `.5` axe sobre 21 URL × 2 anchos × 2 preferencias de movimiento; `.9` axe sobre estados expuestos; `.11` estados forzados por CDP (reposo, cursor, foco, presionado) en es/en/pt; `.24`/`.25` anillo de foco con teclado real y muestreo de píxeles; `.15`/`.19`/`.26` muestreo de píxeles sobre fotos y degradados; `.6` reglas estáticas; `.7` código 404; `.8` comportamiento; `.10` correo.
+Umbrales: 4.5:1 texto normal, 3:1 texto grande y gráficos (los fija cada spec).
 
 ### Botón CTA verde legible en todos sus estados (`cta-button-contrast`)
 
 | Criterion | Status | Notas |
 |-----------|--------|-------|
-| Todo botón CTA, texto azul marino sobre verde de marca ≥ 4.5:1 en reposo, cursor, foco y presionado | ✅ | `.11` (`cta-hero`, `drawer-cta`, `svc-tag-cta`, `form-submit`, `404-cta`, `btn-primary-lg`): ningún estado bajo el umbral, en los tres idiomas |
-| Contraste con el cursor encima ≥ 5:1 | ✅ | `.11` filas `cta-hero-hover>=5` y `404-cta-hover>=5` |
-| Etiqueta CTA de servicios, envío de contacto y botón 404 ≥ 4.5:1 en todos los estados | ✅ | `.11` |
-| Marca de selección, sello de éxito y pin de oficina ≥ 3:1 | ✅ | `.11` (`mode-check` con un modo seleccionado, `exito-seal`, `pin-oficina`) |
-| El fondo verde de los botones CTA no cambia | ✅ | `.6` sección 8: `--color-cta` y `accent-500` idénticos a `main` |
+| Texto azul marino sobre verde ≥ 4.5:1 en reposo, cursor, foco y presionado | ✅ | `.7` (`cta-hero`, `drawer-cta`, `svc-tag-cta`, `form-submit`, `404-cta`, `btn-primary-lg`), sin fila bajo el umbral en los tres idiomas |
+| Cursor ≥ 5:1 | ✅ | `.7` filas `cta-hero-hover>=5` y `404-cta-hover>=5` |
+| Etiqueta de servicios, envío de contacto y botón 404 ≥ 4.5:1 en todos los estados | ✅ | `.7`; el botón de envío conserva el par también tras el envío exitoso (`.9`) |
+| Marca de selección, sello de éxito y pin de oficina ≥ 3:1 | ✅ | `.7` (`mode-check`, `exito seal`, `pin-oficina`) y `.8` (sello) |
+| El fondo verde no cambia | ✅ | `.19`: `--color-cta` y `accent-500` idénticos a `main` |
+| La marca `✓` de cada paso completado usa el texto oscuro del CTA y cumple ≥ 4.5:1 | ✅ | `.8`: en los tres idiomas y con 1, 2 y 3 pasos completados, el color calculado de la viñeta es el par CTA; el muestreo de píxeles de su centro muestra un glifo oscuro sobre el verde (no blanco). La cifra del muestreo queda bajo la calculada porque el trazo fino se antialiasa: el criterio lo cumple el color calculado, y el muestreo confirma que el glifo es oscuro. `.6` (axe con 3 viñetas completadas) no reporta violaciones, aunque el glifo único queda como nodo `incomplete`, razón por la que se mide aparte |
 
-**Scenarios verificados**: 6/6
+**Scenarios verificados**: 7/7
 
 ### Botones azul de marca y enlace de salto (`brand-button-contrast`)
 
 | Criterion | Status | Notas |
 |-----------|--------|-------|
-| Botones azul, enlace de salto y botones de la sección final ≥ 4.5:1 en reposo, cursor, foco y presionado | ✅ | `.11` (`brand-nav`, `brand-servicios`, `skip-link`, `cta-final-btn*`, `exito-btn-brand`) |
-| CTA de la sección final azul con texto claro en portada, servicios, industrias y nosotros | ✅ | `.8` (4 páginas × 3 idiomas × reposo, cursor, foco, presionado) y `.15` (píxeles) |
-| Ningún botón de la sección final con texto oscuro sobre azul | ✅ | `.8`; el override `.cta-final .btn--cta` fija fondo y texto en todos los estados |
+| Botones azul, enlace de salto y sección final ≥ 4.5:1 en los cuatro estados | ✅ | `.7` (`brand-nav`, `brand-servicios`, `skip-link`, `cta-final-btn-*`, `exito btn-brand`) y `.20` |
+| CTA de la sección final azul con texto claro en portada, servicios, industrias y nosotros | ✅ | `.20`: 4 páginas × 3 idiomas × 4 estados; `.btn--cta` y `.cta-final__btn` con fondo azul de marca y texto blanco |
+| Ningún botón de la sección final con texto oscuro sobre azul | ✅ | `.20` exige texto blanco sobre los dos azules del par, sin fila fallida |
 
 **Scenarios verificados**: 4/4
 
@@ -38,9 +41,9 @@ Umbrales: 4.5:1 texto normal, 3:1 texto grande y gráficos (los fija cada spec).
 
 | Criterion | Status | Notas |
 |-----------|--------|-------|
-| Botones de WhatsApp ≥ 4.5:1 en reposo, cursor, foco y presionado | ✅ | `.11` (`drawer-wa`, `cta-final-btn-wa`, `exito-btn-wa`) |
-| Bloque del canal con fondo uniforme y texto ≥ 4.5:1 en toda su superficie | ✅ | `.11` (`channel-wa`) y `.15` (píxeles sobre todo el texto del bloque); el fondo es sólido por construcción (`shared.css`, `.channel--wa { background: var(--color-whatsapp) }`) |
-| El verde de fondo sigue siendo el verde reconocible de la plataforma | ✅ | `.6` sección 6: `--color-whatsapp` coincide en `:root` y `@theme` y `.10` lo compara con el correo |
+| Botones de WhatsApp ≥ 4.5:1 en los cuatro estados | ✅ | `.7` (`drawer-wa`, `cta-final-btn-wa`, `exito btn-wa`) y `.20` (sección final en 4 páginas) |
+| Bloque del canal con fondo uniforme y texto ≥ 4.5:1 en toda su superficie | ✅ | `.7` (`channel-wa` y sus textos) y `.15` (muestreo de píxeles sobre el nombre y el valor del canal); el fondo es el token sólido (`.12`/`.19`) |
+| El verde de fondo sigue siendo el verde reconocible de la plataforma | ✅ | `.19` y `.12`: `--color-whatsapp` coincide en `:root` y `@theme` y es el que usa `.btn--wa` |
 
 **Scenarios verificados**: 3/3
 
@@ -48,9 +51,19 @@ Umbrales: 4.5:1 texto normal, 3:1 texto grande y gráficos (los fija cada spec).
 
 | Criterion | Status | Notas |
 |-----------|--------|-------|
-| Texto casi negro sobre verde de WhatsApp ≥ 4.5:1 | ✅ | `.10` en los tres builders con teléfono |
-| Mismo par que el botón del sitio | ✅ | `.10` compara contra `tokens.css` |
-| Conserva condición de aparición y enlace | ✅ | `.10`: sin teléfono no hay botón; con teléfono el enlace `wa.me` conserva el número |
+| Texto casi negro sobre verde de WhatsApp ≥ 4.5:1 | ✅ | `.10` en los tres builders |
+| Mismo par que el botón del sitio | ✅ | `.19` compara contra `tokens.css` |
+| Conserva condición de aparición y enlace | ✅ | `.10`: sin teléfono no hay botón WhatsApp; `.19`: sin cambios en los enlaces |
+
+**Scenarios verificados**: 2/2
+
+### Botón «Responder por email» del correo (`email-reply-button-contrast`)
+
+| Criterion | Status | Notas |
+|-----------|--------|-------|
+| Texto blanco sobre azul de marca ≥ 4.5:1 | ✅ | `.10`: renderizado en Chrome, tres builders; el botón mide por encima del umbral, también por muestreo de píxeles del botón renderizado, y ya no es texto grande (15px/700), por lo que aplica 4.5:1 |
+| Mismo par que el botón azul sólido del sitio | ✅ | `.19`: fondo y texto del correo idénticos a `--color-brand-solid` y `--color-brand-solid-text`; el comentario de origen nombra el token y la constante la consumen las dos ramas |
+| Conserva condición de aparición, enlace y color azul corporativo | ✅ | `.10`: aparece solo con email (variantes `email+tel` y `solo-email`) y no en `solo-tel` ni `ninguno`; `.19`: el `mailto:` conserva `escapeHtml` y `encodeURIComponent`; `.12`: ningún botón conserva `#4A7BB5` como fondo |
 
 **Scenarios verificados**: 2/2
 
@@ -58,9 +71,9 @@ Umbrales: 4.5:1 texto normal, 3:1 texto grande y gráficos (los fija cada spec).
 
 | Criterion | Status | Notas |
 |-----------|--------|-------|
-| Menú principal ≥ 4.5:1 con cursor, foco, presionado y página actual | ✅ | `.11` (`nav-link`, `nav-link-activo`) |
-| Menú móvil ≥ 4.5:1 con cursor, foco y presionado | ✅ | `.11` (`drawer-link`, con el drawer abierto) y `.9` (axe con drawer abierto) |
-| La página actual se distingue sin depender del color | ✅ | `.8`: subrayado solo en `.is-active` |
+| Menú principal ≥ 4.5:1 con cursor, foco, presionado y página actual | ✅ | `.7` (`nav-link`, `nav-link-activo`) y `.20` (página actual en servicios, industrias y nosotros, tres idiomas) y `.7` (`nav-link-activo`) |
+| Menú móvil ≥ 4.5:1 con cursor, foco y presionado | ✅ | `.7` (`movil drawer-link`) y `.6` (axe con el menú abierto en las 21 URL) |
+| La página actual se distingue sin depender del color | ✅ | ningún bloque lo mide con instrumento; el subrayado de `.nav__link.is-active` está en `Navbar.astro` (`text-decoration: underline`), leído en el diff del cambio |
 
 **Scenarios verificados**: 3/3
 
@@ -68,9 +81,9 @@ Umbrales: 4.5:1 texto normal, 3:1 texto grande y gráficos (los fija cada spec).
 
 | Criterion | Status | Notas |
 |-----------|--------|-------|
-| Rótulos de sección ≥ 4.5:1, incluido el gris alterno | ✅ | `.11` (`eyebrow`, `eyebrow-why`) y `.5` |
-| Número de paso, etiqueta del formulario y plazo de respuesta ≥ 4.5:1 | ✅ | `.11` (`quote-step-num`, `contact-pill`, `quote-sla`) |
-| Un único tono de acento oscuro en la paleta | ✅ | `.6`: solo `--color-accent-800` se agrega, en `:root` y en `@theme` |
+| Rótulos de sección ≥ 4.5:1, incluido el gris alterno | ✅ | `.7` (`eyebrow`, `eyebrow-why`) y `.5` |
+| Número de paso, etiqueta del formulario y plazo ≥ 4.5:1 | ✅ | `.7` (`quote-step-num`, `contact-pill`, `quote-sla`) y `.15` (etiqueta del formulario por píxeles) |
+| Un único tono de acento oscuro en la paleta | ✅ | `.12`: `--color-accent-800` presente en `:root` y `@theme`, igual en ambos |
 
 **Scenarios verificados**: 3/3
 
@@ -78,9 +91,9 @@ Umbrales: 4.5:1 texto normal, 3:1 texto grande y gráficos (los fija cada spec).
 
 | Criterion | Status | Notas |
 |-----------|--------|-------|
-| Nombre de cada industria del directorio ≥ 4.5:1 sobre su fotografía | ✅ | `.19`: las 12 diapositivas en 4 anchos y 3 idiomas; `.16` muestra que sin el overlay oscuro de ≤ 960px el criterio no se cumpliría en 390px |
-| Título del resumen de cotización ≥ 4.5:1 | ✅ | `.11` (`quote-title`) |
-| Ningún título sobre fondo oscuro con color oscuro heredado | ✅ | `.26`: el grupo de títulos con color oscuro cumple 4.5:1 sobre todos sus píxeles de fondo en 7 páginas × 3 idiomas × 2 anchos |
+| Nombre de cada industria ≥ 4.5:1 sobre su foto | ✅ | `.14`: las 12 industrias, nueve configuraciones (390 a 1440 px, es/en/pt); el nombre queda sobre el umbral en el peor píxel de todas |
+| Título del resumen de cotización ≥ 4.5:1 | ✅ | `.7` (`quote-title`) y `.15` |
+| Ningún título sobre fondo oscuro con color oscuro heredado | ✅ | `.22`: ningún título visible tiene texto oscuro sobre fondo oscuro en las 21 URL y dos anchos; los únicos títulos con algún píxel bajo 4.5:1 son de texto claro sobre fotos (`svc-card__title`, `ind-card__name`, `hero-b__title`, solo en `/` y `/servicios/`), deuda declarada fuera de este alcance (hallazgo 2) |
 
 **Scenarios verificados**: 2/2
 
@@ -88,29 +101,30 @@ Umbrales: 4.5:1 texto normal, 3:1 texto grande y gráficos (los fija cada spec).
 
 | Criterion | Status | Notas |
 |-----------|--------|-------|
-| «Por definir» ≥ 4.5:1 sobre blanco | ✅ | `.11` (`quote-empty`) |
-| Valor pendiente distinguible de uno completado | ✅ | `.8`: cambian color y estilo (itálica) |
+| «Por definir» ≥ 4.5:1 sobre blanco | ✅ | `.7` (`quote-empty`) y `.15` |
+| Un valor pendiente se distingue de uno completado | ✅ | El estilo `.v.empty` conserva cursiva y peso 400 frente al valor normal (diff de `cotizar.css`); la distinción es visual y no se midió con un instrumento |
 
 **Scenarios verificados**: 1/1
 
-### Textos secundarios sobre superficies oscuras (`secondary-text-dark-surface-contrast`)
+### Textos de apoyo sobre superficies oscuras (`secondary-text-dark-surface-contrast`)
 
 | Criterion | Status | Notas |
 |-----------|--------|-------|
-| Aviso y mensaje de error de la sección final ≥ 4.5:1 | ✅ | `.11` (`cta-final-hint`, `cta-final-status-error`), `.9` (axe con el estado forzado) y `.15` |
-| Números de ítem y total del directorio ≥ 4.5:1 | ✅ | `.11` (`ind-item-num`) y `.19` (contador) |
-| Etiqueta de paso de «Cómo trabajamos» ≥ 4.5:1 | ✅ | `.11` (`howwork-step`) |
-| Migas de pan de los heroes internos ≥ 4.5:1 | ✅ | `.15` (píxeles sobre el fondo real del hero) |
+| Aviso y mensaje de error de la sección final ≥ 4.5:1 | ✅ | `.7` y `.15` (aviso, error y éxito por píxeles, en 1440 y 390 px, tres idiomas) |
+| Números y total del directorio de industrias ≥ 4.5:1 | ✅ | `.7` (`ind-item-num`), `.15` y `.14` (contador) |
+| Etiqueta de paso de «Cómo trabajamos» ≥ 4.5:1 | ✅ | `.7` (`howwork-step`) |
+| Migas de pan de los heroes internos ≥ 4.5:1 | ✅ | `.21`: servicios, industrias, nosotros y contacto, tres idiomas, 1440 y 390 px, peor píxel contra el fondo real del hero sin fallos; `.5` sin violaciones en esas páginas |
+| El contador se muestra sobre una pastilla ajustada a su contenido | ✅ | `.14`: la pastilla mide una fracción del ancho del visor en todas las configuraciones y `align-self` es `flex-start` |
 
 **Scenarios verificados**: 4/4
 
-### Código de la página 404 (`error-page-code-contrast`)
+### Código decorativo de la página 404 (`error-page-code-contrast`)
 
 | Criterion | Status | Notas |
 |-----------|--------|-------|
-| Código ≥ 3:1 en los tres idiomas | ✅ | `.7`: color y fondo medidos en `/xx-nope/`, `/en/xx-nope/`, `/pt/xx-nope/` |
-| Tamaño calculado ≥ 24 px (o 18.66 px en negrita) en todos los tamaños de pantalla | ✅ | `.7`: 13 anchos de 320 a 1920 px en los tres idiomas; el tamaño computado es de texto grande en todos y el peso es 900 |
-| Sigue siendo decorativo para lectores de pantalla | ✅ | `.7`: `aria-hidden="true"` en los tres idiomas |
+| ≥ 3:1 en los tres idiomas | ✅ | `.18` y `.7` |
+| Tamaño calculado ≥ 24 px en todos los anchos | ✅ | `.18`: 320 a 1920 px, tres idiomas, mínimo 96px |
+| Sigue siendo decorativo para lectores de pantalla | ✅ | `.18`: `aria-hidden="true"` |
 
 **Scenarios verificados**: 2/2
 
@@ -118,8 +132,8 @@ Umbrales: 4.5:1 texto normal, 3:1 texto grande y gráficos (los fija cada spec).
 
 | Criterion | Status | Notas |
 |-----------|--------|-------|
-| Filtro activo ≥ 4.5:1 con cursor, foco y presionado | ✅ | `.11` (`svc-filter-activo`) |
-| Filtros inactivos conservan su respuesta al cursor | ✅ | `.8` y `.11` (`svc-filter-inactivo`) |
+| Filtro activo ≥ 4.5:1 con cursor, foco y presionado | ✅ | `.7` (`svc-filter-activo`) |
+| Los filtros inactivos conservan su respuesta al cursor | ✅ | `.7` (`svc-filter-inactivo`): el color y el contraste cambian entre reposo y cursor |
 
 **Scenarios verificados**: 2/2
 
@@ -127,10 +141,10 @@ Umbrales: 4.5:1 texto normal, 3:1 texto grande y gráficos (los fija cada spec).
 
 | Criterion | Status | Notas |
 |-----------|--------|-------|
-| Anillo ≥ 3:1 en superficies claras y oscuras | ✅ | `.24` (escritorio, 21 páginas) y `.25` (móvil): todas las paradas de Tab medidas por píxeles contra el fondo adyacente; sin falla |
-| Opciones del selector de idioma con indicador visible | ✅ | `.8` (teclado real sobre el desplegable abierto, en los tres idiomas) |
-| Campos enfocados ≥ 3:1 contra su estado sin foco | ✅ | `.8` (borde y anillo) |
-| Ningún control elimina el contorno sin alternativa | ✅ | `.6` sección 3 (sin `outline: none` ni `0` en `src/`) y `.24`/`.25` («SIN ANILLO» vacío) |
+| Anillo ≥ 3:1 sobre superficies claras y oscuras | ✅ | `.16`: Tab real sobre todos los controles enfocables de las 21 URL; sobre superficies con degradado se mide el píxel de fondo contiguo, y ninguno queda bajo 3:1 |
+| Opciones del selector de idioma con indicador visible | ✅ | `.17`: escritorio y menú móvil, tres idiomas |
+| Campos de formulario enfocados ≥ 3:1 contra su estado sin foco | ✅ | `.17` (borde con foco frente a borde sin foco) y `.16` |
+| Ningún control elimina el contorno sin alternativa | ✅ | `.12` (sin `outline: none` ni `outline: 0` en `src`) y `.16` (sin controles sin indicador) |
 
 **Scenarios verificados**: 4/4
 
@@ -138,62 +152,62 @@ Umbrales: 4.5:1 texto normal, 3:1 texto grande y gráficos (los fija cada spec).
 
 | Criterion | Status | Notas |
 |-----------|--------|-------|
-| Cada par figura una vez en la fuente de tokens y el sitio construye | ✅ | `.3` (build sin error) y `.6` sección 6 (tokens nuevos en `:root` y en `@theme`, `--color-brand-hover` retirado) |
-| Sin colores literales nuevos fuera de la fuente, salvo correos | ✅ | `.6` secciones 1 y 4 (ningún hex nuevo fuera de `tokens.css`; en el correo solo el par declarado). Ver hallazgo 3 sobre `rgba()` |
-| La documentación declara la excepción de correos | ✅ | `.6` sección 5 |
-| Ratios de la tabla de `DESIGN.md` coinciden con los medidos | ✅ | `.6` sección 7 (cada fila recalculada desde `tokens.css`) |
-| Tokens de WhatsApp con el verde visible | ✅ | `.6` sección 6 y `.10` |
+| Cada par validado figura una vez en la fuente de tokens y el sitio construye | ✅ | `.12` (paridad `:root`/`@theme`, sin consumidores huérfanos de `--color-brand-hover`) y `.3` |
+| Sin colores literales nuevos fuera de la fuente de tokens (toda notación) | ✅ | `.11`: cero literales netos nuevos entre `#hex`, `rgb()`, `rgba()`, `hsl()`, `hsla()`, `oklch()` y colores con nombre, en el diff contra `main` salvo `tokens.css` y la plantilla de correo; el degradado de ≤ 960px usa `color-mix` con `--color-primary-950` (`.12`). Las dos filas «preexistente» de `.11` son líneas tocadas que ya traían ese literal en `main` |
+| Documentación declara la excepción de los correos | ✅ | `DESIGN.md`, sección de correo, leída en el diff; el comentario de origen está junto a cada par (`.19`) |
+| Ratios de la tabla coinciden con los medidos | ✅ | `.7`, `.8`, `.10`, `.16`: los ratios medidos en navegador coinciden con los de la tabla de `DESIGN.md` (p. ej. pares CTA, azul sólido, WhatsApp, acento y anillo) |
+| Tokens de WhatsApp con el verde visible | ✅ | `.12`, `.19` |
+| `DESIGN.md` coherente con sus pares y con las excepciones del anillo | ✅ | `.12` sección 4: `--color-brand` descrito como no apto para texto normal y excepción `.why__video-toggle:focus-visible` declarada |
 
-**Scenarios verificados**: 3/3
+**Scenarios verificados**: 4/4
 
-### Contraste verificado en todo el sitio (`sitewide-contrast-verification`)
+### Contraste AA verificado en todas las páginas y estados (`sitewide-contrast-verification`)
 
 | Criterion | Status | Notas |
 |-----------|--------|-------|
-| 0 violaciones axe en las 42 combinaciones página × idioma × tamaño | ✅ | `.5` (21 URL × escritorio/móvil, sobre el build de este HEAD; las 3 páginas 404 localizadas de #34 incluidas) |
-| Estados interactivos ≥ 4.5:1 (texto) y ≥ 3:1 (grande/gráficos) | ✅ | `.11`, `.8`, `.24`, `.25`; `.9` cubre menú móvil abierto, pasos y éxito del asistente y estados de la sección final con axe |
-| El resultado se mantiene con movimiento reducido | ✅ | `.5` repite las 42 combinaciones con `prefers-reduced-motion: reduce`; `.9` y las demás comprobaciones interactivas corren con esa preferencia |
-| La revisión visual de industrias y contacto no encuentra textos ilegibles | ✅ | `.19`, `.15`, más inspección visual de capturas de `/industrias/` y `/contacto/` en esta fase |
-| Sección final legible en portada, servicios, industrias y nosotros | ✅ | `.15` (textos y botones, 3 idiomas) y `.8` |
+| 0 violaciones axe en las 42 combinaciones página × idioma × tamaño | ✅ | `.5`: las 84 corridas (42 combinaciones × 2 preferencias de movimiento) sin violaciones, con las 3 páginas 404 incluidas |
+| Estados interactivos ≥ 4.5:1 (texto) y ≥ 3:1 (grande/gráficos) | ✅ | `.7`, `.8`, `.9`, `.20`: cursor, foco, presionado, menú móvil abierto (`.6`), viñetas de pasos completados (`.8`), sello de éxito, mensajes de éxito y error del formulario (`.9`) |
+| El resultado se mantiene con movimiento reducido | ✅ | `.5` y `.16` corren con `reduced-motion: reduce`; la fila `reduce` de cada URL en `.5` no reporta violaciones |
+| Revisión visual de industrias y contacto sin textos ilegibles | ✅ | `.14`, `.15`, `.9`, `.22`: ver hallazgo 1 sobre la etiqueta «SECTOR · 01» a 1024 px, que se lee pero queda marginalmente bajo 4.5:1 en su peor píxel; no hay títulos invisibles |
+| Sección final legible en portada, servicios, industrias y nosotros | ✅ | `.20`, `.15` |
+| Mensaje de éxito del formulario ≥ 4.5:1 sobre la tarjeta | ✅ | `.9`: el estado `success` toma `var(--color-text-accent)`; tres idiomas, sobre blanco |
 
-**Scenarios verificados**: 3/3
+**Scenarios verificados**: 4/4
 
 ### Tests
 
-Comandos del perfil sobre el HEAD integrado: `.1` (paridad i18n), `.2` (enlaces i18n, que incluye las rutas localizadas de #34), `.3` (build) y `.4` (peso de imágenes del inicio, que toca el visor de industrias): los cuatro terminan con exit 0 y el presupuesto de 2 MB se cumple en ambos escenarios. El escenario móvil queda cerca del presupuesto; esa holgura la fija #35 y este cambio no modifica imágenes. El proyecto no declara test runner ni cobertura: no hay instrumento de cobertura que medir.
-
-Bloques obsoletos, sustituidos por una versión corregida del mismo script: `.12`, `.13`, `.17`, `.18`, `.21` y `.22` (anillo de foco: las primeras versiones medían mal los enlaces en línea con salto de línea o con hijos de bloque) por `.24` y `.25`; `.14` (contador del directorio: tomaba las esquinas curvas de la pastilla fuera de los glifos) por `.19`; `.20` y `.23` por `.26` (la versión vigente separa los títulos por color de texto y lista páginas y clases). Su contenido no debe leerse como resultado de la fase.
+Comandos del perfil sobre el HEAD integrado: `.1`, `.2`, `.3` y `.4` terminan con exit 0; `.4` confirma que ambos escenarios de peso de imágenes del inicio están dentro del presupuesto de 2 MB (este cambio no modifica imágenes). El proyecto no declara test runner ni cobertura: no hay instrumento que medir.
 
 ## Hallazgos de Seguridad
 
-Sin aplicar: el dominio del cambio es `fix`.
+Sin aplicar: el dominio del cambio es `fix`. Las interpolaciones del correo mantienen sus escapes (`.19`).
 
 ## Hallazgos
 
-1. **Decisión de apply no contemplada en `design.md`: overlay del visor de industrias más oscuro en ≤ 960px (`3bc419b`, `[pre-adr]` en `observations.md`)** — no contradice ninguna spec. Se contrastó contra `dark-surface-heading-legibility` (el criterio exige nombre ≥ 4.5:1 sobre su fotografía), `industries-selector-interaction` (solo regula el crossfade GSAP, no el degradado), `contrast-token-single-source` (el criterio se limita a hex) y ADR-0008. El bloque `.16` revierte el degradado solo en el navegador y muestra que sin él el nombre, el eyebrow y el sub quedan bajo 4.5:1 en 390px, mientras `.19` muestra que con él todo el viewer cumple en los cuatro anchos; el escritorio queda sin cambio. Reconciliación pendiente de documentación: `design.md` D8 asume el 92 % de oscurecimiento bajo el nombre y no recoge el degradado de ≤ 960px; conviene registrarlo en `design.md` o en un ADR al archivar.
-2. **Deuda declarada y abierta (no bloquea): texto claro sobre fotos y video.** `.26` muestra títulos de texto claro bajo 4.5:1 en `.svc-card__title`, `.ind-card__name` y `.hero-b__title`, solo en `/` y `/servicios/`. La clarificación 1 y la propuesta los difieren a un cambio aparte (requieren rediseñar overlays y degradados); ninguna spec de este cambio los cubre y `/industrias/` queda sin títulos bajo el umbral. Es la porción real detrás de los `incomplete` de axe (`.5` los cuenta por combinación). Observación visual sin bloque: en `/pt/servicios/` el título «Desconsolidação» se corta en el borde de su tarjeta; es previa al cambio y ajena al contraste.
-3. **`rgba()` nuevos en el diff**: el degradado de ≤ 960px (hallazgo 1) agrega un literal `rgba(15,28,46,…)`, el mismo color base del degradado de escritorio ya existente. El criterio, el diseño y el ADR acotan «sin colores literales nuevos» a hex y `.6` sección 1 lo cumple; tokenizar ese color queda como limpieza opcional.
-4. **`apply-evidence.md` vía `comprobar` (`verify-report.27`)**: `apply-evidence.3` y `apply-evidence.14` no calzan porque su base `git merge-base` cambió con la integración de `main` (el recuento de líneas del diff y la base difieren); la conclusión de ambos (0 hex fuera de las excepciones) se reproduce en `.6`. Los demás bloques recomprobables calzan y el resto está marcado como no recomprobable. Ningún criterio se da por cumplido por esos bloques: cada uno se verificó con evidencia propia.
-5. **`comprobar` sobre este informe (`verify-report.28`)**: sin `no_calzan` ni `error`.
-6. Los nodos `incomplete` de axe (`.5` los lista por combinación; son informativos) no cuentan como violaciones; los resueltos por muestreo de píxeles y comprobaciones interactivas son `.11`, `.15`, `.19` y `.26`, y el resto es la deuda del hallazgo 2.
+1. **Etiqueta «SECTOR · 01» del visor de industrias a 1024 px (observación, no bloquea)**: `.14` marca `FALLA` en esa configuración porque el peor píxel de la etiqueta (`.ind-directory__eyebrow`, `accent-300` sobre la foto) queda marginalmente bajo 4.5:1, mientras el nombre, el subtítulo, el contador y las etiquetas cumplen en todas las configuraciones. La etiqueta no está en el alcance de las specs: `dark-surface-heading-legibility` exige el nombre de la industria, la regla de la etiqueta es previa al cambio y el degradado base de escritorio no se tocó. Pertenece a la deuda declarada de texto claro sobre fotos y video (clarificación 1 y propuesta). Axe no la reporta (`.5`).
+2. **Deuda declarada y abierta**: texto claro sobre fotos y video (títulos de servicios, portada y hero) queda diferido a un cambio aparte; ninguna spec de este cambio lo cubre. `.22` lista exactamente esos títulos (`svc-card__title`, `ind-card__name`, `hero-b__title`, solo en `/` y `/servicios/`). Los nodos `incomplete` de axe (`.5`, `.6`; son informativos) provienen de esa deuda y de elementos con estado animado o glifos únicos (la viñeta `✓`, que `.8` mide aparte).
+3. **Texto en el correo fuera de las specs**: el enlace `mailto:` de la tabla de datos y el texto SLA del correo conservan `#4A7BB5` y `#898580` inline; `design.md` ya los registra como candidato de deuda y esta verificación no los mide. `.10` filtra solo los botones de acción.
+4. **Medición**: en `.7` las filas marcadas `(grad)` aproximan el fondo con el primer ancestro opaco (aviso y estados de la sección final, número de ítem del directorio); esos mismos elementos se midieron por píxeles reales en `.15`. El muestreo de glifos delgados subestima el contraste por antialiasing (`.8`), por lo que el criterio es el color calculado y el muestreo confirma el tono.
+5. **`apply-evidence.md` vía `comprobar` (`.23`)**: `apply-evidence.3` y `apply-evidence.14` no calzan (causa `distinto`; su base `git merge-base` cambió con la integración de `main`). Los demás bloques recomprobables calzan y el resto está marcado como no recomprobable. Ningún criterio se da por cumplido por esos bloques: cada uno se verificó con evidencia propia arriba.
+6. **`comprobar` sobre este informe (`.24`)**: sin `no_calzan` ni `error`; los bloques recomprobables (`.1`, `.2`, `.4`, `.11`, `.12`, `.13`, `.19`) calzan y los que requieren preview y Chrome están marcados.
+7. **Correcciones del juicio verificadas**: C1 (`.8`, `.20`), C2 (`.11`, `.12`, `.14`), SA1 (`.9`, `.6`), SA2 (`.14`), SB1 (`.10`, `.19`) y SB2 (`.12`) se cumplen en el HEAD verificado; los literales `rgb()`, `rgba()` y `hsl()` quedan cubiertos por el barrido de `.11`.
 
 ## Coherencia de Grafo de Specs
 
-Sin inconsistencias en `depends_on`, `affects` ni `adrs[]` de las 14 specs de `spec_refs`: `sitewide-contrast-verification` depende de las otras 13 y cada una declara `affects` hacia ella; ninguna declara `adrs[]`. No hay specs `MODIFY`, por lo que no aplica `## Contraste de bases`.
+`.13`: sin inconsistencias en `depends_on`, `affects` ni `adrs[]` de las 15 specs de `spec_refs`. `sitewide-contrast-verification` depende de las otras 13 de `ui-contrast` y cada una declara `affects` hacia ella; `email-reply-button-contrast` solo declara `related`. Ninguna declara `adrs[]`. No hay deltas `MODIFY`: no aplica `## Contraste de bases`.
 
 ## Correcciones de Metadata
 
-Ninguna. Sí se marcan los criterios de aceptación como cumplidos y se fija `verified_at: "2026-10-06"` en las 14 specs de `spec_refs` (validación principal PASS).
+Ninguna de grafo. Con la validación principal en PASS se marcan como cumplidos los criterios que el juicio había dejado abiertos (`cta-button-contrast`, `secondary-text-dark-surface-contrast`, `contrast-token-single-source`, `sitewide-contrast-verification` y los tres de `email-reply-button-contrast`) y se fija `verified_at: "2026-10-06"` en las 15 specs de `spec_refs`.
 
 ## Acciones Requeridas
 
-Ninguna para archivar. Recomendaciones sin bloqueo: (1) registrar la decisión del overlay de ≤ 960px en `design.md` o ADR (hallazgo 1); (2) abrir un cambio aparte para el texto claro sobre fotos y video (hallazgo 2).
+Ninguna para archivar. Recomendaciones sin bloqueo: (1) abrir el cambio aparte para el texto claro sobre fotos y video, que incluya la etiqueta del visor de industrias a 1024 px (hallazgo 1); (2) evaluar el enlace y el texto SLA del correo como deuda (hallazgo 3).
 
 ## Evidencia
 
-
-<!-- evidencia:inicio {"v":1,"id":"verify-report.1","forma":"argv","argv":["npm","run","validate-i18n"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T11:57:40-03:00","exit":0,"sha256":"998abcef00777caba688a15f6cd7f54bc50cfd323cdd82776159426fdde58ffd","lineas":6,"omitidas":0,"no_recomprobable":null} -->
-**Evidencia `verify-report.1`** · exit 0 · 6 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T11:57:40-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+<!-- evidencia:inicio {"v":1,"id":"verify-report.1","forma":"argv","argv":["npm","run","validate-i18n"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T14:06:56-03:00","exit":0,"sha256":"998abcef00777caba688a15f6cd7f54bc50cfd323cdd82776159426fdde58ffd","lineas":6,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `verify-report.1`** · exit 0 · 6 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T14:06:56-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
 
 ```text
 npm run validate-i18n
@@ -209,8 +223,8 @@ npm run validate-i18n
 ```
 <!-- evidencia:fin verify-report.1 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.2","forma":"argv","argv":["npm","run","check-i18n-links"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T11:57:40-03:00","exit":0,"sha256":"d805cf2183837cc3193fe469b7827226292871c3960f9b806317d8bc43db8c51","lineas":5,"omitidas":0,"no_recomprobable":null} -->
-**Evidencia `verify-report.2`** · exit 0 · 5 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T11:57:40-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+<!-- evidencia:inicio {"v":1,"id":"verify-report.2","forma":"argv","argv":["npm","run","check-i18n-links"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T14:06:56-03:00","exit":0,"sha256":"d805cf2183837cc3193fe469b7827226292871c3960f9b806317d8bc43db8c51","lineas":5,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `verify-report.2`** · exit 0 · 5 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T14:06:56-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
 
 ```text
 npm run check-i18n-links
@@ -225,8 +239,8 @@ npm run check-i18n-links
 ```
 <!-- evidencia:fin verify-report.2 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.3","forma":"argv","argv":["npm","run","build"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T11:58:46-03:00","exit":0,"sha256":"aba91849acd9652eeef49568aa3686dc3eee5c8899a3d8039ae7671b5ba2a033","lineas":527,"omitidas":487,"no_recomprobable":"el build reescribe dist/ (ignorado por git) y su salida lleva tiempos; repetirlo con el preview en marcha provoca 500"} -->
-**Evidencia `verify-report.3`** · exit 0 · 527 líneas, 487 omitidas · HEAD `d92da75b0744` · 2026-10-06T11:58:46-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+<!-- evidencia:inicio {"v":1,"id":"verify-report.3","forma":"argv","argv":["npm","run","build"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T14:07:04-03:00","exit":0,"sha256":"9ab8b5b9371f5ed87ea8fc4d64007b76881bd3eb6c190ecbb11a1321f610e8d6","lineas":527,"omitidas":487,"no_recomprobable":"el build reescribe dist/ (ignorado por git) y su salida lleva tiempos; repetirlo con el preview en marcha provoca 500"} -->
+**Evidencia `verify-report.3`** · exit 0 · 527 líneas, 487 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T14:07:04-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
 No re-comprobable: el build reescribe dist/ (ignorado por git) y su salida lleva tiempos; repetirlo con el preview en marcha provoca 500
 
 ```text
@@ -238,47 +252,47 @@ npm run build
 > log-atm-web-astro@0.0.1 build
 > astro build
 
-11:57:46 [@astrojs/cloudflare] Enabling compile-time image optimization. Images will be pre-optimized at build time.
-11:57:46 [@astrojs/cloudflare] Enabling sessions with Cloudflare KV with the "SESSION" KV binding.
-11:57:48 [types] Generated 1.61s
-11:57:48 [log-atm:i18n-validator] [i18n] Validando paridad de claves...
+14:06:58 [@astrojs/cloudflare] Enabling compile-time image optimization. Images will be pre-optimized at build time.
+14:06:58 [@astrojs/cloudflare] Enabling sessions with Cloudflare KV with the "SESSION" KV binding.
+14:06:59 [types] Generated 1.27s
+14:06:59 [log-atm:i18n-validator] [i18n] Validando paridad de claves...
 [i18n] en: OK (536 claves)
 [i18n] pt: OK (536 claves)
-11:57:48 [build] output: "static"
-11:57:48 [build] mode: "server"
-11:57:48 [build] directory: /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro/dist/
-11:57:48 [build] adapter: @astrojs/cloudflare
-11:57:48 [build] Collecting build info...
-11:57:48 [build] ✓ Completed in 2.25s.
-11:57:48 [build] Building server entrypoints...
-11:57:50 [vite] ✓ built in 2.15s
-11:57:52 [vite] ✓ built in 1.45s
-11:57:53 [vite] ✓ built in 708ms
+14:06:59 [build] output: "static"
+14:06:59 [build] mode: "server"
+14:06:59 [build] directory: /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro/dist/
+14:06:59 [build] adapter: @astrojs/cloudflare
+14:06:59 [build] Collecting build info...
+14:06:59 [build] ✓ Completed in 1.69s.
+14:06:59 [build] Building server entrypoints...
+14:07:02 [vite] ✓ built in 2.04s
+14:07:03 [vite] ✓ built in 1.36s
+14:07:04 [vite] ✓ built in 655ms
 
  prerendering static routes 
-11:57:53   ├─ /contacto/index.html (+22ms) 
-11:57:53   ├─ /cotizar/index.html (+12ms) 
-11:57:53   ├─ /industrias/index.html (+22ms) 
-11:57:53   ├─ /nosotros/index.html (+15ms) 
-11:57:53   ├─ /servicios/index.html (+23ms) 
-11:57:53   ├─ /en/contacto/index.html (+9ms) 
-11:57:53   ├─ /pt/contacto/index.html (+9ms) 
-11:57:53   ├─ /en/cotizar/index.html (+9ms) 
-11:57:53   ├─ /pt/cotizar/index.html (+9ms) 
-11:57:53   ├─ /en/industrias/index.html (+12ms) 
-11:57:53   ├─ /pt/industrias/index.html (+11ms) 
-11:57:53   ├─ /en/nosotros/index.html (+9ms) 
-11:57:53   ├─ /pt/nosotros/index.html (+10ms) 
-11:57:53   ├─ /en/servicios/index.html (+14ms) 
-11:57:53   ├─ /pt/servicios/index.html (+13ms) 
-11:57:53   ├─ /en/index.html (+15ms) 
-11:57:53   ├─ /pt/index.html (+13ms) 
-11:57:53   ├─ /index.html (+18ms) 
+14:07:04   ├─ /contacto/index.html (+20ms) 
+14:07:04   ├─ /cotizar/index.html (+12ms) 
+14:07:04   ├─ /industrias/index.html (+21ms) 
+14:07:04   ├─ /nosotros/index.html (+14ms) 
+14:07:04   ├─ /servicios/index.html (+22ms) 
+14:07:04   ├─ /en/contacto/index.html (+9ms) 
+14:07:04   ├─ /pt/contacto/index.html (+9ms) 
+14:07:04   ├─ /en/cotizar/index.html (+9ms) 
+14:07:04   ├─ /pt/cotizar/index.html (+9ms) 
+14:07:04   ├─ /en/industrias/index.html (+11ms) 
+14:07:04   ├─ /pt/industrias/index.html (+11ms) 
+14:07:04   ├─ /en/nosotros/index.html (+9ms) 
+14:07:04   ├─ /pt/nosotros/index.html (+8ms) 
+14:07:04   ├─ /en/servicios/index.html (+13ms) 
+14:07:04   ├─ /pt/servicios/index.html (+13ms) 
+14:07:04   ├─ /en/index.html (+15ms) 
+14:07:04   ├─ /pt/index.html (+13ms) 
+14:07:04   ├─ /index.html (+17ms) 
 ```
 <!-- evidencia:fin verify-report.3 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.4","forma":"argv","argv":["npm","run","measure:images"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T11:58:49-03:00","exit":0,"sha256":"d74fc25ae3d127cf34765cbefeda2444ccb00b452b038c222e7c840fac64738b","lineas":6,"omitidas":0,"no_recomprobable":null} -->
-**Evidencia `verify-report.4`** · exit 0 · 6 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T11:58:49-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+<!-- evidencia:inicio {"v":1,"id":"verify-report.4","forma":"argv","argv":["npm","run","measure:images"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T14:07:08-03:00","exit":0,"sha256":"d74fc25ae3d127cf34765cbefeda2444ccb00b452b038c222e7c840fac64738b","lineas":6,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `verify-report.4`** · exit 0 · 6 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T14:07:08-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
 
 ```text
 npm run measure:images
@@ -294,613 +308,499 @@ movil 390x844 DPR 3: total 2077253 bytes (1.981 MB) | avif 1901372 bytes (1.813 
 ```
 <!-- evidencia:fin verify-report.4 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.5","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/axe_sweep.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T12:10:38-03:00","exit":0,"sha256":"ca78e5e2c61d9891cd7391182b0e372fad74a70e3c5a6462122ce593d17b19d3","lineas":22,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.5`** · exit 0 · 22 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T12:10:38-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
+<!-- evidencia:inicio {"v":1,"id":"verify-report.5","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/axe-run.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T14:55:50-03:00","exit":0,"sha256":"07182d0beadc4b3499703c7ac07f703d043be74661ddc4832b65a4537b71f7c3","lineas":22,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"} -->
+**Evidencia `verify-report.5`** · exit 0 · 22 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T14:55:50-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase
 
 ```text
-node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/axe_sweep.mjs
+node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/axe-run.mjs
 ```
 
 ```text
-/ desk=0/96 mob=0/91 rm-desk=0/95 rm-mob=0/90
-/servicios/ desk=0/86 mob=0/82 rm-desk=0/86 rm-mob=0/82
-/industrias/ desk=0/73 mob=0/70 rm-desk=0/73 rm-mob=0/69
-/nosotros/ desk=0/43 mob=0/39 rm-desk=0/43 rm-mob=0/39
-/contacto/ desk=0/16 mob=0/15 rm-desk=0/16 rm-mob=0/15
-/cotizar/ desk=0/12 mob=0/12 rm-desk=0/12 rm-mob=0/12
-/xx-nope/ desk=0/0 mob=0/2 rm-desk=0/0 rm-mob=0/2
-/en/ desk=0/96 mob=0/91 rm-desk=0/95 rm-mob=0/90
-/en/servicios/ desk=0/86 mob=0/82 rm-desk=0/86 rm-mob=0/82
-/en/industrias/ desk=0/73 mob=0/70 rm-desk=0/73 rm-mob=0/69
-/en/nosotros/ desk=0/43 mob=0/39 rm-desk=0/43 rm-mob=0/39
-/en/contacto/ desk=0/16 mob=0/15 rm-desk=0/16 rm-mob=0/15
-/en/cotizar/ desk=0/12 mob=0/12 rm-desk=0/12 rm-mob=0/12
-/en/xx-nope/ desk=0/0 mob=0/1 rm-desk=0/0 rm-mob=0/1
-/pt/ desk=0/96 mob=0/91 rm-desk=0/95 rm-mob=0/90
-/pt/servicios/ desk=0/86 mob=0/82 rm-desk=0/86 rm-mob=0/82
-/pt/industrias/ desk=0/73 mob=0/70 rm-desk=0/73 rm-mob=0/69
-/pt/nosotros/ desk=0/43 mob=0/39 rm-desk=0/43 rm-mob=0/39
-/pt/contacto/ desk=0/16 mob=0/15 rm-desk=0/16 rm-mob=0/15
-/pt/cotizar/ desk=0/12 mob=0/12 rm-desk=0/12 rm-mob=0/12
-/pt/xx-nope/ desk=0/0 mob=0/1 rm-desk=0/0 rm-mob=0/1
-combinaciones=84 violaciones_totales=0 incompletos_totales=3809 (celda = violaciones/incompletos)
+TOTAL combinaciones=84 (21 URL x 2 anchos x 2 movimientos) violaciones_color-contrast=0 nodos_incompletos=2694
+/                  violaciones por ancho/movimiento: 1440/normal=0(inc 5) 390/normal=0(inc 5) 1440/reduce=0(inc 88) 390/reduce=0(inc 88)
+/servicios/        violaciones por ancho/movimiento: 1440/normal=0(inc 58) 390/normal=0(inc 58) 1440/reduce=0(inc 80) 390/reduce=0(inc 80)
+/industrias/       violaciones por ancho/movimiento: 1440/normal=0(inc 45) 390/normal=0(inc 45) 1440/reduce=0(inc 67) 390/reduce=0(inc 67)
+/nosotros/         violaciones por ancho/movimiento: 1440/normal=0(inc 15) 390/normal=0(inc 15) 1440/reduce=0(inc 37) 390/reduce=0(inc 37)
+/contacto/         violaciones por ancho/movimiento: 1440/normal=0(inc 15) 390/normal=0(inc 15) 1440/reduce=0(inc 15) 390/reduce=0(inc 15)
+/cotizar/          violaciones por ancho/movimiento: 1440/normal=0(inc 12) 390/normal=0(inc 12) 1440/reduce=0(inc 12) 390/reduce=0(inc 12)
+/xx-nope/          violaciones por ancho/movimiento: 1440/normal=0(inc 0) 390/normal=0(inc 0) 1440/reduce=0(inc 0) 390/reduce=0(inc 0)
+/en/               violaciones por ancho/movimiento: 1440/normal=0(inc 5) 390/normal=0(inc 5) 1440/reduce=0(inc 88) 390/reduce=0(inc 88)
+/en/servicios/     violaciones por ancho/movimiento: 1440/normal=0(inc 58) 390/normal=0(inc 58) 1440/reduce=0(inc 80) 390/reduce=0(inc 80)
+/en/industrias/    violaciones por ancho/movimiento: 1440/normal=0(inc 45) 390/normal=0(inc 45) 1440/reduce=0(inc 67) 390/reduce=0(inc 67)
+/en/nosotros/      violaciones por ancho/movimiento: 1440/normal=0(inc 15) 390/normal=0(inc 15) 1440/reduce=0(inc 37) 390/reduce=0(inc 37)
+/en/contacto/      violaciones por ancho/movimiento: 1440/normal=0(inc 15) 390/normal=0(inc 15) 1440/reduce=0(inc 15) 390/reduce=0(inc 15)
+/en/cotizar/       violaciones por ancho/movimiento: 1440/normal=0(inc 12) 390/normal=0(inc 12) 1440/reduce=0(inc 12) 390/reduce=0(inc 12)
+/en/xx-nope/       violaciones por ancho/movimiento: 1440/normal=0(inc 0) 390/normal=0(inc 0) 1440/reduce=0(inc 0) 390/reduce=0(inc 0)
+/pt/               violaciones por ancho/movimiento: 1440/normal=0(inc 5) 390/normal=0(inc 5) 1440/reduce=0(inc 88) 390/reduce=0(inc 88)
+/pt/servicios/     violaciones por ancho/movimiento: 1440/normal=0(inc 58) 390/normal=0(inc 58) 1440/reduce=0(inc 80) 390/reduce=0(inc 80)
+/pt/industrias/    violaciones por ancho/movimiento: 1440/normal=0(inc 45) 390/normal=0(inc 45) 1440/reduce=0(inc 67) 390/reduce=0(inc 67)
+/pt/nosotros/      violaciones por ancho/movimiento: 1440/normal=0(inc 15) 390/normal=0(inc 15) 1440/reduce=0(inc 37) 390/reduce=0(inc 37)
+/pt/contacto/      violaciones por ancho/movimiento: 1440/normal=0(inc 15) 390/normal=0(inc 15) 1440/reduce=0(inc 15) 390/reduce=0(inc 15)
+/pt/cotizar/       violaciones por ancho/movimiento: 1440/normal=0(inc 12) 390/normal=0(inc 12) 1440/reduce=0(inc 12) 390/reduce=0(inc 12)
+/pt/xx-nope/       violaciones por ancho/movimiento: 1440/normal=0(inc 0) 390/normal=0(inc 0) 1440/reduce=0(inc 0) 390/reduce=0(inc 0)
 ```
 <!-- evidencia:fin verify-report.5 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.6","forma":"argv","argv":["bash","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/static_checks.sh"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T12:29:27-03:00","exit":0,"sha256":"530a1d7961d8b6165f7ca5048104eb8f2ca094353772752699f677aaed74f129","lineas":22,"omitidas":0,"no_recomprobable":null} -->
-**Evidencia `verify-report.6`** · exit 0 · 22 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T12:29:27-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+<!-- evidencia:inicio {"v":1,"id":"verify-report.6","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/axe2-run.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T14:57:21-03:00","exit":0,"sha256":"c83a318e912a8bdaa38456fadfc923b8ab1f86ed8490349269e0c61b6cc4dc98","lineas":26,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"} -->
+**Evidencia `verify-report.6`** · exit 0 · 26 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T14:57:21-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase
 
 ```text
-bash /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/static_checks.sh
+node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/axe2-run.mjs
 ```
 
 ```text
-# 1. hex de color agregados en src/ fuera de tokens.css y email-templates.ts
-lineas_con_hex=0
-# 2. --color-brand-hover en src/
-ocurrencias=0
-# 3. outline none/0 en src/
-ocurrencias=0
-# 4. hex sin tokenizar en el diff de email-templates.ts (excepción declarada)
-      1 #111b21       1 #25D366 
-# 5. excepción de correo declarada en DESIGN.md
-menciones=1
-# 6. tokens y pares (tokens.css)
-brand-hover en :root: False
-ERRORES: 0
-# 7. tabla de DESIGN.md vs ratios calculados
-filas=17 ratios_comparados=28 diferencias=0
-# 8. fondo verde CTA, azul de marca y hover de WhatsApp sin cambio respecto a main
-igual  --color-accent-500 -> --color-accent-500: #3EB978; 
-igual  --color-cta -> --color-cta: var(--color-accent-500);
-igual  --color-cta-hover -> --color-cta-hover: var(--color-accent-600);
-igual  --color-brand -> --color-brand: var(--color-primary-500);
-igual  --color-primary-500 -> --color-primary-500: #4A7BB5; 
-igual  --color-whatsapp-hover -> --color-whatsapp-hover: #1da851;
+TOTAL estados=45 violaciones_color-contrast=0 nodos_incompletos=320
+menu movil abierto (390px) violaciones por URL: /=0 /servicios/=0 /industrias/=0 /nosotros/=0 /contacto/=0 /cotizar/=0 /xx-nope/=0 /en/=0 /en/servicios/=0 /en/industrias/=0 /en/nosotros/=0 /en/contacto/=0 /en/cotizar/=0 /en/xx-nope/=0 /pt/=0 /pt/servicios/=0 /pt/industrias/=0 /pt/nosotros/=0 /pt/contacto/=0 /pt/cotizar/=0 /pt/xx-nope/=0
+/es 1440 cotizar paso 1 con modo elegido             violaciones=0 incompletos=12
+/es 1440 cotizar paso 4 (3 viñetas completadas)      violaciones=0 incompletos=11
+/es 1440 cotizar pantalla de exito                   violaciones=0 incompletos=15
+/es 390 cotizar paso 1 con modo elegido              violaciones=0 incompletos=12
+/es 390 cotizar paso 4 (3 viñetas completadas)       violaciones=0 incompletos=11
+/es 390 cotizar pantalla de exito                    violaciones=0 incompletos=11
+/es contacto con mensaje de exito                    violaciones=0 incompletos=16
+/es contacto con mensaje de error                    violaciones=0 incompletos=21
+/en 1440 cotizar paso 1 con modo elegido             violaciones=0 incompletos=12
+/en 1440 cotizar paso 4 (3 viñetas completadas)      violaciones=0 incompletos=11
+/en 1440 cotizar pantalla de exito                   violaciones=0 incompletos=15
+/en 390 cotizar paso 1 con modo elegido              violaciones=0 incompletos=12
+/en 390 cotizar paso 4 (3 viñetas completadas)       violaciones=0 incompletos=11
+/en 390 cotizar pantalla de exito                    violaciones=0 incompletos=11
+/en contacto con mensaje de exito                    violaciones=0 incompletos=15
+/en contacto con mensaje de error                    violaciones=0 incompletos=15
+/pt 1440 cotizar paso 1 con modo elegido             violaciones=0 incompletos=12
+/pt 1440 cotizar paso 4 (3 viñetas completadas)      violaciones=0 incompletos=11
+/pt 1440 cotizar pantalla de exito                   violaciones=0 incompletos=15
+/pt 390 cotizar paso 1 con modo elegido              violaciones=0 incompletos=12
+/pt 390 cotizar paso 4 (3 viñetas completadas)       violaciones=0 incompletos=11
+/pt 390 cotizar pantalla de exito                    violaciones=0 incompletos=11
+/pt contacto con mensaje de exito                    violaciones=0 incompletos=15
+/pt contacto con mensaje de error                    violaciones=0 incompletos=15
 ```
 <!-- evidencia:fin verify-report.6 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.7","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/error_code.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T12:29:54-03:00","exit":0,"sha256":"893429e6e3e1b351b58df434f76a20a921cd657cf105c76156b0f448dac96b80","lineas":4,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.7`** · exit 0 · 4 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T12:29:54-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
+<!-- evidencia:inicio {"v":1,"id":"verify-report.7","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/states.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:00:16-03:00","exit":0,"sha256":"6f54178e910bb3b56312a2bd5ae68a325457e5335485c99517ead31a20ca0b5f","lineas":22,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"} -->
+**Evidencia `verify-report.7`** · exit 0 · 22 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:00:16-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase
 
 ```text
-node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/error_code.mjs
+node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/states.mjs
 ```
 
 ```text
-/xx-nope/ 320:96px/w900 360:96px/w900 390:96px/w900 480:96px/w900 600:96px/w900 768:115.2px/w900 820:123px/w900 960:144px/w900 961:144.15px/w900 1024:153.6px/w900 1280:160px/w900 1440:160px/w900 [color rgb(74, 123, 181) sobre rgb(248, 247, 246) = 4.10:1; aria-hidden=true; texto=404; html lang=es-CL] 1920:160px/w900
-/en/xx-nope/ 320:96px/w900 360:96px/w900 390:96px/w900 480:96px/w900 600:96px/w900 768:115.2px/w900 820:123px/w900 960:144px/w900 961:144.15px/w900 1024:153.6px/w900 1280:160px/w900 1440:160px/w900 [color rgb(74, 123, 181) sobre rgb(248, 247, 246) = 4.10:1; aria-hidden=true; texto=404; html lang=en-US] 1920:160px/w900
-/pt/xx-nope/ 320:96px/w900 360:96px/w900 390:96px/w900 480:96px/w900 600:96px/w900 768:115.2px/w900 820:123px/w900 960:144px/w900 961:144.15px/w900 1024:153.6px/w900 1280:160px/w900 1440:160px/w900 [color rgb(74, 123, 181) sobre rgb(248, 247, 246) = 4.10:1; aria-hidden=true; texto=404; html lang=pt-BR] 1920:160px/w900
-mediciones=39 incumplimientos=0
+FALLOS=0 elementos/estados evaluados=126 (agregados por elemento en es/en/pt: 42)
+cta-hero: umbral 4.5 peor(es/en/pt)=5.1 [reposo=6.44 hover=5.1 foco=6.44 presionado=5.1]  ||  cta-hero-hover>=5: umbral 5 peor(es/en/pt)=5.1 [hover=5.1]
+brand-nav: umbral 4.5 peor(es/en/pt)=6.08 [reposo=6.08 hover=8.52 foco=6.08 presionado=8.52]  ||  brand-servicios: umbral 4.5 peor(es/en/pt)=6.08 [reposo=6.08 hover=8.52 foco=6.08 presionado=8.52]
+nav-link: umbral 4.5 peor(es/en/pt)=7.3 [reposo=15.36 hover=7.3 foco=7.3 presionado=7.3]  ||  skip-link: umbral 4.5 peor(es/en/pt)=6.08 [foco=6.08]
+cta-final-btn-brand: umbral 4.5 peor(es/en/pt)=6.08 [reposo=6.08 hover=8.52 foco=6.08 presionado=8.52]  ||  cta-final-btn-cta: umbral 4.5 peor(es/en/pt)=6.08 [reposo=6.08 hover=8.52 foco=6.08 presionado=8.52]
+cta-final-btn-wa: umbral 4.5 peor(es/en/pt)=5.63 [reposo=8.8 hover=5.63 foco=8.8 presionado=5.63]  ||  cta-final-hint: umbral 4.5 peor(es/en/pt)=9.3 [reposo=9.3(grad)]
+cta-final-status-error: umbral 4.5 peor(es/en/pt)=8.51 [reposo=8.51(grad)]  ||  cta-final-status-ok: umbral 4.5 peor(es/en/pt)=9.21 [reposo=9.21(grad)]
+eyebrow: umbral 4.5 peor(es/en/pt)=6.46 [reposo=6.46]  ||  eyebrow-why: umbral 4.5 peor(es/en/pt)=5.91 [reposo=5.91]
+nav-link-activo: umbral 4.5 peor(es/en/pt)=7.3 [reposo=7.3 hover=7.3 foco=7.3 presionado=7.3]  ||  svc-tag-cta: umbral 4.5 peor(es/en/pt)=6.44 [reposo=6.44]
+svc-filter-activo: umbral 4.5 peor(es/en/pt)=16.08 [reposo=16.08 hover=16.08 foco=16.08 presionado=16.08]  ||  svc-filter-inactivo: umbral 4.5 peor(es/en/pt)=5.44 [reposo=5.44 hover=16.44 foco=5.44 presionado=16.44]
+ind-item-num: umbral 4.5 peor(es/en/pt)=13.51 [reposo=13.51(grad)]  ||  howwork-step: umbral 4.5 peor(es/en/pt)=8.45 [reposo=8.45]
+form-submit: umbral 4.5 peor(es/en/pt)=6.44 [reposo=6.44 hover=6.44 foco=6.44 presionado=6.44]  ||  channel-wa: umbral 4.5 peor(es/en/pt)=8.8 [reposo=8.8 hover=8.8 foco=8.8 presionado=8.8]
+channel-wa-nombre: umbral 4.5 peor(es/en/pt)=8.8 [reposo=8.8]  ||  channel-wa-valor: umbral 4.5 peor(es/en/pt)=8.8 [reposo=8.8]
+contact-pill: umbral 4.5 peor(es/en/pt)=5.8 [reposo=5.8]  ||  pin-oficina(::after sobre pin): umbral 3 peor(es/en/pt)=6.59 [reposo=6.59]
+404-cta: umbral 4.5 peor(es/en/pt)=5.1 [reposo=6.44 hover=5.1 foco=6.44 presionado=5.1]  ||  404-cta-hover>=5: umbral 5 peor(es/en/pt)=5.1 [hover=5.1]
+404-codigo(>=3): umbral 3 peor(es/en/pt)=4.1 [reposo=4.1]  ||  quote-step-num: umbral 4.5 peor(es/en/pt)=6.91 [reposo=6.91]
+quote-empty(Por definir): umbral 4.5 peor(es/en/pt)=5.44 [reposo=5.44]  ||  quote-sla: umbral 4.5 peor(es/en/pt)=5.8 [reposo=5.8]
+quote-title: umbral 4.5 peor(es/en/pt)=16.08 [reposo=16.08]  ||  btn-primary-lg(habilitado): umbral 4.5 peor(es/en/pt)=6.44 [reposo=6.44 hover=6.44 foco=6.44 presionado=6.44]
+mode-check(seleccionado): umbral 3 peor(es/en/pt)=6.44 [reposo=6.44]  ||  movil drawer-link: umbral 4.5 peor(es/en/pt)=7.7 [reposo=8.09 hover=7.7 foco=7.7 presionado=7.7]
+movil drawer-cta: umbral 4.5 peor(es/en/pt)=5.1 [reposo=6.44 hover=5.1 foco=6.44 presionado=5.1]  ||  movil drawer-wa: umbral 4.5 peor(es/en/pt)=5.63 [reposo=8.8 hover=5.63 foco=8.8 presionado=5.63]
+exito seal: umbral 3 peor(es/en/pt)=6.44 [reposo=6.44]  ||  exito step-n: umbral 4.5 peor(es/en/pt)=6.46 [reposo=6.46]
+exito btn-brand: umbral 4.5 peor(es/en/pt)=6.08 [reposo=6.08 hover=8.52 foco=6.08 presionado=8.52]  ||  exito btn-wa: umbral 4.5 peor(es/en/pt)=5.63 [reposo=8.8 hover=5.63 foco=8.8 presionado=5.63]
 ```
 <!-- evidencia:fin verify-report.7 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.8","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/misc.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T12:30:54-03:00","exit":0,"sha256":"759e2f618e446a15a0ee8c58193ef35775be1bfa43567b0fc76ad3a1edb6403d","lineas":28,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.8`** · exit 0 · 28 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T12:30:54-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
+<!-- evidencia:inicio {"v":1,"id":"verify-report.8","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/wizard-run.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:00:36-03:00","exit":0,"sha256":"9d91a25059efa3db9af02e56956144639105fad092d142ea5ccfdc87e8024a46","lineas":19,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"} -->
+**Evidencia `verify-report.8`** · exit 0 · 19 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:00:36-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase
 
 ```text
-node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/misc.mjs
+node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/wizard-run.mjs
 ```
 
 ```text
-OK  /es nav: activo=underline; inactivos=none
-OK  /es filtro inactivo responde al cursor (reposo rgb(255, 255, 255)/rgb(110, 105, 99) -> hover rgb(255, 255, 255)/rgb(33, 31, 28))
-OK  /es pendiente rgb(110, 105, 99) italic vs completado rgb(33, 31, 28) normal (4 pendientes)
-OK  /es/ cta-final botones azul/texto claro en reposo, hover, foco, presionado (2 botones, 8 estados; ej rgb(59, 100, 151) / rgb(255, 255, 255), hover rgb(43, 78, 120) / rgb(255, 255, 255))
-OK  /es/servicios/ cta-final botones azul/texto claro en reposo, hover, foco, presionado (2 botones, 8 estados; ej rgb(59, 100, 151) / rgb(255, 255, 255), hover rgb(43, 78, 120) / rgb(255, 255, 255))
-OK  /es/industrias/ cta-final botones azul/texto claro en reposo, hover, foco, presionado (2 botones, 8 estados; ej rgb(59, 100, 151) / rgb(255, 255, 255), hover rgb(43, 78, 120) / rgb(255, 255, 255))
-OK  /es/nosotros/ cta-final botones azul/texto claro en reposo, hover, foco, presionado (2 botones, 8 estados; ej rgb(59, 100, 151) / rgb(255, 255, 255), hover rgb(43, 78, 120) / rgb(255, 255, 255))
-OK  /es selector de idioma: opciones enfocadas=3, peor anillo=5.49 (solid 3px off -3 rgb(59, 100, 151): anillo/interior=5.49)
-OK  /es campo INPUT: borde rgb(59, 100, 151) vs sin foco rgb(225, 222, 219) = 4.54:1; outline solid 3px rgb(59, 100, 151)
-OK  /en nav: activo=underline; inactivos=none
-OK  /en filtro inactivo responde al cursor (reposo rgb(255, 255, 255)/rgb(110, 105, 99) -> hover rgb(255, 255, 255)/rgb(33, 31, 28))
-OK  /en pendiente rgb(110, 105, 99) italic vs completado rgb(33, 31, 28) normal (4 pendientes)
-OK  /en/ cta-final botones azul/texto claro en reposo, hover, foco, presionado (2 botones, 8 estados; ej rgb(59, 100, 151) / rgb(255, 255, 255), hover rgb(43, 78, 120) / rgb(255, 255, 255))
-OK  /en/servicios/ cta-final botones azul/texto claro en reposo, hover, foco, presionado (2 botones, 8 estados; ej rgb(59, 100, 151) / rgb(255, 255, 255), hover rgb(43, 78, 120) / rgb(255, 255, 255))
-OK  /en/industrias/ cta-final botones azul/texto claro en reposo, hover, foco, presionado (2 botones, 8 estados; ej rgb(59, 100, 151) / rgb(255, 255, 255), hover rgb(43, 78, 120) / rgb(255, 255, 255))
-OK  /en/nosotros/ cta-final botones azul/texto claro en reposo, hover, foco, presionado (2 botones, 8 estados; ej rgb(59, 100, 151) / rgb(255, 255, 255), hover rgb(43, 78, 120) / rgb(255, 255, 255))
-OK  /en selector de idioma: opciones enfocadas=3, peor anillo=5.49 (solid 3px off -3 rgb(59, 100, 151): anillo/interior=5.49)
-OK  /en campo INPUT: borde rgb(59, 100, 151) vs sin foco rgb(225, 222, 219) = 4.54:1; outline solid 3px rgb(59, 100, 151)
-OK  /pt nav: activo=underline; inactivos=none
-OK  /pt filtro inactivo responde al cursor (reposo rgb(255, 255, 255)/rgb(110, 105, 99) -> hover rgb(255, 255, 255)/rgb(33, 31, 28))
-OK  /pt pendiente rgb(110, 105, 99) italic vs completado rgb(33, 31, 28) normal (4 pendientes)
-OK  /pt/ cta-final botones azul/texto claro en reposo, hover, foco, presionado (2 botones, 8 estados; ej rgb(59, 100, 151) / rgb(255, 255, 255), hover rgb(43, 78, 120) / rgb(255, 255, 255))
-OK  /pt/servicios/ cta-final botones azul/texto claro en reposo, hover, foco, presionado (2 botones, 8 estados; ej rgb(59, 100, 151) / rgb(255, 255, 255), hover rgb(43, 78, 120) / rgb(255, 255, 255))
-OK  /pt/industrias/ cta-final botones azul/texto claro en reposo, hover, foco, presionado (2 botones, 8 estados; ej rgb(59, 100, 151) / rgb(255, 255, 255), hover rgb(43, 78, 120) / rgb(255, 255, 255))
-OK  /pt/nosotros/ cta-final botones azul/texto claro en reposo, hover, foco, presionado (2 botones, 8 estados; ej rgb(59, 100, 151) / rgb(255, 255, 255), hover rgb(43, 78, 120) / rgb(255, 255, 255))
-OK  /pt selector de idioma: opciones enfocadas=3, peor anillo=5.49 (solid 3px off -3 rgb(59, 100, 151): anillo/interior=5.49)
-OK  /pt campo INPUT: borde rgb(59, 100, 151) vs sin foco rgb(225, 222, 219) = 4.54:1; outline solid 3px rgb(59, 100, 151)
-comprobaciones=27 fallas=0
+/es  tras-paso-2(1 completado) bullet#1 glifo="✓" 13.6px/w600 color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) borde=rgb(62, 185, 120) computado=6.44:1 pixeles(fondo rgb(62,185,120), glifo rgb(27,69,69))=4.24:1 OK
+/es  tras-paso-2(1 completado) bullet#2 glifo="✓" 13.6px/w600 color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) borde=rgb(62, 185, 120) computado=6.44:1 pixeles(fondo rgb(62,185,120), glifo rgb(27,69,69))=4.24:1 OK
+/es  tras-paso-3(2 completados) bullet#1 glifo="✓" 13.6px/w600 color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) borde=rgb(62, 185, 120) computado=6.44:1 pixeles(fondo rgb(62,185,120), glifo rgb(27,69,69))=4.24:1 OK
+/es  tras-paso-3(2 completados) bullet#2 glifo="✓" 13.6px/w600 color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) borde=rgb(62, 185, 120) computado=6.44:1 pixeles(fondo rgb(62,185,120), glifo rgb(27,69,69))=4.24:1 OK
+/es  tras-paso-3(2 completados) bullet#3 glifo="✓" 13.6px/w600 color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) borde=rgb(62, 185, 120) computado=6.44:1 pixeles(fondo rgb(62,185,120), glifo rgb(27,69,69))=4.24:1 OK
+/es  sello de exito: color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) = 6.44:1 OK
+/en  tras-paso-2(1 completado) bullet#1 glifo="✓" 13.6px/w600 color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) borde=rgb(62, 185, 120) computado=6.44:1 pixeles(fondo rgb(62,185,120), glifo rgb(27,69,69))=4.24:1 OK
+/en  tras-paso-2(1 completado) bullet#2 glifo="✓" 13.6px/w600 color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) borde=rgb(62, 185, 120) computado=6.44:1 pixeles(fondo rgb(62,185,120), glifo rgb(27,69,69))=4.24:1 OK
+/en  tras-paso-3(2 completados) bullet#1 glifo="✓" 13.6px/w600 color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) borde=rgb(62, 185, 120) computado=6.44:1 pixeles(fondo rgb(62,185,120), glifo rgb(27,69,69))=4.24:1 OK
+/en  tras-paso-3(2 completados) bullet#2 glifo="✓" 13.6px/w600 color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) borde=rgb(62, 185, 120) computado=6.44:1 pixeles(fondo rgb(62,185,120), glifo rgb(27,69,69))=4.24:1 OK
+/en  tras-paso-3(2 completados) bullet#3 glifo="✓" 13.6px/w600 color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) borde=rgb(62, 185, 120) computado=6.44:1 pixeles(fondo rgb(62,185,120), glifo rgb(27,69,69))=4.24:1 OK
+/en  sello de exito: color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) = 6.44:1 OK
+/pt  tras-paso-2(1 completado) bullet#1 glifo="✓" 13.6px/w600 color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) borde=rgb(62, 185, 120) computado=6.44:1 pixeles(fondo rgb(62,185,120), glifo rgb(27,69,69))=4.24:1 OK
+/pt  tras-paso-2(1 completado) bullet#2 glifo="✓" 13.6px/w600 color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) borde=rgb(62, 185, 120) computado=6.44:1 pixeles(fondo rgb(62,185,120), glifo rgb(27,69,69))=4.24:1 OK
+/pt  tras-paso-3(2 completados) bullet#1 glifo="✓" 13.6px/w600 color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) borde=rgb(62, 185, 120) computado=6.44:1 pixeles(fondo rgb(62,185,120), glifo rgb(27,69,69))=4.24:1 OK
+/pt  tras-paso-3(2 completados) bullet#2 glifo="✓" 13.6px/w600 color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) borde=rgb(62, 185, 120) computado=6.44:1 pixeles(fondo rgb(62,185,120), glifo rgb(27,69,69))=4.24:1 OK
+/pt  tras-paso-3(2 completados) bullet#3 glifo="✓" 13.6px/w600 color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) borde=rgb(62, 185, 120) computado=6.44:1 pixeles(fondo rgb(62,185,120), glifo rgb(27,69,69))=4.24:1 OK
+/pt  sello de exito: color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) = 6.44:1 OK
+FALLOS=0
 ```
 <!-- evidencia:fin verify-report.8 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.9","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/axe_states.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T12:31:46-03:00","exit":0,"sha256":"5012aa5b179b69f7307f934803d69f7428adab2481f41544f502d4700e026a46","lineas":4,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.9`** · exit 0 · 4 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T12:31:46-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
+<!-- evidencia:inicio {"v":1,"id":"verify-report.9","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/contact-run.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:01:03-03:00","exit":0,"sha256":"9dbc113f7aa214e6b51306373e8d43f46029478c9ea199934e5ccfbb2f7410aa","lineas":16,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"} -->
+**Evidencia `verify-report.9`** · exit 0 · 16 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:01:03-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase
 
 ```text
-node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/axe_states.mjs
+node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/contact-run.mjs
 ```
 
 ```text
-/es desk-paso0=0 desk-paso1=0 desk-paso2=0 desk-paso3=0 desk-pasoexito=0 mob-paso0=0 mob-paso1=0 mob-paso2=0 mob-paso3=0 mob-pasoexito=0 drawer(abierto=true)=0 status-error=0 status-success=0
-/en desk-paso0=0 desk-paso1=0 desk-paso2=0 desk-paso3=0 desk-pasoexito=0 mob-paso0=0 mob-paso1=0 mob-paso2=0 mob-paso3=0 mob-pasoexito=0 drawer(abierto=true)=0 status-error=0 status-success=0
-/pt desk-paso0=0 desk-paso1=0 desk-paso2=0 desk-paso3=0 desk-pasoexito=0 mob-paso0=0 mob-paso1=0 mob-paso2=0 mob-paso3=0 mob-pasoexito=0 drawer(abierto=true)=0 status-error=0 status-success=0
-ejecuciones=39 violaciones_totales=0
+/es  envio            "Enviando tu mensaje…" style.color="" computado=rgb(33, 31, 28) fondo=rgb(255, 255, 255) 14px/w400 = 16.44:1 OK | pixeles(fondo rgb(255,255,255), glifo rgb(32,30,27))=16.63:1
+/es  exito            "✓ Recibido — te contactamos hoy." style.color="var(--color-text-accent)" computado=rgb(34, 102, 63) fondo=rgb(255, 255, 255) 14px/w400 = 6.91:1 OK | pixeles(fondo rgb(255,255,255), glifo rgb(33,101,62))=7.01:1
+/es  boton tras exito "✓ Enviado" color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) disabled=true opacity=1 = 6.44:1 OK
+/es  error-validacion "Revisa los datos: email invalido" style.color="rgb(192, 57, 43)" computado=rgb(192, 57, 43) fondo=rgb(255, 255, 255) 14px/w400 = 5.44:1 OK | pixeles(fondo rgb(255,255,255), glifo rgb(190,57,42))=5.51:1
+/es  error-servidor   "No pudimos enviar tu mensaje. Reintenta " style.color="rgb(192, 57, 43)" computado=rgb(192, 57, 43) fondo=rgb(255, 255, 255) 14px/w400 = 5.44:1 OK | pixeles(fondo rgb(255,255,255), glifo rgb(191,56,42))=5.51:1
+/en  envio            "Sending your message…" style.color="" computado=rgb(33, 31, 28) fondo=rgb(255, 255, 255) 14px/w400 = 16.44:1 OK | pixeles(fondo rgb(255,255,255), glifo rgb(32,30,27))=16.63:1
+/en  exito            "✓ Received — we'll contact you today." style.color="var(--color-text-accent)" computado=rgb(34, 102, 63) fondo=rgb(255, 255, 255) 14px/w400 = 6.91:1 OK | pixeles(fondo rgb(255,255,255), glifo rgb(33,101,62))=7.01:1
+/en  boton tras exito "✓ Sent" color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) disabled=true opacity=1 = 6.44:1 OK
+/en  error-validacion "Please check: email invalido" style.color="rgb(192, 57, 43)" computado=rgb(192, 57, 43) fondo=rgb(255, 255, 255) 14px/w400 = 5.44:1 OK | pixeles(fondo rgb(255,255,255), glifo rgb(192,57,43))=5.44:1
+/en  error-servidor   "We couldn't send your message. Try again" style.color="rgb(192, 57, 43)" computado=rgb(192, 57, 43) fondo=rgb(255, 255, 255) 14px/w400 = 5.44:1 OK | pixeles(fondo rgb(255,255,255), glifo rgb(191,56,42))=5.51:1
+/pt  envio            "Enviando sua mensagem…" style.color="" computado=rgb(33, 31, 28) fondo=rgb(255, 255, 255) 14px/w400 = 16.44:1 OK | pixeles(fondo rgb(255,255,255), glifo rgb(32,30,27))=16.63:1
+/pt  exito            "✓ Recebido — entramos em contato hoje." style.color="var(--color-text-accent)" computado=rgb(34, 102, 63) fondo=rgb(255, 255, 255) 14px/w400 = 6.91:1 OK | pixeles(fondo rgb(255,255,255), glifo rgb(34,102,63))=6.91:1
+/pt  boton tras exito "✓ Enviado" color=rgb(17, 34, 54) fondo=rgb(62, 185, 120) disabled=true opacity=1 = 6.44:1 OK
+/pt  error-validacion "Confira os dados: email invalido" style.color="rgb(192, 57, 43)" computado=rgb(192, 57, 43) fondo=rgb(255, 255, 255) 14px/w400 = 5.44:1 OK | pixeles(fondo rgb(255,255,255), glifo rgb(192,57,43))=5.44:1
+/pt  error-servidor   "Não foi possível enviar sua mensagem. Te" style.color="rgb(192, 57, 43)" computado=rgb(192, 57, 43) fondo=rgb(255, 255, 255) 14px/w400 = 5.44:1 OK | pixeles(fondo rgb(255,255,255), glifo rgb(191,56,42))=5.51:1
+FALLOS=0
 ```
 <!-- evidencia:fin verify-report.9 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.10","forma":"argv","argv":["bash","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/email_run.sh"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T12:31:46-03:00","exit":0,"sha256":"045f3e067f35f97475a2eab2def999f275b9ab249e1006089948dc7f8a176e6b","lineas":8,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.10`** · exit 0 · 8 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T12:31:46-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
+<!-- evidencia:inicio {"v":1,"id":"verify-report.10","forma":"argv","argv":["npx","tsx","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/email-run.mts"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:01:04-03:00","exit":0,"sha256":"b611c6998a051852b8618219f38d0af3052db93452d93efad2fe35fc41cfcfcf","lineas":14,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"} -->
+**Evidencia `verify-report.10`** · exit 0 · 14 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:01:04-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase
 
 ```text
-bash /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/email_run.sh
+npx tsx /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/email-run.mts
 ```
 
 ```text
-sitio: fondo #25d366 texto #111b21 ratio 8.80
-OK  contacto con teléfono: #111b21 sobre #25d366 = 8.80:1; coincide con sitio=true; href=https://wa.me/56912345678?text=H…
-OK  cotizacion-rapida con teléfono: #111b21 sobre #25d366 = 8.80:1; coincide con sitio=true; href=https://wa.me/56912345678?text=H…
-OK  cotizacion-4 con teléfono: #111b21 sobre #25d366 = 8.80:1; coincide con sitio=true; href=https://wa.me/56912345678?text=H…
-OK  contacto sin teléfono: botón ausente=true
-OK  cotizacion-rapida sin teléfono: botón ausente=true
-OK  cotizacion-4 sin teléfono: botón ausente=true
-errores=0
+tokens @theme: brand-solid=#3b6497 brand-solid-text=#ffffff whatsapp=#25D366 whatsapp-text=#111b21 brand=#4A7BB5
+contacto           email+tel   botones=2 | "Responder por email" rgb(255, 255, 255) sobre rgb(59, 100, 151) = 6.08:1 (15px/w700, texto grande=false) | "WhatsApp" rgb(17, 27, 33) sobre rgb(37, 211, 102) = 8.8:1 (15px/w700, texto grande=false)
+   pixeles boton «Responder por email» (contacto, email+tel): fondo=rgb(59,100,151) glifo=rgb(255,255,255) ratio=6.08:1
+contacto           solo-email  botones=1 | "Responder por email" rgb(255, 255, 255) sobre rgb(59, 100, 151) = 6.08:1 (15px/w700, texto grande=false)
+contacto           solo-tel    botones=1 | "WhatsApp" rgb(17, 27, 33) sobre rgb(37, 211, 102) = 8.8:1 (15px/w700, texto grande=false)
+contacto           ninguno     botones=0
+cotizacion-rapida  email+tel   botones=2 | "Responder por email" rgb(255, 255, 255) sobre rgb(59, 100, 151) = 6.08:1 (15px/w700, texto grande=false) | "WhatsApp" rgb(17, 27, 33) sobre rgb(37, 211, 102) = 8.8:1 (15px/w700, texto grande=false)
+cotizacion-rapida  solo-email  botones=1 | "Responder por email" rgb(255, 255, 255) sobre rgb(59, 100, 151) = 6.08:1 (15px/w700, texto grande=false)
+cotizacion-rapida  solo-tel    botones=1 | "WhatsApp" rgb(17, 27, 33) sobre rgb(37, 211, 102) = 8.8:1 (15px/w700, texto grande=false)
+cotizacion-rapida  ninguno     botones=0
+cotizacion-4       email+tel   botones=2 | "Responder por email" rgb(255, 255, 255) sobre rgb(59, 100, 151) = 6.08:1 (15px/w700, texto grande=false) | "WhatsApp" rgb(17, 27, 33) sobre rgb(37, 211, 102) = 8.8:1 (15px/w700, texto grande=false)
+cotizacion-4       solo-email  botones=1 | "Responder por email" rgb(255, 255, 255) sobre rgb(59, 100, 151) = 6.08:1 (15px/w700, texto grande=false)
+cotizacion-4       solo-tel    botones=1 | "WhatsApp" rgb(17, 27, 33) sobre rgb(37, 211, 102) = 8.8:1 (15px/w700, texto grande=false)
+cotizacion-4       ninguno     botones=0
 ```
 <!-- evidencia:fin verify-report.10 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.11","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/states.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T12:36:40-03:00","exit":0,"sha256":"3effd9a54c6b52040442c7bcc4f2a1cb71876e94d46c860d54a0158d315bf232","lineas":41,"omitidas":1,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.11`** · exit 0 · 41 líneas, 1 omitidas · HEAD `d92da75b0744` · 2026-10-06T12:36:40-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
+<!-- evidencia:inicio {"v":1,"id":"verify-report.11","forma":"argv","argv":["python3","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/literales.py"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:01:04-03:00","exit":0,"sha256":"ff67246b161fb2bad1d2c20055a4a22bc6a2c7ee9ebcaa043e238b46732f4b5b","lineas":5,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `verify-report.11`** · exit 0 · 5 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:01:04-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
 
 ```text
-node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/states.mjs
+python3 /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/literales.py
 ```
 
 ```text
-cta-hero                   umbral 4.5  peor=5.10
-cta-hero-hover>=5          umbral 5  peor=5.10
-brand-nav                  umbral 4.5  peor=6.08
-brand-servicios            umbral 4.5  peor=6.08
-svc-tag-cta                umbral 4.5  peor=6.44
-drawer-cta                 umbral 4.5  peor=5.10
-drawer-wa                  umbral 4.5  peor=5.63
-drawer-link                umbral 4.5  peor=7.70
-nav-link                   umbral 4.5  peor=7.30
-nav-link-activo            umbral 4.5  peor=7.30
-skip-link                  umbral 4.5  peor=6.08
-form-submit                umbral 4.5  peor=6.44
-channel-wa                 umbral 4.5  peor=8.80
-pin-oficina                umbral 3  peor=6.44
-404-cta                    umbral 4.5  peor=5.10
-404-cta-hover>=5           umbral 5  peor=5.10
-cta-final-btn              umbral 4.5  peor=6.08
-cta-final-btn-cta          umbral 4.5  peor=6.08
-cta-final-btn-wa           umbral 4.5  peor=5.63
-svc-filter-activo          umbral 4.5  peor=16.08
-svc-filter-inactivo        umbral 4.5  peor=5.44
-btn-primary-lg             umbral 4.5  peor=6.44
-mode-check                 umbral 3  peor=6.44
-quote-step-num             umbral 4.5  peor=6.91
-quote-empty                umbral 4.5  peor=5.44
-quote-sla                  umbral 4.5  peor=5.80
-quote-title                umbral 4.5  peor=16.08
-exito-seal                 umbral 3  peor=6.44
-exito-step-n               umbral 4.5  peor=6.46
-exito-btn-brand            umbral 4.5  peor=6.08
-exito-btn-wa               umbral 4.5  peor=5.63
-eyebrow                    umbral 4.5  peor=5.91
-eyebrow-why                umbral 4.5  peor=6.46
-contact-pill               umbral 4.5  peor=5.80
-cta-final-hint             umbral 4.5  peor=9.30
-cta-final-status-error     umbral 4.5  peor=8.51
-cta-final-status-ok        umbral 4.5  peor=9.21
-howwork-step               umbral 4.5  peor=8.45
-ind-item-num               umbral 4.5  peor=9.27
-
+merge-base main/HEAD = 843d5f691efd
+(preexistente, linea tocada)  log-atm-web-astro/src/pages/contacto.astro  #c0392b  x1
+(preexistente, linea tocada)  log-atm-web-astro/src/styles/pages/shared.css  rgba(255,255,255,0.2)  x1
+LITERALES NETOS NUEVOS (hex, rgb, rgba, hsl, hsla, oklch... fuera de tokens.css y email-templates.ts) = 0
+COLORES CON NOMBRE AGREGADOS = 0
 ```
 <!-- evidencia:fin verify-report.11 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.12","forma":"archivo","argv":null,"texto":"#!/bin/bash\nVPS=desk LANGS=,/en,/pt node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/ring.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T12:39:50-03:00","exit":0,"sha256":"0c7bfcd062a4416fe6b39ff27882b3a1199e915e2226cbc2cd94d9961be57dc7","lineas":25,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.12`** · exit 0 · 25 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T12:39:50-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
+<!-- evidencia:inicio {"v":1,"id":"verify-report.12","forma":"argv","argv":["python3","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/estaticas.py"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:01:05-03:00","exit":0,"sha256":"2047e6d4ab9376a7eb5cbacef7b06db109662cb2641ac828f3a4adbf12f77095","lineas":32,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `verify-report.12`** · exit 0 · 32 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:01:05-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
 
-```bash
-#!/bin/bash
-VPS=desk LANGS=,/en,/pt node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/ring.mjs
+```text
+python3 /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/estaticas.py
 ```
 
 ```text
-desk /es/ paradas=43/43 peor=5.68
-desk /es/servicios/ paradas=37/37 peor=5.68
-desk /es/industrias/ paradas=48/48 peor=5.69
-desk /es/nosotros/ paradas=24/24 peor=5.69
-desk /es/contacto/ paradas=26/26 peor=5.68
-desk /es/cotizar/ paradas=18/18 peor=5.10
-desk /es/xx-nope/ paradas=14/14 peor=5.68
-desk /en/ paradas=43/43 peor=5.68
-desk /en/servicios/ paradas=37/37 peor=5.68
-desk /en/industrias/ paradas=48/48 peor=5.69
-desk /en/nosotros/ paradas=24/24 peor=5.69
-desk /en/contacto/ paradas=26/26 peor=5.68
-desk /en/cotizar/ paradas=18/18 peor=5.09
-desk /en/xx-nope/ paradas=14/14 peor=5.68
-desk /pt/ paradas=43/43 peor=5.68
-desk /pt/servicios/ paradas=37/37 peor=5.68
-desk /pt/industrias/ paradas=48/48 peor=5.69
-desk /pt/nosotros/ paradas=24/24 peor=5.69
-desk /pt/contacto/ paradas=26/26 peor=5.68
-desk /pt/cotizar/ paradas=18/18 peor=5.10
-desk /pt/xx-nope/ paradas=14/14 peor=5.68
-SIN ANILLO (outline none/0): 0 
-FALLAS <3:1: 0
-
-paradas_totales=630
+== 1. Paridad :root / @theme de los tokens agregados o modificados por el cambio ==
+  --color-accent-800                 :root=#22663f    @theme=#22663f    OK
+  --color-error-light                :root=#fca5a5    @theme=#fca5a5    OK
+  --color-whatsapp                   :root=#25d366    @theme=#25d366    OK
+  --color-whatsapp-text              :root=#111b21    @theme=#111b21    OK
+  --color-brand-solid                :root=#3b6497    @theme=#3b6497    OK
+  --color-brand-solid-hover          :root=#2b4e78    @theme=#2b4e78    OK
+  --color-brand-solid-text           :root=#ffffff    @theme=#ffffff    OK
+  --color-cta                        :root=#3eb978    @theme=#3eb978    OK
+  --color-cta-hover                  :root=#339965    @theme=#339965    OK
+  --color-cta-text                   :root=#112236    @theme=#112236    OK
+  --color-cta-hover-text             :root=#0a1624    @theme=#0a1624    OK
+  --color-text-accent                :root=#22663f    @theme=#22663f    OK
+  --color-focus-ring                 :root=#3b6497    @theme=#3b6497    OK
+  --color-focus-ring-inverse         :root=#87d3b0    @theme=#87d3b0    OK
+  tokens con diferencia = 0
+== 2. Consumidores huerfanos de tokens retirados ==
+  referencias a --color-brand-hover: 0
+  referencias a color-brand-hover: 0
+== 3. outline: none / 0 en src ==
+  ocurrencias = 0
+== 4. Correcciones del juicio presentes en el código ==
+  C1 viñeta done usa par CTA                           PRESENTE
+  C2 degradado ≤960px con primary-950 (sin rgba)       PRESENTE
+  SA1 éxito contacto con token                         PRESENTE
+  SA2 contador align-self                              PRESENTE
+  SB1 botón email con constante de par                 PRESENTE
+  SB2 DESIGN.md excepción .why__video-toggle           PRESENTE
+  SB2 DESIGN.md --color-brand no apto texto normal     PRESENTE
+  #4A7BB5 como fondo de botón en email-templates.ts: 0
+== 5. Colores de texto blanco/#fff residuales sobre fondo --color-cta / accent-500 ==
+  (fin del barrido)
 ```
 <!-- evidencia:fin verify-report.12 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.13","forma":"archivo","argv":null,"texto":"#!/bin/bash\nVPS=mob LANGS= node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/ring.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T12:40:28-03:00","exit":1,"sha256":"92e20437188240db7ea383611b922bc956971ce793b66c3b9c50c605f0558e1b","lineas":11,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.13`** · exit 1 · 11 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T12:40:28-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
+<!-- evidencia:inicio {"v":1,"id":"verify-report.13","forma":"argv","argv":["python3","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/grafo.py"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:01:05-03:00","exit":0,"sha256":"5ca0d8a42f9014141a345386f22d2cfe220acda1ccf0d1bcb82d7bab06e4844d","lineas":18,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `verify-report.13`** · exit 0 · 18 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:01:05-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
 
-```bash
-#!/bin/bash
-VPS=mob LANGS= node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/ring.mjs
+```text
+python3 /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/grafo.py
 ```
 
 ```text
-mob /es/ paradas=38/38 peor=5.68
-mob /es/servicios/ paradas=32/32 peor=5.68
-mob /es/industrias/ paradas=43/43 peor=5.69
-mob /es/nosotros/ paradas=19/19 peor=5.69
-mob /es/contacto/ paradas=21/21 peor=1.25
-mob /es/cotizar/ paradas=13/13 peor=5.69
-mob /es/xx-nope/ paradas=9/9 peor=5.68
-SIN ANILLO (outline none/0): 0 
-FALLAS <3:1: 1
-/es/contacto/ a ratio=1.25 ring=rgb(59, 100, 151) w=3 off=2
-paradas_totales=175
+specs en spec_refs = 15
+cta-button-contrast                      depends_on=0 affects=['sitewide-contrast-verification'] adrs=[]
+brand-button-contrast                    depends_on=0 affects=['sitewide-contrast-verification'] adrs=[]
+whatsapp-button-contrast                 depends_on=0 affects=['sitewide-contrast-verification'] adrs=[]
+email-whatsapp-button-contrast           depends_on=0 affects=['sitewide-contrast-verification'] adrs=[]
+nav-link-state-contrast                  depends_on=0 affects=['sitewide-contrast-verification'] adrs=[]
+accent-text-contrast                     depends_on=0 affects=['sitewide-contrast-verification'] adrs=[]
+dark-surface-heading-legibility          depends_on=0 affects=['sitewide-contrast-verification'] adrs=[]
+quote-summary-empty-values-contrast      depends_on=0 affects=['sitewide-contrast-verification'] adrs=[]
+secondary-text-dark-surface-contrast     depends_on=0 affects=['sitewide-contrast-verification'] adrs=[]
+error-page-code-contrast                 depends_on=0 affects=['sitewide-contrast-verification'] adrs=[]
+services-filter-active-state-contrast    depends_on=0 affects=['sitewide-contrast-verification'] adrs=[]
+focus-indicator-contrast                 depends_on=0 affects=['sitewide-contrast-verification'] adrs=[]
+contrast-token-single-source             depends_on=0 affects=['sitewide-contrast-verification'] adrs=[]
+sitewide-contrast-verification           depends_on=13 affects=[] adrs=[]
+email-reply-button-contrast              depends_on=0 affects=[] adrs=[]
+deltas MODIFY = 0
+inconsistencias = 0
 ```
 <!-- evidencia:fin verify-report.13 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.14","forma":"archivo","argv":null,"texto":"#!/bin/bash\nONLY=ind node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/pixels.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T12:46:11-03:00","exit":0,"sha256":"33272cf0991dd584121931b941f381a71028ced67f12a503f04fad61ac7bacbd","lineas":6,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.14`** · exit 0 · 6 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T12:46:11-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
+<!-- evidencia:inicio {"v":1,"id":"verify-report.14","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/industrias-run.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:03:59-03:00","exit":0,"sha256":"f70383e84b971fd0116620fe465ff441a6a0eedbfc6f167c65b061cc3088243c","lineas":10,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"} -->
+**Evidencia `verify-report.14`** · exit 0 · 10 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:03:59-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase
 
-```bash
-#!/bin/bash
-ONLY=ind node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/pixels.mjs
+```text
+node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/industrias-run.mjs
 ```
 
 ```text
-OK   ind nombre                                 n=144 peor=5.94 en /es d1024 slide 5 «E-commerce» fg=rgb(255, 255, 255)
-OK   ind eyebrow                                n=144 peor=4.73 en /es d1024 slide 8 «Sector · 08» fg=rgb(216, 241, 230)
-OK   ind sub                                    n=144 peor=5.95 en /es d1024 slide 2 «Moda, consumo, tem» fg=rgba(255, 255, 255, 0.78)
-OK   ind tags                                   n=396 peor=7.88 en /es m390 slide 8 «Industrial» fg=rgb(255, 255, 255)
-BAJO ind contador                               n=144 peor=1.32 en /es d1024 slide 3 «03 / 12» fg=rgb(255, 255, 255)
-grupos=5 grupos_bajo_4.5=1
+/es  ancho=390  OK    industrias=12 peor(px, todas): nombre=7.94 eyebrow=6.17 sub=6.43 contador=7.95 tags=5.14 | pastilla=106px de 350px, align-self=flex-start
+/es  ancho=600  OK    industrias=12 peor(px, todas): nombre=9.16 eyebrow=7.01 sub=7.15 contador=7.19 tags=5.48 | pastilla=106px de 540px, align-self=flex-start
+/es  ancho=768  OK    industrias=12 peor(px, todas): nombre=9.05 eyebrow=7.01 sub=7.15 contador=7.08 tags=5.4 | pastilla=106px de 691px, align-self=flex-start
+/es  ancho=960  OK    industrias=12 peor(px, todas): nombre=9 eyebrow=6.88 sub=7.26 contador=6.78 tags=5.32 | pastilla=106px de 880px, align-self=flex-start
+/es  ancho=1024 FALLA industrias=12 peor(px, todas): nombre=6.14 eyebrow=4.46 sub=5.68 contador=6.76 tags=4.9 | pastilla=106px de 469px, align-self=flex-start
+/es  ancho=1440 OK    industrias=12 peor(px, todas): nombre=6.48 eyebrow=4.69 sub=5.92 contador=6.86 tags=5.01 | pastilla=106px de 603px, align-self=flex-start
+/en  ancho=390  OK    industrias=12 peor(px, todas): nombre=7.94 eyebrow=6.17 sub=6.43 contador=7.95 tags=5.14 | pastilla=106px de 350px, align-self=flex-start
+/pt  ancho=390  OK    industrias=12 peor(px, todas): nombre=7.94 eyebrow=6.17 sub=6.43 contador=7.95 tags=5.14 | pastilla=106px de 350px, align-self=flex-start
+/en  ancho=1440 OK    industrias=12 peor(px, todas): nombre=6.48 eyebrow=4.69 sub=5.92 contador=6.86 tags=5.01 | pastilla=106px de 603px, align-self=flex-start
+FALLOS=1
 ```
 <!-- evidencia:fin verify-report.14 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.15","forma":"archivo","argv":null,"texto":"#!/bin/bash\nONLY=contacto,heroes,ctafinal node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/pixels.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T12:47:45-03:00","exit":0,"sha256":"94e625a935df0c964a18034eb76981895ca672f3962efca5d7b7b45d83aca0f9","lineas":7,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.15`** · exit 0 · 7 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T12:47:45-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
+<!-- evidencia:inicio {"v":1,"id":"verify-report.15","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/pix-run.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:04:35-03:00","exit":0,"sha256":"c46c8c99c38709c0d63a3471da0f2641615292f3a96e8e5ddef57f4a1b2b974d","lineas":11,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"} -->
+**Evidencia `verify-report.15`** · exit 0 · 11 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:04:35-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase
 
-```bash
-#!/bin/bash
-ONLY=contacto,heroes,ctafinal node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/pixels.mjs
+```text
+node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/pix-run.mjs
 ```
 
 ```text
-OK   contacto canal WA (nombre/valor)           n= 12 peor=8.80 en /es d1440 «WhatsApp · respues» fg=rgb(17, 27, 33)
-OK   contacto otros canales                     n= 24 peor=5.44 en /es d1440 «Teléfono» fg=rgb(110, 105, 99)
-OK   migas de pan (a)                           n= 30 peor=6.53 en /es d1440 cotizar «Inicio» fg=rgb(215, 228, 244)
-OK   hero h1                                    n= 30 peor=7.32 en /es d1440 cotizar «Cotiza en 4 pasos.» fg=rgb(255, 255, 255)
-OK   cta-final textos                           n=156 peor=8.83 en /es / «Cotización rápida » fg=rgb(174, 199, 229)
-OK   cta-final botones                          n= 36 peor=6.08 en /es / «Cotiza ahora» fg=rgb(255, 255, 255)
-grupos=6 grupos_bajo_4.5=0
+FALLOS=0 mediciones=60 (es/en/pt x 1440 y 390)
+cta-final aviso                    OK    umbral 4.5 peor-pixel(6 combinaciones)=8.72 texto rgb(174, 199, 229)
+cta-final error                    OK    umbral 4.5 peor-pixel(6 combinaciones)=7.1 texto rgb(252, 165, 165)
+cta-final exito                    OK    umbral 4.5 peor-pixel(6 combinaciones)=7.69 texto rgb(135, 211, 176)
+cta-final eyebrow                  OK    umbral 4.5 peor-pixel(6 combinaciones)=10.49 texto rgb(174, 199, 229)
+industrias numero de item          OK    umbral 4.5 peor-pixel(6 combinaciones)=11.1 texto rgb(216, 241, 230)
+canal WhatsApp nombre              OK    umbral 4.5 peor-pixel(6 combinaciones)=8.8 texto rgb(17, 27, 33)
+canal WhatsApp valor               OK    umbral 4.5 peor-pixel(6 combinaciones)=8.8 texto rgb(17, 27, 33)
+etiqueta del formulario            OK    umbral 4.5 peor-pixel(6 combinaciones)=5.8 texto rgb(34, 102, 63)
+titulo del resumen                 OK    umbral 4.5 peor-pixel(6 combinaciones)=16.08 texto rgb(255, 255, 255)
+'Por definir' del resumen          OK    umbral 4.5 peor-pixel(6 combinaciones)=5.44 texto rgb(110, 105, 99)
 ```
 <!-- evidencia:fin verify-report.15 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.16","forma":"archivo","argv":null,"texto":"#!/bin/bash\n# Contrafactual: mismo muestreo con el degradado del overlay revertido al de escritorio en todos los anchos\nREVERT_OVERLAY=1 ONLY=ind node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/pixels.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T12:53:28-03:00","exit":0,"sha256":"80bb5f257e8465485831651990d4db86360643851ca2922104ef4faf10ebae1a","lineas":6,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase; contrafactual: revierte el overlay solo en el navegador y no escribe en el repo"} -->
-**Evidencia `verify-report.16`** · exit 0 · 6 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T12:53:28-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase; contrafactual: revierte el overlay solo en el navegador y no escribe en el repo
+<!-- evidencia:inicio {"v":1,"id":"verify-report.16","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/foco-run.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:07:39-03:00","exit":0,"sha256":"3ff50ad45b5114b7f892db8a43c3cc4407132214cdd4a2e7fb2752c3903041c3","lineas":24,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"} -->
+**Evidencia `verify-report.16`** · exit 0 · 24 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:07:39-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase
 
-```bash
-#!/bin/bash
-# Contrafactual: mismo muestreo con el degradado del overlay revertido al de escritorio en todos los anchos
-REVERT_OVERLAY=1 ONLY=ind node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/pixels.mjs
+```text
+node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/foco-run.mjs
 ```
 
 ```text
-BAJO ind nombre                                 n=144 peor=2.44 en /es m390 slide 8 «Iluminarias» fg=rgb(255, 255, 255)
-BAJO ind eyebrow                                n=144 peor=1.77 en /es m390 slide 8 «Sector · 08» fg=rgb(216, 241, 230)
-BAJO ind sub                                    n=144 peor=3.07 en /es m390 slide 8 «LED e industrial» fg=rgba(255, 255, 255, 0.78)
-OK   ind tags                                   n=396 peor=5.07 en /es m390 slide 8 «Industrial» fg=rgb(255, 255, 255)
-BAJO ind contador                               n=144 peor=1.32 en /es d1024 slide 3 «03 / 12» fg=rgb(255, 255, 255)
-grupos=5 grupos_bajo_4.5=4
+/                  controles enfocables recorridos con Tab=31
+/servicios/        controles enfocables recorridos con Tab=32
+/industrias/       controles enfocables recorridos con Tab=37
+/nosotros/         controles enfocables recorridos con Tab=24
+/contacto/         controles enfocables recorridos con Tab=26
+/cotizar/          controles enfocables recorridos con Tab=18
+/xx-nope/          controles enfocables recorridos con Tab=14
+/en/               controles enfocables recorridos con Tab=31
+/en/servicios/     controles enfocables recorridos con Tab=32
+/en/industrias/    controles enfocables recorridos con Tab=37
+/en/nosotros/      controles enfocables recorridos con Tab=24
+/en/contacto/      controles enfocables recorridos con Tab=26
+/en/cotizar/       controles enfocables recorridos con Tab=18
+/en/xx-nope/       controles enfocables recorridos con Tab=14
+/pt/               controles enfocables recorridos con Tab=31
+/pt/servicios/     controles enfocables recorridos con Tab=32
+/pt/industrias/    controles enfocables recorridos con Tab=37
+/pt/nosotros/      controles enfocables recorridos con Tab=24
+/pt/contacto/      controles enfocables recorridos con Tab=26
+/pt/cotizar/       controles enfocables recorridos con Tab=18
+/pt/xx-nope/       controles enfocables recorridos con Tab=14
+anillos < 3:1: 0
+sin indicador visible: 0
+TOTAL controles=546 FALLOS=0
 ```
 <!-- evidencia:fin verify-report.16 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.17","forma":"archivo","argv":null,"texto":"#!/bin/bash\nVPS=desk LANGS=,/en,/pt node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/ring.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T12:56:43-03:00","exit":0,"sha256":"e26f407c3295feee134605d4c646b1c011651afa9cc438d7713d379262fa798b","lineas":25,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.17`** · exit 0 · 25 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T12:56:43-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
+<!-- evidencia:inicio {"v":1,"id":"verify-report.17","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/foco2-run.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:08:03-03:00","exit":0,"sha256":"293dcc20a6817e8db08dc597b2d18ba305519f28b2a5e95e6cf94f8a47e3b677","lineas":23,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"} -->
+**Evidencia `verify-report.17`** · exit 0 · 23 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:08:03-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase
 
-```bash
-#!/bin/bash
-VPS=desk LANGS=,/en,/pt node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/ring.mjs
+```text
+node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/foco2-run.mjs
 ```
 
 ```text
-desk /es/ paradas=42/43 peor=5.68
-desk /es/servicios/ paradas=36/37 peor=5.68
-desk /es/industrias/ paradas=47/48 peor=5.69
-desk /es/nosotros/ paradas=23/24 peor=5.69
-desk /es/contacto/ paradas=25/26 peor=5.68
-desk /es/cotizar/ paradas=17/18 peor=5.10
-desk /es/xx-nope/ paradas=13/14 peor=5.68
-desk /en/ paradas=42/43 peor=5.68
-desk /en/servicios/ paradas=36/37 peor=5.68
-desk /en/industrias/ paradas=47/48 peor=5.69
-desk /en/nosotros/ paradas=23/24 peor=5.69
-desk /en/contacto/ paradas=25/26 peor=5.68
-desk /en/cotizar/ paradas=17/18 peor=5.09
-desk /en/xx-nope/ paradas=13/14 peor=5.68
-desk /pt/ paradas=42/43 peor=5.68
-desk /pt/servicios/ paradas=36/37 peor=5.68
-desk /pt/industrias/ paradas=47/48 peor=5.69
-desk /pt/nosotros/ paradas=23/24 peor=5.69
-desk /pt/contacto/ paradas=25/26 peor=5.68
-desk /pt/cotizar/ paradas=17/18 peor=5.10
-desk /pt/xx-nope/ paradas=13/14 peor=5.68
-SIN ANILLO (outline none/0): 0 
-FALLAS <3:1: 0
-
-paradas_totales=609
+/es selector de idioma opcion 1 OK    clase="lang-selector__option is-active" outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste vs superficie=5.49
+/es selector de idioma opcion 2 OK    clase="lang-selector__option" outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste vs superficie=6.08
+/es selector de idioma opcion 3 OK    clase="lang-selector__option" outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste vs superficie=5.49
+/en selector de idioma opcion 1 OK    clase="lang-selector__option" outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste vs superficie=6.08
+/en selector de idioma opcion 2 OK    clase="lang-selector__option is-active" outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste vs superficie=5.49
+/en selector de idioma opcion 3 OK    clase="lang-selector__option" outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste vs superficie=6.08
+/pt selector de idioma opcion 1 OK    clase="lang-selector__option" outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste vs superficie=6.08
+/pt selector de idioma opcion 2 OK    clase="lang-selector__option" outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste vs superficie=6.08
+/pt selector de idioma opcion 3 OK    clase="lang-selector__option is-active" outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste vs superficie=5.49
+/es movil opcion de idioma "ESEspañol" OK    outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste=5.49
+/es movil opcion de idioma "ENEnglish" OK    outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste=6.08
+/es movil opcion de idioma "PTPortuguês" OK    outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste=6.08
+/en movil opcion de idioma "ESEspañol" OK    outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste=6.08
+/en movil opcion de idioma "ENEnglish" OK    outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste=5.49
+/en movil opcion de idioma "PTPortuguês" OK    outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste=6.08
+/pt movil opcion de idioma "ESEspañol" OK    outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste=6.08
+/pt movil opcion de idioma "ENEnglish" OK    outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste=6.08
+/pt movil opcion de idioma "PTPortuguês" OK    outline=3px solid offset=-3px color=rgb(59, 100, 151) contraste=5.49
+/contacto/ #cn OK    borde con foco=rgb(59, 100, 151) vs sin foco=rgb(225, 222, 219) = 4.54:1 ; contorno 3px solid rgb(59, 100, 151)
+/contacto/ #ce OK    borde con foco=rgb(59, 100, 151) vs sin foco=rgb(225, 222, 219) = 4.54:1 ; contorno 3px solid rgb(59, 100, 151)
+/contacto/ #cm OK    borde con foco=rgb(59, 100, 151) vs sin foco=rgb(225, 222, 219) = 4.54:1 ; contorno 3px solid rgb(59, 100, 151)
+/contacto/ #cp OK    borde con foco=rgb(59, 100, 151) vs sin foco=rgb(225, 222, 219) = 4.54:1 ; contorno 3px solid rgb(59, 100, 151)
+FALLOS=0
 ```
 <!-- evidencia:fin verify-report.17 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.18","forma":"archivo","argv":null,"texto":"#!/bin/bash\nVPS=mob LANGS= node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/ring.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T12:57:20-03:00","exit":0,"sha256":"5a6962ba5bfe3454dac38d909a2ff6a2525c48b022a51f07fb4a002e1988df73","lineas":11,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.18`** · exit 0 · 11 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T12:57:20-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
+<!-- evidencia:inicio {"v":1,"id":"verify-report.18","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/e404-run.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:08:12-03:00","exit":0,"sha256":"cbf6d67a0a0af71f663489c5856c88e6855bf29fad6ce45dfcd0b6ac2fdde205","lineas":4,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"} -->
+**Evidencia `verify-report.18`** · exit 0 · 4 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:08:12-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase
 
-```bash
-#!/bin/bash
-VPS=mob LANGS= node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/ring.mjs
+```text
+node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/e404-run.mjs
 ```
 
 ```text
-mob /es/ paradas=37/38 peor=5.68
-mob /es/servicios/ paradas=31/32 peor=5.68
-mob /es/industrias/ paradas=42/43 peor=5.69
-mob /es/nosotros/ paradas=18/19 peor=5.69
-mob /es/contacto/ paradas=20/21 peor=5.68
-mob /es/cotizar/ paradas=12/13 peor=5.69
-mob /es/xx-nope/ paradas=8/9 peor=5.68
-SIN ANILLO (outline none/0): 0 
-FALLAS <3:1: 0
-
-paradas_totales=168
+/es html lang=es-CL codigo="404" aria-hidden=true | ancho:tamaño/contraste 320:96px/4.1 360:96px/4.1 390:96px/4.1 480:96px/4.1 600:96px/4.1 768:115.2px/4.1 820:123px/4.1 960:144px/4.1 1024:153.6px/4.1 1280:160px/4.1 1440:160px/4.1 1920:160px/4.1 OK
+/en html lang=en-US codigo="404" aria-hidden=true | ancho:tamaño/contraste 320:96px/4.1 360:96px/4.1 390:96px/4.1 480:96px/4.1 600:96px/4.1 768:115.2px/4.1 820:123px/4.1 960:144px/4.1 1024:153.6px/4.1 1280:160px/4.1 1440:160px/4.1 1920:160px/4.1 OK
+/pt html lang=pt-BR codigo="404" aria-hidden=true | ancho:tamaño/contraste 320:96px/4.1 360:96px/4.1 390:96px/4.1 480:96px/4.1 600:96px/4.1 768:115.2px/4.1 820:123px/4.1 960:144px/4.1 1024:153.6px/4.1 1280:160px/4.1 1440:160px/4.1 1920:160px/4.1 OK
+FALLOS=0
 ```
 <!-- evidencia:fin verify-report.18 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.19","forma":"archivo","argv":null,"texto":"#!/bin/bash\nONLY=ind node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/pixels.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T13:03:03-03:00","exit":0,"sha256":"7dad69a4be1ae340b867ee7bc0e8451fde7d21e3a7e8e8b484ffbe21a40bd202","lineas":6,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.19`** · exit 0 · 6 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T13:03:03-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
+<!-- evidencia:inicio {"v":1,"id":"verify-report.19","forma":"argv","argv":["python3","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/pares.py"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:08:12-03:00","exit":0,"sha256":"8a40bc5dd83acf9e5a4436ad47ed03193fcc2479c3037aafe7613440b647c3c2","lineas":11,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `verify-report.19`** · exit 0 · 11 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:08:12-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
 
-```bash
-#!/bin/bash
-ONLY=ind node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/pixels.mjs
+```text
+python3 /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/pares.py
 ```
 
 ```text
-OK   ind nombre                                 n=144 peor=5.94 en /es d1024 slide 5 «E-commerce» fg=rgb(255, 255, 255)
-OK   ind eyebrow                                n=144 peor=4.73 en /es d1024 slide 8 «Sector · 08» fg=rgb(216, 241, 230)
-OK   ind sub                                    n=144 peor=5.95 en /es d1024 slide 2 «Moda, consumo, tem» fg=rgba(255, 255, 255, 0.78)
-OK   ind tags                                   n=396 peor=7.88 en /es m390 slide 8 «Industrial» fg=rgb(255, 255, 255)
-OK   ind contador                               n=144 peor=6.77 en /es d1024 slide 3 «03 / 12» fg=rgb(255, 255, 255)
-grupos=5 grupos_bajo_4.5=0
+== Fondo verde de los botones CTA: main vs HEAD (@theme) ==
+  --color-accent-500: main=#3eb978 HEAD=#3eb978 IGUAL
+  --color-cta: main=#3eb978 HEAD=#3eb978 IGUAL
+== Verde de WhatsApp: token vs botón del sitio ==
+  .btn--wa usa var(--color-whatsapp): True
+== Pares del correo vs tokens ==
+  WhatsApp correo: fondo=#25d366 texto=#111b21 | tokens: #25d366 / #111b21 -> IGUAL
+  Responder por email correo: fondo=#3b6497 texto=#ffffff | tokens: #3b6497 / #ffffff -> IGUAL
+  comentario de origen junto al par de «Responder por email» nombra el token: True
+  consumo de emailBtnColors en las dos ramas: 2 | consumo de waBtnColors: 2
+  enlaces mailto de botón conservan escapeHtml/encodeURIComponent: True
 ```
 <!-- evidencia:fin verify-report.19 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.20","forma":"archivo","argv":null,"texto":"#!/bin/bash\nONLY=titles node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/pixels.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T13:09:03-03:00","exit":0,"sha256":"53ebde14e9679d251041d74bf91e1fb86bf4342c98d97da5136b1cce28626a4b","lineas":2,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.20`** · exit 0 · 2 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T13:09:03-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
+<!-- evidencia:inicio {"v":1,"id":"verify-report.20","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/extras-run.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:12:33-03:00","exit":0,"sha256":"34e873a6e1d1227760bf7b6e0811d6770e91f0e0a7c689e660d201fec212fa50","lineas":5,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"} -->
+**Evidencia `verify-report.20`** · exit 0 · 5 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:12:33-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase
 
-```bash
-#!/bin/bash
-ONLY=titles node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/pixels.mjs
+```text
+node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/extras-run.mjs
 ```
 
 ```text
-BAJO titulos h1-h6                              n=576 peor=1.05 en /es d1440 / «Consultoría Logíst» fg=rgb(255, 255, 255)
-grupos=1 grupos_bajo_4.5=1
+FALLOS=0 elementos evaluados=45 (4 estados cada uno: reposo, cursor, foco, presionado)
+CTA final .btn--cta (azul, texto claro): OK    paginas x idiomas=12 peor=6.08 (ejemplo en reposo reposo:rgb(255,255,255) sobre rgb(59,100,151)=6.08)
+CTA final .cta-final__btn (azul, texto claro): OK    paginas x idiomas=12 peor=6.08 (ejemplo en reposo reposo:rgb(255,255,255) sobre rgb(59,100,151)=6.08)
+CTA final .btn--wa (verde WhatsApp, texto casi negro): OK    paginas x idiomas=12 peor=5.63 (ejemplo en reposo reposo:rgb(17,27,33) sobre rgb(37,211,102)=8.8)
+menu enlace de pagina actual: OK    paginas x idiomas=9 peor=7.3 (ejemplo en reposo reposo:rgb(43,78,120) sobre rgb(239,237,235)=7.3)
 ```
 <!-- evidencia:fin verify-report.20 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.21","forma":"archivo","argv":null,"texto":"#!/bin/bash\nVPS=desk LANGS=,/en,/pt node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/ring.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T13:19:31-03:00","exit":1,"sha256":"2ac81fe4b16316f2c8fdb38c3ba84e1df3abb8b77247f65bf4a5655f6ff726ed","lineas":38,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.21`** · exit 1 · 38 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T13:19:31-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
+<!-- evidencia:inicio {"v":1,"id":"verify-report.21","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/migas-run.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:17:27-03:00","exit":0,"sha256":"f871b9618e93992a1f4aa66907d099590cc14171b7f4d9dcb98689d468d08bc7","lineas":13,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"} -->
+**Evidencia `verify-report.21`** · exit 0 · 13 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:17:27-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase
 
-```bash
-#!/bin/bash
-VPS=desk LANGS=,/en,/pt node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/ring.mjs
+```text
+node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/migas-run.mjs
 ```
 
 ```text
-desk /es/ paradas=43/43 peor=1.70
-desk /es/servicios/ paradas=37/37 peor=1.70
-desk /es/industrias/ paradas=48/48 peor=1.70
-desk /es/nosotros/ paradas=24/24 peor=1.70
-desk /es/contacto/ paradas=26/26 peor=1.70
-desk /es/cotizar/ paradas=18/18 peor=1.70
-desk /es/xx-nope/ paradas=14/14 peor=1.70
-desk /en/ paradas=43/43 peor=1.00
-desk /en/servicios/ paradas=37/37 peor=1.00
-desk /en/industrias/ paradas=48/48 peor=1.00
-desk /en/nosotros/ paradas=24/24 peor=1.00
-desk /en/contacto/ paradas=26/26 peor=1.00
-desk /en/cotizar/ paradas=18/18 peor=1.00
-desk /en/xx-nope/ paradas=14/14 peor=1.00
-desk /pt/ paradas=43/43 peor=4.44
-desk /pt/servicios/ paradas=37/37 peor=4.44
-desk /pt/industrias/ paradas=48/48 peor=4.44
-desk /pt/nosotros/ paradas=24/24 peor=4.44
-desk /pt/contacto/ paradas=26/26 peor=4.44
-desk /pt/cotizar/ paradas=18/18 peor=4.44
-desk /pt/xx-nope/ paradas=14/14 peor=4.44
-SIN ANILLO (outline none/0): 0 
-FALLAS <3:1: 14
-/es/ a.nav__brand.nav__brand--footer ratio=1.70 ring=rgb(135, 211, 176) w=3 off=2
-/es/servicios/ a.nav__brand.nav__brand--footer ratio=1.70 ring=rgb(135, 211, 176) w=3 off=2
-/es/industrias/ a.nav__brand.nav__brand--footer ratio=1.70 ring=rgb(135, 211, 176) w=3 off=2
-/es/nosotros/ a.nav__brand.nav__brand--footer ratio=1.70 ring=rgb(135, 211, 176) w=3 off=2
-/es/contacto/ a.nav__brand.nav__brand--footer ratio=1.70 ring=rgb(135, 211, 176) w=3 off=2
-/es/cotizar/ a.nav__brand.nav__brand--footer ratio=1.70 ring=rgb(135, 211, 176) w=3 off=2
-/es/xx-nope/ a.nav__brand.nav__brand--footer ratio=1.70 ring=rgb(135, 211, 176) w=3 off=2
-/en/ a.nav__brand.nav__brand--footer ratio=1.00 ring=rgb(135, 211, 176) w=3 off=2
-/en/servicios/ a.nav__brand.nav__brand--footer ratio=1.00 ring=rgb(135, 211, 176) w=3 off=2
-/en/industrias/ a.nav__brand.nav__brand--footer ratio=1.00 ring=rgb(135, 211, 176) w=3 off=2
-/en/nosotros/ a.nav__brand.nav__brand--footer ratio=1.00 ring=rgb(135, 211, 176) w=3 off=2
-/en/contacto/ a.nav__brand.nav__brand--footer ratio=1.00 ring=rgb(135, 211, 176) w=3 off=2
-/en/cotizar/ a.nav__brand.nav__brand--footer ratio=1.00 ring=rgb(135, 211, 176) w=3 off=2
-/en/xx-nope/ a.nav__brand.nav__brand--footer ratio=1.00 ring=rgb(135, 211, 176) w=3 off=2
-paradas_totales=630
+FALLOS=0 enlaces de migas de pan medidos=24 (4 paginas internas x 3 idiomas x 1440 y 390 px, peor pixel contra el fondo real del hero)
+/es/servicios/       peor-pixel=8.51 color=rgb(215, 228, 244) opacidad=1
+/es/industrias/      peor-pixel=8.51 color=rgb(215, 228, 244) opacidad=1
+/es/nosotros/        peor-pixel=9 color=rgb(215, 228, 244) opacidad=1
+/es/contacto/        peor-pixel=8.51 color=rgb(215, 228, 244) opacidad=1
+/en/servicios/       peor-pixel=8.51 color=rgb(215, 228, 244) opacidad=1
+/en/industrias/      peor-pixel=8.51 color=rgb(215, 228, 244) opacidad=1
+/en/nosotros/        peor-pixel=9 color=rgb(215, 228, 244) opacidad=1
+/en/contacto/        peor-pixel=8.51 color=rgb(215, 228, 244) opacidad=1
+/pt/servicios/       peor-pixel=8.51 color=rgb(215, 228, 244) opacidad=1
+/pt/industrias/      peor-pixel=8.51 color=rgb(215, 228, 244) opacidad=1
+/pt/nosotros/        peor-pixel=9 color=rgb(215, 228, 244) opacidad=1
+/pt/contacto/        peor-pixel=8.51 color=rgb(215, 228, 244) opacidad=1
 ```
 <!-- evidencia:fin verify-report.21 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.22","forma":"archivo","argv":null,"texto":"#!/bin/bash\nVPS=mob LANGS= node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/ring.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T13:20:09-03:00","exit":1,"sha256":"73661c93066e0e855f49dea7849e79dae93db1ca2145db531b1b15a87849b2c4","lineas":17,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.22`** · exit 1 · 17 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T13:20:09-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
+<!-- evidencia:inicio {"v":1,"id":"verify-report.22","forma":"argv","argv":["node","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/titulos-run.mjs"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:19:19-03:00","exit":0,"sha256":"d1be352b8d452d0f4df8b2916dbf1e49ea99a45fb2b0c57a53603bf2c70e41f3","lineas":4,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"} -->
+**Evidencia `verify-report.22`** · exit 0 · 4 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:19:19-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase
 
-```bash
-#!/bin/bash
-VPS=mob LANGS= node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/ring.mjs
+```text
+node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-ulmu8f0q/titulos-run.mjs
 ```
 
 ```text
-mob /es/ paradas=38/38 peor=1.70
-mob /es/servicios/ paradas=32/32 peor=1.70
-mob /es/industrias/ paradas=43/43 peor=1.70
-mob /es/nosotros/ paradas=19/19 peor=1.70
-mob /es/contacto/ paradas=21/21 peor=1.70
-mob /es/cotizar/ paradas=13/13 peor=1.70
-mob /es/xx-nope/ paradas=9/9 peor=1.70
-SIN ANILLO (outline none/0): 0 
-FALLAS <3:1: 7
-/es/ a.nav__brand.nav__brand--footer ratio=1.70 ring=rgb(135, 211, 176) w=3 off=2
-/es/servicios/ a.nav__brand.nav__brand--footer ratio=1.70 ring=rgb(135, 211, 176) w=3 off=2
-/es/industrias/ a.nav__brand.nav__brand--footer ratio=1.70 ring=rgb(135, 211, 176) w=3 off=2
-/es/nosotros/ a.nav__brand.nav__brand--footer ratio=1.70 ring=rgb(135, 211, 176) w=3 off=2
-/es/contacto/ a.nav__brand.nav__brand--footer ratio=1.70 ring=rgb(135, 211, 176) w=3 off=2
-/es/cotizar/ a.nav__brand.nav__brand--footer ratio=1.70 ring=rgb(135, 211, 176) w=3 off=2
-/es/xx-nope/ a.nav__brand.nav__brand--footer ratio=1.70 ring=rgb(135, 211, 176) w=3 off=2
-paradas_totales=175
+TITULOS evaluados=582 (h1-h6 visibles, 21 URL x 1440 y 390 px) | oscuro-sobre-oscuro=0 | con algun pixel bajo 4.5:1=126
+  bajo 4.5:1 (peor pixel): h3.svc-card__title x93 en paginas: / /servicios/
+  bajo 4.5:1 (peor pixel): h3.ind-card__name x27 en paginas: /
+  bajo 4.5:1 (peor pixel): h1.hero-b__title x6 en paginas: /
 ```
 <!-- evidencia:fin verify-report.22 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.23","forma":"archivo","argv":null,"texto":"#!/bin/bash\nONLY=titles node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/pixels.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T13:26:02-03:00","exit":0,"sha256":"bed89cf2d1645e51d66fbe2a3e023feded32d56763b0bf2f06934b21bb0b166f","lineas":4,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.23`** · exit 0 · 4 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T13:26:02-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
-
-```bash
-#!/bin/bash
-ONLY=titles node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/pixels.mjs
-```
-
-```text
-BAJO titulos h1-h6 (texto claro)                n=294 peor=1.05 en /es d1440 / «Consultoría Logíst» fg=rgb(255, 255, 255)
-     <4.5 en 100 de 294; clases: svc-card__title=79 ind-card__name=15 hero-b__title=6
-OK   titulos h1-h6 (texto oscuro)               n=282 peor=5.11 en /es d1440 / «Nosotros» fg=rgb(137, 133, 128)
-grupos=2 grupos_bajo_4.5=1
-```
-<!-- evidencia:fin verify-report.23 -->
-
-<!-- evidencia:inicio {"v":1,"id":"verify-report.24","forma":"archivo","argv":null,"texto":"#!/bin/bash\nVPS=desk LANGS=,/en,/pt node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/ring.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T13:30:23-03:00","exit":0,"sha256":"0c7bfcd062a4416fe6b39ff27882b3a1199e915e2226cbc2cd94d9961be57dc7","lineas":25,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.24`** · exit 0 · 25 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T13:30:23-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
-
-```bash
-#!/bin/bash
-VPS=desk LANGS=,/en,/pt node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/ring.mjs
-```
-
-```text
-desk /es/ paradas=43/43 peor=5.68
-desk /es/servicios/ paradas=37/37 peor=5.68
-desk /es/industrias/ paradas=48/48 peor=5.69
-desk /es/nosotros/ paradas=24/24 peor=5.69
-desk /es/contacto/ paradas=26/26 peor=5.68
-desk /es/cotizar/ paradas=18/18 peor=5.10
-desk /es/xx-nope/ paradas=14/14 peor=5.68
-desk /en/ paradas=43/43 peor=5.68
-desk /en/servicios/ paradas=37/37 peor=5.68
-desk /en/industrias/ paradas=48/48 peor=5.69
-desk /en/nosotros/ paradas=24/24 peor=5.69
-desk /en/contacto/ paradas=26/26 peor=5.68
-desk /en/cotizar/ paradas=18/18 peor=5.09
-desk /en/xx-nope/ paradas=14/14 peor=5.68
-desk /pt/ paradas=43/43 peor=5.68
-desk /pt/servicios/ paradas=37/37 peor=5.68
-desk /pt/industrias/ paradas=48/48 peor=5.69
-desk /pt/nosotros/ paradas=24/24 peor=5.69
-desk /pt/contacto/ paradas=26/26 peor=5.68
-desk /pt/cotizar/ paradas=18/18 peor=5.10
-desk /pt/xx-nope/ paradas=14/14 peor=5.68
-SIN ANILLO (outline none/0): 0 
-FALLAS <3:1: 0
-
-paradas_totales=630
-```
-<!-- evidencia:fin verify-report.24 -->
-
-<!-- evidencia:inicio {"v":1,"id":"verify-report.25","forma":"archivo","argv":null,"texto":"#!/bin/bash\nVPS=mob LANGS= node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/ring.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T13:31:01-03:00","exit":0,"sha256":"473216a5df13bbbcce82f0baba4a9c6048b58537fc4af249609c470ad46e85be","lineas":11,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.25`** · exit 0 · 11 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T13:31:01-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
-
-```bash
-#!/bin/bash
-VPS=mob LANGS= node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/ring.mjs
-```
-
-```text
-mob /es/ paradas=38/38 peor=5.68
-mob /es/servicios/ paradas=32/32 peor=5.68
-mob /es/industrias/ paradas=43/43 peor=5.69
-mob /es/nosotros/ paradas=19/19 peor=5.69
-mob /es/contacto/ paradas=21/21 peor=5.68
-mob /es/cotizar/ paradas=13/13 peor=5.69
-mob /es/xx-nope/ paradas=9/9 peor=5.68
-SIN ANILLO (outline none/0): 0 
-FALLAS <3:1: 0
-
-paradas_totales=175
-```
-<!-- evidencia:fin verify-report.25 -->
-
-<!-- evidencia:inicio {"v":1,"id":"verify-report.26","forma":"archivo","argv":null,"texto":"#!/bin/bash\nONLY=titles node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/pixels.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T13:36:54-03:00","exit":0,"sha256":"c5625e56c46620f99fddf7c1b6177fde2a233b253d8d853ae1a80dbc00e5fee8","lineas":4,"omitidas":0,"no_recomprobable":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"} -->
-**Evidencia `verify-report.26`** · exit 0 · 4 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T13:36:54-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
-No re-comprobable: requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase
-
-```bash
-#!/bin/bash
-ONLY=titles node /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-verify-l2juug5t/pixels.mjs
-```
-
-```text
-BAJO titulos h1-h6 (texto claro)                n=294 peor=1.05 en /es d1440 / «Consultoría Logíst» fg=rgb(255, 255, 255)
-     <4.5 en 100 de 294; clases: svc-card__title=79 ind-card__name=15 hero-b__title=6; páginas: /=48 /servicios/=52
-OK   titulos h1-h6 (texto oscuro)               n=282 peor=5.11 en /es d1440 / «Nosotros» fg=rgb(137, 133, 128)
-grupos=2 grupos_bajo_4.5=1
-```
-<!-- evidencia:fin verify-report.26 -->
-
-<!-- evidencia:inicio {"v":1,"id":"verify-report.27","forma":"argv","argv":["python3","/home/kapridoo/.claude/skills/_shared/scripts/evidence_block.py","comprobar","/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/memory/changes/fix-color-contrast-sitewide/apply-evidence.md"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T13:37:18-03:00","exit":1,"sha256":"b2b00ec8476b0bb9ab56ca7e394ce53f183ea22d220d0237c624a7fbd34f6729","lineas":1,"omitidas":0,"no_recomprobable":"comprobar sobre verify-report.md volvería a comprobar este informe"} -->
-**Evidencia `verify-report.27`** · exit 1 · 1 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T13:37:18-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+<!-- evidencia:inicio {"v":1,"id":"verify-report.23","forma":"argv","argv":["python3","/home/kapridoo/.claude/skills/_shared/scripts/evidence_block.py","comprobar","/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/memory/changes/fix-color-contrast-sitewide/apply-evidence.md"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:19:22-03:00","exit":1,"sha256":"a1e2c742c3f7dc86107349c8e04438969b3802c62ecb464b5514229158f01740","lineas":1,"omitidas":0,"no_recomprobable":"comprobar sobre verify-report.md volvería a comprobar este informe"} -->
+**Evidencia `verify-report.23`** · exit 1 · 1 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:19:22-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
 No re-comprobable: comprobar sobre verify-report.md volvería a comprobar este informe
 
 ```text
@@ -908,12 +808,12 @@ python3 /home/kapridoo/.claude/skills/_shared/scripts/evidence_block.py comproba
 ```
 
 ```text
-{"v":1,"informe":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/memory/changes/fix-color-contrast-sitewide/apply-evidence.md","bloques":22,"comprobados":9,"calzan":["apply-evidence.1","apply-evidence.4","apply-evidence.5","apply-evidence.19","apply-evidence.20","apply-evidence.21","apply-evidence.22"],"no_calzan":[{"id":"apply-evidence.3","causa":"distinto","exit_registrado":0,"exit_actual":0,"sha256_coincide":false,"visible_coincide":false},{"id":"apply-evidence.14","causa":"distinto","exit_registrado":0,"exit_actual":0,"sha256_coincide":false,"visible_coincide":false}],"omitidos":[{"id":"apply-evidence.2","motivo":"verify corre la suite completa sobre el mismo \u00e1rbol con evidencia propia"},{"id":"apply-evidence.6","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.7","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.8","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.9","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.10","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.11","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.12","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.13","motivo":"verify corre la suite completa sobre el mismo \u00e1rbol con evidencia propia"},{"id":"apply-evidence.15","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.16","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.17","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-e…(+113 caracteres)
+{"v":1,"informe":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/memory/changes/fix-color-contrast-sitewide/apply-evidence.md","bloques":30,"comprobados":13,"calzan":["apply-evidence.1","apply-evidence.4","apply-evidence.5","apply-evidence.19","apply-evidence.20","apply-evidence.21","apply-evidence.22","apply-evidence.23","apply-evidence.25","apply-evidence.26","apply-evidence.30"],"no_calzan":[{"id":"apply-evidence.3","causa":"distinto","exit_registrado":0,"exit_actual":0,"sha256_coincide":false,"visible_coincide":false},{"id":"apply-evidence.14","causa":"distinto","exit_registrado":0,"exit_actual":0,"sha256_coincide":false,"visible_coincide":false}],"omitidos":[{"id":"apply-evidence.2","motivo":"verify corre la suite completa sobre el mismo \u00e1rbol con evidencia propia"},{"id":"apply-evidence.6","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.7","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.8","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.9","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.10","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.11","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.12","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.13","motivo":"verify corre la suite completa sobre el mismo \u00e1rbol con evidencia propia"},{"id":"apply-evidence.15","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.16","motivo":"requiere astro preview en ejecuci\u00f3n y Chrome/puppeteer fuera del repo"},{"id":"apply-evidence.17","motivo":"requiere a…(+649 caracteres)
 ```
-<!-- evidencia:fin verify-report.27 -->
+<!-- evidencia:fin verify-report.23 -->
 
-<!-- evidencia:inicio {"v":1,"id":"verify-report.28","forma":"argv","argv":["python3","/home/kapridoo/.claude/skills/_shared/scripts/evidence_block.py","comprobar","/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/memory/changes/fix-color-contrast-sitewide/verify-report.md"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"d92da75b074425add83fb8f26efa4e0c45c30d80","fecha":"2026-10-06T13:37:32-03:00","exit":0,"sha256":"4a1ee44a2603ad7a868f675369708e5e4f94c5d852f57db068c824424655ac25","lineas":1,"omitidas":0,"no_recomprobable":"re-ejecutarlo comprobaría el informe a sí mismo"} -->
-**Evidencia `verify-report.28`** · exit 0 · 1 líneas, 0 omitidas · HEAD `d92da75b0744` · 2026-10-06T13:37:32-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+<!-- evidencia:inicio {"v":1,"id":"verify-report.24","forma":"argv","argv":["python3","/home/kapridoo/.claude/skills/_shared/scripts/evidence_block.py","comprobar","/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/memory/changes/fix-color-contrast-sitewide/verify-report.md"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"6d9dba7f4347936e575ea97e1f3f7deeb44b6d21","fecha":"2026-10-06T15:19:23-03:00","exit":0,"sha256":"669da018b895ae7b72908d6a076a5c92e272897576c923a3ef401d75baff304e","lineas":1,"omitidas":0,"no_recomprobable":"re-ejecutarlo comprobaría el informe a sí mismo"} -->
+**Evidencia `verify-report.24`** · exit 0 · 1 líneas, 0 omitidas · HEAD `6d9dba7f4347` · 2026-10-06T15:19:23-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
 No re-comprobable: re-ejecutarlo comprobaría el informe a sí mismo
 
 ```text
@@ -921,6 +821,6 @@ python3 /home/kapridoo/.claude/skills/_shared/scripts/evidence_block.py comproba
 ```
 
 ```text
-{"v":1,"informe":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/memory/changes/fix-color-contrast-sitewide/verify-report.md","bloques":27,"comprobados":4,"calzan":["verify-report.1","verify-report.2","verify-report.4","verify-report.6"],"no_calzan":[],"omitidos":[{"id":"verify-report.3","motivo":"el build reescribe dist/ (ignorado por git) y su salida lleva tiempos; repetirlo con el preview en marcha provoca 500"},{"id":"verify-report.5","motivo":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"},{"id":"verify-report.7","motivo":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"},{"id":"verify-report.8","motivo":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"},{"id":"verify-report.9","motivo":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"},{"id":"verify-report.10","motivo":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"},{"id":"verify-report.11","motivo":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"},{"id":"verify-report.12","motivo":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"},{"id":"verify-report.13","motivo":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"},{"id":"verify-report.14","motivo":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"},{"id":"verify-report.15","motivo":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"},{"id":"verify-report.16","motivo":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase; contrafactual: revierte el overlay solo en el navegador y no escribe en el repo"},{"id":"verify-report.17","motivo":"requiere astro preview en 127.0.0.1:4399 y Chrome levantados solo durante la fase"},{"id":"verify-report.18","motivo":"req…(+1156 caracteres)
+{"v":1,"informe":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/memory/changes/fix-color-contrast-sitewide/verify-report.md","bloques":23,"comprobados":7,"calzan":["verify-report.1","verify-report.2","verify-report.4","verify-report.11","verify-report.12","verify-report.13","verify-report.19"],"no_calzan":[],"omitidos":[{"id":"verify-report.3","motivo":"el build reescribe dist/ (ignorado por git) y su salida lleva tiempos; repetirlo con el preview en marcha provoca 500"},{"id":"verify-report.5","motivo":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"},{"id":"verify-report.6","motivo":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"},{"id":"verify-report.7","motivo":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"},{"id":"verify-report.8","motivo":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"},{"id":"verify-report.9","motivo":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"},{"id":"verify-report.10","motivo":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"},{"id":"verify-report.14","motivo":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"},{"id":"verify-report.15","motivo":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"},{"id":"verify-report.16","motivo":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"},{"id":"verify-report.17","motivo":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"},{"id":"verify-report.18","motivo":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"},{"id":"verify-report.20","motivo":"requiere astro preview en 127.0.0.1:4331 y Chrome levantados solo durante la fase"},{"id":"verify-report.21","motivo":"requiere astro preview en 1…(+299 caracteres)
 ```
-<!-- evidencia:fin verify-report.28 -->
+<!-- evidencia:fin verify-report.24 -->

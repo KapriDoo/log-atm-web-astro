@@ -19,7 +19,7 @@ mr_error: ""
 created: "2026-10-03"
 updated: "2026-10-06"
 tags: [change]
-judgment_iterations: 1
+judgment_iterations: 2
 ---
 
 ## Intent

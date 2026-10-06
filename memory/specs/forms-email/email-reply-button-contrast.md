@@ -19,9 +19,9 @@ commits:
   - 94eeb32
 mr: ""
 acceptance_criteria:
-  - "[ ] El botón «Responder por email» del correo muestra texto blanco sobre azul de marca con contraste ≥ 4.5:1"
-  - "[ ] El par de colores del botón del correo coincide con el del botón azul sólido del sitio"
-  - "[ ] El botón del correo conserva su condición de aparición, su enlace y su color azul corporativo"
+  - "[x] El botón «Responder por email» del correo muestra texto blanco sobre azul de marca con contraste ≥ 4.5:1"
+  - "[x] El par de colores del botón del correo coincide con el del botón azul sólido del sitio"
+  - "[x] El botón del correo conserva su condición de aparición, su enlace y su color azul corporativo"
 
 related:
   - "[[forms-email/email-cta-conditional]]"
@@ -31,7 +31,7 @@ affects: []
 adrs: []
 scope:
   - "log-atm-web-astro/src/lib/email-templates.ts"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-06"
 updated: "2026-10-06"
@@ -66,9 +66,9 @@ El botón «Responder por email» que recibe el equipo comercial en los correos 
 
 ## Acceptance Criteria
 
-- [ ] El botón «Responder por email» del correo muestra texto blanco sobre azul de marca con contraste ≥ 4.5:1
-- [ ] El par de colores del botón del correo coincide con el del botón azul sólido del sitio
-- [ ] El botón del correo conserva su condición de aparición, su enlace y su color azul corporativo
+- [x] El botón «Responder por email» del correo muestra texto blanco sobre azul de marca con contraste ≥ 4.5:1
+- [x] El par de colores del botón del correo coincide con el del botón azul sólido del sitio
+- [x] El botón del correo conserva su condición de aparición, su enlace y su color azul corporativo
 
 ## Related
 

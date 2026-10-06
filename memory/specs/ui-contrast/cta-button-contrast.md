@@ -24,7 +24,7 @@ acceptance_criteria:
   - "[x] La etiqueta CTA de tarjetas de servicios, el botón de envío de contacto y el botón de la página 404 cumplen ≥ 4.5:1 en todos sus estados"
   - "[x] La marca de selección, el sello de éxito y el pin de oficina sobre verde cumplen ≥ 3:1"
   - "[x] El color de fondo verde de los botones CTA no cambia respecto al actual"
-  - "[ ] La marca de completado de la viñeta de cada paso terminado del asistente de cotización usa el mismo texto oscuro del CTA y cumple ≥ 4.5:1 sobre el verde de marca"
+  - "[x] La marca de completado de la viñeta de cada paso terminado del asistente de cotización usa el mismo texto oscuro del CTA y cumple ≥ 4.5:1 sobre el verde de marca"
 
 related:
   - "[[ui-contrast/brand-button-contrast]]"
@@ -112,7 +112,7 @@ Los botones de llamada a la acción (CTA) del sitio muestran texto blanco sobre 
 - [x] La etiqueta CTA de tarjetas de servicios, el botón de envío de contacto y el botón de la página 404 cumplen ≥ 4.5:1 en todos sus estados
 - [x] La marca de selección, el sello de éxito y el pin de oficina sobre verde cumplen ≥ 3:1
 - [x] El color de fondo verde de los botones CTA no cambia respecto al actual
-- [ ] La marca de completado de la viñeta de cada paso terminado del asistente de cotización usa el mismo texto oscuro del CTA y cumple ≥ 4.5:1 sobre el verde de marca
+- [x] La marca de completado de la viñeta de cada paso terminado del asistente de cotización usa el mismo texto oscuro del CTA y cumple ≥ 4.5:1 sobre el verde de marca
 
 ## Related
 

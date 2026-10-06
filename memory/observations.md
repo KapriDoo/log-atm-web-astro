@@ -499,3 +499,21 @@ Cada par texto/fondo validado AA se declara como tokens funcionales de rol en `t
 
 ## 2026-10-06 | measure | fix-color-contrast-sitewide | preflight sdd-apply INICIO 13:51:52 outcome=ready
 
+## 2026-10-06 | measure | fix-color-contrast-sitewide | post-dispatch sdd-apply FIN 14:05:54 outcome=advance
+
+## 2026-10-06 | measure | fix-color-contrast-sitewide | preflight sdd-verify INICIO 14:05:58 outcome=ready
+
+
+## 2026-10-06 | observation | fix-color-contrast-sitewide | sdd-verify: etiqueta «SECTOR · 01» del visor de industrias (accent-300 sobre foto) queda marginalmente bajo 4.5:1 en su peor píxel a 1024 px; es texto claro sobre foto, deuda diferida (clarificación 1), candidata al cambio aparte junto con los títulos de svc-card, ind-card y hero-b. Enlace mailto y texto SLA del correo siguen en #4A7BB5/#898580 inline (candidato de deuda de design.md).
+## 2026-10-06 | measure | fix-color-contrast-sitewide | post-dispatch sdd-verify FIN 15:20:14 outcome=advance
+
+## 2026-10-06 | measure | fix-color-contrast-sitewide | preflight sdd-judgment INICIO 15:20:18 outcome=ready
+
+
+## 2026-10-06 | finding | fix-color-contrast-sitewide | Deuda latente de contraste fuera del alcance de la ronda (triage de judgment iteración 2)
+**Detectado por**: sdd-judgment en `fix-color-contrast-sitewide`
+**Descripción**: dos defectos latentes previos al cambio, sin consumidor visible que falle hoy, quedan fuera del veredicto. (1) `src/scripts/wizard.ts:336`: la rama `success` de `setQuoteStatus` conserva `#2d9b6f` (3.48:1 sobre blanco). Hoy es inalcanzable; si se reutiliza, conviene `var(--color-text-accent)` o quitar la rama. (2) `src/styles/global.css:84`: la regla base `a { color: var(--color-brand) }` da 4.38:1 a todo enlace sin clase propia. Un enlace nuevo sin estilo fallaría AA; candidato a apuntarla a `--color-brand-solid`. Además, en barridos de documentación conviene revisar todo `DESIGN.md` (paleta, semánticos y botones) contra la tabla de pares, no solo el token afectado: los AC de coherencia documental se marcaron con una corrección parcial.
+## 2026-10-06 | measure | fix-color-contrast-sitewide | post-dispatch sdd-judgment FIN 15:26:17 outcome=judgment-residual-fix
+
+## 2026-10-06 | measure | fix-color-contrast-sitewide | preflight sdd-apply INICIO 15:26:21 outcome=ready
+

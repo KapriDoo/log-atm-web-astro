@@ -23,7 +23,7 @@ acceptance_criteria:
   - "[x] Los números de ítem y el total del directorio de industrias cumplen ≥ 4.5:1"
   - "[x] La etiqueta de paso de «Cómo trabajamos» cumple ≥ 4.5:1"
   - "[x] Las migas de pan de los heroes internos cumplen ≥ 4.5:1"
-  - "[ ] El contador del directorio de industrias se muestra sobre una pastilla ajustada a su contenido, no sobre una franja de todo el ancho de la foto"
+  - "[x] El contador del directorio de industrias se muestra sobre una pastilla ajustada a su contenido, no sobre una franja de todo el ancho de la foto"
 
 related:
   - "[[internal-page-heroes/hero-title-contrast]]"
@@ -88,7 +88,7 @@ Varios textos de apoyo se ven apagados sobre superficies oscuras: el aviso y el 
 - [x] Los números de ítem y el total del directorio de industrias cumplen ≥ 4.5:1
 - [x] La etiqueta de paso de «Cómo trabajamos» cumple ≥ 4.5:1
 - [x] Las migas de pan de los heroes internos cumplen ≥ 4.5:1
-- [ ] El contador del directorio de industrias se muestra sobre una pastilla ajustada a su contenido, no sobre una franja de todo el ancho de la foto
+- [x] El contador del directorio de industrias se muestra sobre una pastilla ajustada a su contenido, no sobre una franja de todo el ancho de la foto
 
 ## Related
 
