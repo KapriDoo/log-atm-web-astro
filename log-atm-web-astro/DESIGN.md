@@ -23,8 +23,8 @@
 - `primary-50`: #eef4fb — fondos tenues, hover de filas
 - `primary-100`: #d7e4f4 — fondos de cards informativas
 - `primary-200`: #aec7e5 — bordes, dividers sutiles
-- `primary-300`: #83a7d2 — iconos secundarios, placeholders
-- `primary-400`: #658fc3 — links hover, estados intermedios
+- `primary-300`: #83a7d2 — iconos secundarios y decorativos; no apto para texto (2.49:1 sobre blanco)
+- `primary-400`: #658fc3 — bordes en hover (tarjetas, opciones del cotizador) y estados intermedios no textuales; no apto para texto normal (3.35:1 sobre blanco)
 - `primary-500`: #4A7BB5 — **Color de marca principal (azul LOG ATM)**
 - `primary-600`: #3b6497 — hover de elementos primarios
 - `primary-700`: #2b4e78 — hover de botones primarios, active
@@ -44,9 +44,9 @@
 - `neutral-50`: #f8f7f6 — **Fondo de pagina**
 - `neutral-100`: #efedeb — background de secciones alternas
 - `neutral-200`: #e1dedb — **Bordes y divisores**
-- `neutral-300`: #c8c4c1 — placeholder text, iconos inactivos
+- `neutral-300`: #c8c4c1 — iconos inactivos, bordes en hover; no apto para texto (1.73:1 sobre blanco)
 - `neutral-400`: #aaa6a1 — texto deshabilitado
-- `neutral-500`: #898580 — texto de apoyo
+- `neutral-500`: #898580 — texto de apoyo sobre superficies oscuras (4.97:1 sobre primary-950); no apto para texto normal sobre fondos claros (3.66:1 sobre blanco)
 - `neutral-600`: #6e6963 — **Texto secundario**
 - `neutral-700`: #544f4a — texto de cuerpo
 - `neutral-800`: #37332f — texto de headings
@@ -54,11 +54,11 @@
 - `neutral-950`: #131210 — texto de maximo contraste
 
 ### Semantic
-- `success`: #22c55e — Confirmaciones, estados OK
-- `warning`: #ed8c1d — Alertas leves
-- `error`: #E04848 — Errores, alertas criticas
+- `success`: #22c55e — Confirmaciones, estados OK: fondos tenues, bordes e iconos; no apto para texto sobre fondos claros (2.28:1 sobre blanco)
+- `warning`: #ed8c1d — Alertas leves: fondos tenues, bordes e iconos; no apto para texto sobre fondos claros (2.51:1 sobre blanco)
+- `error`: #E04848 — Errores, alertas criticas: bordes, iconos y fondos tenues; no apto para texto normal sobre fondos claros (4.05:1 sobre blanco)
 - `error-light`: #fca5a5 — Errores sobre superficies oscuras (par de `success-light`)
-- `info`: #4A7BB5 — Mensajes informativos
+- `info`: #4A7BB5 — Mismo tono que `primary-500`: iconos, bordes y texto grande de mensajes informativos; no apto para texto normal (4.38:1 sobre blanco)
 
 ### Tokens funcionales
 ```css
@@ -154,8 +154,7 @@ No validos para texto normal: blanco sobre `accent-500`/`accent-600` (CTA), blan
 - **Brand (azul solido)**: `.btn--brand` — `--color-brand-solid` / `--color-brand-solid-text`; hover `--color-brand-solid-hover`. Mismo par en `.skip-link` y en el boton de la seccion final (`.cta-final__btn`, `.cta-final .btn--cta`, que fija fondo y texto en todos los estados). radius-pill, font-display weight-600
 - **CTA**: `.btn--cta` — `--color-cta` / `--color-cta-text`; hover `--color-cta-hover` / `--color-cta-hover-text`. Todo elemento sobre el verde CTA (etiquetas, sellos, checks, pin) consume el mismo par. radius-pill, font-display weight-700, shadow-cta
 - **WhatsApp**: `.btn--wa` y `.channel--wa` — fondo solido `--color-whatsapp` con `--color-whatsapp-text`; hover `--color-whatsapp-hover`. Sin degradados bajo texto
-- **Outline**: `.btn-outline` — transparent, border-primary-300, text-primary-500, radius-pill
-- **Ghost**: bg-transparent, text-brand, hover:bg-primary-50
+- **Ghost**: `.btn--ghost` — fondo transparente, texto `--color-text`, borde `--color-border`; hover fondo `--color-surface` y borde `neutral-300`. En el cotizador, `.btn-ghost` — texto `--color-text-muted` (5.44:1 sobre blanco), hover `--color-text`
 - **Disabled**: opacity-50, cursor-not-allowed
 
 ### Cards
@@ -171,7 +170,7 @@ No validos para texto normal: blanco sobre `accent-500`/`accent-600` (CTA), blan
 - Border-radius: var(--radius-input) (10px)
 - Focus: borde `--color-focus-ring` (`--color-focus-ring-inverse` sobre superficies oscuras) + anillo global de foco
 - Error: border-error
-- Placeholder: var(--color-neutral-400)
+- Placeholder: sin tono de paleta asignado; `neutral-300` y `neutral-400` no se usan para placeholder porque no alcanzan 4.5:1 sobre blanco (1.73 y 2.42:1)
 
 ### Navigation
 - Desktop: horizontal, links en neutral-700; hover y foco `--color-brand-dark`
@@ -194,9 +193,7 @@ No validos para texto normal: blanco sobre `accent-500`/`accent-600` (CTA), blan
 
 ### Badges / Tags
 - Default: bg-primary-100 text-primary-700 radius-pill px-3 py-1
-- Success: bg-success/10 text-success
-- Warning: bg-warning/10 text-warning
-- Error: bg-error/10 text-error
+- Variantes semanticas (success, warning, error): el tono semantico va en el fondo tenue (`/10`), el borde o el icono; el texto usa `--color-text`, porque los tonos semanticos no alcanzan 4.5:1 como texto sobre fondos claros
 
 ---
 
