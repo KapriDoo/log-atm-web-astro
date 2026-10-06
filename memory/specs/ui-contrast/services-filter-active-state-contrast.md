@@ -18,8 +18,8 @@ commits:
   - 7b357dc
 mr: ""
 acceptance_criteria:
-  - "[ ] El filtro activo cumple ≥ 4.5:1 con cursor, foco y presionado"
-  - "[ ] Los filtros inactivos conservan su respuesta al cursor"
+  - "[x] El filtro activo cumple ≥ 4.5:1 con cursor, foco y presionado"
+  - "[x] Los filtros inactivos conservan su respuesta al cursor"
 
 related: []
 affects:
@@ -27,10 +27,10 @@ affects:
 adrs: []
 scope:
   - "log-atm-web-astro/src/styles/pages/shared.css"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-04"
-updated: "2026-10-05"
+updated: "2026-10-06"
 tags: [capability-spec]
 ---
 
@@ -62,5 +62,5 @@ En el catálogo de servicios, el filtro seleccionado queda con texto casi negro 
 
 ## Acceptance Criteria
 
-- [ ] El filtro activo cumple ≥ 4.5:1 con cursor, foco y presionado
-- [ ] Los filtros inactivos conservan su respuesta al cursor
+- [x] El filtro activo cumple ≥ 4.5:1 con cursor, foco y presionado
+- [x] Los filtros inactivos conservan su respuesta al cursor

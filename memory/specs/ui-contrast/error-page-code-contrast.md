@@ -18,9 +18,9 @@ commits:
   - f3779d5
 mr: ""
 acceptance_criteria:
-  - "[ ] El código de la página 404 cumple ≥ 3:1 en los tres idiomas"
-  - "[ ] El tamaño calculado del código es ≥ 24 px en todos los tamaños de pantalla"
-  - "[ ] El código sigue siendo decorativo para lectores de pantalla"
+  - "[x] El código de la página 404 cumple ≥ 3:1 en los tres idiomas"
+  - "[x] El tamaño calculado del código es ≥ 24 px en todos los tamaños de pantalla"
+  - "[x] El código sigue siendo decorativo para lectores de pantalla"
 
 related:
   - "[[ui-contrast/cta-button-contrast]]"
@@ -29,10 +29,10 @@ affects:
 adrs: []
 scope:
   - "log-atm-web-astro/src/pages/404.astro"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-04"
-updated: "2026-10-05"
+updated: "2026-10-06"
 tags: [capability-spec]
 ---
 
@@ -65,9 +65,9 @@ La página de error muestra un código de gran tamaño en un azul muy claro, con
 
 ## Acceptance Criteria
 
-- [ ] El código de la página 404 cumple ≥ 3:1 en los tres idiomas
-- [ ] El tamaño calculado del código es ≥ 24 px en todos los tamaños de pantalla
-- [ ] El código sigue siendo decorativo para lectores de pantalla
+- [x] El código de la página 404 cumple ≥ 3:1 en los tres idiomas
+- [x] El tamaño calculado del código es ≥ 24 px en todos los tamaños de pantalla
+- [x] El código sigue siendo decorativo para lectores de pantalla
 
 ## Related
 

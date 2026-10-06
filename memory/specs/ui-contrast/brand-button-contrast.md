@@ -18,9 +18,9 @@ commits:
   - 58cb313
 mr: ""
 acceptance_criteria:
-  - "[ ] Botones azul de marca, enlace de salto y botones de la sección final cumplen ≥ 4.5:1 en reposo, cursor, foco y presionado"
-  - "[ ] El botón CTA de la sección final muestra fondo azul con texto claro en la portada, servicios, industrias y nosotros"
-  - "[ ] Ningún botón de la sección final muestra texto oscuro sobre fondo azul"
+  - "[x] Botones azul de marca, enlace de salto y botones de la sección final cumplen ≥ 4.5:1 en reposo, cursor, foco y presionado"
+  - "[x] El botón CTA de la sección final muestra fondo azul con texto claro en la portada, servicios, industrias y nosotros"
+  - "[x] Ningún botón de la sección final muestra texto oscuro sobre fondo azul"
 
 related:
   - "[[ui-contrast/cta-button-contrast]]"
@@ -31,10 +31,10 @@ scope:
   - "log-atm-web-astro/src/styles/global.css"
   - "log-atm-web-astro/src/styles/sections/cta.css"
   - "log-atm-web-astro/src/styles/tokens.css"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-04"
-updated: "2026-10-05"
+updated: "2026-10-06"
 tags: [capability-spec]
 ---
 
@@ -80,9 +80,9 @@ Los botones azul de marca, el enlace de salto al contenido y los botones de la s
 
 ## Acceptance Criteria
 
-- [ ] Botones azul de marca, enlace de salto y botones de la sección final cumplen ≥ 4.5:1 en reposo, cursor, foco y presionado
-- [ ] El botón CTA de la sección final muestra fondo azul con texto claro en la portada, servicios, industrias y nosotros
-- [ ] Ningún botón de la sección final muestra texto oscuro sobre fondo azul
+- [x] Botones azul de marca, enlace de salto y botones de la sección final cumplen ≥ 4.5:1 en reposo, cursor, foco y presionado
+- [x] El botón CTA de la sección final muestra fondo azul con texto claro en la portada, servicios, industrias y nosotros
+- [x] Ningún botón de la sección final muestra texto oscuro sobre fondo azul
 
 ## Related
 

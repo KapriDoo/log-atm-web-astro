@@ -19,9 +19,9 @@ commits:
   - 3bc419b
 mr: ""
 acceptance_criteria:
-  - "[ ] El nombre de cada industria del directorio es legible con contraste ≥ 4.5:1 sobre su fotografía"
-  - "[ ] El título del resumen de cotización cumple ≥ 4.5:1 sobre su panel oscuro"
-  - "[ ] Ningún título sobre fondo oscuro del sitio queda con color oscuro heredado"
+  - "[x] El nombre de cada industria del directorio es legible con contraste ≥ 4.5:1 sobre su fotografía"
+  - "[x] El título del resumen de cotización cumple ≥ 4.5:1 sobre su panel oscuro"
+  - "[x] Ningún título sobre fondo oscuro del sitio queda con color oscuro heredado"
 
 related:
   - "[[internal-page-heroes/hero-title-contrast]]"
@@ -33,10 +33,10 @@ scope:
   - "log-atm-web-astro/src/styles/global.css"
   - "log-atm-web-astro/src/styles/pages/shared.css"
   - "log-atm-web-astro/src/styles/pages/cotizar.css"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-04"
-updated: "2026-10-05"
+updated: "2026-10-06"
 tags: [capability-spec]
 ---
 
@@ -69,9 +69,9 @@ Algunos títulos heredan el color oscuro de los encabezados y quedan casi invisi
 
 ## Acceptance Criteria
 
-- [ ] El nombre de cada industria del directorio es legible con contraste ≥ 4.5:1 sobre su fotografía
-- [ ] El título del resumen de cotización cumple ≥ 4.5:1 sobre su panel oscuro
-- [ ] Ningún título sobre fondo oscuro del sitio queda con color oscuro heredado
+- [x] El nombre de cada industria del directorio es legible con contraste ≥ 4.5:1 sobre su fotografía
+- [x] El título del resumen de cotización cumple ≥ 4.5:1 sobre su panel oscuro
+- [x] Ningún título sobre fondo oscuro del sitio queda con color oscuro heredado
 
 ## Related
 

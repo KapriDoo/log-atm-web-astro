@@ -18,9 +18,9 @@ commits:
   - a8c8198
 mr: ""
 acceptance_criteria:
-  - "[ ] Los botones de WhatsApp cumplen ≥ 4.5:1 en reposo, cursor, foco y presionado"
-  - "[ ] El bloque del canal de WhatsApp en contacto muestra fondo uniforme y texto con contraste ≥ 4.5:1 en toda su superficie"
-  - "[ ] El verde de fondo de WhatsApp sigue siendo el verde reconocible de la plataforma"
+  - "[x] Los botones de WhatsApp cumplen ≥ 4.5:1 en reposo, cursor, foco y presionado"
+  - "[x] El bloque del canal de WhatsApp en contacto muestra fondo uniforme y texto con contraste ≥ 4.5:1 en toda su superficie"
+  - "[x] El verde de fondo de WhatsApp sigue siendo el verde reconocible de la plataforma"
 
 related:
   - "[[components/contacto-channels/contact-channels-whatsapp-icon]]"
@@ -32,10 +32,10 @@ scope:
   - "log-atm-web-astro/src/styles/tokens.css"
   - "log-atm-web-astro/src/styles/global.css"
   - "log-atm-web-astro/src/styles/pages/shared.css"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-04"
-updated: "2026-10-05"
+updated: "2026-10-06"
 tags: [capability-spec]
 ---
 
@@ -75,9 +75,9 @@ Los botones de WhatsApp del sitio y el bloque del canal de WhatsApp en la págin
 
 ## Acceptance Criteria
 
-- [ ] Los botones de WhatsApp cumplen ≥ 4.5:1 en reposo, cursor, foco y presionado
-- [ ] El bloque del canal de WhatsApp en contacto muestra fondo uniforme y texto con contraste ≥ 4.5:1 en toda su superficie
-- [ ] El verde de fondo de WhatsApp sigue siendo el verde reconocible de la plataforma
+- [x] Los botones de WhatsApp cumplen ≥ 4.5:1 en reposo, cursor, foco y presionado
+- [x] El bloque del canal de WhatsApp en contacto muestra fondo uniforme y texto con contraste ≥ 4.5:1 en toda su superficie
+- [x] El verde de fondo de WhatsApp sigue siendo el verde reconocible de la plataforma
 
 ## Related
 

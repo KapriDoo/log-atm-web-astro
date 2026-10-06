@@ -18,9 +18,9 @@ commits:
   - 7a9e438
 mr: ""
 acceptance_criteria:
-  - "[ ] Los enlaces del menú principal cumplen ≥ 4.5:1 con cursor, foco, presionado y como página actual"
-  - "[ ] Los enlaces del menú móvil cumplen ≥ 4.5:1 con cursor, foco y presionado"
-  - "[ ] El enlace de la página actual sigue distinguiéndose de los demás"
+  - "[x] Los enlaces del menú principal cumplen ≥ 4.5:1 con cursor, foco, presionado y como página actual"
+  - "[x] Los enlaces del menú móvil cumplen ≥ 4.5:1 con cursor, foco y presionado"
+  - "[x] El enlace de la página actual sigue distinguiéndose de los demás"
 
 related:
   - "[[i18n-ui-selector/i18n-ui-selector-navbar]]"
@@ -29,10 +29,10 @@ affects:
 adrs: []
 scope:
   - "log-atm-web-astro/src/components/ui/Navbar.astro"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-04"
-updated: "2026-10-05"
+updated: "2026-10-06"
 tags: [capability-spec]
 ---
 
@@ -71,9 +71,9 @@ Los enlaces del menú principal cambian a azul de marca al pasar el cursor, reci
 
 ## Acceptance Criteria
 
-- [ ] Los enlaces del menú principal cumplen ≥ 4.5:1 con cursor, foco, presionado y como página actual
-- [ ] Los enlaces del menú móvil cumplen ≥ 4.5:1 con cursor, foco y presionado
-- [ ] El enlace de la página actual sigue distinguiéndose de los demás
+- [x] Los enlaces del menú principal cumplen ≥ 4.5:1 con cursor, foco, presionado y como página actual
+- [x] Los enlaces del menú móvil cumplen ≥ 4.5:1 con cursor, foco y presionado
+- [x] El enlace de la página actual sigue distinguiéndose de los demás
 
 ## Related
 

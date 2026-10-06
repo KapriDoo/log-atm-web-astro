@@ -18,8 +18,8 @@ commits:
   - e38e7c1
 mr: ""
 acceptance_criteria:
-  - "[ ] Los valores «Por definir» cumplen ≥ 4.5:1 sobre blanco"
-  - "[ ] Un valor pendiente se distingue visualmente de un valor completado"
+  - "[x] Los valores «Por definir» cumplen ≥ 4.5:1 sobre blanco"
+  - "[x] Un valor pendiente se distingue visualmente de un valor completado"
 
 related:
   - "[[ui-contrast/dark-surface-heading-legibility]]"
@@ -28,10 +28,10 @@ affects:
 adrs: []
 scope:
   - "log-atm-web-astro/src/styles/pages/cotizar.css"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-04"
-updated: "2026-10-05"
+updated: "2026-10-06"
 tags: [capability-spec]
 ---
 
@@ -57,8 +57,8 @@ En el resumen de cotización, los datos que el usuario aún no define muestran �
 
 ## Acceptance Criteria
 
-- [ ] Los valores «Por definir» cumplen ≥ 4.5:1 sobre blanco
-- [ ] Un valor pendiente se distingue visualmente de un valor completado
+- [x] Los valores «Por definir» cumplen ≥ 4.5:1 sobre blanco
+- [x] Un valor pendiente se distingue visualmente de un valor completado
 
 ## Related
 

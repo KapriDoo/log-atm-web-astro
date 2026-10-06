@@ -31,11 +31,12 @@ commits:
   - 3bc419b
 mr: ""
 acceptance_criteria:
-  - "[ ] La auditoría automática en navegador real reporta 0 violaciones de contraste en las 42 combinaciones de página, idioma y tamaño de pantalla"
+  - "[x] La auditoría automática en navegador real reporta 0 violaciones de contraste en las 42 combinaciones de página, idioma y tamaño de pantalla"
   - "[ ] Todos los estados interactivos de texto cumplen ≥ 4.5:1 y los de texto grande o gráficos cumplen ≥ 3:1"
-  - "[ ] El resultado se mantiene con movimiento reducido activado"
-  - "[ ] La revisión visual de industrias y contacto no encuentra textos ilegibles"
-  - "[ ] La sección final de llamada a la acción es legible en portada, servicios, industrias y nosotros"
+  - "[x] El resultado se mantiene con movimiento reducido activado"
+  - "[x] La revisión visual de industrias y contacto no encuentra textos ilegibles"
+  - "[x] La sección final de llamada a la acción es legible en portada, servicios, industrias y nosotros"
+  - "[ ] El mensaje de éxito del formulario de contacto cumple ≥ 4.5:1 sobre la tarjeta del formulario"
 
 related:
   - "[[ui-contrast/services-process-step-title-contrast]]"
@@ -46,10 +47,10 @@ scope:
   - "log-atm-web-astro/src/styles/"
   - "log-atm-web-astro/src/components/"
   - "log-atm-web-astro/src/pages/"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-04"
-updated: "2026-10-05"
+updated: "2026-10-06"
 tags: [capability-spec]
 ---
 
@@ -63,6 +64,7 @@ El proyecto exige WCAG AA como mínimo en todos los componentes. Esta spec fija 
 
 - El sistema MUST no presentar ninguna violación de contraste de color en una auditoría automática en navegador real, en la portada, servicios, industrias, nosotros, contacto, cotizar y la página 404, en español, inglés y portugués, en escritorio y móvil.
 - El sistema MUST mantener un contraste mínimo de 4.5:1 para texto normal y de 3:1 para texto grande y elementos gráficos en los estados con cursor, foco de teclado, presionado, menú móvil abierto, pasos del asistente de cotización y mensajes de éxito del formulario.
+- El sistema MUST mostrar el mensaje de éxito del formulario de contacto, sobre la tarjeta clara del formulario, con un contraste mínimo de 4.5:1.
 - El sistema SHALL cumplir lo anterior con la preferencia de movimiento reducido activada.
 - El sistema SHALL mostrar legible la sección final de llamada a la acción en las cuatro páginas que la incluyen.
 - El sistema SHOULD confirmar con muestreo de píxeles y revisión visual los textos que la auditoría automática no resuelve, con revisión explícita de las páginas de industrias y contacto.
@@ -87,13 +89,20 @@ El proyecto exige WCAG AA como mínimo en todos los componentes. Esta spec fija 
 **WHEN** inspecciona los textos sobre degradados y capas
 **THEN** todos los textos se leen con claridad, sin títulos invisibles
 
+### Scenario: Visitante envía el formulario de contacto con éxito
+
+**GIVEN** un visitante completa y envía el formulario de contacto
+**WHEN** aparece el mensaje de confirmación del envío
+**THEN** lo lee sobre la tarjeta del formulario con un contraste igual o superior a 4.5:1
+
 ## Acceptance Criteria
 
-- [ ] La auditoría automática en navegador real reporta 0 violaciones de contraste en las 42 combinaciones de página, idioma y tamaño de pantalla
+- [x] La auditoría automática en navegador real reporta 0 violaciones de contraste en las 42 combinaciones de página, idioma y tamaño de pantalla
 - [ ] Todos los estados interactivos de texto cumplen ≥ 4.5:1 y los de texto grande o gráficos cumplen ≥ 3:1
-- [ ] El resultado se mantiene con movimiento reducido activado
-- [ ] La revisión visual de industrias y contacto no encuentra textos ilegibles
-- [ ] La sección final de llamada a la acción es legible en portada, servicios, industrias y nosotros
+- [x] El resultado se mantiene con movimiento reducido activado
+- [x] La revisión visual de industrias y contacto no encuentra textos ilegibles
+- [x] La sección final de llamada a la acción es legible en portada, servicios, industrias y nosotros
+- [ ] El mensaje de éxito del formulario de contacto cumple ≥ 4.5:1 sobre la tarjeta del formulario
 
 ## Related
 

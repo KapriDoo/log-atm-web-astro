@@ -19,10 +19,10 @@ commits:
   - 4611441
 mr: ""
 acceptance_criteria:
-  - "[ ] El indicador de foco cumple ≥ 3:1 sobre superficies claras y sobre superficies oscuras"
-  - "[ ] Las opciones del selector de idioma muestran indicador de foco visible"
-  - "[ ] Los campos de formulario enfocados cumplen ≥ 3:1 contra su estado sin foco"
-  - "[ ] Ningún control interactivo elimina el contorno de foco sin indicador alternativo visible"
+  - "[x] El indicador de foco cumple ≥ 3:1 sobre superficies claras y sobre superficies oscuras"
+  - "[x] Las opciones del selector de idioma muestran indicador de foco visible"
+  - "[x] Los campos de formulario enfocados cumplen ≥ 3:1 contra su estado sin foco"
+  - "[x] Ningún control interactivo elimina el contorno de foco sin indicador alternativo visible"
 
 related:
   - "[[i18n-ui-selector/i18n-ui-selector-navbar]]"
@@ -37,10 +37,10 @@ scope:
   - "log-atm-web-astro/src/styles/pages/shared.css"
   - "log-atm-web-astro/src/styles/sections/cta.css"
   - "log-atm-web-astro/src/pages/404.astro"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-04"
-updated: "2026-10-05"
+updated: "2026-10-06"
 tags: [capability-spec]
 ---
 
@@ -87,10 +87,10 @@ Quien navega con teclado necesita ver dónde está el foco. El anillo de foco ac
 
 ## Acceptance Criteria
 
-- [ ] El indicador de foco cumple ≥ 3:1 sobre superficies claras y sobre superficies oscuras
-- [ ] Las opciones del selector de idioma muestran indicador de foco visible
-- [ ] Los campos de formulario enfocados cumplen ≥ 3:1 contra su estado sin foco
-- [ ] Ningún control interactivo elimina el contorno de foco sin indicador alternativo visible
+- [x] El indicador de foco cumple ≥ 3:1 sobre superficies claras y sobre superficies oscuras
+- [x] Las opciones del selector de idioma muestran indicador de foco visible
+- [x] Los campos de formulario enfocados cumplen ≥ 3:1 contra su estado sin foco
+- [x] Ningún control interactivo elimina el contorno de foco sin indicador alternativo visible
 
 ## Related
 

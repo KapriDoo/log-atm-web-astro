@@ -18,9 +18,9 @@ commits:
   - 4481fc6
 mr: ""
 acceptance_criteria:
-  - "[ ] El botón de WhatsApp del correo muestra texto casi negro sobre verde de WhatsApp con contraste ≥ 4.5:1"
-  - "[ ] El par de colores del botón del correo coincide con el del botón de WhatsApp del sitio"
-  - "[ ] El botón del correo conserva su condición de aparición y su enlace"
+  - "[x] El botón de WhatsApp del correo muestra texto casi negro sobre verde de WhatsApp con contraste ≥ 4.5:1"
+  - "[x] El par de colores del botón del correo coincide con el del botón de WhatsApp del sitio"
+  - "[x] El botón del correo conserva su condición de aparición y su enlace"
 
 related:
   - "[[forms-email/email-cta-conditional]]"
@@ -30,10 +30,10 @@ affects:
 adrs: []
 scope:
   - "log-atm-web-astro/src/lib/email-templates.ts"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-04"
-updated: "2026-10-05"
+updated: "2026-10-06"
 tags: [capability-spec]
 ---
 
@@ -66,9 +66,9 @@ El botón de WhatsApp que recibe el equipo comercial en los correos de formulari
 
 ## Acceptance Criteria
 
-- [ ] El botón de WhatsApp del correo muestra texto casi negro sobre verde de WhatsApp con contraste ≥ 4.5:1
-- [ ] El par de colores del botón del correo coincide con el del botón de WhatsApp del sitio
-- [ ] El botón del correo conserva su condición de aparición y su enlace
+- [x] El botón de WhatsApp del correo muestra texto casi negro sobre verde de WhatsApp con contraste ≥ 4.5:1
+- [x] El par de colores del botón del correo coincide con el del botón de WhatsApp del sitio
+- [x] El botón del correo conserva su condición de aparición y su enlace
 
 ## Related
 

@@ -18,9 +18,9 @@ commits:
   - 952417d
 mr: ""
 acceptance_criteria:
-  - "[ ] Los rótulos de sección cumplen ≥ 4.5:1 en todas las páginas, incluido el fondo gris alterno"
-  - "[ ] El número de paso, la etiqueta del formulario y el plazo de respuesta cumplen ≥ 4.5:1"
-  - "[ ] La paleta de marca incorpora un único tono de acento oscuro para estos textos"
+  - "[x] Los rótulos de sección cumplen ≥ 4.5:1 en todas las páginas, incluido el fondo gris alterno"
+  - "[x] El número de paso, la etiqueta del formulario y el plazo de respuesta cumplen ≥ 4.5:1"
+  - "[x] La paleta de marca incorpora un único tono de acento oscuro para estos textos"
 
 related:
   - "[[ui-contrast/contrast-token-single-source]]"
@@ -32,10 +32,10 @@ scope:
   - "log-atm-web-astro/src/styles/global.css"
   - "log-atm-web-astro/src/styles/pages/cotizar.css"
   - "log-atm-web-astro/src/styles/pages/shared.css"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-04"
-updated: "2026-10-05"
+updated: "2026-10-06"
 tags: [capability-spec]
 ---
 
@@ -73,9 +73,9 @@ Los rótulos superiores de sección, el número de cada paso del asistente de co
 
 ## Acceptance Criteria
 
-- [ ] Los rótulos de sección cumplen ≥ 4.5:1 en todas las páginas, incluido el fondo gris alterno
-- [ ] El número de paso, la etiqueta del formulario y el plazo de respuesta cumplen ≥ 4.5:1
-- [ ] La paleta de marca incorpora un único tono de acento oscuro para estos textos
+- [x] Los rótulos de sección cumplen ≥ 4.5:1 en todas las páginas, incluido el fondo gris alterno
+- [x] El número de paso, la etiqueta del formulario y el plazo de respuesta cumplen ≥ 4.5:1
+- [x] La paleta de marca incorpora un único tono de acento oscuro para estos textos
 
 ## Related
 

@@ -20,11 +20,12 @@ commits:
   - 58cb313
 mr: ""
 acceptance_criteria:
-  - "[ ] Cada par validado figura una sola vez en la fuente de tokens y el sitio construye sin errores"
+  - "[x] Cada par validado figura una sola vez en la fuente de tokens y el sitio construye sin errores"
   - "[ ] No existen colores literales nuevos fuera de la fuente de tokens, salvo en las plantillas de correo"
-  - "[ ] La documentación de diseño declara la excepción de los correos"
-  - "[ ] Los ratios de la tabla de pares validados de la documentación coinciden con los medidos"
-  - "[ ] Los tokens de WhatsApp tienen el verde visible del sitio"
+  - "[x] La documentación de diseño declara la excepción de los correos"
+  - "[x] Los ratios de la tabla de pares validados de la documentación coinciden con los medidos"
+  - "[x] Los tokens de WhatsApp tienen el verde visible del sitio"
+  - "[ ] La documentación de diseño no describe como apto para texto normal un color cuyo par no alcanza 4.5:1 y declara las excepciones vigentes al anillo de foco por contexto"
 
 related:
   - "[[tokens/consolidate-tokens]]"
@@ -36,10 +37,10 @@ adrs: []
 scope:
   - "log-atm-web-astro/src/styles/tokens.css"
   - "log-atm-web-astro/DESIGN.md"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-04"
-updated: "2026-10-05"
+updated: "2026-10-06"
 tags: [capability-spec]
 ---
 
@@ -53,10 +54,11 @@ Cada par de color texto/fondo que cumple WCAG AA se define una vez en la fuente 
 
 - El sistema SHALL definir cada par de color de texto y fondo validado una sola vez en la fuente de tokens de diseño.
 - El sistema SHALL poner cada token nuevo a disposición tanto de los estilos del sitio como de las clases utilitarias de Tailwind.
-- El sistema MUST NOT introducir colores literales nuevos fuera de la fuente de tokens, salvo en las plantillas de correo.
+- El sistema MUST NOT introducir colores literales nuevos fuera de la fuente de tokens, salvo en las plantillas de correo. La regla alcanza todo color escrito como valor fijo, también los colores con transparencia de las capas que oscurecen fotografías.
 - El sistema SHALL declarar la excepción de las plantillas de correo en la documentación de diseño: los clientes de correo exigen estilos en línea y no leen los tokens.
 - El sistema SHALL mostrar en la documentación de diseño los ratios de contraste medidos de cada par validado, incluidos los de botones CTA, WhatsApp, azul de marca y acento verde.
 - El sistema SHALL hacer que los tokens de WhatsApp coincidan con el verde que el sitio muestra.
+- El sistema SHALL mantener la documentación de diseño coherente con sus propios pares: no presenta como apto para texto normal un color cuyo par no alcanza 4.5:1, y declara las excepciones al anillo de foco por contexto que el sitio conserva.
 
 ## Scenarios
 
@@ -72,6 +74,12 @@ Cada par de color texto/fondo que cumple WCAG AA se define una vez en la fuente 
 **WHEN** busca colores literales nuevos
 **THEN** no encuentra ninguno fuera de la fuente de tokens, salvo el botón de WhatsApp de los correos, que figura como excepción declarada
 
+### Scenario: Equipo consulta el uso de un color en la documentación
+
+**GIVEN** una persona del equipo lee la descripción de un color en la documentación de diseño
+**WHEN** la contrasta con la tabla de pares validados y con el anillo de foco del sitio
+**THEN** la descripción no contradice la tabla ni omite una excepción vigente
+
 ### Scenario: Equipo cambia el color de un botón
 
 **GIVEN** una persona del equipo necesita ajustar el color de un botón
@@ -80,11 +88,12 @@ Cada par de color texto/fondo que cumple WCAG AA se define una vez en la fuente 
 
 ## Acceptance Criteria
 
-- [ ] Cada par validado figura una sola vez en la fuente de tokens y el sitio construye sin errores
+- [x] Cada par validado figura una sola vez en la fuente de tokens y el sitio construye sin errores
 - [ ] No existen colores literales nuevos fuera de la fuente de tokens, salvo en las plantillas de correo
-- [ ] La documentación de diseño declara la excepción de los correos
-- [ ] Los ratios de la tabla de pares validados de la documentación coinciden con los medidos
-- [ ] Los tokens de WhatsApp tienen el verde visible del sitio
+- [x] La documentación de diseño declara la excepción de los correos
+- [x] Los ratios de la tabla de pares validados de la documentación coinciden con los medidos
+- [x] Los tokens de WhatsApp tienen el verde visible del sitio
+- [ ] La documentación de diseño no describe como apto para texto normal un color cuyo par no alcanza 4.5:1 y declara las excepciones vigentes al anillo de foco por contexto
 
 ## Related
 

@@ -18,11 +18,12 @@ commits:
   - 84ce2fc
 mr: ""
 acceptance_criteria:
-  - "[ ] Todo botón CTA muestra texto azul marino oscuro sobre fondo verde de marca con contraste ≥ 4.5:1 en reposo, con cursor, con foco de teclado y presionado"
-  - "[ ] El contraste del botón CTA con el cursor encima es ≥ 5:1"
-  - "[ ] La etiqueta CTA de tarjetas de servicios, el botón de envío de contacto y el botón de la página 404 cumplen ≥ 4.5:1 en todos sus estados"
-  - "[ ] La marca de selección, el sello de éxito y el pin de oficina sobre verde cumplen ≥ 3:1"
-  - "[ ] El color de fondo verde de los botones CTA no cambia respecto al actual"
+  - "[x] Todo botón CTA muestra texto azul marino oscuro sobre fondo verde de marca con contraste ≥ 4.5:1 en reposo, con cursor, con foco de teclado y presionado"
+  - "[x] El contraste del botón CTA con el cursor encima es ≥ 5:1"
+  - "[x] La etiqueta CTA de tarjetas de servicios, el botón de envío de contacto y el botón de la página 404 cumplen ≥ 4.5:1 en todos sus estados"
+  - "[x] La marca de selección, el sello de éxito y el pin de oficina sobre verde cumplen ≥ 3:1"
+  - "[x] El color de fondo verde de los botones CTA no cambia respecto al actual"
+  - "[ ] La marca de completado de la viñeta de cada paso terminado del asistente de cotización usa el mismo texto oscuro del CTA y cumple ≥ 4.5:1 sobre el verde de marca"
 
 related:
   - "[[ui-contrast/brand-button-contrast]]"
@@ -37,10 +38,10 @@ scope:
   - "log-atm-web-astro/src/styles/pages/shared.css"
   - "log-atm-web-astro/src/styles/pages/cotizar.css"
   - "log-atm-web-astro/src/pages/404.astro"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-04"
-updated: "2026-10-05"
+updated: "2026-10-06"
 tags: [capability-spec]
 ---
 
@@ -56,7 +57,7 @@ Los botones de llamada a la acción (CTA) del sitio muestran texto blanco sobre 
 - El sistema SHALL mostrar el texto de todo botón CTA en azul marino oscuro de marca.
 - El sistema MUST mantener un contraste mínimo de 4.5:1 entre texto y fondo del botón CTA en reposo, con el cursor encima, con foco de teclado y al ser presionado.
 - El sistema SHOULD ofrecer, con el cursor encima, un contraste con margen sobre el mínimo (no inferior a 5:1) en lugar de quedar en el límite.
-- El sistema SHALL aplicar la misma regla de color a toda superficie verde de marca que lleve texto: el botón CTA del menú y del menú móvil, la etiqueta CTA de las tarjetas de servicios, el botón de envío del formulario de contacto y el botón de la página de error 404.
+- El sistema SHALL aplicar la misma regla de color a toda superficie verde de marca que lleve texto: el botón CTA del menú y del menú móvil, la etiqueta CTA de las tarjetas de servicios, el botón de envío del formulario de contacto, el botón de la página de error 404 y la viñeta de cada paso completado del asistente de cotización.
 - El sistema MUST mantener un contraste mínimo de 3:1 en los elementos gráficos de estado que se dibujan sobre el verde de marca: la marca de selección del modo de envío, el sello de éxito de la cotización y el pin de las tarjetas de oficina.
 
 ## Scenarios
@@ -97,13 +98,20 @@ Los botones de llamada a la acción (CTA) del sitio muestran texto blanco sobre 
 **WHEN** se muestran la marca de selección, el sello de éxito o el pin de oficina sobre el verde de marca
 **THEN** cada elemento se distingue de su fondo con un contraste igual o superior a 3:1
 
+### Scenario: Usuario completa un paso del asistente de cotización
+
+**GIVEN** un usuario avanza al siguiente paso del asistente de cotización
+**WHEN** el paso anterior muestra su viñeta verde con la marca de completado
+**THEN** la marca se lee sobre el verde de marca con un contraste igual o superior a 4.5:1
+
 ## Acceptance Criteria
 
-- [ ] Todo botón CTA muestra texto azul marino oscuro sobre fondo verde de marca con contraste ≥ 4.5:1 en reposo, con cursor, con foco de teclado y presionado
-- [ ] El contraste del botón CTA con el cursor encima es ≥ 5:1
-- [ ] La etiqueta CTA de tarjetas de servicios, el botón de envío de contacto y el botón de la página 404 cumplen ≥ 4.5:1 en todos sus estados
-- [ ] La marca de selección, el sello de éxito y el pin de oficina sobre verde cumplen ≥ 3:1
-- [ ] El color de fondo verde de los botones CTA no cambia respecto al actual
+- [x] Todo botón CTA muestra texto azul marino oscuro sobre fondo verde de marca con contraste ≥ 4.5:1 en reposo, con cursor, con foco de teclado y presionado
+- [x] El contraste del botón CTA con el cursor encima es ≥ 5:1
+- [x] La etiqueta CTA de tarjetas de servicios, el botón de envío de contacto y el botón de la página 404 cumplen ≥ 4.5:1 en todos sus estados
+- [x] La marca de selección, el sello de éxito y el pin de oficina sobre verde cumplen ≥ 3:1
+- [x] El color de fondo verde de los botones CTA no cambia respecto al actual
+- [ ] La marca de completado de la viñeta de cada paso terminado del asistente de cotización usa el mismo texto oscuro del CTA y cumple ≥ 4.5:1 sobre el verde de marca
 
 ## Related
 

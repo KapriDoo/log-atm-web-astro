@@ -477,3 +477,25 @@ Cada par texto/fondo validado AA se declara como tokens funcionales de rol en `t
 
 ## 2026-10-05 | measure | fix-color-contrast-sitewide | preflight sdd-verify INICIO 00:54:53 outcome=ready
 
+## 2026-10-06 | measure | fix-color-contrast-sitewide | preflight sdd-verify INICIO 11:55:43 outcome=ready
+
+
+## 2026-10-06 | finding | fix-color-contrast-sitewide | Overlay ≤ 960px del visor de industrias verificado contra las specs
+**Detectado por**: sdd-verify en `fix-color-contrast-sitewide`
+**Descripción**: la decisión de apply (`3bc419b`) no contradice ninguna spec y cumple `dark-surface-heading-legibility`: el contrafactual con el degradado de escritorio en 390px deja nombre, eyebrow y sub bajo 4.5:1, y con el degradado actual el muestreo de píxeles cumple en las 12 diapositivas, 4 anchos y 3 idiomas (`verify-report.16` y `.19`). `design.md` D8 no recoge el degradado de ≤ 960px; conviene registrarlo en `design.md` o en un ADR al archivar. El `rgba(15,28,46,…)` nuevo repite el color base del degradado de escritorio; el criterio de tokens se limita a hex.
+
+## 2026-10-06 | finding | fix-color-contrast-sitewide | Texto claro sobre fotos y video sigue bajo 4.5:1 (deuda declarada)
+**Detectado por**: sdd-verify en `fix-color-contrast-sitewide`
+**Descripción**: el muestreo de píxeles de títulos h1–h6 (`verify-report.26`) marca texto claro bajo 4.5:1 en `.svc-card__title`, `.ind-card__name` y `.hero-b__title`, solo en `/` y `/servicios/`; los títulos de color oscuro cumplen en todas las páginas. Es la deuda que la clarificación 1 difirió (overlays y degradados de fotos y video); candidato a cambio aparte. En `/pt/servicios/` el título «Desconsolidação» se corta en el borde de su tarjeta (observación visual, previa y ajena al contraste).
+## 2026-10-06 | measure | fix-color-contrast-sitewide | post-dispatch sdd-verify FIN 13:39:32 outcome=advance
+
+## 2026-10-06 | measure | fix-color-contrast-sitewide | preflight sdd-judgment INICIO 13:39:35 outcome=ready
+
+
+## 2026-10-06 | finding | fix-color-contrast-sitewide | axe no cubre glifos ni estados inyectados por JS: dos MUST bajo umbral pasaron verify
+**Detectado por**: sdd-judgment en `fix-color-contrast-sitewide`
+**Descripción**: la viñeta `✓` de paso completado del asistente (`cotizar.css:77`, 2.50:1) y el mensaje de éxito del formulario de contacto (`contacto.astro:221`, `#2d9b6f` inline por JS, 3.48:1) incumplen `sitewide-contrast-verification` a pesar de las 0 violaciones de axe. axe omite el texto de un único glifo de símbolo, y el color de éxito se asigna por JS en un estado que la verificación no expuso. Además, el chequeo estático de colores literales solo buscaba `#hex` y dejó pasar `rgba(...)`. En próximos barridos de contraste conviene buscar todo consumidor de fondos de marca con texto (`grep` del tono de paleta, no solo del token), además de todo `style.color` asignado por JS, y extender el chequeo de literales a `rgb()/rgba()/hsl()`.
+## 2026-10-06 | measure | fix-color-contrast-sitewide | post-dispatch sdd-judgment FIN 13:51:49 outcome=judgment-retry
+
+## 2026-10-06 | measure | fix-color-contrast-sitewide | preflight sdd-apply INICIO 13:51:52 outcome=ready
+
