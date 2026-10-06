@@ -13,6 +13,8 @@ import { spawnSync } from 'node:child_process';
  * Nota: se invoca el validador `.ts` via `tsx` en subproceso para soportar
  * entornos sin loader TS en runtime (p. ej. Cloudflare Pages build), donde
  * un `import()` directo del `.ts` falla con "Unknown file extension".
+ *
+ * @returns {import('astro').AstroIntegration}
  */
 function i18nValidator() {
   return {
@@ -48,7 +50,6 @@ export default defineConfig({
     },
   },
   adapter: cloudflare({
-    platformProxy: { enabled: true },
     // 'compile' pre-optimiza las imágenes en build-time (emite AVIF/WebP/JPEG
     // estáticos en _astro/) en vez del servicio workerd on-demand por defecto.
     // Honra el diseño (optimización build-time, coste runtime cero). Ver ADR-0006.

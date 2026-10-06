@@ -42,7 +42,7 @@ export function initIndDirectory(
 
   let active = 0;
   let paused = false;
-  let timer: ReturnType<typeof setInterval> | null = null;
+  let timer: number | null = null;
 
   function render(i: number): void {
     const previousSlide = slides.find((s) => s.classList.contains('is-active'));

@@ -12,7 +12,8 @@ export type MailEnv = {
 
 /**
  * Resuelve env desde el runtime de Cloudflare via `cloudflare:workers`.
- * En dev con platformProxy lee `.dev.vars`. En prod lee bindings del worker.
+ * En `astro dev` el plugin de Vite de Cloudflare (`@cloudflare/vite-plugin`) lee `.dev.vars`.
+ * En prod lee bindings del worker.
  */
 export function resolveMailEnv(): MailEnv {
   return cfEnv as unknown as MailEnv;
