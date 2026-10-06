@@ -43,6 +43,10 @@ updated: "2026-10-06"
 - `sharp@^0.34.5` — Image processing (native binary)
 - `svgo@^4.0.1` — SVG optimization
 - `tsx@^4.20.6` — TypeScript execution
+- `@astrojs/check@^0.9.10` — Type checking (`astro check`)
+- `typescript@^6.0.3` — TypeScript compiler for `astro check`
+- `playwright-core@^1.63.0` — Browser automation for the a11y audit (browser provided via `CHROME_PATH` or `./chrome`)
+- `axe-core@^4.14.0` — Accessibility rules engine for the a11y audit
 - `@types/react@^19.2.14` — React types
 - `@types/react-dom@^19.2.3` — React DOM types
 
