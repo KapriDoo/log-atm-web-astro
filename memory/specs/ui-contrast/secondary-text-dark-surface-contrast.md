@@ -16,6 +16,7 @@ worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-co
 feature_branch: "feature/fix-color-contrast-sitewide"
 commits:
   - 64fe893
+  - d5792b0
 mr: ""
 acceptance_criteria:
   - "[x] El aviso y el mensaje de error de la sección final cumplen ≥ 4.5:1"

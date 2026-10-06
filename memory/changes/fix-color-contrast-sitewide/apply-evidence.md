@@ -2,7 +2,7 @@
 type: apply-evidence
 change_name: "fix-color-contrast-sitewide"
 created: "2026-10-05"
-updated: "2026-10-05"
+updated: "2026-10-06"
 tags: [apply-evidence]
 ---
 
@@ -1186,3 +1186,404 @@ OK    `neutral-900` doc=[15.36] calc=[15.36]
 filas=17 filas_tabla=17 diferencias=0
 ```
 <!-- evidencia:fin apply-evidence.22 -->
+
+## Redespacho 1 — correcciones de la revisión adversarial
+
+Fuente de tareas: `judgment-report.md` (iteración 1, HEAD revisado `d92da75`) y las specs que
+esa revisión escribió o corrigió. Ninguna tarea es `[TDD]` (el proyecto no tiene suite de
+tests). Antes de las correcciones se registraron los artefactos pendientes del worktree
+(`51dc343 chore(sdd): record fix-color-contrast-sitewide verify and judgment artifacts`).
+
+| Hallazgo | Spec | Commit |
+|---|---|---|
+| C1 — viñeta de paso completado del asistente | `cta-button-contrast`, `sitewide-contrast-verification` | `9d1687e` fix(a11y): use dark CTA text on completed quote wizard step bullets |
+| SA1 — mensaje de éxito del formulario de contacto | `sitewide-contrast-verification` | `ce1aa03` fix(a11y): render the contact form success message with text-accent |
+| C2 — literales `rgba` del degradado del visor ≤ 960px | `contrast-token-single-source` | `ae823e6` fix(tokens): express the narrow industry overlay with primary-950 |
+| SA2 — pastilla del contador a todo el ancho | `secondary-text-dark-surface-contrast` | `d5792b0` fix(a11y): fit the industry directory counter pill to its content |
+| SB1 — botón «Responder por email» del correo | `email-reply-button-contrast` | `84e0c03` fix(email): render the reply-by-email button with the solid brand pair |
+| SB2 — coherencia de `DESIGN.md` (y excepción de correo del botón de SB1) | `contrast-token-single-source`, `email-reply-button-contrast` | `94eeb32` docs(design): align brand color usage and focus ring exceptions with the pairs table |
+
+Notas de implementación:
+
+- C1: `.stepper__step--done .stepper__bullet` consume `--color-cta` / `--color-cta-text` (fondo y
+  borde), igual que `.mode-tile--active .mode-tile__check`.
+- SA1: `setStatus` asigna `var(--color-text-accent)` al estado `success`; el estado `error`
+  (`#c0392b`, preexistente) no cambia. `src/scripts/wizard.ts` conserva un `#2d9b6f` en
+  `setQuoteStatus`, pero ninguna llamada usa `kind === 'success'` (el éxito del asistente muestra
+  la pantalla de éxito): rama inalcanzable, fuera de los hallazgos.
+- C2: los cuatro tramos usan `color-mix(in srgb, var(--color-primary-950) N%, transparent)` con
+  las mismas opacidades (10/20/72/92 %). `primary-950` (`#0a1624`) es más oscuro que el literal
+  retirado (`#0f1c2e`), así que el texto blanco no pierde contraste. El degradado base
+  preexistente (escritorio) no se toca.
+- SA2: `align-self: flex-start` en `.ind-directory__counter`; en un contenedor flex en columna
+  el eje cruzado es el eje en línea, así que `flex-start` sigue la dirección de escritura (RTL
+  incluido).
+- SB1: constante `emailBtnColors` (`background:#3b6497;color:#ffffff;`) junto a `waBtnColors`,
+  con comentario que nombra `--color-brand-solid` / `--color-brand-solid-text`; la consumen las
+  dos ramas con email.
+- SB2: `--color-brand` deja de describirse como color de enlaces (su par solo vale para texto
+  grande); la sección del anillo de foco declara la excepción `.why__video-toggle`; la excepción de
+  correo nombra el par del botón «Responder por email».
+
+El bloque siguiente lista los commits del redespacho con sus archivos (rango fijo).
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.23","forma":"argv","argv":["git","log","--reverse","--format=%h %s","--name-only","d92da75..94eeb32"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide","head":"94eeb323c5b8a2b5b6454b39ed2e0bada50751b3","fecha":"2026-10-06T13:55:19-03:00","exit":0,"sha256":"b4c1f1118a8a4b776792621db19089bae7b41e3afd5dba7a435b325d840729b5","lineas":39,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `apply-evidence.23`** · exit 0 · 39 líneas, 0 omitidas · HEAD `94eeb323c5b8` · 2026-10-06T13:55:19-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide`
+
+```text
+git log --reverse '--format=%h %s' --name-only d92da75..94eeb32
+```
+
+```text
+51dc343 chore(sdd): record fix-color-contrast-sitewide verify and judgment artifacts
+
+memory/changes/fix-color-contrast-sitewide/judgment-report.md
+memory/changes/fix-color-contrast-sitewide/state.md
+memory/changes/fix-color-contrast-sitewide/verify-report.md
+memory/observations.md
+memory/specs/forms-email/email-reply-button-contrast.md
+memory/specs/forms-email/email-whatsapp-button-contrast.md
+memory/specs/ui-contrast/accent-text-contrast.md
+memory/specs/ui-contrast/brand-button-contrast.md
+memory/specs/ui-contrast/contrast-token-single-source.md
+memory/specs/ui-contrast/cta-button-contrast.md
+memory/specs/ui-contrast/dark-surface-heading-legibility.md
+memory/specs/ui-contrast/error-page-code-contrast.md
+memory/specs/ui-contrast/focus-indicator-contrast.md
+memory/specs/ui-contrast/nav-link-state-contrast.md
+memory/specs/ui-contrast/quote-summary-empty-values-contrast.md
+memory/specs/ui-contrast/secondary-text-dark-surface-contrast.md
+memory/specs/ui-contrast/services-filter-active-state-contrast.md
+memory/specs/ui-contrast/sitewide-contrast-verification.md
+memory/specs/ui-contrast/whatsapp-button-contrast.md
+9d1687e fix(a11y): use dark CTA text on completed quote wizard step bullets
+
+log-atm-web-astro/src/styles/pages/cotizar.css
+ce1aa03 fix(a11y): render the contact form success message with text-accent
+
+log-atm-web-astro/src/pages/contacto.astro
+ae823e6 fix(tokens): express the narrow industry overlay with primary-950
+
+log-atm-web-astro/src/styles/pages/shared.css
+d5792b0 fix(a11y): fit the industry directory counter pill to its content
+
+log-atm-web-astro/src/styles/pages/shared.css
+84e0c03 fix(email): render the reply-by-email button with the solid brand pair
+
+log-atm-web-astro/src/lib/email-templates.ts
+94eeb32 docs(design): align brand color usage and focus ring exceptions with the pairs table
+
+log-atm-web-astro/DESIGN.md
+```
+<!-- evidencia:fin apply-evidence.23 -->
+
+`apply-evidence.23` lista los siete commits del redespacho: el registro de artefactos y las seis
+correcciones, cada una con los archivos que toca.
+
+### Build (corrida completa de cierre) y literales de color
+
+El perfil no declara suite de tests; la corrida completa es `npm run build` sobre el árbol final
+(después del último commit de código).
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.24","forma":"argv","argv":["npm","run","build"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"94eeb323c5b8a2b5b6454b39ed2e0bada50751b3","fecha":"2026-10-06T13:56:02-03:00","exit":0,"sha256":"35c6e0a7bc41d933e37a0b0255c870a10719e3ffdcf4a83a4d379e1217ddbafd","lineas":527,"omitidas":487,"no_recomprobable":"verify corre la suite completa sobre el mismo árbol con evidencia propia"} -->
+**Evidencia `apply-evidence.24`** · exit 0 · 527 líneas, 487 omitidas · HEAD `94eeb323c5b8` · 2026-10-06T13:56:02-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: verify corre la suite completa sobre el mismo árbol con evidencia propia
+
+```text
+npm run build
+```
+
+```text
+
+> log-atm-web-astro@0.0.1 build
+> astro build
+
+13:55:55 [@astrojs/cloudflare] Enabling compile-time image optimization. Images will be pre-optimized at build time.
+13:55:55 [@astrojs/cloudflare] Enabling sessions with Cloudflare KV with the "SESSION" KV binding.
+13:55:56 [types] Generated 1.31s
+13:55:56 [log-atm:i18n-validator] [i18n] Validando paridad de claves...
+[i18n] en: OK (536 claves)
+[i18n] pt: OK (536 claves)
+13:55:57 [build] output: "static"
+13:55:57 [build] mode: "server"
+13:55:57 [build] directory: /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro/dist/
+13:55:57 [build] adapter: @astrojs/cloudflare
+13:55:57 [build] Collecting build info...
+13:55:57 [build] ✓ Completed in 1.72s.
+13:55:57 [build] Building server entrypoints...
+13:55:59 [vite] ✓ built in 2.05s
+13:56:00 [vite] ✓ built in 1.41s
+13:56:01 [vite] ✓ built in 663ms
+
+ prerendering static routes 
+13:56:01   ├─ /contacto/index.html (+21ms) 
+13:56:01   ├─ /cotizar/index.html (+11ms) 
+13:56:01   ├─ /industrias/index.html (+21ms) 
+13:56:01   ├─ /nosotros/index.html (+14ms) 
+13:56:01   ├─ /servicios/index.html (+22ms) 
+13:56:01   ├─ /en/contacto/index.html (+9ms) 
+13:56:01   ├─ /pt/contacto/index.html (+10ms) 
+13:56:01   ├─ /en/cotizar/index.html (+10ms) 
+13:56:01   ├─ /pt/cotizar/index.html (+9ms) 
+13:56:02   ├─ /en/industrias/index.html (+11ms) 
+13:56:02   ├─ /pt/industrias/index.html (+11ms) 
+13:56:02   ├─ /en/nosotros/index.html (+8ms) 
+13:56:02   ├─ /pt/nosotros/index.html (+8ms) 
+13:56:02   ├─ /en/servicios/index.html (+13ms) 
+13:56:02   ├─ /pt/servicios/index.html (+13ms) 
+13:56:02   ├─ /en/index.html (+15ms) 
+13:56:02   ├─ /pt/index.html (+14ms) 
+13:56:02   ├─ /index.html (+17ms) 
+```
+<!-- evidencia:fin apply-evidence.24 -->
+
+`apply-evidence.24`: el build termina con exit 0.
+
+Chequeo de literales de color por conteo (HEAD contra la base del cambio, por archivo de `src/`
+tocado): una línea modificada que conserva un literal preexistente no cuenta como literal nuevo.
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.25","forma":"archivo","argv":null,"texto":"# Colores literales (hex, rgb/rgba, hsl/hsla) nuevos en src/: por archivo tocado por el cambio\n# (main...HEAD), multiconjunto de literales en HEAD menos el de main (merge-base). Excepciones\n# declaradas: src/styles/tokens.css y src/lib/email-templates.ts.\npython3 - <<'PY'\nimport re, subprocess, collections\ndef git(*a): return subprocess.run(['git', *a], capture_output=True, text=True).stdout\nbase = git('merge-base', 'main', 'HEAD').strip()\nlit = re.compile(r'#[0-9a-fA-F]{3,8}\\b|\\brgba?\\([^)]*\\)|\\bhsla?\\([^)]*\\)')\nnorm = lambda s: re.sub(r'\\s+', '', s).lower()\nfiles = [f for f in git('diff', '--name-only', f'{base}...HEAD', '--', 'src').split() if f]\nexc = {'log-atm-web-astro/src/styles/tokens.css', 'log-atm-web-astro/src/lib/email-templates.ts'}\ntotal = 0\nfor f in files:\n    rel = f.removeprefix('log-atm-web-astro/')\n    old = collections.Counter(map(norm, lit.findall(git('show', f'{base}:{f}'))))\n    new = collections.Counter(map(norm, lit.findall(git('show', f'HEAD:{f}'))))\n    added = new - old\n    tag = 'excepcion' if f in exc else 'sitio'\n    if added:\n        print(f'{tag:9} {rel}: ' + ', '.join(f'{k} x{v}' for k, v in sorted(added.items())))\n    if tag == 'sitio': total += sum(added.values())\nprint(f'archivos_src_tocados={len(files)} literales_nuevos_fuera_de_excepciones={total}')\nprint('rgba(15,28,46 en HEAD (shared.css):', len(re.findall(r'rgba\\(15,28,46', git('show', 'HEAD:log-atm-web-astro/src/styles/pages/shared.css'))))\nPY\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"94eeb323c5b8a2b5b6454b39ed2e0bada50751b3","fecha":"2026-10-06T13:56:08-03:00","exit":0,"sha256":"029b97ab6c634bd02a264155c532c4853d9ac20f744f1948ad7740ec8ac44290","lineas":4,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `apply-evidence.25`** · exit 0 · 4 líneas, 0 omitidas · HEAD `94eeb323c5b8` · 2026-10-06T13:56:08-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+
+```bash
+# Colores literales (hex, rgb/rgba, hsl/hsla) nuevos en src/: por archivo tocado por el cambio
+# (main...HEAD), multiconjunto de literales en HEAD menos el de main (merge-base). Excepciones
+# declaradas: src/styles/tokens.css y src/lib/email-templates.ts.
+python3 - <<'PY'
+import re, subprocess, collections
+def git(*a): return subprocess.run(['git', *a], capture_output=True, text=True).stdout
+base = git('merge-base', 'main', 'HEAD').strip()
+lit = re.compile(r'#[0-9a-fA-F]{3,8}\b|\brgba?\([^)]*\)|\bhsla?\([^)]*\)')
+norm = lambda s: re.sub(r'\s+', '', s).lower()
+files = [f for f in git('diff', '--name-only', f'{base}...HEAD', '--', 'src').split() if f]
+exc = {'log-atm-web-astro/src/styles/tokens.css', 'log-atm-web-astro/src/lib/email-templates.ts'}
+total = 0
+for f in files:
+    rel = f.removeprefix('log-atm-web-astro/')
+    old = collections.Counter(map(norm, lit.findall(git('show', f'{base}:{f}'))))
+    new = collections.Counter(map(norm, lit.findall(git('show', f'HEAD:{f}'))))
+    added = new - old
+    tag = 'excepcion' if f in exc else 'sitio'
+    if added:
+        print(f'{tag:9} {rel}: ' + ', '.join(f'{k} x{v}' for k, v in sorted(added.items())))
+    if tag == 'sitio': total += sum(added.values())
+print(f'archivos_src_tocados={len(files)} literales_nuevos_fuera_de_excepciones={total}')
+print('rgba(15,28,46 en HEAD (shared.css):', len(re.findall(r'rgba\(15,28,46', git('show', 'HEAD:log-atm-web-astro/src/styles/pages/shared.css'))))
+PY
+```
+
+```text
+excepcion src/lib/email-templates.ts: #111b21 x1, #3b6497 x1
+excepcion src/styles/tokens.css: #0a1624 x1, #111b21 x2, #112236 x1, #22663f x3, #25d366 x2, #2b4e78 x1, #339965 x1, #3b6497 x2, #87d3b0 x1, #fca5a5 x2, #ffffff x1
+archivos_src_tocados=14 literales_nuevos_fuera_de_excepciones=0
+rgba(15,28,46 en HEAD (shared.css): 3
+```
+<!-- evidencia:fin apply-evidence.25 -->
+
+`apply-evidence.25`: ningún archivo del sitio suma literales de color; los únicos nuevos están en
+las dos excepciones declaradas. Los tres `rgba(15,28,46,…)` que quedan en `shared.css` son el
+degradado base preexistente de escritorio, que el hallazgo C2 deja fuera.
+
+### Botón «Responder por email» del correo
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.26","forma":"archivo","argv":null,"texto":"# Renderiza buildContactoEmail en sus tres combinaciones de contacto, extrae el botón\n# «Responder por email» y compara su par con --color-brand-solid / --color-brand-solid-text\n# resueltos desde el :root de tokens.css. Los módulos `cloudflare:*` se reemplazan por un stub.\nnode_modules/.bin/tsx -e '\nconst Module = require(\"module\");\nconst load = Module._load;\nModule._load = function (req, ...rest) { return String(req).startsWith(\"cloudflare:\") ? { env: {}, connect() { throw new Error(\"stub\"); } } : load.call(this, req, ...rest); };\nconst fs = require(\"fs\");\nconst { buildContactoEmail } = require(\"./src/lib/email-templates.ts\");\nconst root = fs.readFileSync(\"src/styles/tokens.css\", \"utf8\").split(\"\\n@theme {\")[0].replace(/\\/\\*[\\s\\S]*?\\*\\//g, \"\");\nconst decl = Object.fromEntries([...root.matchAll(/(--[\\w-]+)\\s*:\\s*([^;]+);/g)].map((m) =\u003e [m[1], m[2].trim()]));\nconst res = (n) =\u003e { const m = /^var\\((--[\\w-]+)\\)$/.exec(decl[n]); return m ? res(m[1]) : decl[n].toLowerCase(); };\nconst lum = (h) =\u003e { const c = [0, 2, 4].map((i) =\u003e parseInt(h.slice(1).slice(i, i + 2), 16) / 255).map((x) =\u003e x <= 0.04045 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };\nconst ratio = (a, b) =\u003e { const [x, y] = [lum(a), lum(b)].sort((p, q) =\u003e q - p); return (x + 0.05) / (y + 0.05); };\nconst site = { bg: res(\"--color-brand-solid\"), fg: res(\"--color-brand-solid-text\") };\nconsole.log(`sitio: --color-brand-solid=${site.bg} --color-brand-solid-text=${site.fg} ratio=${ratio(site.fg, site.bg).toFixed(2)}`);\nconst meta = { ip: \"127.0.0.1\", userAgent: \"check\", formType: \"contacto\" };\nconst base = { name: \"Ana Prueba\", email: \"ana@example.com\", service: \"Carga aérea\", message: \"Hola\" };\nfor (const [label, d] of [[\"email_y_telefono\", { ...base, phone: \"+56 9 1234 5678\" }], [\"solo_email\", base], [\"solo_telefono\", { ...base, email: \"\", phone: \"+56912345678\" }]]) {\n  const { html } = buildContactoEmail(d, meta);\n  const btns = [...html.matchAll(/<a href=\"(mailto:[^\"?]+)[^\"]*\" style=\"([^\"]*)\"\u003eResponder por email<\\/a\u003e/g)];\n  const out = btns.map((m) =\u003e {\n    const bg = /background:(#[0-9a-fA-F]{6});/.exec(m[2])[1].toLowerCase(), fg = /;color:(#[0-9a-fA-F]{6});/.exec(m[2])[1].toLowerCase();\n    return ` href=${m[1]} background=${bg} color=${fg} ratio=${ratio(fg, bg).toFixed(2)} igual_al_sitio=${bg === site.bg && fg === site.fg}`;\n  });\n  console.log(`${label}: botones_responder=${btns.length}` + out.join(\"\"));\n}\n'\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"94eeb323c5b8a2b5b6454b39ed2e0bada50751b3","fecha":"2026-10-06T13:56:25-03:00","exit":0,"sha256":"45688c25c771be6eac7a50f889e6b2033675cf987745b3c2a65e728e78b09bbb","lineas":4,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `apply-evidence.26`** · exit 0 · 4 líneas, 0 omitidas · HEAD `94eeb323c5b8` · 2026-10-06T13:56:25-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+
+```bash
+# Renderiza buildContactoEmail en sus tres combinaciones de contacto, extrae el botón
+# «Responder por email» y compara su par con --color-brand-solid / --color-brand-solid-text
+# resueltos desde el :root de tokens.css. Los módulos `cloudflare:*` se reemplazan por un stub.
+node_modules/.bin/tsx -e '
+const Module = require("module");
+const load = Module._load;
+Module._load = function (req, ...rest) { return String(req).startsWith("cloudflare:") ? { env: {}, connect() { throw new Error("stub"); } } : load.call(this, req, ...rest); };
+const fs = require("fs");
+const { buildContactoEmail } = require("./src/lib/email-templates.ts");
+const root = fs.readFileSync("src/styles/tokens.css", "utf8").split("\n@theme {")[0].replace(/\/\*[\s\S]*?\*\//g, "");
+const decl = Object.fromEntries([...root.matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)].map((m) => [m[1], m[2].trim()]));
+const res = (n) => { const m = /^var\((--[\w-]+)\)$/.exec(decl[n]); return m ? res(m[1]) : decl[n].toLowerCase(); };
+const lum = (h) => { const c = [0, 2, 4].map((i) => parseInt(h.slice(1).slice(i, i + 2), 16) / 255).map((x) => x <= 0.04045 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4); return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]; };
+const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };
+const site = { bg: res("--color-brand-solid"), fg: res("--color-brand-solid-text") };
+console.log(`sitio: --color-brand-solid=${site.bg} --color-brand-solid-text=${site.fg} ratio=${ratio(site.fg, site.bg).toFixed(2)}`);
+const meta = { ip: "127.0.0.1", userAgent: "check", formType: "contacto" };
+const base = { name: "Ana Prueba", email: "ana@example.com", service: "Carga aérea", message: "Hola" };
+for (const [label, d] of [["email_y_telefono", { ...base, phone: "+56 9 1234 5678" }], ["solo_email", base], ["solo_telefono", { ...base, email: "", phone: "+56912345678" }]]) {
+  const { html } = buildContactoEmail(d, meta);
+  const btns = [...html.matchAll(/<a href="(mailto:[^"?]+)[^"]*" style="([^"]*)">Responder por email<\/a>/g)];
+  const out = btns.map((m) => {
+    const bg = /background:(#[0-9a-fA-F]{6});/.exec(m[2])[1].toLowerCase(), fg = /;color:(#[0-9a-fA-F]{6});/.exec(m[2])[1].toLowerCase();
+    return ` href=${m[1]} background=${bg} color=${fg} ratio=${ratio(fg, bg).toFixed(2)} igual_al_sitio=${bg === site.bg && fg === site.fg}`;
+  });
+  console.log(`${label}: botones_responder=${btns.length}` + out.join(""));
+}
+'
+```
+
+```text
+sitio: --color-brand-solid=#3b6497 --color-brand-solid-text=#ffffff ratio=6.08
+email_y_telefono: botones_responder=1 href=mailto:ana@example.com background=#3b6497 color=#ffffff ratio=6.08 igual_al_sitio=true
+solo_email: botones_responder=1 href=mailto:ana@example.com background=#3b6497 color=#ffffff ratio=6.08 igual_al_sitio=true
+solo_telefono: botones_responder=0
+```
+<!-- evidencia:fin apply-evidence.26 -->
+
+`apply-evidence.26`: con email del remitente (con o sin teléfono) el correo muestra un único
+botón «Responder por email» con el mismo par que `--color-brand-solid` / `--color-brand-solid-text`
+y enlace `mailto:`; sin email no hay botón.
+
+### Verificación en navegador
+
+Entorno: `astro preview --port 4391` sobre el build de `apply-evidence.24`; Chrome 148 del
+checkout principal (solo lectura); `puppeteer-core` y `axe-core` instalados en el directorio de
+temporales del despacho; `sharp` del worktree para leer las capturas. Los scripts (`lib.mjs`,
+`states.mjs`, `industrias.mjs`, `axe.mjs`) viven en ese directorio.
+
+Estados (C1 y SA1), en es/en/pt, escritorio y móvil: la viñeta del paso 1 tras avanzar al paso 2
+del asistente, y el mensaje de éxito del formulario de contacto con la respuesta de
+`/api/contacto` simulada (`{ "ok": true }`) por intercepción de la petición.
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.27","forma":"archivo","argv":null,"texto":"# Verificación en navegador: states.mjs (requiere astro preview en 127.0.0.1:4391)\ncd /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-apply-21c0gmml/tools.CvEyCM6I && node states.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"94eeb323c5b8a2b5b6454b39ed2e0bada50751b3","fecha":"2026-10-06T13:58:07-03:00","exit":0,"sha256":"62f8f21df279dfb201784d009448f9a2788ee8af8d5dfbc037ff23d19f2b26b8","lineas":13,"omitidas":0,"no_recomprobable":"requiere astro preview en ejecución y Chrome/puppeteer fuera del repo"} -->
+**Evidencia `apply-evidence.27`** · exit 0 · 13 líneas, 0 omitidas · HEAD `94eeb323c5b8` · 2026-10-06T13:58:07-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: requiere astro preview en ejecución y Chrome/puppeteer fuera del repo
+
+```bash
+# Verificación en navegador: states.mjs (requiere astro preview en 127.0.0.1:4391)
+cd /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-apply-21c0gmml/tools.CvEyCM6I && node states.mjs
+```
+
+```text
+OK    desktop /es  cotizar  viñeta completada texto=✓ visible=true color=rgb(17,34,54) fondo=rgb(62,185,120) ratio=6.44 umbral=4.5
+OK    desktop /es  contacto éxito "✓ Recibido — te contactamos …" estilo=var(--color-text-accent) color=rgb(34,102,63) fondo=rgb(255,255,255) 14px ratio=6.91 umbral=4.5
+OK    desktop /en  cotizar  viñeta completada texto=✓ visible=true color=rgb(17,34,54) fondo=rgb(62,185,120) ratio=6.44 umbral=4.5
+OK    desktop /en  contacto éxito "✓ Received — we'll contact y…" estilo=var(--color-text-accent) color=rgb(34,102,63) fondo=rgb(255,255,255) 14px ratio=6.91 umbral=4.5
+OK    desktop /pt  cotizar  viñeta completada texto=✓ visible=true color=rgb(17,34,54) fondo=rgb(62,185,120) ratio=6.44 umbral=4.5
+OK    desktop /pt  contacto éxito "✓ Recebido — entramos em con…" estilo=var(--color-text-accent) color=rgb(34,102,63) fondo=rgb(255,255,255) 14px ratio=6.91 umbral=4.5
+OK    movil   /es  cotizar  viñeta completada texto=✓ visible=true color=rgb(17,34,54) fondo=rgb(62,185,120) ratio=6.44 umbral=4.5
+OK    movil   /es  contacto éxito "✓ Recibido — te contactamos …" estilo=var(--color-text-accent) color=rgb(34,102,63) fondo=rgb(255,255,255) 14px ratio=6.91 umbral=4.5
+OK    movil   /en  cotizar  viñeta completada texto=✓ visible=true color=rgb(17,34,54) fondo=rgb(62,185,120) ratio=6.44 umbral=4.5
+OK    movil   /en  contacto éxito "✓ Received — we'll contact y…" estilo=var(--color-text-accent) color=rgb(34,102,63) fondo=rgb(255,255,255) 14px ratio=6.91 umbral=4.5
+OK    movil   /pt  cotizar  viñeta completada texto=✓ visible=true color=rgb(17,34,54) fondo=rgb(62,185,120) ratio=6.44 umbral=4.5
+OK    movil   /pt  contacto éxito "✓ Recebido — entramos em con…" estilo=var(--color-text-accent) color=rgb(34,102,63) fondo=rgb(255,255,255) 14px ratio=6.91 umbral=4.5
+fallas=0
+```
+<!-- evidencia:fin apply-evidence.27 -->
+
+`apply-evidence.27`: en los 12 casos la viñeta completada muestra `✓` con `primary-900` sobre el
+verde de marca y el mensaje de éxito toma `var(--color-text-accent)` sobre la tarjeta blanca; ambos
+superan 4.5:1 (cifras en el bloque).
+
+Visor de industrias (C2 y SA2), en es/en/pt, a 390px, 960px (límite de la media query) y 1440px,
+con movimiento reducido (sin autoavance): para cada una de las 12 diapositivas se muestrea el
+nombre de industria y el contador (criterio p5 ≥ 4.5, el mismo de `apply-evidence.12`), y por
+viewport se mide el ancho de la pastilla del contador contra el ancho útil del overlay.
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.28","forma":"archivo","argv":null,"texto":"# Verificación en navegador: industrias.mjs (requiere astro preview en 127.0.0.1:4391)\ncd /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-apply-21c0gmml/tools.CvEyCM6I && node industrias.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"94eeb323c5b8a2b5b6454b39ed2e0bada50751b3","fecha":"2026-10-06T14:01:32-03:00","exit":0,"sha256":"09c0416f0379f029703e83bb850ccf72519c0eed724cf2db890aa3a68f51e7be","lineas":235,"omitidas":195,"no_recomprobable":"requiere astro preview en ejecución y Chrome/puppeteer fuera del repo"} -->
+**Evidencia `apply-evidence.28`** · exit 0 · 235 líneas, 195 omitidas · HEAD `94eeb323c5b8` · 2026-10-06T14:01:32-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: requiere astro preview en ejecución y Chrome/puppeteer fuera del repo
+
+```bash
+# Verificación en navegador: industrias.mjs (requiere astro preview en 127.0.0.1:4391)
+cd /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-apply-21c0gmml/tools.CvEyCM6I && node industrias.mjs
+```
+
+```text
+chequeos=225 fallas=0
+OK    movil /es     pastilla contador align-self=flex-start ancho=106px contenido=64px ancho_util_overlay=284px
+      movil /es     overlay background-image=linear-gradient(color(srgb 0.0392157 0.0862745 0.141176 / 0.…
+OK    movil /en     pastilla contador align-self=flex-start ancho=106px contenido=64px ancho_util_overlay=284px
+      movil /en     overlay background-image=linear-gradient(color(srgb 0.0392157 0.0862745 0.141176 / 0.…
+OK    movil /pt     pastilla contador align-self=flex-start ancho=106px contenido=64px ancho_util_overlay=284px
+      movil /pt     overlay background-image=linear-gradient(color(srgb 0.0392157 0.0862745 0.141176 / 0.…
+OK    tablet960 /es pastilla contador align-self=flex-start ancho=106px contenido=64px ancho_util_overlay=814px
+      tablet960 /es overlay background-image=linear-gradient(color(srgb 0.0392157 0.0862745 0.141176 / 0.…
+OK    tablet960 /en pastilla contador align-self=flex-start ancho=106px contenido=64px ancho_util_overlay=814px
+      tablet960 /en overlay background-image=linear-gradient(color(srgb 0.0392157 0.0862745 0.141176 / 0.…
+OK    tablet960 /pt pastilla contador align-self=flex-start ancho=106px contenido=64px ancho_util_overlay=814px
+      tablet960 /pt overlay background-image=linear-gradient(color(srgb 0.0392157 0.0862745 0.141176 / 0.…
+OK    desktop /es   pastilla contador align-self=flex-start ancho=106px contenido=64px ancho_util_overlay=537px
+      desktop /es   overlay background-image=linear-gradient(rgba(15, 28, 46, 0.1), rgba(15, 28, 46, 0.2)…
+OK    desktop /en   pastilla contador align-self=flex-start ancho=106px contenido=64px ancho_util_overlay=537px
+      desktop /en   overlay background-image=linear-gradient(rgba(15, 28, 46, 0.1), rgba(15, 28, 46, 0.2)…
+OK    desktop /pt   pastilla contador align-self=flex-start ancho=106px contenido=64px ancho_util_overlay=537px
+      desktop /pt   overlay background-image=linear-gradient(rgba(15, 28, 46, 0.1), rgba(15, 28, 46, 0.2)…
+OK    movil /es     slide  1 #dir-name               px=4510 min=13.19 p5=14.29 mediana=16.94 umbral=4.5
+OK    movil /es     slide  1 .ind-directory__counter px=5040 min=3.22 p5=9.72 mediana=9.94 umbral=4.5
+OK    movil /es     slide  2 #dir-name               px=3403 min=11.82 p5=12.51 mediana=13.11 umbral=4.5
+OK    movil /es     slide  2 .ind-directory__counter px=5726 min=1.78 p5=8.59 mediana=12.49 umbral=4.5
+OK    movil /es     slide  3 #dir-name               px=8159 min=10.57 p5=12.83 mediana=13.82 umbral=4.5
+OK    movil /es     slide  3 .ind-directory__counter px=5726 min=2.73 p5=9.78 mediana=10.64 umbral=4.5
+OK    movil /es     slide  4 #dir-name               px=8118 min=9.64 p5=10.24 mediana=11.45 umbral=4.5
+OK    movil /es     slide  4 .ind-directory__counter px=5910 min=6.33 p5=11.83 mediana=13.52 umbral=4.5
+OK    movil /es     slide  5 #dir-name               px=7462 min=9.31 p5=10.75 mediana=13.93 umbral=4.5
+OK    movil /es     slide  5 .ind-directory__counter px=5726 min=9.40 p5=9.66 mediana=13.36 umbral=4.5
+OK    movil /es     slide  6 #dir-name               px=7667 min=10.03 p5=13.48 mediana=16.99 umbral=4.5
+OK    movil /es     slide  6 .ind-directory__counter px=5726 min=2.16 p5=8.61 mediana=8.78 umbral=4.5
+OK    movil /es     slide  7 #dir-name               px=10209 min=10.00 p5=12.90 mediana=16.50 umbral=4.5
+OK    movil /es     slide  7 .ind-directory__counter px=5450 min=2.04 p5=9.07 mediana=13.94 umbral=4.5
+OK    movil /es     slide  8 #dir-name               px=6560 min=7.93 p5=8.45 mediana=16.84 umbral=4.5
+OK    movil /es     slide  8 .ind-directory__counter px=5726 min=15.92 p5=16.66 mediana=18.43 umbral=4.5
+OK    movil /es     slide  9 #dir-name               px=10045 min=11.14 p5=13.58 mediana=17.36 umbral=4.5
+OK    movil /es     slide  9 .ind-directory__counter px=5726 min=2.29 p5=9.42 mediana=10.68 umbral=4.5
+OK    movil /es     slide 10 #dir-name               px=11111 min=9.03 p5=10.50 mediana=14.69 umbral=4.5
+OK    movil /es     slide 10 .ind-directory__counter px=5040 min=2.10 p5=8.79 mediana=9.21 umbral=4.5
+OK    movil /es     slide 11 #dir-name               px=6765 min=10.77 p5=13.03 mediana=18.41 umbral=4.5
+```
+<!-- evidencia:fin apply-evidence.28 -->
+
+`apply-evidence.28`: 225 chequeos sin fallas. El nombre de industria supera el umbral en las 12
+diapositivas de los tres idiomas y los tres anchos, también a 390px y 960px, donde rige el
+degradado expresado con `primary-950` (el `background-image` computado ≤ 960px es
+`color(srgb 0.039 0.086 0.141 / …)`, es decir `#0a1624`; en 1440px sigue el degradado base). La
+pastilla del contador computa `align-self: flex-start` y mide lo mismo que su contenido más gap y
+padding (106px), muy por debajo del ancho útil del overlay en todos los anchos. El bloque muestra
+40 de 235 líneas, con las fallas primero; el exit 0 cubre las omitidas.
+
+Barrido axe-core `color-contrast` sobre el sitio completo, para confirmar que las correcciones no
+introducen violaciones: 21 URL (7 rutas × es/en/pt, incluida la 404 `/xx-nope/`) × desktop
+1440×900 y móvil 390×844 × `prefers-reduced-motion` `no-preference` y `reduce`, con scroll
+completo antes de auditar.
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.29","forma":"archivo","argv":null,"texto":"# Barrido axe color-contrast: axe.mjs (requiere astro preview en 127.0.0.1:4391)\ncd /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-apply-21c0gmml/tools.CvEyCM6I && node axe.mjs\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"94eeb323c5b8a2b5b6454b39ed2e0bada50751b3","fecha":"2026-10-06T14:04:53-03:00","exit":0,"sha256":"26bae1401fd67b5f401e70f088f321a380f07f7439e224ddb92cc6208fb97c5d","lineas":5,"omitidas":0,"no_recomprobable":"requiere astro preview en ejecución y Chrome/puppeteer fuera del repo"} -->
+**Evidencia `apply-evidence.29`** · exit 0 · 5 líneas, 0 omitidas · HEAD `94eeb323c5b8` · 2026-10-06T14:04:53-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: requiere astro preview en ejecución y Chrome/puppeteer fuera del repo
+
+```bash
+# Barrido axe color-contrast: axe.mjs (requiere astro preview en 127.0.0.1:4391)
+cd /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/fix-color-contrast-sitewide/sdd-apply-21c0gmml/tools.CvEyCM6I && node axe.mjs
+```
+
+```text
+no-preference desktop urls=21 violaciones=0
+no-preference movil   urls=21 violaciones=0
+reduce        desktop urls=21 violaciones=0
+reduce        movil   urls=21 violaciones=0
+corridas=84 violaciones=0
+```
+<!-- evidencia:fin apply-evidence.29 -->
+
+`apply-evidence.29`: 84 corridas sin violaciones de contraste.
+
+### Coherencia de `DESIGN.md` (SB2)
+
+El bloque siguiente muestra las líneas de `DESIGN.md` que describen `--color-brand`, la regla del
+anillo de foco con su excepción y la excepción de correo con el par del botón de SB1.
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.30","forma":"argv","argv":["grep","-nE","^--color-brand:|why__video-toggle|Responder por email|--color-brand-solid-text` / `--color-brand-solid`\\)","DESIGN.md"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"94eeb323c5b8a2b5b6454b39ed2e0bada50751b3","fecha":"2026-10-06T14:05:01-03:00","exit":0,"sha256":"c79c745af5140318e6afb4880d40e3f821632cd1cc173ca3e7d7aed57d9209a9","lineas":4,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `apply-evidence.30`** · exit 0 · 4 líneas, 0 omitidas · HEAD `94eeb323c5b8` · 2026-10-06T14:05:01-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+
+```text
+grep -nE '^--color-brand:|why__video-toggle|Responder por email|--color-brand-solid-text` / `--color-brand-solid`\)' DESIGN.md
+```
+
+```text
+71:--color-brand: #4A7BB5;      /* Color de marca: acentos y texto grande; no apto para texto normal (4.38:1 sobre blanco) */
+186:- Los componentes no fijan otro color de anillo ni usan `outline: none` sin un indicador equivalente visible en modos de color forzado (ADR-0008). Excepcion vigente: `.why__video-toggle:focus-visible` conserva un anillo blanco de 2px, porque el boton flota sobre el video oscuro
+260:`--color-whatsapp-text` / `--color-whatsapp`; el boton «Responder por email»: `#ffffff` sobre
+261:`#3b6497`, espejo de `--color-brand-solid-text` / `--color-brand-solid`). Un cambio de esos
+```
+<!-- evidencia:fin apply-evidence.30 -->
+
+`apply-evidence.30`: `--color-brand` se describe como apto solo para acentos y texto grande, la
+regla del anillo de foco declara la excepción `.why__video-toggle` y la excepción de correo nombra
+el par del botón «Responder por email».

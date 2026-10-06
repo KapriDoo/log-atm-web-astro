@@ -16,6 +16,7 @@ worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-co
 feature_branch: "feature/fix-color-contrast-sitewide"
 commits:
   - 84ce2fc
+  - 9d1687e
 mr: ""
 acceptance_criteria:
   - "[x] Todo botón CTA muestra texto azul marino oscuro sobre fondo verde de marca con contraste ≥ 4.5:1 en reposo, con cursor, con foco de teclado y presionado"

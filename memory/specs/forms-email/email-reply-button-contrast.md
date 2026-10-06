@@ -7,14 +7,16 @@ domain: "fix"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on: []
 change_ref: "[[fix-color-contrast-sitewide]]"
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide"
 feature_branch: "feature/fix-color-contrast-sitewide"
-commits: []
+commits:
+  - 84e0c03
+  - 94eeb32
 mr: ""
 acceptance_criteria:
   - "[ ] El botón «Responder por email» del correo muestra texto blanco sobre azul de marca con contraste ≥ 4.5:1"

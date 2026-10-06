@@ -29,6 +29,8 @@ worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-co
 feature_branch: "feature/fix-color-contrast-sitewide"
 commits:
   - 3bc419b
+  - 9d1687e
+  - ce1aa03
 mr: ""
 acceptance_criteria:
   - "[x] La auditoría automática en navegador real reporta 0 violaciones de contraste en las 42 combinaciones de página, idioma y tamaño de pantalla"
