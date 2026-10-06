@@ -257,7 +257,10 @@ async function main() {
     }
   } finally {
     await browser.close();
+    // Espera (hasta 5 s) a que el servidor termine antes de informar, para no dejar procesos vivos.
+    const exited = new Promise((r) => server.once('exit', r));
     stopServer();
+    await Promise.race([exited, new Promise((r) => setTimeout(r, 5000))]);
   }
 
   console.log(
