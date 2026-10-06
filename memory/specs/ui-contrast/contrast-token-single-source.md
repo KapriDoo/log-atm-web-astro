@@ -7,7 +7,7 @@ domain: "fix"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on: []
@@ -29,7 +29,7 @@ acceptance_criteria:
   - "[x] La documentación de diseño declara la excepción de los correos"
   - "[x] Los ratios de la tabla de pares validados de la documentación coinciden con los medidos"
   - "[x] Los tokens de WhatsApp tienen el verde visible del sitio"
-  - "[ ] La documentación de diseño no describe como apto para texto normal un color cuyo par no alcanza 4.5:1 y declara las excepciones vigentes al anillo de foco por contexto"
+  - "[x] La documentación de diseño no describe como apto para texto normal un color cuyo par no alcanza 4.5:1 y declara las excepciones vigentes al anillo de foco por contexto"
 
 related:
   - "[[tokens/consolidate-tokens]]"
@@ -98,7 +98,7 @@ Cada par de color texto/fondo que cumple WCAG AA se define una vez en la fuente 
 - [x] La documentación de diseño declara la excepción de los correos
 - [x] Los ratios de la tabla de pares validados de la documentación coinciden con los medidos
 - [x] Los tokens de WhatsApp tienen el verde visible del sitio
-- [ ] La documentación de diseño no describe como apto para texto normal un color cuyo par no alcanza 4.5:1 y declara las excepciones vigentes al anillo de foco por contexto
+- [x] La documentación de diseño no describe como apto para texto normal un color cuyo par no alcanza 4.5:1 y declara las excepciones vigentes al anillo de foco por contexto
 
 ## Related
 
