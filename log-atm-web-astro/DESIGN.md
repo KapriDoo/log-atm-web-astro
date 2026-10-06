@@ -23,8 +23,8 @@
 - `primary-50`: #eef4fb — fondos tenues, hover de filas
 - `primary-100`: #d7e4f4 — fondos de cards informativas
 - `primary-200`: #aec7e5 — bordes, dividers sutiles
-- `primary-300`: #83a7d2 — iconos secundarios, placeholders
-- `primary-400`: #658fc3 — links hover, estados intermedios
+- `primary-300`: #83a7d2 — iconos secundarios y decorativos; no apto para texto (2.49:1 sobre blanco)
+- `primary-400`: #658fc3 — bordes en hover (tarjetas, opciones del cotizador) y estados intermedios no textuales; no apto para texto normal (3.35:1 sobre blanco)
 - `primary-500`: #4A7BB5 — **Color de marca principal (azul LOG ATM)**
 - `primary-600`: #3b6497 — hover de elementos primarios
 - `primary-700`: #2b4e78 — hover de botones primarios, active
@@ -37,15 +37,16 @@
 - `accent-400`: #87d3b0 — iconos de accion, highlights
 - `accent-500`: #3EB978 — **CTA principal (verde)**
 - `accent-600`: #339965 — hover de CTA, estados activos
-- `accent-700`: #297A51 — active/pressed, texto sobre verde
+- `accent-700`: #297A51 — active/pressed
+- `accent-800`: #22663f — **texto de acento verde sobre fondos claros** (`--color-text-accent`)
 
 ### Neutral
 - `neutral-50`: #f8f7f6 — **Fondo de pagina**
 - `neutral-100`: #efedeb — background de secciones alternas
 - `neutral-200`: #e1dedb — **Bordes y divisores**
-- `neutral-300`: #c8c4c1 — placeholder text, iconos inactivos
+- `neutral-300`: #c8c4c1 — iconos inactivos, bordes en hover; no apto para texto (1.73:1 sobre blanco)
 - `neutral-400`: #aaa6a1 — texto deshabilitado
-- `neutral-500`: #898580 — texto de apoyo
+- `neutral-500`: #898580 — texto de apoyo sobre superficies oscuras (4.97:1 sobre primary-950); no apto para texto normal sobre fondos claros (3.66:1 sobre blanco)
 - `neutral-600`: #6e6963 — **Texto secundario**
 - `neutral-700`: #544f4a — texto de cuerpo
 - `neutral-800`: #37332f — texto de headings
@@ -53,10 +54,11 @@
 - `neutral-950`: #131210 — texto de maximo contraste
 
 ### Semantic
-- `success`: #22c55e — Confirmaciones, estados OK
-- `warning`: #ed8c1d — Alertas leves
-- `error`: #E04848 — Errores, alertas criticas
-- `info`: #4A7BB5 — Mensajes informativos
+- `success`: #22c55e — Confirmaciones, estados OK: fondos tenues, bordes e iconos; no apto para texto sobre fondos claros (2.28:1 sobre blanco)
+- `warning`: #ed8c1d — Alertas leves: fondos tenues, bordes e iconos; no apto para texto sobre fondos claros (2.51:1 sobre blanco)
+- `error`: #E04848 — Errores, alertas criticas: bordes, iconos y fondos tenues; no apto para texto normal sobre fondos claros (4.05:1 sobre blanco)
+- `error-light`: #fca5a5 — Errores sobre superficies oscuras (par de `success-light`)
+- `info`: #4A7BB5 — Mismo tono que `primary-500`: iconos, bordes y texto grande de mensajes informativos; no apto para texto normal (4.38:1 sobre blanco)
 
 ### Tokens funcionales
 ```css
@@ -66,21 +68,59 @@
 --color-border: #e1dedb;     /* Bordes */
 --color-text: #211f1c;       /* Texto principal */
 --color-text-muted: #6e6963; /* Texto secundario */
---color-brand: #4A7BB5;      /* Color de marca */
+--color-brand: #4A7BB5;      /* Color de marca: acentos y texto grande; no apto para texto normal (4.38:1 sobre blanco) */
 --color-brand-dark: #2b4e78; /* Variante oscura marca */
---color-cta: #3EB978;        /* CTA principal */
---color-cta-hover: #339965;  /* CTA hover */
---color-whatsapp: #128C7E;
+
+/* Pares texto/fondo validados: los componentes consumen el par, no el tono de paleta */
+--color-cta: #3EB978;            /* CTA principal (fondo) */
+--color-cta-hover: #339965;      /* CTA hover (fondo) */
+--color-cta-text: #112236;       /* texto sobre --color-cta (primary-900) */
+--color-cta-hover-text: #0a1624; /* texto sobre --color-cta-hover (primary-950) */
+
+--color-brand-solid: #3b6497;       /* boton azul solido (primary-600) */
+--color-brand-solid-hover: #2b4e78; /* hover (primary-700) */
+--color-brand-solid-text: #ffffff;  /* texto sobre ambos */
+
+--color-whatsapp: #25D366;       /* verde visible de WhatsApp */
 --color-whatsapp-hover: #1da851;
+--color-whatsapp-text: #111b21;  /* texto sobre ambos */
+
+--color-text-accent: #22663f;    /* texto de acento verde sobre fondos claros (accent-800) */
+
+--color-focus-ring: #3b6497;         /* anillo de foco sobre superficies claras (primary-600) */
+--color-focus-ring-inverse: #87d3b0; /* anillo de foco sobre superficies oscuras (accent-400) */
 ```
 
+Fuente unica: `src/styles/tokens.css` (`:root` es la autoridad en runtime; `@theme` repite el
+hex resuelto para registrar las utilidades de Tailwind).
+
 ### Pares de contraste validados
-- `neutral-900` sobre `neutral-50`: ratio ~14:1 ✅ AAA
-- `primary-500` sobre `#ffffff`: ratio ~4.8:1 ✅ AA
-- `primary-900` sobre `#ffffff`: ratio ~14.5:1 ✅ AAA
-- `accent-500` sobre `#ffffff`: ratio ~3.1:1 ⚠️ solo para texto grande (≥18px)
-- `#ffffff` sobre `primary-500`: ratio ~4.8:1 ✅ AA
-- `#ffffff` sobre `accent-600`: ratio ~4.5:1 ✅ AA
+
+Ratios WCAG 2.x calculados sobre los hex de `tokens.css`. Umbral: 4.5:1 texto normal;
+3:1 texto grande (≥ 24px, o ≥ 18.66px en negrita) y componentes graficos (anillo de foco, bordes).
+
+| Texto / indicador | Fondo | Ratio | Uso |
+|---|---|---|---|
+| `--color-cta-text` (primary-900) | `--color-cta` (accent-500) | 6.44:1 | Botones y etiquetas CTA en reposo |
+| `--color-cta-hover-text` (primary-950) | `--color-cta-hover` (accent-600) | 5.10:1 | Botones CTA en hover |
+| `--color-brand-solid-text` (blanco) | `--color-brand-solid` (primary-600) | 6.08:1 | Botones azul solido, skip link |
+| `--color-brand-solid-text` (blanco) | `--color-brand-solid-hover` (primary-700) | 8.52:1 | Botones azul solido en hover |
+| `--color-whatsapp-text` (#111b21) | `--color-whatsapp` (#25D366) | 8.80:1 | Boton y canal WhatsApp |
+| `--color-whatsapp-text` (#111b21) | `--color-whatsapp-hover` (#1da851) | 5.63:1 | Boton WhatsApp en hover |
+| `--color-text-accent` (accent-800) | blanco · neutral-50 · neutral-100 · accent-300 | 6.91 · 6.46 · 5.91 · 5.80:1 | Eyebrows, pills, numeros de paso |
+| `--color-brand-dark` (primary-700) | neutral-100 · primary-50 | 7.30 · 7.70:1 | Enlaces de navegacion en hover, foco y activo |
+| `--color-text-muted` (neutral-600) | blanco | 5.44:1 | Valores pendientes, texto secundario |
+| `--color-text-inverse` (blanco) | primary-900 | 16.08:1 | Titulos y chips activos sobre oscuro |
+| `primary-200` | primary-900 | 9.27:1 | Texto secundario sobre superficies oscuras |
+| `primary-100` | primary-800 | 9.66:1 | Migas de pan de heroes internos |
+| `--color-brand` (primary-500) | neutral-50 | 4.10:1 | Solo texto grande (codigo 404, ≥ 96px) |
+| `--color-focus-ring` (primary-600) | blanco · neutral-50 · neutral-100 · primary-50 | 6.08 · 5.68 · 5.20 · 5.49:1 | Anillo de foco en superficies claras |
+| `--color-focus-ring` (primary-600) | neutral-200 | 4.54:1 | Borde de campo enfocado vs. borde sin foco |
+| `--color-focus-ring-inverse` (accent-400) | primary-950 · 900 · 800 · 700 · neutral-950 | 10.38 · 9.17 · 7.10 · 4.86 · 10.68:1 | Anillo de foco en superficies oscuras |
+| `neutral-900` | neutral-50 | 15.36:1 | Texto principal |
+
+No validos para texto normal: blanco sobre `accent-500`/`accent-600` (CTA), blanco sobre
+`primary-500` (4.38:1) y `accent-500`/`accent-600`/`accent-700` como texto sobre fondos claros.
 
 ---
 
@@ -111,10 +151,10 @@
 ## Component Stylings
 
 ### Buttons
-- **Primary**: `.btn-primary` — bg-primary-500, text-white, radius-pill, px-7 py-3, font-display weight-600
-- **CTA**: `.btn-cta` — bg-accent-500, text-white, radius-pill, px-7 py-3, font-display weight-700, shadow-cta
-- **Outline**: `.btn-outline` — transparent, border-primary-300, text-primary-500, radius-pill
-- **Ghost**: bg-transparent, text-brand, hover:bg-primary-50
+- **Brand (azul solido)**: `.btn--brand` — `--color-brand-solid` / `--color-brand-solid-text`; hover `--color-brand-solid-hover`. Mismo par en `.skip-link` y en el boton de la seccion final (`.cta-final__btn`, `.cta-final .btn--cta`, que fija fondo y texto en todos los estados). radius-pill, font-display weight-600
+- **CTA**: `.btn--cta` — `--color-cta` / `--color-cta-text`; hover `--color-cta-hover` / `--color-cta-hover-text`. Todo elemento sobre el verde CTA (etiquetas, sellos, checks, pin) consume el mismo par. radius-pill, font-display weight-700, shadow-cta
+- **WhatsApp**: `.btn--wa` y `.channel--wa` — fondo solido `--color-whatsapp` con `--color-whatsapp-text`; hover `--color-whatsapp-hover`. Sin degradados bajo texto
+- **Ghost**: `.btn--ghost` — fondo transparente, texto `--color-text`, borde `--color-border`; hover fondo `--color-surface` y borde `neutral-300`. En el cotizador, `.btn-ghost` — texto `--color-text-muted` (5.44:1 sobre blanco), hover `--color-text`
 - **Disabled**: opacity-50, cursor-not-allowed
 
 ### Cards
@@ -128,14 +168,21 @@
 ### Inputs
 - Border: 1px solid var(--color-border)
 - Border-radius: var(--radius-input) (10px)
-- Focus: outline-3px accent-500, outline-offset 2px
+- Focus: borde `--color-focus-ring` (`--color-focus-ring-inverse` sobre superficies oscuras) + anillo global de foco
 - Error: border-error
-- Placeholder: var(--color-neutral-400)
+- Placeholder: sin tono de paleta asignado; `neutral-300` y `neutral-400` no se usan para placeholder porque no alcanzan 4.5:1 sobre blanco (1.73 y 2.42:1)
 
 ### Navigation
-- Desktop: horizontal, links en neutral-700, hover brand
-- Mobile: hamburger menu
-- Active state: text-brand, font-weight 600
+- Desktop: horizontal, links en neutral-700; hover y foco `--color-brand-dark`
+- Mobile: hamburger menu; hover y foco del drawer `--color-brand-dark`
+- Active state: `--color-brand-dark`, font-weight 600 y subrayado de 2px (`text-underline-offset: 0.3em`): la pagina actual no depende solo del color
+
+### Focus ring (anillo de foco por contexto)
+- Regla global: `:focus-visible { outline: 3px solid var(--focus-ring-color, var(--color-focus-ring)); }`
+- Superficies claras: `--color-focus-ring` (primary-600, ≥ 5.20:1)
+- Superficies oscuras con controles enfocables: declaran `--focus-ring-color: var(--color-focus-ring-inverse)` en la misma regla que define su fondo (`.hero-b`, `.page-hero`, `.ind-directory-section`, `.quote-hero`, `.cta-final`, `.footer`). Una seccion oscura nueva hace lo mismo
+- `--focus-ring-color` es una variable de contexto, no un token: solo toma el valor `var(--color-focus-ring-inverse)`, y una isla clara dentro de una superficie oscura puede restablecerla
+- Los componentes no fijan otro color de anillo ni usan `outline: none` sin un indicador equivalente visible en modos de color forzado (ADR-0008). Excepcion vigente: `.why__video-toggle:focus-visible` conserva un anillo blanco de 2px, porque el boton flota sobre el video oscuro
 
 ### Modals / Dialogs
 - Overlay: black/50
@@ -146,9 +193,7 @@
 
 ### Badges / Tags
 - Default: bg-primary-100 text-primary-700 radius-pill px-3 py-1
-- Success: bg-success/10 text-success
-- Warning: bg-warning/10 text-warning
-- Error: bg-error/10 text-error
+- Variantes semanticas (success, warning, error): el tono semantico va en el fondo tenue (`/10`), el borde o el icono; el texto usa `--color-text`, porque los tonos semanticos no alcanzan 4.5:1 como texto sobre fondos claros
 
 ---
 
@@ -197,12 +242,21 @@
 - Priorizar accesibilidad WCAG 2.2 AA minimo
 
 ### Don't
-- No usar colores hardcodeados en componentes
+- No usar colores hardcodeados en componentes (unica excepcion: plantillas de correo, ver abajo)
 - No mezclar radius styles incompatibles (ej: pill + square)
 - No usar accent-500 para texto pequeno sobre fondo claro
 - No ignorar prefers-reduced-motion
 - No exceder 65 caracteres por linea de texto
 - No usar sombras con opacidad mayor al 20% en contexts sutiles
+
+### Excepcion: plantillas de correo
+`src/lib/email-templates.ts` es el unico archivo autorizado a declarar hex de color fuera de
+`tokens.css`: los clientes de correo exigen estilos inline y no leen las hojas del sitio. Cada
+par del correo que replica un par del sitio vive en una constante local con un comentario que
+nombra los tokens de origen (p. ej. el boton WhatsApp: `#111b21` sobre `#25D366`, espejo de
+`--color-whatsapp-text` / `--color-whatsapp`; el boton «Responder por email»: `#ffffff` sobre
+`#3b6497`, espejo de `--color-brand-solid-text` / `--color-brand-solid`). Un cambio de esos
+tokens se replica a mano en la constante (ADR-0008).
 
 ---
 

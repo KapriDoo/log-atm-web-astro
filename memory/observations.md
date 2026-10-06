@@ -402,3 +402,128 @@ Las 4 cards altas declaran `sizes="665px"` (ancho pintado de la foto, fijo por e
 
 ## 2026-10-03 | measure | debt-assets-weight | preflight sdd-archive INICIO 01:41:13 outcome=ready
 
+## 2026-10-03 | measure | fix-color-contrast-sitewide | preflight sdd-init INICIO 01:44:10 outcome=ready
+
+## 2026-10-03 | measure | fix-color-contrast-sitewide | post-dispatch sdd-init FIN 01:44:51 outcome=advance
+
+## 2026-10-03 | measure | fix-color-contrast-sitewide | preflight sdd-explore INICIO 01:44:51 outcome=ready
+
+
+## 2026-10-03 | debt-candidate | fix-color-contrast-sitewide | DESIGN.md con ratios de contraste erróneos
+**Detectado por**: sdd-explore en `fix-color-contrast-sitewide`
+**Ubicación**: log-atm-web-astro/DESIGN.md:77-83
+**Descripción**: "Pares de contraste validados" declara #fff sobre primary-500 ~4.8:1 (real 4.38), accent-500 sobre blanco ~3.1:1 (real 2.50) y #fff sobre accent-600 ~4.5:1 (real 3.56); guía decisiones de diseño con datos falsos.
+**Promoción sugerida**: se corrige dentro de `fix-color-contrast-sitewide`; si se difiere, `sdd new fix-design-md-contrast-pairs --domain debt`
+
+## 2026-10-03 | debt-candidate | fix-color-contrast-sitewide | Color de heading heredado invisible sobre fondos oscuros
+**Detectado por**: sdd-explore en `fix-color-contrast-sitewide`
+**Ubicación**: log-atm-web-astro/src/styles/pages/shared.css:110 (`.ind-directory__name`), log-atm-web-astro/src/styles/pages/cotizar.css:309 (`.quote-summary__title`)
+**Descripción**: los h3 sin `color` explícito toman neutral-900 de la regla global de headings y quedan ilegibles sobre fondo oscuro (1.0-1.02:1); axe lo marca solo en `.quote-summary__title`, el de `/industrias/` queda como `incomplete` por estar sobre foto.
+**Promoción sugerida**: se aborda en `fix-color-contrast-sitewide`; alternativa `sdd new fix-heading-color-inheritance --domain fix`
+
+## 2026-10-03 | debt-candidate | fix-color-contrast-sitewide | Hex literales fuera de tokens.css y tokens WhatsApp huérfanos
+**Detectado por**: sdd-explore en `fix-color-contrast-sitewide`
+**Ubicación**: log-atm-web-astro/src/styles/global.css:158-162, shared.css:864, tokens.css:53-55 y 185-187, src/lib/email-templates.ts:283,295
+**Descripción**: ~34 declaraciones con hex literal fuera de `tokens.css`; `--color-whatsapp*` (#128C7E) no se usa y difiere del verde mostrado (#25D366); `:root` y `@theme` duplican la paleta; el botón WhatsApp de los correos usa #fff sobre #25D366 (1.98:1).
+**Promoción sugerida**: `sdd new tokens-hex-cleanup --domain debt`
+## 2026-10-03 | measure | fix-color-contrast-sitewide | post-dispatch sdd-explore FIN 02:20:03 outcome=advance
+
+## 2026-10-03 | measure | fix-color-contrast-sitewide | preflight sdd-propose INICIO 02:20:03 outcome=ready
+
+## 2026-10-03 | measure | fix-color-contrast-sitewide | post-dispatch sdd-propose FIN 02:22:05 outcome=paused
+
+## 2026-10-04 | measure | fix-color-contrast-sitewide | preflight sdd-propose INICIO 23:45:49 outcome=ready
+
+## 2026-10-04 | measure | fix-color-contrast-sitewide | post-dispatch sdd-propose FIN 23:46:47 outcome=paused
+
+## 2026-10-04 | measure | fix-color-contrast-sitewide | preflight sdd-spec INICIO 23:47:49 outcome=ready
+
+## 2026-10-04 | measure | fix-color-contrast-sitewide | preflight sdd-spec INICIO 23:49:16 outcome=ready
+
+## 2026-10-04 | measure | fix-color-contrast-sitewide | post-dispatch sdd-spec FIN 23:52:35 outcome=advance
+
+## 2026-10-04 | measure | fix-color-contrast-sitewide | preflight sdd-design INICIO 23:52:37 outcome=ready
+
+
+## 2026-10-05 | pre-adr | fix-color-contrast-sitewide | Pares de contraste como tokens funcionales y anillo de foco por contexto
+Cada par texto/fondo validado AA se declara como tokens funcionales de rol en `tokens.css` (`:root` + `@theme`) y los componentes consumen el token del par; el anillo de foco usa `var(--focus-ring-color, var(--color-focus-ring))` y cada superficie oscura con controles enfocables declara `--focus-ring-color: var(--color-focus-ring-inverse)` junto a su fondo, porque ningún color único cumple 3:1 sobre blanco y sobre `primary-700/800`. `email-templates.ts` es la única excepción de hex fuera de `tokens.css`. Registrado en [[0008-contrast-pair-tokens-and-contextual-focus-ring]].
+
+## 2026-10-05 | debt-candidate | fix-color-contrast-sitewide | Contraste del botón de email y del SLA en las plantillas de correo
+**Detectado por**: sdd-design en `fix-color-contrast-sitewide`
+**Ubicación**: log-atm-web-astro/src/lib/email-templates.ts:280,290 (`#ffffff` sobre `#4A7BB5`, 4.38:1) y :301 (`#898580` sobre blanco, ~3.6:1)
+**Descripción**: el botón «Responder por email» y el texto SLA de la sección de CTAs del correo no cumplen AA; ninguna spec de este cambio los cubre (solo el botón WhatsApp). La corrección natural replica el par brand-solid (`#3b6497`, 6.08:1) y `neutral-600` para el SLA, bajo la excepción de hex inline de ADR-0008.
+**Promoción sugerida**: `sdd new fix-email-cta-contrast --domain fix`
+
+## 2026-10-05 | finding | fix-color-contrast-sitewide | extended_context.py no resuelve wikilinks `related[]` con forma `capability/slug`
+**Detectado por**: sdd-design en `fix-color-contrast-sitewide`
+**Descripción**: el modo `reader` reporta «wikilink de `related[]` sin resolver» para los 15 `related[]` de las specs del cambio (p. ej. `[[tokens/consolidate-tokens]]`, `[[ui-contrast/brand-button-contrast]]`), aunque todas existen en `memory/specs/{capability}/{slug}.md`. El resolutor espera `[[slug]]`; las specs emitidas por `sdd-spec` usan `[[capability/slug]]`. La fase leyó las relacionadas por pull.
+## 2026-10-05 | measure | fix-color-contrast-sitewide | post-dispatch sdd-design FIN 00:02:52 outcome=advance
+
+## 2026-10-05 | measure | fix-color-contrast-sitewide | preflight sdd-tasks INICIO 00:02:54 outcome=ready
+
+## 2026-10-05 | measure | fix-color-contrast-sitewide | post-dispatch sdd-tasks FIN 00:05:05 outcome=advance
+
+## 2026-10-05 | measure | fix-color-contrast-sitewide | preflight sdd-apply INICIO 00:05:07 outcome=ready
+
+
+## 2026-10-05 | pre-adr | fix-color-contrast-sitewide | Overlay del visor de industrias más oscuro en pantallas ≤ 960px
+**Detectado por**: sdd-apply (Tarea 28, muestreo de píxeles) en `fix-color-contrast-sitewide`
+**Descripción**: `design.md` asume que el nombre de industria cae en la «zona inferior del overlay (92 % oscuro)»; en visores ≤ 960px (alto fijo 420px) el nombre ocupa el 55–74 % de la altura, donde el degradado solo oscurece 38–49 %, y tres diapositivas quedaban bajo 4.5:1 en 390px. Se aplicó el mismo criterio de D9 (oscurecimiento determinista detrás del texto): en `@media (max-width: 960px)` el overlay pasa a `0.10 0% · 0.20 25% · 0.72 50% · 0.92 100%` (commit `3bc419b`). Desktop no cambia. Decisión de diseño tomada en apply sin HITL; revisar en verify/archive si se prefiere otra variante (scrim tras el caption).
+
+## 2026-10-05 | finding | fix-color-contrast-sitewide | Herramientas de verificación de contraste en Chrome real
+**Detectado por**: sdd-apply en `fix-color-contrast-sitewide`
+**Descripción**: con `puppeteer-core`, `page.screenshot({clip})` espera coordenadas de documento; `boundingBox()`/`getBoundingClientRect()` devuelven coordenadas de viewport, así que el muestreo de píxeles tras un scroll debe sumar `scrollX/scrollY`. En `/industrias/` desktop, centrar un elemento tras el click desplaza el listado bajo el cursor y su `mouseenter` cambia la diapositiva activa: mover el cursor fuera antes de medir. Scripts de referencia en `apply-evidence.md` (bloques embebidos).
+## 2026-10-05 | measure | fix-color-contrast-sitewide | post-dispatch sdd-apply FIN 00:54:48 outcome=advance
+
+## 2026-10-05 | measure | fix-color-contrast-sitewide | preflight sdd-verify INICIO 00:54:53 outcome=ready
+
+## 2026-10-06 | measure | fix-color-contrast-sitewide | preflight sdd-verify INICIO 11:55:43 outcome=ready
+
+
+## 2026-10-06 | finding | fix-color-contrast-sitewide | Overlay ≤ 960px del visor de industrias verificado contra las specs
+**Detectado por**: sdd-verify en `fix-color-contrast-sitewide`
+**Descripción**: la decisión de apply (`3bc419b`) no contradice ninguna spec y cumple `dark-surface-heading-legibility`: el contrafactual con el degradado de escritorio en 390px deja nombre, eyebrow y sub bajo 4.5:1, y con el degradado actual el muestreo de píxeles cumple en las 12 diapositivas, 4 anchos y 3 idiomas (`verify-report.16` y `.19`). `design.md` D8 no recoge el degradado de ≤ 960px; conviene registrarlo en `design.md` o en un ADR al archivar. El `rgba(15,28,46,…)` nuevo repite el color base del degradado de escritorio; el criterio de tokens se limita a hex.
+
+## 2026-10-06 | finding | fix-color-contrast-sitewide | Texto claro sobre fotos y video sigue bajo 4.5:1 (deuda declarada)
+**Detectado por**: sdd-verify en `fix-color-contrast-sitewide`
+**Descripción**: el muestreo de píxeles de títulos h1–h6 (`verify-report.26`) marca texto claro bajo 4.5:1 en `.svc-card__title`, `.ind-card__name` y `.hero-b__title`, solo en `/` y `/servicios/`; los títulos de color oscuro cumplen en todas las páginas. Es la deuda que la clarificación 1 difirió (overlays y degradados de fotos y video); candidato a cambio aparte. En `/pt/servicios/` el título «Desconsolidação» se corta en el borde de su tarjeta (observación visual, previa y ajena al contraste).
+## 2026-10-06 | measure | fix-color-contrast-sitewide | post-dispatch sdd-verify FIN 13:39:32 outcome=advance
+
+## 2026-10-06 | measure | fix-color-contrast-sitewide | preflight sdd-judgment INICIO 13:39:35 outcome=ready
+
+
+## 2026-10-06 | finding | fix-color-contrast-sitewide | axe no cubre glifos ni estados inyectados por JS: dos MUST bajo umbral pasaron verify
+**Detectado por**: sdd-judgment en `fix-color-contrast-sitewide`
+**Descripción**: la viñeta `✓` de paso completado del asistente (`cotizar.css:77`, 2.50:1) y el mensaje de éxito del formulario de contacto (`contacto.astro:221`, `#2d9b6f` inline por JS, 3.48:1) incumplen `sitewide-contrast-verification` a pesar de las 0 violaciones de axe. axe omite el texto de un único glifo de símbolo, y el color de éxito se asigna por JS en un estado que la verificación no expuso. Además, el chequeo estático de colores literales solo buscaba `#hex` y dejó pasar `rgba(...)`. En próximos barridos de contraste conviene buscar todo consumidor de fondos de marca con texto (`grep` del tono de paleta, no solo del token), además de todo `style.color` asignado por JS, y extender el chequeo de literales a `rgb()/rgba()/hsl()`.
+## 2026-10-06 | measure | fix-color-contrast-sitewide | post-dispatch sdd-judgment FIN 13:51:49 outcome=judgment-retry
+
+## 2026-10-06 | measure | fix-color-contrast-sitewide | preflight sdd-apply INICIO 13:51:52 outcome=ready
+
+## 2026-10-06 | measure | fix-color-contrast-sitewide | post-dispatch sdd-apply FIN 14:05:54 outcome=advance
+
+## 2026-10-06 | measure | fix-color-contrast-sitewide | preflight sdd-verify INICIO 14:05:58 outcome=ready
+
+
+## 2026-10-06 | observation | fix-color-contrast-sitewide | sdd-verify: etiqueta «SECTOR · 01» del visor de industrias (accent-300 sobre foto) queda marginalmente bajo 4.5:1 en su peor píxel a 1024 px; es texto claro sobre foto, deuda diferida (clarificación 1), candidata al cambio aparte junto con los títulos de svc-card, ind-card y hero-b. Enlace mailto y texto SLA del correo siguen en #4A7BB5/#898580 inline (candidato de deuda de design.md).
+## 2026-10-06 | measure | fix-color-contrast-sitewide | post-dispatch sdd-verify FIN 15:20:14 outcome=advance
+
+## 2026-10-06 | measure | fix-color-contrast-sitewide | preflight sdd-judgment INICIO 15:20:18 outcome=ready
+
+
+## 2026-10-06 | finding | fix-color-contrast-sitewide | Deuda latente de contraste fuera del alcance de la ronda (triage de judgment iteración 2)
+**Detectado por**: sdd-judgment en `fix-color-contrast-sitewide`
+**Descripción**: dos defectos latentes previos al cambio, sin consumidor visible que falle hoy, quedan fuera del veredicto. (1) `src/scripts/wizard.ts:336`: la rama `success` de `setQuoteStatus` conserva `#2d9b6f` (3.48:1 sobre blanco). Hoy es inalcanzable; si se reutiliza, conviene `var(--color-text-accent)` o quitar la rama. (2) `src/styles/global.css:84`: la regla base `a { color: var(--color-brand) }` da 4.38:1 a todo enlace sin clase propia. Un enlace nuevo sin estilo fallaría AA; candidato a apuntarla a `--color-brand-solid`. Además, en barridos de documentación conviene revisar todo `DESIGN.md` (paleta, semánticos y botones) contra la tabla de pares, no solo el token afectado: los AC de coherencia documental se marcaron con una corrección parcial.
+## 2026-10-06 | measure | fix-color-contrast-sitewide | post-dispatch sdd-judgment FIN 15:26:17 outcome=judgment-residual-fix
+
+## 2026-10-06 | measure | fix-color-contrast-sitewide | preflight sdd-apply INICIO 15:26:21 outcome=ready
+
+
+## 2026-10-06 | observation | fix-color-contrast-sitewide | sdd-apply (redespacho 2): el placeholder de `.cta-final__input` (`--color-text-inverse` al 50 % sobre el campo translúcido de la sección final) mide ~4.8:1 sobre `primary-950` puro y ~4.0:1 donde lo alcanzan los degradados radiales de la sección; axe no evalúa `::placeholder`. Deuda preexistente fuera de los residuales C1/SA1; `DESIGN.md` no lo presenta como par válido.
+## 2026-10-06 | measure | fix-color-contrast-sitewide | post-dispatch sdd-apply FIN 15:31:23 outcome=advance
+
+## 2026-10-06 | measure | fix-color-contrast-sitewide | preflight sdd-verify INICIO 15:31:27 outcome=ready
+
+## 2026-10-06 | measure | fix-color-contrast-sitewide | post-dispatch sdd-verify FIN 16:38:44 outcome=advance
+
+## 2026-10-06 | measure | fix-color-contrast-sitewide | preflight sdd-archive INICIO 16:38:47 outcome=ready
+

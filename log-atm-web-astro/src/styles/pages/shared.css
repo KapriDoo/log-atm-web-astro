@@ -30,6 +30,7 @@
 .ind-directory-section {
   background: var(--color-primary-900);
   color: #fff;
+  --focus-ring-color: var(--color-focus-ring-inverse);
   position: relative;
   overflow: hidden;
 }
@@ -88,17 +89,34 @@
   padding: 1.75rem 2rem 2rem;
   z-index: 2;
 }
+/* Visor bajo (≤ 960px): el caption ocupa desde ~50 % de la altura; el tramo oscuro del
+   degradado sube para que el nombre de industria cumpla ≥ 4.5:1 sobre cualquier foto */
+@media (max-width: 960px) {
+  .ind-directory__overlay {
+    background: linear-gradient(180deg,
+      color-mix(in srgb, var(--color-primary-950) 10%, transparent) 0%,
+      color-mix(in srgb, var(--color-primary-950) 20%, transparent) 25%,
+      color-mix(in srgb, var(--color-primary-950) 72%, transparent) 50%,
+      color-mix(in srgb, var(--color-primary-950) 92%, transparent) 100%);
+  }
+}
 .ind-directory__counter {
   display: inline-flex; align-items: baseline; gap: 0.4rem;
+  /* Ítem del overlay en columna: sin esto se estira y la pastilla cubre todo el ancho */
+  align-self: flex-start;
   font-family: var(--font-mono); font-size: 0.85rem;
   color: #fff; letter-spacing: 0.06em;
+  /* Pastilla oscura: contraste determinista sobre cualquier fotografía */
+  background: color-mix(in srgb, var(--color-primary-950) 65%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-pill);
 }
 .ind-directory__counter > span:first-child {
   font-family: var(--font-display); font-size: 2.5rem; font-weight: 800;
   line-height: 1; letter-spacing: -0.02em;
 }
-.ind-directory__counter .sep { color: rgba(255,255,255,0.4); }
-.ind-directory__counter .total { color: rgba(255,255,255,0.55); }
 
 .ind-directory__caption { color: #fff; }
 .ind-directory__eyebrow {
@@ -112,6 +130,7 @@
   font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 800; letter-spacing: -0.025em; line-height: 1.05;
   margin: 0 0 0.4rem;
+  color: var(--color-text-inverse);
 }
 .ind-directory__sub {
   color: rgba(255,255,255,0.78);
@@ -169,7 +188,7 @@
 
 .ind-directory__item-num {
   font-family: var(--font-mono); font-size: 0.85rem;
-  color: rgba(255,255,255,0.45);
+  color: var(--color-primary-200);
   letter-spacing: 0.06em;
   transition: color 0.25s;
 }
@@ -306,6 +325,7 @@
   padding: clamp(7rem, 12vw, 10rem) 0 clamp(4rem, 7vw, 6rem);
   background: linear-gradient(180deg, var(--color-primary-900) 0%, var(--color-primary-800) 100%);
   color: #fff;
+  --focus-ring-color: var(--color-focus-ring-inverse);
   overflow: hidden;
   isolation: isolate;
 }
@@ -404,7 +424,7 @@
   text-transform: uppercase; letter-spacing: 0.12em;
   margin-bottom: 1rem;
 }
-.page-hero__breadcrumb a { color: var(--color-primary-100); opacity: 0.7; }
+.page-hero__breadcrumb a { color: var(--color-primary-100); }
 .page-hero__breadcrumb a:hover { opacity: 1; color: var(--color-accent-400); }
 
 /* Section helpers shared */
@@ -439,7 +459,7 @@
   cursor: pointer;
   transition: all 0.18s;
 }
-.svc-filter:hover { color: var(--color-text); border-color: var(--color-primary-300); }
+.svc-filter:not(.svc-filter--active):hover { color: var(--color-text); border-color: var(--color-primary-300); }
 .svc-filter--active { background: var(--color-primary-900); color: #fff; border-color: var(--color-primary-900); }
 
 .svc-detail-row {
@@ -694,7 +714,7 @@
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.12em;
-  color: var(--color-brand);
+  color: var(--color-brand-dark);
   padding: 0.3rem 0.55rem;
   border-radius: 999px;
   background: rgba(255,255,255,0.94);
@@ -795,7 +815,7 @@
 .contact-form-card__sub { font-size: 0.9rem; color: var(--color-text-muted); margin: 0; }
 .contact-form-card__pill {
   font-family: var(--font-mono); font-size: 0.7rem;
-  background: var(--color-accent-300); color: var(--color-accent-700);
+  background: var(--color-accent-300); color: var(--color-text-accent);
   padding: 0.4rem 0.7rem; border-radius: var(--radius-pill);
   display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap;
 }
@@ -828,13 +848,11 @@
 .form-field input:focus,
 .form-field select:focus,
 .form-field textarea:focus {
-  outline: none;
-  border-color: var(--color-primary-500);
-  box-shadow: 0 0 0 3px rgba(74,123,181,0.15);
+  border-color: var(--color-focus-ring);
 }
 .form-field textarea { resize: vertical; min-height: 100px; }
 .form-submit {
-  background: var(--color-cta); color: #fff;
+  background: var(--color-cta); color: var(--color-cta-text);
   font-family: var(--font-body); font-weight: 600; font-size: 1rem;
   padding: 0.95rem 1.5rem; border: 0; border-radius: var(--radius-md);
   cursor: pointer; width: 100%; display: inline-flex; justify-content: center;
@@ -861,17 +879,17 @@
   transition: border-color 0.18s, transform 0.18s;
 }
 .channel:hover { border-color: var(--color-primary-400); transform: translateY(-1px); }
-.channel--wa { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); border-color: transparent; color: #fff; }
+.channel--wa { background: var(--color-whatsapp); border-color: transparent; color: var(--color-whatsapp-text); }
 .channel--wa:hover { transform: translateY(-1px); }
 .channel--wa .channel__name,
 .channel--wa .channel__value,
-.channel--wa .channel__arrow { color: #fff; }
+.channel--wa .channel__arrow { color: var(--color-whatsapp-text); }
 .channel__icon {
   width: 44px; height: 44px; border-radius: var(--radius-md);
   background: var(--color-primary-50); color: var(--color-primary-700);
   display: grid; place-items: center;
 }
-.channel--wa .channel__icon { background: rgba(255,255,255,0.2); color: #fff; }
+.channel--wa .channel__icon { background: rgba(255,255,255,0.2); color: var(--color-whatsapp-text); }
 .channel__name {
   font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase;
   letter-spacing: 0.08em; color: var(--color-text-muted); margin-bottom: 0.2rem;
@@ -915,7 +933,7 @@
 }
 .office-card__pin::after {
   content: ''; width: 14px; height: 14px; border-radius: 50%;
-  background: #fff;
+  background: var(--color-cta-text);
   transform: rotate(45deg);
 }
 .office-card__body { padding: 1.5rem; display: grid; gap: 0.75rem; }

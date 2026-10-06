@@ -43,8 +43,8 @@
     position: absolute;
     top: -40px;
     left: 0;
-    background: var(--color-brand);
-    color: var(--color-text-inverse);
+    background: var(--color-brand-solid);
+    color: var(--color-brand-solid-text);
     padding: 8px 16px;
     z-index: 1000;
     border-radius: 0 0 var(--radius-xs) 0;
@@ -67,9 +67,10 @@
     border: 0;
   }
 
-  /* Focus visible accesible */
+  /* Focus visible accesible — el color sale del contexto de superficie:
+     las superficies oscuras declaran --focus-ring-color (ADR-0008) */
   :focus-visible {
-    outline: 3px solid var(--color-accent-500);
+    outline: 3px solid var(--focus-ring-color, var(--color-focus-ring));
     outline-offset: 2px;
     border-radius: var(--radius-xs);
   }
@@ -127,18 +128,19 @@
   .btn:hover { transform: translateY(-1px); }
   .btn--cta {
     background: var(--color-cta);
-    color: var(--color-text-inverse);
+    color: var(--color-cta-text);
     box-shadow: var(--shadow-cta);
   }
   .btn--cta:hover {
-    background: var(--color-accent-600);
+    background: var(--color-cta-hover);
+    color: var(--color-cta-hover-text);
     box-shadow: 0 6px 28px rgb(62 185 120 / 0.45);
   }
   .btn--brand {
-    background: var(--color-brand);
-    color: var(--color-text-inverse);
+    background: var(--color-brand-solid);
+    color: var(--color-brand-solid-text);
   }
-  .btn--brand:hover { background: var(--color-brand-dark); }
+  .btn--brand:hover { background: var(--color-brand-solid-hover); }
   .btn--ghost-light {
     background: rgba(255,255,255,0.08);
     color: var(--color-text-inverse);
@@ -156,10 +158,13 @@
   }
   .btn--ghost:hover { background: var(--color-surface); border-color: var(--color-neutral-300); }
   .btn--wa {
-    background: #25D366;
-    color: var(--color-text-inverse);
+    background: var(--color-whatsapp);
+    color: var(--color-whatsapp-text);
   }
-  .btn--wa:hover { background: #1da851; }
+  .btn--wa:hover {
+    background: var(--color-whatsapp-hover);
+    color: var(--color-whatsapp-text);
+  }
   .btn--sm { padding: 0.5rem 1rem; font-size: 0.8125rem; }
 
   /* Card base — estilo lifecare */
@@ -186,7 +191,7 @@
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--color-accent-600);
+    color: var(--color-text-accent);
     margin-bottom: 0.875rem;
   }
   .eyebrow::before {

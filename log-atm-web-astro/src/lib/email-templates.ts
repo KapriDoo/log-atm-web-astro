@@ -267,6 +267,12 @@ function buildCTAButtons(args: {
   if (!hasEmail && !hasPhone) return "";
 
   const btnStyle = `font-family:'Outfit',Arial,sans-serif;font-weight:700;font-size:15px;text-align:center;text-decoration:none;padding:14px 20px;border-radius:9999px;display:block;`;
+  // Par del botón WhatsApp: espejo de --color-whatsapp / --color-whatsapp-text de tokens.css
+  // (los clientes de correo no leen tokens.css; excepción declarada en DESIGN.md y ADR-0008).
+  const waBtnColors = `background:#25D366;color:#111b21;`;
+  // Par del botón «Responder por email»: espejo de --color-brand-solid / --color-brand-solid-text
+  // de tokens.css (primary-600 con texto blanco, 6.08:1).
+  const emailBtnColors = `background:#3b6497;color:#ffffff;`;
 
   let buttonsHtml: string;
 
@@ -277,22 +283,22 @@ function buildCTAButtons(args: {
       `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">` +
       `<tr>` +
       `<td style="padding-right:8px;width:50%;">` +
-      `<a href="mailto:${escapeHtml(String(args.email))}?subject=${encodeURIComponent(args.mailSubject)}" style="${btnStyle}background:#4A7BB5;color:#ffffff;">Responder por email</a>` +
+      `<a href="mailto:${escapeHtml(String(args.email))}?subject=${encodeURIComponent(args.mailSubject)}" style="${btnStyle}${emailBtnColors}">Responder por email</a>` +
       `</td>` +
       `<td style="padding-left:8px;width:50%;">` +
-      `<a href="https://wa.me/${waNumber}?text=${encodeURIComponent(args.waText)}" style="${btnStyle}background:#25D366;color:#ffffff;">WhatsApp</a>` +
+      `<a href="https://wa.me/${waNumber}?text=${encodeURIComponent(args.waText)}" style="${btnStyle}${waBtnColors}">WhatsApp</a>` +
       `</td>` +
       `</tr>` +
       `</table>`;
   } else if (hasEmail) {
     // Solo email — full width
     buttonsHtml =
-      `<a href="mailto:${escapeHtml(String(args.email))}?subject=${encodeURIComponent(args.mailSubject)}" style="${btnStyle}background:#4A7BB5;color:#ffffff;">Responder por email</a>`;
+      `<a href="mailto:${escapeHtml(String(args.email))}?subject=${encodeURIComponent(args.mailSubject)}" style="${btnStyle}${emailBtnColors}">Responder por email</a>`;
   } else {
     // Solo WhatsApp — full width
     const waNumber = cleanPhone(String(args.phone)).replace(/^\+/, "");
     buttonsHtml =
-      `<a href="https://wa.me/${waNumber}?text=${encodeURIComponent(args.waText)}" style="${btnStyle}background:#25D366;color:#ffffff;">WhatsApp</a>`;
+      `<a href="https://wa.me/${waNumber}?text=${encodeURIComponent(args.waText)}" style="${btnStyle}${waBtnColors}">WhatsApp</a>`;
   }
 
   return (

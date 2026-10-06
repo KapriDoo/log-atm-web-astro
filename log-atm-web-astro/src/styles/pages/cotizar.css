@@ -3,6 +3,7 @@
 .quote-hero {
   background: linear-gradient(180deg, var(--color-primary-900) 0%, var(--color-primary-700) 100%);
   color: #fff;
+  --focus-ring-color: var(--color-focus-ring-inverse);
   padding: clamp(6rem, 10vw, 8rem) 0 clamp(2rem, 4vw, 3rem);
   position: relative;
   overflow: hidden;
@@ -74,7 +75,7 @@
 .stepper__step:hover { background: var(--color-neutral-50); }
 .stepper__step--active { background: var(--color-primary-50); }
 .stepper__step--done .stepper__bullet {
-  background: var(--color-accent-500); color: #fff; border-color: var(--color-accent-500);
+  background: var(--color-cta); color: var(--color-cta-text); border-color: var(--color-cta);
 }
 .stepper__step--active .stepper__bullet {
   background: var(--color-primary-700); color: #fff; border-color: var(--color-primary-700);
@@ -132,7 +133,7 @@
 .quote-step__num {
   font-family: var(--font-mono); font-size: 0.7rem;
   letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--color-accent-600); margin-bottom: 0.5rem;
+  color: var(--color-text-accent); margin-bottom: 0.5rem;
 }
 .quote-step__title {
   font-family: var(--font-display); font-size: clamp(1.5rem, 2.5vw, 2rem);
@@ -189,7 +190,7 @@
   transition: all 0.18s;
 }
 .mode-tile--active .mode-tile__check {
-  background: var(--color-cta); border-color: var(--color-cta); color: #fff;
+  background: var(--color-cta); border-color: var(--color-cta); color: var(--color-cta-text);
 }
 
 /* Origin/Dest with arrow */
@@ -275,7 +276,7 @@
 .btn-ghost:hover { color: var(--color-text); }
 .btn-ghost:disabled { opacity: 0.3; cursor: not-allowed; }
 .btn-primary-lg {
-  background: var(--color-cta); color: #fff;
+  background: var(--color-cta); color: var(--color-cta-text);
   font-family: var(--font-body); font-weight: 600; font-size: 1rem;
   padding: 0.9rem 1.75rem;
   border: 0; border-radius: var(--radius-md);
@@ -309,6 +310,7 @@
 .quote-summary__title {
   font-family: var(--font-display); font-size: 1.0625rem; font-weight: 600;
   margin: 0 0 0.2rem;
+  color: var(--color-text-inverse);
 }
 .quote-summary__sub {
   font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase;
@@ -332,7 +334,7 @@
   font-weight: 500;
   max-width: 60%;
 }
-.quote-summary__row .v.empty { color: var(--color-neutral-400); font-style: italic; font-weight: 400; }
+.quote-summary__row .v.empty { color: var(--color-text-muted); font-style: italic; font-weight: 400; }
 .quote-summary__foot {
   padding: 1.25rem 1.5rem;
   border-top: 1px solid var(--color-border);
@@ -341,7 +343,7 @@
 .quote-summary__sla {
   display: flex; align-items: center; gap: 0.5rem;
   font-family: var(--font-mono); font-size: 0.75rem;
-  color: var(--color-accent-700);
+  color: var(--color-text-accent);
   background: var(--color-accent-300);
   padding: 0.5rem 0.75rem; border-radius: var(--radius-md);
 }
@@ -357,7 +359,7 @@
 }
 .quote-success__seal {
   width: 80px; height: 80px; border-radius: 50%;
-  background: var(--color-accent-500); color: #fff;
+  background: var(--color-cta); color: var(--color-cta-text);
   display: grid; place-items: center; margin: 0 auto 1.5rem;
   font-size: 2.5rem; font-weight: 600;
   box-shadow: 0 8px 32px rgba(62,185,120,0.4);
@@ -389,7 +391,7 @@
 }
 .quote-success__step-n {
   font-family: var(--font-mono); font-size: 0.7rem;
-  color: var(--color-accent-600); margin-bottom: 0.4rem;
+  color: var(--color-text-accent); margin-bottom: 0.4rem;
 }
 .quote-success__step-t {
   font-family: var(--font-display); font-weight: 600; font-size: 0.95rem;

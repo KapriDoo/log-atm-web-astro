@@ -60,7 +60,7 @@ updated: "2026-10-03"
 
 - **Output:** `output: 'static'` (SSG)
 - **Deploy Target:** Cloudflare Pages
-- **Build Scripts:** `npm run build` (`astro build`, sin type-check); `npm run validate-i18n` (validador i18n vía tsx, ejecución separada)
+- **Build Scripts:** `npm run build` (`astro build`, sin type-check); `npm run validate-i18n` (validador i18n vía tsx, ejecución separada); `npm run check-i18n-links` (chequeo de links i18n vía tsx, ejecución separada)
 - **Validation:** Custom i18n validator via tsx at build time
 
 ## Design System & Branding

@@ -217,8 +217,9 @@ const submitSuccessText = t('contacto.form.submitSuccess');
     function setStatus(msg: string, kind: '' | 'error' | 'success' = '') {
       if (!status) return;
       status.textContent = msg;
+      // Éxito con --color-text-accent: ≥ 4.5:1 sobre la tarjeta blanca del formulario
       status.style.color =
-        kind === 'error' ? '#c0392b' : kind === 'success' ? '#2d9b6f' : '';
+        kind === 'error' ? '#c0392b' : kind === 'success' ? 'var(--color-text-accent)' : '';
     }
 
     form?.addEventListener('submit', async (e) => {
