@@ -63,12 +63,13 @@ updated: "2026-10-06"
 ## Build & Deploy
 
 - **Output:** `output: 'static'` (SSG)
-- **Deploy Target:** Cloudflare Pages
+- **Deploy Target:** Cloudflare Workers mediante Workers Builds (integración git: cada push dispara un build; `main` es producción)
 - **Build Scripts:** `npm run build` (`astro build`, sin type-check); `npm run validate-i18n` (validador i18n vía tsx, ejecución separada); `npm run check-i18n-links` (chequeo de links i18n vía tsx, ejecución separada)
 - **Validation:** Custom i18n validator via tsx at build time
-- **Container (actual):** `Dockerfile` multi-etapa (node:22-slim build + nginx:alpine con Brotli) sirve solo `dist/client`; `docker-compose.yml` en la raíz del repo; sin Containerfile ni Podman configurado
-- **Type-check:** sin `@astrojs/check`/`typescript` en devDependencies; `astro build` no chequea tipos
-- **CI:** sin `.github/workflows` ni `.gitlab-ci.yml`
+- **Container:** `log-atm-web-astro/Containerfile` (Podman rootless, un stage `node:22-slim`, `astro preview` con workerd en el puerto 4321; `.dev.vars` montado en solo lectura al ejecutar); comandos `npm run container:build` / `npm run container:run`
+- **Type-check:** `npm run check` (`astro check`), separado de `npm run build`, que no verifica tipos
+- **Verification Commands:** `npm run check`; `npm run a11y` (requiere `npm run build` y Chrome vía `CHROME_PATH` o `./chrome`); `npm run validate-i18n`; `npm run check-i18n-links`
+- **CI:** sin integración continua; las verificaciones las ejecuta quien desarrolla y `sdd-verify`
 
 ## Design System & Branding
 
