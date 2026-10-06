@@ -7,7 +7,7 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on:
@@ -19,20 +19,22 @@ commits:
   - 6ff4c84
 mr: ""
 acceptance_criteria:
-  - "[ ] La construcción de la imagen con un archivo de credenciales de prueba presente en el proyecto no deja ese valor en el historial de capas, en los metadatos ni en el sistema de archivos de la imagen"
-  - "[ ] Con el archivo de credenciales de prueba montado en modo solo lectura al ejecutar el contenedor, el servicio de contacto recibe el valor de la credencial de prueba"
-  - "[ ] Ejecutar el contenedor sin el archivo de credenciales local falla con un error visible y no deja un sitio en ejecución"
+  - "[x] La construcción de la imagen con un archivo de credenciales de prueba presente en el proyecto no deja ese valor en el historial de capas, en los metadatos ni en el sistema de archivos de la imagen"
+  - "[x] Con el archivo de credenciales de prueba montado en modo solo lectura al ejecutar el contenedor, el servicio de contacto recibe el valor de la credencial de prueba"
+  - "[x] Ejecutar el contenedor sin el archivo de credenciales local falla con un error visible y no deja un sitio en ejecución"
 
 related:
   - "[[forms-email/quote-email-delivery]]"
-affects: []
+affects:
+  - "[[container-build-run-commands]]"
+  - "[[readme-deployment-and-local-container]]"
 adrs: []
 scope:
   - "log-atm-web-astro/.containerignore"
   - "log-atm-web-astro/Containerfile"
   - "log-atm-web-astro/package.json"
   - "log-atm-web-astro/.dev.vars.example"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-06"
 updated: "2026-10-06"
@@ -75,9 +77,9 @@ El envío de correos del formulario de contacto usa una credencial de correo que
 
 ## Acceptance Criteria
 
-- [ ] La construcción de la imagen con un archivo de credenciales de prueba presente en el proyecto no deja ese valor en el historial de capas, en los metadatos ni en el sistema de archivos de la imagen
-- [ ] Con el archivo de credenciales de prueba montado en modo solo lectura al ejecutar el contenedor, el servicio de contacto recibe el valor de la credencial de prueba
-- [ ] Ejecutar el contenedor sin el archivo de credenciales local falla con un error visible y no deja un sitio en ejecución
+- [x] La construcción de la imagen con un archivo de credenciales de prueba presente en el proyecto no deja ese valor en el historial de capas, en los metadatos ni en el sistema de archivos de la imagen
+- [x] Con el archivo de credenciales de prueba montado en modo solo lectura al ejecutar el contenedor, el servicio de contacto recibe el valor de la credencial de prueba
+- [x] Ejecutar el contenedor sin el archivo de credenciales local falla con un error visible y no deja un sitio en ejecución
 
 ## Related
 

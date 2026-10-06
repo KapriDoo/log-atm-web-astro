@@ -7,7 +7,7 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
@@ -20,10 +20,10 @@ commits:
   - 928caa0
 mr: ""
 acceptance_criteria:
-  - "[ ] La ubicación del navegador de la auditoría se indica mediante una variable de entorno"
-  - "[ ] Cuando no hay un navegador disponible, la auditoría termina con un error que explica qué falta y cómo indicarlo"
-  - "[ ] Sin contenido compilado del sitio, la auditoría termina con un error que indica compilar primero"
-  - "[ ] Las dependencias que la auditoría necesita están declaradas en el proyecto, de modo que una instalación limpia basta para ejecutarla"
+  - "[x] La ubicación del navegador de la auditoría se indica mediante una variable de entorno"
+  - "[x] Cuando no hay un navegador disponible, la auditoría termina con un error que explica qué falta y cómo indicarlo"
+  - "[x] Sin contenido compilado del sitio, la auditoría termina con un error que indica compilar primero"
+  - "[x] Las dependencias que la auditoría necesita están declaradas en el proyecto, de modo que una instalación limpia basta para ejecutarla"
 
 related: []
 affects: []
@@ -32,7 +32,7 @@ scope:
   - "log-atm-web-astro/scripts/axe-audit.mjs"
   - "log-atm-web-astro/package.json"
   - "log-atm-web-astro/README.md"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-06"
 updated: "2026-10-06"
@@ -75,10 +75,10 @@ El navegador local de pruebas de un desarrollador no se comparte con el reposito
 
 ## Acceptance Criteria
 
-- [ ] La ubicación del navegador de la auditoría se indica mediante una variable de entorno
-- [ ] Cuando no hay un navegador disponible, la auditoría termina con un error que explica qué falta y cómo indicarlo
-- [ ] Sin contenido compilado del sitio, la auditoría termina con un error que indica compilar primero
-- [ ] Las dependencias que la auditoría necesita están declaradas en el proyecto, de modo que una instalación limpia basta para ejecutarla
+- [x] La ubicación del navegador de la auditoría se indica mediante una variable de entorno
+- [x] Cuando no hay un navegador disponible, la auditoría termina con un error que explica qué falta y cómo indicarlo
+- [x] Sin contenido compilado del sitio, la auditoría termina con un error que indica compilar primero
+- [x] Las dependencias que la auditoría necesita están declaradas en el proyecto, de modo que una instalación limpia basta para ejecutarla
 
 ## Related
 

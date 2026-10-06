@@ -7,7 +7,7 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
@@ -20,17 +20,19 @@ commits:
   - 6ff4c84
 mr: ""
 acceptance_criteria:
-  - "[ ] Un único comando del proyecto construye la imagen y otro único comando la ejecuta y publica el sitio en el puerto 4321"
-  - "[ ] El comando de ejecución localiza el archivo de credenciales por su ubicación absoluta, sin depender del directorio desde el que se invoca"
-  - "[ ] Tras reconstruir la imagen y volver a ejecutar el contenedor, el sitio responde con éxito, sin necesidad de pasos manuales adicionales"
+  - "[x] Un único comando del proyecto construye la imagen y otro único comando la ejecuta y publica el sitio en el puerto 4321"
+  - "[x] El comando de ejecución localiza el archivo de credenciales por su ubicación absoluta, sin depender del directorio desde el que se invoca"
+  - "[x] Tras reconstruir la imagen y volver a ejecutar el contenedor, el sitio responde con éxito, sin necesidad de pasos manuales adicionales"
 
 related: []
-affects: []
+affects:
+  - "[[readme-deployment-and-local-container]]"
+  - "[[static-server-container-removal]]"
 adrs: []
 scope:
   - "log-atm-web-astro/package.json"
   - "log-atm-web-astro/Containerfile"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-06"
 updated: "2026-10-06"
@@ -66,9 +68,9 @@ Quien quiere ver el sitio en un contenedor local necesita un camino corto y repe
 
 ## Acceptance Criteria
 
-- [ ] Un único comando del proyecto construye la imagen y otro único comando la ejecuta y publica el sitio en el puerto 4321
-- [ ] El comando de ejecución localiza el archivo de credenciales por su ubicación absoluta, sin depender del directorio desde el que se invoca
-- [ ] Tras reconstruir la imagen y volver a ejecutar el contenedor, el sitio responde con éxito, sin necesidad de pasos manuales adicionales
+- [x] Un único comando del proyecto construye la imagen y otro único comando la ejecuta y publica el sitio en el puerto 4321
+- [x] El comando de ejecución localiza el archivo de credenciales por su ubicación absoluta, sin depender del directorio desde el que se invoca
+- [x] Tras reconstruir la imagen y volver a ejecutar el contenedor, el sitio responde con éxito, sin necesidad de pasos manuales adicionales
 
 ## Related
 

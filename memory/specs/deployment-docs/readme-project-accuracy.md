@@ -7,7 +7,7 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: low
 depends_on:
@@ -20,9 +20,9 @@ commits:
   - 928caa0
 mr: ""
 acceptance_criteria:
-  - "[ ] El README documenta los comandos de verificación de tipos, de auditoría de accesibilidad, de medición de imágenes y de chequeo de enlaces i18n, con qué hace cada uno"
-  - "[ ] El README no menciona Potrace ni dependencias que el proyecto no usa"
-  - "[ ] La versión de Astro que declara el README coincide con la que declara el proyecto"
+  - "[x] El README documenta los comandos de verificación de tipos, de auditoría de accesibilidad, de medición de imágenes y de chequeo de enlaces i18n, con qué hace cada uno"
+  - "[x] El README no menciona Potrace ni dependencias que el proyecto no usa"
+  - "[x] La versión de Astro que declara el README coincide con la que declara el proyecto"
 
 related:
   - "[[readme-deployment-and-local-container]]"
@@ -30,7 +30,7 @@ affects: []
 adrs: []
 scope:
   - "log-atm-web-astro/README.md"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-06"
 updated: "2026-10-06"
@@ -66,9 +66,9 @@ Un README con herramientas que el proyecto no usa o con comandos sin documentar 
 
 ## Acceptance Criteria
 
-- [ ] El README documenta los comandos de verificación de tipos, de auditoría de accesibilidad, de medición de imágenes y de chequeo de enlaces i18n, con qué hace cada uno
-- [ ] El README no menciona Potrace ni dependencias que el proyecto no usa
-- [ ] La versión de Astro que declara el README coincide con la que declara el proyecto
+- [x] El README documenta los comandos de verificación de tipos, de auditoría de accesibilidad, de medición de imágenes y de chequeo de enlaces i18n, con qué hace cada uno
+- [x] El README no menciona Potrace ni dependencias que el proyecto no usa
+- [x] La versión de Astro que declara el README coincide con la que declara el proyecto
 
 ## Related
 

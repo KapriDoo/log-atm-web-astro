@@ -7,7 +7,7 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
@@ -21,10 +21,10 @@ commits:
   - 68b9a0e
 mr: ""
 acceptance_criteria:
-  - "[ ] El perfil del proyecto lista el comando de verificación de tipos y el de auditoría de accesibilidad entre los comandos de verificación de cada cambio"
-  - "[ ] El perfil indica que la verificación de tipos está separada de la compilación"
-  - "[ ] El perfil indica que no existe integración continua que ejecute estas verificaciones automáticamente"
-  - "[ ] El perfil describe el contenedor local con Podman y el destino de despliegue en Cloudflare Workers"
+  - "[x] El perfil del proyecto lista el comando de verificación de tipos y el de auditoría de accesibilidad entre los comandos de verificación de cada cambio"
+  - "[x] El perfil indica que la verificación de tipos está separada de la compilación"
+  - "[x] El perfil indica que no existe integración continua que ejecute estas verificaciones automáticamente"
+  - "[x] El perfil describe el contenedor local con Podman y el destino de despliegue en Cloudflare Workers"
 
 related:
   - "[[deployment-target-references]]"
@@ -32,7 +32,7 @@ affects: []
 adrs: []
 scope:
   - "memory/_profile.md"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-06"
 updated: "2026-10-06"
@@ -68,10 +68,10 @@ El proyecto no tiene integración continua: nada ejecuta las verificaciones de t
 
 ## Acceptance Criteria
 
-- [ ] El perfil del proyecto lista el comando de verificación de tipos y el de auditoría de accesibilidad entre los comandos de verificación de cada cambio
-- [ ] El perfil indica que la verificación de tipos está separada de la compilación
-- [ ] El perfil indica que no existe integración continua que ejecute estas verificaciones automáticamente
-- [ ] El perfil describe el contenedor local con Podman y el destino de despliegue en Cloudflare Workers
+- [x] El perfil del proyecto lista el comando de verificación de tipos y el de auditoría de accesibilidad entre los comandos de verificación de cada cambio
+- [x] El perfil indica que la verificación de tipos está separada de la compilación
+- [x] El perfil indica que no existe integración continua que ejecute estas verificaciones automáticamente
+- [x] El perfil describe el contenedor local con Podman y el destino de despliegue en Cloudflare Workers
 
 ## Related
 

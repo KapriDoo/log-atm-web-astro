@@ -7,7 +7,7 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
@@ -18,9 +18,9 @@ commits:
   - a89d8c7
 mr: ""
 acceptance_criteria:
-  - "[ ] Dos ramas que agregan entradas distintas al final del registro de observaciones se fusionan sin conflicto y conservan las entradas de ambas"
-  - "[ ] La regla de fusión sin conflicto aplica únicamente al registro de observaciones y a ningún otro archivo del vault"
-  - "[ ] La regla vive en el repositorio y no exige configuración local en cada equipo"
+  - "[x] Dos ramas que agregan entradas distintas al final del registro de observaciones se fusionan sin conflicto y conservan las entradas de ambas"
+  - "[x] La regla de fusión sin conflicto aplica únicamente al registro de observaciones y a ningún otro archivo del vault"
+  - "[x] La regla vive en el repositorio y no exige configuración local en cada equipo"
 
 related:
   - "[[dead-code-cleanup/observations-debt-log-sync]]"
@@ -29,7 +29,7 @@ adrs: []
 scope:
   - ".gitattributes"
   - "memory/observations.md"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-06"
 updated: "2026-10-06"
@@ -71,9 +71,9 @@ Cada cambio en curso agrega entradas al final del registro de observaciones. Cua
 
 ## Acceptance Criteria
 
-- [ ] Dos ramas que agregan entradas distintas al final del registro de observaciones se fusionan sin conflicto y conservan las entradas de ambas
-- [ ] La regla de fusión sin conflicto aplica únicamente al registro de observaciones y a ningún otro archivo del vault
-- [ ] La regla vive en el repositorio y no exige configuración local en cada equipo
+- [x] Dos ramas que agregan entradas distintas al final del registro de observaciones se fusionan sin conflicto y conservan las entradas de ambas
+- [x] La regla de fusión sin conflicto aplica únicamente al registro de observaciones y a ningún otro archivo del vault
+- [x] La regla vive en el repositorio y no exige configuración local en cada equipo
 
 ## Related
 

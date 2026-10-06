@@ -7,7 +7,7 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on:
@@ -20,12 +20,12 @@ commits:
   - 6a738a2
 mr: ""
 acceptance_criteria:
-  - "[ ] El README declara el destino de despliegue como «Cloudflare Workers (producción) · Podman (local, opcional)» y describe el despliegue por integración git con Workers Builds"
-  - "[ ] El README documenta los comandos para construir y ejecutar el contenedor, el requisito previo de crear el archivo de credenciales a partir del ejemplo y el aviso del tamaño aproximado de la imagen"
-  - "[ ] El README documenta la limitación de la vista previa local sin contenedor (error 500 tras reconstruir sin reiniciar) y que el contenedor la evita"
-  - "[ ] El README indica cómo acceder desde la red local o desde un móvil cuando el equipo corre en WSL2"
-  - "[ ] El README no contiene datos del dashboard de Cloudflare marcados como pendientes ni marcadores de tarea (TODO, «a confirmar»)"
-  - "[ ] El README no menciona Docker, nginx ni `docker compose`"
+  - "[x] El README declara el destino de despliegue como «Cloudflare Workers (producción) · Podman (local, opcional)» y describe el despliegue por integración git con Workers Builds"
+  - "[x] El README documenta los comandos para construir y ejecutar el contenedor, el requisito previo de crear el archivo de credenciales a partir del ejemplo y el aviso del tamaño aproximado de la imagen"
+  - "[x] El README documenta la limitación de la vista previa local sin contenedor (error 500 tras reconstruir sin reiniciar) y que el contenedor la evita"
+  - "[x] El README indica cómo acceder desde la red local o desde un móvil cuando el equipo corre en WSL2"
+  - "[x] El README no contiene datos del dashboard de Cloudflare marcados como pendientes ni marcadores de tarea (TODO, «a confirmar»)"
+  - "[x] El README no menciona Docker, nginx ni `docker compose`"
 
 related:
   - "[[container-production-parity]]"
@@ -33,7 +33,7 @@ affects: []
 adrs: []
 scope:
   - "log-atm-web-astro/README.md"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-06"
 updated: "2026-10-06"
@@ -51,7 +51,7 @@ Quien se incorpora al proyecto lee el README para saber cómo llega el sitio a p
 - El README SHALL declarar el destino de despliegue como «Cloudflare Workers (producción) · Podman (local, opcional)».
 - El README MUST describir el despliegue a producción como integración git con Workers Builds, el único flujo verificado.
 - El README MUST documentar los comandos de construcción y ejecución del contenedor local y el requisito previo de crear el archivo de credenciales a partir del ejemplo, sin el cual la ejecución falla.
-- El README SHALL advertir que la imagen pesa aproximadamente 866 MB y que ese tamaño es aceptable para uso local opcional.
+- El README SHALL advertir que la imagen pesa aproximadamente 960 MB y que ese tamaño es aceptable para uso local opcional.
 - El README MUST documentar la limitación de la vista previa local sin contenedor, que responde con error 500 tras reconstruir sin reiniciar, e indicar que el contenedor la evita.
 - El README SHALL indicar que, para acceder al sitio desde la red local o desde un móvil cuando el equipo corre en WSL2, el modo de red espejo del archivo de configuración de WSL es el camino.
 - El README MUST NOT presentar datos del dashboard de Cloudflare como pendientes de confirmar: comando de build, comando de deploy, directorio raíz, nombre del Worker y versión de Node quedan fuera del README.
@@ -85,12 +85,12 @@ Quien se incorpora al proyecto lee el README para saber cómo llega el sitio a p
 
 ## Acceptance Criteria
 
-- [ ] El README declara el destino de despliegue como «Cloudflare Workers (producción) · Podman (local, opcional)» y describe el despliegue por integración git con Workers Builds
-- [ ] El README documenta los comandos para construir y ejecutar el contenedor, el requisito previo de crear el archivo de credenciales a partir del ejemplo y el aviso del tamaño aproximado de la imagen
-- [ ] El README documenta la limitación de la vista previa local sin contenedor (error 500 tras reconstruir sin reiniciar) y que el contenedor la evita
-- [ ] El README indica cómo acceder desde la red local o desde un móvil cuando el equipo corre en WSL2
-- [ ] El README no contiene datos del dashboard de Cloudflare marcados como pendientes ni marcadores de tarea (TODO, «a confirmar»)
-- [ ] El README no menciona Docker, nginx ni `docker compose`
+- [x] El README declara el destino de despliegue como «Cloudflare Workers (producción) · Podman (local, opcional)» y describe el despliegue por integración git con Workers Builds
+- [x] El README documenta los comandos para construir y ejecutar el contenedor, el requisito previo de crear el archivo de credenciales a partir del ejemplo y el aviso del tamaño aproximado de la imagen
+- [x] El README documenta la limitación de la vista previa local sin contenedor (error 500 tras reconstruir sin reiniciar) y que el contenedor la evita
+- [x] El README indica cómo acceder desde la red local o desde un móvil cuando el equipo corre en WSL2
+- [x] El README no contiene datos del dashboard de Cloudflare marcados como pendientes ni marcadores de tarea (TODO, «a confirmar»)
+- [x] El README no menciona Docker, nginx ni `docker compose`
 
 ## Related
 

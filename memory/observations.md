@@ -601,3 +601,11 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 **Ubicación**: `memory/specs/deployment-docs/readme-deployment-and-local-container.md` (requisito del tamaño), `memory/changes/chore-local-container-podman/design.md` (D7), `log-atm-web-astro/README.md`
 **Descripción**: `podman images` informa 964 MB para `localhost/log-atm-web` construida desde el árbol final. La cifra ~866 MB de la spec y del diseño viene de la exploración, anterior a las devDependencies que agrega este cambio (`typescript`, `@astrojs/check`, `playwright-core`, `axe-core`), que la imagen instala con `npm ci`. El README declara el valor medido («alrededor de 960 MB»).
 **Promoción sugerida**: `sdd-verify` decide si la cifra de la spec requiere un delta o si el criterio de aceptación (aviso del tamaño aproximado) basta
+## 2026-10-06 | measure | chore-local-container-podman | post-dispatch sdd-apply FIN 19:15:11 outcome=advance
+
+## 2026-10-06 | measure | chore-local-container-podman | preflight sdd-verify INICIO 19:15:21 outcome=ready
+
+## 2026-10-06 | measure | chore-local-container-podman | post-dispatch sdd-verify FIN 19:33:19 outcome=advance
+
+## 2026-10-06 | measure | chore-local-container-podman | preflight sdd-archive INICIO 19:33:30 outcome=ready
+

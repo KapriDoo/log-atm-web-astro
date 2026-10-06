@@ -7,7 +7,7 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
@@ -19,16 +19,16 @@ commits:
   - 9122439
 mr: ""
 acceptance_criteria:
-  - "[ ] El comando de compilación del sitio no ejecuta la verificación de tipos"
-  - "[ ] La verificación de tipos es un comando independiente de la compilación"
-  - "[ ] Una compilación del sitio con un error de tipos deliberado termina con éxito"
+  - "[x] El comando de compilación del sitio no ejecuta la verificación de tipos"
+  - "[x] La verificación de tipos es un comando independiente de la compilación"
+  - "[x] Una compilación del sitio con un error de tipos deliberado termina con éxito"
 
 related: []
 affects: []
 adrs: []
 scope:
   - "log-atm-web-astro/package.json"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-06"
 updated: "2026-10-06"
@@ -63,9 +63,9 @@ El despliegue a producción compila el sitio en un entorno alojado cuyo comando 
 
 ## Acceptance Criteria
 
-- [ ] El comando de compilación del sitio no ejecuta la verificación de tipos
-- [ ] La verificación de tipos es un comando independiente de la compilación
-- [ ] Una compilación del sitio con un error de tipos deliberado termina con éxito
+- [x] El comando de compilación del sitio no ejecuta la verificación de tipos
+- [x] La verificación de tipos es un comando independiente de la compilación
+- [x] Una compilación del sitio con un error de tipos deliberado termina con éxito
 
 ## Related
 

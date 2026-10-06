@@ -7,7 +7,7 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
@@ -19,22 +19,26 @@ commits:
   - 6e64c26
 mr: ""
 acceptance_criteria:
-  - "[ ] Un comando único del proyecto ejecuta la auditoría de accesibilidad sobre el sitio compilado, en un navegador real"
-  - "[ ] La lista de páginas auditadas se obtiene del contenido compilado y abarca todas las páginas en español, inglés y portugués, más las páginas de «no encontrado»"
-  - "[ ] Cada página se audita en un tamaño de pantalla de escritorio y en uno de móvil"
-  - "[ ] El comando termina con código de salida distinto de cero ante cualquier violación y con éxito cuando no hay ninguna"
-  - "[ ] El informe identifica cada violación con su página, tamaño de pantalla y elemento afectado"
-  - "[ ] La auditoría detecta violaciones de contraste de color, que una simulación de documento sin navegador no calcula"
-  - "[ ] Una página agregada al sitio entra en la auditoría sin modificar la herramienta"
+  - "[x] Un comando único del proyecto ejecuta la auditoría de accesibilidad sobre el sitio compilado, en un navegador real"
+  - "[x] La lista de páginas auditadas se obtiene del contenido compilado y abarca todas las páginas en español, inglés y portugués, más las páginas de «no encontrado»"
+  - "[x] Cada página se audita en un tamaño de pantalla de escritorio y en uno de móvil"
+  - "[x] El comando termina con código de salida distinto de cero ante cualquier violación y con éxito cuando no hay ninguna"
+  - "[x] El informe identifica cada violación con su página, tamaño de pantalla y elemento afectado"
+  - "[x] La auditoría detecta violaciones de contraste de color, que una simulación de documento sin navegador no calcula"
+  - "[x] Una página agregada al sitio entra en la auditoría sin modificar la herramienta"
 
 related:
   - "[[ui-contrast/sitewide-contrast-verification]]"
-affects: []
+affects:
+  - "[[a11y-audit-browser-portability]]"
+  - "[[a11y-audit-final-state-evaluation]]"
+  - "[[profile-verification-commands]]"
+  - "[[readme-project-accuracy]]"
 adrs: []
 scope:
   - "log-atm-web-astro/scripts/axe-audit.mjs"
   - "log-atm-web-astro/package.json"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-06"
 updated: "2026-10-06"
@@ -85,13 +89,13 @@ La accesibilidad del sitio, en especial el contraste de color, solo se comprueba
 
 ## Acceptance Criteria
 
-- [ ] Un comando único del proyecto ejecuta la auditoría de accesibilidad sobre el sitio compilado, en un navegador real
-- [ ] La lista de páginas auditadas se obtiene del contenido compilado y abarca todas las páginas en español, inglés y portugués, más las páginas de «no encontrado»
-- [ ] Cada página se audita en un tamaño de pantalla de escritorio y en uno de móvil
-- [ ] El comando termina con código de salida distinto de cero ante cualquier violación y con éxito cuando no hay ninguna
-- [ ] El informe identifica cada violación con su página, tamaño de pantalla y elemento afectado
-- [ ] La auditoría detecta violaciones de contraste de color, que una simulación de documento sin navegador no calcula
-- [ ] Una página agregada al sitio entra en la auditoría sin modificar la herramienta
+- [x] Un comando único del proyecto ejecuta la auditoría de accesibilidad sobre el sitio compilado, en un navegador real
+- [x] La lista de páginas auditadas se obtiene del contenido compilado y abarca todas las páginas en español, inglés y portugués, más las páginas de «no encontrado»
+- [x] Cada página se audita en un tamaño de pantalla de escritorio y en uno de móvil
+- [x] El comando termina con código de salida distinto de cero ante cualquier violación y con éxito cuando no hay ninguna
+- [x] El informe identifica cada violación con su página, tamaño de pantalla y elemento afectado
+- [x] La auditoría detecta violaciones de contraste de color, que una simulación de documento sin navegador no calcula
+- [x] Una página agregada al sitio entra en la auditoría sin modificar la herramienta
 
 ## Related
 

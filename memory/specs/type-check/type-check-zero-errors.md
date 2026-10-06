@@ -7,7 +7,7 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on: []
@@ -19,14 +19,17 @@ commits:
   - 69df563
 mr: ""
 acceptance_criteria:
-  - "[ ] Un comando único del proyecto ejecuta la verificación de tipos de todo el sitio"
-  - "[ ] Ese comando termina con 0 errores sobre el código del repositorio"
-  - "[ ] Los cuatro errores de tipos existentes se corrigen en su origen, sin suprimirlos con comentarios de omisión ni excluir archivos de la verificación"
-  - "[ ] Un error de tipos introducido a propósito hace que el comando termine con código de salida distinto de cero"
-  - "[ ] Una instalación de dependencias desde cero no reporta incompatibilidad de versiones entre la herramienta de verificación y el lenguaje de tipado"
+  - "[x] Un comando único del proyecto ejecuta la verificación de tipos de todo el sitio"
+  - "[x] Ese comando termina con 0 errores sobre el código del repositorio"
+  - "[x] Los cuatro errores de tipos existentes se corrigen en su origen, sin suprimirlos con comentarios de omisión ni excluir archivos de la verificación"
+  - "[x] Un error de tipos introducido a propósito hace que el comando termine con código de salida distinto de cero"
+  - "[x] Una instalación de dependencias desde cero no reporta incompatibilidad de versiones entre la herramienta de verificación y el lenguaje de tipado"
 
 related: []
-affects: []
+affects:
+  - "[[profile-verification-commands]]"
+  - "[[readme-project-accuracy]]"
+  - "[[type-check-build-independence]]"
 adrs: []
 scope:
   - "log-atm-web-astro/package.json"
@@ -34,7 +37,7 @@ scope:
   - "log-atm-web-astro/src/lib/mailer.ts"
   - "log-atm-web-astro/src/scripts/gsap-ind-directory.ts"
   - "log-atm-web-astro/src/types/"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-06"
 updated: "2026-10-06"
@@ -77,11 +80,11 @@ El proceso de compilación del sitio no revisa tipos, de modo que los errores de
 
 ## Acceptance Criteria
 
-- [ ] Un comando único del proyecto ejecuta la verificación de tipos de todo el sitio
-- [ ] Ese comando termina con 0 errores sobre el código del repositorio
-- [ ] Los cuatro errores de tipos existentes se corrigen en su origen, sin suprimirlos con comentarios de omisión ni excluir archivos de la verificación
-- [ ] Un error de tipos introducido a propósito hace que el comando termine con código de salida distinto de cero
-- [ ] Una instalación de dependencias desde cero no reporta incompatibilidad de versiones entre la herramienta de verificación y el lenguaje de tipado
+- [x] Un comando único del proyecto ejecuta la verificación de tipos de todo el sitio
+- [x] Ese comando termina con 0 errores sobre el código del repositorio
+- [x] Los cuatro errores de tipos existentes se corrigen en su origen, sin suprimirlos con comentarios de omisión ni excluir archivos de la verificación
+- [x] Un error de tipos introducido a propósito hace que el comando termine con código de salida distinto de cero
+- [x] Una instalación de dependencias desde cero no reporta incompatibilidad de versiones entre la herramienta de verificación y el lenguaje de tipado
 
 ## Related
 

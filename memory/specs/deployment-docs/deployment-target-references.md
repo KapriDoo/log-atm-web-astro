@@ -7,7 +7,7 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: low
 depends_on: []
@@ -18,8 +18,8 @@ commits:
   - 5be9818
 mr: ""
 acceptance_criteria:
-  - "[ ] Ningún comentario ni archivo de configuración del proyecto nombra a Cloudflare Pages como destino de despliegue"
-  - "[ ] El archivo de ejemplo de credenciales y la configuración del sitio nombran a Cloudflare Workers como destino"
+  - "[x] Ningún comentario ni archivo de configuración del proyecto nombra a Cloudflare Pages como destino de despliegue"
+  - "[x] El archivo de ejemplo de credenciales y la configuración del sitio nombran a Cloudflare Workers como destino"
 
 related: []
 affects: []
@@ -27,7 +27,7 @@ adrs: []
 scope:
   - "log-atm-web-astro/astro.config.mjs"
   - "log-atm-web-astro/.dev.vars.example"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-06"
 updated: "2026-10-06"
@@ -61,8 +61,8 @@ Producción se despliega en Cloudflare Workers. Un comentario que nombra Cloudfl
 
 ## Acceptance Criteria
 
-- [ ] Ningún comentario ni archivo de configuración del proyecto nombra a Cloudflare Pages como destino de despliegue
-- [ ] El archivo de ejemplo de credenciales y la configuración del sitio nombran a Cloudflare Workers como destino
+- [x] Ningún comentario ni archivo de configuración del proyecto nombra a Cloudflare Pages como destino de despliegue
+- [x] El archivo de ejemplo de credenciales y la configuración del sitio nombran a Cloudflare Workers como destino
 
 ## Related
 

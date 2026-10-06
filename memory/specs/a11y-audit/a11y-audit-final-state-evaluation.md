@@ -7,7 +7,7 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
@@ -20,9 +20,9 @@ commits:
   - 928caa0
 mr: ""
 acceptance_criteria:
-  - "[ ] La auditoría se ejecuta con el movimiento reducido activado por defecto"
-  - "[ ] Sobre el sitio vigente, la auditoría informa 0 violaciones de contraste en las páginas de portada de los tres idiomas, sin falsos positivos por animaciones de entrada"
-  - "[ ] La documentación del comando explica que se evalúa el estado final de las páginas y por qué es el relevante para el contraste"
+  - "[x] La auditoría se ejecuta con el movimiento reducido activado por defecto"
+  - "[x] Sobre el sitio vigente, la auditoría informa 0 violaciones de contraste en las páginas de portada de los tres idiomas, sin falsos positivos por animaciones de entrada"
+  - "[x] La documentación del comando explica que se evalúa el estado final de las páginas y por qué es el relevante para el contraste"
 
 related:
   - "[[ui-contrast/sitewide-contrast-verification]]"
@@ -31,7 +31,7 @@ adrs: []
 scope:
   - "log-atm-web-astro/scripts/axe-audit.mjs"
   - "log-atm-web-astro/README.md"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-06"
 updated: "2026-10-06"
@@ -66,9 +66,9 @@ Las animaciones de entrada del sitio parten de textos casi transparentes. Una au
 
 ## Acceptance Criteria
 
-- [ ] La auditoría se ejecuta con el movimiento reducido activado por defecto
-- [ ] Sobre el sitio vigente, la auditoría informa 0 violaciones de contraste en las páginas de portada de los tres idiomas, sin falsos positivos por animaciones de entrada
-- [ ] La documentación del comando explica que se evalúa el estado final de las páginas y por qué es el relevante para el contraste
+- [x] La auditoría se ejecuta con el movimiento reducido activado por defecto
+- [x] Sobre el sitio vigente, la auditoría informa 0 violaciones de contraste en las páginas de portada de los tres idiomas, sin falsos positivos por animaciones de entrada
+- [x] La documentación del comando explica que se evalúa el estado final de las páginas y por qué es el relevante para el contraste
 
 ## Related
 

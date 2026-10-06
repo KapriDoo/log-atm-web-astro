@@ -7,7 +7,7 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
@@ -19,9 +19,9 @@ commits:
   - 0809264
 mr: ""
 acceptance_criteria:
-  - "[ ] El repositorio no contiene ninguna definición de imagen, configuración de servidor web estático ni archivo de orquestación que sirva el sitio como contenido estático"
-  - "[ ] El repositorio no contiene el script de redirección de puertos de Windows hacia WSL2"
-  - "[ ] Ningún archivo del repositorio referencia los archivos retirados"
+  - "[x] El repositorio no contiene ninguna definición de imagen, configuración de servidor web estático ni archivo de orquestación que sirva el sitio como contenido estático"
+  - "[x] El repositorio no contiene el script de redirección de puertos de Windows hacia WSL2"
+  - "[x] Ningún archivo del repositorio referencia los archivos retirados"
 
 related: []
 affects: []
@@ -32,7 +32,7 @@ scope:
   - "log-atm-web-astro/default.conf"
   - "docker-compose.yml"
   - "fix-wsl2-port.bat"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-06"
 updated: "2026-10-06"
@@ -68,9 +68,9 @@ Producción ejecuta el sitio en Cloudflare Workers, con API y respuestas reales 
 
 ## Acceptance Criteria
 
-- [ ] El repositorio no contiene ninguna definición de imagen, configuración de servidor web estático ni archivo de orquestación que sirva el sitio como contenido estático
-- [ ] El repositorio no contiene el script de redirección de puertos de Windows hacia WSL2
-- [ ] Ningún archivo del repositorio referencia los archivos retirados
+- [x] El repositorio no contiene ninguna definición de imagen, configuración de servidor web estático ni archivo de orquestación que sirva el sitio como contenido estático
+- [x] El repositorio no contiene el script de redirección de puertos de Windows hacia WSL2
+- [x] Ningún archivo del repositorio referencia los archivos retirados
 
 ## Related
 

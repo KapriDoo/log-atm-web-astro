@@ -7,7 +7,7 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
@@ -18,21 +18,23 @@ commits:
   - 6ff4c84
 mr: ""
 acceptance_criteria:
-  - "[ ] Con el contenedor en ejecución, la portada responde con éxito en español, inglés y portugués, tanto en la dirección de bucle local IPv4 como en `localhost`"
-  - "[ ] Una ruta inexistente en español, inglés y portugués responde «no encontrado» y no la portada"
-  - "[ ] Un envío de contacto con datos inválidos recibe una respuesta de validación en formato estructurado, no una página del sitio"
-  - "[ ] El contenedor se ejecuta sin privilegios de administrador del equipo"
+  - "[x] Con el contenedor en ejecución, la portada responde con éxito en español, inglés y portugués, tanto en la dirección de bucle local IPv4 como en `localhost`"
+  - "[x] Una ruta inexistente en español, inglés y portugués responde «no encontrado» y no la portada"
+  - "[x] Un envío de contacto con datos inválidos recibe una respuesta de validación en formato estructurado, no una página del sitio"
+  - "[x] El contenedor se ejecuta sin privilegios de administrador del equipo"
 
 related:
   - "[[i18n-routing/i18n-not-found-localized]]"
-affects: []
+affects:
+  - "[[container-build-run-commands]]"
+  - "[[container-secrets-isolation]]"
 adrs:
   - "[[0007-not-found-page-on-demand-single]]"
 scope:
   - "log-atm-web-astro/Containerfile"
   - "log-atm-web-astro/.containerignore"
   - "log-atm-web-astro/package.json"
-verified_at: null
+verified_at: "2026-10-06"
 
 created: "2026-10-06"
 updated: "2026-10-06"
@@ -82,10 +84,10 @@ Quien desarrolla necesita ver el sitio en su equipo tal como lo sirve producció
 
 ## Acceptance Criteria
 
-- [ ] Con el contenedor en ejecución, la portada responde con éxito en español, inglés y portugués, tanto en la dirección de bucle local IPv4 como en `localhost`
-- [ ] Una ruta inexistente en español, inglés y portugués responde «no encontrado» y no la portada
-- [ ] Un envío de contacto con datos inválidos recibe una respuesta de validación en formato estructurado, no una página del sitio
-- [ ] El contenedor se ejecuta sin privilegios de administrador del equipo
+- [x] Con el contenedor en ejecución, la portada responde con éxito en español, inglés y portugués, tanto en la dirección de bucle local IPv4 como en `localhost`
+- [x] Una ruta inexistente en español, inglés y portugués responde «no encontrado» y no la portada
+- [x] Un envío de contacto con datos inválidos recibe una respuesta de validación en formato estructurado, no una página del sitio
+- [x] El contenedor se ejecuta sin privilegios de administrador del equipo
 
 ## Related
 
