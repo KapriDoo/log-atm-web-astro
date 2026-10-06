@@ -93,7 +93,11 @@
    degradado sube para que el nombre de industria cumpla ≥ 4.5:1 sobre cualquier foto */
 @media (max-width: 960px) {
   .ind-directory__overlay {
-    background: linear-gradient(180deg, rgba(15,28,46,0.10) 0%, rgba(15,28,46,0.20) 25%, rgba(15,28,46,0.72) 50%, rgba(15,28,46,0.92) 100%);
+    background: linear-gradient(180deg,
+      color-mix(in srgb, var(--color-primary-950) 10%, transparent) 0%,
+      color-mix(in srgb, var(--color-primary-950) 20%, transparent) 25%,
+      color-mix(in srgb, var(--color-primary-950) 72%, transparent) 50%,
+      color-mix(in srgb, var(--color-primary-950) 92%, transparent) 100%);
   }
 }
 .ind-directory__counter {
