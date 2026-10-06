@@ -517,3 +517,5 @@ Cada par texto/fondo validado AA se declara como tokens funcionales de rol en `t
 
 ## 2026-10-06 | measure | fix-color-contrast-sitewide | preflight sdd-apply INICIO 15:26:21 outcome=ready
 
+
+## 2026-10-06 | observation | fix-color-contrast-sitewide | sdd-apply (redespacho 2): el placeholder de `.cta-final__input` (`--color-text-inverse` al 50 % sobre el campo translúcido de la sección final) mide ~4.8:1 sobre `primary-950` puro y ~4.0:1 donde lo alcanzan los degradados radiales de la sección; axe no evalúa `::placeholder`. Deuda preexistente fuera de los residuales C1/SA1; `DESIGN.md` no lo presenta como par válido.

@@ -1587,3 +1587,285 @@ grep -nE '^--color-brand:|why__video-toggle|Responder por email|--color-brand-so
 `apply-evidence.30`: `--color-brand` se describe como apto solo para acentos y texto grande, la
 regla del anillo de foco declara la excepción `.why__video-toggle` y la excepción de correo nombra
 el par del botón «Responder por email».
+
+## Redespacho 2 — correcciones de prosa de la revisión adversarial (iteración 2)
+
+Fuente de tareas: `judgment-report.md` (iteración 2, HEAD revisado `6d9dba7`) y la spec que esa
+revisión corrigió, `ui-contrast/contrast-token-single-source` (AC 6 desmarcado y nuevo `AND` del
+scenario «Equipo consulta el uso de un color en la documentación»). Ninguna tarea es `[TDD]`: los
+dos residuales son de prosa y el despacho restringe los archivos a `.md`, tests y el workspace del
+cambio. Antes de las correcciones se registraron los artefactos pendientes del worktree
+(`7528a68`).
+
+| Hallazgo | Spec | Commit |
+|---|---|---|
+| SA1 — `DESIGN.md` asigna a texto normal colores bajo 4.5:1 | `contrast-token-single-source` | `9223023` docs(design): stop assigning sub-4.5:1 colors to normal text in DESIGN.md |
+| C1 — `design.md` y ADR-0008 sin el botón «Responder por email» | `contrast-token-single-source`, `email-reply-button-contrast` | `81490f7` docs(sdd): align design and ADR-0008 with the reply-by-email button spec |
+
+Notas de implementación:
+
+- SA1: además de las cuatro líneas que nombra el reporte (`primary-400`, `info`, `.btn-outline`,
+  Ghost), el `AND` de la spec alcanza toda la documentación de diseño, así que la pasada cubre
+  cada descripción que asigna un color a texto: `primary-300` y `neutral-300` («placeholders»),
+  `neutral-500` («texto de apoyo», válido solo sobre superficies oscuras, que es donde lo usa el
+  footer), los semánticos `success`/`warning`/`error`, el placeholder de Inputs (`neutral-400`) y
+  las variantes semánticas de Badges (`text-success`/`text-warning`/`text-error`, sin consumidor
+  en `src/`). Cada una declara su rol no textual y su ratio medido. `.btn-outline` se retira (no
+  existe en `src/`) y Ghost describe las dos clases reales: `.btn--ghost` (`global.css`) y
+  `.btn-ghost` del cotizador (`cotizar.css`). `neutral-400` conserva «texto deshabilitado»
+  (exento de 1.4.3).
+- C1: `design.md` cita la spec `forms-email/email-reply-button-contrast` y la constante
+  `emailBtnColors`, y deja como deuda solo el texto SLA `#898580` y el enlace `mailto` en
+  `#4A7BB5`; ADR-0008 agrega la spec a sus referencias. El scenario de la spec ya venía corregido
+  por la revisión.
+
+El bloque siguiente lista los commits del redespacho con sus archivos (rango fijo).
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.31","forma":"argv","argv":["git","log","--reverse","--format=%h %s","--name-only","6d9dba7..81490f7"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide","head":"81490f722e7137f5a470586e1516b6550c399430","fecha":"2026-10-06T15:30:08-03:00","exit":0,"sha256":"bb919b15fdd516a5aa47e3ce13567aee47c903228874e86e449c27bbc102d825","lineas":18,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `apply-evidence.31`** · exit 0 · 18 líneas, 0 omitidas · HEAD `81490f722e71` · 2026-10-06T15:30:08-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide`
+
+```text
+git log --reverse '--format=%h %s' --name-only 6d9dba7..81490f7
+```
+
+```text
+7528a68 chore(sdd): record fix-color-contrast-sitewide verify and judgment iteration 2 artifacts
+
+memory/changes/fix-color-contrast-sitewide/judgment-report.md
+memory/changes/fix-color-contrast-sitewide/state.md
+memory/changes/fix-color-contrast-sitewide/verify-report.md
+memory/observations.md
+memory/specs/forms-email/email-reply-button-contrast.md
+memory/specs/ui-contrast/contrast-token-single-source.md
+memory/specs/ui-contrast/cta-button-contrast.md
+memory/specs/ui-contrast/secondary-text-dark-surface-contrast.md
+memory/specs/ui-contrast/sitewide-contrast-verification.md
+9223023 docs(design): stop assigning sub-4.5:1 colors to normal text in DESIGN.md
+
+log-atm-web-astro/DESIGN.md
+81490f7 docs(sdd): align design and ADR-0008 with the reply-by-email button spec
+
+memory/adrs/0008-contrast-pair-tokens-and-contextual-focus-ring.md
+memory/changes/fix-color-contrast-sitewide/design.md
+```
+<!-- evidencia:fin apply-evidence.31 -->
+
+### Coherencia de `DESIGN.md` con sus pares (SA1)
+
+El bloque siguiente recalcula desde `tokens.css` cada ratio que citan las líneas corregidas de
+`DESIGN.md` y lo compara con el valor escrito.
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.32","forma":"archivo","argv":null,"texto":"# Recalcula desde tokens.css cada ratio que DESIGN.md cita en las líneas corregidas (SA1)\npython3 - src/styles/tokens.css DESIGN.md <<'PY'\nimport re, sys\nsrc = open(sys.argv[1]).read()\nroot = re.sub(r'/\\*.*?\\*/', '', src.split('\\n@theme {')[0], flags=re.S)\ndecl = dict(re.findall(r'(--[\\w-]+)\\s*:\\s*([^;]+);', root))\ndef res(n):\n    v = decl[n].strip(); m = re.fullmatch(r'var\\((--[\\w-]+)\\)', v)\n    return res(m.group(1)) if m else v\ndef lum(h):\n    h = h.lstrip('#'); c = [int(h[i:i+2], 16)/255 for i in (0, 2, 4)]\n    c = [x/12.92 if x <= 0.04045 else ((x+0.055)/1.055)**2.4 for x in c]\n    return 0.2126*c[0] + 0.7152*c[1] + 0.0722*c[2]\ndef ratio(a, b):\n    a, b = (x if x.startswith('#') else res(x) for x in (a, b))\n    x, y = sorted([lum(a), lum(b)], reverse=True); return (x+0.05)/(y+0.05)\nlines = open(sys.argv[2]).read().splitlines()\n# prefijo de línea -\u003e pares texto/fondo en el orden en que la línea cita los ratios (dos decimales; el umbral 4.5 no cuenta)\nrows = [\n ('- `primary-300`', [('--color-primary-300', '#ffffff')]),\n ('- `primary-400`', [('--color-primary-400', '#ffffff')]),\n ('- `neutral-300`', [('--color-neutral-300', '#ffffff')]),\n ('- `neutral-500`', [('--color-neutral-500', '--color-primary-950'), ('--color-neutral-500', '#ffffff')]),\n ('- `success`', [('--color-success', '#ffffff')]),\n ('- `warning`', [('--color-warning', '#ffffff')]),\n ('- `error`:', [('--color-error', '#ffffff')]),\n ('- `info`', [('--color-info', '#ffffff')]),\n ('- **Ghost**', [('--color-text-muted', '#ffffff')]),\n ('- Placeholder', [('--color-neutral-300', '#ffffff'), ('--color-neutral-400', '#ffffff')]),\n]\ndiff = 0\nfor key, pairs in rows:\n    line = next(l for l in lines if l.startswith(key))\n    doc = [float(x) for x in re.findall(r'\\d+\\.\\d\\d', line)]\n    calc = [round(ratio(a, b), 2) for a, b in pairs]\n    ok = doc == calc; diff += not ok\n    print(f\"{'OK   ' if ok else 'DIFF '} {key[2:]} doc={doc} calc={calc}\")\nprint(f\"lineas={len(rows)} diferencias={diff}\")\nsys.exit(1 if diff else 0)\nPY\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"81490f722e7137f5a470586e1516b6550c399430","fecha":"2026-10-06T15:30:15-03:00","exit":0,"sha256":"15a527a57c3a87d0fa020ebc5be2dcb70d959cc43ff398458494f9e314681f8a","lineas":11,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `apply-evidence.32`** · exit 0 · 11 líneas, 0 omitidas · HEAD `81490f722e71` · 2026-10-06T15:30:15-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+
+```bash
+# Recalcula desde tokens.css cada ratio que DESIGN.md cita en las líneas corregidas (SA1)
+python3 - src/styles/tokens.css DESIGN.md <<'PY'
+import re, sys
+src = open(sys.argv[1]).read()
+root = re.sub(r'/\*.*?\*/', '', src.split('\n@theme {')[0], flags=re.S)
+decl = dict(re.findall(r'(--[\w-]+)\s*:\s*([^;]+);', root))
+def res(n):
+    v = decl[n].strip(); m = re.fullmatch(r'var\((--[\w-]+)\)', v)
+    return res(m.group(1)) if m else v
+def lum(h):
+    h = h.lstrip('#'); c = [int(h[i:i+2], 16)/255 for i in (0, 2, 4)]
+    c = [x/12.92 if x <= 0.04045 else ((x+0.055)/1.055)**2.4 for x in c]
+    return 0.2126*c[0] + 0.7152*c[1] + 0.0722*c[2]
+def ratio(a, b):
+    a, b = (x if x.startswith('#') else res(x) for x in (a, b))
+    x, y = sorted([lum(a), lum(b)], reverse=True); return (x+0.05)/(y+0.05)
+lines = open(sys.argv[2]).read().splitlines()
+# prefijo de línea -> pares texto/fondo en el orden en que la línea cita los ratios (dos decimales; el umbral 4.5 no cuenta)
+rows = [
+ ('- `primary-300`', [('--color-primary-300', '#ffffff')]),
+ ('- `primary-400`', [('--color-primary-400', '#ffffff')]),
+ ('- `neutral-300`', [('--color-neutral-300', '#ffffff')]),
+ ('- `neutral-500`', [('--color-neutral-500', '--color-primary-950'), ('--color-neutral-500', '#ffffff')]),
+ ('- `success`', [('--color-success', '#ffffff')]),
+ ('- `warning`', [('--color-warning', '#ffffff')]),
+ ('- `error`:', [('--color-error', '#ffffff')]),
+ ('- `info`', [('--color-info', '#ffffff')]),
+ ('- **Ghost**', [('--color-text-muted', '#ffffff')]),
+ ('- Placeholder', [('--color-neutral-300', '#ffffff'), ('--color-neutral-400', '#ffffff')]),
+]
+diff = 0
+for key, pairs in rows:
+    line = next(l for l in lines if l.startswith(key))
+    doc = [float(x) for x in re.findall(r'\d+\.\d\d', line)]
+    calc = [round(ratio(a, b), 2) for a, b in pairs]
+    ok = doc == calc; diff += not ok
+    print(f"{'OK   ' if ok else 'DIFF '} {key[2:]} doc={doc} calc={calc}")
+print(f"lineas={len(rows)} diferencias={diff}")
+sys.exit(1 if diff else 0)
+PY
+```
+
+```text
+OK    `primary-300` doc=[2.49] calc=[2.49]
+OK    `primary-400` doc=[3.35] calc=[3.35]
+OK    `neutral-300` doc=[1.73] calc=[1.73]
+OK    `neutral-500` doc=[4.97, 3.66] calc=[4.97, 3.66]
+OK    `success` doc=[2.28] calc=[2.28]
+OK    `warning` doc=[2.51] calc=[2.51]
+OK    `error`: doc=[4.05] calc=[4.05]
+OK    `info` doc=[4.38] calc=[4.38]
+OK    **Ghost** doc=[5.44] calc=[5.44]
+OK    Placeholder doc=[1.73, 2.42] calc=[1.73, 2.42]
+lineas=10 diferencias=0
+```
+<!-- evidencia:fin apply-evidence.32 -->
+
+El bloque siguiente contrasta los botones que describe `DESIGN.md` con su definición en `src/`.
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.33","forma":"archivo","argv":null,"texto":"# Botones que describe DESIGN.md frente a su definición en src/: clases descritas y declaraciones de color\ngrep -oE '`\\.btn[-_a-z]*`' DESIGN.md | sort -u\necho '--- definiciones en src/ (color, fondo, borde)'\nfor c in btn--ghost btn-ghost btn-outline; do\n  n=$(grep -rlE \"^\\s*\\.$c(:hover)?\\s*\\{\" src | wc -l)\n  echo \"$c: archivos_con_regla=$n\"\n  grep -rhE -A5 \"^\\s*\\.$c(:hover)?\\s*\\{\" src | grep -E \"\\.$c|color:|background:|border-color:|border:\" | sed 's/^ *//'\ndone\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"81490f722e7137f5a470586e1516b6550c399430","fecha":"2026-10-06T15:30:15-03:00","exit":0,"sha256":"3e811a21985603842870c76af0dab8b1c236d5298dbd03297e10f77614bc5457","lineas":22,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `apply-evidence.33`** · exit 0 · 22 líneas, 0 omitidas · HEAD `81490f722e71` · 2026-10-06T15:30:15-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+
+```bash
+# Botones que describe DESIGN.md frente a su definición en src/: clases descritas y declaraciones de color
+grep -oE '`\.btn[-_a-z]*`' DESIGN.md | sort -u
+echo '--- definiciones en src/ (color, fondo, borde)'
+for c in btn--ghost btn-ghost btn-outline; do
+  n=$(grep -rlE "^\s*\.$c(:hover)?\s*\{" src | wc -l)
+  echo "$c: archivos_con_regla=$n"
+  grep -rhE -A5 "^\s*\.$c(:hover)?\s*\{" src | grep -E "\.$c|color:|background:|border-color:|border:" | sed 's/^ *//'
+done
+```
+
+```text
+`.btn--brand`
+`.btn--cta`
+`.btn--ghost`
+`.btn-ghost`
+`.btn--wa`
+--- definiciones en src/ (color, fondo, borde)
+btn--ghost: archivos_con_regla=1
+.btn--ghost {
+background: transparent;
+color: var(--color-text);
+border-color: var(--color-border);
+.btn--ghost:hover { background: var(--color-surface); border-color: var(--color-neutral-300); }
+background: var(--color-whatsapp);
+color: var(--color-whatsapp-text);
+btn-ghost: archivos_con_regla=1
+.btn-ghost {
+background: transparent; border: 0;
+color: var(--color-text-muted); cursor: pointer;
+.btn-ghost:hover { color: var(--color-text); }
+.btn-ghost:disabled { opacity: 0.3; cursor: not-allowed; }
+background: var(--color-cta); color: var(--color-cta-text);
+btn-outline: archivos_con_regla=0
+```
+<!-- evidencia:fin apply-evidence.33 -->
+
+El bloque siguiente busca en `DESIGN.md` las asignaciones a texto normal que señala SA1 y sus
+variantes (enlaces en `primary-400`, `text-primary-500`, `text-brand`, placeholders en tonos
+claros, texto en tonos semánticos, `.btn-outline`, `info` como color de mensajes).
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.34","forma":"archivo","argv":null,"texto":"# Asignaciones a texto normal que SA1 señala y sus variantes: ninguna debe quedar en DESIGN.md\nn=$(grep -cE 'links hover|text-primary-500|text-brand|placeholder text|text-success|text-warning|text-error|btn-outline|Mensajes informativos$|neutral-400\\)$' DESIGN.md)\necho \"coincidencias=$n\"\ntest \"$n\" -eq 0\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"81490f722e7137f5a470586e1516b6550c399430","fecha":"2026-10-06T15:30:15-03:00","exit":0,"sha256":"1663813a3d1f4d844a1867035a5a5373a0be19074e3dfa71d3ea39d2cb843fb3","lineas":1,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `apply-evidence.34`** · exit 0 · 1 líneas, 0 omitidas · HEAD `81490f722e71` · 2026-10-06T15:30:15-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+
+```bash
+# Asignaciones a texto normal que SA1 señala y sus variantes: ninguna debe quedar en DESIGN.md
+n=$(grep -cE 'links hover|text-primary-500|text-brand|placeholder text|text-success|text-warning|text-error|btn-outline|Mensajes informativos$|neutral-400\)$' DESIGN.md)
+echo "coincidencias=$n"
+test "$n" -eq 0
+```
+
+```text
+coincidencias=0
+```
+<!-- evidencia:fin apply-evidence.34 -->
+
+Lectura de los tres bloques de SA1:
+
+- `apply-evidence.32`: las diez líneas corregidas citan ratios que calzan con los calculados desde
+  `tokens.css`, y cada uno bajo 4.5:1 va junto a «no apto para texto» o restringido a otro fondo.
+- `apply-evidence.33`: `DESIGN.md` describe cinco clases de botón; `.btn--ghost` y `.btn-ghost`
+  existen con los tokens que la documentación indica, y `.btn-outline` no tiene regla en `src/`
+  y ya no se describe. Las líneas de `whatsapp` y `cta` de la salida son reglas vecinas que
+  arrastra el contexto de `grep -A5`.
+- `apply-evidence.34`: ninguna de las asignaciones señaladas queda en `DESIGN.md`.
+
+### `design.md` y ADR-0008 frente a la spec del botón «Responder por email» (C1)
+
+El bloque siguiente muestra la línea de riesgos de `design.md` y las referencias del ADR-0008.
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.35","forma":"argv","argv":["grep","-nE","email-reply-button-contrast","memory/changes/fix-color-contrast-sitewide/design.md","memory/adrs/0008-contrast-pair-tokens-and-contextual-focus-ring.md"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide","head":"81490f722e7137f5a470586e1516b6550c399430","fecha":"2026-10-06T15:30:28-03:00","exit":0,"sha256":"84a0291984d07fb5d9e6238dc251be221c79cb011b434dc30e4f6f140065f1ba","lineas":2,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `apply-evidence.35`** · exit 0 · 2 líneas, 0 omitidas · HEAD `81490f722e71` · 2026-10-06T15:30:28-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide`
+
+```text
+grep -nE email-reply-button-contrast memory/changes/fix-color-contrast-sitewide/design.md memory/adrs/0008-contrast-pair-tokens-and-contextual-focus-ring.md
+```
+
+```text
+memory/changes/fix-color-contrast-sitewide/design.md:191:- **Canal de correo**: el botón «Responder por email» queda cubierto por la spec `forms-email/email-reply-button-contrast`: sus dos ramas consumen la constante `emailBtnColors` (`#ffffff` sobre `#3b6497`, 6.08:1, espejo de `--color-brand-solid-text` / `--color-brand-solid`) bajo la excepción de hex inline de ADR-0008 (D3). Fuera del alcance de las specs quedan el texto SLA `#898580` sobre blanco (~3.6:1) y el enlace `mailto` en `#4A7BB5` de la tabla de datos (`email-templates.ts:211,307`), registrados como candidato de deuda en `observations.md`.
+memory/adrs/0008-contrast-pair-tokens-and-contextual-focus-ring.md:89:- Specs: `ui-contrast/contrast-token-single-source`, `ui-contrast/focus-indicator-contrast`, `forms-email/email-whatsapp-button-contrast`, `forms-email/email-reply-button-contrast`.
+```
+<!-- evidencia:fin apply-evidence.35 -->
+
+`apply-evidence.35`: `design.md` cita la spec y la constante `emailBtnColors` y deja como deuda
+solo el texto SLA y el enlace `mailto`; ADR-0008 lista la spec entre sus referencias.
+
+### Build (corrida completa de cierre)
+
+El perfil no declara suite de tests; la corrida completa es `npm run build` sobre el árbol final.
+Los cambios del redespacho no tocan `src/`.
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.36","forma":"argv","argv":["npm","run","build"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro","head":"81490f722e7137f5a470586e1516b6550c399430","fecha":"2026-10-06T15:30:36-03:00","exit":0,"sha256":"ef658289aeb2e9ef6e3103e027333539d654796bda7bd43c0eaa4d6d760330c8","lineas":527,"omitidas":487,"no_recomprobable":"verify corre la suite completa sobre el mismo árbol con evidencia propia"} -->
+**Evidencia `apply-evidence.36`** · exit 0 · 527 líneas, 487 omitidas · HEAD `81490f722e71` · 2026-10-06T15:30:36-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro`
+No re-comprobable: verify corre la suite completa sobre el mismo árbol con evidencia propia
+
+```text
+npm run build
+```
+
+```text
+
+> log-atm-web-astro@0.0.1 build
+> astro build
+
+15:30:29 [@astrojs/cloudflare] Enabling compile-time image optimization. Images will be pre-optimized at build time.
+15:30:29 [@astrojs/cloudflare] Enabling sessions with Cloudflare KV with the "SESSION" KV binding.
+15:30:30 [types] Generated 1.29s
+15:30:30 [log-atm:i18n-validator] [i18n] Validando paridad de claves...
+[i18n] en: OK (536 claves)
+[i18n] pt: OK (536 claves)
+15:30:31 [build] output: "static"
+15:30:31 [build] mode: "server"
+15:30:31 [build] directory: /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-color-contrast-sitewide/log-atm-web-astro/dist/
+15:30:31 [build] adapter: @astrojs/cloudflare
+15:30:31 [build] Collecting build info...
+15:30:31 [build] ✓ Completed in 1.71s.
+15:30:31 [build] Building server entrypoints...
+15:30:33 [vite] ✓ built in 2.06s
+15:30:34 [vite] ✓ built in 1.36s
+15:30:35 [vite] ✓ built in 671ms
+
+ prerendering static routes 
+15:30:35   ├─ /contacto/index.html (+20ms) 
+15:30:36   ├─ /cotizar/index.html (+11ms) 
+15:30:36   ├─ /industrias/index.html (+21ms) 
+15:30:36   ├─ /nosotros/index.html (+14ms) 
+15:30:36   ├─ /servicios/index.html (+21ms) 
+15:30:36   ├─ /en/contacto/index.html (+9ms) 
+15:30:36   ├─ /pt/contacto/index.html (+9ms) 
+15:30:36   ├─ /en/cotizar/index.html (+9ms) 
+15:30:36   ├─ /pt/cotizar/index.html (+9ms) 
+15:30:36   ├─ /en/industrias/index.html (+12ms) 
+15:30:36   ├─ /pt/industrias/index.html (+12ms) 
+15:30:36   ├─ /en/nosotros/index.html (+9ms) 
+15:30:36   ├─ /pt/nosotros/index.html (+10ms) 
+15:30:36   ├─ /en/servicios/index.html (+14ms) 
+15:30:36   ├─ /pt/servicios/index.html (+13ms) 
+15:30:36   ├─ /en/index.html (+16ms) 
+15:30:36   ├─ /pt/index.html (+13ms) 
+15:30:36   ├─ /index.html (+16ms) 
+```
+<!-- evidencia:fin apply-evidence.36 -->
+
+`apply-evidence.36`: el build termina con exit 0 sobre el árbol final.
+
+Specs marcadas: `contrast-token-single-source` (commits `9223023`, `81490f7`) y
+`email-reply-button-contrast` (commit `81490f7`), ambas en `status: review`. El AC 6 de
+`contrast-token-single-source` queda sin marcar: lo marca `sdd-verify`.

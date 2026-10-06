@@ -20,6 +20,8 @@ commits:
   - 58cb313
   - ae823e6
   - 94eeb32
+  - 9223023
+  - 81490f7
 mr: ""
 acceptance_criteria:
   - "[x] Cada par validado figura una sola vez en la fuente de tokens y el sitio construye sin errores"

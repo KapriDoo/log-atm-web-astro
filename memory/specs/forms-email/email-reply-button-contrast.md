@@ -17,6 +17,7 @@ feature_branch: "feature/fix-color-contrast-sitewide"
 commits:
   - 84e0c03
   - 94eeb32
+  - 81490f7
 mr: ""
 acceptance_criteria:
   - "[x] El botón «Responder por email» del correo muestra texto blanco sobre azul de marca con contraste ≥ 4.5:1"
