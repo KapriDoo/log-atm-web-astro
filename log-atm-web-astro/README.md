@@ -28,12 +28,12 @@ Minería · Retail · Agro · Farmacia · E-commerce cross-border · Construcci�
 
 | Capa | Tecnología |
 |---|---|
-| Framework | [Astro](https://astro.build) 6.1.5 (SSG) |
+| Framework | [Astro](https://astro.build) 6 (versión exacta en `package.json`) |
 | UI islands | React 19 |
 | Estilos | Tailwind CSS v4 + design tokens (CSS variables) |
 | Animaciones | GSAP 3.14, Motion (Framer Motion) 12 |
-| Iconos | Lucide vía `astro-icon` |
-| Imágenes | Sharp (optimización), Potrace (PNG → SVG) |
+| Iconos | Lucide (`@iconify-json/lucide`) con el componente local `Icon.astro` |
+| Imágenes | Sharp (optimización en build) |
 | Tipografías | Inter + Outfit (`@fontsource`) |
 | Lenguaje | TypeScript (modo `strict`) |
 | Runtime | Cloudflare Workers (`@astrojs/cloudflare`) |
@@ -50,10 +50,37 @@ Ejecutar desde la raíz del proyecto (`log-atm-web-astro/`).
 | Comando | Acción |
 |---|---|
 | `npm install` | Instala dependencias |
-| `npm run dev` | Servidor local en `http://localhost:4321` |
-| `npm run build` | Build de producción en `./dist/` |
-| `npm run preview` | Sirve el build localmente para verificación |
+| `npm run dev` | Servidor de desarrollo en `http://localhost:4321` |
+| `npm run build` | Build de producción en `./dist/` (no verifica tipos) |
+| `npm run preview` | Sirve el build con workerd para verificarlo localmente |
+| `npm run check` | Verifica los tipos del sitio completo (`astro check`) |
+| `npm run a11y` | Audita la accesibilidad del sitio compilado en un navegador real |
+| `npm run validate-i18n` | Comprueba la paridad de claves de traducción es/en/pt |
+| `npm run check-i18n-links` | Busca en `dist/client` enlaces internos fuera del idioma de su página |
+| `npm run measure:images` | Mide el peso de las imágenes de la portada frente a su presupuesto |
+| `npm run container:build` | Construye la imagen del contenedor local (Podman) |
+| `npm run container:run` | Ejecuta el contenedor local en `http://localhost:4321` |
 | `npm run astro -- --help` | CLI de Astro |
+
+### Verificaciones
+
+- **`npm run check`** — verificación de tipos con `astro check`. Es un comando separado del
+  build: `npm run build` no verifica tipos, así que un error de tipado no detiene el despliegue
+  y se detecta con este comando.
+- **`npm run a11y`** — auditoría de accesibilidad con axe-core (reglas WCAG 2.x A/AA) en un
+  navegador real, que calcula el contraste de color sobre los estilos finales. Requiere
+  compilar antes (`npm run build`) y un Chrome: se indica su ruta con la variable de entorno
+  `CHROME_PATH` o se instala en `./chrome` con `npx @puppeteer/browsers install chrome@stable`.
+  Recorre todas las páginas de `dist/client` y las páginas de «no encontrado» de cada idioma,
+  en escritorio y en móvil, y termina con código distinto de cero ante cualquier violación.
+  Audita con movimiento reducido (`prefers-reduced-motion: reduce`) porque el contraste
+  relevante es el del estado final de la página: las animaciones de entrada parten de textos
+  casi transparentes y medirlas a mitad de camino da falsos positivos que el visitante no ve.
+- **`npm run measure:images`** — tras compilar, mide el peso de las imágenes que descarga la
+  portada en escritorio y en móvil frente al presupuesto de 2 MB; se ejecuta en cada cambio que
+  toque imágenes de la portada.
+- **`npm run check-i18n-links`** — tras compilar, detecta enlaces internos que apuntan a un
+  idioma distinto del de su página o que no terminan en `/`.
 
 ### Vista previa local
 
