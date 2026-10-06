@@ -68,7 +68,7 @@
 --color-border: #e1dedb;     /* Bordes */
 --color-text: #211f1c;       /* Texto principal */
 --color-text-muted: #6e6963; /* Texto secundario */
---color-brand: #4A7BB5;      /* Color de marca: enlaces y acentos */
+--color-brand: #4A7BB5;      /* Color de marca: acentos y texto grande; no apto para texto normal (4.38:1 sobre blanco) */
 --color-brand-dark: #2b4e78; /* Variante oscura marca */
 
 /* Pares texto/fondo validados: los componentes consumen el par, no el tono de paleta */
@@ -183,7 +183,7 @@ No validos para texto normal: blanco sobre `accent-500`/`accent-600` (CTA), blan
 - Superficies claras: `--color-focus-ring` (primary-600, ≥ 5.20:1)
 - Superficies oscuras con controles enfocables: declaran `--focus-ring-color: var(--color-focus-ring-inverse)` en la misma regla que define su fondo (`.hero-b`, `.page-hero`, `.ind-directory-section`, `.quote-hero`, `.cta-final`, `.footer`). Una seccion oscura nueva hace lo mismo
 - `--focus-ring-color` es una variable de contexto, no un token: solo toma el valor `var(--color-focus-ring-inverse)`, y una isla clara dentro de una superficie oscura puede restablecerla
-- Los componentes no fijan otro color de anillo ni usan `outline: none` sin un indicador equivalente visible en modos de color forzado (ADR-0008)
+- Los componentes no fijan otro color de anillo ni usan `outline: none` sin un indicador equivalente visible en modos de color forzado (ADR-0008). Excepcion vigente: `.why__video-toggle:focus-visible` conserva un anillo blanco de 2px, porque el boton flota sobre el video oscuro
 
 ### Modals / Dialogs
 - Overlay: black/50
@@ -257,8 +257,9 @@ No validos para texto normal: blanco sobre `accent-500`/`accent-600` (CTA), blan
 `tokens.css`: los clientes de correo exigen estilos inline y no leen las hojas del sitio. Cada
 par del correo que replica un par del sitio vive en una constante local con un comentario que
 nombra los tokens de origen (p. ej. el boton WhatsApp: `#111b21` sobre `#25D366`, espejo de
-`--color-whatsapp-text` / `--color-whatsapp`). Un cambio de esos tokens se replica a mano en la
-constante (ADR-0008).
+`--color-whatsapp-text` / `--color-whatsapp`; el boton «Responder por email»: `#ffffff` sobre
+`#3b6497`, espejo de `--color-brand-solid-text` / `--color-brand-solid`). Un cambio de esos
+tokens se replica a mano en la constante (ADR-0008).
 
 ---
 
