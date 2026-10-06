@@ -7,15 +7,16 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
   - "[[container-build-run-commands]]"
 change_ref: "[[chore-local-container-podman]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/chore-local-container-podman"
+feature_branch: "feature/chore-local-container-podman"
+commits:
+  - 0809264
 mr: ""
 acceptance_criteria:
   - "[ ] El repositorio no contiene ninguna definición de imagen, configuración de servidor web estático ni archivo de orquestación que sirva el sitio como contenido estático"

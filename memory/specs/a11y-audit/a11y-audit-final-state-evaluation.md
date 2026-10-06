@@ -7,15 +7,17 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
   - "[[a11y-audit-real-browser-coverage]]"
 change_ref: "[[chore-local-container-podman]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/chore-local-container-podman"
+feature_branch: "feature/chore-local-container-podman"
+commits:
+  - a5cb95f
+  - 928caa0
 mr: ""
 acceptance_criteria:
   - "[ ] La auditoría se ejecuta con el movimiento reducido activado por defecto"

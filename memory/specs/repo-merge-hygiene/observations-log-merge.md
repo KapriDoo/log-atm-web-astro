@@ -7,14 +7,15 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
 change_ref: "[[chore-local-container-podman]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/chore-local-container-podman"
+feature_branch: "feature/chore-local-container-podman"
+commits:
+  - a89d8c7
 mr: ""
 acceptance_criteria:
   - "[ ] Dos ramas que agregan entradas distintas al final del registro de observaciones se fusionan sin conflicto y conservan las entradas de ambas"

@@ -589,3 +589,15 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 
 ## 2026-10-06 | measure | chore-local-container-podman | preflight sdd-apply INICIO 18:44:16 outcome=ready
 
+
+## 2026-10-06 | debt-candidate | chore-local-container-podman | Violación existente `label-content-name-mismatch` (WCAG 2.5.3) en el encabezado de todas las páginas
+**Detectado por**: sdd-apply en `chore-local-container-podman` (primera corrida de `npm run a11y`, 42 auditorías)
+**Ubicación**: `log-atm-web-astro/src/components/ui/Navbar.astro:38` (enlace de marca `.nav__brand`, `aria-label={t('a11y.brandHome')}`) y `log-atm-web-astro/src/components/ui/LanguageSelector.astro:55` (`#lang-trigger`)
+**Descripción**: axe-core informa 63 nodos `label-content-name-mismatch` (serious): el enlace de marca en las 21 URLs × escritorio y móvil, y `#lang-trigger` en las 21 URLs solo en escritorio. El nombre accesible no contiene el texto visible del elemento. Es la única regla con violaciones; `color-contrast` informa 0 en todas las páginas, incluidas las portadas es/en/pt. Este cambio no corrige el sitio (tasks.md), así que `npm run a11y` termina hoy con exit 1.
+**Promoción sugerida**: cambio `fix` que alinee el `aria-label` de ambos elementos con su texto visible y deje `npm run a11y` en exit 0
+
+## 2026-10-06 | discovery | chore-local-container-podman | La imagen del contenedor local pesa 964 MB, no ~866 MB
+**Detectado por**: sdd-apply en `chore-local-container-podman`
+**Ubicación**: `memory/specs/deployment-docs/readme-deployment-and-local-container.md` (requisito del tamaño), `memory/changes/chore-local-container-podman/design.md` (D7), `log-atm-web-astro/README.md`
+**Descripción**: `podman images` informa 964 MB para `localhost/log-atm-web` construida desde el árbol final. La cifra ~866 MB de la spec y del diseño viene de la exploración, anterior a las devDependencies que agrega este cambio (`typescript`, `@astrojs/check`, `playwright-core`, `axe-core`), que la imagen instala con `npm ci`. El README declara el valor medido («alrededor de 960 MB»).
+**Promoción sugerida**: `sdd-verify` decide si la cifra de la spec requiere un delta o si el criterio de aceptación (aviso del tamaño aproximado) basta

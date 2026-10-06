@@ -7,15 +7,16 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: high
 depends_on:
   - "[[container-production-parity]]"
 change_ref: "[[chore-local-container-podman]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/chore-local-container-podman"
+feature_branch: "feature/chore-local-container-podman"
+commits:
+  - 6ff4c84
 mr: ""
 acceptance_criteria:
   - "[ ] La construcción de la imagen con un archivo de credenciales de prueba presente en el proyecto no deja ese valor en el historial de capas, en los metadatos ni en el sistema de archivos de la imagen"

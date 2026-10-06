@@ -7,16 +7,17 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: high
 depends_on:
   - "[[container-build-run-commands]]"
   - "[[container-secrets-isolation]]"
 change_ref: "[[chore-local-container-podman]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/chore-local-container-podman"
+feature_branch: "feature/chore-local-container-podman"
+commits:
+  - 6a738a2
 mr: ""
 acceptance_criteria:
   - "[ ] El README declara el destino de despliegue como «Cloudflare Workers (producción) · Podman (local, opcional)» y describe el despliegue por integración git con Workers Builds"

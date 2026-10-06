@@ -7,16 +7,17 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
   - "[[container-production-parity]]"
   - "[[container-secrets-isolation]]"
 change_ref: "[[chore-local-container-podman]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/chore-local-container-podman"
+feature_branch: "feature/chore-local-container-podman"
+commits:
+  - 6ff4c84
 mr: ""
 acceptance_criteria:
   - "[ ] Un único comando del proyecto construye la imagen y otro único comando la ejecuta y publica el sitio en el puerto 4321"

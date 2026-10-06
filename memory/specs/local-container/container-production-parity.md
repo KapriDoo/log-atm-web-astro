@@ -7,14 +7,15 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: high
 depends_on: []
 change_ref: "[[chore-local-container-podman]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/chore-local-container-podman"
+feature_branch: "feature/chore-local-container-podman"
+commits:
+  - 6ff4c84
 mr: ""
 acceptance_criteria:
   - "[ ] Con el contenedor en ejecución, la portada responde con éxito en español, inglés y portugués, tanto en la dirección de bucle local IPv4 como en `localhost`"

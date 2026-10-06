@@ -7,16 +7,17 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: low
 depends_on:
   - "[[type-check-zero-errors]]"
   - "[[a11y-audit-real-browser-coverage]]"
 change_ref: "[[chore-local-container-podman]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/chore-local-container-podman"
+feature_branch: "feature/chore-local-container-podman"
+commits:
+  - 928caa0
 mr: ""
 acceptance_criteria:
   - "[ ] El README documenta los comandos de verificación de tipos, de auditoría de accesibilidad, de medición de imágenes y de chequeo de enlaces i18n, con qué hace cada uno"

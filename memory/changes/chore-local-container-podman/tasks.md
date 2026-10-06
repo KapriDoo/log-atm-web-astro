@@ -37,10 +37,10 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Criterio de completado**: `git check-attr merge memory/observations.md` → `union`; `git check-attr merge memory/_profile.md` → `unspecified`; el commit contiene únicamente `.gitattributes`.
 - **Modo**: no TDD (archivo de configuración).
 
-- [ ] Crear `.gitattributes` en la raíz del repo con el comentario en español y la línea `memory/observations.md merge=union`
-- [ ] Ejecutar `git -C <worktree> check-attr merge memory/observations.md` y confirmar `union`
-- [ ] Ejecutar `git -C <worktree> check-attr merge memory/_profile.md` y confirmar `unspecified`
-- [ ] Confirmar un commit propio (`chore(repo): ...`, en inglés, Conventional Commits) que solo incluye `.gitattributes`
+- [x] Crear `.gitattributes` en la raíz del repo con el comentario en español y la línea `memory/observations.md merge=union`
+- [x] Ejecutar `git -C <worktree> check-attr merge memory/observations.md` y confirmar `union`
+- [x] Ejecutar `git -C <worktree> check-attr merge memory/_profile.md` y confirmar `unspecified`
+- [x] Confirmar un commit propio (`chore(repo): ...`, en inglés, Conventional Commits) que solo incluye `.gitattributes`
 
 ### Tarea 2: Verificar la fusión de `observations.md` en un repo de prueba
 
@@ -50,11 +50,11 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 1
 - **Modo**: no TDD (evidencia por ejecución)
 
-- [ ] Crear el repo de prueba en un directorio nuevo de `mktemp -d` y commitear `.gitattributes`, `memory/observations.md` y `memory/specs/x/y.md`
-- [ ] Crear dos ramas que agregan entradas distintas al final de `memory/observations.md` y fusionarlas: sin conflicto, ambas entradas presentes
-- [ ] Crear dos ramas que editan la misma línea de `memory/specs/x/y.md` y fusionarlas: conflicto de contenido
-- [ ] Ejecutar `git config --local --get-regexp '^merge\.'` en el repo de prueba y confirmar salida vacía
-- [ ] Borrar el repo de prueba
+- [x] Crear el repo de prueba en un directorio nuevo de `mktemp -d` y commitear `.gitattributes`, `memory/observations.md` y `memory/specs/x/y.md`
+- [x] Crear dos ramas que agregan entradas distintas al final de `memory/observations.md` y fusionarlas: sin conflicto, ambas entradas presentes
+- [x] Crear dos ramas que editan la misma línea de `memory/specs/x/y.md` y fusionarlas: conflicto de contenido
+- [x] Ejecutar `git config --local --get-regexp '^merge\.'` en el repo de prueba y confirmar salida vacía
+- [x] Borrar el repo de prueba
 
 ---
 
@@ -67,10 +67,10 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Criterio de completado**: ambas dependencias figuran en `devDependencies` con esos rangos; `npm run a11y` existe como script; el lockfile está actualizado.
 - **Modo**: no TDD
 
-- [ ] Ejecutar `npm ci` en `log-atm-web-astro/` del worktree para tener `node_modules`
-- [ ] Ejecutar `npm install -D playwright-core@^1.63.0 axe-core@^4.14.0`
-- [ ] Agregar el script `a11y` con el valor exacto `node scripts/axe-audit.mjs` en `package.json`
-- [ ] Confirmar que `jsdom` no queda declarado ni importado por ningún archivo de `scripts/` tras la Tarea 4
+- [x] Ejecutar `npm ci` en `log-atm-web-astro/` del worktree para tener `node_modules`
+- [x] Ejecutar `npm install -D playwright-core@^1.63.0 axe-core@^4.14.0`
+- [x] Agregar el script `a11y` con el valor exacto `node scripts/axe-audit.mjs` en `package.json`
+- [x] Confirmar que `jsdom` no queda declarado ni importado por ningún archivo de `scripts/` tras la Tarea 4
 
 ### Tarea 4: Reescribir `scripts/axe-audit.mjs`
 
@@ -80,12 +80,12 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 3
 - **Modo**: no TDD (la evidencia por ejecución está en la Tarea 5)
 
-- [ ] Reemplazar el contenido de `scripts/axe-audit.mjs` por la nueva implementación, con comentarios en español
-- [ ] Implementar precondición de build y resolución de navegador con los mensajes y exit codes del contrato
-- [ ] Implementar el ciclo de vida del servidor propio (puerto libre por `net`, sondeo, volcado de salida si falla, terminación del grupo de procesos en éxito, error y `SIGINT`)
-- [ ] Implementar la derivación de URLs desde `dist/client` y de las sondas 404 desde los `hreflang` de `index.html`
-- [ ] Implementar los dos contextos con `reducedMotion: 'reduce'`, la auditoría por página, la verificación del estado HTTP esperado y el informe con totales
-- [ ] Confirmar con búsqueda de texto que `jsdom` ya no se importa en `scripts/`
+- [x] Reemplazar el contenido de `scripts/axe-audit.mjs` por la nueva implementación, con comentarios en español
+- [x] Implementar precondición de build y resolución de navegador con los mensajes y exit codes del contrato
+- [x] Implementar el ciclo de vida del servidor propio (puerto libre por `net`, sondeo, volcado de salida si falla, terminación del grupo de procesos en éxito, error y `SIGINT`)
+- [x] Implementar la derivación de URLs desde `dist/client` y de las sondas 404 desde los `hreflang` de `index.html`
+- [x] Implementar los dos contextos con `reducedMotion: 'reduce'`, la auditoría por página, la verificación del estado HTTP esperado y el informe con totales
+- [x] Confirmar con búsqueda de texto que `jsdom` ya no se importa en `scripts/`
 
 ### Tarea 5: Verificar cobertura, informe y exit codes de la auditoría
 
@@ -95,13 +95,13 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 4
 - **Modo**: no TDD
 
-- [ ] Ejecutar `npm run build` en el worktree y confirmar exit 0
-- [ ] Ejecutar `npm run a11y` con `CHROME_PATH` y confirmar el resumen de 42 auditorías sobre 21 URLs
-- [ ] Revisar que las líneas de hallazgo traen viewport, URL, regla, impacto, ayuda y selector
-- [ ] En una copia aislada (`${DEST}` nuevo bajo el directorio de temporales): inyectar texto de bajo contraste en una página, compilar y auditar; confirmar exit 1 y violación `color-contrast` con página, tamaño y selector
-- [ ] En la copia aislada: agregar una página nueva, compilar y auditar; confirmar que entra en el resumen sin editar el script
-- [ ] Ejecutar `pgrep -af "workerd|astro preview"` y confirmar que no quedan procesos huérfanos
-- [ ] Si hay violaciones existentes del sitio, agregarlas como deuda al final de `memory/observations.md` (solo agregado) y registrarlas en `Riesgos` del envelope
+- [x] Ejecutar `npm run build` en el worktree y confirmar exit 0
+- [x] Ejecutar `npm run a11y` con `CHROME_PATH` y confirmar el resumen de 42 auditorías sobre 21 URLs
+- [x] Revisar que las líneas de hallazgo traen viewport, URL, regla, impacto, ayuda y selector
+- [x] En una copia aislada (`${DEST}` nuevo bajo el directorio de temporales): inyectar texto de bajo contraste en una página, compilar y auditar; confirmar exit 1 y violación `color-contrast` con página, tamaño y selector
+- [x] En la copia aislada: agregar una página nueva, compilar y auditar; confirmar que entra en el resumen sin editar el script
+- [x] Ejecutar `pgrep -af "workerd|astro preview"` y confirmar que no quedan procesos huérfanos
+- [x] Si hay violaciones existentes del sitio, agregarlas como deuda al final de `memory/observations.md` (solo agregado) y registrarlas en `Riesgos` del envelope
 
 ---
 
@@ -115,10 +115,10 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 4
 - **Modo**: no TDD
 
-- [ ] En una copia aislada sin `chrome/`, ejecutar `npm run a11y` sin `CHROME_PATH` y confirmar exit 2 con el mensaje esperado
-- [ ] Ejecutar con `CHROME_PATH=/ruta/inexistente` y confirmar exit 2 con mensaje que nombra la variable
-- [ ] En una copia aislada sin `dist/`, ejecutar `npm run a11y` y confirmar exit 2 con «npm run build»
-- [ ] En una copia aislada, ejecutar `npm ci` y confirmar que `node_modules/playwright-core` y `node_modules/axe-core` existen y el script arranca hasta la resolución del navegador
+- [x] En una copia aislada sin `chrome/`, ejecutar `npm run a11y` sin `CHROME_PATH` y confirmar exit 2 con el mensaje esperado
+- [x] Ejecutar con `CHROME_PATH=/ruta/inexistente` y confirmar exit 2 con mensaje que nombra la variable
+- [x] En una copia aislada sin `dist/`, ejecutar `npm run a11y` y confirmar exit 2 con «npm run build»
+- [x] En una copia aislada, ejecutar `npm ci` y confirmar que `node_modules/playwright-core` y `node_modules/axe-core` existen y el script arranca hasta la resolución del navegador
 
 ---
 
@@ -132,10 +132,10 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 5
 - **Modo**: no TDD
 
-- [ ] Agregar el comentario de cabecera en español sobre estado final y movimiento reducido
-- [ ] Confirmar por búsqueda de texto que `reducedMotion: 'reduce'` está en los dos contextos y no hay bandera que lo anule
-- [ ] Ejecutar `npm run a11y` y confirmar 0 violaciones `color-contrast` en las portadas de los tres idiomas
-- [ ] Si hay violaciones `color-contrast` en portadas, registrarlas como deuda en `memory/observations.md` (solo agregado) y marcarlas en `Riesgos`
+- [x] Agregar el comentario de cabecera en español sobre estado final y movimiento reducido
+- [x] Confirmar por búsqueda de texto que `reducedMotion: 'reduce'` está en los dos contextos y no hay bandera que lo anule
+- [x] Ejecutar `npm run a11y` y confirmar 0 violaciones `color-contrast` en las portadas de los tres idiomas
+- [x] Si hay violaciones `color-contrast` en portadas, registrarlas como deuda en `memory/observations.md` (solo agregado) y marcarlas en `Riesgos`
 
 ---
 
@@ -149,10 +149,10 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 3 (se ejecutan en orden: ambas editan `package.json`)
 - **Modo**: no TDD
 
-- [ ] Ejecutar `npm install -D @astrojs/check@^0.9.10 typescript@^6.0.3`
-- [ ] Agregar el script `check` con el valor exacto `astro check` en `package.json`
-- [ ] Ejecutar `npm ls typescript @astrojs/check` y confirmar ausencia de `invalid` y de advertencias de peer
-- [ ] Ejecutar `npm run check` y confirmar los 4 errores esperados (TS2307, TS2353, TS7031, TS2322)
+- [x] Ejecutar `npm install -D @astrojs/check@^0.9.10 typescript@^6.0.3`
+- [x] Agregar el script `check` con el valor exacto `astro check` en `package.json`
+- [x] Ejecutar `npm ls typescript @astrojs/check` y confirmar ausencia de `invalid` y de advertencias de peer
+- [x] Ejecutar `npm run check` y confirmar los 4 errores esperados (TS2307, TS2353, TS7031, TS2322)
 
 ### Tarea 9: Corregir los cuatro errores de tipos en su origen
 
@@ -162,13 +162,13 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 8
 - **Modo**: [TDD] (el test es `npm run check`: rojo con 4 errores, verde con 0)
 
-- [ ] Ejecutar `npm run check` y confirmar el rojo de 4 errores (test)
-- [ ] Crear `src/types/cloudflare-workers.d.ts` como script ambient con la declaración de `cloudflare:workers`
-- [ ] Quitar `platformProxy: { enabled: true },` de `astro.config.mjs`
-- [ ] Agregar el JSDoc `AstroIntegration` a `i18nValidator` en `astro.config.mjs`
-- [ ] Cambiar la declaración de `timer` a `number | null` en `src/scripts/gsap-ind-directory.ts`
-- [ ] Actualizar el JSDoc de `resolveMailEnv` en `src/lib/mailer.ts` (solo el comentario)
-- [ ] Ejecutar `npm run check` y confirmar `0 errors`
+- [x] Ejecutar `npm run check` y confirmar el rojo de 4 errores (test)
+- [x] Crear `src/types/cloudflare-workers.d.ts` como script ambient con la declaración de `cloudflare:workers`
+- [x] Quitar `platformProxy: { enabled: true },` de `astro.config.mjs`
+- [x] Agregar el JSDoc `AstroIntegration` a `i18nValidator` en `astro.config.mjs`
+- [x] Cambiar la declaración de `timer` a `number | null` en `src/scripts/gsap-ind-directory.ts`
+- [x] Actualizar el JSDoc de `resolveMailEnv` en `src/lib/mailer.ts` (solo el comentario)
+- [x] Ejecutar `npm run check` y confirmar `0 errors`
 
 ### Tarea 10: Verificar el criterio de la verificación de tipos
 
@@ -178,10 +178,10 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 9
 - **Modo**: no TDD
 
-- [ ] Ejecutar `grep -rn "@ts-ignore\|@ts-expect-error\|@ts-nocheck"` sobre `src/` y `astro.config.mjs` y comparar con la base: sin apariciones nuevas
-- [ ] Ejecutar `git -C <worktree> diff --stat -- log-atm-web-astro/tsconfig.json` y confirmar sin cambios
-- [ ] En una copia aislada, introducir el error deliberado y confirmar `npm run check` con exit distinto de cero
-- [ ] En una copia aislada, ejecutar `npm ci` y `npm ls typescript @astrojs/check` y confirmar sin incompatibilidad de versiones
+- [x] Ejecutar `grep -rn "@ts-ignore\|@ts-expect-error\|@ts-nocheck"` sobre `src/` y `astro.config.mjs` y comparar con la base: sin apariciones nuevas
+- [x] Ejecutar `git -C <worktree> diff --stat -- log-atm-web-astro/tsconfig.json` y confirmar sin cambios
+- [x] En una copia aislada, introducir el error deliberado y confirmar `npm run check` con exit distinto de cero
+- [x] En una copia aislada, ejecutar `npm ci` y `npm ls typescript @astrojs/check` y confirmar sin incompatibilidad de versiones
 
 ### Tarea 11: Actualizar `## Stack` del perfil con las devDependencies nuevas
 
@@ -191,9 +191,9 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 3, Tarea 8
 - **Modo**: no TDD (solo prosa)
 
-- [ ] Leer los rangos de `@astrojs/check`, `typescript`, `playwright-core` y `axe-core` en `package.json`
-- [ ] Agregar las cuatro entradas a `### Dev Tools` en el formato vigente
-- [ ] Confirmar con `git diff` que solo cambió esa sección
+- [x] Leer los rangos de `@astrojs/check`, `typescript`, `playwright-core` y `axe-core` en `package.json`
+- [x] Agregar las cuatro entradas a `### Dev Tools` en el formato vigente
+- [x] Confirmar con `git diff` que solo cambió esa sección
 
 ---
 
@@ -207,10 +207,10 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 9
 - **Modo**: no TDD
 
-- [ ] Confirmar por lectura de `package.json` que `build` es `astro build` y `check` es `astro check`
-- [ ] En una copia aislada con el error de tipos deliberado, ejecutar `npm run build` y confirmar exit 0
-- [ ] En la misma copia, ejecutar `npm run check` y confirmar exit distinto de cero
-- [ ] En el worktree, ejecutar `npm run build` y confirmar exit 0 y 18 archivos `*.html` bajo `dist/client`
+- [x] Confirmar por lectura de `package.json` que `build` es `astro build` y `check` es `astro check`
+- [x] En una copia aislada con el error de tipos deliberado, ejecutar `npm run build` y confirmar exit 0
+- [x] En la misma copia, ejecutar `npm run check` y confirmar exit distinto de cero
+- [x] En el worktree, ejecutar `npm run build` y confirmar exit 0 y 18 archivos `*.html` bajo `dist/client`
 
 ---
 
@@ -223,9 +223,9 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Criterio de completado**: el archivo existe con esas instrucciones y comentarios; no copia `.dev.vars` de forma explícita.
 - **Modo**: no TDD
 
-- [ ] Crear `log-atm-web-astro/Containerfile` con las instrucciones del contrato
-- [ ] Agregar los tres comentarios en español (glibc/workerd, secretos montados, `--host ::`)
-- [ ] Confirmar que `CMD` está en forma exec y no invoca `npm`
+- [x] Crear `log-atm-web-astro/Containerfile` con las instrucciones del contrato
+- [x] Agregar los tres comentarios en español (glibc/workerd, secretos montados, `--host ::`)
+- [x] Confirmar que `CMD` está en forma exec y no invoca `npm`
 
 ### Tarea 14: Crear el `.containerignore`
 
@@ -235,8 +235,8 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 13
 - **Modo**: no TDD
 
-- [ ] Crear `log-atm-web-astro/.containerignore` con las diez exclusiones y la re-inclusión de `.dev.vars.example`
-- [ ] Agregar un comentario en español que explique que `.env*` se excluye por ser credenciales locales según `.gitignore`
+- [x] Crear `log-atm-web-astro/.containerignore` con las diez exclusiones y la re-inclusión de `.dev.vars.example`
+- [x] Agregar un comentario en español que explique que `.env*` se excluye por ser credenciales locales según `.gitignore`
 
 ### Tarea 15: Agregar los scripts `container:build` y `container:run`
 
@@ -246,9 +246,9 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 8 (ambas editan `package.json`)
 - **Modo**: no TDD
 
-- [ ] Agregar `container:build` con el valor exacto del contrato
-- [ ] Agregar `container:run` con el valor exacto del contrato, con las comillas escapadas
-- [ ] Validar que `package.json` parsea como JSON (`node -e "JSON.parse(require('fs').readFileSync('package.json','utf8'))"`)
+- [x] Agregar `container:build` con el valor exacto del contrato
+- [x] Agregar `container:run` con el valor exacto del contrato, con las comillas escapadas
+- [x] Validar que `package.json` parsea como JSON (`node -e "JSON.parse(require('fs').readFileSync('package.json','utf8'))"`)
 
 ### Tarea 16: Verificar la paridad del contenedor con producción
 
@@ -258,13 +258,13 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 13, Tarea 14, Tarea 15
 - **Modo**: no TDD
 
-- [ ] Ejecutar `podman info --format '{{.Host.Security.Rootless}}'` y confirmar `true`
-- [ ] Ejecutar `npm run container:build` y confirmar exit 0
-- [ ] Preparar un `.dev.vars` de prueba y ejecutar `npm run container:run` desde un subdirectorio (p. ej. `src/`) para probar la ruta absoluta
-- [ ] Ejecutar `curl` a `/`, `/en/`, `/pt/` en `127.0.0.1:4321` y en `localhost:4321` y confirmar 200
-- [ ] Ejecutar `curl` a `/no-existe`, `/en/no-existe`, `/pt/no-existe` y confirmar 404 con la página de «no encontrado»
-- [ ] Ejecutar `POST /api/contacto` con cuerpo inválido y confirmar 400 con `Content-Type: application/json`
-- [ ] Detener el contenedor y confirmar con `podman ps -a` y `ss -ltn` que no quedan contenedores ni el puerto 4321 abierto
+- [x] Ejecutar `podman info --format '{{.Host.Security.Rootless}}'` y confirmar `true`
+- [x] Ejecutar `npm run container:build` y confirmar exit 0
+- [x] Preparar un `.dev.vars` de prueba y ejecutar `npm run container:run` desde un subdirectorio (p. ej. `src/`) para probar la ruta absoluta
+- [x] Ejecutar `curl` a `/`, `/en/`, `/pt/` en `127.0.0.1:4321` y en `localhost:4321` y confirmar 200
+- [x] Ejecutar `curl` a `/no-existe`, `/en/no-existe`, `/pt/no-existe` y confirmar 404 con la página de «no encontrado»
+- [x] Ejecutar `POST /api/contacto` con cuerpo inválido y confirmar 400 con `Content-Type: application/json`
+- [x] Detener el contenedor y confirmar con `podman ps -a` y `ss -ltn` que no quedan contenedores ni el puerto 4321 abierto
 
 ---
 
@@ -278,12 +278,12 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 16
 - **Modo**: no TDD
 
-- [ ] Crear la copia aislada y el `.dev.vars` falso con el valor aleatorio `FAKE_SECRET_<aleatorio>`
-- [ ] Construir la imagen de prueba con el archivo presente en la copia
-- [ ] Barrer `podman history --no-trunc`, `podman inspect` y el sistema de archivos de la imagen y confirmar 0 coincidencias en los tres
-- [ ] Ejecutar el contenedor con el montaje `:ro`, enviar un `POST /api/contacto` válido y confirmar en el log el intento a `127.0.0.1:1` y la ausencia de `Missing env var: SMTP_PASS`
-- [ ] Sin `.dev.vars`, ejecutar `npm run container:run` y confirmar exit distinto de cero con error `statfs` y sin contenedor en `podman ps -a`
-- [ ] Eliminar imágenes y contenedores de prueba y el directorio temporal
+- [x] Crear la copia aislada y el `.dev.vars` falso con el valor aleatorio `FAKE_SECRET_<aleatorio>`
+- [x] Construir la imagen de prueba con el archivo presente en la copia
+- [x] Barrer `podman history --no-trunc`, `podman inspect` y el sistema de archivos de la imagen y confirmar 0 coincidencias en los tres
+- [x] Ejecutar el contenedor con el montaje `:ro`, enviar un `POST /api/contacto` válido y confirmar en el log el intento a `127.0.0.1:1` y la ausencia de `Missing env var: SMTP_PASS`
+- [x] Sin `.dev.vars`, ejecutar `npm run container:run` y confirmar exit distinto de cero con error `statfs` y sin contenedor en `podman ps -a`
+- [x] Eliminar imágenes y contenedores de prueba y el directorio temporal
 
 ---
 
@@ -297,10 +297,10 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 16, Tarea 17
 - **Modo**: no TDD
 
-- [ ] En una copia aislada con `.dev.vars` de prueba, ejecutar `npm run container:build` y `npm run container:run` desde `src/` y confirmar 200 en `/`
-- [ ] Aplicar un cambio trivial visible en la copia (texto de la portada), ejecutar `npm run container:build` y `npm run container:run` y confirmar 200 con el cambio visible
-- [ ] Confirmar que la segunda ejecución no requirió limpiar contenedores previos (`--rm`)
-- [ ] Eliminar imágenes, contenedores y el directorio temporal; confirmar el puerto 4321 libre
+- [x] En una copia aislada con `.dev.vars` de prueba, ejecutar `npm run container:build` y `npm run container:run` desde `src/` y confirmar 200 en `/`
+- [x] Aplicar un cambio trivial visible en la copia (texto de la portada), ejecutar `npm run container:build` y `npm run container:run` y confirmar 200 con el cambio visible
+- [x] Confirmar que la segunda ejecución no requirió limpiar contenedores previos (`--rm`)
+- [x] Eliminar imágenes, contenedores y el directorio temporal; confirmar el puerto 4321 libre
 
 ---
 
@@ -314,10 +314,10 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 9 (ambas editan `astro.config.mjs`)
 - **Modo**: no TDD
 
-- [ ] Editar el comentario de `astro.config.mjs` con la redacción de D8
-- [ ] Editar los comentarios de las líneas 2-3 de `.dev.vars.example` con la redacción de D8
-- [ ] Ejecutar `grep -rn "Cloudflare Pages"` en los dos alcances y confirmar 0 resultados
-- [ ] Confirmar con `git diff` que `.dev.vars.example` conserva todas las claves y valores
+- [x] Editar el comentario de `astro.config.mjs` con la redacción de D8
+- [x] Editar los comentarios de las líneas 2-3 de `.dev.vars.example` con la redacción de D8
+- [x] Ejecutar `grep -rn "Cloudflare Pages"` en los dos alcances y confirmar 0 resultados
+- [x] Confirmar con `git diff` que `.dev.vars.example` conserva todas las claves y valores
 
 ---
 
@@ -331,12 +331,12 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 15, Tarea 18
 - **Modo**: no TDD (solo prosa)
 
-- [ ] Reemplazar la fila `Deploy` de la tabla de stack por `Despliegue` con el valor de la spec
-- [ ] Reemplazar la sección «Con Docker» por la sección del contenedor local con Podman y sus siete elementos
-- [ ] Agregar la sección de vista previa local con la limitación del 500 y la mención del contenedor
-- [ ] Agregar la sección de despliegue por Workers Builds, sin los datos del dashboard
-- [ ] Actualizar el bloque *Estructura* (sin `Dockerfile`/`nginx.conf`; con `Containerfile`, `.containerignore`, `wrangler.toml`)
-- [ ] Ejecutar `grep -niE "docker|nginx|TODO|a confirmar" README.md` y confirmar 0 resultados
+- [x] Reemplazar la fila `Deploy` de la tabla de stack por `Despliegue` con el valor de la spec
+- [x] Reemplazar la sección «Con Docker» por la sección del contenedor local con Podman y sus siete elementos
+- [x] Agregar la sección de vista previa local con la limitación del 500 y la mención del contenedor
+- [x] Agregar la sección de despliegue por Workers Builds, sin los datos del dashboard
+- [x] Actualizar el bloque *Estructura* (sin `Dockerfile`/`nginx.conf`; con `Containerfile`, `.containerignore`, `wrangler.toml`)
+- [x] Ejecutar `grep -niE "docker|nginx|TODO|a confirmar" README.md` y confirmar 0 resultados
 
 ---
 
@@ -350,12 +350,12 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 20 (mismo archivo), Tarea 8, Tarea 3, Tarea 15
 - **Modo**: no TDD (solo prosa)
 
-- [ ] Corregir las filas `Framework`, `Iconos` e `Imágenes` de la tabla de stack
-- [ ] Ampliar la tabla de comandos con los diez comandos y su finalidad
-- [ ] Agregar la sección *Verificaciones* con los cuatro comandos y el detalle de `npm run a11y`
-- [ ] Comparar el mayor de Astro del README con el rango de `astro` en `package.json`
-- [ ] Verificar que cada comando documentado existe como script en `package.json`
-- [ ] Ejecutar `grep -niE "potrace|astro-icon|docker|nginx|TODO|a confirmar" README.md` y confirmar 0 resultados
+- [x] Corregir las filas `Framework`, `Iconos` e `Imágenes` de la tabla de stack
+- [x] Ampliar la tabla de comandos con los diez comandos y su finalidad
+- [x] Agregar la sección *Verificaciones* con los cuatro comandos y el detalle de `npm run a11y`
+- [x] Comparar el mayor de Astro del README con el rango de `astro` en `package.json`
+- [x] Verificar que cada comando documentado existe como script en `package.json`
+- [x] Ejecutar `grep -niE "potrace|astro-icon|docker|nginx|TODO|a confirmar" README.md` y confirmar 0 resultados
 
 ---
 
@@ -369,8 +369,8 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 18, Tarea 21
 - **Modo**: no TDD
 
-- [ ] Ejecutar `git -C <worktree> rm` sobre los cinco archivos
-- [ ] Confirmar con `git -C <worktree> ls-files` que ninguno figura
+- [x] Ejecutar `git -C <worktree> rm` sobre los cinco archivos
+- [x] Confirmar con `git -C <worktree> ls-files` que ninguno figura
 
 ### Tarea 23: Verificar que ningún archivo referencia lo retirado
 
@@ -380,8 +380,8 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 22, Tarea 19
 - **Modo**: no TDD
 
-- [ ] Ejecutar la búsqueda de referencias con las exclusiones indicadas
-- [ ] Si hay resultados, corregir el archivo que referencia (no `memory/` ni `.sdd/`) y repetir hasta 0
+- [x] Ejecutar la búsqueda de referencias con las exclusiones indicadas
+- [x] Si hay resultados, corregir el archivo que referencia (no `memory/` ni `.sdd/`) y repetir hasta 0
 
 ---
 
@@ -395,8 +395,8 @@ las agrega como deuda al final de `memory/observations.md` (solo agregado) y las
 - **Requiere**: Tarea 4, Tarea 8, Tarea 11, Tarea 15
 - **Modo**: no TDD (solo prosa)
 
-- [ ] Reescribir las líneas `Deploy Target`, `Container (actual)` y `Type-check` de `## Build & Deploy`
-- [ ] Agregar la línea `Verification Commands` con los cuatro comandos y el requisito del `a11y`
-- [ ] Reescribir la línea `CI` con la declaración de ausencia de integración continua
-- [ ] Actualizar `updated:` del frontmatter
-- [ ] Verificar contra los cuatro criterios de la spec y con `git diff` que solo cambió `## Build & Deploy` y el frontmatter respecto de la Tarea 11
+- [x] Reescribir las líneas `Deploy Target`, `Container (actual)` y `Type-check` de `## Build & Deploy`
+- [x] Agregar la línea `Verification Commands` con los cuatro comandos y el requisito del `a11y`
+- [x] Reescribir la línea `CI` con la declaración de ausencia de integración continua
+- [x] Actualizar `updated:` del frontmatter
+- [x] Verificar contra los cuatro criterios de la spec y con `git diff` que solo cambió `## Build & Deploy` y el frontmatter respecto de la Tarea 11

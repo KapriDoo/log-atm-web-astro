@@ -7,14 +7,15 @@ domain: "migration"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: low
 depends_on: []
 change_ref: "[[chore-local-container-podman]]"
-worktree: ""
-feature_branch: ""
-commits: []
+worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/chore-local-container-podman"
+feature_branch: "feature/chore-local-container-podman"
+commits:
+  - 5be9818
 mr: ""
 acceptance_criteria:
   - "[ ] Ningún comentario ni archivo de configuración del proyecto nombra a Cloudflare Pages como destino de despliegue"
