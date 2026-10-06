@@ -8,7 +8,7 @@ version: 0.0.1
 node_engine: ">=22.12.0"
 status: active
 created: "2026-05-19"
-updated: "2026-10-03"
+updated: "2026-10-06"
 ---
 
 ## Stack
@@ -62,6 +62,9 @@ updated: "2026-10-03"
 - **Deploy Target:** Cloudflare Pages
 - **Build Scripts:** `npm run build` (`astro build`, sin type-check); `npm run validate-i18n` (validador i18n vía tsx, ejecución separada); `npm run check-i18n-links` (chequeo de links i18n vía tsx, ejecución separada)
 - **Validation:** Custom i18n validator via tsx at build time
+- **Container (actual):** `Dockerfile` multi-etapa (node:22-slim build + nginx:alpine con Brotli) sirve solo `dist/client`; `docker-compose.yml` en la raíz del repo; sin Containerfile ni Podman configurado
+- **Type-check:** sin `@astrojs/check`/`typescript` en devDependencies; `astro build` no chequea tipos
+- **CI:** sin `.github/workflows` ni `.gitlab-ci.yml`
 
 ## Design System & Branding
 
