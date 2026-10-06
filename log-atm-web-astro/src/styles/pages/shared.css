@@ -102,6 +102,8 @@
 }
 .ind-directory__counter {
   display: inline-flex; align-items: baseline; gap: 0.4rem;
+  /* Ítem del overlay en columna: sin esto se estira y la pastilla cubre todo el ancho */
+  align-self: flex-start;
   font-family: var(--font-mono); font-size: 0.85rem;
   color: #fff; letter-spacing: 0.06em;
   /* Pastilla oscura: contraste determinista sobre cualquier fotografía */
