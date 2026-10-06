@@ -76,7 +76,17 @@ const sectorPrefix = t('industrias.directory.sectorPrefix');
           <div class="ind-directory__viewer">
             {industries.map((it, i) => (
               <div class:list={['ind-directory__slide', { 'is-active': i === 0 }]} data-slide={i}>
-                <Picture src={it.img} formats={['avif', 'webp']} alt={it.name} quality={80} />
+                {/* El slide recorta con object-fit: cover un recuadro más alto que la foto (16:9):
+                    el ancho pintado es alto × 1,79 (~800–920px hasta 960px; ≥1040px sobre 960px),
+                    por eso sizes sigue ese ancho y no el del recuadro. */}
+                <Picture
+                  src={it.img}
+                  formats={['avif', 'webp']}
+                  alt={it.name}
+                  quality={80}
+                  widths={[920, 1376]}
+                  sizes="(max-width: 960px) 920px, 1376px"
+                />
               </div>
             ))}
             <div class="ind-directory__overlay">

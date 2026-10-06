@@ -7,6 +7,9 @@ informed: sdd-tasks, sdd-apply, sdd-verify
 extends: "[[0001-image-optimization-astro-assets]]"
 change_ref: "[[optimize-images-webp]]"
 capability: image-pipeline
+spec_refs:
+  - "[[card-image-weight-budget]]"
+updated: "2026-10-03"
 ---
 
 # ADR 0006: `<Picture>` multi-formato como estándar para todas las imágenes de contenido

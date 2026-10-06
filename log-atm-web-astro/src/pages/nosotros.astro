@@ -103,7 +103,16 @@ const how = HOW_WE_WORK.map((h, i) => ({ ...h, ...(howCopy[i] ?? { title: h.titl
           {how.map((s) => (
             <div class="howwork-card">
               <div class="howwork-card__media">
-                <Picture src={s.img} formats={['avif', 'webp']} alt={s.title} quality={80} />
+                {/* Recuadro 4:3 con object-fit: cover: el ancho pintado de la foto 16:9 es ~1,34× el
+                    de la card (90vw hasta 600px, 45vw hasta 1000px, 22vw hasta 1280px, 285px máximo). */}
+                <Picture
+                  src={s.img}
+                  formats={['avif', 'webp']}
+                  alt={s.title}
+                  quality={80}
+                  widths={[400, 800, 1376]}
+                  sizes="(max-width: 600px) 121vw, (max-width: 1000px) 60vw, (max-width: 1280px) 30vw, 385px"
+                />
                 <span class="howwork-card__step">{s.step}</span>
                 <span class="howwork-card__icon">
                   <Icon name={s.icon} width={18} height={18} />

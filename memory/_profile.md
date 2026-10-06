@@ -38,7 +38,6 @@ updated: "2026-10-03"
 ### Animation & Motion
 - `gsap@^3.14.2` — GSAP library
 - `motion@^12.38.0` — Framer Motion
-- `potrace@^2.1.8` — Vectorization utility
 
 ### Dev Tools
 - `sharp@^0.34.5` — Image processing (native binary)

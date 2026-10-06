@@ -65,18 +65,21 @@ El proyecto define típicamente:
 **Ubicación**: `src/assets/industries/*.jpg` (14 archivos) + `src/lib/industryImages.ts`
 **Descripción**: `INDUSTRY_IMAGES` se exporta pero nunca se importa/consume en ningún archivo de `src/`. Los 14 jpg (10.5 MB) duplican las industrias que sí se sirven desde `public/images/industries/`. Inflan el repositorio sin aportar valor.
 **Promoción sugerida**: `sdd new cleanup-dead-industry-assets --domain debt`
+**Estado**: resuelto por `e6ade3a` (borró los 14 jpg de `src/assets/industries/` y `src/lib/industryImages.ts`).
 
 ## 2026-05-28 | debt-candidate | logo.svg duplicado/sin uso en src/assets
 **Detectado por**: sdd-explore en `optimize-images-webp`
 **Ubicación**: `src/assets/logo.svg`
 **Descripción**: No referenciado en `src/`. El logo activo es `public/logo.svg` / `public/logo.png`. Generado por `scripts/png-to-svg.mjs` (one-shot) y aparentemente huérfano.
 **Promoción sugerida**: `sdd new cleanup-orphan-logo-svg --domain debt`
+**Estado**: resuelto por `e6ade3a` (borró `src/assets/logo.svg`); `debt-assets-weight` retiró además `scripts/png-to-svg.mjs` y la dependencia `potrace`.
 
 ## 2026-05-28 | debt-candidate | Videos posiblemente duplicados en public/videos (3.76 MB c/u)
 **Detectado por**: sdd-explore en `optimize-images-webp`
 **Ubicación**: `public/videos/hero-port.mp4`, `public/videos/log-atm-intro.mp4`
 **Descripción**: Ambos archivos pesan exactamente 3,756,542 bytes; posible duplicado. Solo `log-atm-intro.mp4` se referencia (WhyVideoSection). Verificar y eliminar el huérfano para reducir peso del deploy.
 **Promoción sugerida**: `sdd new dedupe-public-videos --domain debt`
+**Estado**: cerrado por `debt-assets-weight`: se confirmaron 3 MP4 con el mismo md5 (`public/video/intro.mp4`, `public/videos/hero-port.mp4`, `public/videos/log-atm-intro.mp4`) y se dejó solo `public/videos/log-atm-intro.mp4`.
 
 ## 2026-05-28 | architecture | `<Picture>` multi-formato como estándar de imágenes de contenido (optimize-images-webp)
 Se adopta `astro:assets` con `<Picture formats={['avif','webp']}>` + fallback JPEG para todas las imágenes de contenido (services/industries/process), moviéndolas a `src/assets/images/` y portando `ImageMetadata` en `src/lib/constants.ts` (campo `img` pasa de `string` a `ImageMetadata` vía imports estáticos directos, sin mapa auxiliar). Hero LCP con `priority`; poster de `<video>` vía `getImage()` (WebP). Extiende ADR-0001 (no lo supersede). Ver ADR-0006.
@@ -89,6 +92,7 @@ Se adopta `astro:assets` con `<Picture formats={['avif','webp']}>` + fallback JP
 - **Layout del worktree**: el proyecto Astro vive en el subdirectorio anidado `log-atm-web-astro/` dentro del worktree, no en la raíz. Build/npm e imports se ejecutan desde `.../optimize-images-webp/log-atm-web-astro/`. `node_modules` no venía instalado → `npm install` (442 paquetes) antes del primer build.
 - **[pre-adr] imageService:'compile' obligatorio con adapter Cloudflare**: design.md §28 asumía que `output:'static'` + Cloudflare adapter emite AVIF/WebP estáticos en build-time automáticamente. NO es así: el adapter Cloudflare por defecto usa `imageService:'cloudflare-binding'` (servicio workerd on-demand), que emite URLs `/_image?href=...&f=avif` resueltas en runtime — NO archivos estáticos. El bloque `image.service` (Sharp) de astro.config queda overrideado por el adapter. Para honrar el diseño (optimización build-time, coste runtime cero, AC de T8 "dist/_astro contiene *.avif/*.webp"), se añadió `imageService:'compile'` al adapter. Verificado: tras el cambio el build emite 32 AVIF + 33 WebP estáticos y las URLs apuntan a `/_astro/*.avif|webp`. Decisión aplicada con default razonable (no había ADR que la cubriera); candidata a documentarse en ADR-0006.
 - **`logo.svg` real**: tasks/design indicaban `src/assets/logo.svg`, pero git lo rastreaba en `src/assets/industries/logo.svg`. Eliminado junto con `git rm -r src/assets/industries/`. Ningún `logo.svg` permanece bajo `src/`.
+  - **Corrección (`debt-assets-weight`)**: el historial git muestra que `e6ade3a` eliminó `src/assets/logo.svg`; `src/assets/industries/logo.svg` no existía en el árbol previo a ese commit.
 - **Decisión `alt` en cards home**: el markup original de ServicesSection/IndustriesSection usaba `alt=""` (decorativo; el enlace de la card ya nombra el servicio/industria). tasks.md sugería `alt={s.title}`/`alt={ind.name}`. Se preservó `alt=""` en las secciones home para no alterar la semántica de accesibilidad existente. En las páginas (servicios/nosotros/industrias) el original ya tenía `alt` con texto y se respetó.
 - **`as const` + ImageMetadata (R1)**: NO se materializó. Los arrays SERVICES/INDUSTRIES/HOW_WE_WORK con `as const` aceptan objetos `ImageMetadata` sin retipar. Build TS verde.
 - **Peso (evidencia LCP)**: hero `svc-maritima` original 937 KB JPEG → variante 768w ~64 KB WebP / ~93 KB AVIF (el navegador descarga solo la variante que matchea el viewport, un único formato). Fuentes totales 22 MB → variantes generadas AVIF 4.9 MB + WebP 3.8 MB (por todos los breakpoints; servidas selectivamente).
@@ -349,6 +353,54 @@ En `astro preview`, un `POST` sin `content-type` lo corta el chequeo de origen d
 ## 2026-10-02 | measure | fix-i18n-links-and-404 | post-dispatch sdd-verify FIN 22:41:27 outcome=advance
 
 ## 2026-10-02 | measure | fix-i18n-links-and-404 | preflight sdd-archive INICIO 22:41:31 outcome=ready
+
+## 2026-10-02 | measure | debt-assets-weight | preflight sdd-init INICIO 22:44:22 outcome=ready
+
+## 2026-10-02 | measure | debt-assets-weight | post-dispatch sdd-init FIN 22:44:59 outcome=advance
+
+## 2026-10-02 | measure | debt-assets-weight | preflight sdd-propose INICIO 22:45:00 outcome=ready
+
+## 2026-10-02 | measure | debt-assets-weight | post-dispatch sdd-propose FIN 22:47:04 outcome=paused
+
+## 2026-10-03 | measure | debt-assets-weight | preflight sdd-spec INICIO 00:10:51 outcome=ready
+
+## 2026-10-03 | measure | debt-assets-weight | post-dispatch sdd-spec FIN 00:12:33 outcome=advance
+
+## 2026-10-03 | measure | debt-assets-weight | preflight sdd-tasks INICIO 00:12:33 outcome=ready
+
+## 2026-10-03 | measure | debt-assets-weight | post-dispatch sdd-tasks FIN 00:14:07 outcome=advance
+
+## 2026-10-03 | measure | debt-assets-weight | preflight sdd-apply INICIO 00:14:07 outcome=ready
+
+## 2026-10-03 | pre-adr | debt-assets-weight | Cards altas de industrias del inicio quedan blandas en móvil DPR ≥ 2 por el presupuesto de 2 MB
+Las cards del bento pintan la foto 16:9 con `object-fit: cover` en recuadros más altos que 16:9; las 4 cards altas de industrias (2 filas, ~167×370px a 390px) pintan la foto a ~665px de ancho. En móvil DPR 3, darles una variante a su altura (~1376w) lleva el inicio sobre 2 MB, así que reciben 450–600w y se ven borrosas a DPR 2 y 3. Escritorio queda nítido. Resolverlo pide una decisión de diseño (proporción de esas cards en móvil, o `sizes` por card alta/baja) fuera del alcance del cambio. Evidencia: `apply-evidence.18` y `apply-evidence.21`.
+
+## 2026-10-03 | env-quirk | debt-assets-weight | `astro preview` (adapter Cloudflare) responde 500 a todo tras un `npm run build` posterior a su arranque
+El servidor de preview queda apuntando al build anterior: hay que detenerlo y relanzarlo después de cada build para verificar en navegador.
+
+## 2026-10-03 | measure | debt-assets-weight | post-dispatch sdd-apply FIN 00:41:10 outcome=advance
+
+## 2026-10-03 | measure | debt-assets-weight | preflight sdd-verify INICIO 00:41:10 outcome=ready
+
+## 2026-10-03 | measure | debt-assets-weight | preflight sdd-verify INICIO 00:41:42 outcome=ready
+
+## 2026-10-03 | gotcha | debt-assets-weight | verify confirma en navegador la blandura de las cards altas de industrias en móvil DPR 2
+Una captura Chrome 390×844 DPR 2 del bento de industrias muestra Minería y Farma blandas frente a Retail. El presupuesto no está agotado según la definición de la spec (solo AVIF), así que `sdd-apply` puede probar una variante intermedia para esas 4 cards y re-medir con `npm run measure:images`. Detalle en `verify-report.md` (H-1).
+
+## 2026-10-03 | measure | debt-assets-weight | post-dispatch sdd-verify FIN 00:58:51 outcome=verify-retry
+
+## 2026-10-03 | measure | debt-assets-weight | preflight sdd-apply INICIO 00:58:54 outcome=ready
+
+## 2026-10-03 | decision | debt-assets-weight | Cards altas de industrias del inicio: `sizes` por ancho pintado y quality 55 para entrar en el presupuesto móvil
+Las 4 cards altas declaran `sizes="665px"` (ancho pintado de la foto, fijo por el alto de 2 filas) y reciben 1376w a DPR 2 y 3; con quality 80 el móvil DPR 3 supera 2 MB, y quality 55 solo en esas cards es el paso más alto que entra. El margen móvil queda estrecho (~20 KB bajo el límite que aplica `npm run measure:images` sobre el total): cualquier imagen nueva o más pesada en el inicio puede superar el presupuesto. Las posiciones altas viven en `IndustriesSection.astro` (`ind-card--tall`). Evidencia: `apply-evidence.28` a `apply-evidence.33`.
+
+## 2026-10-03 | measure | debt-assets-weight | post-dispatch sdd-apply FIN 01:13:24 outcome=advance
+
+## 2026-10-03 | measure | debt-assets-weight | preflight sdd-verify INICIO 01:13:24 outcome=ready
+
+## 2026-10-03 | measure | debt-assets-weight | post-dispatch sdd-verify FIN 01:41:09 outcome=advance
+
+## 2026-10-03 | measure | debt-assets-weight | preflight sdd-archive INICIO 01:41:13 outcome=ready
 
 ## 2026-10-03 | measure | fix-color-contrast-sitewide | preflight sdd-init INICIO 01:44:10 outcome=ready
 

@@ -5,7 +5,7 @@ import Footer from '../components/ui/Footer.astro';
 import CTASection from '../components/sections/CTASection.astro';
 import Icon from "../components/ui/Icon.astro";
 import { Picture } from 'astro:assets';
-import { SERVICES } from '../lib/constants';
+import { SERVICES, SERVICE_CARD_IMAGE_WIDTHS, SERVICE_CARD_IMAGE_SIZES } from '../lib/constants';
 import { useTranslations, getLangFromUrl, buildLocaleUrl, tList, type Locale } from '../i18n/utils';
 import '../styles/pages/shared.css';
 import '../styles/sections/services.css';
@@ -89,7 +89,14 @@ const detailedServices = services
                 href={isLink ? href : undefined}
               >
                 <div class="svc-card__media">
-                  <Picture src={s.img} formats={['avif', 'webp']} alt={s.title} quality={80} />
+                  <Picture
+                    src={s.img}
+                    formats={['avif', 'webp']}
+                    alt={s.title}
+                    quality={80}
+                    widths={SERVICE_CARD_IMAGE_WIDTHS}
+                    sizes={SERVICE_CARD_IMAGE_SIZES[s.size]}
+                  />
                   <div class="svc-card__overlay"></div>
                 </div>
                 <span class:list={['svc-card__tag', { 'svc-card__tag--cta': s.isCta }]}>{s.tag}</span>
@@ -118,7 +125,16 @@ const detailedServices = services
           <div class:list={['svc-detail-row', { 'svc-detail-row--reverse': i % 2 === 1 }]}>
             <div class="svc-detail__media">
               <span class="svc-detail__badge">{detail.badge}</span>
-              <Picture src={s.img} formats={['avif', 'webp']} alt={s.title} quality={80} />
+              {/* Recuadro 5:4 con object-fit: cover: el ancho pintado de la foto 16:9 es ~1,43× el
+                  del recuadro (90vw hasta 900px, 48vw hasta 1280px, 620px máximo). */}
+              <Picture
+                src={s.img}
+                formats={['avif', 'webp']}
+                alt={s.title}
+                quality={80}
+                widths={[640, 960, 1376]}
+                sizes="(max-width: 900px) 129vw, (max-width: 1280px) 69vw, 890px"
+              />
             </div>
             <div>
               <div class="svc-detail__num">{s.n} · {s.tag}</div>

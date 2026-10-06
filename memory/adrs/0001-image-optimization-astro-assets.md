@@ -4,6 +4,9 @@ date: 2026-05-10
 deciders: sdd-design
 consulted: stack-existing, astro-docs
 informed: sdd-apply, sdd-verify
+spec_refs:
+  - "[[card-image-weight-budget]]"
+updated: "2026-10-03"
 ---
 
 # ADR 0001: Optimización de imágenes con Astro Assets y Sharp

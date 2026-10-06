@@ -18,7 +18,7 @@
 | Redes sociales | Facebook, Twitter/X, Instagram |
 | Color principal | ~#4A7BB5 (azul plano único) |
 | Logo fuente | `/mnt/c/Users/cipri/Downloads/logatmlogo.png` |
-| Logo destino | `src/assets/logo.svg` (convertir con potrace) |
+| Logo vectorial | `public/logo.svg` (fuente vigente, versionada) |
 | Firma email | `/mnt/c/Users/cipri/Downloads/logatmgmail.png` |
 
 **Descripción del logo**: Ancla marítima (fondo) + grúa portuaria (superpuesta) + letras "ATM LOG" — diseño flat monocolor azul. Simboliza puentes entre marítimo e industrial.
@@ -58,20 +58,9 @@ A definir con cliente. Referencias del sector: IATA, FIATA, BASC, ISO 9001, Adua
 
 ---
 
-## Conversión logo PNG → SVG
+## Logo vectorial
 
-No existe skill para esto. Usar `potrace` npm (v2.1.8, disponible):
-
-```js
-// scripts/png-to-svg.mjs — ejecutar una sola vez
-import potrace from 'potrace';
-import sharp from 'sharp';
-// sharp convierte PNG → escala de grises → BMP
-// potrace traza el bitmap al path SVG
-// Parámetros: threshold:128, color:'#4A7BB5', background:'transparent'
-```
-
-Resultado en `src/assets/logo.svg`.
+La fuente vigente del logo vectorial es `public/logo.svg`, ya generado y versionado en el repositorio. `scripts/generate-favicons.mjs` deriva de él `favicon.svg`, `favicon.ico` y `apple-touch-icon.png`.
 
 ---
 
