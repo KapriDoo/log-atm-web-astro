@@ -11,7 +11,7 @@ import { spawnSync } from 'node:child_process';
  * No bloquea el dev server; sólo se ejecuta en `astro build`.
  *
  * Nota: se invoca el validador `.ts` via `tsx` en subproceso para soportar
- * entornos sin loader TS en runtime (p. ej. Cloudflare Pages build), donde
+ * entornos sin loader TS en runtime (p. ej. el build alojado de Cloudflare Workers Builds), donde
  * un `import()` directo del `.ts` falla con "Unknown file extension".
  *
  * @returns {import('astro').AstroIntegration}
