@@ -75,7 +75,7 @@
 .stepper__step:hover { background: var(--color-neutral-50); }
 .stepper__step--active { background: var(--color-primary-50); }
 .stepper__step--done .stepper__bullet {
-  background: var(--color-accent-500); color: #fff; border-color: var(--color-accent-500);
+  background: var(--color-cta); color: var(--color-cta-text); border-color: var(--color-cta);
 }
 .stepper__step--active .stepper__bullet {
   background: var(--color-primary-700); color: #fff; border-color: var(--color-primary-700);
