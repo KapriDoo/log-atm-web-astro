@@ -86,4 +86,4 @@ con un comentario que nombra los tokens de origen, y `DESIGN.md` declara la exce
 ## Referencias
 
 - [[0005-email-section-helpers-textual-logo]] — arquitectura de plantillas de correo con estilos inline.
-- Specs: `ui-contrast/contrast-token-single-source`, `ui-contrast/focus-indicator-contrast`, `forms-email/email-whatsapp-button-contrast`.
+- Specs: `ui-contrast/contrast-token-single-source`, `ui-contrast/focus-indicator-contrast`, `forms-email/email-whatsapp-button-contrast`, `forms-email/email-reply-button-contrast`.

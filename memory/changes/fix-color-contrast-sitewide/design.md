@@ -188,7 +188,7 @@ El proyecto no tiene suite de tests ni dependencias de axe/puppeteer; los script
 
 ## Riesgos y hallazgos del diseño
 
-- **Fuera del alcance de las specs, en el canal de correo**: el botón «Responder por email» usa `#ffffff` sobre `#4A7BB5` (4.38:1) y el texto SLA `#898580` sobre blanco (~3.6:1) en `email-templates.ts:280,290,301`. No hay spec que los cubra; quedan registrados como candidato de deuda en `observations.md`.
+- **Canal de correo**: el botón «Responder por email» queda cubierto por la spec `forms-email/email-reply-button-contrast`: sus dos ramas consumen la constante `emailBtnColors` (`#ffffff` sobre `#3b6497`, 6.08:1, espejo de `--color-brand-solid-text` / `--color-brand-solid`) bajo la excepción de hex inline de ADR-0008 (D3). Fuera del alcance de las specs quedan el texto SLA `#898580` sobre blanco (~3.6:1) y el enlace `mailto` en `#4A7BB5` de la tabla de datos (`email-templates.ts:211,307`), registrados como candidato de deuda en `observations.md`.
 - **Pin de oficina**: el pin verde sobre el mapa placeholder (`primary-100/200`) mide 1.4–1.9:1; es decorativo (sin rol ni información) y la spec solo exige el punto sobre el verde. Sin cambio.
 - **Duplicación `:root`/`@theme`**: deuda preexistente; los tokens nuevos se declaran en ambos bloques porque la spec exige su disponibilidad en Tailwind. El valor de runtime es el de `:root`.
 - **Contador del directorio**: la pastilla agrega un elemento visual no presente hoy; entra en la tabla antes/después del PR.
