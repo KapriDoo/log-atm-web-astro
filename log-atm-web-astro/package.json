@@ -11,6 +11,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "a11y": "node scripts/axe-audit.mjs",
+    "container:build": "podman build -t log-atm-web -f Containerfile .",
+    "container:run": "podman run --rm --init -p 4321:4321 -v \"$PWD/.dev.vars:/app/dist/server/.dev.vars:ro\" log-atm-web",
     "astro": "astro",
     "validate-i18n": "tsx scripts/validate-i18n.ts",
     "check-i18n-links": "tsx scripts/check-i18n-links.ts",
