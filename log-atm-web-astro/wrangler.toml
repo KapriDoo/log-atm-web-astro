@@ -2,14 +2,19 @@
 #
 # Notas:
 # - El adapter @astrojs/cloudflare v13 genera `dist/server/wrangler.json`
-#   con `name`, `main` y `assets` durante el build. NO los duplicamos acá
-#   para evitar (a) divergencia y (b) catch-22 al inicio del build
-#   cuando `dist/` aún no existe.
+#   con `main` y `assets` durante el build. NO los duplicamos acá para
+#   evitar (a) divergencia y (b) catch-22 al inicio del build cuando
+#   `dist/` aún no existe.
+# - `name` sí se declara: el adapter lo toma de acá y, sin él, el nombre
+#   generado es `log-atm-web-astro`. Debe coincidir con el Worker real
+#   `log-atm-web`; un `wrangler deploy` manual con otro nombre crea un
+#   Worker nuevo en vez de actualizar el de producción.
 # - SMTP_PASS NO va acá. Está como Secret en el dashboard del Worker.
 #   Para dev local, crear `.dev.vars` (gitignored) con SMTP_PASS="...".
 # - En deploy, las vars del dashboard pisan estas para Production/Preview;
 #   tener las plaintext acá mantiene `wrangler dev` / `astro dev` funcional.
 
+name = "log-atm-web"
 compatibility_flags = ["nodejs_compat"]
 
 # Cerramos el subdominio workers.dev y preview URLs para que el tráfico entre
