@@ -49,9 +49,19 @@
     z-index: 1000;
     border-radius: 0 0 var(--radius-xs) 0;
     transition: top 0.2s;
+    /* Fondo azul sólido: anillo de contexto oscuro (accent-400, 3.47:1 sobre primary-600) */
+    --focus-ring-color: var(--color-focus-ring-inverse);
   }
   .skip-link:focus {
     top: 0;
+  }
+  /* Conserva el texto blanco en hover: sin esta regla gana `a:hover` (primary-700 sobre primary-600) */
+  .skip-link:hover {
+    color: var(--color-brand-solid-text);
+  }
+  /* Anillo hacia adentro: queda dentro de la caja opaca y no cruza el logo del header */
+  .skip-link:focus-visible {
+    outline-offset: -5px;
   }
 
   /* Screen-reader only — texto invisible visualmente, leído por AT */
@@ -81,9 +91,14 @@
     color: var(--color-neutral-900);
   }
 
+  /* Links base: primary-600 (6.08:1 sobre blanco) y hover primary-700, mismo criterio que
+     .btn--brand. Las superficies oscuras declaran el color de sus propios links. */
   a {
-    color: var(--color-brand);
+    color: var(--color-primary-600);
     text-decoration: none;
+  }
+  a:hover {
+    color: var(--color-primary-700);
   }
 
   img, video {

@@ -51,13 +51,14 @@ const isMobile = variant === 'mobile';
       class="lang-selector__trigger"
       aria-expanded="false"
       aria-controls="lang-menu"
-      aria-label={t('a11y.languageCurrent', { lang: currentName })}
       id="lang-trigger"
     >
+      {/* Nombre accesible = código visible + contexto oculto (WCAG 2.5.3, sin aria-label) */}
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
         <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
       </svg>
       <span class="lang-selector__current">{currentLabel}</span>
+      <span class="sr-only">{t('a11y.languageCurrent', { lang: currentName })}</span>
       <svg class="lang-selector__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
         <path d="m6 9 6 6 6-6"/>
       </svg>

@@ -332,8 +332,9 @@ function initWizard(): void {
   function setQuoteStatus(msg: string, kind: '' | 'error' | 'success' = '') {
     if (!statusEl) return;
     statusEl.textContent = msg;
+    // Éxito con --color-text-accent, el mismo token del formulario de contacto (≥ 4.5:1)
     (statusEl as HTMLElement).style.color =
-      kind === 'error' ? '#c0392b' : kind === 'success' ? '#2d9b6f' : '';
+      kind === 'error' ? '#c0392b' : kind === 'success' ? 'var(--color-text-accent)' : '';
   }
 
   async function submitQuote(): Promise<void> {
