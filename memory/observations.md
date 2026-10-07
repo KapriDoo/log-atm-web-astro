@@ -625,3 +625,7 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 **Detectado por**: sdd-apply en `chore-deploy-config` (corrida completa de cierre)
 **Descripción**: la auditoría a11y sobre el árbol del cambio da los mismos 63 nodos de la regla `label-content-name-mismatch` registrados por `chore-local-container-podman` (exit 1); el cambio no toca `src/`. `check`, `validate-i18n` y `check-i18n-links` terminan con exit 0.
 
+## 2026-10-06 | measure | chore-deploy-config | post-dispatch sdd-apply FIN 22:21:16 outcome=advance
+
+## 2026-10-06 | measure | chore-deploy-config | preflight sdd-verify INICIO 22:21:19 outcome=ready
+
