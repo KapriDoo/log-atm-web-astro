@@ -172,6 +172,7 @@ No validos para texto normal: blanco sobre `accent-500`/`accent-600` (CTA), blan
 - Focus: borde `--color-focus-ring` (`--color-focus-ring-inverse` sobre superficies oscuras) + anillo global de foco
 - Error: border-error
 - Placeholder: sin tono de paleta asignado; `neutral-300` y `neutral-400` no se usan para placeholder porque no alcanzan 4.5:1 sobre blanco (1.73 y 2.42:1)
+- Placeholder sobre superficie oscura (`.cta-final__input`): `primary-200`, ≥ 6.5:1 sobre el píxel más claro del fondo del campo (degradado + vidrio, medido por muestreo de píxeles; axe no evalúa `::placeholder`)
 
 ### Navigation
 - Desktop: horizontal; `.nav__link` en `--color-text` (neutral-900), font-weight 500, 15px; hover, foco y activo: fondo `--color-surface-alt` (neutral-100) y texto `--color-brand-dark`

@@ -128,8 +128,9 @@
   width: 100%;
   transition: border-color 150ms, background 150ms;
 }
+/* primary-200: ≥ 6.5:1 sobre el píxel más claro del fondo del campo (muestreo, incluido foco) */
 .cta-final__input::placeholder {
-  color: color-mix(in srgb, var(--color-text-inverse) 50%, transparent);
+  color: var(--color-primary-200);
 }
 .cta-final__input:focus {
   border-color: var(--color-focus-ring-inverse);
