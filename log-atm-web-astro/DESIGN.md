@@ -118,6 +118,7 @@ Ratios WCAG 2.x calculados sobre los hex de `tokens.css`. Umbral: 4.5:1 texto no
 | `--color-focus-ring` (primary-600) | blanco · neutral-50 · neutral-100 · primary-50 | 6.08 · 5.68 · 5.20 · 5.49:1 | Anillo de foco en superficies claras |
 | `--color-focus-ring` (primary-600) | neutral-200 | 4.54:1 | Borde de campo enfocado vs. borde sin foco |
 | `--color-focus-ring-inverse` (accent-400) | primary-950 · 900 · 800 · 700 · neutral-950 | 10.38 · 9.17 · 7.10 · 4.86 · 10.68:1 | Anillo de foco en superficies oscuras |
+| `--color-focus-ring-inverse` (accent-400) | primary-600 | 3.47:1 | Anillo interior del skip link |
 | `neutral-900` | neutral-50 | 15.36:1 | Texto principal |
 
 No validos para texto normal: blanco sobre `accent-500`/`accent-600` (CTA), blanco sobre
@@ -184,6 +185,7 @@ No validos para texto normal: blanco sobre `accent-500`/`accent-600` (CTA), blan
 - Regla global: `:focus-visible { outline: 3px solid var(--focus-ring-color, var(--color-focus-ring)); }`
 - Superficies claras: `--color-focus-ring` (primary-600, ≥ 5.20:1)
 - Superficies oscuras con controles enfocables: declaran `--focus-ring-color: var(--color-focus-ring-inverse)` en la misma regla que define su fondo (`.hero-b`, `.page-hero`, `.ind-directory-section`, `.quote-hero`, `.cta-final`, `.footer`). Una seccion oscura nueva hace lo mismo
+- `.skip-link` (fondo primary-600) declara el anillo inverso y lo dibuja hacia adentro (`outline-offset: -5px`): el anillo queda dentro de su caja opaca y no cruza el logo del header
 - `--focus-ring-color` es una variable de contexto, no un token: solo toma el valor `var(--color-focus-ring-inverse)`, y una isla clara dentro de una superficie oscura puede restablecerla
 - Los componentes no fijan otro color de anillo ni usan `outline: none` sin un indicador equivalente visible en modos de color forzado (ADR-0008). Excepcion vigente: `.why__video-toggle:focus-visible` conserva un anillo blanco de 2px, porque el boton flota sobre el video oscuro
 

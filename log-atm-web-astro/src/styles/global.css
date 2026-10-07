@@ -49,9 +49,15 @@
     z-index: 1000;
     border-radius: 0 0 var(--radius-xs) 0;
     transition: top 0.2s;
+    /* Fondo azul sólido: anillo de contexto oscuro (accent-400, 3.47:1 sobre primary-600) */
+    --focus-ring-color: var(--color-focus-ring-inverse);
   }
   .skip-link:focus {
     top: 0;
+  }
+  /* Anillo hacia adentro: queda dentro de la caja opaca y no cruza el logo del header */
+  .skip-link:focus-visible {
+    outline-offset: -5px;
   }
 
   /* Screen-reader only — texto invisible visualmente, leído por AT */
