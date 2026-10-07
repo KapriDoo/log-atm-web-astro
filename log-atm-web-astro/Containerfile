@@ -1,9 +1,10 @@
 # Contenedor local opcional que reproduce producción (Cloudflare Workers) con Podman rootless.
 # Construir: npm run container:build · Ejecutar: npm run container:run (ver README).
 
-# Debian/glibc (node:22-slim) y no Alpine: workerd, el runtime de Workers que usa
-# `astro preview`, no publica binario para musl.
-FROM docker.io/library/node:22-slim
+# Node 24, la misma versión que fija `.node-version` en la raíz del repo para Workers Builds
+# (paridad con producción). Debian/glibc (node:24-slim) y no Alpine: workerd, el runtime de
+# Workers que usa `astro preview`, no publica binario para musl.
+FROM docker.io/library/node:24-slim
 
 WORKDIR /app
 
