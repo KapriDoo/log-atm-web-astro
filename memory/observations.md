@@ -635,3 +635,11 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 
 
 ## 2026-10-06 | pattern | fix-contrast-followups | sdd-apply (redespacho H1): toda regla de color de enlace declarada en `@layer base` con selector de clase (hoy solo `.skip-link`) pierde contra `a:hover` (0,1,1) y necesita su propio `:hover`; las reglas de componente o sin capa no tienen el problema porque ganan a la capa base
+## 2026-10-06 | measure | fix-contrast-followups | post-dispatch sdd-apply FIN 21:54:00 outcome=advance
+
+## 2026-10-06 | measure | fix-contrast-followups | preflight sdd-verify INICIO 21:54:03 outcome=ready
+
+## 2026-10-06 | measure | fix-contrast-followups | post-dispatch sdd-verify FIN 22:05:07 outcome=advance
+
+## 2026-10-06 | measure | fix-contrast-followups | preflight sdd-archive INICIO 22:05:10 outcome=ready
+
