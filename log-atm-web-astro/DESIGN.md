@@ -26,8 +26,8 @@
 - `primary-300`: #83a7d2 — iconos secundarios y decorativos; no apto para texto (2.49:1 sobre blanco)
 - `primary-400`: #658fc3 — bordes en hover (tarjetas, opciones del cotizador) y estados intermedios no textuales; no apto para texto normal (3.35:1 sobre blanco)
 - `primary-500`: #4A7BB5 — **Color de marca principal (azul LOG ATM)**
-- `primary-600`: #3b6497 — hover de elementos primarios
-- `primary-700`: #2b4e78 — hover de botones primarios, active
+- `primary-600`: #3b6497 — hover de elementos primarios; color de los enlaces base (`a`, 6.08:1 sobre blanco)
+- `primary-700`: #2b4e78 — hover de botones primarios y de enlaces base, active
 - `primary-800`: #1c3554 — texto sobre fondos claros
 - `primary-900`: #112236 — superficies oscuras, hero overlay
 - `primary-950`: #0a1624 — footer, fondos oscuros maximos
