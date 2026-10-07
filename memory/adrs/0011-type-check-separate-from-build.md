@@ -9,13 +9,15 @@ capability: type-check
 tags: [adr, typescript, astro-check, build, cloudflare]
 ---
 
-# ADR 0011: Verificación de tipos separada del build y declaración local de `cloudflare:workers`
+# ADR 0011: Verificación de tipos separada del build local, encadenada en el build de CI, y declaración local de `cloudflare:workers`
 
 ## Contexto
 
 `astro build` transpila con esbuild sin verificar tipos; un error de tipado llegó a producción
-(`replyTo` vs `reply` en el mailer). El build de producción lo ejecuta Workers Builds con un
-comando que no está verificado desde el repo. `astro check` sobre el código vigente da 4
+(`replyTo` vs `reply` en el mailer). El build de producción lo ejecuta Workers Builds, que
+corre en cada push y en cada pull request y es el único CI del proyecto; su comando de build
+vive en el dashboard de Cloudflare (`cd log-atm-web-astro && npm ci && npm run <script>`, con
+directorio raíz `/`). `astro check` sobre el código vigente da 4
 errores, uno de ellos TS2307 por el módulo del runtime `cloudflare:workers`. Los tipos
 completos del runtime (`wrangler types`, `@cloudflare/workers-types`) declaran globales que
 chocan con `lib.dom` (11 errores medidos). `typescript` 7.x queda fuera del peer de
@@ -23,8 +25,12 @@ chocan con `lib.dom` (11 errores medidos). `typescript` 7.x queda fuera del peer
 
 ## Decisión
 
-- `npm run check` (`astro check`) es un comando propio; `npm run build` sigue siendo
-  `astro build` y no ejecuta la verificación de tipos.
+- `npm run check` (`astro check`) es un comando propio; `npm run build` es `astro build` y
+  no ejecuta la verificación de tipos: es el build local rápido.
+- El type-check corre en CI mediante `npm run build:ci` (`astro check && astro build`), el
+  script que ejecuta el comando de build de Workers Builds
+  (`cd log-atm-web-astro && npm ci && npm run build:ci`). Un error de tipos detiene el build
+  de CI y el check del pull request.
 - `typescript` se fija en `^6` (dentro del peer `^5 || ^6` de `@astrojs/check`).
 - El código parte de 0 errores y los errores se corrigen en origen, sin supresiones ni
   exclusiones.
@@ -37,26 +43,31 @@ chocan con `lib.dom` (11 errores medidos). `typescript` 7.x queda fuera del peer
 
 ### Positivas
 
-- Un error de tipos nunca detiene un despliegue a producción.
+- Un error de tipos falla el check «Workers Builds: log-atm-web» del pull request antes de
+  llegar a `main`: la barrera es automática.
+- El build local conserva su velocidad: `npm run build` no verifica tipos.
 - Cada cambio tiene una comprobación de tipos objetiva desde una base limpia.
 - El DOM conserva sus tipos: ningún global del runtime de Workers los sobrescribe.
 
 ### Negativas
 
-- La verificación depende de que alguien (o `sdd-verify`) la ejecute: sin CI no hay barrera
-  automática.
+- Un error de tipos bloquea el despliegue a producción hasta corregirse en origen.
+- El comando de build de CI vive en el dashboard de Cloudflare, fuera del repositorio: se
+  mantiene a mano y el README documenta su valor.
 - La declaración local se mantiene a mano: usar otra exportación de `cloudflare:workers`
   exige ampliarla.
-- Encadenar `check` al build se reevalúa cuando se conozca el comando de build de Workers
-  Builds (residual del MR de [[chore-local-container-podman]]).
 
 ## Alternativas descartadas
 
-- **`astro check && astro build`**: puede bloquear el despliegue de producción.
+- **`astro check && astro build` como `npm run build`**: hace lento cada build local; el
+  encadenamiento queda limitado al build de CI (`build:ci`).
+- **Verificación de tipos solo manual (`npm run check` y `sdd-verify`)**: sin barrera
+  automática en el único CI del proyecto.
 - **`wrangler types` / `@cloudflare/workers-types`**: rompen tipos del DOM.
 - **Suprimir o excluir los errores preexistentes**: oculta deuda y anula la detección de
   regresiones.
 
 ## Estado
 
-**Accepted** — 2026-10-06.
+**Accepted** — 2026-10-06. Actualizado por [[chore-deploy-config]] (2026-10-06): type-check en
+CI vía `build:ci`.

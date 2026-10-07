@@ -39,7 +39,8 @@ Minería · Retail · Agro · Farmacia · E-commerce cross-border · Construcci�
 | Runtime | Cloudflare Workers (`@astrojs/cloudflare`) |
 | Despliegue | Cloudflare Workers (producción) · Podman (local, opcional) |
 
-**Node.js:** `>=22.12.0`
+**Node.js:** 24, fijado en `.node-version` en la raíz del repositorio (fuente única para
+Workers Builds y el contenedor local); `engines.node` (`>=22.12.0`) es el mínimo compatible.
 
 ---
 
@@ -52,6 +53,7 @@ Ejecutar desde la raíz del proyecto (`log-atm-web-astro/`).
 | `npm install` | Instala dependencias |
 | `npm run dev` | Servidor de desarrollo en `http://localhost:4321` |
 | `npm run build` | Build de producción en `./dist/` (no verifica tipos) |
+| `npm run build:ci` | Verifica tipos (`astro check`) y luego compila; es el build de Workers Builds |
 | `npm run preview` | Sirve el build con workerd para verificarlo localmente |
 | `npm run check` | Verifica los tipos del sitio completo (`astro check`) |
 | `npm run a11y` | Audita la accesibilidad del sitio compilado en un navegador real |
@@ -65,8 +67,8 @@ Ejecutar desde la raíz del proyecto (`log-atm-web-astro/`).
 ### Verificaciones
 
 - **`npm run check`** — verificación de tipos con `astro check`. Es un comando separado del
-  build: `npm run build` no verifica tipos, así que un error de tipado no detiene el despliegue
-  y se detecta con este comando.
+  build local: `npm run build` no verifica tipos. En CI la verificación corre dentro de
+  `npm run build:ci`, el build de Workers Builds, que se detiene ante un error de tipos.
 - **`npm run a11y`** — auditoría de accesibilidad con axe-core (reglas WCAG 2.x A/AA) en un
   navegador real, que calcula el contraste de color sobre los estilos finales. Requiere
   compilar antes (`npm run build`) y un Chrome: se indica su ruta con la variable de entorno
@@ -119,8 +121,36 @@ npm run container:run            # sirve el sitio en http://localhost:4321
 ## Despliegue
 
 Producción corre en Cloudflare Workers mediante la integración git de Workers Builds: cada push
-al repositorio dispara un build y la rama `main` es producción. La credencial `SMTP_PASS` vive
-como Secret del Worker y las variables no secretas, en `wrangler.toml`.
+al repositorio dispara un build y la rama `main` es producción. Workers Builds también corre en
+cada pull request (check «Workers Builds: log-atm-web») y es el único CI del proyecto. La
+credencial `SMTP_PASS` vive como Secret del Worker y las variables no secretas, en
+`wrangler.toml`.
+
+Configuración de Workers Builds (Worker `log-atm-web`):
+
+| Campo | Valor |
+|---|---|
+| Repositorio / rama de producción | `KapriDoo/log-atm-web-astro` / `main` |
+| Directorio raíz | `/` |
+| Comando de build | `cd log-atm-web-astro && npm ci && npm run build:ci` |
+| Comando de deploy | `cd log-atm-web-astro && npx wrangler deploy` |
+| Comando de versión | `cd log-atm-web-astro && npx wrangler versions upload` |
+| Variables de build | ninguna |
+| Node | 24, desde `.node-version` en la raíz del repositorio |
+
+- **Nombre del Worker:** `wrangler.toml` declara `name = "log-atm-web"`, el Worker real. Un
+  `wrangler deploy` manual con otro nombre crearía un Worker nuevo en lugar de actualizar
+  producción.
+- **Versión de Node:** la única fuente es `.node-version`. No se define `NODE_VERSION` en el
+  dashboard, que sería una segunda fuente no versionada. El contenedor local usa la misma
+  versión (`node:24-slim`).
+- **Type-check en CI:** `npm run build:ci` ejecuta `astro check` antes de `astro build`; un
+  error de tipos hace fallar el build de Workers Builds y el check del pull request.
+- **Configuración del dashboard:** los comandos de la tabla viven en el dashboard de
+  Cloudflare, no en el repositorio, y se editan a mano en Workers & Pages → log-atm-web →
+  Settings → Build. El comando de build pasa a `npm run build:ci` después de integrar en `main`
+  el cambio que agrega ese script (antes, el script no existe y el build fallaría). En el
+  siguiente build, el log debe mostrar que Workers Builds detecta Node 24 desde `.node-version`.
 
 ---
 
