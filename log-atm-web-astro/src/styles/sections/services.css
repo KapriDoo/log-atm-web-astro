@@ -100,6 +100,10 @@
   line-height: 1.15;
   margin: 0;
   color: var(--color-text-inverse);
+  /* Palabras largas («Desconsolidação») se cortan con guion según el lang del documento;
+     overflow-wrap garantiza el corte si el navegador no tiene diccionario para ese idioma */
+  hyphens: auto;
+  overflow-wrap: anywhere;
 }
 .svc-card__desc {
   font-size: 0.9375rem;
