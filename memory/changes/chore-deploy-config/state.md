@@ -2,10 +2,10 @@
 type: change-state
 change_name: "chore-deploy-config"
 domain: "fix"
-status: active
+status: completed
 fast_path: "apply-only"
-current_phase: sdd-verify
-phases_completed: [sdd-init, sdd-apply]
+current_phase: ""
+phases_completed: [sdd-init, sdd-apply, sdd-verify, sdd-archive]
 spec_refs: []
 worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/chore-deploy-config"
 feature_branch: "feature/chore-deploy-config"

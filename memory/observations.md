@@ -662,3 +662,7 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 
 ## 2026-10-06 | measure | fix-contrast-followups | preflight sdd-archive INICIO 22:05:10 outcome=ready
 
+## 2026-10-06 | measure | chore-deploy-config | post-dispatch sdd-verify FIN 22:30:53 outcome=advance
+
+## 2026-10-06 | measure | chore-deploy-config | preflight sdd-archive INICIO 22:30:56 outcome=ready
+
