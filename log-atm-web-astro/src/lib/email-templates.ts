@@ -82,7 +82,7 @@ function buildEmailHeader(badge: { color: BadgeColor; label: string }): string {
     `<tr>` +
     `<td style="vertical-align:middle;padding-right:12px;">` +
     `<div style="width:40px;height:40px;background:#ffffff;border-radius:10px;display:inline-block;vertical-align:middle;line-height:40px;text-align:center;">` +
-    `<span style="color:#4A7BB5;font-family:'Outfit',Arial,sans-serif;font-weight:900;font-size:18px;">A</span>` +
+    `<span style="color:#3b6497;font-family:'Outfit',Arial,sans-serif;font-weight:900;font-size:18px;">A</span>` +
     `</div>` +
     `</td>` +
     `<td style="vertical-align:middle;">` +
@@ -132,7 +132,8 @@ function buildEmailFooter(): string {
 function buildHeroSection(args: { kicker: string; title: string; subtitle: string }): string {
   return (
     `<tr><td style="padding:32px 32px 8px;">` +
-    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#339965;font-weight:600;margin-bottom:8px;">${args.kicker}</div>` +
+    // Kicker: espejo de --color-text-accent de tokens.css (6.91:1 sobre blanco).
+    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#22663f;font-weight:600;margin-bottom:8px;">${args.kicker}</div>` +
     `<h1 style="font-family:'Outfit',Arial,sans-serif;font-weight:800;font-size:26px;line-height:1.15;letter-spacing:-.02em;color:#211f1c;margin:0 0 8px;">${args.title}</h1>` +
     `<p style="font-family:'Inter',Arial,sans-serif;font-size:15px;line-height:1.55;color:#544f4a;margin:0;">${args.subtitle}</p>` +
     `</td></tr>`
@@ -208,9 +209,9 @@ function buildDataGrid(args: { label: string; rows: GridRow[] }): string {
 
       let valueHtml: string;
       if (kind === "email") {
-        valueHtml = `<a href="mailto:${escapeHtml(val)}" style="color:#4A7BB5;text-decoration:none;font-weight:500;">${escapeHtml(val)}</a>`;
+        valueHtml = `<a href="mailto:${escapeHtml(val)}" style="color:#3b6497;text-decoration:none;font-weight:500;">${escapeHtml(val)}</a>`;
       } else if (kind === "tel") {
-        valueHtml = `<a href="tel:${cleanPhone(val)}" style="color:#4A7BB5;text-decoration:none;font-weight:500;">${escapeHtml(val)}</a>`;
+        valueHtml = `<a href="tel:${cleanPhone(val)}" style="color:#3b6497;text-decoration:none;font-weight:500;">${escapeHtml(val)}</a>`;
       } else if (kind === "pill") {
         valueHtml = `<span style="display:inline-block;background:#d7e4f4;color:#2b4e78;font-family:'JetBrains Mono','SF Mono',monospace;font-size:12px;font-weight:600;padding:4px 10px;border-radius:9999px;">${escapeHtml(val)}</span>`;
       } else {
@@ -304,7 +305,7 @@ function buildCTAButtons(args: {
   return (
     `<tr><td style="padding:8px 32px 28px;">` +
     buttonsHtml +
-    `<p style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;color:#898580;text-align:center;margin:14px 0 0;letter-spacing:.04em;">SLA cliente &middot; responder a la brevedad</p>` +
+    `<p style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;color:#6e6963;text-align:center;margin:14px 0 0;letter-spacing:.04em;">SLA cliente &middot; responder a la brevedad</p>` +
     `</td></tr>`
   );
 }
@@ -313,19 +314,19 @@ function buildCTAButtons(args: {
 function buildMetadataBox(meta: Meta): string {
   const folioRow =
     meta.folio
-      ? `<tr><td style="width:90px;color:#898580;">Folio</td><td><strong style="color:#211f1c;">${escapeHtml(meta.folio)}</strong></td></tr>`
+      ? `<tr><td style="width:90px;color:#6e6963;">Folio</td><td><strong style="color:#211f1c;">${escapeHtml(meta.folio)}</strong></td></tr>`
       : "";
 
   return (
     `<tr><td style="padding:0 32px 24px;">` +
     `<div style="background:#f8f7f6;border:1px solid #e1dedb;border-radius:12px;padding:16px 20px;">` +
-    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#898580;margin-bottom:8px;">Metadatos técnicos</div>` +
+    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#6e6963;margin-bottom:8px;">Metadatos técnicos</div>` +
     `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;color:#544f4a;line-height:1.7;">` +
     folioRow +
-    `<tr><td style="width:90px;color:#898580;">Formulario</td><td>${escapeHtml(meta.formType)}</td></tr>` +
-    `<tr><td style="color:#898580;">Recibido</td><td>${formatDateCL()}</td></tr>` +
-    `<tr><td style="color:#898580;">IP</td><td>${escapeHtml(meta.ip)}</td></tr>` +
-    `<tr><td style="vertical-align:top;color:#898580;">User-Agent</td><td>${escapeHtml(meta.userAgent)}</td></tr>` +
+    `<tr><td style="width:90px;color:#6e6963;">Formulario</td><td>${escapeHtml(meta.formType)}</td></tr>` +
+    `<tr><td style="color:#6e6963;">Recibido</td><td>${formatDateCL()}</td></tr>` +
+    `<tr><td style="color:#6e6963;">IP</td><td>${escapeHtml(meta.ip)}</td></tr>` +
+    `<tr><td style="vertical-align:top;color:#6e6963;">User-Agent</td><td>${escapeHtml(meta.userAgent)}</td></tr>` +
     `</table>` +
     `</div>` +
     `</td></tr>`
@@ -361,7 +362,7 @@ export function buildContactoEmail(
   const heroTitle =
     escapeHtml(d.name) +
     (d.company
-      ? ` &middot; <span style="color:#4A7BB5;font-family:'Outfit',Arial,sans-serif;">${escapeHtml(d.company)}</span>`
+      ? ` &middot; <span style="color:#3b6497;font-family:'Outfit',Arial,sans-serif;">${escapeHtml(d.company)}</span>`
       : "");
 
   const sections =
@@ -557,7 +558,7 @@ export function buildCotizacion4Email(
   const heroTitle =
     escapeHtml(d.name) +
     (d.company
-      ? ` &middot; <span style="color:#4A7BB5;font-family:'Outfit',Arial,sans-serif;">${escapeHtml(d.company)}</span>`
+      ? ` &middot; <span style="color:#3b6497;font-family:'Outfit',Arial,sans-serif;">${escapeHtml(d.company)}</span>`
       : "");
 
   const sections =
