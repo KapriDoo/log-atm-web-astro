@@ -609,3 +609,17 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 
 ## 2026-10-06 | measure | chore-local-container-podman | preflight sdd-archive INICIO 19:33:30 outcome=ready
 
+## 2026-10-06 | measure | fix-contrast-followups | preflight sdd-init INICIO 21:20:24 outcome=ready
+
+## 2026-10-06 | measure | fix-contrast-followups | sdd-init: _profile.md unchanged (profile_status=unchanged); observations.md supera 500 líneas (613), considerar rotación manual
+
+## 2026-10-06 | measure | fix-contrast-followups | post-dispatch sdd-init FIN 21:20:58 outcome=advance
+
+## 2026-10-06 | measure | fix-contrast-followups | preflight sdd-apply INICIO 21:21:43 outcome=ready
+
+## 2026-10-06 | decision | fix-contrast-followups | sdd-apply: el barrido de pares texto/fondo de los correos encontró el kicker del hero en accent-600 (#339965, 3.57:1); se llevó a #22663f (espejo de --color-text-accent) para cumplir el criterio «todos los textos ≥ 4.5:1» del brief, aunque la tarea solo nombraba #898580 y #4A7BB5
+
+## 2026-10-06 | discovery | fix-contrast-followups | sdd-apply: `hyphens: auto` + `overflow-wrap: anywhere` en `.svc-card__title` también parte con guion títulos es/en/pt de las tarjetas angostas (span 2) a 1280/1440px que antes invadían el padding derecho («Documentación», «Desconsolidado», «Deconsolidation»); ningún título desborda ahora
+
+## 2026-10-06 | discovery | fix-contrast-followups | sdd-apply: `#2D9B6F` (mayúsculas) sigue en src/lib/constants.ts como color decorativo de la industria «Agroindustria» (--ind-color); fuera del alcance del brief 13, que solo pedía la rama success del wizard
+
