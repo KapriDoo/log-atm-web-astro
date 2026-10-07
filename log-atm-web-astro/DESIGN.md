@@ -26,10 +26,10 @@
 - `primary-300`: #83a7d2 — iconos secundarios y decorativos; no apto para texto (2.49:1 sobre blanco)
 - `primary-400`: #658fc3 — bordes en hover (tarjetas, opciones del cotizador) y estados intermedios no textuales; no apto para texto normal (3.35:1 sobre blanco)
 - `primary-500`: #4A7BB5 — **Color de marca principal (azul LOG ATM)**
-- `primary-600`: #3b6497 — hover de elementos primarios
-- `primary-700`: #2b4e78 — hover de botones primarios, active
+- `primary-600`: #3b6497 — hover de elementos primarios; color de los enlaces base (`a`, 6.08:1 sobre blanco)
+- `primary-700`: #2b4e78 — hover de botones primarios y de enlaces base, active
 - `primary-800`: #1c3554 — texto sobre fondos claros
-- `primary-900`: #112236 — navbar dark, hero overlay
+- `primary-900`: #112236 — superficies oscuras, hero overlay
 - `primary-950`: #0a1624 — footer, fondos oscuros maximos
 
 ### Accent
@@ -109,6 +109,7 @@ Ratios WCAG 2.x calculados sobre los hex de `tokens.css`. Umbral: 4.5:1 texto no
 | `--color-whatsapp-text` (#111b21) | `--color-whatsapp-hover` (#1da851) | 5.63:1 | Boton WhatsApp en hover |
 | `--color-text-accent` (accent-800) | blanco · neutral-50 · neutral-100 · accent-300 | 6.91 · 6.46 · 5.91 · 5.80:1 | Eyebrows, pills, numeros de paso |
 | `--color-brand-dark` (primary-700) | neutral-100 · primary-50 | 7.30 · 7.70:1 | Enlaces de navegacion en hover, foco y activo |
+| `neutral-700` | blanco | 8.09:1 | Enlaces del drawer de navegacion |
 | `--color-text-muted` (neutral-600) | blanco | 5.44:1 | Valores pendientes, texto secundario |
 | `--color-text-inverse` (blanco) | primary-900 | 16.08:1 | Titulos y chips activos sobre oscuro |
 | `primary-200` | primary-900 | 9.27:1 | Texto secundario sobre superficies oscuras |
@@ -117,6 +118,7 @@ Ratios WCAG 2.x calculados sobre los hex de `tokens.css`. Umbral: 4.5:1 texto no
 | `--color-focus-ring` (primary-600) | blanco · neutral-50 · neutral-100 · primary-50 | 6.08 · 5.68 · 5.20 · 5.49:1 | Anillo de foco en superficies claras |
 | `--color-focus-ring` (primary-600) | neutral-200 | 4.54:1 | Borde de campo enfocado vs. borde sin foco |
 | `--color-focus-ring-inverse` (accent-400) | primary-950 · 900 · 800 · 700 · neutral-950 | 10.38 · 9.17 · 7.10 · 4.86 · 10.68:1 | Anillo de foco en superficies oscuras |
+| `--color-focus-ring-inverse` (accent-400) | primary-600 | 3.47:1 | Anillo interior del skip link |
 | `neutral-900` | neutral-50 | 15.36:1 | Texto principal |
 
 No validos para texto normal: blanco sobre `accent-500`/`accent-600` (CTA), blanco sobre
@@ -171,16 +173,19 @@ No validos para texto normal: blanco sobre `accent-500`/`accent-600` (CTA), blan
 - Focus: borde `--color-focus-ring` (`--color-focus-ring-inverse` sobre superficies oscuras) + anillo global de foco
 - Error: border-error
 - Placeholder: sin tono de paleta asignado; `neutral-300` y `neutral-400` no se usan para placeholder porque no alcanzan 4.5:1 sobre blanco (1.73 y 2.42:1)
+- Placeholder sobre superficie oscura (`.cta-final__input`): `primary-200`, ≥ 6.5:1 sobre el píxel más claro del fondo del campo (degradado + vidrio, medido por muestreo de píxeles; axe no evalúa `::placeholder`)
 
 ### Navigation
-- Desktop: horizontal, links en neutral-700; hover y foco `--color-brand-dark`
-- Mobile: hamburger menu; hover y foco del drawer `--color-brand-dark`
-- Active state: `--color-brand-dark`, font-weight 600 y subrayado de 2px (`text-underline-offset: 0.3em`): la pagina actual no depende solo del color
+- Desktop: horizontal; `.nav__link` en `--color-text` (neutral-900), font-weight 500, 15px; hover, foco y activo: fondo `--color-surface-alt` (neutral-100) y texto `--color-brand-dark`
+- Mobile: hamburger menu; `.nav-drawer__link` en neutral-700, font-weight 500, 17px; hover y foco: fondo primary-50 y texto `--color-brand-dark`
+- Active state: `--color-brand-dark` sobre neutral-100, mismo font-weight 500 y subrayado de 2px (`text-underline-offset: 0.3em`): la pagina actual no depende solo del color
+- Nombre accesible del enlace de marca y del selector de idioma: el texto visible seguido de un sufijo `.sr-only` localizado (`a11y.brandHome`, `a11y.languageCurrent`), sin `aria-label` (WCAG 2.5.3)
 
 ### Focus ring (anillo de foco por contexto)
 - Regla global: `:focus-visible { outline: 3px solid var(--focus-ring-color, var(--color-focus-ring)); }`
 - Superficies claras: `--color-focus-ring` (primary-600, ≥ 5.20:1)
 - Superficies oscuras con controles enfocables: declaran `--focus-ring-color: var(--color-focus-ring-inverse)` en la misma regla que define su fondo (`.hero-b`, `.page-hero`, `.ind-directory-section`, `.quote-hero`, `.cta-final`, `.footer`). Una seccion oscura nueva hace lo mismo
+- `.skip-link` (fondo primary-600) declara el anillo inverso y lo dibuja hacia adentro (`outline-offset: -5px`): el anillo queda dentro de su caja opaca y no cruza el logo del header
 - `--focus-ring-color` es una variable de contexto, no un token: solo toma el valor `var(--color-focus-ring-inverse)`, y una isla clara dentro de una superficie oscura puede restablecerla
 - Los componentes no fijan otro color de anillo ni usan `outline: none` sin un indicador equivalente visible en modos de color forzado (ADR-0008). Excepcion vigente: `.why__video-toggle:focus-visible` conserva un anillo blanco de 2px, porque el boton flota sobre el video oscuro
 

@@ -609,3 +609,37 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 
 ## 2026-10-06 | measure | chore-local-container-podman | preflight sdd-archive INICIO 19:33:30 outcome=ready
 
+## 2026-10-06 | measure | fix-contrast-followups | preflight sdd-init INICIO 21:20:24 outcome=ready
+
+## 2026-10-06 | measure | fix-contrast-followups | sdd-init: _profile.md unchanged (profile_status=unchanged); observations.md supera 500 líneas (613), considerar rotación manual
+
+## 2026-10-06 | measure | fix-contrast-followups | post-dispatch sdd-init FIN 21:20:58 outcome=advance
+
+## 2026-10-06 | measure | fix-contrast-followups | preflight sdd-apply INICIO 21:21:43 outcome=ready
+
+## 2026-10-06 | decision | fix-contrast-followups | sdd-apply: el barrido de pares texto/fondo de los correos encontró el kicker del hero en accent-600 (#339965, 3.57:1); se llevó a #22663f (espejo de --color-text-accent) para cumplir el criterio «todos los textos ≥ 4.5:1» del brief, aunque la tarea solo nombraba #898580 y #4A7BB5
+
+## 2026-10-06 | discovery | fix-contrast-followups | sdd-apply: `hyphens: auto` + `overflow-wrap: anywhere` en `.svc-card__title` también parte con guion títulos es/en/pt de las tarjetas angostas (span 2) a 1280/1440px que antes invadían el padding derecho («Documentación», «Desconsolidado», «Deconsolidation»); ningún título desborda ahora
+
+## 2026-10-06 | discovery | fix-contrast-followups | sdd-apply: `#2D9B6F` (mayúsculas) sigue en src/lib/constants.ts como color decorativo de la industria «Agroindustria» (--ind-color); fuera del alcance del brief 13, que solo pedía la rama success del wizard
+
+## 2026-10-06 | measure | fix-contrast-followups | post-dispatch sdd-apply FIN 21:39:09 outcome=advance
+
+## 2026-10-06 | measure | fix-contrast-followups | preflight sdd-verify INICIO 21:39:13 outcome=ready
+
+
+## 2026-10-06 | discovery | fix-contrast-followups | sdd-verify: la regla nueva `a:hover` (primary-700, @layer base) gana a `.skip-link` (misma capa, menor especificidad) y deja el skip link con hover en ~1.4:1; axe no evalúa hover, por eso `npm run a11y` sigue en exit 0; verdict PARTIAL hasta fijar `.skip-link:hover`
+## 2026-10-06 | measure | fix-contrast-followups | post-dispatch sdd-verify FIN 21:49:49 outcome=verify-retry
+
+## 2026-10-06 | measure | fix-contrast-followups | preflight sdd-apply INICIO 21:49:52 outcome=ready
+
+
+## 2026-10-06 | pattern | fix-contrast-followups | sdd-apply (redespacho H1): toda regla de color de enlace declarada en `@layer base` con selector de clase (hoy solo `.skip-link`) pierde contra `a:hover` (0,1,1) y necesita su propio `:hover`; las reglas de componente o sin capa no tienen el problema porque ganan a la capa base
+## 2026-10-06 | measure | fix-contrast-followups | post-dispatch sdd-apply FIN 21:54:00 outcome=advance
+
+## 2026-10-06 | measure | fix-contrast-followups | preflight sdd-verify INICIO 21:54:03 outcome=ready
+
+## 2026-10-06 | measure | fix-contrast-followups | post-dispatch sdd-verify FIN 22:05:07 outcome=advance
+
+## 2026-10-06 | measure | fix-contrast-followups | preflight sdd-archive INICIO 22:05:10 outcome=ready
+

@@ -35,12 +35,14 @@ const rtl = isRTL(currentLang);
 
 <nav class="nav" id="navbar" aria-label={t('a11y.mainNav')}>
   <div class="container nav__inner">
-    <a href={homeHref} class="nav__brand" aria-label={t('a11y.brandHome')}>
+    <!-- Nombre accesible = texto visible + destino oculto (WCAG 2.5.3, sin aria-label) -->
+    <a href={homeHref} class="nav__brand">
       <img class="nav__brand-logo" src="/logo.png" alt="" width="38" height="38" loading="eager" fetchpriority="high" />
       <span>
         <span class="nav__brand-name">{t('meta.siteName')}</span>
         <span class="nav__brand-sub">{t('meta.tagline')}</span>
       </span>
+      <span class="sr-only">{t('a11y.brandHome')}</span>
     </a>
 
     <ul class="nav__links" role="list">
