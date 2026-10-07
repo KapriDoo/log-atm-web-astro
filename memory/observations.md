@@ -623,3 +623,15 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 
 ## 2026-10-06 | discovery | fix-contrast-followups | sdd-apply: `#2D9B6F` (mayúsculas) sigue en src/lib/constants.ts como color decorativo de la industria «Agroindustria» (--ind-color); fuera del alcance del brief 13, que solo pedía la rama success del wizard
 
+## 2026-10-06 | measure | fix-contrast-followups | post-dispatch sdd-apply FIN 21:39:09 outcome=advance
+
+## 2026-10-06 | measure | fix-contrast-followups | preflight sdd-verify INICIO 21:39:13 outcome=ready
+
+
+## 2026-10-06 | discovery | fix-contrast-followups | sdd-verify: la regla nueva `a:hover` (primary-700, @layer base) gana a `.skip-link` (misma capa, menor especificidad) y deja el skip link con hover en ~1.4:1; axe no evalúa hover, por eso `npm run a11y` sigue en exit 0; verdict PARTIAL hasta fijar `.skip-link:hover`
+## 2026-10-06 | measure | fix-contrast-followups | post-dispatch sdd-verify FIN 21:49:49 outcome=verify-retry
+
+## 2026-10-06 | measure | fix-contrast-followups | preflight sdd-apply INICIO 21:49:52 outcome=ready
+
+
+## 2026-10-06 | pattern | fix-contrast-followups | sdd-apply (redespacho H1): toda regla de color de enlace declarada en `@layer base` con selector de clase (hoy solo `.skip-link`) pierde contra `a:hover` (0,1,1) y necesita su propio `:hover`; las reglas de componente o sin capa no tienen el problema porque ganan a la capa base

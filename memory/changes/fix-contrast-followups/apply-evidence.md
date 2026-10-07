@@ -1091,3 +1091,207 @@ errores. `apply-evidence.19`: `astro check` sin errores, advertencias ni sugeren
 violaciones (incluida `label-content-name-mismatch`) ni estados HTTP inesperados. Los servidores de
 vista previa que levantó la fase (4410 y 4411) se bajaron antes de esta corrida; la auditoría baja el
 suyo al terminar.
+
+## Redespacho 1 — corrección de H1 de `verify-report.md` (T3, hover del skip link)
+
+Commit: `bbecfe8` — fix(a11y): keep skip link text white on hover.
+
+`verify-report.md` (H1, bloqueante de la segunda aceptación de T3) detecta que la regla base
+`a:hover { color: var(--color-primary-700) }`, en `@layer base` igual que `.skip-link`, gana por
+especificidad (0,1,1 frente a 0,1,0): con foco y puntero encima, el texto del skip link pasa de blanco
+a primary-700 sobre su fondo primary-600. La corrección agrega `.skip-link:hover { color:
+var(--color-brand-solid-text); }` en `src/styles/global.css` (especificidad 0,2,0), el mismo par
+blanco/primary-600 que `DESIGN.md` documenta para el skip link. H2 (`#2D9B6F` en `constants.ts`) es
+opcional según el propio informe, queda fuera de la fuente de tareas (el criterio de T2 es
+`grep -rn 2d9b6f src/`, que distingue mayúsculas) y no se toca.
+
+El bloque siguiente mide, sobre `dist/` compilado desde `bbecfe8` y servido por un `astro preview`
+propio en el puerto 4431, el skip link enfocado por teclado y con el puntero encima en las 18
+páginas a 1440, 1280 y 390 px, y repite el barrido de hover de todos los enlaces visibles en
+escritorio para descartar otra regresión del color base.
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.21","forma":"archivo","argv":null,"texto":"# Script embebido (hover.mjs): skip link enfocado + hover en 18 páginas a 1440/1280/390, y barrido de\n# hover de todos los enlaces visibles (escritorio 1280). Requiere el servidor de vista previa en 4431.\nnode --input-type=module - http://127.0.0.1:4431 /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-contrast-followups/log-atm-web-astro/dist/client <<'JS'\nimport { createRequire } from 'node:module';\nimport { readdirSync } from 'node:fs';\nimport { join, relative } from 'node:path';\nconst require = createRequire('/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-contrast-followups/log-atm-web-astro/package.json');\nconst { chromium } = require('playwright-core');\nconst [base, dist] = process.argv.slice(2);\nconst pages = []; (function walk(d) { for (const e of readdirSync(d, { withFileTypes: true })) { const f = join(d, e.name); if (e.isDirectory()) walk(f); else if (e.name.endsWith('.html')) pages.push('/' + relative(dist, f).replace(/(^|\\/)index\\.html$/, '$1')); } })(dist);\npages.sort();\n// Color del texto y fondo opaco más cercano; marca si hay imagen/degradado en la cadena\nconst medir = (a) =\u003e {\n  const lin = (c) =\u003e { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };\n  const lum = ([r, g, b]) =\u003e 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);\n  const fg = getComputedStyle(a).color.match(/[\\d.]+/g).slice(0, 3).map(Number);\n  let el = a; let bg = null; let img = false;\n  while (el) { const s = getComputedStyle(el); if (s.backgroundImage !== 'none') img = true; const m = s.backgroundColor.match(/[\\d.]+/g); if (m && (m.length < 4 || +m[3] === 1)) { bg = m.slice(0, 3).map(Number); break; } el = el.parentElement; }\n  bg ??= [255, 255, 255];\n  const [x, y] = [lum(fg), lum(bg)].sort((p, q) =\u003e q - p);\n  return { fg: `rgb(${fg.join(', ')})`, bg: `rgb(${bg.join(', ')})`, img, ratio: +((x + 0.05) / (y + 0.05)).toFixed(2) };\n};\nconst browser = await chromium.launch({ executablePath: '/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome' });\n// 1) Skip link: foco por teclado + puntero encima, en todas las páginas y tres anchos\nfor (const width of [1440, 1280, 390]) {\n  const page = await (await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: 'reduce' })).newPage();\n  const combos = new Map(); let n = 0; let min = Infinity;\n  for (const p of pages) {\n    await page.goto(base + p, { waitUntil: 'load' });\n    await page.keyboard.press('Tab');\n    const enfocado = await page.evaluate(() =\u003e document.activeElement?.classList.contains('skip-link'));\n    if (!enfocado) { console.log(`[${width}] ${p}: el primer Tab no enfoca .skip-link`); continue; }\n    await page.hover('.skip-link');\n    const r = await page.$eval('.skip-link', (a, f) =\u003e ({ hover: a.matches(':hover'), fv: a.matches(':focus-visible'), ...new Function('return ' + f)()(a) }), medir.toString());\n    n++; min = Math.min(min, r.ratio);\n    const k = `hover=${r.hover} focus-visible=${r.fv} ${r.fg} sobre ${r.bg} = ${r.ratio}:1`; combos.set(k, (combos.get(k) ?? 0) + 1);\n  }\n  console.log(`[${width}] skip link enfocado + hover: ${n}/${pages.length} páginas, ratio mínimo ${min}:1`);\n  for (const [k, c] of combos) console.log(`  ${c}× ${k}`);\n  await page.context().close();\n}\n// 2) Barrido de hover: todo enlace visible con texto, escritorio 1280\nconst page = await (await browser.newContext({ viewport: { width: 1280, height: 800 }, reducedMotion: 'reduce' })).newPage();\nlet medidos = 0; let tapados = 0; const bajos = new Map();\nfor (const p of pages) {\n  await page.goto(base + p, { waitUntil: 'load' });\n  const total = await page.$$eval('a', (as) =\u003e as.length);\n  for (let i = 0; i < total; i++) {\n    const a = (await page.$$('a'))[i];\n    const ok = await a.evaluate((el) =\u003e { const cs = getComputedStyle(el); const r = el.getBoundingClientRect(); return r.width \u003e 0 && r.height \u003e 0 && cs.visibility !== 'hidden' && !!el.textContent.trim() && !el.closest('[inert],[aria-hidden=\"true\"]'); });\n    if (!ok) continue;\n    await a.scrollIntoViewIfNeeded();\n    const box = await a.boundingBox(); if (!box) continue;\n    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);\n    const r = await a.evaluate((el, f) =\u003e ({ hover: el.matches(':hover'), cls: el.className ? '.' + String(el.className).split(' ')[0] : `[href=\"${el.getAttribute('href')}\"]`, ...new Function('return ' + f)()(el) }), medir.toString());\n    if (!r.hover) { tapados++; continue; }\n    medidos++;\n    if (r.ratio < 4.5) { const k = `${r.cls} ${r.fg} sobre ${r.bg}${r.img ? ' (imagen/degradado en la cadena)' : ''} = ${r.ratio}:1`; bajos.set(k, (bajos.get(k) ?? 0) + 1); }\n  }\n}\nawait browser.close();\nconsole.log(`Barrido hover (1280): ${pages.length} páginas · enlaces medidos con :hover efectivo=${medidos} · no alcanzables por el puntero=${tapados} · bajo 4.5:1=${[...bajos.values()].reduce((s, v) =\u003e s + v, 0)}`);\nfor (const [k, c] of [...bajos].sort()) console.log(`  ${c}× ${k}`);\nJS\n","cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-contrast-followups/log-atm-web-astro","head":"bbecfe84da10ff685aabf8097eeacc03c4512c4b","fecha":"2026-10-06T21:52:31-03:00","exit":0,"sha256":"cb26aa570c2091d0595313bd18358914c3037d68b394189873d1b2d93d1d8362","lineas":11,"omitidas":0,"no_recomprobable":"requiere el servidor de vista previa levantado por la fase (puerto 4431), que se baja al cerrar"} -->
+**Evidencia `apply-evidence.21`** · exit 0 · 11 líneas, 0 omitidas · HEAD `bbecfe84da10` · 2026-10-06T21:52:31-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-contrast-followups/log-atm-web-astro`
+No re-comprobable: requiere el servidor de vista previa levantado por la fase (puerto 4431), que se baja al cerrar
+
+```bash
+# Script embebido (hover.mjs): skip link enfocado + hover en 18 páginas a 1440/1280/390, y barrido de
+# hover de todos los enlaces visibles (escritorio 1280). Requiere el servidor de vista previa en 4431.
+node --input-type=module - http://127.0.0.1:4431 /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-contrast-followups/log-atm-web-astro/dist/client <<'JS'
+import { createRequire } from 'node:module';
+import { readdirSync } from 'node:fs';
+import { join, relative } from 'node:path';
+const require = createRequire('/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-contrast-followups/log-atm-web-astro/package.json');
+const { chromium } = require('playwright-core');
+const [base, dist] = process.argv.slice(2);
+const pages = []; (function walk(d) { for (const e of readdirSync(d, { withFileTypes: true })) { const f = join(d, e.name); if (e.isDirectory()) walk(f); else if (e.name.endsWith('.html')) pages.push('/' + relative(dist, f).replace(/(^|\/)index\.html$/, '$1')); } })(dist);
+pages.sort();
+// Color del texto y fondo opaco más cercano; marca si hay imagen/degradado en la cadena
+const medir = (a) => {
+  const lin = (c) => { c /= 255; return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+  const lum = ([r, g, b]) => 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
+  const fg = getComputedStyle(a).color.match(/[\d.]+/g).slice(0, 3).map(Number);
+  let el = a; let bg = null; let img = false;
+  while (el) { const s = getComputedStyle(el); if (s.backgroundImage !== 'none') img = true; const m = s.backgroundColor.match(/[\d.]+/g); if (m && (m.length < 4 || +m[3] === 1)) { bg = m.slice(0, 3).map(Number); break; } el = el.parentElement; }
+  bg ??= [255, 255, 255];
+  const [x, y] = [lum(fg), lum(bg)].sort((p, q) => q - p);
+  return { fg: `rgb(${fg.join(', ')})`, bg: `rgb(${bg.join(', ')})`, img, ratio: +((x + 0.05) / (y + 0.05)).toFixed(2) };
+};
+const browser = await chromium.launch({ executablePath: '/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome' });
+// 1) Skip link: foco por teclado + puntero encima, en todas las páginas y tres anchos
+for (const width of [1440, 1280, 390]) {
+  const page = await (await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: 'reduce' })).newPage();
+  const combos = new Map(); let n = 0; let min = Infinity;
+  for (const p of pages) {
+    await page.goto(base + p, { waitUntil: 'load' });
+    await page.keyboard.press('Tab');
+    const enfocado = await page.evaluate(() => document.activeElement?.classList.contains('skip-link'));
+    if (!enfocado) { console.log(`[${width}] ${p}: el primer Tab no enfoca .skip-link`); continue; }
+    await page.hover('.skip-link');
+    const r = await page.$eval('.skip-link', (a, f) => ({ hover: a.matches(':hover'), fv: a.matches(':focus-visible'), ...new Function('return ' + f)()(a) }), medir.toString());
+    n++; min = Math.min(min, r.ratio);
+    const k = `hover=${r.hover} focus-visible=${r.fv} ${r.fg} sobre ${r.bg} = ${r.ratio}:1`; combos.set(k, (combos.get(k) ?? 0) + 1);
+  }
+  console.log(`[${width}] skip link enfocado + hover: ${n}/${pages.length} páginas, ratio mínimo ${min}:1`);
+  for (const [k, c] of combos) console.log(`  ${c}× ${k}`);
+  await page.context().close();
+}
+// 2) Barrido de hover: todo enlace visible con texto, escritorio 1280
+const page = await (await browser.newContext({ viewport: { width: 1280, height: 800 }, reducedMotion: 'reduce' })).newPage();
+let medidos = 0; let tapados = 0; const bajos = new Map();
+for (const p of pages) {
+  await page.goto(base + p, { waitUntil: 'load' });
+  const total = await page.$$eval('a', (as) => as.length);
+  for (let i = 0; i < total; i++) {
+    const a = (await page.$$('a'))[i];
+    const ok = await a.evaluate((el) => { const cs = getComputedStyle(el); const r = el.getBoundingClientRect(); return r.width > 0 && r.height > 0 && cs.visibility !== 'hidden' && !!el.textContent.trim() && !el.closest('[inert],[aria-hidden="true"]'); });
+    if (!ok) continue;
+    await a.scrollIntoViewIfNeeded();
+    const box = await a.boundingBox(); if (!box) continue;
+    await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+    const r = await a.evaluate((el, f) => ({ hover: el.matches(':hover'), cls: el.className ? '.' + String(el.className).split(' ')[0] : `[href="${el.getAttribute('href')}"]`, ...new Function('return ' + f)()(el) }), medir.toString());
+    if (!r.hover) { tapados++; continue; }
+    medidos++;
+    if (r.ratio < 4.5) { const k = `${r.cls} ${r.fg} sobre ${r.bg}${r.img ? ' (imagen/degradado en la cadena)' : ''} = ${r.ratio}:1`; bajos.set(k, (bajos.get(k) ?? 0) + 1); }
+  }
+}
+await browser.close();
+console.log(`Barrido hover (1280): ${pages.length} páginas · enlaces medidos con :hover efectivo=${medidos} · no alcanzables por el puntero=${tapados} · bajo 4.5:1=${[...bajos.values()].reduce((s, v) => s + v, 0)}`);
+for (const [k, c] of [...bajos].sort()) console.log(`  ${c}× ${k}`);
+JS
+```
+
+```text
+[1440] skip link enfocado + hover: 18/18 páginas, ratio mínimo 6.08:1
+  18× hover=true focus-visible=true rgb(255, 255, 255) sobre rgb(59, 100, 151) = 6.08:1
+[1280] skip link enfocado + hover: 18/18 páginas, ratio mínimo 6.08:1
+  18× hover=true focus-visible=true rgb(255, 255, 255) sobre rgb(59, 100, 151) = 6.08:1
+[390] skip link enfocado + hover: 18/18 páginas, ratio mínimo 6.08:1
+  18× hover=true focus-visible=true rgb(255, 255, 255) sobre rgb(59, 100, 151) = 6.08:1
+Barrido hover (1280): 18 páginas · enlaces medidos con :hover efectivo=363 · no alcanzables por el puntero=18 · bajo 4.5:1=30
+  15× .svc-card rgb(255, 255, 255) sobre rgb(255, 255, 255) = 1:1
+  5× [href="/"] rgb(215, 228, 244) sobre rgb(248, 247, 246) (imagen/degradado en la cadena) = 1.2:1
+  5× [href="/en/"] rgb(215, 228, 244) sobre rgb(248, 247, 246) (imagen/degradado en la cadena) = 1.2:1
+  5× [href="/pt/"] rgb(215, 228, 244) sobre rgb(248, 247, 246) (imagen/degradado en la cadena) = 1.2:1
+```
+<!-- evidencia:fin apply-evidence.21 -->
+
+`apply-evidence.21`: con foco de teclado y puntero encima, el skip link conserva el texto blanco
+sobre primary-600 en las 18 páginas y en los tres anchos; ya no aparece la combinación primary-700
+sobre primary-600 que reporta `verify-report.10`/`.11`. En el barrido de hover, los enlaces bajo
+4,5:1 son los mismos falsos positivos que `verify-report.md` descarta en T3-a: `.svc-card` (texto
+blanco propio del componente sobre la foto `.svc-card__media` y su degradado oscuro, hermanos
+posicionados que la cadena de ancestros no ve) y el breadcrumb del hero (primary-100 propio, con
+degradado en la cadena). Ninguno renderiza el color base ni su hover. El servidor de vista previa
+del puerto 4431 se bajó al terminar el muestreo.
+
+### Corrida completa de cierre del redespacho
+
+Sin commit propio. `npm run build` corrió sobre `bbecfe8` antes del muestreo anterior; `npm run a11y`
+audita ese `dist/` con su propio `astro preview` y Chrome vía `CHROME_PATH`.
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.22","forma":"argv","argv":["npm","run","validate-i18n"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-contrast-followups/log-atm-web-astro","head":"bbecfe84da10ff685aabf8097eeacc03c4512c4b","fecha":"2026-10-06T21:52:59-03:00","exit":0,"sha256":"998abcef00777caba688a15f6cd7f54bc50cfd323cdd82776159426fdde58ffd","lineas":6,"omitidas":0,"no_recomprobable":"verify corre la suite completa sobre el mismo árbol con evidencia propia"} -->
+**Evidencia `apply-evidence.22`** · exit 0 · 6 líneas, 0 omitidas · HEAD `bbecfe84da10` · 2026-10-06T21:52:59-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-contrast-followups/log-atm-web-astro`
+No re-comprobable: verify corre la suite completa sobre el mismo árbol con evidencia propia
+
+```text
+npm run validate-i18n
+```
+
+```text
+
+> log-atm-web-astro@0.0.1 validate-i18n
+> tsx scripts/validate-i18n.ts
+
+[i18n] en: OK (536 claves)
+[i18n] pt: OK (536 claves)
+```
+<!-- evidencia:fin apply-evidence.22 -->
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.23","forma":"argv","argv":["npm","run","check-i18n-links"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-contrast-followups/log-atm-web-astro","head":"bbecfe84da10ff685aabf8097eeacc03c4512c4b","fecha":"2026-10-06T21:52:59-03:00","exit":0,"sha256":"d805cf2183837cc3193fe469b7827226292871c3960f9b806317d8bc43db8c51","lineas":5,"omitidas":0,"no_recomprobable":"verify corre la suite completa sobre el mismo árbol con evidencia propia"} -->
+**Evidencia `apply-evidence.23`** · exit 0 · 5 líneas, 0 omitidas · HEAD `bbecfe84da10` · 2026-10-06T21:52:59-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-contrast-followups/log-atm-web-astro`
+No re-comprobable: verify corre la suite completa sobre el mismo árbol con evidencia propia
+
+```text
+npm run check-i18n-links
+```
+
+```text
+
+> log-atm-web-astro@0.0.1 check-i18n-links
+> tsx scripts/check-i18n-links.ts
+
+[i18n-links] 18 páginas (es=6, en=6, pt=6), 411 enlaces internos evaluados, 0 violaciones
+```
+<!-- evidencia:fin apply-evidence.23 -->
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.24","forma":"argv","argv":["npm","run","check"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-contrast-followups/log-atm-web-astro","head":"bbecfe84da10ff685aabf8097eeacc03c4512c4b","fecha":"2026-10-06T21:53:07-03:00","exit":0,"sha256":"231279c312ecac08fa1010ef7c9bbde416f7a462ef3dee2518d8a34a87ada68d","lineas":13,"omitidas":0,"no_recomprobable":"verify corre la suite completa sobre el mismo árbol con evidencia propia"} -->
+**Evidencia `apply-evidence.24`** · exit 0 · 13 líneas, 0 omitidas · HEAD `bbecfe84da10` · 2026-10-06T21:53:07-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-contrast-followups/log-atm-web-astro`
+No re-comprobable: verify corre la suite completa sobre el mismo árbol con evidencia propia
+
+```text
+npm run check
+```
+
+```text
+
+> log-atm-web-astro@0.0.1 check
+> astro check
+
+21:53:01 [@astrojs/cloudflare] Enabling compile-time image optimization. Images will be pre-optimized at build time.
+21:53:01 [@astrojs/cloudflare] Enabling sessions with Cloudflare KV with the "SESSION" KV binding.
+21:53:02 [types] Generated 1.31s
+21:53:02 [check] Getting diagnostics for Astro files in /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-contrast-followups/log-atm-web-astro...
+Result (51 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+
+```
+<!-- evidencia:fin apply-evidence.24 -->
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.25","forma":"argv","argv":["env","CHROME_PATH=/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome","npm","run","a11y"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-contrast-followups/log-atm-web-astro","head":"bbecfe84da10ff685aabf8097eeacc03c4512c4b","fecha":"2026-10-06T21:53:30-03:00","exit":0,"sha256":"993baf4aa3dc9a3f99ad11d35dc963408a496e012235d3c7ac9a3ca954bacc03","lineas":7,"omitidas":0,"no_recomprobable":"verify corre la suite completa sobre el mismo árbol con evidencia propia"} -->
+**Evidencia `apply-evidence.25`** · exit 0 · 7 líneas, 0 omitidas · HEAD `bbecfe84da10` · 2026-10-06T21:53:30-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/fix-contrast-followups/log-atm-web-astro`
+No re-comprobable: verify corre la suite completa sobre el mismo árbol con evidencia propia
+
+```text
+env CHROME_PATH=/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome npm run a11y
+```
+
+```text
+
+> log-atm-web-astro@0.0.1 a11y
+> node scripts/axe-audit.mjs
+
+Auditando 21 URLs (18 páginas, 3 sondas 404) en escritorio y móvil…
+
+Resumen: 42 auditorías (21 URLs × 2 tamaños: 18 páginas, 3 sondas 404) · 0 violaciones en 0 reglas · 0 estados HTTP inesperados
+```
+<!-- evidencia:fin apply-evidence.25 -->
+
+`apply-evidence.22`: paridad de claves i18n OK en en/pt. `apply-evidence.23`: links i18n sin
+errores. `apply-evidence.24`: `astro check` sin errores, advertencias ni sugerencias.
+`apply-evidence.25`: `npm run a11y` termina en exit 0 sobre las 21 URL × escritorio/móvil, sin
+violaciones ni estados HTTP inesperados. No queda ningún servidor de vista previa levantado.
