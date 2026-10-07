@@ -81,9 +81,14 @@
     color: var(--color-neutral-900);
   }
 
+  /* Links base: primary-600 (6.08:1 sobre blanco) y hover primary-700, mismo criterio que
+     .btn--brand. Las superficies oscuras declaran el color de sus propios links. */
   a {
-    color: var(--color-brand);
+    color: var(--color-primary-600);
     text-decoration: none;
+  }
+  a:hover {
+    color: var(--color-primary-700);
   }
 
   img, video {
