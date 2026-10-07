@@ -55,6 +55,10 @@
   .skip-link:focus {
     top: 0;
   }
+  /* Conserva el texto blanco en hover: sin esta regla gana `a:hover` (primary-700 sobre primary-600) */
+  .skip-link:hover {
+    color: var(--color-brand-solid-text);
+  }
   /* Anillo hacia adentro: queda dentro de la caja opaca y no cruza el logo del header */
   .skip-link:focus-visible {
     outline-offset: -5px;
