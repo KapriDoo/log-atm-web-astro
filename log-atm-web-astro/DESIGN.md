@@ -29,7 +29,7 @@
 - `primary-600`: #3b6497 — hover de elementos primarios
 - `primary-700`: #2b4e78 — hover de botones primarios, active
 - `primary-800`: #1c3554 — texto sobre fondos claros
-- `primary-900`: #112236 — navbar dark, hero overlay
+- `primary-900`: #112236 — superficies oscuras, hero overlay
 - `primary-950`: #0a1624 — footer, fondos oscuros maximos
 
 ### Accent
@@ -109,6 +109,7 @@ Ratios WCAG 2.x calculados sobre los hex de `tokens.css`. Umbral: 4.5:1 texto no
 | `--color-whatsapp-text` (#111b21) | `--color-whatsapp-hover` (#1da851) | 5.63:1 | Boton WhatsApp en hover |
 | `--color-text-accent` (accent-800) | blanco · neutral-50 · neutral-100 · accent-300 | 6.91 · 6.46 · 5.91 · 5.80:1 | Eyebrows, pills, numeros de paso |
 | `--color-brand-dark` (primary-700) | neutral-100 · primary-50 | 7.30 · 7.70:1 | Enlaces de navegacion en hover, foco y activo |
+| `neutral-700` | blanco | 8.09:1 | Enlaces del drawer de navegacion |
 | `--color-text-muted` (neutral-600) | blanco | 5.44:1 | Valores pendientes, texto secundario |
 | `--color-text-inverse` (blanco) | primary-900 | 16.08:1 | Titulos y chips activos sobre oscuro |
 | `primary-200` | primary-900 | 9.27:1 | Texto secundario sobre superficies oscuras |
@@ -173,9 +174,10 @@ No validos para texto normal: blanco sobre `accent-500`/`accent-600` (CTA), blan
 - Placeholder: sin tono de paleta asignado; `neutral-300` y `neutral-400` no se usan para placeholder porque no alcanzan 4.5:1 sobre blanco (1.73 y 2.42:1)
 
 ### Navigation
-- Desktop: horizontal, links en neutral-700; hover y foco `--color-brand-dark`
-- Mobile: hamburger menu; hover y foco del drawer `--color-brand-dark`
-- Active state: `--color-brand-dark`, font-weight 600 y subrayado de 2px (`text-underline-offset: 0.3em`): la pagina actual no depende solo del color
+- Desktop: horizontal; `.nav__link` en `--color-text` (neutral-900), font-weight 500, 15px; hover, foco y activo: fondo `--color-surface-alt` (neutral-100) y texto `--color-brand-dark`
+- Mobile: hamburger menu; `.nav-drawer__link` en neutral-700, font-weight 500, 17px; hover y foco: fondo primary-50 y texto `--color-brand-dark`
+- Active state: `--color-brand-dark` sobre neutral-100, mismo font-weight 500 y subrayado de 2px (`text-underline-offset: 0.3em`): la pagina actual no depende solo del color
+- Nombre accesible del enlace de marca y del selector de idioma: el texto visible seguido de un sufijo `.sr-only` localizado (`a11y.brandHome`, `a11y.languageCurrent`), sin `aria-label` (WCAG 2.5.3)
 
 ### Focus ring (anillo de foco por contexto)
 - Regla global: `:focus-visible { outline: 3px solid var(--focus-ring-color, var(--color-focus-ring)); }`
