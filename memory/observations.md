@@ -527,3 +527,85 @@ Cada par texto/fondo validado AA se declara como tokens funcionales de rol en `t
 
 ## 2026-10-06 | measure | fix-color-contrast-sitewide | preflight sdd-archive INICIO 16:38:47 outcome=ready
 
+## 2026-10-06 | measure | chore-local-container-podman | preflight sdd-init INICIO 18:05:28 outcome=ready
+
+## 2026-10-06 | pre-adr | chore-local-container-podman | Hallazgo de init: `docker-compose.yml` y `fix-wsl2-port.bat` existen en la raíz del repo (fuera de `log-atm-web-astro/`), y `docker-compose.yml` referencia `Dockerfile`; el brief afirma que no hay compose. Explore/design deben decidir su retiro junto con Dockerfile/nginx.
+## 2026-10-06 | measure | chore-local-container-podman | post-dispatch sdd-init FIN 18:06:13 outcome=advance
+
+## 2026-10-06 | measure | chore-local-container-podman | preflight sdd-explore INICIO 18:06:16 outcome=ready
+
+
+## 2026-10-06 | pre-adr | chore-local-container-podman | Despliegue vigente = Workers Builds (git) y datos pendientes del dashboard
+**Detectado por**: sdd-explore en `chore-local-container-podman`
+**Descripción**: el check `Workers Builds: log-atm-web` y el bot `cloudflare-workers-and-pages` aparecen en el PR #36 y en `main`; no hay `wrangler deploy` manual, así que el brief no necesita script `deploy`. No es determinable desde el repo el comando de build/deploy del dashboard, el directorio raíz ni la reconciliación entre el `name: log-atm-web-astro` del `wrangler.json` generado y el Worker `log-atm-web`. Decide si `astro check` se encadena a `npm run build` (puede bloquear producción).
+
+## 2026-10-06 | pre-adr | chore-local-container-podman | Contenedor: secretos, ignore, bind IPv6 y pin de typescript
+**Detectado por**: sdd-explore en `chore-local-container-podman`
+**Descripción**: (1) `--env-file` solo no inyecta bindings; funciona montando `.dev.vars` en `dist/server/.dev.vars` o con `CLOUDFLARE_INCLUDE_PROCESS_ENV=true`. (2) Sin `.containerignore`, `COPY . .` copia `.dev.vars` a la imagen (reproducido). (3) En este WSL2 `localhost` resuelve a `::1`; `astro preview --host ::` sirve en `localhost`, con `0.0.0.0` no. (4) `npm i -D typescript` instala 7.x, fuera del peer de `@astrojs/check`; fijar `^6`. (5) El 500 tras rebuild persiste en `astro preview` y en `wrangler dev` (404); el contenedor lo evita porque no reconstruye con el servidor activo.
+
+## 2026-10-06 | debt-candidate | chore-local-container-podman | Opción `platformProxy` muerta en el adapter v13 y errores de tipos preexistentes
+**Detectado por**: sdd-explore en `chore-local-container-podman`
+**Ubicación**: `log-atm-web-astro/astro.config.mjs:51`, `astro.config.mjs:21`, `src/scripts/gsap-ind-directory.ts:99`
+**Descripción**: `platformProxy` ya no existe en `Options` de `@astrojs/cloudflare@13.5.0` (TS2353) y se ignora; `logger` sin tipo (TS7031); `window.setInterval` asignado a `ReturnType<typeof setInterval>` (TS2322). Junto con `cloudflare:workers` (TS2307) son los 4 errores de `astro check`.
+**Promoción sugerida**: `sdd new fix-typecheck-errors --domain debt`
+
+## 2026-10-06 | debt-candidate | chore-local-container-podman | Referencias obsoletas a Cloudflare Pages y README desfasado
+**Detectado por**: sdd-explore en `chore-local-container-podman`
+**Ubicación**: `log-atm-web-astro/astro.config.mjs:14`, `log-atm-web-astro/.dev.vars.example:3`, `memory/_profile.md` (Deploy Target), `log-atm-web-astro/README.md` (astro-icon, Astro 6.1.5 "SSG", Potrace, Docker/nginx)
+**Descripción**: el deploy es Cloudflare Workers desde 2026-05-13 (`11008c2`); varios textos aún dicen Pages, y el README conserva `astro-icon` (reemplazado en `70d86db`) y la versión 6.1.5.
+**Promoción sugerida**: cubierto por este cambio salvo `memory/_profile.md` (lo actualiza `sdd-init` en el próximo cambio)
+## 2026-10-06 | measure | chore-local-container-podman | post-dispatch sdd-explore FIN 18:22:00 outcome=advance
+
+## 2026-10-06 | measure | chore-local-container-podman | preflight sdd-propose INICIO 18:22:03 outcome=ready
+
+## 2026-10-06 | measure | chore-local-container-podman | post-dispatch sdd-propose FIN 18:23:31 outcome=paused
+
+## 2026-10-06 | measure | chore-local-container-podman | preflight sdd-spec INICIO 18:28:34 outcome=ready
+
+## 2026-10-06 | measure | chore-local-container-podman | post-dispatch sdd-spec FIN 18:32:21 outcome=advance
+
+## 2026-10-06 | measure | chore-local-container-podman | preflight sdd-design INICIO 18:32:21 outcome=ready
+
+
+## 2026-10-06 | pre-adr | chore-local-container-podman | ADR-0009: contenedor local Podman con workerd y secretos montados en ejecución
+Un stage `node:22-slim` que compila y ejecuta `astro preview --host :: --port 4321`; `.dev.vars` se monta `:ro` en `/app/dist/server/.dev.vars` desde `"$PWD/.dev.vars"` (npm fija el cwd en la raíz del paquete); `.containerignore` excluye credenciales, dependencias, builds y `chrome/`. Único camino verificado con API y 404 reales.
+
+## 2026-10-06 | pre-adr | chore-local-container-podman | ADR-0010: auditoría a11y en navegador real contra un `astro preview` propio
+La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un servidor estático no puede auditarla: el script lanza su propio `astro preview` en un puerto libre tras el build (inmune al quirk del 500), deriva las URLs de `dist/client` + prefijos `hreflang`, audita escritorio y móvil con `reducedMotion: 'reduce'` y resuelve el navegador por `CHROME_PATH` → `./chrome` → error.
+
+## 2026-10-06 | pre-adr | chore-local-container-podman | ADR-0011: type-check separado del build y declaración local de `cloudflare:workers`
+`npm run check` independiente de `npm run build` (el comando de build de Workers Builds no está verificado); `typescript@^6`; 4 errores corregidos en origen; `src/types/cloudflare-workers.d.ts` ambient en lugar de `wrangler types` (rompe `lib.dom`). `memory/_profile.md` lo edita `sdd-apply` en este cambio (nota b de clarifications), no `sdd-init` en el próximo.
+
+## 2026-10-06 | debt-candidate | chore-local-container-podman | `npm run preview` en el host no lee el `.dev.vars` de la raíz de la app
+**Detectado por**: sdd-design en `chore-local-container-podman`
+**Ubicación**: `log-atm-web-astro/` (`astro preview` con `@astrojs/cloudflare` 13)
+**Descripción**: exploración mostró que el adapter busca `.dev.vars` junto al config redirigido `dist/server/wrangler.json`; por inferencia, la vista previa local fuera del contenedor no carga las credenciales de `log-atm-web-astro/.dev.vars` (`astro dev` sí). No afecta a este cambio (el contenedor monta el archivo en esa ruta y la auditoría a11y no usa la API); no verificado en el host.
+**Promoción sugerida**: verificar y, si se confirma, documentarlo en el README en un cambio posterior
+## 2026-10-06 | measure | chore-local-container-podman | post-dispatch sdd-design FIN 18:40:50 outcome=advance
+
+## 2026-10-06 | measure | chore-local-container-podman | preflight sdd-tasks INICIO 18:40:54 outcome=ready
+
+## 2026-10-06 | measure | chore-local-container-podman | post-dispatch sdd-tasks FIN 18:44:16 outcome=advance
+
+## 2026-10-06 | measure | chore-local-container-podman | preflight sdd-apply INICIO 18:44:16 outcome=ready
+
+
+## 2026-10-06 | debt-candidate | chore-local-container-podman | Violación existente `label-content-name-mismatch` (WCAG 2.5.3) en el encabezado de todas las páginas
+**Detectado por**: sdd-apply en `chore-local-container-podman` (primera corrida de `npm run a11y`, 42 auditorías)
+**Ubicación**: `log-atm-web-astro/src/components/ui/Navbar.astro:38` (enlace de marca `.nav__brand`, `aria-label={t('a11y.brandHome')}`) y `log-atm-web-astro/src/components/ui/LanguageSelector.astro:55` (`#lang-trigger`)
+**Descripción**: axe-core informa 63 nodos `label-content-name-mismatch` (serious): el enlace de marca en las 21 URLs × escritorio y móvil, y `#lang-trigger` en las 21 URLs solo en escritorio. El nombre accesible no contiene el texto visible del elemento. Es la única regla con violaciones; `color-contrast` informa 0 en todas las páginas, incluidas las portadas es/en/pt. Este cambio no corrige el sitio (tasks.md), así que `npm run a11y` termina hoy con exit 1.
+**Promoción sugerida**: cambio `fix` que alinee el `aria-label` de ambos elementos con su texto visible y deje `npm run a11y` en exit 0
+
+## 2026-10-06 | discovery | chore-local-container-podman | La imagen del contenedor local pesa 964 MB, no ~866 MB
+**Detectado por**: sdd-apply en `chore-local-container-podman`
+**Ubicación**: `memory/specs/deployment-docs/readme-deployment-and-local-container.md` (requisito del tamaño), `memory/changes/chore-local-container-podman/design.md` (D7), `log-atm-web-astro/README.md`
+**Descripción**: `podman images` informa 964 MB para `localhost/log-atm-web` construida desde el árbol final. La cifra ~866 MB de la spec y del diseño viene de la exploración, anterior a las devDependencies que agrega este cambio (`typescript`, `@astrojs/check`, `playwright-core`, `axe-core`), que la imagen instala con `npm ci`. El README declara el valor medido («alrededor de 960 MB»).
+**Promoción sugerida**: `sdd-verify` decide si la cifra de la spec requiere un delta o si el criterio de aceptación (aviso del tamaño aproximado) basta
+## 2026-10-06 | measure | chore-local-container-podman | post-dispatch sdd-apply FIN 19:15:11 outcome=advance
+
+## 2026-10-06 | measure | chore-local-container-podman | preflight sdd-verify INICIO 19:15:21 outcome=ready
+
+## 2026-10-06 | measure | chore-local-container-podman | post-dispatch sdd-verify FIN 19:33:19 outcome=advance
+
+## 2026-10-06 | measure | chore-local-container-podman | preflight sdd-archive INICIO 19:33:30 outcome=ready
+

@@ -1,0 +1,5 @@
+# El registro de observaciones del vault SDD es append-only: cada rama solo agrega
+# entradas al final. La fusión por unión conserva las líneas de ambas ramas sin
+# conflicto. El resto del vault (specs, ADRs, cambios, perfil) sigue señalando
+# los conflictos reales.
+memory/observations.md merge=union

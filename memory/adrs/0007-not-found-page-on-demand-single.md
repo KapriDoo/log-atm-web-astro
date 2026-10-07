@@ -7,6 +7,9 @@ informed: sdd-tasks, sdd-apply, sdd-verify
 extends: "[[0002-i18n-routing-pages-lang-folder]]"
 change_ref: "[[fix-i18n-links-and-404]]"
 capability: i18n-routing
+spec_refs:
+  - "[[container-production-parity]]"
+updated: "2026-10-06"
 tags: [adr, i18n, routing, 404, astro, cloudflare]
 ---
 

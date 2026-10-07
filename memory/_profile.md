@@ -8,7 +8,7 @@ version: 0.0.1
 node_engine: ">=22.12.0"
 status: active
 created: "2026-05-19"
-updated: "2026-10-03"
+updated: "2026-10-06"
 ---
 
 ## Stack
@@ -43,6 +43,10 @@ updated: "2026-10-03"
 - `sharp@^0.34.5` — Image processing (native binary)
 - `svgo@^4.0.1` — SVG optimization
 - `tsx@^4.20.6` — TypeScript execution
+- `@astrojs/check@^0.9.10` — Type checking (`astro check`)
+- `typescript@^6.0.3` — TypeScript compiler for `astro check`
+- `playwright-core@^1.63.0` — Browser automation for the a11y audit (browser provided via `CHROME_PATH` or `./chrome`)
+- `axe-core@^4.14.0` — Accessibility rules engine for the a11y audit
 - `@types/react@^19.2.14` — React types
 - `@types/react-dom@^19.2.3` — React DOM types
 
@@ -59,9 +63,13 @@ updated: "2026-10-03"
 ## Build & Deploy
 
 - **Output:** `output: 'static'` (SSG)
-- **Deploy Target:** Cloudflare Pages
+- **Deploy Target:** Cloudflare Workers mediante Workers Builds (integración git: cada push dispara un build; `main` es producción)
 - **Build Scripts:** `npm run build` (`astro build`, sin type-check); `npm run validate-i18n` (validador i18n vía tsx, ejecución separada); `npm run check-i18n-links` (chequeo de links i18n vía tsx, ejecución separada)
 - **Validation:** Custom i18n validator via tsx at build time
+- **Container:** `log-atm-web-astro/Containerfile` (Podman rootless, un stage `node:22-slim`, `astro preview` con workerd en el puerto 4321; `.dev.vars` montado en solo lectura al ejecutar); comandos `npm run container:build` / `npm run container:run`
+- **Type-check:** `npm run check` (`astro check`), separado de `npm run build`, que no verifica tipos
+- **Verification Commands:** `npm run check`; `npm run a11y` (requiere `npm run build` y Chrome vía `CHROME_PATH` o `./chrome`); `npm run validate-i18n`; `npm run check-i18n-links`
+- **CI:** sin integración continua; las verificaciones las ejecuta quien desarrolla y `sdd-verify`
 
 ## Design System & Branding
 
