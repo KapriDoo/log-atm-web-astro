@@ -20,7 +20,7 @@ acceptance_criteria:
   - "[ ] La fuente de tokens no define ninguno de los 18 tokens de opacidad ni el token de hover oscuro de WhatsApp, ni en las variables del sitio ni en el tema de Tailwind"
   - "[ ] Los tokens de WhatsApp en uso (base, hover y texto) permanecen definidos con el verde visible del sitio"
   - "[ ] El CSS que genera Tailwind sobre el sitio construido difiere del CSS previo al cambio solo en las declaraciones eliminadas de opacidad y de hover oscuro de WhatsApp"
-  - "[ ] Los tokens de sombra y de radio de borde siguen definidos en la fuente de tokens y disponibles como utilidades de Tailwind"
+  - "[ ] Los tokens de sombra y de radio de borde están definidos en `tokens.css` (`:root`) y se consumen vía `var()`"
   - "[ ] Cada par validado figura una sola vez en la fuente de tokens y el sitio construye sin errores"
   - "[ ] La documentación de diseño declara la excepción de los correos, muestra ratios que coinciden con los medidos y no describe como apto para texto normal un color cuyo par no alcanza 4.5:1"
   - "[ ] Los colores de las industrias llevan un comentario de una línea que justifica por qué son datos y no tokens"
@@ -67,8 +67,8 @@ El equipo de diseño y desarrollo necesita una regla de color que describa lo qu
 - El sistema SHALL declarar la excepción de las plantillas de correo en la documentación de diseño: los clientes de correo exigen estilos en línea y no leen los tokens.
 - El sistema SHALL NOT definir tokens de opacidad ni el token de hover oscuro de WhatsApp, porque ningún estilo ni clase utilitaria los consume.
 - El sistema SHALL conservar los tokens de WhatsApp en uso (color base, hover y texto) con el verde que el sitio muestra.
-- El sistema SHALL mantener definidos los tokens de sombra y de radio de borde, disponibles tanto para los estilos del sitio como para las clases utilitarias de Tailwind.
-- El sistema SHALL poner cada token a disposición tanto de los estilos del sitio como de las clases utilitarias de Tailwind.
+- El sistema SHALL mantener definidos los tokens de sombra y de radio de borde en las variables del sitio (`:root` de `tokens.css`), y los estilos del sitio los consumen vía `var()`.
+- El sistema SHALL NOT exponer los tokens de sombra en el tema de Tailwind (`@theme`), porque hacerlo reemplaza las sombras por defecto de Tailwind y cambia el CSS generado sin que ningún elemento use esas utilidades.
 - El sistema SHALL mostrar en la documentación de diseño los ratios de contraste medidos de cada par validado y mantenerla coherente con ellos: no presenta como apto para texto normal un color cuyo par no alcanza 4.5:1 y declara las excepciones vigentes al anillo de foco por contexto.
 - El sistema SHALL justificar con un comentario de una línea que los colores de las industrias son datos del contenido y no tokens, de modo que la decisión de colores queda documentada junto a los datos.
 
@@ -108,7 +108,7 @@ El equipo de diseño y desarrollo necesita una regla de color que describa lo qu
 
 **GIVEN** una persona del equipo necesita una sombra o un radio de borde
 **WHEN** busca el token correspondiente
-**THEN** lo encuentra en la fuente de tokens y puede usarlo en estilos del sitio y en clases utilitarias
+**THEN** lo encuentra en las variables del sitio de la fuente de tokens y lo consume vía `var()`
 
 ### Scenario: Equipo consulta los colores de las industrias
 
@@ -122,7 +122,7 @@ El equipo de diseño y desarrollo necesita una regla de color que describa lo qu
 - [ ] La fuente de tokens no define ninguno de los 18 tokens de opacidad ni el token de hover oscuro de WhatsApp, ni en las variables del sitio ni en el tema de Tailwind
 - [ ] Los tokens de WhatsApp en uso (base, hover y texto) permanecen definidos con el verde visible del sitio
 - [ ] El CSS que genera Tailwind sobre el sitio construido difiere del CSS previo al cambio solo en las declaraciones eliminadas de opacidad y de hover oscuro de WhatsApp
-- [ ] Los tokens de sombra y de radio de borde siguen definidos en la fuente de tokens y disponibles como utilidades de Tailwind
+- [ ] Los tokens de sombra y de radio de borde están definidos en `tokens.css` (`:root`) y se consumen vía `var()`
 - [ ] Cada par validado figura una sola vez en la fuente de tokens y el sitio construye sin errores
 - [ ] La documentación de diseño declara la excepción de los correos, muestra ratios que coinciden con los medidos y no describe como apto para texto normal un color cuyo par no alcanza 4.5:1
 - [ ] Los colores de las industrias llevan un comentario de una línea que justifica por qué son datos y no tokens
