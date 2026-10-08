@@ -6,7 +6,7 @@ import CTASection from '../components/sections/CTASection.astro';
 import Icon from "../components/ui/Icon.astro";
 import { Picture } from 'astro:assets';
 import { INDUSTRIES } from '../lib/constants';
-import { useTranslations, getLangFromUrl, buildLocaleUrl, tList, type Locale } from '../i18n/utils';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, tListFor, type Locale } from '../i18n/utils';
 import '../styles/pages/shared.css';
 
 const { lang: langProp } = Astro.props as { lang?: Locale };
@@ -19,17 +19,16 @@ const title = t('meta.industrias.title');
 const description = t('meta.industrias.description');
 
 type IndName = { name: string; sub: string };
-const indNames = tList<IndName>(currentLang, 'industrias.names');
-const indTags = tList<string[]>(currentLang, 'industrias.tags');
-const indServices = tList<string[]>(currentLang, 'industrias.servicesPer');
+const indNames = tListFor<IndName>(currentLang, 'industrias.names', INDUSTRIES);
+const indTags = tListFor<string[]>(currentLang, 'industrias.tags', INDUSTRIES);
+const indServices = tListFor<string[]>(currentLang, 'industrias.servicesPer', INDUSTRIES);
 
 // Combinar metadata visual (img/color/icon) con copy traducido
 const industries = INDUSTRIES.map((ind, i) => ({
   ...ind,
-  name: indNames[i]?.name ?? ind.name,
-  sub: indNames[i]?.sub ?? ind.sub,
-  tags: indTags[i] ?? [],
-  services: indServices[i] ?? [],
+  ...indNames[i],
+  tags: indTags[i],
+  services: indServices[i],
 }));
 
 const spotlight = industries[0];

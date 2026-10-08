@@ -2,6 +2,7 @@
  * LOG ATM — Helpers i18n.
  * - getLangFromUrl: extrae el locale del path (`/en/...` → 'en'; `/...` → 'es').
  * - useTranslations: devuelve un `t(key)` con fallback al master español.
+ * - tList / tListFor: listas traducidas; tListFor exige que el texto tenga tantos ítems como los datos.
  * - getAlternateLinks: arma los `<link rel="alternate" hreflang>` para SEO.
  * - isRTL / getHtmlLang / getOgLocale: utilidades misceláneas.
  */
@@ -121,6 +122,23 @@ export function tList<T = unknown>(
   const fb = resolveKey(dictionaries[DEFAULT_LOCALE], key);
   if (Array.isArray(fb)) return fb as T[];
   return fallback;
+}
+
+/**
+ * Resuelve con `tList` la lista de texto que acompaña a una lista de datos no
+ * textuales (alineadas por posición) y exige que ambas tengan la misma cantidad
+ * de ítems. Si difieren, lanza un `Error` que nombra la clave, el idioma y las
+ * dos longitudes: como las páginas se prerenderizan, el desalineamiento detiene
+ * el build. No hay valor de respaldo: el texto visible sale solo del i18n.
+ */
+export function tListFor<T = unknown>(lang: Locale, key: string, data: readonly unknown[]): T[] {
+  const copy = tList<T>(lang, key);
+  if (copy.length !== data.length) {
+    throw new Error(
+      `[i18n] Lista desalineada: "${key}" (lang=${lang}) tiene ${copy.length} ítems de texto y ${data.length} ítems de datos`,
+    );
+  }
+  return copy;
 }
 
 export function tObj<T extends Record<string, unknown> = Record<string, unknown>>(

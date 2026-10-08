@@ -6,7 +6,7 @@ import CTASection from '../components/sections/CTASection.astro';
 import Icon from "../components/ui/Icon.astro";
 import { Picture } from 'astro:assets';
 import { VALUES, HOW_WE_WORK } from '../lib/constants';
-import { useTranslations, getLangFromUrl, buildLocaleUrl, tList, type Locale } from '../i18n/utils';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, tListFor, type Locale } from '../i18n/utils';
 import '../styles/pages/shared.css';
 
 const { lang: langProp } = Astro.props as { lang?: Locale };
@@ -20,11 +20,11 @@ const description = t('meta.nosotros.description');
 type ValueItem = { title: string; desc: string };
 type HowItem = { title: string; desc: string };
 
-const valuesCopy = tList<ValueItem>(currentLang, 'nosotros.values.items');
-const howCopy = tList<HowItem>(currentLang, 'nosotros.how.items');
+const valuesCopy = tListFor<ValueItem>(currentLang, 'nosotros.values.items', VALUES);
+const howCopy = tListFor<HowItem>(currentLang, 'nosotros.how.items', HOW_WE_WORK);
 
-const values = VALUES.map((v, i) => ({ ...v, ...(valuesCopy[i] ?? { title: v.title, desc: v.desc }) }));
-const how = HOW_WE_WORK.map((h, i) => ({ ...h, ...(howCopy[i] ?? { title: h.title, desc: h.desc }) }));
+const values = VALUES.map((v, i) => ({ ...v, ...valuesCopy[i] }));
+const how = HOW_WE_WORK.map((h, i) => ({ ...h, ...howCopy[i] }));
 ---
 
 <BaseLayout title={title} description={description} lang={currentLang}>

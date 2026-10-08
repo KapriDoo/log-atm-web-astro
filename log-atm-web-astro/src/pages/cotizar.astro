@@ -10,7 +10,7 @@ import {
   QUOTE_DESTS,
   QUOTE_STEPS,
 } from '../lib/constants';
-import { useTranslations, getLangFromUrl, buildLocaleUrl, tList, type Locale } from '../i18n/utils';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, tList, tListFor, type Locale } from '../i18n/utils';
 import '../styles/pages/shared.css';
 import '../styles/pages/cotizar.css';
 
@@ -27,14 +27,14 @@ type StepCopy = { label: string; name: string };
 type SuccessStep = { title: string; desc: string };
 
 const chips = tList<string>(currentLang, 'cotizar.chips');
-const modeCopies = tList<ModeCopy>(currentLang, 'cotizar.modes');
-const stepCopies = tList<StepCopy>(currentLang, 'cotizar.steps');
+const modeCopies = tListFor<ModeCopy>(currentLang, 'cotizar.modes', QUOTE_MODES);
+const stepCopies = tListFor<StepCopy>(currentLang, 'cotizar.steps', QUOTE_STEPS);
 const cargoTypes = tList<string>(currentLang, 'cotizar.cargoTypes');
 const extras = tList<string>(currentLang, 'cotizar.extras');
 const successSteps = tList<SuccessStep>(currentLang, 'cotizar.success.steps');
 
-const modes = QUOTE_MODES.map((m, i) => ({ ...m, ...(modeCopies[i] ?? { name: m.name, desc: m.desc }) }));
-const steps = QUOTE_STEPS.map((s, i) => ({ ...s, ...(stepCopies[i] ?? { label: s.label, name: s.name }) }));
+const modes = QUOTE_MODES.map((m, i) => ({ ...m, ...modeCopies[i] }));
+const steps = QUOTE_STEPS.map((s, i) => ({ ...s, ...stepCopies[i] }));
 
 // Strings consumidos por el script inline (cliente)
 const clientStrings = {

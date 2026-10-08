@@ -698,3 +698,5 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 
 ## 2026-10-08 | measure | debt-copy-tokens-ssot | preflight sdd-apply INICIO 00:08:04 outcome=ready
 
+## 2026-10-08 | decision | debt-copy-tokens-ssot | sdd-apply: las cifras `num` de `HERO_STRIP_STATS` (`20+`, `1:1`), `metric` de `WHY_ITEMS` (`1:1`, `24/7`, `4`) y la numeración `n`/`step` de `SERVICES`, `HOW_WE_WORK` y `QUOTE_STEPS` (`01`…) son neutras al idioma y quedan en `constants.ts` como ids; todo otro texto renderizado de esas listas sale del i18n vía `tListFor`
+

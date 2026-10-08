@@ -3,17 +3,14 @@ import { Picture } from 'astro:assets';
 import heroImg from '../../assets/images/services/svc-maritima.jpeg';
 import Icon from "../ui/Icon.astro";
 import { SITE, LIVE_ROUTES, HERO_STRIP_STATS } from '../../lib/constants';
-import { useTranslations, getLangFromUrl, buildLocaleUrl, tList } from '../../i18n/utils';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, tListFor } from '../../i18n/utils';
 
 const currentLang = getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
 const quoteHref = buildLocaleUrl(currentLang, '/cotizar');
 
-const stripLabels = tList<string>(currentLang, 'home.hero.stripStats');
-const heroStripStats = HERO_STRIP_STATS.map((s, i) => ({
-  num: s.num,
-  label: stripLabels[i] ?? s.label,
-}));
+const stripLabels = tListFor<string>(currentLang, 'home.hero.stripStats', HERO_STRIP_STATS);
+const heroStripStats = HERO_STRIP_STATS.map((s, i) => ({ num: s.num, label: stripLabels[i] }));
 ---
 
 <header class="hero hero-b" aria-label={t('a11y.heroAria')}>
