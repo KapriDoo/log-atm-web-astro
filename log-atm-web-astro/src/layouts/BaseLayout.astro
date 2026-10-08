@@ -11,7 +11,7 @@ import {
   getOgLocale,
 } from '../i18n/utils';
 import { LOCALES, OG_LOCALE, type Locale } from '../i18n/config';
-import { SITE } from '../lib/site';
+import { SITE, TWITTER_HANDLE } from '../lib/site';
 
 interface Props {
   title?: string;
@@ -163,8 +163,8 @@ const breadcrumbSchema = emitUrlSignals && Astro.url.pathname !== '/' ? JSON.str
     <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:site"        content="@logatm" />
-    <meta name="twitter:creator"     content="@logatm" />
+    <meta name="twitter:site"        content={TWITTER_HANDLE} />
+    <meta name="twitter:creator"     content={TWITTER_HANDLE} />
     <meta name="twitter:card"        content="summary_large_image" />
     <meta name="twitter:title"       content={pageTitle} />
     <meta name="twitter:description" content={description} />

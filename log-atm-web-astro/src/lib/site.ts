@@ -36,6 +36,9 @@ const WHATSAPP_TEXT = 'Hola, me interesa cotizar';
 /** Enlace de WhatsApp derivado del teléfono (solo dígitos) con el texto prellenado. */
 export const WHATSAPP_URL = `https://wa.me/${SITE.phone.replace(/\D/g, '')}?text=${encodeURIComponent(WHATSAPP_TEXT)}`;
 
+/** Cuenta de X/Twitter de los meta `twitter:site` y `twitter:creator`, derivada de su URL: `@logatm`. */
+export const TWITTER_HANDLE = `@${new URL(SITE.social.twitter).pathname.slice(1)}`;
+
 const { street, locality, city, country } = SITE.address;
 
 /** Línea de dirección del pie de página y de contacto: `calle, localidad, ciudad, país`. */

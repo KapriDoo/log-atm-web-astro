@@ -17,10 +17,10 @@ feature_branch: feature/debt-copy-tokens-ssot
 mr: ""
 acceptance_criteria:
   - "[ ] Existe una única definición de la identidad del sitio (nombre, URL, teléfono, teléfono de lectura, email, dirección estructurada, coordenadas y redes), importable sin arrastrar imágenes ni otros módulos, y no contiene slogan"
-  - "[ ] Los meta, el JSON-LD, el correo, el enlace de WhatsApp, el pie de página y la página de contacto leen sus datos de esa definición; el layout base no redefine nombre ni URL del sitio"
+  - "[ ] Los meta (incluidas las cuentas de twitter:site y twitter:creator, derivadas de la red X/Twitter), el JSON-LD, el correo, el enlace de WhatsApp, el nombre de marca de la barra de navegación, el pie de página y la página de contacto leen sus datos de esa definición; el layout base no redefine nombre ni URL del sitio y el i18n no define el nombre del sitio"
   - "[ ] El enlace de WhatsApp se deriva del teléfono de la identidad; la línea de dirección del pie de página, de contacto y del correo se arma desde la dirección estructurada"
   - "[ ] El eslogan del JSON-LD de cada página es el meta.tagline del idioma de esa página, y el título por defecto usa la clave meta.defaultTitle del i18n"
-  - "[ ] La plantilla de correo toma el eslogan de meta.tagline en español, preferentemente con un import nombrado de la clave meta del archivo de español en vez del JSON completo, y el nombre y la dirección de la identidad del sitio"
+  - "[ ] La plantilla de correo toma el eslogan de meta.tagline del archivo de español del i18n, importado como JSON completo, y el nombre y la dirección de la identidad del sitio"
   - "[ ] Cambiar un dato de la identidad en su única definición se refleja en meta, JSON-LD, correo, WhatsApp, pie de página y contacto sin otra edición"
   - "[ ] El teléfono y el email de contacto mostrados siguen siendo +56 9 8270 8492 y contacto@logatm.com en todas las páginas, y el JSON-LD de /en y /pt publica el eslogan en inglés y portugués respectivamente"
 
@@ -61,7 +61,8 @@ El nombre, la URL, el teléfono, el email, la dirección, las coordenadas y las 
 - El sistema SHALL derivar de esa definición el enlace de WhatsApp, la línea de dirección del pie de página y de contacto, la línea de dirección del correo y los datos del negocio en los datos estructurados.
 - El sistema SHALL publicar en los datos estructurados de cada página el eslogan en el idioma de esa página.
 - El sistema SHALL usar como título por defecto de una página el de las traducciones, sin que el layout base redefina nombre ni URL del sitio.
-- El sistema SHALL tomar el eslogan de los correos al operador de las traducciones en español, porque esos correos se redactan en español, y SHOULD importar solo la clave de las traducciones que usa en vez del archivo completo.
+- El sistema SHALL tomar el eslogan de los correos al operador de las traducciones en español, porque esos correos se redactan en español.
+- El sistema SHALL mostrar el nombre de marca de la barra de navegación y del pie de página desde esa definición, y derivar de su red X/Twitter la cuenta de los meta `twitter:site` y `twitter:creator`.
 - El sistema SHALL mantener sin cambios el teléfono y el email de contacto vigentes.
 - El sistema SHALL NOT conservar un dato de identidad duplicado en otro lugar.
 
@@ -101,10 +102,10 @@ El nombre, la URL, el teléfono, el email, la dirección, las coordenadas y las 
 ## Acceptance Criteria
 
 - [ ] Existe una única definición de la identidad del sitio (nombre, URL, teléfono, teléfono de lectura, email, dirección estructurada, coordenadas y redes), importable sin arrastrar imágenes ni otros módulos, y no contiene slogan
-- [ ] Los meta, el JSON-LD, el correo, el enlace de WhatsApp, el pie de página y la página de contacto leen sus datos de esa definición; el layout base no redefine nombre ni URL del sitio
+- [ ] Los meta (incluidas las cuentas de twitter:site y twitter:creator, derivadas de la red X/Twitter), el JSON-LD, el correo, el enlace de WhatsApp, el nombre de marca de la barra de navegación, el pie de página y la página de contacto leen sus datos de esa definición; el layout base no redefine nombre ni URL del sitio y el i18n no define el nombre del sitio
 - [ ] El enlace de WhatsApp se deriva del teléfono de la identidad; la línea de dirección del pie de página, de contacto y del correo se arma desde la dirección estructurada
 - [ ] El eslogan del JSON-LD de cada página es el meta.tagline del idioma de esa página, y el título por defecto usa la clave meta.defaultTitle del i18n
-- [ ] La plantilla de correo toma el eslogan de meta.tagline en español, preferentemente con un import nombrado de la clave meta del archivo de español en vez del JSON completo, y el nombre y la dirección de la identidad del sitio
+- [ ] La plantilla de correo toma el eslogan de meta.tagline del archivo de español del i18n, importado como JSON completo, y el nombre y la dirección de la identidad del sitio
 - [ ] Cambiar un dato de la identidad en su única definición se refleja en meta, JSON-LD, correo, WhatsApp, pie de página y contacto sin otra edición
 - [ ] El teléfono y el email de contacto mostrados siguen siendo +56 9 8270 8492 y contacto@logatm.com en todas las páginas, y el JSON-LD de /en y /pt publica el eslogan en inglés y portugués respectivamente
 
