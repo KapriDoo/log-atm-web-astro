@@ -666,3 +666,68 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 
 ## 2026-10-06 | measure | chore-deploy-config | preflight sdd-archive INICIO 22:30:56 outcome=ready
 
+## 2026-10-07 | measure | debt-copy-tokens-ssot | preflight sdd-init INICIO 22:06:12 outcome=ready
+
+## 2026-10-07 | measure | debt-copy-tokens-ssot | post-dispatch sdd-init FIN 22:06:50 outcome=advance
+
+## 2026-10-07 | measure | debt-copy-tokens-ssot | preflight sdd-propose INICIO 22:07:01 outcome=ready
+
+
+## 2026-10-07 | discovery | debt-copy-tokens-ssot | sdd-propose: el patrón de fallback `copy[i] ?? constante` está en 12 sitios, no 10 — el brief omite `HOW_WE_WORK` (nosotros.astro) e `INDUSTRIES` en industrias.astro (`name`/`sub` + `tags`/`servicesPer` con `?? []`); las 13 listas i18n↔datos coinciden hoy en longitud en es/en/pt
+## 2026-10-07 | discovery | debt-copy-tokens-ssot | sdd-propose: `tokens/create-functional-tokens` exige tokens de opacidad; eliminar los 18 `--opacity-*` la contradice, por lo que también queda superseded por el delta de política de color (que reenuncia sus requisitos de sombras y radios). `validate-i18n` ya detecta un ítem quitado en un solo idioma (la paridad aplanada incluye índices de array)
+## 2026-10-07 | discovery | debt-copy-tokens-ssot | sdd-propose: `QUOTE_ORIGINS` incluye `'Otro'`, copy en español que se muestra sin traducir en /en y /pt cotizar; queda como C1 en clarifications.md
+## 2026-10-07 | measure | debt-copy-tokens-ssot | post-dispatch sdd-propose FIN 22:12:56 outcome=paused
+
+## 2026-10-07 | measure | debt-copy-tokens-ssot | preflight sdd-propose INICIO 22:45:12 outcome=ready
+
+## 2026-10-07 | discovery | debt-copy-tokens-ssot | sdd-propose (iter 2): astro 6.3.1 `loadConfigWithVite` intenta import nativo del `.mjs` y, si falla, recarga el config con el runner de Vite (transpila TS) — `astro.config.mjs` puede importar `src/lib/site.ts` (sin imports). `public/manifest.json` no contiene host (`start_url: "/"`), así que el cambio a `www` no lo toca; `robots.txt` pasa a endpoint prerenderizado que deriva `Sitemap:` de `SITE.url`
+## 2026-10-07 | measure | debt-copy-tokens-ssot | post-dispatch sdd-propose FIN 22:47:34 outcome=paused
+
+## 2026-10-07 | measure | debt-copy-tokens-ssot | preflight sdd-spec INICIO 23:59:31 outcome=ready
+
+
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-spec: sin motivo para fijar el slogan en español en el JSON-LD (schema.org `slogan` es texto libre); queda localizado por idioma vía `meta.tagline`. Las 7 specs de estilos y `create-functional-tokens` solo reciben `superseded_by`; sus Purpose/AC quedan sin alinear con el delta (contradicen la política de legado tolerado) — candidato a limpieza en archive
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-spec: se generan 5 specs (1 delta ADD + 4 nuevas) en vez de las 3-4 estimadas, para mantener una spec por comportamiento: política de color, copy↔datos, identidad del sitio, host canónico www/robots y opciones del cotizador
+## 2026-10-08 | measure | debt-copy-tokens-ssot | post-dispatch sdd-spec FIN 00:03:10 outcome=advance
+
+## 2026-10-08 | measure | debt-copy-tokens-ssot | preflight sdd-tasks INICIO 00:03:14 outcome=ready
+
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-tasks: `tokens.css` define `--shadow-*` solo en `:root` (no en `@theme`); el criterio de «disponibles como utilidades de Tailwind» exige añadirlos a `@theme`, lo que puede chocar con el criterio de CSS idéntico salvo lo eliminado — la Tarea 16 lo mide y reporta sin decidir
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-tasks: la línea base de regresión vive en `log-atm-web-astro/.wrangler/baseline/` (gitignored); el worktree no tiene `node_modules` (un enlace simbólico no queda ignorado por el patrón `node_modules/`), por eso la Tarea 2 usa `npm ci`
+## 2026-10-08 | measure | debt-copy-tokens-ssot | post-dispatch sdd-tasks FIN 00:08:04 outcome=advance
+
+## 2026-10-08 | measure | debt-copy-tokens-ssot | preflight sdd-apply INICIO 00:08:04 outcome=ready
+
+## 2026-10-08 | decision | debt-copy-tokens-ssot | sdd-apply: las cifras `num` de `HERO_STRIP_STATS` (`20+`, `1:1`), `metric` de `WHY_ITEMS` (`1:1`, `24/7`, `4`) y la numeración `n`/`step` de `SERVICES`, `HOW_WE_WORK` y `QUOTE_STEPS` (`01`…) son neutras al idioma y quedan en `constants.ts` como ids; todo otro texto renderizado de esas listas sale del i18n vía `tListFor`
+
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | [pre-adr] sdd-apply: con `@astrojs/cloudflare` 13.5.0 (prerender en workerd, el default) y Astro 6.3.1, un error lanzado al prerenderizar una página NO hace fallar `astro build`: el log muestra el error, el build sale con exit 0 y la página queda vacía (`dist/client/index.html` de 0 bytes) o ausente. Afecta a todo error de render, no solo a `tListFor`. Con `prerenderEnvironment: 'node'` el build sí falla con el mensaje. Falta decidir cómo se cumple el AC «quitar un ítem en los tres idiomas hace fallar astro build» de `copy-single-source`: cambiar el entorno de prerender (afecta la emulación workerd y el servicio de imágenes `compile`, ADR-0006), agregar una guarda en `astro:build:done` que falle ante páginas vacías o ausentes, u otra salida
+
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-apply: residual fuera de `tasks.md`: `meta.siteName` («LOG ATM») del i18n duplica `SITE.name` de `src/lib/site.ts` y lo consumen Navbar (2 veces) y Footer como nombre de marca; `site-identity-single-source` pide no conservar un dato de identidad duplicado. No se corrige en esta fase (la fuente de tareas no lo incluye)
+
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-apply: tras elegir la opción de origen «Otro», el resumen del wizard de /cotizar muestra el valor «Otro» (`state.origin` lee `select.value` en `wizard.ts`) y no la etiqueta traducida («Other»/«Outro») en /en y /pt; coherente con `quote-extras-and-origin-options`, que fija el valor «Otro» para el operador
+
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-apply: añadir `--shadow-sm|md|lg|xl|cta` a `@theme` (criterio 5 de `color-token-policy`) cambia el CSS construido más allá de las declaraciones eliminadas (criterio 4): Tailwind sobrescribe en su capa `theme` los defaults de `--shadow-sm|md|xl`, agrega `--shadow-cta` y regenera las utilidades `.shadow-*` (que crea por escaneo de texto; `.shadow-cta` pasa de color de sombra a sombra). Sin cambio visual: ningún elemento usa clases `shadow-*` y `:root` en `@layer base` gana a la capa `theme`. Tensión entre criterios sin decidir en apply
+
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-apply: residuales fuera de `tasks.md`: `twitter:site`/`twitter:creator` de `BaseLayout.astro` conservan el literal `@logatm` (duplica la cuenta de `SITE.social.twitter`); el primer build de Workers Builds tras el merge debe confirmar que `astro.config.mjs` carga `src/lib/site.ts` (import TS desde el config)
+
+## 2026-10-08 | measure | debt-copy-tokens-ssot | post-dispatch sdd-apply FIN 00:33:51 outcome=blocked
+
+## 2026-10-08 | measure | debt-copy-tokens-ssot | preflight sdd-apply INICIO 16:58:17 outcome=ready
+
+## 2026-10-08 | decision | debt-copy-tokens-ssot | sdd-apply (re-despacho): el `[pre-adr]` del build que no falla se resuelve con la guarda post-build `log-atm:prerender-output-guard` de `astro.config.mjs` ([[0012-prerender-output-guard]]). Falla el build si una página prerenderizada esperada (según `pages` de `astro:build:done`, más al menos un path por cada ruta de página prerenderizada) no existe, pesa 0 bytes o no contiene `<html`. Corre en `build` y en `build:ci`. Se descartaron `prerenderEnvironment: 'node'` y relajar la spec
+
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-apply: residual upstream para el PR: `@astrojs/cloudflare` 13.5.0, con el prerender en workerd, devuelve el error de render como respuesta (`render()` no revisa el status) y Astro 6.3.1 escribe el cuerpo tal cual. La página queda con 0 bytes o con la traza del error como contenido (p. ej. `TypeError: Illegal invocation …` en `/servicios/index.html`). Es reportable en withastro/astro; la guarda de ADR-0012 es la mitigación local
+
+## 2026-10-08 | decision | debt-copy-tokens-ssot | sdd-apply: la tensión entre los criterios 4 y 5 de `color-token-policy` se resuelve sacando los `--shadow-*` de `@theme` (quedan en `:root`, consumidos vía `var()`). El criterio 5 se reescribe así, y el CSS construido difiere de la línea base solo en las declaraciones retiradas
+
+## 2026-10-08 | decision | debt-copy-tokens-ssot | sdd-apply: los residuales de `meta.siteName` y de `@logatm` quedan cerrados. La marca de Navbar y Footer lee `SITE.name` y la clave sale del i18n; `twitter:site`/`twitter:creator` leen `TWITTER_HANDLE`, derivado de `SITE.social.twitter`. El correo vuelve al import simple de `es.json`. Ningún cambio visible en `dist/client`
+## 2026-10-08 | measure | debt-copy-tokens-ssot | post-dispatch sdd-apply FIN 17:13:05 outcome=advance
+
+## 2026-10-08 | measure | debt-copy-tokens-ssot | preflight sdd-verify INICIO 17:13:18 outcome=ready
+
+
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-verify: residuales no bloqueantes: (1) `MAIL_TO` de `wrangler.toml` y `.dev.vars.example` y el email y teléfono del `README.md` repiten datos de identidad fuera de `site.ts` (config de despliegue y docs, fuera de las specs); (2) los scripts de cliente de `CTASection.astro` y `WhyVideoSection.astro` conservan textos de respaldo en español (`dataset.msg… ?? "…"`), previos al cambio y ajenos a los 12 sitios; (3) `canonical-host-www` habla de «siete páginas» pero hay seis rutas prerenderizadas por idioma y la 404 bajo demanda, sin señales de URL (ADR-0007); (4) el primer build de Workers Builds tras el merge debe confirmar que `astro.config.mjs` carga `src/lib/site.ts`
+## 2026-10-08 | measure | debt-copy-tokens-ssot | post-dispatch sdd-verify FIN 17:34:17 outcome=advance
+
+## 2026-10-08 | measure | debt-copy-tokens-ssot | preflight sdd-archive INICIO 17:34:23 outcome=ready
+

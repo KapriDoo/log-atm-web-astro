@@ -1,6 +1,7 @@
 ---
 import Icon from "./Icon.astro";
-import { CURRENT_YEAR, SITE } from '../../lib/constants';
+import { CURRENT_YEAR } from '../../lib/constants';
+import { SITE, ADDRESS_LINE } from '../../lib/site';
 import { useTranslations, getLangFromUrl, buildLocaleUrl } from '../../i18n/utils';
 
 const currentLang = getLangFromUrl(Astro.url);
@@ -17,7 +18,7 @@ const contactHref = buildLocaleUrl(currentLang, '/contacto');
         <a href={homeHref} class="nav__brand nav__brand--footer">
           <img class="nav__brand-logo nav__brand-logo--light" src="/logo.png" alt="" width="38" height="38" />
           <span>
-            <span class="nav__brand-name">{t('meta.siteName')}</span>
+            <span class="nav__brand-name">{SITE.name}</span>
             <span class="nav__brand-sub nav__brand-sub--footer">{t('meta.tagline')}</span>
           </span>
         </a>
@@ -43,7 +44,7 @@ const contactHref = buildLocaleUrl(currentLang, '/contacto');
           </a>
           <a href={contactHref} class="footer__contact-address">
             <Icon name="lucide:map-pin" width={14} height={14} aria-hidden="true" />
-            <span>{SITE.address}</span>
+            <span>{ADDRESS_LINE}</span>
           </a>
         </div>
       </div>

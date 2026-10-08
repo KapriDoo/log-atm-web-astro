@@ -1,5 +1,5 @@
 ---
-import { SITE } from '../../lib/constants';
+import { SITE, WHATSAPP_URL } from '../../lib/site';
 import { useTranslations, getLangFromUrl, stripLocaleFromPath, buildLocaleUrl, isRTL } from '../../i18n/utils';
 import LanguageSelector from './LanguageSelector.astro';
 
@@ -39,7 +39,7 @@ const rtl = isRTL(currentLang);
     <a href={homeHref} class="nav__brand">
       <img class="nav__brand-logo" src="/logo.png" alt="" width="38" height="38" loading="eager" fetchpriority="high" />
       <span>
-        <span class="nav__brand-name">{t('meta.siteName')}</span>
+        <span class="nav__brand-name">{SITE.name}</span>
         <span class="nav__brand-sub">{t('meta.tagline')}</span>
       </span>
       <span class="sr-only">{t('a11y.brandHome')}</span>
@@ -79,7 +79,7 @@ const rtl = isRTL(currentLang);
       <a href={homeHref} class="nav__brand">
         <img class="nav__brand-logo" src="/logo.png" alt="" width="38" height="38" />
         <span>
-          <span class="nav__brand-name">{t('meta.siteName')}</span>
+          <span class="nav__brand-name">{SITE.name}</span>
           <span class="nav__brand-sub">{t('meta.tagline')}</span>
         </span>
       </a>
@@ -96,7 +96,7 @@ const rtl = isRTL(currentLang);
     </ul>
     <div class="nav-drawer__ctas">
       <a class="btn btn--cta" href={quoteHref}>{t('nav.quoteCta')}</a>
-      <a class="btn btn--wa" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">{t('common.whatsapp')}</a>
+      <a class="btn btn--wa" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">{t('common.whatsapp')}</a>
     </div>
     <LanguageSelector currentLang={currentLang} currentPath={cleanPath} variant="mobile" />
   </div>

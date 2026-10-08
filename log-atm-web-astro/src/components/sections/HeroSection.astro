@@ -2,18 +2,16 @@
 import { Picture } from 'astro:assets';
 import heroImg from '../../assets/images/services/svc-maritima.jpeg';
 import Icon from "../ui/Icon.astro";
-import { SITE, LIVE_ROUTES, HERO_STRIP_STATS } from '../../lib/constants';
-import { useTranslations, getLangFromUrl, buildLocaleUrl, tList } from '../../i18n/utils';
+import { LIVE_ROUTES, HERO_STRIP_STATS } from '../../lib/constants';
+import { WHATSAPP_URL } from '../../lib/site';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, tListFor } from '../../i18n/utils';
 
 const currentLang = getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
 const quoteHref = buildLocaleUrl(currentLang, '/cotizar');
 
-const stripLabels = tList<string>(currentLang, 'home.hero.stripStats');
-const heroStripStats = HERO_STRIP_STATS.map((s, i) => ({
-  num: s.num,
-  label: stripLabels[i] ?? s.label,
-}));
+const stripLabels = tListFor<string>(currentLang, 'home.hero.stripStats', HERO_STRIP_STATS);
+const heroStripStats = HERO_STRIP_STATS.map((s, i) => ({ num: s.num, label: stripLabels[i] }));
 ---
 
 <header class="hero hero-b" aria-label={t('a11y.heroAria')}>
@@ -44,7 +42,7 @@ const heroStripStats = HERO_STRIP_STATS.map((s, i) => ({
             {t('home.hero.ctaQuote')}
             <Icon name="lucide:arrow-right" width={16} height={16} aria-hidden="true" />
           </a>
-          <a class="btn btn--ghost-light" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
+          <a class="btn btn--ghost-light" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
             <Icon name="lucide:message-circle" width={14} height={14} aria-hidden="true" />
             {t('common.whatsapp')}
           </a>

@@ -5,6 +5,10 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import cloudflare from '@astrojs/cloudflare';
 import { spawnSync } from 'node:child_process';
+import { existsSync, readFileSync, statSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+// Identidad del sitio sin imports: carga en el entorno de construcción (fuente única del host canónico).
+import { SITE } from './src/lib/site.ts';
 
 /**
  * Integration mínima que valida la paridad de claves i18n antes de cada build.
@@ -36,8 +40,64 @@ function i18nValidator() {
   };
 }
 
+/**
+ * Guarda post-build: falla el build si una página prerenderizada esperada no existe en
+ * `dist/client`, pesa 0 bytes o no contiene `<html`. Ver ADR-0012.
+ *
+ * El prerender de `@astrojs/cloudflare` corre en workerd y devuelve los errores de render como
+ * respuesta sin lanzar: `astro build` termina con exit 0 y la página queda ausente o vacía.
+ *
+ * «Esperada» no sale de lo escrito en disco:
+ * - `pages` de `astro:build:done` lista cada path que entregó `getStaticPaths` (o el path fijo
+ *   de una ruta estática); Astro lo registra antes de renderizar, así que incluye los que fallan.
+ * - Las rutas de página prerenderizadas del proyecto (`astro:routes:resolved`) deben tener al
+ *   menos un path en esa lista: cubre una ruta cuyo `getStaticPaths` no entrega ninguno.
+ *
+ * @returns {import('astro').AstroIntegration}
+ */
+function prerenderOutputGuard() {
+  /** @type {import('astro').IntegrationResolvedRoute[]} */
+  let prerenderedPageRoutes = [];
+  return {
+    name: 'log-atm:prerender-output-guard',
+    hooks: {
+      'astro:routes:resolved': ({ routes }) => {
+        prerenderedPageRoutes = routes.filter(
+          (route) => route.type === 'page' && route.isPrerendered && route.origin === 'project'
+        );
+      },
+      'astro:build:done': ({ pages, dir, logger }) => {
+        const failures = [];
+        const expectedPaths = pages.map(({ pathname }) => `/${pathname}`);
+        for (const route of prerenderedPageRoutes) {
+          if (!expectedPaths.some((path) => route.patternRegex.test(path))) {
+            failures.push(`${route.pattern} (${route.entrypoint}): sin paths de getStaticPaths`);
+          }
+        }
+        for (const path of expectedPaths) {
+          // build.format 'directory' (por defecto): cada página se escribe como `<path>/index.html`.
+          const file = fileURLToPath(new URL(`.${path.replace(/\/?$/, '/')}index.html`, dir));
+          if (!existsSync(file)) {
+            failures.push(`${path}: no existe ${file}`);
+          } else if (statSync(file).size === 0) {
+            failures.push(`${path}: ${file} pesa 0 bytes`);
+          } else if (!readFileSync(file, 'utf8').includes('<html')) {
+            failures.push(`${path}: ${file} no contiene <html`);
+          }
+        }
+        if (failures.length > 0) {
+          throw new Error(
+            `[prerender] ${failures.length} página(s) prerenderizada(s) sin HTML válido:\n  - ${failures.join('\n  - ')}`
+          );
+        }
+        logger.info(`[prerender] ${expectedPaths.length} páginas prerenderizadas con HTML válido`);
+      },
+    },
+  };
+}
+
 export default defineConfig({
-  site: 'https://logatm.com',
+  site: SITE.url,
   output: 'static',
   image: {
     // Servicio Sharp explícito (ya en deps). Opciones de codec por formato. Ver ADR-0006.
@@ -68,6 +128,7 @@ export default defineConfig({
   integrations: [
     react(),
     i18nValidator(),
+    prerenderOutputGuard(),
     sitemap({
       i18n: {
         defaultLocale: 'es',

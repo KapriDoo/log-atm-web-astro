@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
 import Icon from "../components/ui/Icon.astro";
-import { SITE } from '../lib/constants';
+import { SITE, WHATSAPP_URL, ADDRESS_LINE } from '../lib/site';
 import { useTranslations, getLangFromUrl, buildLocaleUrl, tList, type Locale } from '../i18n/utils';
 import WhatsAppIcon from '../components/icons/WhatsAppIcon.astro';
 import '../styles/pages/shared.css';
@@ -137,7 +137,7 @@ const submitSuccessText = t('contacto.form.submitSuccess');
             <span class="eyebrow">{t('contacto.channels.eyebrow')}</span>
 
             <div class="contact-channels">
-              <a class="channel channel--wa" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
+              <a class="channel channel--wa" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                 <span class="channel__icon">
                   <WhatsAppIcon width={22} height={22} ariaLabel="WhatsApp" />
                 </span>
@@ -176,7 +176,7 @@ const submitSuccessText = t('contacto.form.submitSuccess');
               </div>
               <div class="office-card__body">
                 <h3 class="office-card__name">{t('contacto.office.name')}</h3>
-                <p class="office-card__address">{SITE.address}</p>
+                <p class="office-card__address">{ADDRESS_LINE}</p>
                 <div class="office-card__hours">
                   <div class="office-card__hours-row"><span>{t('contacto.office.rowWeek')}</span><strong>{t('contacto.office.hoursWeek')}</strong></div>
                   <div class="office-card__hours-row"><span>{t('contacto.office.rowSat')}</span><strong>{t('contacto.office.hoursSat')}</strong></div>

@@ -1,4 +1,7 @@
 import { formatDateCL } from "./mailer";
+import { SITE, ADDRESS_EMAIL_HTML } from "./site";
+// Los correos al operador se redactan en español: el eslogan sale de `meta.tagline` de `es.json`.
+import es from "../i18n/translations/es.json";
 
 // ============================================================
 // Utilidades base — conservar escapeHtml sin modificaciones
@@ -86,8 +89,8 @@ function buildEmailHeader(badge: { color: BadgeColor; label: string }): string {
     `</div>` +
     `</td>` +
     `<td style="vertical-align:middle;">` +
-    `<div style="font-family:'Outfit',Arial,sans-serif;font-weight:800;font-size:18px;color:#ffffff;line-height:1;">LOG ATM</div>` +
-    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#aec7e5;margin-top:3px;">Logística a tu medida</div>` +
+    `<div style="font-family:'Outfit',Arial,sans-serif;font-weight:800;font-size:18px;color:#ffffff;line-height:1;">${SITE.name}</div>` +
+    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#aec7e5;margin-top:3px;">${es.meta.tagline}</div>` +
     `</td>` +
     `</tr>` +
     `</table>` +
@@ -109,11 +112,11 @@ function buildEmailFooter(): string {
     `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">` +
     `<tr>` +
     `<td style="vertical-align:top;">` +
-    `<div style="font-family:'Outfit',Arial,sans-serif;font-weight:700;font-size:15px;color:#ffffff;margin-bottom:4px;">LOG ATM</div>` +
-    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#658fc3;">Logística a tu medida</div>` +
+    `<div style="font-family:'Outfit',Arial,sans-serif;font-weight:700;font-size:15px;color:#ffffff;margin-bottom:4px;">${SITE.name}</div>` +
+    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#658fc3;">${es.meta.tagline}</div>` +
     `</td>` +
     `<td align="right" style="vertical-align:top;font-size:12px;color:#658fc3;">` +
-    `Av. Pdte Kennedy 5600, Of. 507<br>Vitacura &middot; Santiago &middot; Chile` +
+    ADDRESS_EMAIL_HTML +
     `</td>` +
     `</tr>` +
     `</table>` +

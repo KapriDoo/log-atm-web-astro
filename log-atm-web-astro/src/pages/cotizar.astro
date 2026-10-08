@@ -4,13 +4,13 @@ import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
 import Icon from "../components/ui/Icon.astro";
 import {
-  SITE,
   QUOTE_MODES,
   QUOTE_ORIGINS,
   QUOTE_DESTS,
   QUOTE_STEPS,
 } from '../lib/constants';
-import { useTranslations, getLangFromUrl, buildLocaleUrl, tList, type Locale } from '../i18n/utils';
+import { WHATSAPP_URL } from '../lib/site';
+import { useTranslations, getLangFromUrl, buildLocaleUrl, tList, tListFor, type Locale } from '../i18n/utils';
 import '../styles/pages/shared.css';
 import '../styles/pages/cotizar.css';
 
@@ -27,14 +27,14 @@ type StepCopy = { label: string; name: string };
 type SuccessStep = { title: string; desc: string };
 
 const chips = tList<string>(currentLang, 'cotizar.chips');
-const modeCopies = tList<ModeCopy>(currentLang, 'cotizar.modes');
-const stepCopies = tList<StepCopy>(currentLang, 'cotizar.steps');
+const modeCopies = tListFor<ModeCopy>(currentLang, 'cotizar.modes', QUOTE_MODES);
+const stepCopies = tListFor<StepCopy>(currentLang, 'cotizar.steps', QUOTE_STEPS);
 const cargoTypes = tList<string>(currentLang, 'cotizar.cargoTypes');
 const extras = tList<string>(currentLang, 'cotizar.extras');
 const successSteps = tList<SuccessStep>(currentLang, 'cotizar.success.steps');
 
-const modes = QUOTE_MODES.map((m, i) => ({ ...m, ...(modeCopies[i] ?? { name: m.name, desc: m.desc }) }));
-const steps = QUOTE_STEPS.map((s, i) => ({ ...s, ...(stepCopies[i] ?? { label: s.label, name: s.name }) }));
+const modes = QUOTE_MODES.map((m, i) => ({ ...m, ...modeCopies[i] }));
+const steps = QUOTE_STEPS.map((s, i) => ({ ...s, ...stepCopies[i] }));
 
 // Strings consumidos por el script inline (cliente)
 const clientStrings = {
@@ -141,6 +141,8 @@ const clientStrings = {
                 <select id="q-origin" name="origin">
                   <option value="">{t('cotizar.step2.placeholderOrigin')}</option>
                   {QUOTE_ORIGINS.map((o) => <option value={o}>{o}</option>)}
+                  {/* El operador recibe «Otro» en todos los idiomas; la etiqueta sale del i18n. */}
+                  <option value="Otro">{t('cotizar.step2.originOther')}</option>
                 </select>
               </div>
               <div class="route-pair__arrow" aria-hidden="true">→</div>
@@ -342,7 +344,7 @@ const clientStrings = {
             </div>
             <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
               <a class="btn btn--brand" href={homeHref}>{t('cotizar.success.backHome')}</a>
-              <a class="btn btn--wa" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
+              <a class="btn btn--wa" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                 <Icon name="lucide:message-circle" width={16} height={16} aria-hidden="true" />
                 {t('cotizar.success.whatsapp')}
               </a>

@@ -1,6 +1,5 @@
 {
   "meta": {
-    "siteName": "LOG ATM",
     "tagline": "Logística a tu medida",
     "taglineUpper": "LOGÍSTICA A TU MEDIDA",
     "defaultTitle": "LOG ATM — Logística a tu medida",
@@ -420,6 +419,7 @@
       "labelOrigin": "Origen",
       "labelDest": "Destino",
       "placeholderOrigin": "Selecciona origen...",
+      "originOther": "Otro",
       "labelIncoterm": "Incoterm",
       "labelDate": "Fecha estimada de salida",
       "incotermUnsure": "No estoy seguro"
@@ -494,7 +494,6 @@
       "Aduana",
       "Seguro de carga",
       "Almacenaje destino",
-      "Última milla",
       "Inspección origen"
     ],
     "success": {

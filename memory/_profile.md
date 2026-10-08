@@ -8,7 +8,7 @@ version: 0.0.1
 node_engine: ">=22.12.0"
 status: active
 created: "2026-05-19"
-updated: "2026-10-06"
+updated: "2026-10-08"
 ---
 
 ## Stack
@@ -87,6 +87,7 @@ updated: "2026-10-06"
 - **Performance:** Lighthouse ≥ 95 (all pages)
 - **Accessibility:** WCAG AA minimum
 - **Animations:** `prefers-reduced-motion` required
+- **Fuentes de datos:** todo texto visible sale del i18n (`src/i18n/translations/*.json`); `src/lib/constants.ts` conserva solo datos no textuales (ids, imágenes, íconos, tamaños, enlaces y colores), alineados por posición con su lista de texto mediante `tListFor`; la identidad del sitio (nombre, URL, teléfono, email, dirección, coordenadas y redes) vive en `src/lib/site.ts`
 
 ## Notable Implementation Details
 
@@ -104,4 +105,4 @@ updated: "2026-10-06"
 - Hero LCP: `priority` prop on `<Picture>` (`fetchpriority="high"`, `loading="eager"`, `decoding="sync"`)
 - Poster generation (video): `getImage()` from `astro:assets`
 
-**Convention:** `constants.ts` is the single source of truth for content data + image assets (no auxiliary key→asset maps).
+**Convention:** `constants.ts` es la fuente única de los datos no textuales y de los assets de imagen (sin mapas auxiliares clave→asset); el texto visible sale del i18n y la identidad del sitio, de `src/lib/site.ts`.

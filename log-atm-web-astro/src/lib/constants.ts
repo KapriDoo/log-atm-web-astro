@@ -1,6 +1,7 @@
 /**
- * LOG ATM — Constantes centralizadas
+ * LOG ATM — Datos no textuales del sitio (ids, imágenes, íconos, tamaños, enlaces y colores).
  * Nunca duplicar estos valores en componentes. Siempre importar desde aquí.
+ * El texto visible sale del i18n y la identidad del sitio, de `./site`.
  */
 
 // Imports estáticos para astro:assets (build-time, Sharp). Ver ADR-0006.
@@ -35,46 +36,18 @@ import how02 from '../assets/images/process/how-02-diagnostico.jpeg';
 import how03 from '../assets/images/process/how-03-ruta.jpeg';
 import how04 from '../assets/images/process/how-04-operacion.jpeg';
 
-export const SITE = {
-  name: 'LOG ATM',
-  url: 'https://logatm.com',
-  tagline: 'Logística a tu medida',
-  phone: '+56982708492',
-  phoneDisplay: '+56 9 8270 8492',
-  email: 'contacto@logatm.com',
-  address: 'Av. Pdte Kennedy 5600, Of. 507, Vitacura, Santiago, Chile',
-  whatsappUrl: 'https://wa.me/56982708492?text=Hola%2C%20me%20interesa%20cotizar',
-  social: {
-    facebook: 'https://facebook.com/logatm',
-    twitter: 'https://twitter.com/logatm',
-    instagram: 'https://instagram.com/logatm',
-  },
-} as const;
-
-export const SEO = {
-  defaultTitle: `${SITE.name} — ${SITE.tagline}`,
-  defaultDescription:
-    'Logística aérea y marítima a tu medida. Carga internacional, aduana, almacenaje y consultoría desde Vitacura, Santiago, Chile.',
-  defaultImage: `${SITE.url}/og-default.svg`,
-  locale: 'es_CL',
-  twitterHandle: '@logatm',
-} as const;
-
-// Strip de stats dentro del hero — etiquetas cortas del handoff (hero-b.jsx)
+// Strip de stats dentro del hero (hero-b.jsx). La etiqueta de cada cifra sale de home.hero.stripStats.
 export const HERO_STRIP_STATS = [
-  { num: '20+', label: 'Años de experiencia del equipo' },
-  { num: '1:1', label: 'Ejecutivo dedicado' },
+  { num: '20+' },
+  { num: '1:1' },
 ] as const;
 
-// Servicios — 11 cards en bento grid con foto, tag y tamaño
+// Servicios — 11 cards en bento grid con foto, ícono y tamaño. Título, descripción y tag salen de servicios.list.
 // size: feature (col-span-6, alto) | wide (col-span-6) | std (col-span-4) | mini (col-span-3)
 export const SERVICES = [
   {
     n: '01',
-    title: 'Carga Aérea',
     img: svcAerea,
-    desc: 'Express, courier internacional y chárter aéreo con tiempos garantizados.',
-    tag: 'Express · 48h',
     icon: 'lucide:plane',
     size: 'feature',
     isCta: false,
@@ -82,10 +55,7 @@ export const SERVICES = [
   },
   {
     n: '02',
-    title: 'Carga Marítima',
     img: svcMaritima,
-    desc: 'FCL y LCL a 80+ puertos. Consolidamos para reducir costos.',
-    tag: 'FCL · LCL',
     icon: 'lucide:ship',
     size: 'wide',
     isCta: false,
@@ -93,10 +63,7 @@ export const SERVICES = [
   },
   {
     n: '03',
-    title: 'Aduana y Documentación',
     img: svcAduana,
-    desc: 'DUS, certificados de origen y clasificación arancelaria.',
-    tag: 'Aduana Chile',
     icon: 'lucide:file-check',
     size: 'std',
     isCta: false,
@@ -104,10 +71,7 @@ export const SERVICES = [
   },
   {
     n: '04',
-    title: 'Almacenaje',
     img: svcAlmacenaje,
-    desc: 'Bodegaje, fulfillment y última milla con inventario en tiempo real.',
-    tag: '24/7',
     icon: 'lucide:warehouse',
     size: 'std',
     isCta: false,
@@ -115,10 +79,7 @@ export const SERVICES = [
   },
   {
     n: '05',
-    title: 'Consultoría Logística',
     img: svcConsultoria,
-    desc: 'Supply chain a medida que reduce costos y plazos.',
-    tag: 'A tu medida',
     icon: 'lucide:compass',
     size: 'std',
     isCta: true,
@@ -126,10 +87,7 @@ export const SERVICES = [
   },
   {
     n: '06',
-    title: 'Courier Internacional',
     img: svcCourier,
-    desc: 'Envíos exprés puerta a puerta con cobertura global.',
-    tag: 'D2D',
     icon: 'lucide:package',
     size: 'wide',
     isCta: false,
@@ -137,10 +95,7 @@ export const SERVICES = [
   },
   {
     n: '07',
-    title: 'Seguros de Carga',
     img: svcSeguros,
-    desc: 'Cobertura integral durante todo el trayecto.',
-    tag: 'Global',
     icon: 'lucide:shield',
     size: 'std',
     isCta: false,
@@ -148,10 +103,7 @@ export const SERVICES = [
   },
   {
     n: '08',
-    title: 'Desconsolidado',
     img: svcDesconsolidado,
-    desc: 'Recepción, fraccionamiento y distribución desde puerto.',
-    tag: 'LCL',
     icon: 'lucide:container',
     size: 'std',
     isCta: false,
@@ -159,10 +111,7 @@ export const SERVICES = [
   },
   {
     n: '09',
-    title: 'Casillero USA',
     img: svcCasillero,
-    desc: 'Dirección propia en EE.UU. para compras online.',
-    tag: 'Miami',
     icon: 'lucide:mailbox',
     size: 'mini',
     isCta: false,
@@ -170,10 +119,7 @@ export const SERVICES = [
   },
   {
     n: '10',
-    title: 'Compras Internacionales',
     img: svcAsesoria,
-    desc: 'Asesoría completa: proveedores, pagos y logística.',
-    tag: 'Asesoría',
     icon: 'lucide:handshake',
     size: 'mini',
     isCta: false,
@@ -181,10 +127,7 @@ export const SERVICES = [
   },
   {
     n: '11',
-    title: 'Ruta Medio Oriente',
     img: svcMedioOriente,
-    desc: 'Conexión especializada con socios locales de confianza.',
-    tag: 'DXB · JED',
     icon: 'lucide:globe',
     size: 'wide',
     isCta: true,
@@ -206,45 +149,37 @@ export const SERVICE_CARD_IMAGE_SIZES = {
   mini: '(max-width: 640px) 90vw, (max-width: 1024px) 46vw, 360px',
 } as const;
 
-// Razones para elegir LOG ATM — con métrica destacada (paridad target image)
+// Razones para elegir LOG ATM — con métrica destacada (paridad target image). El texto sale de home.why.items.
 export const WHY_ITEMS = [
   {
     icon: 'lucide:user',
-    title: 'Ejecutivo dedicado',
-    desc: 'Una persona que conoce tu negocio y anticipa tus necesidades.',
     metric: '1:1',
-    sub: 'cuenta',
   },
   {
     icon: 'lucide:map-pin',
-    title: 'Atención 24/7',
-    desc: 'Soporte directo con tu ejecutivo cuando lo necesites.',
     metric: '24/7',
-    sub: 'soporte',
   },
   {
     icon: 'lucide:compass',
-    title: 'Multimodal real',
-    desc: 'Aéreo, marítimo, terrestre y courier bajo un mismo equipo.',
     metric: '4',
-    sub: 'modalidades',
   },
 ] as const;
 
-// Industrias atendidas (12 con foto en home — paridad handoff data.jsx)
+// Industrias atendidas (12 con foto en home — paridad handoff data.jsx). Nombre y bajada salen de industrias.names.
+// Los colores son datos de contenido por industria (acento de cada card), no tokens de diseño.
 export const INDUSTRIES = [
-  { icon: 'lucide:pickaxe',       name: 'Minería',            sub: 'Cobre, litio, maquinaria',     color: '#658fc3', img: indMineria },
-  { icon: 'lucide:shopping-bag',  name: 'Retail',             sub: 'Moda, consumo, temporada',     color: '#3EB978', img: indRetail },
-  { icon: 'lucide:wheat',         name: 'Agroindustria',      sub: 'Fruta, vinos, granos',         color: '#2D9B6F', img: indAgro },
-  { icon: 'lucide:pill',          name: 'Farmacéutica',       sub: 'Cadena de frío, reactivos',    color: '#4A7BB5', img: indFarma },
-  { icon: 'lucide:shopping-cart', name: 'E-commerce',         sub: 'Cross-border, fulfillment',    color: '#339965', img: indEcommerce },
-  { icon: 'lucide:hard-hat',      name: 'Construcción',       sub: 'Maquinaria, materiales',       color: '#3b6497', img: indConstruccion },
-  { icon: 'lucide:hammer',        name: 'Chatarra Ferrosa',   sub: 'Reciclaje y exportación',      color: '#7a7a7a', img: indChatarra },
-  { icon: 'lucide:lightbulb',     name: 'Iluminarias',        sub: 'LED e industrial',             color: '#cc7614', img: indIluminarias },
-  { icon: 'lucide:car',           name: 'Vehículos Usados',   sub: 'Importación y trámites',       color: '#e84c3d', img: indVehiculos },
-  { icon: 'lucide:briefcase',     name: 'Efectos Personales', sub: 'Mudanzas internacionales',     color: '#9b59b6', img: indEfectos },
-  { icon: 'lucide:settings',      name: 'Maquinaria',         sub: 'Industrial y agrícola',        color: '#34495e', img: indMaquinaria },
-  { icon: 'lucide:scissors',      name: 'Textil',             sub: 'Prendas, telas, accesorios',   color: '#e91e63', img: indTextil },
+  { icon: 'lucide:pickaxe',       color: '#658fc3', img: indMineria },
+  { icon: 'lucide:shopping-bag',  color: '#3EB978', img: indRetail },
+  { icon: 'lucide:wheat',         color: '#2D9B6F', img: indAgro },
+  { icon: 'lucide:pill',          color: '#4A7BB5', img: indFarma },
+  { icon: 'lucide:shopping-cart', color: '#339965', img: indEcommerce },
+  { icon: 'lucide:hard-hat',      color: '#3b6497', img: indConstruccion },
+  { icon: 'lucide:hammer',        color: '#7a7a7a', img: indChatarra },
+  { icon: 'lucide:lightbulb',     color: '#cc7614', img: indIluminarias },
+  { icon: 'lucide:car',           color: '#e84c3d', img: indVehiculos },
+  { icon: 'lucide:briefcase',     color: '#9b59b6', img: indEfectos },
+  { icon: 'lucide:settings',      color: '#34495e', img: indMaquinaria },
+  { icon: 'lucide:scissors',      color: '#e91e63', img: indTextil },
 ] as const;
 
 // Rutas marítimas/aéreas mostradas en el panel translúcido del hero
@@ -284,36 +219,36 @@ export const QUICK_QUOTE_VOLUMES = [
 // Datos de sub-páginas (handoff design_handoff_pages)
 // ──────────────────────────────────────────────────────────
 
-// Valores (en /nosotros)
+// Valores (en /nosotros). El texto sale de nosotros.values.items.
 export const VALUES = [
-  { icon: 'lucide:user-round-check', title: 'Cercanía operativa', desc: 'No somos un proveedor: somos tu equipo logístico extendido.' },
-  { icon: 'lucide:compass',          title: 'A tu medida',         desc: 'Cada cuenta tiene una operación diseñada para su realidad.' },
-  { icon: 'lucide:shield-check',     title: 'Transparencia total', desc: 'Tarifas claras, sin sorpresas. Si algo falla, lo decimos primero.' },
-  { icon: 'lucide:sparkles',         title: 'Mejora continua',     desc: 'KPIs medibles y revisión trimestral con cada cliente.' },
+  { icon: 'lucide:user-round-check' },
+  { icon: 'lucide:compass' },
+  { icon: 'lucide:shield-check' },
+  { icon: 'lucide:sparkles' },
 ] as const;
 
-// Cómo trabajamos (en /nosotros)
+// Cómo trabajamos (en /nosotros). El texto sale de nosotros.how.items.
 export const HOW_WE_WORK = [
-  { step: '01', icon: 'lucide:user-round-check', img: how01,  title: 'Ejecutivo dedicado',     desc: 'Una persona asignada a tu cuenta que conoce tu operación, productos y tiempos. Punto único de contacto, sin call centers.' },
-  { step: '02', icon: 'lucide:file-check',       img: how02, title: 'Diagnóstico operativo',  desc: 'Mapeamos tu cadena actual: orígenes, destinos, volúmenes, tiempos críticos y dolores. Detectamos sobrecostos y cuellos de botella.' },
-  { step: '03', icon: 'lucide:compass',          img: how03,        title: 'Diseño de ruta a medida', desc: 'Proponemos modos, navieras, aerolíneas y agentes según costo, tiempo y riesgo. Negociamos tarifas y dejamos todo documentado.' },
-  { step: '04', icon: 'lucide:package',          img: how04,   title: 'Operación y reporte',    desc: 'Ejecutamos cada embarque con visibilidad completa, alertas proactivas ante desvíos y reporte semanal de carga en tránsito.' },
+  { step: '01', icon: 'lucide:user-round-check', img: how01 },
+  { step: '02', icon: 'lucide:file-check',       img: how02 },
+  { step: '03', icon: 'lucide:compass',          img: how03 },
+  { step: '04', icon: 'lucide:package',          img: how04 },
 ] as const;
 
-// Cotización (multi-step en /cotizar)
+// Cotización (multi-step en /cotizar). Nombre y descripción de cada modalidad salen de cotizar.modes.
 export const QUOTE_MODES = [
-  { k: 'sea',     name: 'Marítimo',   desc: 'FCL/LCL, 80+ puertos. Best ratio costo/plazo.', icon: 'lucide:ship' },
-  { k: 'air',     name: 'Aéreo',      desc: 'Express 48h–7d. Ideal para urgencias y alto valor.', icon: 'lucide:plane' },
-  { k: 'courier', name: 'Courier',    desc: 'Door-to-door internacional. Hasta 70kg.', icon: 'lucide:package' },
-  { k: 'multi',   name: 'Multimodal', desc: 'Combinación aéreo + marítimo + terrestre.', icon: 'lucide:compass' },
+  { k: 'sea',     icon: 'lucide:ship' },
+  { k: 'air',     icon: 'lucide:plane' },
+  { k: 'courier', icon: 'lucide:package' },
+  { k: 'multi',   icon: 'lucide:compass' },
 ] as const;
 
+// Orígenes del wizard (topónimos). La opción final «Otro» la agrega cotizar.astro con etiqueta del i18n.
 export const QUOTE_ORIGINS = [
   'Shanghai, CN', 'Shenzhen, CN', 'Hong Kong, HK',
   'Miami, US', 'Los Angeles, US',
   'Rotterdam, NL', 'Hamburg, DE',
   'Dubai, AE', 'Jeddah, SA',
-  'Otro',
 ] as const;
 
 export const QUOTE_DESTS = [
@@ -321,11 +256,12 @@ export const QUOTE_DESTS = [
   'Iquique, CL', 'Antofagasta, CL', 'Punta Arenas, CL',
 ] as const;
 
+// Pasos del wizard: etiqueta y nombre salen de cotizar.steps.
 export const QUOTE_STEPS = [
-  { n: '01', label: 'Servicio',  name: 'Modalidad' },
-  { n: '02', label: 'Ruta',      name: 'Origen → Destino' },
-  { n: '03', label: 'Carga',     name: 'Tipo y volumen' },
-  { n: '04', label: 'Contacto',  name: 'Tus datos' },
+  { n: '01' },
+  { n: '02' },
+  { n: '03' },
+  { n: '04' },
 ] as const;
 
 // Año actual para copyright

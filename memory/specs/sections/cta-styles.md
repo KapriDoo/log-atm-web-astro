@@ -6,7 +6,7 @@ slug: "cta-styles"
 domain: "refactoring"
 delta_type: null
 supersedes: null
-superseded_by: null
+superseded_by: "[[color-token-policy]]"
 status: completed
 assigned_agent: "sdd-apply"
 priority: medium
@@ -23,7 +23,7 @@ adrs: []
 scope: ["src/styles/sections/cta.css"]
 verified_at: "2026-04-27"
 created: "2026-04-26"
-updated: "2026-04-26"
+updated: "2026-10-08"
 tags: [capability-spec]
 ---
 
