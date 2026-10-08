@@ -1,5 +1,5 @@
 ---
-import { SITE } from '../../lib/constants';
+import { WHATSAPP_URL } from '../../lib/site';
 import { useTranslations, getLangFromUrl, stripLocaleFromPath, buildLocaleUrl, isRTL } from '../../i18n/utils';
 import LanguageSelector from './LanguageSelector.astro';
 
@@ -96,7 +96,7 @@ const rtl = isRTL(currentLang);
     </ul>
     <div class="nav-drawer__ctas">
       <a class="btn btn--cta" href={quoteHref}>{t('nav.quoteCta')}</a>
-      <a class="btn btn--wa" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">{t('common.whatsapp')}</a>
+      <a class="btn btn--wa" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">{t('common.whatsapp')}</a>
     </div>
     <LanguageSelector currentLang={currentLang} currentPath={cleanPath} variant="mobile" />
   </div>

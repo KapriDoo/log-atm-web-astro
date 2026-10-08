@@ -1,12 +1,12 @@
 ---
 import Icon from "../ui/Icon.astro";
 import {
-    SITE,
     QUICK_QUOTE_MODES,
     QUICK_QUOTE_ORIGINS,
     QUICK_QUOTE_DESTINATIONS,
     QUICK_QUOTE_VOLUMES,
 } from "../../lib/constants";
+import { SITE, WHATSAPP_URL } from "../../lib/site";
 import { useTranslations, getLangFromUrl, buildLocaleUrl, tListFor } from "../../i18n/utils";
 
 const currentLang = getLangFromUrl(Astro.url);
@@ -41,7 +41,7 @@ const quickQuoteVolumes = QUICK_QUOTE_VOLUMES.map((v, i) => ({ value: v, label: 
                 </a>
                 <a
                     class="btn btn--wa"
-                    href={SITE.whatsappUrl}
+                    href={WHATSAPP_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                 >

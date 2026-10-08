@@ -4,12 +4,12 @@ import Navbar from '../components/ui/Navbar.astro';
 import Footer from '../components/ui/Footer.astro';
 import Icon from "../components/ui/Icon.astro";
 import {
-  SITE,
   QUOTE_MODES,
   QUOTE_ORIGINS,
   QUOTE_DESTS,
   QUOTE_STEPS,
 } from '../lib/constants';
+import { WHATSAPP_URL } from '../lib/site';
 import { useTranslations, getLangFromUrl, buildLocaleUrl, tList, tListFor, type Locale } from '../i18n/utils';
 import '../styles/pages/shared.css';
 import '../styles/pages/cotizar.css';
@@ -342,7 +342,7 @@ const clientStrings = {
             </div>
             <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
               <a class="btn btn--brand" href={homeHref}>{t('cotizar.success.backHome')}</a>
-              <a class="btn btn--wa" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
+              <a class="btn btn--wa" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
                 <Icon name="lucide:message-circle" width={16} height={16} aria-hidden="true" />
                 {t('cotizar.success.whatsapp')}
               </a>

@@ -11,7 +11,7 @@ import {
   getOgLocale,
 } from '../i18n/utils';
 import { LOCALES, OG_LOCALE, type Locale } from '../i18n/config';
-import { SITE } from '../lib/constants';
+import { SITE } from '../lib/site';
 
 interface Props {
   title?: string;
@@ -23,9 +23,6 @@ interface Props {
   lang?: Locale;
 }
 
-const SITE_NAME = 'LOG ATM';
-const SITE_URL  = 'https://logatm.com';
-
 // Fuente del locale, en orden de prioridad:
 // 1) prop `lang` (cuando la página `[lang]/*.astro` delega y propaga
 //    `Astro.params.lang` explícitamente — único método 100% fiable);
@@ -35,7 +32,7 @@ const langProp = (Astro.props as Props).lang;
 const currentLang = (langProp ?? (Astro.currentLocale as Locale | undefined) ?? getLangFromUrl(Astro.url)) as Locale;
 const t = useTranslations(currentLang);
 const DEFAULT_DESC = t('meta.defaultDescription');
-const DEFAULT_IMG  = `${SITE_URL}/og-default.svg`;
+const DEFAULT_IMG  = `${SITE.url}/og-default.svg`;
 
 const htmlLang = getHtmlLang(currentLang);
 const dir = isRTL(currentLang) ? 'rtl' : 'ltr';
@@ -47,7 +44,7 @@ const cleanPath = stripLocaleFromPath(Astro.url.pathname);
 // reflejar el segmento de locale en la subruta). Esto asegura URLs localizadas
 // y con trailing slash, alineadas con sitemap y hreflang.
 const computedCanonicalPath = buildLocaleUrl(currentLang, cleanPath);
-const computedCanonical = new URL(computedCanonicalPath, SITE_URL).href;
+const computedCanonical = new URL(computedCanonicalPath, SITE.url).href;
 
 const {
   title,
@@ -65,54 +62,50 @@ const emitUrlSignals = !noindex;
 const alternates = emitUrlSignals
   ? getAlternateLinks(cleanPath).map((a) => ({
       hreflang: a.hreflang,
-      href: new URL(a.href, SITE_URL).href,
+      href: new URL(a.href, SITE.url).href,
     }))
   : [];
 const ogLocale = getOgLocale(currentLang);
 const ogAlternateLocales = LOCALES.filter((l) => l !== currentLang).map((l) => OG_LOCALE[l]);
 
-const pageTitle = title ? `${title} | ${SITE_NAME}` : `${SITE_NAME} — Logística a tu medida`;
+const pageTitle = title ? `${title} | ${SITE.name}` : t('meta.defaultTitle');
 
 const schemaLocalBusiness = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'FreightForwarder',
-  name: 'LOG ATM',
+  name: SITE.name,
   description: DEFAULT_DESC,
-  url: SITE_URL,
+  url: SITE.url,
   telephone: SITE.phone,
   email: SITE.email,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Av. Pdte Kennedy 5600, Of. 507',
-    addressLocality: 'Vitacura',
-    addressRegion: 'Región Metropolitana',
-    addressCountry: 'CL',
+    streetAddress: SITE.address.street,
+    addressLocality: SITE.address.locality,
+    addressRegion: SITE.address.region,
+    addressCountry: SITE.address.countryCode,
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: -33.4081,
-    longitude: -70.5756,
+    latitude: SITE.geo.latitude,
+    longitude: SITE.geo.longitude,
   },
-  sameAs: [
-    'https://facebook.com/logatm',
-    'https://twitter.com/logatm',
-    'https://instagram.com/logatm',
-  ],
+  sameAs: [SITE.social.facebook, SITE.social.twitter, SITE.social.instagram],
   areaServed: {
     '@type': 'Country',
     name: 'Chile',
   },
-  slogan: 'Logística a tu medida',
+  slogan: t('meta.tagline'),
 });
 
 const schemaWebSite = JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: SITE_NAME,
-  url: SITE_URL,
+  name: SITE.name,
+  url: SITE.url,
   potentialAction: {
     '@type': 'SearchAction',
-    target: `${SITE_URL}/?q={search_term_string}`,
+    target: `${SITE.url}/?q={search_term_string}`,
     'query-input': 'required name=search_term_string',
   },
 });
@@ -125,12 +118,12 @@ const breadcrumbSchema = emitUrlSignals && Astro.url.pathname !== '/' ? JSON.str
       '@type': 'ListItem',
       position: 1,
       name: 'Inicio',
-      item: SITE_URL,
+      item: SITE.url,
     },
     {
       '@type': 'ListItem',
       position: 2,
-      name: title || SITE_NAME,
+      name: title || SITE.name,
       item: canonical,
     },
   ],
@@ -161,7 +154,7 @@ const breadcrumbSchema = emitUrlSignals && Astro.url.pathname !== '/' ? JSON.str
     <meta property="og:title"       content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image"       content={image} />
-    <meta property="og:site_name"   content={SITE_NAME} />
+    <meta property="og:site_name"   content={SITE.name} />
     <meta property="og:locale"      content={ogLocale} />
     {ogAlternateLocales.map((l) => (
       <meta property="og:locale:alternate" content={l} />

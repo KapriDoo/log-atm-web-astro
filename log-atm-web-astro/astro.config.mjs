@@ -5,6 +5,8 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import cloudflare from '@astrojs/cloudflare';
 import { spawnSync } from 'node:child_process';
+// Identidad del sitio sin imports: carga en el entorno de construcción (fuente única del host canónico).
+import { SITE } from './src/lib/site.ts';
 
 /**
  * Integration mínima que valida la paridad de claves i18n antes de cada build.
@@ -37,7 +39,7 @@ function i18nValidator() {
 }
 
 export default defineConfig({
-  site: 'https://logatm.com',
+  site: SITE.url,
   output: 'static',
   image: {
     // Servicio Sharp explícito (ya en deps). Opciones de codec por formato. Ver ADR-0006.

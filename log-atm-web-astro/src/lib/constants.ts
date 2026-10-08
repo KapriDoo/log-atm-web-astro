@@ -1,6 +1,7 @@
 /**
- * LOG ATM — Constantes centralizadas
+ * LOG ATM — Datos no textuales del sitio (ids, imágenes, íconos, tamaños, enlaces y colores).
  * Nunca duplicar estos valores en componentes. Siempre importar desde aquí.
+ * El texto visible sale del i18n y la identidad del sitio, de `./site`.
  */
 
 // Imports estáticos para astro:assets (build-time, Sharp). Ver ADR-0006.
@@ -34,22 +35,6 @@ import how01 from '../assets/images/process/how-01-ejecutivo.jpeg';
 import how02 from '../assets/images/process/how-02-diagnostico.jpeg';
 import how03 from '../assets/images/process/how-03-ruta.jpeg';
 import how04 from '../assets/images/process/how-04-operacion.jpeg';
-
-export const SITE = {
-  name: 'LOG ATM',
-  url: 'https://logatm.com',
-  tagline: 'Logística a tu medida',
-  phone: '+56982708492',
-  phoneDisplay: '+56 9 8270 8492',
-  email: 'contacto@logatm.com',
-  address: 'Av. Pdte Kennedy 5600, Of. 507, Vitacura, Santiago, Chile',
-  whatsappUrl: 'https://wa.me/56982708492?text=Hola%2C%20me%20interesa%20cotizar',
-  social: {
-    facebook: 'https://facebook.com/logatm',
-    twitter: 'https://twitter.com/logatm',
-    instagram: 'https://instagram.com/logatm',
-  },
-} as const;
 
 // Strip de stats dentro del hero (hero-b.jsx). La etiqueta de cada cifra sale de home.hero.stripStats.
 export const HERO_STRIP_STATS = [
