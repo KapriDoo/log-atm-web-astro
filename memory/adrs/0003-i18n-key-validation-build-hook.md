@@ -142,3 +142,7 @@ En `astro.config.mjs` (hook complementario):
 **Accepted** — 2026-05-12
 
 No supersede ningún ADR previo.
+
+## Nota de actualización — 2026-10-08
+
+El script `prebuild` de `package.json` nunca existió en el proyecto: el mecanismo único de validación en build es el hook `astro:build:start` de la integración `log-atm:i18n-validator` de `astro.config.mjs`, que ejecuta `scripts/validate-i18n.ts` vía `tsx` y detiene el build antes de generar HTML cuando la paridad de claves falla. `npm run validate-i18n` ejecuta la misma validación de forma independiente. El validador compara los diccionarios de los tres idiomas soportados (es, en, pt) y toma los idiomas y el maestro de `src/i18n/config.ts`, la definición única de idiomas. La decisión de este ADR (script de build hook en lugar de un test) se mantiene.

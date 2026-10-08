@@ -87,6 +87,7 @@ updated: "2026-10-08"
 - **Performance:** Lighthouse ≥ 95 (all pages)
 - **Accessibility:** WCAG AA minimum
 - **Animations:** `prefers-reduced-motion` required
+- **Idiomas:** la lista de idiomas soportados (`LOCALES`), el idioma por defecto (`DEFAULT_LOCALE`), los idiomas con prefijo (`NON_DEFAULT_LOCALES`, derivados) y los códigos regionales (`HTML_LANG`, `OG_LOCALE`, `SITEMAP_LOCALES`) viven en `src/i18n/config.ts`, sin imports; `astro.config.mjs` (routing y sitemap) y `scripts/validate-i18n.ts` los importan de ahí, sin literales de idiomas propios
 - **Fuentes de datos:** todo texto visible sale del i18n (`src/i18n/translations/*.json`); `src/lib/constants.ts` conserva solo datos no textuales (ids, imágenes, íconos, tamaños, enlaces y colores), alineados por posición con su lista de texto mediante `tListFor`; la identidad del sitio (nombre, URL, teléfono, email, dirección, coordenadas y redes) vive en `src/lib/site.ts`
 
 ## Notable Implementation Details
