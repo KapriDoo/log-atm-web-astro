@@ -4,13 +4,12 @@
  * - useTranslations: devuelve un `t(key)` con fallback al master español.
  * - tList / tListFor: listas traducidas; tListFor exige que el texto tenga tantos ítems como los datos.
  * - getAlternateLinks: arma los `<link rel="alternate" hreflang>` para SEO.
- * - isRTL / getHtmlLang / getOgLocale: utilidades misceláneas.
+ * - getHtmlLang / getOgLocale: utilidades misceláneas.
  */
 
 import {
   LOCALES,
   DEFAULT_LOCALE,
-  RTL_LOCALES,
   HTML_LANG,
   OG_LOCALE,
   type Locale,
@@ -154,11 +153,6 @@ export function tObj<T extends Record<string, unknown> = Record<string, unknown>
   return fallback;
 }
 
-/** Indica si el locale se renderiza de derecha a izquierda. */
-export function isRTL(lang: Locale): boolean {
-  return (RTL_LOCALES as readonly Locale[]).includes(lang);
-}
-
 export function getHtmlLang(lang: Locale): string {
   return HTML_LANG[lang] ?? HTML_LANG[DEFAULT_LOCALE];
 }
@@ -185,4 +179,4 @@ export function getAlternateLinks(currentPath: string): Array<{ hreflang: string
 }
 
 export type { Locale, TranslationKey };
-export { LOCALES, DEFAULT_LOCALE, NON_DEFAULT_LOCALES, LOCALE_LABELS, LOCALE_NAMES, RTL_LOCALES } from './config';
+export { LOCALES, DEFAULT_LOCALE, NON_DEFAULT_LOCALES, LOCALE_LABELS, LOCALE_NAMES } from './config';

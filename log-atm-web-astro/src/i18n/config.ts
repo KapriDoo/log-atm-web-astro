@@ -12,8 +12,6 @@ export const NON_DEFAULT_LOCALES: ReadonlyArray<Exclude<Locale, 'es'>> = [
   'pt',
 ];
 
-export const RTL_LOCALES: ReadonlyArray<Locale> = [];
-
 /** Etiqueta corta para selector (códigos ISO). */
 export const LOCALE_LABELS: Record<Locale, string> = {
   es: 'ES',
