@@ -609,6 +609,25 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 
 ## 2026-10-06 | measure | chore-local-container-podman | preflight sdd-archive INICIO 19:33:30 outcome=ready
 
+## 2026-10-06 | measure | chore-deploy-config | preflight sdd-init INICIO 22:06:52 outcome=ready
+
+## 2026-10-06 | measure | chore-deploy-config | post-dispatch sdd-init FIN 22:07:32 outcome=advance
+
+## 2026-10-06 | measure | chore-deploy-config | preflight sdd-apply INICIO 22:07:56 outcome=ready
+
+## 2026-10-06 | debt-candidate | chore-deploy-config | Menciones de `node:22-slim` fuera del alcance de tasks.md
+**Detectado por**: sdd-apply en `chore-deploy-config` (T2)
+**Ubicación**: `memory/adrs/0009-local-container-podman-workerd.md` (Decisión, «un stage sobre `docker.io/library/node:22-slim`») y `memory/_profile.md` (línea **Container** de Build & Deploy)
+**Descripción**: el `Containerfile` pasa a `node:24-slim` (Node 24, fijado en `.node-version`), pero ambos documentos siguen nombrando `node:22-slim`. `tasks.md` no los incluye, así que `sdd-apply` no los modifica. El perfil tampoco menciona `.node-version` ni `build:ci`.
+**Promoción sugerida**: actualizar el perfil en el cierre del cambio (Container con `node:24-slim`, `.node-version`, `build:ci`) y corregir la mención de ADR-0009
+
+## 2026-10-06 | measure | chore-deploy-config | `npm run a11y` mantiene la deuda `label-content-name-mismatch`
+**Detectado por**: sdd-apply en `chore-deploy-config` (corrida completa de cierre)
+**Descripción**: la auditoría a11y sobre el árbol del cambio da los mismos 63 nodos de la regla `label-content-name-mismatch` registrados por `chore-local-container-podman` (exit 1); el cambio no toca `src/`. `check`, `validate-i18n` y `check-i18n-links` terminan con exit 0.
+
+## 2026-10-06 | measure | chore-deploy-config | post-dispatch sdd-apply FIN 22:21:16 outcome=advance
+
+## 2026-10-06 | measure | chore-deploy-config | preflight sdd-verify INICIO 22:21:19 outcome=ready
 ## 2026-10-06 | measure | fix-contrast-followups | preflight sdd-init INICIO 21:20:24 outcome=ready
 
 ## 2026-10-06 | measure | fix-contrast-followups | sdd-init: _profile.md unchanged (profile_status=unchanged); observations.md supera 500 líneas (613), considerar rotación manual
@@ -642,4 +661,8 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 ## 2026-10-06 | measure | fix-contrast-followups | post-dispatch sdd-verify FIN 22:05:07 outcome=advance
 
 ## 2026-10-06 | measure | fix-contrast-followups | preflight sdd-archive INICIO 22:05:10 outcome=ready
+
+## 2026-10-06 | measure | chore-deploy-config | post-dispatch sdd-verify FIN 22:30:53 outcome=advance
+
+## 2026-10-06 | measure | chore-deploy-config | preflight sdd-archive INICIO 22:30:56 outcome=ready
 
