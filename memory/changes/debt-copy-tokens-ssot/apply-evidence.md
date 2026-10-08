@@ -917,3 +917,107 @@ Resumen: 42 auditorías (21 URLs × 2 tamaños: 18 páginas, 3 sondas 404) · 0 
 3. **`meta.siteName`** del i18n duplica `SITE.name` (Navbar y Footer). Queda fuera de `tasks.md`.
 4. **Literales `@logatm`** de `twitter:site` y `twitter:creator` en `BaseLayout.astro`: duplican la cuenta de `SITE.social.twitter`. Quedan fuera de `tasks.md`.
 5. **Primer build de Workers Builds tras el merge**: revisar que `astro.config.mjs` carga `src/lib/site.ts` en el build alojado (tarea 13). Es parte del checklist post-deploy de `clarifications.md`.
+
+## Re-despacho: guarda post-build, sombras fuera de `@theme` y residuales
+
+Este re-despacho resuelve el bloqueo de la tarea 7 y la tensión de la tarea 16 con las decisiones de `clarifications.md` («Bloqueo de sdd-apply — Respuestas»), y cierra los residuales 3 y 4 y el import del correo. Las secciones anteriores quedan como registro; los bloques que este re-despacho deja obsoletos se retiran con remisión al vigente.
+
+### Tarea 7: guarda post-build (`36e17f1`)
+
+`astro.config.mjs` suma la integración `log-atm:prerender-output-guard`. En `astro:build:done` recorre `pages`, la lista de paths que Astro registra antes de renderizar cada uno (salen de `getStaticPaths` o del path fijo de la ruta), y exige que cada `index.html` exista en `dist/client`, no pese 0 bytes y contenga `<html`. Además, cada ruta de página prerenderizada del proyecto (`astro:routes:resolved`) debe tener al menos un path en esa lista. Así «esperada» no depende de lo que el render escribió. La guarda lanza un error con la ruta y el archivo de cada página que falla, y `astro build` sale con exit 1. Corre dentro de `build:ci` porque es parte de `astro build`.
+
+Prueba por mutación con `npm run build:ci` en tres copias aisladas de `36e17f1`, extraídas con `git archive` bajo el directorio de temporales del despacho y con el `node_modules` del worktree enlazado. Caso sin mutación:
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.40","forma":"argv","argv":["bash","-c","npm run build:ci \u003e ../build.log 2\u003e&1; st=$?; /usr/bin/grep -E \"^- [0-9]+ errors|\\[prerender\\]|Complete!\" ../build.log; echo \"exit de build:ci: $st\"; exit $st"],"texto":null,"cwd":"/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/c3.q7WaI91E/log-atm-web-astro","head":null,"fecha":"2026-10-08T17:04:22-03:00","exit":0,"sha256":"bf4f71e60465a4b94217f8beebfd528b77927682e25be8412874a88be1af000c","lineas":4,"omitidas":0,"no_recomprobable":"build sobre una copia aislada, borrada al terminar la prueba"} -->
+**Evidencia `apply-evidence.40`** · exit 0 · 4 líneas, 0 omitidas · HEAD `sin-git` · 2026-10-08T17:04:22-03:00 · `/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/c3.q7WaI91E/log-atm-web-astro`
+No re-comprobable: build sobre una copia aislada, borrada al terminar la prueba
+
+```text
+bash -c 'npm run build:ci > ../build.log 2>&1; st=$?; /usr/bin/grep -E "^- [0-9]+ errors|\[prerender\]|Complete!" ../build.log; echo "exit de build:ci: $st"; exit $st'
+```
+
+```text
+- 0 errors
+17:04:22 [log-atm:prerender-output-guard] [prerender] 18 páginas prerenderizadas con HTML válido
+17:04:22 [build] Complete!
+exit de build:ci: 0
+```
+<!-- evidencia:fin apply-evidence.40 -->
+
+Caso 1: el último ítem de `servicios.list` quitado en `es.json`, `en.json` y `pt.json`. `validate-i18n` mantiene la paridad, `tListFor` lanza en el render de las portadas y de servicios, y la guarda detiene el build nombrando las seis páginas afectadas. Cinco quedan con 0 bytes. En `/servicios/` el prerender escribe como página la traza de un `TypeError: Illegal invocation` de workerd (387 bytes, sin `<html`), es decir, sin la guarda se publicaría una traza de error como página:
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.41","forma":"argv","argv":["bash","-c","npm run build:ci \u003e ../build.log 2\u003e&1; st=$?; /usr/bin/grep -c \"Lista desalineada\" ../build.log; /usr/bin/grep -E \"\\[prerender\\]|^ *- /|Complete!\" ../build.log; echo \"exit de build:ci: $st\"; exit $st"],"texto":null,"cwd":"/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/c1.UVM4XsUe/log-atm-web-astro","head":null,"fecha":"2026-10-08T17:04:47-03:00","exit":1,"sha256":"e552b868e36b2e802795d7fe7324df7ef1925e7a7116f40ba5438cf33f2cd465","lineas":9,"omitidas":0,"no_recomprobable":"mutación sobre una copia aislada, borrada al terminar la prueba"} -->
+**Evidencia `apply-evidence.41`** · exit 1 · 9 líneas, 0 omitidas · HEAD `sin-git` · 2026-10-08T17:04:47-03:00 · `/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/c1.UVM4XsUe/log-atm-web-astro`
+No re-comprobable: mutación sobre una copia aislada, borrada al terminar la prueba
+
+```text
+bash -c 'npm run build:ci > ../build.log 2>&1; st=$?; /usr/bin/grep -c "Lista desalineada" ../build.log; /usr/bin/grep -E "\[prerender\]|^ *- /|Complete!" ../build.log; echo "exit de build:ci: $st"; exit $st'
+```
+
+```text
+6
+[prerender] 6 página(s) prerenderizada(s) sin HTML válido:
+  - /servicios/: /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/c1.UVM4XsUe/log-atm-web-astro/dist/client/servicios/index.html no contiene <html
+  - /en/servicios/: /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/c1.UVM4XsUe/log-atm-web-astro/dist/client/en/servicios/index.html pesa 0 bytes
+  - /pt/servicios/: /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/c1.UVM4XsUe/log-atm-web-astro/dist/client/pt/servicios/index.html pesa 0 bytes
+  - /en/: /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/c1.UVM4XsUe/log-atm-web-astro/dist/client/en/index.html pesa 0 bytes
+  - /pt/: /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/c1.UVM4XsUe/log-atm-web-astro/dist/client/pt/index.html pesa 0 bytes
+  - /: /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/c1.UVM4XsUe/log-atm-web-astro/dist/client/index.html pesa 0 bytes
+exit de build:ci: 1
+```
+<!-- evidencia:fin apply-evidence.41 -->
+
+Caso 2: un `throw` forzado en el render de `/en/contacto` (`if (currentLang === 'en') throw …` en el frontmatter de `contacto.astro`; `/contacto` y `/pt/contacto` no cambian). La guarda detiene el build y nombra solo esa página:
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.42","forma":"argv","argv":["bash","-c","/usr/bin/grep -n \"mutación\" src/pages/contacto.astro; npm run build:ci \u003e ../build.log 2\u003e&1; st=$?; /usr/bin/grep -c \"throw forzado\" ../build.log; /usr/bin/grep -E \"\\[prerender\\]|^ *- /|Complete!\" ../build.log; echo \"exit de build:ci: $st\"; exit $st"],"texto":null,"cwd":"/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/c2.Th3Sqe67/log-atm-web-astro","head":null,"fecha":"2026-10-08T17:05:18-03:00","exit":1,"sha256":"7467964d432a2d58128838ff5d051f9877d7b872f6226e83cd0f61f603a9baab","lineas":5,"omitidas":0,"no_recomprobable":"mutación sobre una copia aislada, borrada al terminar la prueba"} -->
+**Evidencia `apply-evidence.42`** · exit 1 · 5 líneas, 0 omitidas · HEAD `sin-git` · 2026-10-08T17:05:18-03:00 · `/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/c2.Th3Sqe67/log-atm-web-astro`
+No re-comprobable: mutación sobre una copia aislada, borrada al terminar la prueba
+
+```text
+bash -c '/usr/bin/grep -n "mutación" src/pages/contacto.astro; npm run build:ci > ../build.log 2>&1; st=$?; /usr/bin/grep -c "throw forzado" ../build.log; /usr/bin/grep -E "\[prerender\]|^ *- /|Complete!" ../build.log; echo "exit de build:ci: $st"; exit $st'
+```
+
+```text
+14:if (currentLang === 'en') throw new Error('[mutación] throw forzado en el render de /en/contacto');
+1
+[prerender] 1 página(s) prerenderizada(s) sin HTML válido:
+  - /en/contacto/: /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/c2.Th3Sqe67/log-atm-web-astro/dist/client/en/contacto/index.html pesa 0 bytes
+exit de build:ci: 1
+```
+<!-- evidencia:fin apply-evidence.42 -->
+
+Caso adicional, para la parte de «esperada» que no sale de `pages`: `getStaticPaths` de `[lang]/nosotros.astro` devuelve `[]`, de modo que `/en/nosotros/` y `/pt/nosotros/` no se piden ni se escriben, y tampoco figuran en `pages`. La comprobación de rutas resueltas lo detecta:
+
+
+<!-- evidencia:retirado {"v":1,"id":"apply-evidence.43","sha256":"82124b0fca45ee7dc02e143c003cc1938a3aedf9c1704d61f4172c799f2311c7","remite":"apply-evidence.44"} -->
+**Evidencia `apply-evidence.43` retirada** · remite a `apply-evidence.44` · sha256 `82124b0fca45`
+
+El primer intento, con `return []`, falló en `astro check` y no en la guarda: el tipo de `Astro.params` queda en `never` (bloque retirado). Repetición en una copia nueva, con una mutación que conserva el tipo (`NON_DEFAULT_LOCALES.filter(() => false).map(…)`). Sin la guarda, `/en/nosotros/` y `/pt/nosotros/` faltarían sin aviso (el `0` del bloque cuenta los directorios `nosotros` de `en/` y `pt/`):
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.44","forma":"argv","argv":["bash","-c","/usr/bin/grep -n \"return\" \"src/pages/[lang]/nosotros.astro\"; npm run build:ci \u003e ../build.log 2\u003e&1; st=$?; /usr/bin/grep -E \"^- [0-9]+ errors|\\[prerender\\]|^ *- /|Complete!\" ../build.log; ls dist/client/en dist/client/pt | /usr/bin/grep -c nosotros; echo \"exit de build:ci: $st\"; exit $st"],"texto":null,"cwd":"/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/c5.TyOpBzJJ/log-atm-web-astro","head":null,"fecha":"2026-10-08T17:06:18-03:00","exit":1,"sha256":"94e86b43833cb48ac89b8052cc7830ec387981e33c6aadad11113ed9272dd0c9","lineas":6,"omitidas":0,"no_recomprobable":"mutación sobre una copia aislada, borrada al terminar la prueba"} -->
+**Evidencia `apply-evidence.44`** · exit 1 · 6 líneas, 0 omitidas · HEAD `sin-git` · 2026-10-08T17:06:18-03:00 · `/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/c5.TyOpBzJJ/log-atm-web-astro`
+No re-comprobable: mutación sobre una copia aislada, borrada al terminar la prueba
+
+```text
+bash -c '/usr/bin/grep -n "return" "src/pages/[lang]/nosotros.astro"; npm run build:ci > ../build.log 2>&1; st=$?; /usr/bin/grep -E "^- [0-9]+ errors|\[prerender\]|^ *- /|Complete!" ../build.log; ls dist/client/en dist/client/pt | /usr/bin/grep -c nosotros; echo "exit de build:ci: $st"; exit $st'
+```
+
+```text
+6:  return NON_DEFAULT_LOCALES.filter(() => false).map((lang) => ({ params: { lang } }));
+- 0 errors
+[prerender] 1 página(s) prerenderizada(s) sin HTML válido:
+  - /[lang]/nosotros (src/pages/[lang]/nosotros.astro): sin paths de getStaticPaths
+0
+exit de build:ci: 1
+```
+<!-- evidencia:fin apply-evidence.44 -->
+
+**Estado de la tarea 7:** con la guarda, quitar un ítem en los tres idiomas (`apply-evidence.41`) y un `throw` en el render de una sola página (`apply-evidence.42`) hacen fallar `build:ci` con exit 1. La guarda nombra cada página afectada, y el mensaje de `tListFor` con clave, idioma y longitudes queda en el log del build. Una ruta sin paths también falla (`apply-evidence.44`), y sin mutación `build:ci` termina en 0 (`apply-evidence.40`). Las cinco copias se borraron. La spec [[copy-single-source]] declara el mecanismo y estos escenarios, y [[0012-prerender-output-guard]] documenta la decisión. Residual para el PR: `@astrojs/cloudflare` 13.5.0, con el prerender en workerd, se traga los errores de render (reportable upstream). La guarda es la mitigación local.
+
+### Tarea 16: `--shadow-*` fuera de `@theme` (`e2ee811`)
+
+Los cinco `--shadow-*` salen de `@theme` y siguen en `:root`. El criterio 5 de [[color-token-policy]] queda como «tokens de sombra y radio definidos en `tokens.css` (`:root`) y consumidos vía `var()`», y sus requisitos y su escenario de sombras se ajustan a ese criterio. El diff del CSS construido contra la línea base se registra sobre el árbol final, en la sección de cierre.
