@@ -7,7 +7,7 @@ domain: "debt"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: low
 depends_on: []
@@ -16,11 +16,11 @@ worktree: /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tok
 feature_branch: feature/debt-copy-tokens-ssot
 mr: ""
 acceptance_criteria:
-  - "[ ] El paso de extras del cotizar ofrece 4 opciones (Aduana, Seguro de carga, Almacenaje destino e Inspección origen o su traducción) en es, en y pt, sin «Última milla», «Last mile» ni «Última milha»"
-  - "[ ] La opción de origen «Otro» se muestra como «Otro» en español, «Other» en inglés y «Outro» en portugués, y el valor que recibe el operador sigue siendo «Otro» en los tres idiomas"
-  - "[ ] La cotización enviada por la API se acepta con cualquier servicio de texto, con o sin «Última milla», y la API no cambia"
-  - "[ ] npm run validate-i18n termina en exit 0"
-  - "[ ] Las únicas diferencias del texto visible de cotizar respecto del anterior son la ausencia de «Última milla» en los tres idiomas y las etiquetas «Other» y «Outro» en /en/cotizar y /pt/cotizar"
+  - "[x] El paso de extras del cotizar ofrece 4 opciones (Aduana, Seguro de carga, Almacenaje destino e Inspección origen o su traducción) en es, en y pt, sin «Última milla», «Last mile» ni «Última milha»"
+  - "[x] La opción de origen «Otro» se muestra como «Otro» en español, «Other» en inglés y «Outro» en portugués, y el valor que recibe el operador sigue siendo «Otro» en los tres idiomas"
+  - "[x] La cotización enviada por la API se acepta con cualquier servicio de texto, con o sin «Última milla», y la API no cambia"
+  - "[x] npm run validate-i18n termina en exit 0"
+  - "[x] Las únicas diferencias del texto visible de cotizar respecto del anterior son la ausencia de «Última milla» en los tres idiomas y las etiquetas «Other» y «Outro» en /en/cotizar y /pt/cotizar"
 
 related:
   - "[[copy-single-source]]"
@@ -33,7 +33,7 @@ scope:
   - "log-atm-web-astro/src/i18n/translations/pt.json"
   - "log-atm-web-astro/src/pages/cotizar.astro"
   - "log-atm-web-astro/src/lib/constants.ts"
-verified_at: null
+verified_at: 2026-10-08
 
 created: "2026-10-08"
 updated: "2026-10-08"
@@ -78,11 +78,11 @@ El cotizador ofrece solo servicios adicionales que la empresa presta, y cada vis
 
 ## Acceptance Criteria
 
-- [ ] El paso de extras del cotizar ofrece 4 opciones (Aduana, Seguro de carga, Almacenaje destino e Inspección origen o su traducción) en es, en y pt, sin «Última milla», «Last mile» ni «Última milha»
-- [ ] La opción de origen «Otro» se muestra como «Otro» en español, «Other» en inglés y «Outro» en portugués, y el valor que recibe el operador sigue siendo «Otro» en los tres idiomas
-- [ ] La cotización enviada por la API se acepta con cualquier servicio de texto, con o sin «Última milla», y la API no cambia
-- [ ] npm run validate-i18n termina en exit 0
-- [ ] Las únicas diferencias del texto visible de cotizar respecto del anterior son la ausencia de «Última milla» en los tres idiomas y las etiquetas «Other» y «Outro» en /en/cotizar y /pt/cotizar
+- [x] El paso de extras del cotizar ofrece 4 opciones (Aduana, Seguro de carga, Almacenaje destino e Inspección origen o su traducción) en es, en y pt, sin «Última milla», «Last mile» ni «Última milha»
+- [x] La opción de origen «Otro» se muestra como «Otro» en español, «Other» en inglés y «Outro» en portugués, y el valor que recibe el operador sigue siendo «Otro» en los tres idiomas
+- [x] La cotización enviada por la API se acepta con cualquier servicio de texto, con o sin «Última milla», y la API no cambia
+- [x] npm run validate-i18n termina en exit 0
+- [x] Las únicas diferencias del texto visible de cotizar respecto del anterior son la ausencia de «Última milla» en los tres idiomas y las etiquetas «Other» y «Outro» en /en/cotizar y /pt/cotizar
 
 ## Related
 

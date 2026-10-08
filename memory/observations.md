@@ -721,3 +721,13 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 ## 2026-10-08 | decision | debt-copy-tokens-ssot | sdd-apply: la tensión entre los criterios 4 y 5 de `color-token-policy` se resuelve sacando los `--shadow-*` de `@theme` (quedan en `:root`, consumidos vía `var()`). El criterio 5 se reescribe así, y el CSS construido difiere de la línea base solo en las declaraciones retiradas
 
 ## 2026-10-08 | decision | debt-copy-tokens-ssot | sdd-apply: los residuales de `meta.siteName` y de `@logatm` quedan cerrados. La marca de Navbar y Footer lee `SITE.name` y la clave sale del i18n; `twitter:site`/`twitter:creator` leen `TWITTER_HANDLE`, derivado de `SITE.social.twitter`. El correo vuelve al import simple de `es.json`. Ningún cambio visible en `dist/client`
+## 2026-10-08 | measure | debt-copy-tokens-ssot | post-dispatch sdd-apply FIN 17:13:05 outcome=advance
+
+## 2026-10-08 | measure | debt-copy-tokens-ssot | preflight sdd-verify INICIO 17:13:18 outcome=ready
+
+
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-verify: residuales no bloqueantes: (1) `MAIL_TO` de `wrangler.toml` y `.dev.vars.example` y el email y teléfono del `README.md` repiten datos de identidad fuera de `site.ts` (config de despliegue y docs, fuera de las specs); (2) los scripts de cliente de `CTASection.astro` y `WhyVideoSection.astro` conservan textos de respaldo en español (`dataset.msg… ?? "…"`), previos al cambio y ajenos a los 12 sitios; (3) `canonical-host-www` habla de «siete páginas» pero hay seis rutas prerenderizadas por idioma y la 404 bajo demanda, sin señales de URL (ADR-0007); (4) el primer build de Workers Builds tras el merge debe confirmar que `astro.config.mjs` carga `src/lib/site.ts`
+## 2026-10-08 | measure | debt-copy-tokens-ssot | post-dispatch sdd-verify FIN 17:34:17 outcome=advance
+
+## 2026-10-08 | measure | debt-copy-tokens-ssot | preflight sdd-archive INICIO 17:34:23 outcome=ready
+

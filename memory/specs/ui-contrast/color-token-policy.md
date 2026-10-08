@@ -7,7 +7,7 @@ domain: "debt"
 delta_type: ADD
 supersedes: "[[contrast-token-single-source]]"
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on: []
@@ -16,15 +16,15 @@ worktree: /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tok
 feature_branch: feature/debt-copy-tokens-ssot
 mr: ""
 acceptance_criteria:
-  - "[ ] La cabecera de la fuente de tokens y la regla «Don't» de la documentación de diseño enuncian la misma política: colores de marca, semánticos y pares validados solo vía tokens; ningún literal nuevo fuera de la fuente de tokens salvo en las plantillas de correo; los literales existentes son legado tolerado que no se migra"
-  - "[ ] La fuente de tokens no define ninguno de los 18 tokens de opacidad ni el token de hover oscuro de WhatsApp, ni en las variables del sitio ni en el tema de Tailwind"
-  - "[ ] Los tokens de WhatsApp en uso (base, hover y texto) permanecen definidos con el verde visible del sitio"
-  - "[ ] El CSS que genera Tailwind sobre el sitio construido difiere del CSS previo al cambio solo en las declaraciones eliminadas de opacidad y de hover oscuro de WhatsApp"
-  - "[ ] Los tokens de sombra y de radio de borde están definidos en `tokens.css` (`:root`) y se consumen vía `var()`"
-  - "[ ] Cada par validado figura una sola vez en la fuente de tokens y el sitio construye sin errores"
-  - "[ ] La documentación de diseño declara la excepción de los correos, muestra ratios que coinciden con los medidos y no describe como apto para texto normal un color cuyo par no alcanza 4.5:1"
-  - "[ ] Los colores de las industrias llevan un comentario de una línea que justifica por qué son datos y no tokens"
-  - "[ ] Las siete specs de estilos (cta-styles, hero-styles, services-styles, why-styles, navbar-styles, footer-styles, industries-styles), create-functional-tokens y contrast-token-single-source declaran esta spec como sucesora"
+  - "[x] La cabecera de la fuente de tokens y la regla «Don't» de la documentación de diseño enuncian la misma política: colores de marca, semánticos y pares validados solo vía tokens; ningún literal nuevo fuera de la fuente de tokens salvo en las plantillas de correo; los literales existentes son legado tolerado que no se migra"
+  - "[x] La fuente de tokens no define ninguno de los 18 tokens de opacidad ni el token de hover oscuro de WhatsApp, ni en las variables del sitio ni en el tema de Tailwind"
+  - "[x] Los tokens de WhatsApp en uso (base, hover y texto) permanecen definidos con el verde visible del sitio"
+  - "[x] El CSS que genera Tailwind sobre el sitio construido difiere del CSS previo al cambio solo en las declaraciones eliminadas de opacidad y de hover oscuro de WhatsApp"
+  - "[x] Los tokens de sombra y de radio de borde están definidos en `tokens.css` (`:root`) y se consumen vía `var()`"
+  - "[x] Cada par validado figura una sola vez en la fuente de tokens y el sitio construye sin errores"
+  - "[x] La documentación de diseño declara la excepción de los correos, muestra ratios que coinciden con los medidos y no describe como apto para texto normal un color cuyo par no alcanza 4.5:1"
+  - "[x] Los colores de las industrias llevan un comentario de una línea que justifica por qué son datos y no tokens"
+  - "[x] Las siete specs de estilos (cta-styles, hero-styles, services-styles, why-styles, navbar-styles, footer-styles, industries-styles), create-functional-tokens y contrast-token-single-source declaran esta spec como sucesora"
 
 related:
   - "[[contrast-token-single-source]]"
@@ -45,7 +45,7 @@ scope:
   - "log-atm-web-astro/src/styles/tokens.css"
   - "log-atm-web-astro/DESIGN.md"
   - "log-atm-web-astro/src/lib/constants.ts"
-verified_at: null
+verified_at: 2026-10-08
 
 created: "2026-10-08"
 updated: "2026-10-08"
@@ -118,15 +118,15 @@ El equipo de diseño y desarrollo necesita una regla de color que describa lo qu
 
 ## Acceptance Criteria
 
-- [ ] La cabecera de la fuente de tokens y la regla «Don't» de la documentación de diseño enuncian la misma política: colores de marca, semánticos y pares validados solo vía tokens; ningún literal nuevo fuera de la fuente de tokens salvo en las plantillas de correo; los literales existentes son legado tolerado que no se migra
-- [ ] La fuente de tokens no define ninguno de los 18 tokens de opacidad ni el token de hover oscuro de WhatsApp, ni en las variables del sitio ni en el tema de Tailwind
-- [ ] Los tokens de WhatsApp en uso (base, hover y texto) permanecen definidos con el verde visible del sitio
-- [ ] El CSS que genera Tailwind sobre el sitio construido difiere del CSS previo al cambio solo en las declaraciones eliminadas de opacidad y de hover oscuro de WhatsApp
-- [ ] Los tokens de sombra y de radio de borde están definidos en `tokens.css` (`:root`) y se consumen vía `var()`
-- [ ] Cada par validado figura una sola vez en la fuente de tokens y el sitio construye sin errores
-- [ ] La documentación de diseño declara la excepción de los correos, muestra ratios que coinciden con los medidos y no describe como apto para texto normal un color cuyo par no alcanza 4.5:1
-- [ ] Los colores de las industrias llevan un comentario de una línea que justifica por qué son datos y no tokens
-- [ ] Las siete specs de estilos (cta-styles, hero-styles, services-styles, why-styles, navbar-styles, footer-styles, industries-styles), create-functional-tokens y contrast-token-single-source declaran esta spec como sucesora
+- [x] La cabecera de la fuente de tokens y la regla «Don't» de la documentación de diseño enuncian la misma política: colores de marca, semánticos y pares validados solo vía tokens; ningún literal nuevo fuera de la fuente de tokens salvo en las plantillas de correo; los literales existentes son legado tolerado que no se migra
+- [x] La fuente de tokens no define ninguno de los 18 tokens de opacidad ni el token de hover oscuro de WhatsApp, ni en las variables del sitio ni en el tema de Tailwind
+- [x] Los tokens de WhatsApp en uso (base, hover y texto) permanecen definidos con el verde visible del sitio
+- [x] El CSS que genera Tailwind sobre el sitio construido difiere del CSS previo al cambio solo en las declaraciones eliminadas de opacidad y de hover oscuro de WhatsApp
+- [x] Los tokens de sombra y de radio de borde están definidos en `tokens.css` (`:root`) y se consumen vía `var()`
+- [x] Cada par validado figura una sola vez en la fuente de tokens y el sitio construye sin errores
+- [x] La documentación de diseño declara la excepción de los correos, muestra ratios que coinciden con los medidos y no describe como apto para texto normal un color cuyo par no alcanza 4.5:1
+- [x] Los colores de las industrias llevan un comentario de una línea que justifica por qué son datos y no tokens
+- [x] Las siete specs de estilos (cta-styles, hero-styles, services-styles, why-styles, navbar-styles, footer-styles, industries-styles), create-functional-tokens y contrast-token-single-source declaran esta spec como sucesora
 
 ## Related
 

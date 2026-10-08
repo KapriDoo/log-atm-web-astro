@@ -7,7 +7,7 @@ domain: "debt"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on: []
@@ -16,17 +16,17 @@ worktree: /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tok
 feature_branch: feature/debt-copy-tokens-ssot
 mr: ""
 acceptance_criteria:
-  - "[ ] Los datos no textuales del sitio no contienen texto visible: las listas de servicios, estadísticas del hero, motivos de «por qué», industrias, valores, cómo trabajamos, modalidades y pasos de cotización conservan solo ids, imágenes, íconos, tamaños, enlaces y colores; y SEO no existe"
-  - "[ ] Los 12 sitios que combinan datos con texto (servicios en home y en su página, estadísticas del hero, motivos de «por qué», industrias en home y en su página, valores y cómo trabajamos en nosotros, modalidades y pasos de cotizar, y las opciones de modalidad y volumen del cotizador rápido) obtienen su texto exclusivamente del i18n, sin valor de respaldo ni operador de fusión con datos de texto"
-  - "[ ] Un único helper del módulo de utilidades i18n, junto a tList, recibe la clave y la lista de datos, lanza un Error con la clave, el idioma y las dos longitudes cuando difieren y, si coinciden, retorna el texto; los 12 sitios lo usan"
-  - "[ ] Quitar un ítem de una lista del i18n en un solo idioma hace fallar npm run validate-i18n"
-  - "[ ] Quitar un ítem de una lista del i18n en los tres idiomas hace fallar astro build (exit 1): el log del build muestra el mensaje del helper con la clave, el idioma y las dos longitudes, y la guarda post-build nombra cada página afectada"
-  - "[ ] Un throw forzado en el render de una página cualquiera hace fallar astro build (exit 1) y la guarda post-build nombra esa página"
-  - "[ ] La guarda post-build hace fallar astro build cuando una página prerenderizada esperada no existe en dist/client, pesa 0 bytes o no contiene <html; las páginas esperadas salen de los paths que Astro registra antes de renderizar (getStaticPaths o el path fijo de la ruta) y cada ruta de página prerenderizada tiene al menos uno, también cuando su getStaticPaths no entrega ninguno"
-  - "[ ] La guarda post-build corre dentro de npm run build y de npm run build:ci"
-  - "[ ] Con los datos y el i18n alineados, npm run build y npm run check terminan sin error"
-  - "[ ] Una búsqueda en src de los cuatro textos que contradicen el i18n vigente (el eslogan «tiempos garantizados» con la etiqueta «Express · 48h», «Bodegaje, fulfillment y última milla», «KPIs medibles y revisión trimestral» y «Express 48h–7d») no arroja resultados"
-  - "[ ] El texto visible, los meta y el JSON-LD de home, servicios, nosotros, cotizar, industrias y contacto en es, en y pt son idénticos antes y después del cambio, salvo las diferencias intencionales declaradas en esta spec y en las specs hermanas del cambio"
+  - "[x] Los datos no textuales del sitio no contienen texto visible: las listas de servicios, estadísticas del hero, motivos de «por qué», industrias, valores, cómo trabajamos, modalidades y pasos de cotización conservan solo ids, imágenes, íconos, tamaños, enlaces y colores; y SEO no existe"
+  - "[x] Los 12 sitios que combinan datos con texto (servicios en home y en su página, estadísticas del hero, motivos de «por qué», industrias en home y en su página, valores y cómo trabajamos en nosotros, modalidades y pasos de cotizar, y las opciones de modalidad y volumen del cotizador rápido) obtienen su texto exclusivamente del i18n, sin valor de respaldo ni operador de fusión con datos de texto"
+  - "[x] Un único helper del módulo de utilidades i18n, junto a tList, recibe la clave y la lista de datos, lanza un Error con la clave, el idioma y las dos longitudes cuando difieren y, si coinciden, retorna el texto; los 12 sitios lo usan"
+  - "[x] Quitar un ítem de una lista del i18n en un solo idioma hace fallar npm run validate-i18n"
+  - "[x] Quitar un ítem de una lista del i18n en los tres idiomas hace fallar astro build (exit 1): el log del build muestra el mensaje del helper con la clave, el idioma y las dos longitudes, y la guarda post-build nombra cada página afectada"
+  - "[x] Un throw forzado en el render de una página cualquiera hace fallar astro build (exit 1) y la guarda post-build nombra esa página"
+  - "[x] La guarda post-build hace fallar astro build cuando una página prerenderizada esperada no existe en dist/client, pesa 0 bytes o no contiene <html; las páginas esperadas salen de los paths que Astro registra antes de renderizar (getStaticPaths o el path fijo de la ruta) y cada ruta de página prerenderizada tiene al menos uno, también cuando su getStaticPaths no entrega ninguno"
+  - "[x] La guarda post-build corre dentro de npm run build y de npm run build:ci"
+  - "[x] Con los datos y el i18n alineados, npm run build y npm run check terminan sin error"
+  - "[x] Una búsqueda en src de los cuatro textos que contradicen el i18n vigente (el eslogan «tiempos garantizados» con la etiqueta «Express · 48h», «Bodegaje, fulfillment y última milla», «KPIs medibles y revisión trimestral» y «Express 48h–7d») no arroja resultados"
+  - "[x] El texto visible, los meta y el JSON-LD de home, servicios, nosotros, cotizar, industrias y contacto en es, en y pt son idénticos antes y después del cambio, salvo las diferencias intencionales declaradas en esta spec y en las specs hermanas del cambio"
 
 related:
   - "[[i18n-core-translation-helpers]]"
@@ -49,7 +49,7 @@ scope:
   - "log-atm-web-astro/src/pages/cotizar.astro"
   - "log-atm-web-astro/src/pages/industrias.astro"
   - "log-atm-web-astro/astro.config.mjs"
-verified_at: null
+verified_at: 2026-10-08
 
 created: "2026-10-08"
 updated: "2026-10-08"
@@ -117,17 +117,17 @@ Cada texto que ve un visitante tiene una sola fuente: las traducciones. Los dato
 
 ## Acceptance Criteria
 
-- [ ] Los datos no textuales del sitio no contienen texto visible: las listas de servicios, estadísticas del hero, motivos de «por qué», industrias, valores, cómo trabajamos, modalidades y pasos de cotización conservan solo ids, imágenes, íconos, tamaños, enlaces y colores; y SEO no existe
-- [ ] Los 12 sitios que combinan datos con texto (servicios en home y en su página, estadísticas del hero, motivos de «por qué», industrias en home y en su página, valores y cómo trabajamos en nosotros, modalidades y pasos de cotizar, y las opciones de modalidad y volumen del cotizador rápido) obtienen su texto exclusivamente del i18n, sin valor de respaldo ni operador de fusión con datos de texto
-- [ ] Un único helper del módulo de utilidades i18n, junto a tList, recibe la clave y la lista de datos, lanza un Error con la clave, el idioma y las dos longitudes cuando difieren y, si coinciden, retorna el texto; los 12 sitios lo usan
-- [ ] Quitar un ítem de una lista del i18n en un solo idioma hace fallar npm run validate-i18n
-- [ ] Quitar un ítem de una lista del i18n en los tres idiomas hace fallar astro build (exit 1): el log del build muestra el mensaje del helper con la clave, el idioma y las dos longitudes, y la guarda post-build nombra cada página afectada
-- [ ] Un throw forzado en el render de una página cualquiera hace fallar astro build (exit 1) y la guarda post-build nombra esa página
-- [ ] La guarda post-build hace fallar astro build cuando una página prerenderizada esperada no existe en dist/client, pesa 0 bytes o no contiene <html; las páginas esperadas salen de los paths que Astro registra antes de renderizar (getStaticPaths o el path fijo de la ruta) y cada ruta de página prerenderizada tiene al menos uno, también cuando su getStaticPaths no entrega ninguno
-- [ ] La guarda post-build corre dentro de npm run build y de npm run build:ci
-- [ ] Con los datos y el i18n alineados, npm run build y npm run check terminan sin error
-- [ ] Una búsqueda en src de los cuatro textos que contradicen el i18n vigente (el eslogan «tiempos garantizados» con la etiqueta «Express · 48h», «Bodegaje, fulfillment y última milla», «KPIs medibles y revisión trimestral» y «Express 48h–7d») no arroja resultados
-- [ ] El texto visible, los meta y el JSON-LD de home, servicios, nosotros, cotizar, industrias y contacto en es, en y pt son idénticos antes y después del cambio, salvo las diferencias intencionales declaradas en esta spec y en las specs hermanas del cambio
+- [x] Los datos no textuales del sitio no contienen texto visible: las listas de servicios, estadísticas del hero, motivos de «por qué», industrias, valores, cómo trabajamos, modalidades y pasos de cotización conservan solo ids, imágenes, íconos, tamaños, enlaces y colores; y SEO no existe
+- [x] Los 12 sitios que combinan datos con texto (servicios en home y en su página, estadísticas del hero, motivos de «por qué», industrias en home y en su página, valores y cómo trabajamos en nosotros, modalidades y pasos de cotizar, y las opciones de modalidad y volumen del cotizador rápido) obtienen su texto exclusivamente del i18n, sin valor de respaldo ni operador de fusión con datos de texto
+- [x] Un único helper del módulo de utilidades i18n, junto a tList, recibe la clave y la lista de datos, lanza un Error con la clave, el idioma y las dos longitudes cuando difieren y, si coinciden, retorna el texto; los 12 sitios lo usan
+- [x] Quitar un ítem de una lista del i18n en un solo idioma hace fallar npm run validate-i18n
+- [x] Quitar un ítem de una lista del i18n en los tres idiomas hace fallar astro build (exit 1): el log del build muestra el mensaje del helper con la clave, el idioma y las dos longitudes, y la guarda post-build nombra cada página afectada
+- [x] Un throw forzado en el render de una página cualquiera hace fallar astro build (exit 1) y la guarda post-build nombra esa página
+- [x] La guarda post-build hace fallar astro build cuando una página prerenderizada esperada no existe en dist/client, pesa 0 bytes o no contiene <html; las páginas esperadas salen de los paths que Astro registra antes de renderizar (getStaticPaths o el path fijo de la ruta) y cada ruta de página prerenderizada tiene al menos uno, también cuando su getStaticPaths no entrega ninguno
+- [x] La guarda post-build corre dentro de npm run build y de npm run build:ci
+- [x] Con los datos y el i18n alineados, npm run build y npm run check terminan sin error
+- [x] Una búsqueda en src de los cuatro textos que contradicen el i18n vigente (el eslogan «tiempos garantizados» con la etiqueta «Express · 48h», «Bodegaje, fulfillment y última milla», «KPIs medibles y revisión trimestral» y «Express 48h–7d») no arroja resultados
+- [x] El texto visible, los meta y el JSON-LD de home, servicios, nosotros, cotizar, industrias y contacto en es, en y pt son idénticos antes y después del cambio, salvo las diferencias intencionales declaradas en esta spec y en las specs hermanas del cambio
 
 ## Related
 

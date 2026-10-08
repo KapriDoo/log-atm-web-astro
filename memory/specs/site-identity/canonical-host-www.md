@@ -7,7 +7,7 @@ domain: "debt"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
@@ -17,13 +17,13 @@ worktree: /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tok
 feature_branch: feature/debt-copy-tokens-ssot
 mr: ""
 acceptance_criteria:
-  - "[ ] La URL de la identidad del sitio es https://www.logatm.com y es la única fuente del host canónico"
-  - "[ ] En el sitio construido, canonical, hreflang, og:url, og:image, sitemap y JSON-LD de las siete páginas en es, en y pt usan https://www.logatm.com y no contienen https://logatm.com"
-  - "[ ] dist/client/robots.txt existe y contiene la línea Sitemap: https://www.logatm.com/sitemap-index.xml"
-  - "[ ] robots.txt se genera desde un endpoint prerenderizado (prerender = true) que responde con tipo de contenido text/plain y arma la línea Sitemap desde la URL de la identidad; el archivo estático public/robots.txt no existe"
-  - "[ ] La configuración de Astro lee la URL del sitio de la definición de identidad (astro.config.mjs importa src/lib/site.ts) y npm run build termina en verde"
-  - "[ ] manifest.json no contiene host y no se modifica; el email contacto@logatm.com no cambia"
-  - "[ ] Las únicas diferencias del sitio construido respecto del anterior en estas señales son el cambio de host a www; ninguna otra señal SEO cambia"
+  - "[x] La URL de la identidad del sitio es https://www.logatm.com y es la única fuente del host canónico"
+  - "[x] En el sitio construido, canonical, hreflang, og:url, og:image, sitemap y JSON-LD de las siete páginas en es, en y pt usan https://www.logatm.com y no contienen https://logatm.com"
+  - "[x] dist/client/robots.txt existe y contiene la línea Sitemap: https://www.logatm.com/sitemap-index.xml"
+  - "[x] robots.txt se genera desde un endpoint prerenderizado (prerender = true) que responde con tipo de contenido text/plain y arma la línea Sitemap desde la URL de la identidad; el archivo estático public/robots.txt no existe"
+  - "[x] La configuración de Astro lee la URL del sitio de la definición de identidad (astro.config.mjs importa src/lib/site.ts) y npm run build termina en verde"
+  - "[x] manifest.json no contiene host y no se modifica; el email contacto@logatm.com no cambia"
+  - "[x] Las únicas diferencias del sitio construido respecto del anterior en estas señales son el cambio de host a www; ninguna otra señal SEO cambia"
 
 related:
   - "[[site-identity-single-source]]"
@@ -37,7 +37,7 @@ scope:
   - "log-atm-web-astro/public/robots.txt"
   - "log-atm-web-astro/src/lib/site.ts"
   - "log-atm-web-astro/src/layouts/BaseLayout.astro"
-verified_at: null
+verified_at: 2026-10-08
 
 created: "2026-10-08"
 updated: "2026-10-08"
@@ -89,13 +89,13 @@ El sitio responde en `www.logatm.com`: el dominio sin `www` redirige (301) a esa
 
 ## Acceptance Criteria
 
-- [ ] La URL de la identidad del sitio es https://www.logatm.com y es la única fuente del host canónico
-- [ ] En el sitio construido, canonical, hreflang, og:url, og:image, sitemap y JSON-LD de las siete páginas en es, en y pt usan https://www.logatm.com y no contienen https://logatm.com
-- [ ] dist/client/robots.txt existe y contiene la línea Sitemap: https://www.logatm.com/sitemap-index.xml
-- [ ] robots.txt se genera desde un endpoint prerenderizado (prerender = true) que responde con tipo de contenido text/plain y arma la línea Sitemap desde la URL de la identidad; el archivo estático public/robots.txt no existe
-- [ ] La configuración de Astro lee la URL del sitio de la definición de identidad (astro.config.mjs importa src/lib/site.ts) y npm run build termina en verde
-- [ ] manifest.json no contiene host y no se modifica; el email contacto@logatm.com no cambia
-- [ ] Las únicas diferencias del sitio construido respecto del anterior en estas señales son el cambio de host a www; ninguna otra señal SEO cambia
+- [x] La URL de la identidad del sitio es https://www.logatm.com y es la única fuente del host canónico
+- [x] En el sitio construido, canonical, hreflang, og:url, og:image, sitemap y JSON-LD de las siete páginas en es, en y pt usan https://www.logatm.com y no contienen https://logatm.com
+- [x] dist/client/robots.txt existe y contiene la línea Sitemap: https://www.logatm.com/sitemap-index.xml
+- [x] robots.txt se genera desde un endpoint prerenderizado (prerender = true) que responde con tipo de contenido text/plain y arma la línea Sitemap desde la URL de la identidad; el archivo estático public/robots.txt no existe
+- [x] La configuración de Astro lee la URL del sitio de la definición de identidad (astro.config.mjs importa src/lib/site.ts) y npm run build termina en verde
+- [x] manifest.json no contiene host y no se modifica; el email contacto@logatm.com no cambia
+- [x] Las únicas diferencias del sitio construido respecto del anterior en estas señales son el cambio de host a www; ninguna otra señal SEO cambia
 
 ## Related
 

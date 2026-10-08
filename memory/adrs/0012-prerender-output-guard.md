@@ -6,6 +6,9 @@ consulted: clarifications.md, apply-evidence.md (tareas 7 y re-despacho), ADR-00
 informed: sdd-verify
 change_ref: "[[debt-copy-tokens-ssot]]"
 capability: i18n-translations
+spec_refs:
+  - "[[copy-single-source]]"
+updated: "2026-10-08"
 tags: [adr, build, prerender, cloudflare, workerd, ci]
 ---
 
