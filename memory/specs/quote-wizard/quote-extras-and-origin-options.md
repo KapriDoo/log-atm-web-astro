@@ -7,13 +7,13 @@ domain: "debt"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: low
 depends_on: []
 change_ref: "[[debt-copy-tokens-ssot]]"
-worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot"
-feature_branch: "feature/debt-copy-tokens-ssot"
+worktree: /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot
+feature_branch: feature/debt-copy-tokens-ssot
 mr: ""
 acceptance_criteria:
   - "[ ] El paso de extras del cotizar ofrece 4 opciones (Aduana, Seguro de carga, Almacenaje destino e Inspección origen o su traducción) en es, en y pt, sin «Última milla», «Last mile» ni «Última milha»"

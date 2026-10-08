@@ -7,13 +7,13 @@ domain: "debt"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on: []
 change_ref: "[[debt-copy-tokens-ssot]]"
-worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot"
-feature_branch: "feature/debt-copy-tokens-ssot"
+worktree: /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot
+feature_branch: feature/debt-copy-tokens-ssot
 mr: ""
 acceptance_criteria:
   - "[ ] Los datos no textuales del sitio no contienen texto visible: las listas de servicios, estadísticas del hero, motivos de «por qué», industrias, valores, cómo trabajamos, modalidades y pasos de cotización conservan solo ids, imágenes, íconos, tamaños, enlaces y colores; y SEO no existe"

@@ -7,13 +7,13 @@ domain: "debt"
 delta_type: ADD
 supersedes: "[[contrast-token-single-source]]"
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on: []
 change_ref: "[[debt-copy-tokens-ssot]]"
-worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot"
-feature_branch: "feature/debt-copy-tokens-ssot"
+worktree: /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot
+feature_branch: feature/debt-copy-tokens-ssot
 mr: ""
 acceptance_criteria:
   - "[ ] La cabecera de la fuente de tokens y la regla «Don't» de la documentación de diseño enuncian la misma política: colores de marca, semánticos y pares validados solo vía tokens; ningún literal nuevo fuera de la fuente de tokens salvo en las plantillas de correo; los literales existentes son legado tolerado que no se migra"

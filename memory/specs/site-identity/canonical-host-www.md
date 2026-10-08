@@ -7,14 +7,14 @@ domain: "debt"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
   - "[[site-identity-single-source]]"
 change_ref: "[[debt-copy-tokens-ssot]]"
-worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot"
-feature_branch: "feature/debt-copy-tokens-ssot"
+worktree: /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot
+feature_branch: feature/debt-copy-tokens-ssot
 mr: ""
 acceptance_criteria:
   - "[ ] La URL de la identidad del sitio es https://www.logatm.com y es la única fuente del host canónico"

@@ -708,3 +708,5 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 
 ## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-apply: añadir `--shadow-sm|md|lg|xl|cta` a `@theme` (criterio 5 de `color-token-policy`) cambia el CSS construido más allá de las declaraciones eliminadas (criterio 4): Tailwind sobrescribe en su capa `theme` los defaults de `--shadow-sm|md|xl`, agrega `--shadow-cta` y regenera las utilidades `.shadow-*` (que crea por escaneo de texto; `.shadow-cta` pasa de color de sombra a sombra). Sin cambio visual: ningún elemento usa clases `shadow-*` y `:root` en `@layer base` gana a la capa `theme`. Tensión entre criterios sin decidir en apply
 
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-apply: residuales fuera de `tasks.md`: `twitter:site`/`twitter:creator` de `BaseLayout.astro` conservan el literal `@logatm` (duplica la cuenta de `SITE.social.twitter`); el primer build de Workers Builds tras el merge debe confirmar que `astro.config.mjs` carga `src/lib/site.ts` (import TS desde el config)
+

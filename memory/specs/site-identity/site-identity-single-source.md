@@ -7,13 +7,13 @@ domain: "debt"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on: []
 change_ref: "[[debt-copy-tokens-ssot]]"
-worktree: "/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot"
-feature_branch: "feature/debt-copy-tokens-ssot"
+worktree: /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot
+feature_branch: feature/debt-copy-tokens-ssot
 mr: ""
 acceptance_criteria:
   - "[ ] Existe una única definición de la identidad del sitio (nombre, URL, teléfono, teléfono de lectura, email, dirección estructurada, coordenadas y redes), importable sin arrastrar imágenes ni otros módulos, y no contiene slogan"
