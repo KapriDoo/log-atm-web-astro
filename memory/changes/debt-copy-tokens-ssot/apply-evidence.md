@@ -430,22 +430,8 @@ import { meta } from "../i18n/translations/es.json";
 El chunk del worker de correo importa de `site` solo los bindings `SITE`, `meta` y `ADDRESS_EMAIL_HTML`. El chunk compartido `site_*.mjs` lleva igual el diccionario español completo porque la 404 bajo demanda (que usa `t()`) comparte ese chunk; el import nombrado no agrega peso al worker:
 
 
-<!-- evidencia:inicio {"v":1,"id":"apply-evidence.19","forma":"argv","argv":["bash","-c","/usr/bin/grep -h '^import' dist/server/chunks/email-templates_*.mjs; /usr/bin/grep -l 'site_' dist/server/chunks/*.mjs | xargs -n1 basename"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro","head":"f97a70e8cc07acb1967cba882c8a9f498b95519b","fecha":"2026-10-08T00:25:34-03:00","exit":0,"sha256":"b441af5534f1745eb6d75e17c028953f548ddc91a69065ba53f64afe7fe23034","lineas":5,"omitidas":0,"no_recomprobable":"inspecciona el dist de la tarea 14, que las tareas siguientes reconstruyen"} -->
-**Evidencia `apply-evidence.19`** · exit 0 · 5 líneas, 0 omitidas · HEAD `f97a70e8cc07` · 2026-10-08T00:25:34-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro`
-No re-comprobable: inspecciona el dist de la tarea 14, que las tareas siguientes reconstruyen
-
-```text
-bash -c '/usr/bin/grep -h '"'"'^import'"'"' dist/server/chunks/email-templates_*.mjs; /usr/bin/grep -l '"'"'site_'"'"' dist/server/chunks/*.mjs | xargs -n1 basename'
-```
-
-```text
-import { connect } from "cloudflare:sockets";
-import { env } from "cloudflare:workers";
-import { S as SITE, m as meta, a as ADDRESS_EMAIL_HTML } from "./site_CW62D9M4.mjs";
-404_C6k5obDO.mjs
-email-templates_BdKxAzvP.mjs
-```
-<!-- evidencia:fin apply-evidence.19 -->
+<!-- evidencia:retirado {"v":1,"id":"apply-evidence.19","sha256":"b441af5534f1745eb6d75e17c028953f548ddc91a69065ba53f64afe7fe23034","remite":"apply-evidence.46"} -->
+**Evidencia `apply-evidence.19` retirada** · remite a `apply-evidence.46` · sha256 `b441af5534f1`
 
 ## Tareas 13 y 14: host canónico desde `site.ts` y `robots.txt` prerenderizado
 
@@ -567,24 +553,8 @@ src/pages/cotizar.astro
 Se eliminaron los 18 `--opacity-*` (con su encabezado) y `--color-whatsapp-hover-dark`, en `:root` y en `@theme`. Los tokens de WhatsApp en uso siguen con sus valores, y `@theme` gana los cinco `--shadow-*` con los mismos valores de `:root` (los radios ya estaban en ambos bloques). Antes de editar no había consumidores de los tokens retirados en `src/` ni en `DESIGN.md`. La única coincidencia de `DESIGN.md`, «Disabled: opacity-50», nombra la utilidad estándar de Tailwind, no el token. Estado actual:
 
 
-<!-- evidencia:inicio {"v":1,"id":"apply-evidence.25","forma":"argv","argv":["bash","-c","/usr/bin/grep -rnE -- '--opacity-|whatsapp-hover-dark' src DESIGN.md | wc -l; /usr/bin/grep -nE -- '--color-whatsapp(-hover|-text)?:' src/styles/tokens.css; /usr/bin/grep -nE -- '--(shadow|radius)-[a-z0-9]+:' src/styles/tokens.css | awk -F: '{print $2}' | sed 's/^ *//' | sort | uniq -c | awk '{print $1, $2}' | tr '\\n' ' '; echo"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro","head":"c7f6b5503b662f1f99afc2d457c699eab23ada96","fecha":"2026-10-08T00:29:13-03:00","exit":0,"sha256":"a5455212c5a7ed0a9a7703eb08bf0c6fd19c83176e2f25ebc014376d239571b2","lineas":8,"omitidas":0,"no_recomprobable":null} -->
-**Evidencia `apply-evidence.25`** · exit 0 · 8 líneas, 0 omitidas · HEAD `c7f6b5503b66` · 2026-10-08T00:29:13-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro`
-
-```text
-bash -c '/usr/bin/grep -rnE -- '"'"'--opacity-|whatsapp-hover-dark'"'"' src DESIGN.md | wc -l; /usr/bin/grep -nE -- '"'"'--color-whatsapp(-hover|-text)?:'"'"' src/styles/tokens.css; /usr/bin/grep -nE -- '"'"'--(shadow|radius)-[a-z0-9]+:'"'"' src/styles/tokens.css | awk -F: '"'"'{print $2}'"'"' | sed '"'"'s/^ *//'"'"' | sort | uniq -c | awk '"'"'{print $1, $2}'"'"' | tr '"'"'\n'"'"' '"'"' '"'"'; echo'
-```
-
-```text
-0
-57:    --color-whatsapp:           #25D366;
-58:    --color-whatsapp-hover:     #1da851;
-59:    --color-whatsapp-text:      #111b21; /* par: 8.80 reposo · 5.63 hover */
-186:  --color-whatsapp:            #25D366;
-187:  --color-whatsapp-hover:      #1da851;
-188:  --color-whatsapp-text:       #111b21;
-2 --radius-2xl 2 --radius-card 2 --radius-circle 2 --radius-input 2 --radius-lg 2 --radius-md 2 --radius-pill 2 --radius-sm 2 --radius-xl 2 --radius-xs 2 --shadow-cta 2 --shadow-lg 2 --shadow-md 2 --shadow-sm 2 --shadow-xl 
-```
-<!-- evidencia:fin apply-evidence.25 -->
+<!-- evidencia:retirado {"v":1,"id":"apply-evidence.25","sha256":"a5455212c5a7ed0a9a7703eb08bf0c6fd19c83176e2f25ebc014376d239571b2","remite":"apply-evidence.50"} -->
+**Evidencia `apply-evidence.25` retirada** · remite a `apply-evidence.50` · sha256 `a5455212c5a7`
 
 Medición pedida por la tarea: con los `--shadow-*` en `@theme`, el CSS construido difiere en más que las declaraciones eliminadas (el diff completo lo registra la tarea 19). Tailwind reemplaza en su capa `theme` los valores por defecto de `--shadow-sm|md|xl` por los del proyecto y agrega `--shadow-cta`. También cambian las reglas utilitarias `.shadow-sm|md|lg|xl|cta`, que genera porque esos nombres aparecen en hojas y documentos, y `.shadow-cta` pasa de color de sombra a sombra. El aspecto no cambia: ningún elemento del HTML construido usa clases `shadow-*`, y los valores que leen los estilos (`var(--shadow-*)`) siguen saliendo de `:root` en `@layer base`, que se impone a la capa `theme`. Esto tensiona el criterio 4 de [[color-token-policy]] («el CSS difiere solo en las declaraciones eliminadas») con el 5 («sombras disponibles como utilidades de Tailwind»). La tensión queda registrada en `observations.md` y en los riesgos del reporte, sin decidirla aquí:
 
@@ -773,40 +743,8 @@ bash -c 'for f in $(cd .wrangler/baseline/before/html && find . -name index.html
 CSS construido contra la línea base, por hoja (sin hash) y por declaración. Las bajas son los 18 `--opacity-*` y `--color-whatsapp-hover-dark` (declaradas). El resto de las bajas y altas vienen de los `--shadow-*` en `@theme` (tensión descrita en la tarea 16). `cotizar`, `index` y `shared` no cambian:
 
 
-<!-- evidencia:inicio {"v":1,"id":"apply-evidence.34","forma":"argv","argv":["bash","-c","python3 /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-s_66runf/css-decl-diff.py before/css after/css | sed -n '1,40p' | /usr/bin/grep -vE '^  - --opacity-'; echo \"bajas --opacity-* en 404 y Footer: $(python3 /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-s_66runf/css-decl-diff.py before/css after/css | /usr/bin/grep -c '^  - --opacity-')\""],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro/.wrangler/baseline","head":"4ca32b7343a72720e7065134199947e47d490d87","fecha":"2026-10-08T00:30:53-03:00","exit":0,"sha256":"f7984d37c8bf67ff485878502936c7f03c5ff411380c6fff9dec7f3db91dc9af","lineas":23,"omitidas":0,"no_recomprobable":"script en el directorio de temporales del despacho, borrado al terminar la fase"} -->
-**Evidencia `apply-evidence.34`** · exit 0 · 23 líneas, 0 omitidas · HEAD `4ca32b7343a7` · 2026-10-08T00:30:53-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro/.wrangler/baseline`
-No re-comprobable: script en el directorio de temporales del despacho, borrado al terminar la fase
-
-```text
-bash -c 'python3 /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-s_66runf/css-decl-diff.py before/css after/css | sed -n '"'"'1,40p'"'"' | /usr/bin/grep -vE '"'"'^  - --opacity-'"'"'; echo "bajas --opacity-* en 404 y Footer: $(python3 /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-s_66runf/css-decl-diff.py before/css after/css | /usr/bin/grep -c '"'"'^  - --opacity-'"'"')"'
-```
-
-```text
-404: -31 +10
-  - --color-whatsapp-hover-dark:#0d6b61;
-  - --shadow-md:0 4px 6px -1px #0000001a, 0 2px 4px -2px #0000001a;
-  - --shadow-sm:0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
-  - --shadow-xl:0 20px 25px -5px #0000001a, 0 8px 10px -6px #0000001a;
-  - --tw-shadow-color:#3eb978}
-  - --tw-shadow-color:color-mix(in oklab, var(--color-cta) var(--tw-shadow-alpha), transparent)}
-  - --tw-shadow:0 10px 15px -3px var(--tw-shadow-color,#0000001a), 0 4px 6px -4px var(--tw-shadow-color,#0000001a);
-  - --tw-shadow:0 1px 3px 0 var(--tw-shadow-color,#0000001a), 0 1px 2px -1px var(--tw-shadow-color,#0000001a);
-  - --tw-shadow:0 20px 25px -5px var(--tw-shadow-color,#0000001a), 0 8px 10px -6px var(--tw-shadow-color,#0000001a);
-  - --tw-shadow:0 4px 6px -1px var(--tw-shadow-color,#0000001a), 0 2px 4px -2px var(--tw-shadow-color,#0000001a);
-  - .shadow-cta{
-  - @supports (color:color-mix(in lab,red,red)){
-  - }
-  + --shadow-cta:0 4px 20px 0 #3eb97859;
-  + --shadow-md:0 4px 16px 0 #4a7bb51f;
-  + --shadow-sm:0 1px 3px 0 #4a7bb514;
-  + --shadow-xl:0 16px 48px 0 #4a7bb533;
-  + --tw-shadow:0 16px 48px 0 var(--tw-shadow-color,#4a7bb533);
-  + --tw-shadow:0 1px 3px 0 var(--tw-shadow-color,#4a7bb514);
-  + --tw-shadow:0 4px 16px 0 var(--tw-shadow-color,#4a7bb51f);
-  + --tw-shadow:0 4px 20px 0 var(--tw-shadow-color,#3eb97859);
-bajas --opacity-* en 404 y Footer: 36
-```
-<!-- evidencia:fin apply-evidence.34 -->
+<!-- evidencia:retirado {"v":1,"id":"apply-evidence.34","sha256":"f7984d37c8bf67ff485878502936c7f03c5ff411380c6fff9dec7f3db91dc9af","remite":"apply-evidence.51"} -->
+**Evidencia `apply-evidence.34` retirada** · remite a `apply-evidence.51` · sha256 `f7984d37c8bf`
 
 Restos del dominio sin `www` en HTML, sitemap y robots; `manifest.json`; teléfono y email en las 18 páginas:
 
@@ -1021,3 +959,283 @@ exit de build:ci: 1
 ### Tarea 16: `--shadow-*` fuera de `@theme` (`e2ee811`)
 
 Los cinco `--shadow-*` salen de `@theme` y siguen en `:root`. El criterio 5 de [[color-token-policy]] queda como «tokens de sombra y radio definidos en `tokens.css` (`:root`) y consumidos vía `var()`», y sus requisitos y su escenario de sombras se ajustan a ese criterio. El diff del CSS construido contra la línea base se registra sobre el árbol final, en la sección de cierre.
+
+### Residuales 3 y 4 y el import del correo (`e350a25`)
+
+- **`meta.siteName`**: la marca de la barra de navegación (dos sitios) y del pie de página lee `SITE.name`, y la clave sale de `es.json`, `en.json` y `pt.json`. Son tres consumidores y la paridad pasa de 536 a 535 claves.
+- **`@logatm`**: `twitter:site` y `twitter:creator` de `BaseLayout.astro` leen `TWITTER_HANDLE`, que `site.ts` deriva de `SITE.social.twitter` junto a los demás derivados. Son dos consumidores en un archivo.
+- **Correo**: `email-templates.ts` vuelve a `import es from "../i18n/translations/es.json"` y usa `es.meta.tagline`. [[site-identity-single-source]] queda ajustada (import simple; marca de la barra y cuenta de X desde la identidad).
+
+Ninguno creció: los dos residuales se resolvieron y ninguno queda pendiente. Que no hay cambio visible en `dist/client` lo muestra el diff de cierre. Para el correo, los tres correos renderizados con datos fijos y la fecha sustituida por un stub, con la plantilla de `d3e9cd3` (import nombrado) y con la de `e350a25` (import simple), dan el mismo resultado. El fixture está bajo el directorio de temporales del despacho, con un `mailer.ts` stub porque el real importa `cloudflare:workers`:
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.45","forma":"argv","argv":["bash","-c","/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro/node_modules/.bin/tsx render.mts /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/email-fixture.kXle9BjK/before \u003e before.json && /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro/node_modules/.bin/tsx render.mts /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/email-fixture.kXle9BjK/after \u003e after.json && cmp before.json after.json && echo 'correos idénticos'; wc -c < after.json; /usr/bin/grep -o 'Logística a tu medida' after.json | wc -l; sed -n 4p after/lib/email-templates.ts"],"texto":null,"cwd":"/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/email-fixture.kXle9BjK","head":null,"fecha":"2026-10-08T17:10:05-03:00","exit":0,"sha256":"5ba722736dfab153c2759f43ebbe138d1c39f83ce35143aceea01ba7f5bc7576","lineas":4,"omitidas":0,"no_recomprobable":"fixture en el directorio de temporales del despacho, borrado al terminar la fase"} -->
+**Evidencia `apply-evidence.45`** · exit 0 · 4 líneas, 0 omitidas · HEAD `sin-git` · 2026-10-08T17:10:05-03:00 · `/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/email-fixture.kXle9BjK`
+No re-comprobable: fixture en el directorio de temporales del despacho, borrado al terminar la fase
+
+```text
+bash -c '/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro/node_modules/.bin/tsx render.mts /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/email-fixture.kXle9BjK/before > before.json && /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro/node_modules/.bin/tsx render.mts /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/email-fixture.kXle9BjK/after > after.json && cmp before.json after.json && echo '"'"'correos idénticos'"'"'; wc -c < after.json; /usr/bin/grep -o '"'"'Logística a tu medida'"'"' after.json | wc -l; sed -n 4p after/lib/email-templates.ts'
+```
+
+```text
+correos idénticos
+31138
+6
+import es from "../i18n/translations/es.json";
+```
+<!-- evidencia:fin apply-evidence.45 -->
+
+El chunk del worker de correo importa de `site` los bindings `SITE`, `es` y `ADDRESS_EMAIL_HTML`. Igual que con el import nombrado, el diccionario español viaja en el chunk compartido con la 404 bajo demanda, así que el import simple no agrega peso:
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.46","forma":"argv","argv":["bash","-c","/usr/bin/grep -h '^import' dist/server/chunks/email-templates_*.mjs; /usr/bin/grep -l 'site_' dist/server/chunks/*.mjs | xargs -n1 basename"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro","head":"e350a2557c6bb2a4c99abfeb1a0a9b2d5fc72cf6","fecha":"2026-10-08T17:10:12-03:00","exit":0,"sha256":"0e644658f4fc17c840d60437be38779c931033bca4c00171528f8fbe0060d8d8","lineas":5,"omitidas":0,"no_recomprobable":"inspecciona el dist del build final; verify reconstruye"} -->
+**Evidencia `apply-evidence.46`** · exit 0 · 5 líneas, 0 omitidas · HEAD `e350a2557c6b` · 2026-10-08T17:10:12-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro`
+No re-comprobable: inspecciona el dist del build final; verify reconstruye
+
+```text
+bash -c '/usr/bin/grep -h '"'"'^import'"'"' dist/server/chunks/email-templates_*.mjs; /usr/bin/grep -l '"'"'site_'"'"' dist/server/chunks/*.mjs | xargs -n1 basename'
+```
+
+```text
+import { connect } from "cloudflare:sockets";
+import { env } from "cloudflare:workers";
+import { S as SITE, e as es, a as ADDRESS_EMAIL_HTML } from "./site_n8xZ30Oh.mjs";
+404__KnRh5FD.mjs
+email-templates_DCG9j_EJ.mjs
+```
+<!-- evidencia:fin apply-evidence.46 -->
+
+### Cierre del re-despacho: `dist/client` final contra la línea base (tareas 19 y 20)
+
+Build del árbol final (`e350a25`) con `npm run build`. La guarda informa las 18 páginas, y las señales se extrajeron de nuevo en `.wrangler/baseline/after/` (gitignored):
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.47","forma":"argv","argv":["bash","-c","/usr/bin/grep -E '\\[prerender\\]|Complete!' /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/build-final.log; /usr/bin/grep -c 'Uncaught\\|\\[ERROR\\]' /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/build-final.log; find dist/client -name index.html | wc -l; find dist/client -name index.html -size 0 | wc -l"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro","head":"e350a2557c6bb2a4c99abfeb1a0a9b2d5fc72cf6","fecha":"2026-10-08T17:10:27-03:00","exit":0,"sha256":"d65a05796b469c0ee31f255d99533074c6cb927c4a3cea191e319ca54b65791e","lineas":5,"omitidas":0,"no_recomprobable":"log del build final en el directorio de temporales; verify construye con evidencia propia"} -->
+**Evidencia `apply-evidence.47`** · exit 0 · 5 líneas, 0 omitidas · HEAD `e350a2557c6b` · 2026-10-08T17:10:27-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro`
+No re-comprobable: log del build final en el directorio de temporales; verify construye con evidencia propia
+
+```text
+bash -c '/usr/bin/grep -E '"'"'\[prerender\]|Complete!'"'"' /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/build-final.log; /usr/bin/grep -c '"'"'Uncaught\|\[ERROR\]'"'"' /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/build-final.log; find dist/client -name index.html | wc -l; find dist/client -name index.html -size 0 | wc -l'
+```
+
+```text
+17:08:24 [log-atm:prerender-output-guard] [prerender] 18 páginas prerenderizadas con HTML válido
+17:08:24 [build] Complete!
+0
+18
+0
+```
+<!-- evidencia:fin apply-evidence.47 -->
+
+Clasificación del diff de señales (texto visible, `<title>` y `<meta>`, canonical/hreflang, JSON-LD y `robots.txt`) contra las diferencias declaradas. `classify.py` (en el directorio de temporales del despacho) normaliza el host `www` (c) y el `slogan` localizado (d), y luego compara por palabras: solo acepta la baja de «Última milla» (a) y «Otro» → «Other»/«Outro» (b), y lista como no declarada cualquier otra diferencia. La marca «LOG ATM» desde `SITE.name` y `@logatm` desde `TWITTER_HANDLE` no generan diferencias:
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.48","forma":"argv","argv":["python3","/tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/tools/classify.py","before","after"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro/.wrangler/baseline","head":"e350a2557c6bb2a4c99abfeb1a0a9b2d5fc72cf6","fecha":"2026-10-08T17:10:27-03:00","exit":0,"sha256":"d6f8016c0bf45fd576c0890c6ec16569dcb1a81b7cdf4c5b16f09fdf89f1e546","lineas":21,"omitidas":0,"no_recomprobable":"script en el directorio de temporales del despacho, borrado al terminar la fase"} -->
+**Evidencia `apply-evidence.48`** · exit 0 · 21 líneas, 0 omitidas · HEAD `e350a2557c6b` · 2026-10-08T17:10:27-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro/.wrangler/baseline`
+No re-comprobable: script en el directorio de temporales del despacho, borrado al terminar la fase
+
+```text
+python3 /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/tools/classify.py before after
+```
+
+```text
+contacto.txt: sin diferencias no declaradas
+cotizar.txt: sin diferencias no declaradas
+en.txt: sin diferencias no declaradas
+en__contacto.txt: sin diferencias no declaradas
+en__cotizar.txt: sin diferencias no declaradas
+en__industrias.txt: sin diferencias no declaradas
+en__nosotros.txt: sin diferencias no declaradas
+en__servicios.txt: sin diferencias no declaradas
+industrias.txt: sin diferencias no declaradas
+nosotros.txt: sin diferencias no declaradas
+pt.txt: sin diferencias no declaradas
+pt__contacto.txt: sin diferencias no declaradas
+pt__cotizar.txt: sin diferencias no declaradas
+pt__industrias.txt: sin diferencias no declaradas
+pt__nosotros.txt: sin diferencias no declaradas
+pt__servicios.txt: sin diferencias no declaradas
+robots.txt: sin diferencias no declaradas
+root.txt: sin diferencias no declaradas
+servicios.txt: sin diferencias no declaradas
+páginas sin par: ninguna
+totales por categoría: {'a Última milla ausente': 3, 'b Otro traducido': 2, 'c host www': 233, 'd slogan localizado': 12}
+```
+<!-- evidencia:fin apply-evidence.48 -->
+
+HTML crudo normalizado (host y slogan) contra la línea base, con el mismo comando de `apply-evidence.33`. Su salida calza con la de ese bloque (mismo sha256 `402bdaf61158`), así que el re-despacho no cambia el HTML. Fuera de las señales solo cambian el hash de `Footer.*.css`, el orden de claves del JSON inline de industrias, la opción «Otro» de cotizar y el botón de «Última milla» que ya no está:
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.49","forma":"argv","argv":["bash","-c","for f in $(cd .wrangler/baseline/before/html && find . -name index.html | sort); do diff <(sed 's/\u003e</\u003e\\n</g' .wrangler/baseline/before/html/$f) <(sed 's#https://www\\.logatm\\.com#https://logatm.com#g; s#\"slogan\":\"Logistics tailored to you\"#\"slogan\":\"Logística a tu medida\"#; s#\"slogan\":\"Logística sob medida\"#\"slogan\":\"Logística a tu medida\"#' dist/client/$f | sed 's/\u003e</\u003e\\n</g') | /usr/bin/grep '^[<\u003e]' | sed -E 's#(Footer\\.)[A-Za-z0-9_-]+(\\.css)#\\1HASH\\2#; s#^(. <script\u003e\\(function\\(\\)\\{const industries = ).*#\\1[JSON inline]#' | sort -u; done | sort | uniq -c"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro","head":"e350a2557c6bb2a4c99abfeb1a0a9b2d5fc72cf6","fecha":"2026-10-08T17:10:43-03:00","exit":0,"sha256":"402bdaf6115868277e5624d5f4ab28ab0024c2609a34c1fb61cc80c438d64942","lineas":17,"omitidas":0,"no_recomprobable":"compara el dist final; verify reconstruye"} -->
+**Evidencia `apply-evidence.49`** · exit 0 · 17 líneas, 0 omitidas · HEAD `e350a2557c6b` · 2026-10-08T17:10:43-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro`
+No re-comprobable: compara el dist final; verify reconstruye
+
+```text
+bash -c 'for f in $(cd .wrangler/baseline/before/html && find . -name index.html | sort); do diff <(sed '"'"'s/></>\n</g'"'"' .wrangler/baseline/before/html/$f) <(sed '"'"'s#https://www\.logatm\.com#https://logatm.com#g; s#"slogan":"Logistics tailored to you"#"slogan":"Logística a tu medida"#; s#"slogan":"Logística sob medida"#"slogan":"Logística a tu medida"#'"'"' dist/client/$f | sed '"'"'s/></>\n</g'"'"') | /usr/bin/grep '"'"'^[<>]'"'"' | sed -E '"'"'s#(Footer\.)[A-Za-z0-9_-]+(\.css)#\1HASH\2#; s#^(. <script>\(function\(\)\{const industries = ).*#\1[JSON inline]#'"'"' | sort -u; done | sort | uniq -c'
+```
+
+```text
+      1 < <button type="button" class="chip-multi" data-extra="Last mile">Last mile</button>
+      1 < <button type="button" class="chip-multi" data-extra="Última milha">Última milha</button>
+      1 < <button type="button" class="chip-multi" data-extra="Última milla">Última milla</button>
+     18 < <link rel="stylesheet" href="/_astro/Footer.HASH.css">
+     18 > <link rel="stylesheet" href="/_astro/Footer.HASH.css">
+      3 < <option value="Jeddah, SA">Jeddah, SA</option>
+      1 > <option value="Jeddah, SA">Jeddah, SA</option>  <option value="Otro">Other</option> </select> </div> <div class="route-pair__arrow" aria-hidden="true">→</div> <div class="form-field"> <label for="q-dest">Destination</label> <select id="q-dest" name="dest"> <option value="Santiago, CL" selected>Santiago, CL</option>
+      1 > <option value="Jeddah, SA">Jeddah, SA</option>  <option value="Otro">Otro</option> </select> </div> <div class="route-pair__arrow" aria-hidden="true">→</div> <div class="form-field"> <label for="q-dest">Destino</label> <select id="q-dest" name="dest"> <option value="Santiago, CL" selected>Santiago, CL</option>
+      1 > <option value="Jeddah, SA">Jeddah, SA</option>  <option value="Otro">Outro</option> </select> </div> <div class="route-pair__arrow" aria-hidden="true">→</div> <div class="form-field"> <label for="q-dest">Destino</label> <select id="q-dest" name="dest"> <option value="Santiago, CL" selected>Santiago, CL</option>
+      1 < <option value="Otro">Otro</option> </select> </div> <div class="route-pair__arrow" aria-hidden="true">→</div> <div class="form-field"> <label for="q-dest">Destination</label> <select id="q-dest" name="dest"> <option value="Santiago, CL" selected>Santiago, CL</option>
+      2 < <option value="Otro">Otro</option> </select> </div> <div class="route-pair__arrow" aria-hidden="true">→</div> <div class="form-field"> <label for="q-dest">Destino</label> <select id="q-dest" name="dest"> <option value="Santiago, CL" selected>Santiago, CL</option>
+      1 > </script> </body> </html> <script>(function(){const industries = [{"icon":"lucide:pickaxe","color":"#658fc3","img":{"src":"/_astro/ind-mineria.ByjgnuJh.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Mineração","sub":"Cobre, lítio, maquinário","tags":["Cobre","Lítio"],"services":["FCL","Maquinário","Reefer"]},{"icon":"lucide:shopping-bag","color":"#3EB978","img":{"src":"/_astro/ind-retail.T3SOoBD2.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Varejo","sub":"Moda, consumo, sazonalidade","tags":["Moda","Consumo","Alta temporada"],"services":["LCL","Courier","Fulfillment"]},{"icon":"lucide:wheat","color":"#2D9B6F","img":{"src":"/_astro/ind-agro.CGITh8dF.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Agroindústria","sub":"Fruta, vinhos, grãos","tags":["Fruta fresca","Vinhos","Grãos"],"services":["Reefer","Certificação SAG","Aéreo"]},{"icon":"lucide:pill","color":"#4A7BB5","img":{"src":"/_astro/ind-farma.BXogGomO.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Farmacêutica","sub":"Cadeia de frio, reagentes","tags":["Cadeia de frio","GDP","Reagentes"],"services":["Cadeia de frio","Validação GDP","Aéreo expresso"]},{"icon":"lucide:shopping-cart","color":"#339965","img":{"src":"/_astro/ind-ecommerce.CclOggbc.jpeg","width":1376,"height":768,"format":"jpg"},"name":"E-commerce","sub":"Cross-border, fulfillment","tags":["Cross-border","Fulfillment"],"services":["Fulfillment","Caixa postal EUA"]},{"icon":"lucide:hard-hat","color":"#3b6497","img":{"src":"/_astro/ind-construccion.DbAV3UUV.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Construção","sub":"Maquinário, materiais","tags":["Maquinário","Materiais","Open-top"],"services":["FCL","Open-top","Maquinário"]},{"icon":"lucide:hammer","color":"#7a7a7a","img":{"src":"/_astro/ind-chatarra.DFRybrIL.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Sucata Ferrosa","sub":"Reciclagem e exportação","tags":["Reciclagem","Exportação","Bulk"],"services":["FCL","Exportação","Aduan…(+1390 caracteres)
+      1 > </script> </body> </html> <script>(function(){const industries = [{"icon":"lucide:pickaxe","color":"#658fc3","img":{"src":"/_astro/ind-mineria.ByjgnuJh.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Minería","sub":"Cobre, litio, maquinaria","tags":["Cobre","Litio"],"services":["FCL","Maquinaria","Reefer"]},{"icon":"lucide:shopping-bag","color":"#3EB978","img":{"src":"/_astro/ind-retail.T3SOoBD2.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Retail","sub":"Moda, consumo, temporada","tags":["Moda","Consumo","Temporada alta"],"services":["LCL","Courier","Fulfillment"]},{"icon":"lucide:wheat","color":"#2D9B6F","img":{"src":"/_astro/ind-agro.CGITh8dF.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Agroindustria","sub":"Fruta, vinos, granos","tags":["Fruta fresca","Vinos","Granos"],"services":["Reefer","Certificación SAG","Aéreo"]},{"icon":"lucide:pill","color":"#4A7BB5","img":{"src":"/_astro/ind-farma.BXogGomO.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Farmacéutica","sub":"Cadena de frío, reactivos","tags":["Cadena de frío","GDP","Reactivos"],"services":["Cadena frío","Validación GDP","Aéreo express"]},{"icon":"lucide:shopping-cart","color":"#339965","img":{"src":"/_astro/ind-ecommerce.CclOggbc.jpeg","width":1376,"height":768,"format":"jpg"},"name":"E-commerce","sub":"Cross-border, fulfillment","tags":["Cross-border","Fulfillment"],"services":["Fulfillment","Casillero USA"]},{"icon":"lucide:hard-hat","color":"#3b6497","img":{"src":"/_astro/ind-construccion.DbAV3UUV.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Construcción","sub":"Maquinaria, materiales","tags":["Maquinaria","Materiales","Open-top"],"services":["FCL","Open-top","Maquinaria"]},{"icon":"lucide:hammer","color":"#7a7a7a","img":{"src":"/_astro/ind-chatarra.DFRybrIL.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Chatarra Ferrosa","sub":"Reciclaje y exportación","tags":["Reciclaje","Exportación","Bulk"],"services":["FCL","Exportación","Aduana"]…(+1394 caracteres)
+      1 > </script> </body> </html> <script>(function(){const industries = [{"icon":"lucide:pickaxe","color":"#658fc3","img":{"src":"/_astro/ind-mineria.ByjgnuJh.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Mining","sub":"Copper, lithium, machinery","tags":["Copper","Lithium"],"services":["FCL","Machinery","Reefer"]},{"icon":"lucide:shopping-bag","color":"#3EB978","img":{"src":"/_astro/ind-retail.T3SOoBD2.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Retail","sub":"Fashion, consumer, seasonal","tags":["Fashion","Consumer","Peak season"],"services":["LCL","Courier","Fulfillment"]},{"icon":"lucide:wheat","color":"#2D9B6F","img":{"src":"/_astro/ind-agro.CGITh8dF.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Agribusiness","sub":"Fruit, wines, grains","tags":["Fresh fruit","Wines","Grains"],"services":["Reefer","SAG certification","Air"]},{"icon":"lucide:pill","color":"#4A7BB5","img":{"src":"/_astro/ind-farma.BXogGomO.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Pharmaceutical","sub":"Cold chain, reagents","tags":["Cold chain","GDP","Reagents"],"services":["Cold chain","GDP validation","Air express"]},{"icon":"lucide:shopping-cart","color":"#339965","img":{"src":"/_astro/ind-ecommerce.CclOggbc.jpeg","width":1376,"height":768,"format":"jpg"},"name":"E-commerce","sub":"Cross-border, fulfillment","tags":["Cross-border","Fulfillment"],"services":["Fulfillment","USA mailbox"]},{"icon":"lucide:hard-hat","color":"#3b6497","img":{"src":"/_astro/ind-construccion.DbAV3UUV.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Construction","sub":"Machinery, materials","tags":["Machinery","Materials","Open-top"],"services":["FCL","Open-top","Machinery"]},{"icon":"lucide:hammer","color":"#7a7a7a","img":{"src":"/_astro/ind-chatarra.DFRybrIL.jpeg","width":1376,"height":768,"format":"jpg"},"name":"Ferrous Scrap","sub":"Recycling and export","tags":["Recycling","Export","Bulk"],"services":["FCL","Export","Customs"]},{"icon":"lucide:lightbulb","…(+1363 caracteres)
+      1 < </script> </body> </html> <script>(function(){const industries = [{"icon":"lucide:pickaxe","name":"Mineração","sub":"Cobre, lítio, maquinário","color":"#658fc3","img":{"src":"/_astro/ind-mineria.ByjgnuJh.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Cobre","Lítio"],"services":["FCL","Maquinário","Reefer"]},{"icon":"lucide:shopping-bag","name":"Varejo","sub":"Moda, consumo, sazonalidade","color":"#3EB978","img":{"src":"/_astro/ind-retail.T3SOoBD2.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Moda","Consumo","Alta temporada"],"services":["LCL","Courier","Fulfillment"]},{"icon":"lucide:wheat","name":"Agroindústria","sub":"Fruta, vinhos, grãos","color":"#2D9B6F","img":{"src":"/_astro/ind-agro.CGITh8dF.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Fruta fresca","Vinhos","Grãos"],"services":["Reefer","Certificação SAG","Aéreo"]},{"icon":"lucide:pill","name":"Farmacêutica","sub":"Cadeia de frio, reagentes","color":"#4A7BB5","img":{"src":"/_astro/ind-farma.BXogGomO.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Cadeia de frio","GDP","Reagentes"],"services":["Cadeia de frio","Validação GDP","Aéreo expresso"]},{"icon":"lucide:shopping-cart","name":"E-commerce","sub":"Cross-border, fulfillment","color":"#339965","img":{"src":"/_astro/ind-ecommerce.CclOggbc.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Cross-border","Fulfillment"],"services":["Fulfillment","Caixa postal EUA"]},{"icon":"lucide:hard-hat","name":"Construção","sub":"Maquinário, materiais","color":"#3b6497","img":{"src":"/_astro/ind-construccion.DbAV3UUV.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Maquinário","Materiais","Open-top"],"services":["FCL","Open-top","Maquinário"]},{"icon":"lucide:hammer","name":"Sucata Ferrosa","sub":"Reciclagem e exportação","color":"#7a7a7a","img":{"src":"/_astro/ind-chatarra.DFRybrIL.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Reciclagem","Exportação","Bulk"],"services":["FCL","Exportação","Aduan…(+1390 caracteres)
+      1 < </script> </body> </html> <script>(function(){const industries = [{"icon":"lucide:pickaxe","name":"Minería","sub":"Cobre, litio, maquinaria","color":"#658fc3","img":{"src":"/_astro/ind-mineria.ByjgnuJh.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Cobre","Litio"],"services":["FCL","Maquinaria","Reefer"]},{"icon":"lucide:shopping-bag","name":"Retail","sub":"Moda, consumo, temporada","color":"#3EB978","img":{"src":"/_astro/ind-retail.T3SOoBD2.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Moda","Consumo","Temporada alta"],"services":["LCL","Courier","Fulfillment"]},{"icon":"lucide:wheat","name":"Agroindustria","sub":"Fruta, vinos, granos","color":"#2D9B6F","img":{"src":"/_astro/ind-agro.CGITh8dF.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Fruta fresca","Vinos","Granos"],"services":["Reefer","Certificación SAG","Aéreo"]},{"icon":"lucide:pill","name":"Farmacéutica","sub":"Cadena de frío, reactivos","color":"#4A7BB5","img":{"src":"/_astro/ind-farma.BXogGomO.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Cadena de frío","GDP","Reactivos"],"services":["Cadena frío","Validación GDP","Aéreo express"]},{"icon":"lucide:shopping-cart","name":"E-commerce","sub":"Cross-border, fulfillment","color":"#339965","img":{"src":"/_astro/ind-ecommerce.CclOggbc.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Cross-border","Fulfillment"],"services":["Fulfillment","Casillero USA"]},{"icon":"lucide:hard-hat","name":"Construcción","sub":"Maquinaria, materiales","color":"#3b6497","img":{"src":"/_astro/ind-construccion.DbAV3UUV.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Maquinaria","Materiales","Open-top"],"services":["FCL","Open-top","Maquinaria"]},{"icon":"lucide:hammer","name":"Chatarra Ferrosa","sub":"Reciclaje y exportación","color":"#7a7a7a","img":{"src":"/_astro/ind-chatarra.DFRybrIL.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Reciclaje","Exportación","Bulk"],"services":["FCL","Exportación","Aduana"]…(+1394 caracteres)
+      1 < </script> </body> </html> <script>(function(){const industries = [{"icon":"lucide:pickaxe","name":"Mining","sub":"Copper, lithium, machinery","color":"#658fc3","img":{"src":"/_astro/ind-mineria.ByjgnuJh.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Copper","Lithium"],"services":["FCL","Machinery","Reefer"]},{"icon":"lucide:shopping-bag","name":"Retail","sub":"Fashion, consumer, seasonal","color":"#3EB978","img":{"src":"/_astro/ind-retail.T3SOoBD2.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Fashion","Consumer","Peak season"],"services":["LCL","Courier","Fulfillment"]},{"icon":"lucide:wheat","name":"Agribusiness","sub":"Fruit, wines, grains","color":"#2D9B6F","img":{"src":"/_astro/ind-agro.CGITh8dF.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Fresh fruit","Wines","Grains"],"services":["Reefer","SAG certification","Air"]},{"icon":"lucide:pill","name":"Pharmaceutical","sub":"Cold chain, reagents","color":"#4A7BB5","img":{"src":"/_astro/ind-farma.BXogGomO.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Cold chain","GDP","Reagents"],"services":["Cold chain","GDP validation","Air express"]},{"icon":"lucide:shopping-cart","name":"E-commerce","sub":"Cross-border, fulfillment","color":"#339965","img":{"src":"/_astro/ind-ecommerce.CclOggbc.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Cross-border","Fulfillment"],"services":["Fulfillment","USA mailbox"]},{"icon":"lucide:hard-hat","name":"Construction","sub":"Machinery, materials","color":"#3b6497","img":{"src":"/_astro/ind-construccion.DbAV3UUV.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Machinery","Materials","Open-top"],"services":["FCL","Open-top","Machinery"]},{"icon":"lucide:hammer","name":"Ferrous Scrap","sub":"Recycling and export","color":"#7a7a7a","img":{"src":"/_astro/ind-chatarra.DFRybrIL.jpeg","width":1376,"height":768,"format":"jpg"},"tags":["Recycling","Export","Bulk"],"services":["FCL","Export","Customs"]},{"icon":"lucide:lightbulb","…(+1363 caracteres)
+```
+<!-- evidencia:fin apply-evidence.49 -->
+
+Tokens de `tokens.css` tras la tarea 16, con el comando del bloque `apply-evidence.25` (retirado, remite a este): sin `--opacity-*` ni `--color-whatsapp-hover-dark`, los tres tokens de WhatsApp en uso en ambos bloques, los radios en `:root` y `@theme` (2 cada uno) y las sombras solo en `:root` (1 cada una):
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.50","forma":"argv","argv":["bash","-c","/usr/bin/grep -rnE -- '--opacity-|whatsapp-hover-dark' src DESIGN.md | wc -l; /usr/bin/grep -nE -- '--color-whatsapp(-hover|-text)?:' src/styles/tokens.css; /usr/bin/grep -nE -- '--(shadow|radius)-[a-z0-9]+:' src/styles/tokens.css | awk -F: '{print $2}' | sed 's/^ *//' | sort | uniq -c | awk '{print $1, $2}' | tr '\\n' ' '; echo"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro","head":"e350a2557c6bb2a4c99abfeb1a0a9b2d5fc72cf6","fecha":"2026-10-08T17:10:54-03:00","exit":0,"sha256":"c3a3d15e10800d82c406c5f1f931182c9af56fa14d1b0b0b0f2bcd7eb6a22a19","lineas":8,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `apply-evidence.50`** · exit 0 · 8 líneas, 0 omitidas · HEAD `e350a2557c6b` · 2026-10-08T17:10:54-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro`
+
+```text
+bash -c '/usr/bin/grep -rnE -- '"'"'--opacity-|whatsapp-hover-dark'"'"' src DESIGN.md | wc -l; /usr/bin/grep -nE -- '"'"'--color-whatsapp(-hover|-text)?:'"'"' src/styles/tokens.css; /usr/bin/grep -nE -- '"'"'--(shadow|radius)-[a-z0-9]+:'"'"' src/styles/tokens.css | awk -F: '"'"'{print $2}'"'"' | sed '"'"'s/^ *//'"'"' | sort | uniq -c | awk '"'"'{print $1, $2}'"'"' | tr '"'"'\n'"'"' '"'"' '"'"'; echo'
+```
+
+```text
+0
+57:    --color-whatsapp:           #25D366;
+58:    --color-whatsapp-hover:     #1da851;
+59:    --color-whatsapp-text:      #111b21; /* par: 8.80 reposo · 5.63 hover */
+186:  --color-whatsapp:            #25D366;
+187:  --color-whatsapp-hover:      #1da851;
+188:  --color-whatsapp-text:       #111b21;
+2 --radius-2xl 2 --radius-card 2 --radius-circle 2 --radius-input 2 --radius-lg 2 --radius-md 2 --radius-pill 2 --radius-sm 2 --radius-xl 2 --radius-xs 1 --shadow-cta 1 --shadow-lg 1 --shadow-md 1 --shadow-sm 1 --shadow-xl 
+```
+<!-- evidencia:fin apply-evidence.50 -->
+
+CSS construido contra la línea base, por hoja (sin hash) y por fragmento de declaración (`css-decl-diff.py`, en el directorio de temporales del despacho). Las únicas bajas son los 18 `--opacity-*` y `--color-whatsapp-hover-dark` en `404` y `Footer`, sin altas. `cotizar`, `index` y `shared` no cambian. El criterio 4 de [[color-token-policy]] se cumple:
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.51","forma":"argv","argv":["bash","-c","python3 /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/tools/css-decl-diff.py .wrangler/baseline/before/css dist/client/_astro | /usr/bin/grep -vE '^  - --opacity-'; echo \"bajas --opacity-* en 404 y Footer: $(python3 /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/tools/css-decl-diff.py .wrangler/baseline/before/css dist/client/_astro | /usr/bin/grep -c '^  - --opacity-')\""],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro","head":"e350a2557c6bb2a4c99abfeb1a0a9b2d5fc72cf6","fecha":"2026-10-08T17:10:54-03:00","exit":0,"sha256":"3a5565b329e7f07742ace7c5addf1bf2af5e1666744a663008548529288a8c6c","lineas":8,"omitidas":0,"no_recomprobable":"script en el directorio de temporales del despacho, borrado al terminar la fase"} -->
+**Evidencia `apply-evidence.51`** · exit 0 · 8 líneas, 0 omitidas · HEAD `e350a2557c6b` · 2026-10-08T17:10:54-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro`
+No re-comprobable: script en el directorio de temporales del despacho, borrado al terminar la fase
+
+```text
+bash -c 'python3 /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/tools/css-decl-diff.py .wrangler/baseline/before/css dist/client/_astro | /usr/bin/grep -vE '"'"'^  - --opacity-'"'"'; echo "bajas --opacity-* en 404 y Footer: $(python3 /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/tools/css-decl-diff.py .wrangler/baseline/before/css dist/client/_astro | /usr/bin/grep -c '"'"'^  - --opacity-'"'"')"'
+```
+
+```text
+404: -19 +0
+  - --color-whatsapp-hover-dark:#0d6b61;
+Footer: -19 +0
+  - --color-whatsapp-hover-dark:#0d6b61;
+cotizar: -0 +0
+index: -0 +0
+shared: -0 +0
+bajas --opacity-* en 404 y Footer: 36
+```
+<!-- evidencia:fin apply-evidence.51 -->
+
+Restos del dominio sin `www`, `manifest.json`, teléfono y email, con los comandos de `apply-evidence.35` y `apply-evidence.36`:
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.52","forma":"argv","argv":["bash","-c","echo \"https://logatm.com en dist/client: $(/usr/bin/grep -rlE 'https://logatm\\.com' dist/client --include='*.html' --include='*.xml' --include='*.txt' | wc -l)\"; cmp .wrangler/baseline/before/manifest.json dist/client/manifest.json && echo 'manifest.json sin cambios'; git -C .. diff --stat e9d68aeda82e -- log-atm-web-astro/public/manifest.json | wc -l; for p in $(find dist/client -name index.html | sort); do echo \"$(/usr/bin/grep -c '+56 9 8270 8492' $p) $(/usr/bin/grep -c 'contacto@logatm.com' $p)\"; done | sort | uniq -c"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro","head":"e350a2557c6bb2a4c99abfeb1a0a9b2d5fc72cf6","fecha":"2026-10-08T17:11:17-03:00","exit":0,"sha256":"4b473efa99b3a9d00db88782243fe307ff3e1ba02ee9fe0554dd1ac0ea6a1f50","lineas":5,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `apply-evidence.52`** · exit 0 · 5 líneas, 0 omitidas · HEAD `e350a2557c6b` · 2026-10-08T17:11:17-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro`
+
+```text
+bash -c 'echo "https://logatm.com en dist/client: $(/usr/bin/grep -rlE '"'"'https://logatm\.com'"'"' dist/client --include='"'"'*.html'"'"' --include='"'"'*.xml'"'"' --include='"'"'*.txt'"'"' | wc -l)"; cmp .wrangler/baseline/before/manifest.json dist/client/manifest.json && echo '"'"'manifest.json sin cambios'"'"'; git -C .. diff --stat e9d68aeda82e -- log-atm-web-astro/public/manifest.json | wc -l; for p in $(find dist/client -name index.html | sort); do echo "$(/usr/bin/grep -c '"'"'+56 9 8270 8492'"'"' $p) $(/usr/bin/grep -c '"'"'contacto@logatm.com'"'"' $p)"; done | sort | uniq -c'
+```
+
+```text
+https://logatm.com en dist/client: 0
+manifest.json sin cambios
+0
+      6 1 2
+     12 1 3
+```
+<!-- evidencia:fin apply-evidence.52 -->
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.53","forma":"argv","argv":["bash","-c","for f in $(cd .wrangler/baseline/before/html && find . -name index.html | sort); do a=\"$(/usr/bin/grep -c '+56 9 8270 8492' .wrangler/baseline/before/html/$f) $(/usr/bin/grep -c 'contacto@logatm.com' .wrangler/baseline/before/html/$f) $(/usr/bin/grep -c 'wa.me/56982708492' .wrangler/baseline/before/html/$f)\"; b=\"$(/usr/bin/grep -c '+56 9 8270 8492' dist/client/$f) $(/usr/bin/grep -c 'contacto@logatm.com' dist/client/$f) $(/usr/bin/grep -c 'wa.me/56982708492' dist/client/$f)\"; [ \"$a\" = \"$b\" ] && echo igual || echo \"distinto $f: $a / $b\"; done | sort | uniq -c"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro","head":"e350a2557c6bb2a4c99abfeb1a0a9b2d5fc72cf6","fecha":"2026-10-08T17:11:18-03:00","exit":0,"sha256":"22cde6bb641aae3e2aa3cbde4cbd3e60b9d6f7ca04ed126e72a44298483e4019","lineas":1,"omitidas":0,"no_recomprobable":null} -->
+**Evidencia `apply-evidence.53`** · exit 0 · 1 líneas, 0 omitidas · HEAD `e350a2557c6b` · 2026-10-08T17:11:18-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro`
+
+```text
+bash -c 'for f in $(cd .wrangler/baseline/before/html && find . -name index.html | sort); do a="$(/usr/bin/grep -c '"'"'+56 9 8270 8492'"'"' .wrangler/baseline/before/html/$f) $(/usr/bin/grep -c '"'"'contacto@logatm.com'"'"' .wrangler/baseline/before/html/$f) $(/usr/bin/grep -c '"'"'wa.me/56982708492'"'"' .wrangler/baseline/before/html/$f)"; b="$(/usr/bin/grep -c '"'"'+56 9 8270 8492'"'"' dist/client/$f) $(/usr/bin/grep -c '"'"'contacto@logatm.com'"'"' dist/client/$f) $(/usr/bin/grep -c '"'"'wa.me/56982708492'"'"' dist/client/$f)"; [ "$a" = "$b" ] && echo igual || echo "distinto $f: $a / $b"; done | sort | uniq -c'
+```
+
+```text
+     18 igual
+```
+<!-- evidencia:fin apply-evidence.53 -->
+
+Checks de la tarea 20 sobre el árbol final (`e350a25`, con el `dist/` de este cierre). `check`, `validate-i18n` (535 claves por idioma, sin `meta.siteName`) y `check-i18n-links`:
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.54","forma":"argv","argv":["bash","-c","npm run check 2\u003e&1 | tail -n 4; npm run validate-i18n 2\u003e&1 | tail -n 2; npm run check-i18n-links 2\u003e&1 | tail -n 4"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro","head":"e350a2557c6bb2a4c99abfeb1a0a9b2d5fc72cf6","fecha":"2026-10-08T17:11:35-03:00","exit":0,"sha256":"fb6fa527d9df473db14d08fd2baa272082073c62b397a9cf70c5e6d057c48a10","lineas":10,"omitidas":0,"no_recomprobable":"verify corre la suite completa sobre el mismo árbol con evidencia propia"} -->
+**Evidencia `apply-evidence.54`** · exit 0 · 10 líneas, 0 omitidas · HEAD `e350a2557c6b` · 2026-10-08T17:11:35-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro`
+No re-comprobable: verify corre la suite completa sobre el mismo árbol con evidencia propia
+
+```text
+bash -c 'npm run check 2>&1 | tail -n 4; npm run validate-i18n 2>&1 | tail -n 2; npm run check-i18n-links 2>&1 | tail -n 4'
+```
+
+```text
+- 0 errors
+- 0 warnings
+- 0 hints
+
+[i18n] en: OK (535 claves)
+[i18n] pt: OK (535 claves)
+> log-atm-web-astro@0.0.1 check-i18n-links
+> tsx scripts/check-i18n-links.ts
+
+[i18n-links] 18 páginas (es=6, en=6, pt=6), 411 enlaces internos evaluados, 0 violaciones
+```
+<!-- evidencia:fin apply-evidence.54 -->
+
+`measure:images` en el árbol final. Las cifras coinciden con las del commit base que registra `apply-evidence.38` (1304843 bytes en escritorio y 2077253 bytes en móvil):
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.55","forma":"argv","argv":["bash","-c","npm run measure:images 2\u003e&1 | tail -n 2"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro","head":"e350a2557c6bb2a4c99abfeb1a0a9b2d5fc72cf6","fecha":"2026-10-08T17:11:36-03:00","exit":0,"sha256":"111b0bc0b197cbcd2a85dc709618b97770f2ec29df3a19f22c4e75afefa48e61","lineas":2,"omitidas":0,"no_recomprobable":"verify corre la suite completa sobre el mismo árbol con evidencia propia"} -->
+**Evidencia `apply-evidence.55`** · exit 0 · 2 líneas, 0 omitidas · HEAD `e350a2557c6b` · 2026-10-08T17:11:36-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro`
+No re-comprobable: verify corre la suite completa sobre el mismo árbol con evidencia propia
+
+```text
+bash -c 'npm run measure:images 2>&1 | tail -n 2'
+```
+
+```text
+escritorio 1440x900 DPR 1: total 1304843 bytes (1.244 MB) | avif 1128962 bytes (1.077 MB) | otras 175881 bytes (0.168 MB) | archivos 21 | OK < 2 MB
+movil 390x844 DPR 3: total 2077253 bytes (1.981 MB) | avif 1901372 bytes (1.813 MB) | otras 175881 bytes (0.168 MB) | archivos 21 | OK < 2 MB
+```
+<!-- evidencia:fin apply-evidence.55 -->
+
+`npm run a11y` (axe-core en Chrome real, con `CHROME_PATH` al Chrome de `log-atm-web-astro/chrome/` del checkout principal). El commit base da 0 violaciones en `apply-evidence.39`, y el árbol final también:
+
+
+<!-- evidencia:inicio {"v":1,"id":"apply-evidence.56","forma":"argv","argv":["bash","-c","export CHROME_PATH=/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome; npm run a11y \u003e /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/a11y-final.txt 2\u003e&1; st=$?; /usr/bin/grep -cE '^\\[' /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/a11y-final.txt; tail -n 3 /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/a11y-final.txt; echo \"exit de a11y: $st\"; exit $st"],"texto":null,"cwd":"/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro","head":"e350a2557c6bb2a4c99abfeb1a0a9b2d5fc72cf6","fecha":"2026-10-08T17:12:00-03:00","exit":0,"sha256":"67e693b3fd6ef9eb0bc837656397deffdc0972698329d2f90c534f8bb687c585","lineas":5,"omitidas":0,"no_recomprobable":"verify corre la suite completa sobre el mismo árbol con evidencia propia"} -->
+**Evidencia `apply-evidence.56`** · exit 0 · 5 líneas, 0 omitidas · HEAD `e350a2557c6b` · 2026-10-08T17:12:00-03:00 · `/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-copy-tokens-ssot/log-atm-web-astro`
+No re-comprobable: verify corre la suite completa sobre el mismo árbol con evidencia propia
+
+```text
+bash -c 'export CHROME_PATH=/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome; npm run a11y > /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/a11y-final.txt 2>&1; st=$?; /usr/bin/grep -cE '"'"'^\['"'"' /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/a11y-final.txt; tail -n 3 /tmp/sdd-temporales-kapridoo/log-atm-web-astro-f0812733d673/debt-copy-tokens-ssot/sdd-apply-zz4ygvde/a11y-final.txt; echo "exit de a11y: $st"; exit $st'
+```
+
+```text
+0
+Auditando 21 URLs (18 páginas, 3 sondas 404) en escritorio y móvil…
+
+Resumen: 42 auditorías (21 URLs × 2 tamaños: 18 páginas, 3 sondas 404) · 0 violaciones en 0 reglas · 0 estados HTTP inesperados
+exit de a11y: 0
+```
+<!-- evidencia:fin apply-evidence.56 -->
+
+### Residuales tras el re-despacho (anotados en `observations.md`)
+
+1. **Upstream**: `@astrojs/cloudflare` 13.5.0, con el prerender en workerd, se traga los errores de render (reportable en withastro/astro). La guarda de [[0012-prerender-output-guard]] es la mitigación local y supone `build.format: 'directory'`.
+2. **Primer build de Workers Builds tras el merge**: confirmar que `astro.config.mjs` carga `src/lib/site.ts` y que el log muestra la línea `[prerender] 18 páginas prerenderizadas con HTML válido` (checklist post-deploy de `clarifications.md`).
+
+Los residuales 1 a 4 del primer despacho quedan cerrados: la guarda, las sombras fuera de `@theme`, `meta.siteName` y `@logatm`. `tasks.md` todavía describe la tarea 16 con las sombras en `@theme`; rige la decisión de `clarifications.md`.

@@ -714,3 +714,10 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 
 ## 2026-10-08 | measure | debt-copy-tokens-ssot | preflight sdd-apply INICIO 16:58:17 outcome=ready
 
+## 2026-10-08 | decision | debt-copy-tokens-ssot | sdd-apply (re-despacho): el `[pre-adr]` del build que no falla se resuelve con la guarda post-build `log-atm:prerender-output-guard` de `astro.config.mjs` ([[0012-prerender-output-guard]]). Falla el build si una página prerenderizada esperada (según `pages` de `astro:build:done`, más al menos un path por cada ruta de página prerenderizada) no existe, pesa 0 bytes o no contiene `<html`. Corre en `build` y en `build:ci`. Se descartaron `prerenderEnvironment: 'node'` y relajar la spec
+
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-apply: residual upstream para el PR: `@astrojs/cloudflare` 13.5.0, con el prerender en workerd, devuelve el error de render como respuesta (`render()` no revisa el status) y Astro 6.3.1 escribe el cuerpo tal cual. La página queda con 0 bytes o con la traza del error como contenido (p. ej. `TypeError: Illegal invocation …` en `/servicios/index.html`). Es reportable en withastro/astro; la guarda de ADR-0012 es la mitigación local
+
+## 2026-10-08 | decision | debt-copy-tokens-ssot | sdd-apply: la tensión entre los criterios 4 y 5 de `color-token-policy` se resuelve sacando los `--shadow-*` de `@theme` (quedan en `:root`, consumidos vía `var()`). El criterio 5 se reescribe así, y el CSS construido difiere de la línea base solo en las declaraciones retiradas
+
+## 2026-10-08 | decision | debt-copy-tokens-ssot | sdd-apply: los residuales de `meta.siteName` y de `@logatm` quedan cerrados. La marca de Navbar y Footer lee `SITE.name` y la clave sale del i18n; `twitter:site`/`twitter:creator` leen `TWITTER_HANDLE`, derivado de `SITE.social.twitter`. El correo vuelve al import simple de `es.json`. Ningún cambio visible en `dist/client`
