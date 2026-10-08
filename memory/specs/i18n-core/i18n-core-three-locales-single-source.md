@@ -7,7 +7,7 @@ domain: "debt"
 delta_type: MODIFY
 supersedes: "[[i18n-core-translation-helpers]]"
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on: []
@@ -16,16 +16,16 @@ worktree: /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-i18n-thr
 feature_branch: feature/debt-i18n-three-locales
 mr: ""
 acceptance_criteria:
-  - "[ ] La página `/` muestra textos en español; `/en/` y `/pt/` muestran inglés y portugués respectivamente."
-  - "[ ] Una clave traducida solo en español se muestra en español en los tres idiomas."
-  - "[ ] Una clave inexistente en todos los diccionarios se muestra como su literal y deja un aviso visible en consola."
-  - "[ ] Una traducción con marcador `{nombre}` interpola correctamente el valor pasado."
-  - "[ ] Todas las páginas generadas declaran dirección de lectura de izquierda a derecha y una búsqueda en `src` de `RTL_LOCALES`, `isRTL`, `is-rtl` y `[dir=\"rtl\"]` no arroja resultados."
-  - "[ ] Existe un registro de la línea base medida con un build de `main@1c70406` antes de modificar código (lista de HTML de `dist/client`, `sitemap-*.xml` y `hreflang`; hoy 6 rutas prerenderizadas por idioma, 18 HTML, más la 404 bajo demanda), y los criterios de paridad de las specs de este cambio se evalúan contra ese registro y no contra las cifras del input."
-  - "[ ] El diff de `dist/client` contra la línea base difiere solo en la lista cerrada: (1) el `name` del primer ítem del `BreadcrumbList` en `/en` y `/pt` (Home e Início), y (2) el script de cliente de `CTASection` y `WhyVideoSection` (contenido inline o nombre con hash del bundle) cuyo único cambio es la eliminación de los respaldos en español; el sitemap y los `hreflang` son idénticos a la línea base."
-  - "[ ] En una copia aislada bajo el directorio de temporales, sin commit, agregar un idioma ficticio solo en la definición única de idiomas hace que el enrutamiento de Astro, el sitemap y `npm run validate-i18n` lo reconozcan sin editar otro archivo, y ni `astro.config.mjs` ni `scripts/validate-i18n.ts` declaran literales de idiomas."
-  - "[ ] `npm run check`, `npm run validate-i18n`, `npm run check-i18n-links`, `npm run a11y` y `npm run measure:images` terminan con exit 0 y la guarda de prerender ([[0012-prerender-output-guard]]) queda en verde en `npm run build`."
-  - "[ ] ADR-0002 incluye una nota de actualización fechada que declara los tres idiomas y las seis páginas prerenderizadas por idioma más la 404 bajo demanda, y referencia a ADR-0007, sin reescribir la decisión."
+  - "[x] La página `/` muestra textos en español; `/en/` y `/pt/` muestran inglés y portugués respectivamente."
+  - "[x] Una clave traducida solo en español se muestra en español en los tres idiomas."
+  - "[x] Una clave inexistente en todos los diccionarios se muestra como su literal y deja un aviso visible en consola."
+  - "[x] Una traducción con marcador `{nombre}` interpola correctamente el valor pasado."
+  - "[x] Todas las páginas generadas declaran dirección de lectura de izquierda a derecha y una búsqueda en `src` de `RTL_LOCALES`, `isRTL`, `is-rtl` y `[dir=\"rtl\"]` no arroja resultados."
+  - "[x] Existe un registro de la línea base medida con un build de `main@1c70406` antes de modificar código (lista de HTML de `dist/client`, `sitemap-*.xml` y `hreflang`; hoy 6 rutas prerenderizadas por idioma, 18 HTML, más la 404 bajo demanda), y los criterios de paridad de las specs de este cambio se evalúan contra ese registro y no contra las cifras del input."
+  - "[x] El diff de `dist/client` contra la línea base difiere solo en la lista cerrada: (1) el `name` del primer ítem del `BreadcrumbList` en `/en` y `/pt` (Home e Início), y (2) el script de cliente de `CTASection` y `WhyVideoSection` (contenido inline o nombre con hash del bundle) cuyo único cambio es la eliminación de los respaldos en español; el sitemap y los `hreflang` son idénticos a la línea base."
+  - "[x] En una copia aislada bajo el directorio de temporales, sin commit, agregar un idioma ficticio solo en la definición única de idiomas hace que el enrutamiento de Astro, el sitemap y `npm run validate-i18n` lo reconozcan sin editar otro archivo, y ni `astro.config.mjs` ni `scripts/validate-i18n.ts` declaran literales de idiomas."
+  - "[x] `npm run check`, `npm run validate-i18n`, `npm run check-i18n-links`, `npm run a11y` y `npm run measure:images` terminan con exit 0 y la guarda de prerender ([[0012-prerender-output-guard]]) queda en verde en `npm run build`."
+  - "[x] ADR-0002 incluye una nota de actualización fechada que declara los tres idiomas y las seis páginas prerenderizadas por idioma más la 404 bajo demanda, y referencia a ADR-0007, sin reescribir la decisión."
 
 related:
   - "[[i18n-core-translation-helpers]]"
@@ -47,7 +47,7 @@ scope:
   - "log-atm-web-astro/src/components/ui/Navbar.astro"
   - "log-atm-web-astro/astro.config.mjs"
   - "log-atm-web-astro/scripts/validate-i18n.ts"
-verified_at: null
+verified_at: 2026-10-08
 
 created: "2026-10-08"
 updated: "2026-10-08"
@@ -120,16 +120,16 @@ LOG ATM atiende clientes en tres idiomas: español, inglés y portugués. El sit
 
 ## Acceptance Criteria
 
-- [ ] La página `/` muestra textos en español; `/en/` y `/pt/` muestran inglés y portugués respectivamente.
-- [ ] Una clave traducida solo en español se muestra en español en los tres idiomas.
-- [ ] Una clave inexistente en todos los diccionarios se muestra como su literal y deja un aviso visible en consola.
-- [ ] Una traducción con marcador `{nombre}` interpola correctamente el valor pasado.
-- [ ] Todas las páginas generadas declaran dirección de lectura de izquierda a derecha y una búsqueda en `src` de `RTL_LOCALES`, `isRTL`, `is-rtl` y `[dir="rtl"]` no arroja resultados.
-- [ ] Existe un registro de la línea base medida con un build de `main@1c70406` antes de modificar código (lista de HTML de `dist/client`, `sitemap-*.xml` y `hreflang`; hoy 6 rutas prerenderizadas por idioma, 18 HTML, más la 404 bajo demanda), y los criterios de paridad de las specs de este cambio se evalúan contra ese registro y no contra las cifras del input.
-- [ ] El diff de `dist/client` contra la línea base difiere solo en la lista cerrada: (1) el `name` del primer ítem del `BreadcrumbList` en `/en` y `/pt` (Home e Início), y (2) el script de cliente de `CTASection` y `WhyVideoSection` (contenido inline o nombre con hash del bundle) cuyo único cambio es la eliminación de los respaldos en español; el sitemap y los `hreflang` son idénticos a la línea base.
-- [ ] En una copia aislada bajo el directorio de temporales, sin commit, agregar un idioma ficticio solo en la definición única de idiomas hace que el enrutamiento de Astro, el sitemap y `npm run validate-i18n` lo reconozcan sin editar otro archivo, y ni `astro.config.mjs` ni `scripts/validate-i18n.ts` declaran literales de idiomas.
-- [ ] `npm run check`, `npm run validate-i18n`, `npm run check-i18n-links`, `npm run a11y` y `npm run measure:images` terminan con exit 0 y la guarda de prerender ([[0012-prerender-output-guard]]) queda en verde en `npm run build`.
-- [ ] ADR-0002 incluye una nota de actualización fechada que declara los tres idiomas y las seis páginas prerenderizadas por idioma más la 404 bajo demanda, y referencia a ADR-0007, sin reescribir la decisión.
+- [x] La página `/` muestra textos en español; `/en/` y `/pt/` muestran inglés y portugués respectivamente.
+- [x] Una clave traducida solo en español se muestra en español en los tres idiomas.
+- [x] Una clave inexistente en todos los diccionarios se muestra como su literal y deja un aviso visible en consola.
+- [x] Una traducción con marcador `{nombre}` interpola correctamente el valor pasado.
+- [x] Todas las páginas generadas declaran dirección de lectura de izquierda a derecha y una búsqueda en `src` de `RTL_LOCALES`, `isRTL`, `is-rtl` y `[dir="rtl"]` no arroja resultados.
+- [x] Existe un registro de la línea base medida con un build de `main@1c70406` antes de modificar código (lista de HTML de `dist/client`, `sitemap-*.xml` y `hreflang`; hoy 6 rutas prerenderizadas por idioma, 18 HTML, más la 404 bajo demanda), y los criterios de paridad de las specs de este cambio se evalúan contra ese registro y no contra las cifras del input.
+- [x] El diff de `dist/client` contra la línea base difiere solo en la lista cerrada: (1) el `name` del primer ítem del `BreadcrumbList` en `/en` y `/pt` (Home e Início), y (2) el script de cliente de `CTASection` y `WhyVideoSection` (contenido inline o nombre con hash del bundle) cuyo único cambio es la eliminación de los respaldos en español; el sitemap y los `hreflang` son idénticos a la línea base.
+- [x] En una copia aislada bajo el directorio de temporales, sin commit, agregar un idioma ficticio solo en la definición única de idiomas hace que el enrutamiento de Astro, el sitemap y `npm run validate-i18n` lo reconozcan sin editar otro archivo, y ni `astro.config.mjs` ni `scripts/validate-i18n.ts` declaran literales de idiomas.
+- [x] `npm run check`, `npm run validate-i18n`, `npm run check-i18n-links`, `npm run a11y` y `npm run measure:images` terminan con exit 0 y la guarda de prerender ([[0012-prerender-output-guard]]) queda en verde en `npm run build`.
+- [x] ADR-0002 incluye una nota de actualización fechada que declara los tres idiomas y las seis páginas prerenderizadas por idioma más la 404 bajo demanda, y referencia a ADR-0007, sin reescribir la decisión.
 
 ## Related
 

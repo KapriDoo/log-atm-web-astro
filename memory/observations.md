@@ -769,3 +769,15 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 ## 2026-10-08 | discovery | debt-i18n-three-locales | sdd-apply [hallazgo]: el diff de `dist/client` contra la línea base trae, además de la lista cerrada, el CSS del panel del drawer: quitar la regla RTL no iguala el CSS, porque `--drawer-offset: 100%;transform:translate(var(--drawer-offset))` pasa a `transform:translate(100%)` (reemplazo de la variable que pide la Tarea 2; mismo valor computado)
 
 Afecta a `Footer.*.css` y `404.*.css` (nombres con hash nuevos). La condición de `clarifications.md` pide que el CSS normalizado sin las reglas RTL sea idéntico; con este reemplazo no lo es al pie de la letra. Detalle en `baseline.md` (bloque `baseline.8`). Además: `en/index.html` y `pt/index.html` emiten `BreadcrumbList` desde la línea base, así que las migas localizadas son 12 páginas (no 10 internas).
+## 2026-10-08 | measure | debt-i18n-three-locales | post-dispatch sdd-apply FIN 20:26:35 outcome=advance
+
+## 2026-10-08 | measure | debt-i18n-three-locales | preflight sdd-verify INICIO 20:27:05 outcome=ready
+
+
+## 2026-10-08 | decision | debt-i18n-three-locales | sdd-verify: PASS; la lista cerrada de diferencias de dist/client (migas en/pt, script de CTASection/WhyVideoSection, reglas RTL del drawer con la sustitución de --drawer-offset) se cumple con evidencia propia y el drawer móvil se mide igual en base y HEAD, con y sin movimiento reducido (verify-report.md, bloques 10 y 18)
+
+## 2026-10-08 | discovery | debt-i18n-three-locales | sdd-verify: ADR-0002, ADR-0003 y ADR-0007 recibieron spec_refs hacia las specs del cambio (corrección de metadata unívoca); el criterio 8 del delta de routing nombra `zh`, `hi` y `ar` al negarlos, y `_profile.md` incorporó `build:ci` en f882dc2 fuera del alcance declarado de la Tarea 5
+## 2026-10-08 | measure | debt-i18n-three-locales | post-dispatch sdd-verify FIN 20:43:07 outcome=advance
+
+## 2026-10-08 | measure | debt-i18n-three-locales | preflight sdd-archive INICIO 20:43:13 outcome=ready
+

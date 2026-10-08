@@ -7,7 +7,7 @@ domain: "debt"
 delta_type: MODIFY
 supersedes: "[[i18n-routing-locale-prefixes]]"
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
@@ -17,16 +17,16 @@ worktree: /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-i18n-thr
 feature_branch: feature/debt-i18n-three-locales
 mr: ""
 acceptance_criteria:
-  - "[ ] La construcción del sitio genera, por idioma, las seis páginas prerenderizadas (18 HTML en total), las mismas que la línea base medida en `main@1c70406`, y la 404 bajo demanda no figura entre ellas."
-  - "[ ] Las URLs en español no tienen prefijo de idioma y las de inglés y portugués se sirven bajo `/en/` y `/pt/`."
-  - "[ ] Una URL en cualquier idioma abierta directamente preserva el idioma sin redirección."
-  - "[ ] El selector aparece en el navbar de escritorio y dentro del drawer móvil, y lista los tres idiomas."
-  - "[ ] Cambiar de idioma redirige a la misma ruta con el prefijo correcto, y el idioma activo es identificable visualmente y con `aria-current`."
-  - "[ ] El drawer móvil mantiene inert, focus-trap y respeto a `prefers-reduced-motion`, y el selector se opera completo con teclado."
-  - "[ ] `npm run a11y` termina con exit 0 y `npm run check-i18n-links` no encuentra enlaces internos fuera de su idioma."
-  - "[ ] Ninguna spec vigente de esta capability menciona `zh`, `hi` ni `ar`, y las specs [[i18n-not-found-localized]], [[i18n-not-found-navigation-and-seo-signals]] y [[i18n-internal-links-keep-language]] conservan su contenido y estado."
-  - "[ ] [[i18n-routing-locale-prefixes]] e [[i18n-ui-selector-navbar]] declaran `superseded_by` hacia esta spec."
-  - "[ ] ADR-0002 referencia a ADR-0007 en su nota de actualización fechada."
+  - "[x] La construcción del sitio genera, por idioma, las seis páginas prerenderizadas (18 HTML en total), las mismas que la línea base medida en `main@1c70406`, y la 404 bajo demanda no figura entre ellas."
+  - "[x] Las URLs en español no tienen prefijo de idioma y las de inglés y portugués se sirven bajo `/en/` y `/pt/`."
+  - "[x] Una URL en cualquier idioma abierta directamente preserva el idioma sin redirección."
+  - "[x] El selector aparece en el navbar de escritorio y dentro del drawer móvil, y lista los tres idiomas."
+  - "[x] Cambiar de idioma redirige a la misma ruta con el prefijo correcto, y el idioma activo es identificable visualmente y con `aria-current`."
+  - "[x] El drawer móvil mantiene inert, focus-trap y respeto a `prefers-reduced-motion`, y el selector se opera completo con teclado."
+  - "[x] `npm run a11y` termina con exit 0 y `npm run check-i18n-links` no encuentra enlaces internos fuera de su idioma."
+  - "[x] Ninguna spec vigente de esta capability menciona `zh`, `hi` ni `ar`, y las specs [[i18n-not-found-localized]], [[i18n-not-found-navigation-and-seo-signals]] y [[i18n-internal-links-keep-language]] conservan su contenido y estado."
+  - "[x] [[i18n-routing-locale-prefixes]] e [[i18n-ui-selector-navbar]] declaran `superseded_by` hacia esta spec."
+  - "[x] ADR-0002 referencia a ADR-0007 en su nota de actualización fechada."
 
 related:
   - "[[i18n-routing-locale-prefixes]]"
@@ -46,7 +46,7 @@ scope:
   - "log-atm-web-astro/src/components/ui/LanguageSelector.astro"
   - "log-atm-web-astro/src/components/ui/Navbar.astro"
   - "log-atm-web-astro/astro.config.mjs"
-verified_at: null
+verified_at: 2026-10-08
 
 created: "2026-10-08"
 updated: "2026-10-08"
@@ -126,16 +126,16 @@ Cada página de LOG ATM (home, servicios, industrias, nosotros, contacto y cotiz
 
 ## Acceptance Criteria
 
-- [ ] La construcción del sitio genera, por idioma, las seis páginas prerenderizadas (18 HTML en total), las mismas que la línea base medida en `main@1c70406`, y la 404 bajo demanda no figura entre ellas.
-- [ ] Las URLs en español no tienen prefijo de idioma y las de inglés y portugués se sirven bajo `/en/` y `/pt/`.
-- [ ] Una URL en cualquier idioma abierta directamente preserva el idioma sin redirección.
-- [ ] El selector aparece en el navbar de escritorio y dentro del drawer móvil, y lista los tres idiomas.
-- [ ] Cambiar de idioma redirige a la misma ruta con el prefijo correcto, y el idioma activo es identificable visualmente y con `aria-current`.
-- [ ] El drawer móvil mantiene inert, focus-trap y respeto a `prefers-reduced-motion`, y el selector se opera completo con teclado.
-- [ ] `npm run a11y` termina con exit 0 y `npm run check-i18n-links` no encuentra enlaces internos fuera de su idioma.
-- [ ] Ninguna spec vigente de esta capability menciona `zh`, `hi` ni `ar`, y las specs [[i18n-not-found-localized]], [[i18n-not-found-navigation-and-seo-signals]] y [[i18n-internal-links-keep-language]] conservan su contenido y estado.
-- [ ] [[i18n-routing-locale-prefixes]] e [[i18n-ui-selector-navbar]] declaran `superseded_by` hacia esta spec.
-- [ ] ADR-0002 referencia a ADR-0007 en su nota de actualización fechada.
+- [x] La construcción del sitio genera, por idioma, las seis páginas prerenderizadas (18 HTML en total), las mismas que la línea base medida en `main@1c70406`, y la 404 bajo demanda no figura entre ellas.
+- [x] Las URLs en español no tienen prefijo de idioma y las de inglés y portugués se sirven bajo `/en/` y `/pt/`.
+- [x] Una URL en cualquier idioma abierta directamente preserva el idioma sin redirección.
+- [x] El selector aparece en el navbar de escritorio y dentro del drawer móvil, y lista los tres idiomas.
+- [x] Cambiar de idioma redirige a la misma ruta con el prefijo correcto, y el idioma activo es identificable visualmente y con `aria-current`.
+- [x] El drawer móvil mantiene inert, focus-trap y respeto a `prefers-reduced-motion`, y el selector se opera completo con teclado.
+- [x] `npm run a11y` termina con exit 0 y `npm run check-i18n-links` no encuentra enlaces internos fuera de su idioma.
+- [x] Ninguna spec vigente de esta capability menciona `zh`, `hi` ni `ar`, y las specs [[i18n-not-found-localized]], [[i18n-not-found-navigation-and-seo-signals]] y [[i18n-internal-links-keep-language]] conservan su contenido y estado.
+- [x] [[i18n-routing-locale-prefixes]] e [[i18n-ui-selector-navbar]] declaran `superseded_by` hacia esta spec.
+- [x] ADR-0002 referencia a ADR-0007 en su nota de actualización fechada.
 
 ## Related
 

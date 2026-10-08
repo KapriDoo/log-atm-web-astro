@@ -7,7 +7,7 @@ domain: "debt"
 delta_type: MODIFY
 supersedes: "[[i18n-translations-json-structure]]"
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
@@ -17,15 +17,15 @@ worktree: /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-i18n-thr
 feature_branch: feature/debt-i18n-three-locales
 mr: ""
 acceptance_criteria:
-  - "[ ] Los tres diccionarios tienen el mismo conjunto exacto de claves y existe al menos un namespace por cada área de negocio enumerada."
-  - "[ ] El diccionario maestro en español refleja el microcopy actual del código."
-  - "[ ] `npm run build` falla cuando hay divergencia estructural y el reporte indica idioma y clave de cada divergencia."
-  - "[ ] La validación termina antes del paso de generación de HTML y existe un script ejecutable de validación independiente de la construcción (`npm run validate-i18n`)."
-  - "[ ] `scripts/validate-i18n.ts` no declara literales de idiomas y toma los idiomas y el maestro de la definición única de idiomas."
-  - "[ ] Una búsqueda de textos de respaldo en español (el operador `??` seguido de un texto literal en español) en los scripts de `CTASection.astro` y `WhyVideoSection.astro` no arroja resultados; el valor enviado al operador queda fuera de la búsqueda."
-  - "[ ] El HTML generado de las páginas que incluyen esos scripts difiere de la línea base solo en el script de cliente (contenido inline o nombre con hash del bundle) y únicamente por la eliminación de los respaldos."
-  - "[ ] [[i18n-translations-json-structure]] e [[i18n-translations-build-validation]] declaran `superseded_by` hacia esta spec."
-  - "[ ] ADR-0003 incluye una nota de actualización fechada que declara que `prebuild` nunca existió y que el hook `astro:build:start` es el mecanismo único, sin reescribir la decisión."
+  - "[x] Los tres diccionarios tienen el mismo conjunto exacto de claves y existe al menos un namespace por cada área de negocio enumerada."
+  - "[x] El diccionario maestro en español refleja el microcopy actual del código."
+  - "[x] `npm run build` falla cuando hay divergencia estructural y el reporte indica idioma y clave de cada divergencia."
+  - "[x] La validación termina antes del paso de generación de HTML y existe un script ejecutable de validación independiente de la construcción (`npm run validate-i18n`)."
+  - "[x] `scripts/validate-i18n.ts` no declara literales de idiomas y toma los idiomas y el maestro de la definición única de idiomas."
+  - "[x] Una búsqueda de textos de respaldo en español (el operador `??` seguido de un texto literal en español) en los scripts de `CTASection.astro` y `WhyVideoSection.astro` no arroja resultados; el valor enviado al operador queda fuera de la búsqueda."
+  - "[x] El HTML generado de las páginas que incluyen esos scripts difiere de la línea base solo en el script de cliente (contenido inline o nombre con hash del bundle) y únicamente por la eliminación de los respaldos."
+  - "[x] [[i18n-translations-json-structure]] e [[i18n-translations-build-validation]] declaran `superseded_by` hacia esta spec."
+  - "[x] ADR-0003 incluye una nota de actualización fechada que declara que `prebuild` nunca existió y que el hook `astro:build:start` es el mecanismo único, sin reescribir la decisión."
 
 related:
   - "[[i18n-translations-json-structure]]"
@@ -41,7 +41,7 @@ scope:
   - "log-atm-web-astro/astro.config.mjs"
   - "log-atm-web-astro/src/components/sections/CTASection.astro"
   - "log-atm-web-astro/src/components/sections/WhyVideoSection.astro"
-verified_at: null
+verified_at: 2026-10-08
 
 created: "2026-10-08"
 updated: "2026-10-08"
@@ -114,15 +114,15 @@ El equipo de contenido y el de desarrollo pueden agregar, modificar y traducir t
 
 ## Acceptance Criteria
 
-- [ ] Los tres diccionarios tienen el mismo conjunto exacto de claves y existe al menos un namespace por cada área de negocio enumerada.
-- [ ] El diccionario maestro en español refleja el microcopy actual del código.
-- [ ] `npm run build` falla cuando hay divergencia estructural y el reporte indica idioma y clave de cada divergencia.
-- [ ] La validación termina antes del paso de generación de HTML y existe un script ejecutable de validación independiente de la construcción (`npm run validate-i18n`).
-- [ ] `scripts/validate-i18n.ts` no declara literales de idiomas y toma los idiomas y el maestro de la definición única de idiomas.
-- [ ] Una búsqueda de textos de respaldo en español (el operador `??` seguido de un texto literal en español) en los scripts de `CTASection.astro` y `WhyVideoSection.astro` no arroja resultados; el valor enviado al operador queda fuera de la búsqueda.
-- [ ] El HTML generado de las páginas que incluyen esos scripts difiere de la línea base solo en el script de cliente (contenido inline o nombre con hash del bundle) y únicamente por la eliminación de los respaldos.
-- [ ] [[i18n-translations-json-structure]] e [[i18n-translations-build-validation]] declaran `superseded_by` hacia esta spec.
-- [ ] ADR-0003 incluye una nota de actualización fechada que declara que `prebuild` nunca existió y que el hook `astro:build:start` es el mecanismo único, sin reescribir la decisión.
+- [x] Los tres diccionarios tienen el mismo conjunto exacto de claves y existe al menos un namespace por cada área de negocio enumerada.
+- [x] El diccionario maestro en español refleja el microcopy actual del código.
+- [x] `npm run build` falla cuando hay divergencia estructural y el reporte indica idioma y clave de cada divergencia.
+- [x] La validación termina antes del paso de generación de HTML y existe un script ejecutable de validación independiente de la construcción (`npm run validate-i18n`).
+- [x] `scripts/validate-i18n.ts` no declara literales de idiomas y toma los idiomas y el maestro de la definición única de idiomas.
+- [x] Una búsqueda de textos de respaldo en español (el operador `??` seguido de un texto literal en español) en los scripts de `CTASection.astro` y `WhyVideoSection.astro` no arroja resultados; el valor enviado al operador queda fuera de la búsqueda.
+- [x] El HTML generado de las páginas que incluyen esos scripts difiere de la línea base solo en el script de cliente (contenido inline o nombre con hash del bundle) y únicamente por la eliminación de los respaldos.
+- [x] [[i18n-translations-json-structure]] e [[i18n-translations-build-validation]] declaran `superseded_by` hacia esta spec.
+- [x] ADR-0003 incluye una nota de actualización fechada que declara que `prebuild` nunca existió y que el hook `astro:build:start` es el mecanismo único, sin reescribir la decisión.
 
 ## Related
 

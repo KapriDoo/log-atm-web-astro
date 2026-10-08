@@ -7,7 +7,7 @@ domain: "debt"
 delta_type: MODIFY
 supersedes: "[[i18n-seo-hreflang]]"
 superseded_by: null
-status: review
+status: completed
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
@@ -18,13 +18,13 @@ worktree: /home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-i18n-thr
 feature_branch: feature/debt-i18n-three-locales
 mr: ""
 acceptance_criteria:
-  - "[ ] Cada página HTML indexable contiene 3 `<link rel=\"alternate\" hreflang>` de idioma más 1 `x-default`, idénticos a los de la línea base medida en `main@1c70406`."
-  - "[ ] El `<head>` declara `og:locale` correcto por idioma y los otros dos como `og:locale:alternate`."
-  - "[ ] El sitemap incluye 18 URLs, idénticas a las de la línea base, con sus enlaces alternativos y sin la 404."
-  - "[ ] Los tags BCP-47 del sitemap y de los `hreflang` coinciden con el atributo de idioma del documento y con la definición única de idiomas."
-  - "[ ] La página 404 no emite alternativas de idioma, canónica, dirección para redes sociales ni migas."
-  - "[ ] El `name` del primer ítem de `BreadcrumbList` es «Inicio» en `dist/client/**`, «Home» en `dist/client/en/**` e «Início» en `dist/client/pt/**`, y es la única diferencia de los datos estructurados respecto de la línea base."
-  - "[ ] [[i18n-seo-hreflang]] declara `superseded_by` hacia esta spec."
+  - "[x] Cada página HTML indexable contiene 3 `<link rel=\"alternate\" hreflang>` de idioma más 1 `x-default`, idénticos a los de la línea base medida en `main@1c70406`."
+  - "[x] El `<head>` declara `og:locale` correcto por idioma y los otros dos como `og:locale:alternate`."
+  - "[x] El sitemap incluye 18 URLs, idénticas a las de la línea base, con sus enlaces alternativos y sin la 404."
+  - "[x] Los tags BCP-47 del sitemap y de los `hreflang` coinciden con el atributo de idioma del documento y con la definición única de idiomas."
+  - "[x] La página 404 no emite alternativas de idioma, canónica, dirección para redes sociales ni migas."
+  - "[x] El `name` del primer ítem de `BreadcrumbList` es «Inicio» en `dist/client/**`, «Home» en `dist/client/en/**` e «Início» en `dist/client/pt/**`, y es la única diferencia de los datos estructurados respecto de la línea base."
+  - "[x] [[i18n-seo-hreflang]] declara `superseded_by` hacia esta spec."
 
 related:
   - "[[i18n-seo-hreflang]]"
@@ -39,7 +39,7 @@ scope:
   - "log-atm-web-astro/src/layouts/BaseLayout.astro"
   - "log-atm-web-astro/src/i18n/utils.ts"
   - "log-atm-web-astro/astro.config.mjs"
-verified_at: null
+verified_at: 2026-10-08
 
 created: "2026-10-08"
 updated: "2026-10-08"
@@ -102,13 +102,13 @@ Los buscadores descubren, indexan y muestran la versión correcta de cada págin
 
 ## Acceptance Criteria
 
-- [ ] Cada página HTML indexable contiene 3 `<link rel="alternate" hreflang>` de idioma más 1 `x-default`, idénticos a los de la línea base medida en `main@1c70406`.
-- [ ] El `<head>` declara `og:locale` correcto por idioma y los otros dos como `og:locale:alternate`.
-- [ ] El sitemap incluye 18 URLs, idénticas a las de la línea base, con sus enlaces alternativos y sin la 404.
-- [ ] Los tags BCP-47 del sitemap y de los `hreflang` coinciden con el atributo de idioma del documento y con la definición única de idiomas.
-- [ ] La página 404 no emite alternativas de idioma, canónica, dirección para redes sociales ni migas.
-- [ ] El `name` del primer ítem de `BreadcrumbList` es «Inicio» en `dist/client/**`, «Home» en `dist/client/en/**` e «Início» en `dist/client/pt/**`, y es la única diferencia de los datos estructurados respecto de la línea base.
-- [ ] [[i18n-seo-hreflang]] declara `superseded_by` hacia esta spec.
+- [x] Cada página HTML indexable contiene 3 `<link rel="alternate" hreflang>` de idioma más 1 `x-default`, idénticos a los de la línea base medida en `main@1c70406`.
+- [x] El `<head>` declara `og:locale` correcto por idioma y los otros dos como `og:locale:alternate`.
+- [x] El sitemap incluye 18 URLs, idénticas a las de la línea base, con sus enlaces alternativos y sin la 404.
+- [x] Los tags BCP-47 del sitemap y de los `hreflang` coinciden con el atributo de idioma del documento y con la definición única de idiomas.
+- [x] La página 404 no emite alternativas de idioma, canónica, dirección para redes sociales ni migas.
+- [x] El `name` del primer ítem de `BreadcrumbList` es «Inicio» en `dist/client/**`, «Home» en `dist/client/en/**` e «Início» en `dist/client/pt/**`, y es la única diferencia de los datos estructurados respecto de la línea base.
+- [x] [[i18n-seo-hreflang]] declara `superseded_by` hacia esta spec.
 
 ## Related
 

@@ -5,6 +5,9 @@ deciders: sdd-design
 consulted: exploration.md, proposal.md
 informed: sdd-apply, sdd-verify
 capability: i18n-translations
+spec_refs:
+  - "[[i18n-translations-parity-and-build-validation]]"
+updated: "2026-10-08"
 tags: [adr, i18n, validation, build, ci]
 ---
 

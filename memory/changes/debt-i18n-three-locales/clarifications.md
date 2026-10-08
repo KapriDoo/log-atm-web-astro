@@ -26,3 +26,14 @@ Origen: riesgo levantado por `sdd-tasks` (Tarea 6). El scope aprobado incluye re
 - Se admite solo si la diferencia del CSS construido (inline o bundle) consiste únicamente en la eliminación de las reglas `[dir="rtl"]`/`.is-rtl` del drawer: el CSS normalizado de la base, sin esas reglas, es idéntico al nuevo. Si solo cambia el nombre con hash referenciado en el HTML, se acepta como consecuencia de lo mismo.
 - Cualquier otra diferencia de CSS sigue bloqueando el cierre.
 - El PR declara la lista cerrada de diferencias admitidas: `BreadcrumbList` (en/pt), script de cliente de `CTASection`/`WhyVideoSection` y reglas RTL del drawer.
+
+### Ampliación tras sdd-apply — sustitución de `--drawer-offset` (2026-10-08)
+
+Hallazgo de `sdd-apply` (`baseline.8`): además de la regla RTL, la declaración del panel pasa de `--drawer-offset: 100%;transform:translate(var(--drawer-offset))` a `transform:translate(100%)` (la variable existía solo para invertir el slide en RTL; valor computado idéntico). Se admite dentro de la diferencia «reglas RTL del drawer», con acuerdo del consultor; la variable no se restaura (sería código muerto). Condiciones para `sdd-verify`:
+
+1. Fuera de la regla RTL, la única diferencia de CSS es exactamente esa sustitución, una vez por archivo, en `Footer.*.css` y `404.*.css`.
+2. En `src/` no queda ningún consumidor de `--drawer-offset` (CSS ni JS que la lea o escriba).
+3. Prueba empírica en Chrome real del drawer móvil: abre y cierra con la misma posición y animación que la base, también con `prefers-reduced-motion: reduce`; captura antes/después.
+4. El PR nombra esta sustitución dentro de la lista cerrada de diferencias admitidas.
+
+Las 12 páginas con migas localizadas (las homes `/en/` y `/pt/` ya emitían `BreadcrumbList` en la base) corrigen un conteo, no son una diferencia nueva.

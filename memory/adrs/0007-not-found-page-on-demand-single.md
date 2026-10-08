@@ -9,7 +9,9 @@ change_ref: "[[fix-i18n-links-and-404]]"
 capability: i18n-routing
 spec_refs:
   - "[[container-production-parity]]"
-updated: "2026-10-06"
+  - "[[i18n-routing-pages-and-language-selector]]"
+  - "[[i18n-seo-alternates-sitemap-and-breadcrumbs]]"
+updated: "2026-10-08"
 tags: [adr, i18n, routing, 404, astro, cloudflare]
 ---
 

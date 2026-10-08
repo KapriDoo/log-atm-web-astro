@@ -5,6 +5,10 @@ deciders: sdd-design
 consulted: exploration.md, astro-docs-i18n
 informed: sdd-apply, sdd-verify
 capability: i18n-routing
+spec_refs:
+  - "[[i18n-core-three-locales-single-source]]"
+  - "[[i18n-routing-pages-and-language-selector]]"
+updated: "2026-10-08"
 tags: [adr, i18n, routing, astro]
 ---
 
