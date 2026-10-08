@@ -6,7 +6,7 @@ slug: "i18n-ui-selector-navbar"
 domain: "feature"
 delta_type: null
 supersedes: null
-superseded_by: null
+superseded_by: "[[i18n-routing-pages-and-language-selector]]"
 status: completed
 assigned_agent: "sdd-apply"
 priority: high
@@ -33,7 +33,7 @@ scope:
   - "log-atm-web-astro/src/components/ui/Navbar.astro"
 verified_at: null
 created: "2026-05-12"
-updated: "2026-05-12"
+updated: "2026-10-08"
 tags: [capability-spec, i18n, ui, a11y]
 ---
 
@@ -41,13 +41,13 @@ tags: [capability-spec, i18n, ui, a11y]
 
 ## Purpose
 
-El visitante debe poder cambiar el idioma del sitio en cualquier momento, desde cualquier página y desde cualquier dispositivo, sin perder la página en la que está navegando. La incorporación del selector no puede degradar la accesibilidad ya conseguida en el navbar actual.
+El visitante debe poder cambiar el idioma del sitio en cualquier momento, desde cualquier página y desde cualquier dispositivo, sin perder la página en la que está navegando. La incorporación del selector no puede degradar la accesibilidad ya conseguida en el navbar actual. [[i18n-routing-pages-and-language-selector]] absorbe esta spec y concuerda con ella: el selector lista los tres idiomas y el drawer conserva su comportamiento.
 
 ## Requirements
 
 - El sistema SHALL exponer un selector de idioma visible en el navbar de cualquier página.
 - El sistema SHALL ofrecer el selector tanto en variante de escritorio (junto a la navegación principal) como en variante móvil (dentro del drawer).
-- El sistema SHALL listar los seis idiomas soportados con etiqueta corta y nombre nativo accesible para lectores de pantalla.
+- El sistema SHALL listar los tres idiomas soportados con etiqueta corta y nombre nativo accesible para lectores de pantalla.
 - El sistema SHALL marcar visualmente y semánticamente cuál es el idioma activo.
 - El sistema SHALL conducir al visitante a la misma página en el idioma elegido cuando este la selecciona.
 - El sistema SHALL preservar el comportamiento del drawer móvil ya implementado: inert al cerrarse, focus-trap al abrirse, respeto a `prefers-reduced-motion`.
@@ -59,14 +59,14 @@ El visitante debe poder cambiar el idioma del sitio en cualquier momento, desde 
 ### Scenario: Visitante cambia de idioma desde escritorio
 
 **GIVEN** un visitante en `/servicios` con el navegador en pantalla amplia
-**WHEN** abre el selector de idioma y elige "English"
-**THEN** llega a `/en/servicios` con el contenido traducido y el selector marca "English" como activo
+**WHEN** abre el selector de idioma y elige «English»
+**THEN** llega a `/en/servicios` con el contenido traducido y el selector marca «English» como activo
 
 ### Scenario: Visitante cambia de idioma desde móvil
 
 **GIVEN** un visitante en `/industrias` en un móvil
-**WHEN** abre el drawer del navbar, navega al selector y elige "中文"
-**THEN** llega a `/zh/industrias` con el contenido en chino y el drawer se cierra restaurando el foco al botón que lo abrió
+**WHEN** abre el drawer del navbar, navega al selector y elige «Português»
+**THEN** llega a `/pt/industrias` con el contenido en portugués y el drawer se cierra restaurando el foco al botón que lo abrió
 
 ### Scenario: Usuario con lector de pantalla cambia de idioma
 
@@ -82,7 +82,7 @@ El visitante debe poder cambiar el idioma del sitio en cualquier momento, desde 
 
 ## Acceptance Criteria
 
-- [ ] El selector aparece en navbar desktop y dentro del drawer móvil.
+- [ ] El selector aparece en navbar desktop y dentro del drawer móvil, y lista los tres idiomas.
 - [ ] Cambiar de idioma redirige a la misma ruta con el prefijo correcto.
 - [ ] El idioma activo es identificable visual y semánticamente (atributo de selección y/o `aria-current`).
 - [ ] La auditoría Lighthouse de accesibilidad sigue ≥ 95 tras la integración.
@@ -92,4 +92,5 @@ El visitante debe poder cambiar el idioma del sitio en cualquier momento, desde 
 ## Related
 
 - [[i18n-routing-locale-prefixes]] — destino de la navegación al cambiar idioma
-- [[i18n-rtl-support-arabic]] — comportamiento del drawer cuando el idioma activo es árabe
+- [[i18n-rtl-support-arabic]] — spec cancelada: el drawer se comporta igual en los tres idiomas
+- [[i18n-routing-pages-and-language-selector]] — spec que absorbe a esta

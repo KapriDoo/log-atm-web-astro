@@ -6,7 +6,7 @@ slug: "i18n-translations-build-validation"
 domain: "feature"
 delta_type: null
 supersedes: null
-superseded_by: null
+superseded_by: "[[i18n-translations-parity-and-build-validation]]"
 status: completed
 assigned_agent: "sdd-apply"
 priority: high
@@ -32,7 +32,7 @@ scope:
   - "log-atm-web-astro/package.json"
 verified_at: null
 created: "2026-05-12"
-updated: "2026-05-12"
+updated: "2026-10-08"
 tags: [capability-spec, i18n, build]
 ---
 
@@ -40,12 +40,12 @@ tags: [capability-spec, i18n, build]
 
 ## Purpose
 
-Evitar que el sitio se publique con diccionarios desbalanceados que producirían claves visibles al visitante o textos huérfanos. El build local y el de CI deben ser la última línea de defensa antes de promover el sitio.
+Evitar que el sitio se publique con diccionarios desbalanceados que producirían claves visibles al visitante o textos huérfanos. El build local y el de CI deben ser la última línea de defensa antes de promover el sitio. [[i18n-translations-parity-and-build-validation]] absorbe esta spec y concuerda con ella: la validación cubre los tres diccionarios.
 
 ## Requirements
 
-- El sistema SHALL ejecutar una validación de paridad de claves entre los seis diccionarios antes de generar el HTML de salida.
-- El sistema SHALL hacer fallar el proceso de build cuando alguno de los cinco idiomas no-default tenga claves faltantes o sobrantes respecto al maestro español.
+- El sistema SHALL ejecutar una validación de paridad de claves entre los tres diccionarios antes de generar el HTML de salida.
+- El sistema SHALL hacer fallar el proceso de build cuando el inglés o el portugués tengan claves faltantes o sobrantes respecto al maestro español.
 - El sistema SHALL reportar al desarrollador la lista exacta de claves divergentes por idioma cuando la validación falla.
 - El sistema SHOULD permitir ejecutar la validación de forma aislada (sin build completo) para iterar rápido.
 
@@ -53,7 +53,7 @@ Evitar que el sitio se publique con diccionarios desbalanceados que producirían
 
 ### Scenario: Build con diccionarios alineados
 
-**GIVEN** los seis diccionarios con paridad estructural completa
+**GIVEN** los tres diccionarios con paridad estructural completa
 **WHEN** un desarrollador ejecuta el build
 **THEN** la validación pasa silenciosamente y el build continúa hasta generar el HTML
 
@@ -79,3 +79,4 @@ Evitar que el sitio se publique con diccionarios desbalanceados que producirían
 ## Related
 
 - [[i18n-translations-json-structure]] — definición de la paridad esperada
+- [[i18n-translations-parity-and-build-validation]] — spec que absorbe a esta

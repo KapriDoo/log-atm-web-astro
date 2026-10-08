@@ -6,7 +6,7 @@ slug: "i18n-translations-json-structure"
 domain: "feature"
 delta_type: null
 supersedes: null
-superseded_by: null
+superseded_by: "[[i18n-translations-parity-and-build-validation]]"
 status: completed
 assigned_agent: "sdd-apply"
 priority: high
@@ -18,7 +18,7 @@ feature_branch: "feature/rescue-multi-language-support"
 commits: []
 mr: ""
 acceptance_criteria:
-  - "Existen seis diccionarios (es, en, zh, hi, ar, pt) con exactamente el mismo conjunto de claves."
+  - "Existen tres diccionarios (es, en, pt) con exactamente el mismo conjunto de claves."
   - "El diccionario en español incluye todos los textos visibles en el sitio actual, alineados con la pasada UX writing más reciente."
   - "El proceso de build falla cuando un diccionario tiene claves faltantes o sobrantes respecto al español."
 related:
@@ -31,7 +31,7 @@ scope:
   - "log-atm-web-astro/src/i18n/translations/"
 verified_at: null
 created: "2026-05-12"
-updated: "2026-05-12"
+updated: "2026-10-08"
 tags: [capability-spec, i18n, content]
 ---
 
@@ -39,15 +39,15 @@ tags: [capability-spec, i18n, content]
 
 ## Purpose
 
-El equipo de contenido y el equipo de desarrollo deben poder agregar, modificar y traducir textos del sitio sin romper la integridad: cualquier clave declarada en el idioma maestro (español) debe existir en los otros cinco idiomas y viceversa.
+El equipo de contenido y el equipo de desarrollo deben poder agregar, modificar y traducir textos del sitio sin romper la integridad: cualquier clave declarada en el idioma maestro (español) debe existir en inglés y portugués y viceversa. [[i18n-translations-parity-and-build-validation]] reemplaza a esta spec y concuerda con ella en los tres diccionarios.
 
 ## Requirements
 
-- El sistema SHALL contener un diccionario por cada idioma soportado: español, inglés, chino, hindi, árabe y portugués.
+- El sistema SHALL contener un diccionario por cada idioma soportado: español, inglés y portugués.
 - El sistema SHALL tratar el diccionario en español como maestro: ninguna clave puede existir en otro idioma sin estar también en español.
 - El sistema SHALL organizar las claves por áreas de negocio en namespaces (al menos: navegación, footer, home, servicios, industrias, nosotros, contacto, cotizar, comunes, accesibilidad).
 - El sistema SHALL incluir, al cierre de este cambio, todos los textos visibles del sitio vigente (incluyendo los refinamientos de UX writing aplicados en la última pasada).
-- El sistema SHALL preservar la paridad estructural de claves entre los seis diccionarios; las traducciones que falten contenido real pueden quedar provisionales pero deben existir.
+- El sistema SHALL preservar la paridad estructural de claves entre los tres diccionarios; las traducciones que falten contenido real pueden quedar provisionales pero deben existir.
 
 ## Scenarios
 
@@ -59,9 +59,9 @@ El equipo de contenido y el equipo de desarrollo deben poder agregar, modificar 
 
 ### Scenario: Una traducción quedó huérfana
 
-**GIVEN** un diccionario en chino que conserva una clave eliminada del maestro
-**WHEN** se ejecuta el build
-**THEN** el build falla indicando la clave sobrante en chino
+**GIVEN** un diccionario en inglés que conserva una clave eliminada del maestro
+**WHEN** se construye el sitio
+**THEN** la construcción falla indicando la clave sobrante en inglés
 
 ### Scenario: Un visitante navega tras la pasada UX writing
 
@@ -71,7 +71,7 @@ El equipo de contenido y el equipo de desarrollo deben poder agregar, modificar 
 
 ## Acceptance Criteria
 
-- [ ] Los seis diccionarios tienen el mismo conjunto exacto de claves.
+- [ ] Los tres diccionarios tienen el mismo conjunto exacto de claves.
 - [ ] El diccionario maestro español refleja el microcopy actual del código (no copias antiguas).
 - [ ] El build falla local y en CI cuando hay desbalance de claves entre diccionarios.
 - [ ] Los namespaces declarados existen en al menos un namespace por área de negocio enumerada.
@@ -80,3 +80,4 @@ El equipo de contenido y el equipo de desarrollo deben poder agregar, modificar 
 
 - [[i18n-core-translation-helpers]] — consumidor de los diccionarios
 - [[i18n-translations-build-validation]] — validación bloqueante en build
+- [[i18n-translations-parity-and-build-validation]] — spec que reemplaza a esta

@@ -731,3 +731,37 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 
 ## 2026-10-08 | measure | debt-copy-tokens-ssot | preflight sdd-archive INICIO 17:34:23 outcome=ready
 
+## 2026-10-08 | measure | debt-i18n-three-locales | preflight sdd-init INICIO 19:19:14 outcome=ready
+
+## 2026-10-08 | measure | debt-i18n-three-locales | post-dispatch sdd-init FIN 19:19:58 outcome=advance
+
+## 2026-10-08 | measure | debt-i18n-three-locales | preflight sdd-propose INICIO 19:20:06 outcome=ready
+
+
+## 2026-10-08 | discovery | debt-i18n-three-locales | sdd-propose: el árbol tiene 6 rutas prerenderizadas por idioma + la 404 bajo demanda (ADR-0007), frente a las cifras del input (7 rutas, 21 HTML, 18 URLs); los AC de paridad se fijan contra un build de línea base medido. La clave `common.breadcrumbHome` (Inicio/Home/Início) ya existe y la reutiliza el BreadcrumbList; `astro.config.mjs` puede importar `src/i18n/config.ts` (sin imports) con el patrón de `site.ts`
+## 2026-10-08 | measure | debt-i18n-three-locales | post-dispatch sdd-propose FIN 19:22:02 outcome=paused
+
+## 2026-10-08 | measure | debt-i18n-three-locales | preflight sdd-propose INICIO 19:51:03 outcome=ready
+
+## 2026-10-08 | measure | debt-i18n-three-locales | post-dispatch sdd-propose FIN 19:52:12 outcome=paused
+
+## 2026-10-08 | measure | debt-i18n-three-locales | preflight sdd-spec INICIO 20:00:37 outcome=ready
+
+
+## 2026-10-08 | decision | debt-i18n-three-locales | sdd-spec: 4 deltas MODIFY (core, routing, seo, translations); `ui-selector-navbar` se absorbe en el delta de routing y `translations-build-validation` en el de translations (superseded_by declarado en ambos extremos, `supersedes` solo hacia la spec 1:1); `i18n-rtl-support-arabic` en `cancelled` citando `551e26f`. Los AC de cierre (línea base, diff con lista cerrada, 5 comandos, prueba de SSOT aislada) viven en el delta de core; el `BreadcrumbList` localizado en el de seo; los respaldos de CTASection/WhyVideoSection en el de translations
+## 2026-10-08 | discovery | debt-i18n-three-locales | sdd-spec: las bases superseded conservan Purpose y Acceptance Criteria con seis idiomas (solo se escribieron `superseded_by` y `updated`); ADR-0042 D-1 pide acuerdo con el delta en esas secciones, pero la cadena de sucesores que lista `extended_context.py` ya no resume su contenido. Los ADR-0002/0003 no declaran `spec_refs`, así que la simetría `adrs` ↔ `spec_refs` queda a cargo de `sdd-verify` (autocorrección)
+## 2026-10-08 | incident | debt-i18n-three-locales | ASSERT FAIL delta-base-outcome-divergent sdd-spec: delta [[i18n-core-three-locales-single-source]] → base [[i18n-core-translation-helpers]] (/home/kapridoo/projects/log-atm-web-astro/.sdd/worktrees/debt-i18n-three-locales/memory/specs/i18n-core/i18n-core-translation-helpers.md): Scenario «Una traducción falta en el idioma seleccionado» con desenlace distinto
+
+## 2026-10-08 | measure | debt-i18n-three-locales | preflight sdd-spec INICIO 20:05:04 outcome=ready
+
+## 2026-10-08 | decision | debt-i18n-three-locales | sdd-spec (re-despacho): se revisaron los Scenarios que cada delta comparte con su base (D-5): 6 divergencias en 4 pares (core: «Una traducción falta en el idioma seleccionado»; ui-selector: escritorio y móvil; hreflang: home y sitemap; json-structure: huérfana). Se corrigieron en las 6 bases superseded (Purpose, Requirements, Scenarios, AC de cuerpo y frontmatter) para concordar con los tres idiomas (ADR-0042 D-1/D-3); cada delta declara en Related que la base concuerda (D-2). `delta_base_signal` sin rechazos en los 4 deltas
+## 2026-10-08 | measure | debt-i18n-three-locales | post-dispatch sdd-spec FIN 20:07:42 outcome=advance
+
+## 2026-10-08 | measure | debt-i18n-three-locales | preflight sdd-tasks INICIO 20:07:49 outcome=ready
+
+
+## 2026-10-08 | decision | debt-i18n-three-locales | sdd-tasks: 14 tareas en 4 specs, ninguna [TDD] (el proyecto no tiene suite de tests; la verificacion es build + diff de dist/client contra la linea base + 5 comandos + pruebas en copia aislada). Riesgo anotado en la Tarea 6: retirar las reglas CSS RTL del Navbar puede cambiar el CSS (inline o nombre con hash) y la lista cerrada de diferencias admitidas del proposal no lo contempla; sdd-apply lo registra como hallazgo en lugar de admitirlo en silencio. Se deriva tarea de perfil (convencion de lista unica de idiomas en config.ts)
+## 2026-10-08 | measure | debt-i18n-three-locales | post-dispatch sdd-tasks FIN 20:10:45 outcome=advance
+
+## 2026-10-08 | measure | debt-i18n-three-locales | preflight sdd-apply INICIO 20:10:45 outcome=ready
+
