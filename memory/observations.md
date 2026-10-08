@@ -706,3 +706,5 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 
 ## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-apply: tras elegir la opción de origen «Otro», el resumen del wizard de /cotizar muestra el valor «Otro» (`state.origin` lee `select.value` en `wizard.ts`) y no la etiqueta traducida («Other»/«Outro») en /en y /pt; coherente con `quote-extras-and-origin-options`, que fija el valor «Otro» para el operador
 
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-apply: añadir `--shadow-sm|md|lg|xl|cta` a `@theme` (criterio 5 de `color-token-policy`) cambia el CSS construido más allá de las declaraciones eliminadas (criterio 4): Tailwind sobrescribe en su capa `theme` los defaults de `--shadow-sm|md|xl`, agrega `--shadow-cta` y regenera las utilidades `.shadow-*` (que crea por escaneo de texto; `.shadow-cta` pasa de color de sombra a sombra). Sin cambio visual: ningún elemento usa clases `shadow-*` y `:root` en `@layer base` gana a la capa `theme`. Tensión entre criterios sin decidir en apply
+

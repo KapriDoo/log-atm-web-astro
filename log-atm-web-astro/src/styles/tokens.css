@@ -3,8 +3,10 @@
  * Color base: #4A7BB5 (HSL 213°, 42%, 50%)
  * Sistema: Tailwind v4 @theme + CSS custom properties
  *
- * REGLA: nunca usar colores hardcodeados en componentes.
- * Siempre referenciar tokens de esta hoja.
+ * POLÍTICA DE COLOR:
+ * - Colores de marca, semánticos y pares de texto/fondo validados: solo vía tokens de `tokens.css`.
+ * - Ningún color literal nuevo fuera de `tokens.css` (tampoco con transparencia, como las capas que oscurecen fotos), salvo en las plantillas de correo.
+ * - Los literales existentes fuera de `tokens.css` son legado tolerado y no se migran.
  */
 
 @layer base {
@@ -54,7 +56,6 @@
     /* ─── WhatsApp ───────────────────────────────────────── */
     --color-whatsapp:           #25D366;
     --color-whatsapp-hover:     #1da851;
-    --color-whatsapp-hover-dark:#0d6b61;
     --color-whatsapp-text:      #111b21; /* par: 8.80 reposo · 5.63 hover */
 
     /* ─── Amber (overlay accent fallback) ────────────────── */
@@ -102,26 +103,6 @@
     /* ─── SVG placeholder (WhySection) ───────────────────── */
     --color-svg-bg:   var(--color-neutral-100);
     --color-svg-text: var(--color-neutral-400);
-
-    /* ─── Opacidad ───────────────────────────────────────── */
-    --opacity-subtle: 0.10;
-    --opacity-low:    0.08;
-    --opacity-12:     0.12;
-    --opacity-medium: 0.15;
-    --opacity-20:     0.20;
-    --opacity-22:     0.22;
-    --opacity-high:   0.25;
-    --opacity-30:     0.30;
-    --opacity-35:     0.35;
-    --opacity-40:     0.40;
-    --opacity-45:     0.45;
-    --opacity-50:     0.50;
-    --opacity-60:     0.60;
-    --opacity-65:     0.65;
-    --opacity-70:     0.70;
-    --opacity-80:     0.80;
-    --opacity-90:     0.90;
-    --opacity-full:   1;
 
     /* ─── Elevaciones / Sombras ──────────────────────────── */
     --shadow-sm:  0 1px 3px 0 rgb(74 123 181 / 0.08);
@@ -204,7 +185,6 @@
   /* WhatsApp */
   --color-whatsapp:            #25D366;
   --color-whatsapp-hover:      #1da851;
-  --color-whatsapp-hover-dark: #0d6b61;
   --color-whatsapp-text:       #111b21;
 
   /* Amber */
@@ -239,25 +219,12 @@
   --color-svg-bg:   #efedeb;
   --color-svg-text: #aaa6a1;
 
-  /* Opacidad */
-  --opacity-subtle: 0.10;
-  --opacity-low:    0.08;
-  --opacity-12:     0.12;
-  --opacity-medium: 0.15;
-  --opacity-20:     0.20;
-  --opacity-22:     0.22;
-  --opacity-high:   0.25;
-  --opacity-30:     0.30;
-  --opacity-35:     0.35;
-  --opacity-40:     0.40;
-  --opacity-45:     0.45;
-  --opacity-50:     0.50;
-  --opacity-60:     0.60;
-  --opacity-65:     0.65;
-  --opacity-70:     0.70;
-  --opacity-80:     0.80;
-  --opacity-90:     0.90;
-  --opacity-full:   1;
+  /* Sombras */
+  --shadow-sm:  0 1px 3px 0 rgb(74 123 181 / 0.08);
+  --shadow-md:  0 4px 16px 0 rgb(74 123 181 / 0.12);
+  --shadow-lg:  0 8px 32px 0 rgb(74 123 181 / 0.16);
+  --shadow-xl:  0 16px 48px 0 rgb(74 123 181 / 0.20);
+  --shadow-cta: 0 4px 20px 0 rgb(62 185 120 / 0.35);
 
   /* Border radius */
   --radius-xs:    4px;

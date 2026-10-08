@@ -247,7 +247,10 @@ No validos para texto normal: blanco sobre `accent-500`/`accent-600` (CTA), blan
 - Priorizar accesibilidad WCAG 2.2 AA minimo
 
 ### Don't
-- No usar colores hardcodeados en componentes (unica excepcion: plantillas de correo, ver abajo)
+- Política de color:
+  - Colores de marca, semánticos y pares de texto/fondo validados: solo vía tokens de `tokens.css`.
+  - Ningún color literal nuevo fuera de `tokens.css` (tampoco con transparencia, como las capas que oscurecen fotos), salvo en las plantillas de correo. Ver «Excepcion: plantillas de correo».
+  - Los literales existentes fuera de `tokens.css` son legado tolerado y no se migran.
 - No mezclar radius styles incompatibles (ej: pill + square)
 - No usar accent-500 para texto pequeno sobre fondo claro
 - No ignorar prefers-reduced-motion
