@@ -710,3 +710,7 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 
 ## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-apply: residuales fuera de `tasks.md`: `twitter:site`/`twitter:creator` de `BaseLayout.astro` conservan el literal `@logatm` (duplica la cuenta de `SITE.social.twitter`); el primer build de Workers Builds tras el merge debe confirmar que `astro.config.mjs` carga `src/lib/site.ts` (import TS desde el config)
 
+## 2026-10-08 | measure | debt-copy-tokens-ssot | post-dispatch sdd-apply FIN 00:33:51 outcome=blocked
+
+## 2026-10-08 | measure | debt-copy-tokens-ssot | preflight sdd-apply INICIO 16:58:17 outcome=ready
+
