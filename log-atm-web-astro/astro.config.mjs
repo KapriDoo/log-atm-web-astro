@@ -9,6 +9,8 @@ import { existsSync, readFileSync, statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 // Identidad del sitio sin imports: carga en el entorno de construcción (fuente única del host canónico).
 import { SITE } from './src/lib/site.ts';
+// Definición única de idiomas sin imports: routing y sitemap toman de aquí locales y tags regionales.
+import { LOCALES, DEFAULT_LOCALE, SITEMAP_LOCALES } from './src/i18n/config.ts';
 
 /**
  * Integration mínima que valida la paridad de claves i18n antes de cada build.
@@ -116,8 +118,8 @@ export default defineConfig({
     imageService: 'compile',
   }),
   i18n: {
-    defaultLocale: 'es',
-    locales: ['es', 'en', 'pt'],
+    defaultLocale: DEFAULT_LOCALE,
+    locales: [...LOCALES],
     routing: {
       prefixDefaultLocale: false,
     },
@@ -131,12 +133,8 @@ export default defineConfig({
     prerenderOutputGuard(),
     sitemap({
       i18n: {
-        defaultLocale: 'es',
-        locales: {
-          es: 'es-CL',
-          en: 'en-US',
-          pt: 'pt-BR',
-        },
+        defaultLocale: DEFAULT_LOCALE,
+        locales: SITEMAP_LOCALES,
       },
     }),
   ],
