@@ -6,7 +6,7 @@ slug: "contrast-token-single-source"
 domain: "fix"
 delta_type: null
 supersedes: null
-superseded_by: null
+superseded_by: "[[color-token-policy]]"
 status: completed
 assigned_agent: "sdd-apply"
 priority: medium
@@ -44,7 +44,7 @@ scope:
 verified_at: "2026-10-06"
 
 created: "2026-10-04"
-updated: "2026-10-06"
+updated: "2026-10-08"
 tags: [capability-spec]
 ---
 

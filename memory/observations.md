@@ -666,3 +666,35 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 
 ## 2026-10-06 | measure | chore-deploy-config | preflight sdd-archive INICIO 22:30:56 outcome=ready
 
+## 2026-10-07 | measure | debt-copy-tokens-ssot | preflight sdd-init INICIO 22:06:12 outcome=ready
+
+## 2026-10-07 | measure | debt-copy-tokens-ssot | post-dispatch sdd-init FIN 22:06:50 outcome=advance
+
+## 2026-10-07 | measure | debt-copy-tokens-ssot | preflight sdd-propose INICIO 22:07:01 outcome=ready
+
+
+## 2026-10-07 | discovery | debt-copy-tokens-ssot | sdd-propose: el patrón de fallback `copy[i] ?? constante` está en 12 sitios, no 10 — el brief omite `HOW_WE_WORK` (nosotros.astro) e `INDUSTRIES` en industrias.astro (`name`/`sub` + `tags`/`servicesPer` con `?? []`); las 13 listas i18n↔datos coinciden hoy en longitud en es/en/pt
+## 2026-10-07 | discovery | debt-copy-tokens-ssot | sdd-propose: `tokens/create-functional-tokens` exige tokens de opacidad; eliminar los 18 `--opacity-*` la contradice, por lo que también queda superseded por el delta de política de color (que reenuncia sus requisitos de sombras y radios). `validate-i18n` ya detecta un ítem quitado en un solo idioma (la paridad aplanada incluye índices de array)
+## 2026-10-07 | discovery | debt-copy-tokens-ssot | sdd-propose: `QUOTE_ORIGINS` incluye `'Otro'`, copy en español que se muestra sin traducir en /en y /pt cotizar; queda como C1 en clarifications.md
+## 2026-10-07 | measure | debt-copy-tokens-ssot | post-dispatch sdd-propose FIN 22:12:56 outcome=paused
+
+## 2026-10-07 | measure | debt-copy-tokens-ssot | preflight sdd-propose INICIO 22:45:12 outcome=ready
+
+## 2026-10-07 | discovery | debt-copy-tokens-ssot | sdd-propose (iter 2): astro 6.3.1 `loadConfigWithVite` intenta import nativo del `.mjs` y, si falla, recarga el config con el runner de Vite (transpila TS) — `astro.config.mjs` puede importar `src/lib/site.ts` (sin imports). `public/manifest.json` no contiene host (`start_url: "/"`), así que el cambio a `www` no lo toca; `robots.txt` pasa a endpoint prerenderizado que deriva `Sitemap:` de `SITE.url`
+## 2026-10-07 | measure | debt-copy-tokens-ssot | post-dispatch sdd-propose FIN 22:47:34 outcome=paused
+
+## 2026-10-07 | measure | debt-copy-tokens-ssot | preflight sdd-spec INICIO 23:59:31 outcome=ready
+
+
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-spec: sin motivo para fijar el slogan en español en el JSON-LD (schema.org `slogan` es texto libre); queda localizado por idioma vía `meta.tagline`. Las 7 specs de estilos y `create-functional-tokens` solo reciben `superseded_by`; sus Purpose/AC quedan sin alinear con el delta (contradicen la política de legado tolerado) — candidato a limpieza en archive
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-spec: se generan 5 specs (1 delta ADD + 4 nuevas) en vez de las 3-4 estimadas, para mantener una spec por comportamiento: política de color, copy↔datos, identidad del sitio, host canónico www/robots y opciones del cotizador
+## 2026-10-08 | measure | debt-copy-tokens-ssot | post-dispatch sdd-spec FIN 00:03:10 outcome=advance
+
+## 2026-10-08 | measure | debt-copy-tokens-ssot | preflight sdd-tasks INICIO 00:03:14 outcome=ready
+
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-tasks: `tokens.css` define `--shadow-*` solo en `:root` (no en `@theme`); el criterio de «disponibles como utilidades de Tailwind» exige añadirlos a `@theme`, lo que puede chocar con el criterio de CSS idéntico salvo lo eliminado — la Tarea 16 lo mide y reporta sin decidir
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-tasks: la línea base de regresión vive en `log-atm-web-astro/.wrangler/baseline/` (gitignored); el worktree no tiene `node_modules` (un enlace simbólico no queda ignorado por el patrón `node_modules/`), por eso la Tarea 2 usa `npm ci`
+## 2026-10-08 | measure | debt-copy-tokens-ssot | post-dispatch sdd-tasks FIN 00:08:04 outcome=advance
+
+## 2026-10-08 | measure | debt-copy-tokens-ssot | preflight sdd-apply INICIO 00:08:04 outcome=ready
+
