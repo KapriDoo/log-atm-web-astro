@@ -765,3 +765,7 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 
 ## 2026-10-08 | measure | debt-i18n-three-locales | preflight sdd-apply INICIO 20:10:45 outcome=ready
 
+
+## 2026-10-08 | discovery | debt-i18n-three-locales | sdd-apply [hallazgo]: el diff de `dist/client` contra la línea base trae, además de la lista cerrada, el CSS del panel del drawer: quitar la regla RTL no iguala el CSS, porque `--drawer-offset: 100%;transform:translate(var(--drawer-offset))` pasa a `transform:translate(100%)` (reemplazo de la variable que pide la Tarea 2; mismo valor computado)
+
+Afecta a `Footer.*.css` y `404.*.css` (nombres con hash nuevos). La condición de `clarifications.md` pide que el CSS normalizado sin las reglas RTL sea idéntico; con este reemplazo no lo es al pie de la letra. Detalle en `baseline.md` (bloque `baseline.8`). Además: `en/index.html` y `pt/index.html` emiten `BreadcrumbList` desde la línea base, así que las migas localizadas son 12 páginas (no 10 internas).

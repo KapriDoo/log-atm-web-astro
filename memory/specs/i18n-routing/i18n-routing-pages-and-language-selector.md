@@ -7,7 +7,7 @@ domain: "debt"
 delta_type: MODIFY
 supersedes: "[[i18n-routing-locale-prefixes]]"
 superseded_by: null
-status: draft
+status: review
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
