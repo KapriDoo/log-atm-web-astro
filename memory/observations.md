@@ -704,3 +704,5 @@ La 404 es bajo demanda (ADR-0007) y no existe en `dist/client`, así que un serv
 
 ## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-apply: residual fuera de `tasks.md`: `meta.siteName` («LOG ATM») del i18n duplica `SITE.name` de `src/lib/site.ts` y lo consumen Navbar (2 veces) y Footer como nombre de marca; `site-identity-single-source` pide no conservar un dato de identidad duplicado. No se corrige en esta fase (la fuente de tareas no lo incluye)
 
+## 2026-10-08 | discovery | debt-copy-tokens-ssot | sdd-apply: tras elegir la opción de origen «Otro», el resumen del wizard de /cotizar muestra el valor «Otro» (`state.origin` lee `select.value` en `wizard.ts`) y no la etiqueta traducida («Other»/«Outro») en /en y /pt; coherente con `quote-extras-and-origin-options`, que fija el valor «Otro» para el operador
+

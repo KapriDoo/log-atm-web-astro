@@ -141,6 +141,8 @@ const clientStrings = {
                 <select id="q-origin" name="origin">
                   <option value="">{t('cotizar.step2.placeholderOrigin')}</option>
                   {QUOTE_ORIGINS.map((o) => <option value={o}>{o}</option>)}
+                  {/* El operador recibe «Otro» en todos los idiomas; la etiqueta sale del i18n. */}
+                  <option value="Otro">{t('cotizar.step2.originOther')}</option>
                 </select>
               </div>
               <div class="route-pair__arrow" aria-hidden="true">→</div>

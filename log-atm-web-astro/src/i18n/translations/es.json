@@ -420,6 +420,7 @@
       "labelOrigin": "Origen",
       "labelDest": "Destino",
       "placeholderOrigin": "Selecciona origen...",
+      "originOther": "Otro",
       "labelIncoterm": "Incoterm",
       "labelDate": "Fecha estimada de salida",
       "incotermUnsure": "No estoy seguro"
@@ -494,7 +495,6 @@
       "Aduana",
       "Seguro de carga",
       "Almacenaje destino",
-      "Última milla",
       "Inspección origen"
     ],
     "success": {

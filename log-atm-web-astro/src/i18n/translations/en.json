@@ -420,6 +420,7 @@
       "labelOrigin": "Origin",
       "labelDest": "Destination",
       "placeholderOrigin": "Select origin...",
+      "originOther": "Other",
       "labelIncoterm": "Incoterm",
       "labelDate": "Estimated departure date",
       "incotermUnsure": "I'm not sure"
@@ -494,7 +495,6 @@
       "Customs",
       "Cargo insurance",
       "Destination warehousing",
-      "Last mile",
       "Origin inspection"
     ],
     "success": {

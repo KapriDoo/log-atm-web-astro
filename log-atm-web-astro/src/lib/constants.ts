@@ -243,12 +243,12 @@ export const QUOTE_MODES = [
   { k: 'multi',   icon: 'lucide:compass' },
 ] as const;
 
+// Orígenes del wizard (topónimos). La opción final «Otro» la agrega cotizar.astro con etiqueta del i18n.
 export const QUOTE_ORIGINS = [
   'Shanghai, CN', 'Shenzhen, CN', 'Hong Kong, HK',
   'Miami, US', 'Los Angeles, US',
   'Rotterdam, NL', 'Hamburg, DE',
   'Dubai, AE', 'Jeddah, SA',
-  'Otro',
 ] as const;
 
 export const QUOTE_DESTS = [
