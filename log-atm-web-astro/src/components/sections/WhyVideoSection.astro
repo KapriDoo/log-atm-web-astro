@@ -102,7 +102,8 @@ const whyItems = WHY_ITEMS.map((w, i) => ({ ...w, ...whyCopy[i] }));
     const syncToggle = () => {
       const playing = !video.paused && !video.ended;
       toggle.setAttribute('aria-pressed', String(playing));
-      toggle.setAttribute('aria-label', playing ? (toggle.dataset.labelPause ?? 'Pausar video') : (toggle.dataset.labelPlay ?? 'Reproducir video'));
+      // data-label-play/pause se renderizan siempre desde el i18n: sin respaldo en el script.
+      toggle.setAttribute('aria-label', playing ? toggle.dataset.labelPause! : toggle.dataset.labelPlay!);
       icon.textContent = playing ? '❚❚' : '▶';
       icon.dataset.state = playing ? 'playing' : 'paused';
     };

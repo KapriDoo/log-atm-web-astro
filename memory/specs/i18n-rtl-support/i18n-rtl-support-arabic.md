@@ -7,7 +7,7 @@ domain: "feature"
 delta_type: null
 supersedes: null
 superseded_by: null
-status: completed
+status: cancelled
 assigned_agent: "sdd-apply"
 priority: medium
 depends_on:
@@ -33,7 +33,7 @@ scope:
   - "log-atm-web-astro/src/styles/"
 verified_at: null
 created: "2026-05-12"
-updated: "2026-05-12"
+updated: "2026-10-08"
 tags: [capability-spec, i18n, rtl, a11y]
 ---
 
@@ -84,3 +84,7 @@ Los visitantes en árabe deben experimentar el sitio en su dirección natural de
 
 - [[i18n-ui-selector-navbar]] — el drawer cuyo origen cambia con la dirección
 - [[i18n-core-translation-helpers]] — flag de dirección consumido desde aquí
+
+## Cancelación
+
+Esta spec queda cancelada (2026-10-08). El commit `551e26f` retiró del sitio los idiomas chino, hindi y árabe, y desde entonces el sitio ofrece solo idiomas de izquierda a derecha. [[i18n-core-three-locales-single-source]] declara la dirección de lectura de izquierda a derecha en las tres versiones y retira la lógica de dirección por idioma. Un idioma de derecha a izquierda que se agregue en el futuro se especifica con su propia spec.

@@ -1,18 +1,20 @@
 /**
- * LOG ATM — Configuración i18n centralizada.
- * Locales soportados, defaults y mapeos de display.
+ * LOG ATM — Definición única de idiomas: locales soportados, idioma por defecto,
+ * locales con prefijo, códigos regionales (BCP-47 y Open Graph) y mapeos de display.
+ * El routing y el sitemap de `astro.config.mjs` y los scripts de validación toman
+ * sus idiomas de aquí. Sin imports (ni imágenes, ni componentes, ni otros recursos),
+ * para que la carguen por igual la configuración de Astro, `tsx` y las páginas.
  */
 
 export const LOCALES = ['es', 'en', 'pt'] as const;
 export type Locale = (typeof LOCALES)[number];
 
-export const DEFAULT_LOCALE: Locale = 'es';
-export const NON_DEFAULT_LOCALES: ReadonlyArray<Exclude<Locale, 'es'>> = [
-  'en',
-  'pt',
-];
+export const DEFAULT_LOCALE = 'es' satisfies Locale;
 
-export const RTL_LOCALES: ReadonlyArray<Locale> = [];
+/** Locales servidos bajo prefijo `/{locale}/`: todos salvo el idioma por defecto. */
+export const NON_DEFAULT_LOCALES: ReadonlyArray<Exclude<Locale, typeof DEFAULT_LOCALE>> = LOCALES.filter(
+  (l): l is Exclude<Locale, typeof DEFAULT_LOCALE> => l !== DEFAULT_LOCALE,
+);
 
 /** Etiqueta corta para selector (códigos ISO). */
 export const LOCALE_LABELS: Record<Locale, string> = {

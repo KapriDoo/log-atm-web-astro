@@ -241,16 +241,17 @@ const quickQuoteVolumes = QUICK_QUOTE_VOLUMES.map((v, i) => ({ value: v, label: 
         const emailInput = form.querySelector<HTMLInputElement>("#qq-email");
         const phoneInput = form.querySelector<HTMLInputElement>("#qq-phone");
         const submitBtn = form.querySelector<HTMLButtonElement>(".cta-final__btn");
+        // Los data-msg-* del botón se renderizan siempre desde el i18n: el texto visible no tiene respaldo en el script.
         const MSG = {
-            noContact: submitBtn?.dataset.msgNoContact ?? "Necesitamos un email o teléfono para contactarte.",
-            badEmail:  submitBtn?.dataset.msgBadEmail  ?? "Revisa el formato del email.",
-            wa:        submitBtn?.dataset.msgWa        ?? "Abriendo WhatsApp…",
-            email:     submitBtn?.dataset.msgEmail     ?? "Abriendo tu correo…",
-            sending:   submitBtn?.dataset.msgSending   ?? "Enviando…",
-            sent:      submitBtn?.dataset.msgSent      ?? "✓ Recibido. Te contactamos por email muy pronto.",
-            reviewPrefix: submitBtn?.dataset.msgReviewPrefix ?? "Revisa los datos:",
-            sendFail:  submitBtn?.dataset.msgSendFail  ?? "No pudimos enviar. Reintenta o usa WhatsApp.",
-            connError: submitBtn?.dataset.msgConnError ?? "Error de conexión. Reintenta.",
+            noContact: submitBtn?.dataset.msgNoContact!,
+            badEmail:  submitBtn?.dataset.msgBadEmail!,
+            wa:        submitBtn?.dataset.msgWa!,
+            email:     submitBtn?.dataset.msgEmail!,
+            sending:   submitBtn?.dataset.msgSending!,
+            sent:      submitBtn?.dataset.msgSent!,
+            reviewPrefix: submitBtn?.dataset.msgReviewPrefix!,
+            sendFail:  submitBtn?.dataset.msgSendFail!,
+            connError: submitBtn?.dataset.msgConnError!,
         };
 
         // Radiogroup canal: roving tabindex + arrow keys (WAI-ARIA APG).

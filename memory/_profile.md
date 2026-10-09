@@ -64,7 +64,7 @@ updated: "2026-10-08"
 
 - **Output:** `output: 'static'` (SSG)
 - **Deploy Target:** Cloudflare Workers mediante Workers Builds (integración git: cada push dispara un build; `main` es producción)
-- **Build Scripts:** `npm run build` (`astro build`, sin type-check); `npm run validate-i18n` (validador i18n vía tsx, ejecución separada); `npm run check-i18n-links` (chequeo de links i18n vía tsx, ejecución separada)
+- **Build Scripts:** `npm run build` (`astro build`, sin type-check); `npm run build:ci` (`astro check && astro build`); `npm run validate-i18n` (validador i18n vía tsx, ejecución separada); `npm run check-i18n-links` (chequeo de links i18n vía tsx, ejecución separada)
 - **Validation:** Custom i18n validator via tsx at build time
 - **Container:** `log-atm-web-astro/Containerfile` (Podman rootless, un stage `node:22-slim`, `astro preview` con workerd en el puerto 4321; `.dev.vars` montado en solo lectura al ejecutar); comandos `npm run container:build` / `npm run container:run`
 - **Type-check:** `npm run check` (`astro check`), separado de `npm run build`, que no verifica tipos
@@ -87,6 +87,7 @@ updated: "2026-10-08"
 - **Performance:** Lighthouse ≥ 95 (all pages)
 - **Accessibility:** WCAG AA minimum
 - **Animations:** `prefers-reduced-motion` required
+- **Idiomas:** la lista de idiomas soportados (`LOCALES`), el idioma por defecto (`DEFAULT_LOCALE`), los idiomas con prefijo (`NON_DEFAULT_LOCALES`, derivados) y los códigos regionales (`HTML_LANG`, `OG_LOCALE`, `SITEMAP_LOCALES`) viven en `src/i18n/config.ts`, sin imports; `astro.config.mjs` (routing y sitemap) y `scripts/validate-i18n.ts` los importan de ahí, sin literales de idiomas propios
 - **Fuentes de datos:** todo texto visible sale del i18n (`src/i18n/translations/*.json`); `src/lib/constants.ts` conserva solo datos no textuales (ids, imágenes, íconos, tamaños, enlaces y colores), alineados por posición con su lista de texto mediante `tListFor`; la identidad del sitio (nombre, URL, teléfono, email, dirección, coordenadas y redes) vive en `src/lib/site.ts`
 
 ## Notable Implementation Details

@@ -5,6 +5,10 @@ deciders: sdd-design
 consulted: exploration.md, astro-docs-i18n
 informed: sdd-apply, sdd-verify
 capability: i18n-routing
+spec_refs:
+  - "[[i18n-core-three-locales-single-source]]"
+  - "[[i18n-routing-pages-and-language-selector]]"
+updated: "2026-10-08"
 tags: [adr, i18n, routing, astro]
 ---
 
@@ -88,3 +92,7 @@ const lang = (Astro.currentLocale ?? 'es') as Locale;
 **Accepted** — 2026-05-12
 
 No supersede ningún ADR previo. ADR 0001 cubre una decisión de assets, no relacionada.
+
+## Nota de actualización — 2026-10-08
+
+El sitio soporta tres idiomas: español (por defecto, sin prefijo), inglés (`/en/`) y portugués (`/pt/`). `NON_DEFAULT_LOCALES` vale `['en', 'pt']` y se deriva de `LOCALES` en `src/i18n/config.ts`, la definición única de idiomas. Cada idioma tiene seis páginas prerenderizadas (home, servicios, industrias, nosotros, contacto y cotizar): 18 HTML en total. La página 404 es única, se genera bajo demanda, queda fuera del patrón `[lang]/` y de la cuenta de páginas por idioma, según [[0007-not-found-page-on-demand-single]]. La decisión de este ADR (carpeta `src/pages/[lang]/` para los idiomas con prefijo) se mantiene.
