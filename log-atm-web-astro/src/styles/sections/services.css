@@ -100,6 +100,9 @@
   line-height: 1.15;
   margin: 0;
   color: var(--color-text-inverse);
+  /* Corta palabras largas (p. ej. "Desconsolidação") con guion según el lang */
+  hyphens: auto;
+  overflow-wrap: anywhere;
 }
 .svc-card__desc {
   font-size: 0.9375rem;

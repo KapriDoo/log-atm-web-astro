@@ -118,6 +118,8 @@ Ratios WCAG 2.x calculados sobre los hex de `tokens.css`. Umbral: 4.5:1 texto no
 | `--color-focus-ring` (primary-600) | neutral-200 | 4.54:1 | Borde de campo enfocado vs. borde sin foco |
 | `--color-focus-ring-inverse` (accent-400) | primary-950 · 900 · 800 · 700 · neutral-950 | 10.38 · 9.17 · 7.10 · 4.86 · 10.68:1 | Anillo de foco en superficies oscuras |
 | `neutral-900` | neutral-50 | 15.36:1 | Texto principal |
+| `--color-brand-solid` (primary-600) | blanco · neutral-50 | 6.08 · 5.68:1 | Color base de los links de texto (hover `--color-brand-solid-hover`) |
+| `primary-200` | peor punto de `.cta-final` (degradado mas vidrios) ≈ rgb(55,73,95) | ≈5.3:1 | Placeholder de `.cta-final__input` |
 
 No validos para texto normal: blanco sobre `accent-500`/`accent-600` (CTA), blanco sobre
 `primary-500` (4.38:1) y `accent-500`/`accent-600`/`accent-700` como texto sobre fondos claros.
@@ -170,17 +172,17 @@ No validos para texto normal: blanco sobre `accent-500`/`accent-600` (CTA), blan
 - Border-radius: var(--radius-input) (10px)
 - Focus: borde `--color-focus-ring` (`--color-focus-ring-inverse` sobre superficies oscuras) + anillo global de foco
 - Error: border-error
-- Placeholder: sin tono de paleta asignado; `neutral-300` y `neutral-400` no se usan para placeholder porque no alcanzan 4.5:1 sobre blanco (1.73 y 2.42:1)
+- Placeholder: sobre claro, sin tono de paleta asignado; en `.cta-final__input` (oscuro) usa `primary-200`; `neutral-300` y `neutral-400` no se usan para placeholder porque no alcanzan 4.5:1 sobre blanco (1.73 y 2.42:1)
 
 ### Navigation
-- Desktop: horizontal, links en neutral-700; hover y foco `--color-brand-dark`
+- Desktop: horizontal, links en `--color-text`, font-weight 500; hover y foco `--color-brand-dark`
 - Mobile: hamburger menu; hover y foco del drawer `--color-brand-dark`
-- Active state: `--color-brand-dark`, font-weight 600 y subrayado de 2px (`text-underline-offset: 0.3em`): la pagina actual no depende solo del color
+- Active state: `--color-brand-dark` (peso 500, sin cambio) y subrayado de 2px (`text-underline-offset: 0.3em`): la pagina actual no depende solo del color
 
 ### Focus ring (anillo de foco por contexto)
 - Regla global: `:focus-visible { outline: 3px solid var(--focus-ring-color, var(--color-focus-ring)); }`
 - Superficies claras: `--color-focus-ring` (primary-600, ≥ 5.20:1)
-- Superficies oscuras con controles enfocables: declaran `--focus-ring-color: var(--color-focus-ring-inverse)` en la misma regla que define su fondo (`.hero-b`, `.page-hero`, `.ind-directory-section`, `.quote-hero`, `.cta-final`, `.footer`). Una seccion oscura nueva hace lo mismo
+- Superficies oscuras con controles enfocables: declaran `--focus-ring-color: var(--color-focus-ring-inverse)` en la misma regla que define su fondo (`.hero-b`, `.page-hero`, `.ind-directory-section`, `.quote-hero`, `.cta-final`, `.footer`, `.skip-link`). Una seccion oscura nueva hace lo mismo
 - `--focus-ring-color` es una variable de contexto, no un token: solo toma el valor `var(--color-focus-ring-inverse)`, y una isla clara dentro de una superficie oscura puede restablecerla
 - Los componentes no fijan otro color de anillo ni usan `outline: none` sin un indicador equivalente visible en modos de color forzado (ADR-0008). Excepcion vigente: `.why__video-toggle:focus-visible` conserva un anillo blanco de 2px, porque el boton flota sobre el video oscuro
 

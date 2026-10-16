@@ -50,6 +50,11 @@
     border-radius: 0 0 var(--radius-xs) 0;
     transition: top 0.2s;
   }
+  /* Anillo hacia adentro para no cruzar el logo del header */
+  .skip-link:focus-visible {
+    --focus-ring-color: var(--color-focus-ring-inverse);
+    outline-offset: -3px;
+  }
   .skip-link:focus {
     top: 0;
   }
@@ -82,8 +87,11 @@
   }
 
   a {
-    color: var(--color-brand);
+    color: var(--color-brand-solid);
     text-decoration: none;
+  }
+  a:where(:hover) {
+    color: var(--color-brand-solid-hover);
   }
 
   img, video {

@@ -333,7 +333,7 @@ function initWizard(): void {
     if (!statusEl) return;
     statusEl.textContent = msg;
     (statusEl as HTMLElement).style.color =
-      kind === 'error' ? '#c0392b' : kind === 'success' ? '#2d9b6f' : '';
+      kind === 'error' ? '#c0392b' : kind === 'success' ? 'var(--color-text-accent)' : '';
   }
 
   async function submitQuote(): Promise<void> {
