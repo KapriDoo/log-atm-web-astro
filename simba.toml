@@ -1,0 +1,21 @@
+# simba.toml del piloto en logatm (D187), en la base de #38. Las compuertas son las verificaciones
+# que el proyecto declaraba en esta base (memory/_profile.md): type-check, build, i18n y a11y.
+agente = "claude"
+
+# La app vive en log-atm-web-astro/: las sesiones corren npm con --prefix, sin cd.
+comandos = ["npm run check", "npm run build", "npm run validate-i18n", "npm run check-i18n-links", "npm run a11y"]
+
+[compuertas]
+check = ["npm", "run", "check", "--prefix", "log-atm-web-astro"]
+build = ["npm", "run", "build", "--prefix", "log-atm-web-astro"]
+i18n = ["npm", "run", "validate-i18n", "--prefix", "log-atm-web-astro"]
+links = ["npm", "run", "check-i18n-links", "--prefix", "log-atm-web-astro"]
+a11y = ["npm", "run", "a11y", "--prefix", "log-atm-web-astro"]
+
+[espacio]
+# El Chrome de la auditoría a11y está fuera de git (376 MB): se enlaza el del checkout del usuario,
+# que solo se lee. El enlace se ignora en .git/info/exclude del clon del piloto.
+preparar = [
+    ["npm", "ci", "--prefix", "log-atm-web-astro"],
+    ["ln", "-sfn", "/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome", "log-atm-web-astro/chrome"],
+]
