@@ -1,0 +1,13 @@
+# simba.toml del piloto en logatm (D187), en la base de #30 y #34. Las compuertas son lo que el
+# proyecto tenía en esta base: sin type-check ni auditoría a11y, que llegaron después (#37).
+agente = "claude"
+
+# La app vive en log-atm-web-astro/: las sesiones corren npm con --prefix, sin cd.
+comandos = ["npm run build", "npm run validate-i18n"]
+
+[compuertas]
+build = ["npm", "run", "build", "--prefix", "log-atm-web-astro"]
+i18n = ["npm", "run", "validate-i18n", "--prefix", "log-atm-web-astro"]
+
+[espacio]
+preparar = [["npm", "ci", "--prefix", "log-atm-web-astro"]]
