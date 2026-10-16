@@ -49,7 +49,7 @@ const TOTAL = SERVICES.length;
         return (
           <CardTag
             class:list={['svc-card', `svc-card--${s.size}`, { 'svc-card--static': !isLink }]}
-            href={isLink ? s.href : undefined}
+            href={isLink ? buildLocaleUrl(currentLang, s.href!) : undefined}
             data-scroll-animate
             data-scroll-type="fade-up"
           >
