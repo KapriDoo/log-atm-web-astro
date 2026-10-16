@@ -1,4 +1,4 @@
-import { WorkerMailer } from "worker-mailer";
+import { WorkerMailer, type EmailOptions } from "worker-mailer";
 import { env as cfEnv } from "cloudflare:workers";
 
 export type MailEnv = {
@@ -52,11 +52,11 @@ export async function sendMail(
     await mailer.send({
       from: { name: "Formulario Web", email: user },
       to,
-      replyTo: opts.replyTo,
+      reply: opts.replyTo,
       subject: opts.subject,
       text: opts.text,
       html: opts.html,
-    });
+    } satisfies EmailOptions);
   } finally {
     try {
       // worker-mailer mantiene el socket; cerrarlo libera el conn.
