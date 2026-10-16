@@ -18,6 +18,12 @@ Desde la raíz del repo, con `--prefix` y sin `cd`:
 - `npm run check-i18n-links --prefix log-atm-web-astro`: los links internos que salen de su idioma en `dist/client`. Pide el build antes.
 - `npm run a11y --prefix log-atm-web-astro`: la auditoría axe en Chrome real sobre las páginas del build, en escritorio y móvil. Pide el build antes; el Chrome está en `log-atm-web-astro/chrome`.
 
+## Cómo se verifica
+
+- El proyecto no tiene tests automatizados: `package.json` no trae un script de tests ni un runner, y no hay integración continua. Lo automático son los comandos de arriba, que simba corre como compuertas.
+- Lo demás (el comportamiento en el navegador, el envío real de correos, lo que se ve en pantalla) lo verifica a mano quien desarrolla, antes del deploy.
+- Por eso, un criterio de comportamiento se verifica leyendo el código contra el criterio y con esos comandos, sin exigir un test; agregar un runner de tests es un cambio aparte, que se pide.
+
 ## Convenciones
 
 - Commits en inglés, con Conventional Commits.
