@@ -170,12 +170,13 @@ No validos para texto normal: blanco sobre `accent-500`/`accent-600` (CTA), blan
 - Border-radius: var(--radius-input) (10px)
 - Focus: borde `--color-focus-ring` (`--color-focus-ring-inverse` sobre superficies oscuras) + anillo global de foco
 - Error: border-error
-- Placeholder: sin tono de paleta asignado; `neutral-300` y `neutral-400` no se usan para placeholder porque no alcanzan 4.5:1 sobre blanco (1.73 y 2.42:1)
+- Placeholder de `.cta-final__input`: `--color-text-inverse` al 70 % sobre el degradado; peor punto medido por muestreo de píxeles 5.33:1 (`/` a 1280px; 6.82–7.24:1 a 390px)
+- Placeholder (resto): sin tono de paleta asignado; `neutral-300` y `neutral-400` no se usan para placeholder porque no alcanzan 4.5:1 sobre blanco (1.73 y 2.42:1)
 
 ### Navigation
-- Desktop: horizontal, links en neutral-700; hover y foco `--color-brand-dark`
+- Desktop: horizontal, links en `--color-text`, font-weight 500; hover y foco `--color-brand-dark`
 - Mobile: hamburger menu; hover y foco del drawer `--color-brand-dark`
-- Active state: `--color-brand-dark`, font-weight 600 y subrayado de 2px (`text-underline-offset: 0.3em`): la pagina actual no depende solo del color
+- Active state: `--color-brand-dark`, fondo `--color-surface-alt` y subrayado de 2px (`text-underline-offset: 0.3em`): la pagina actual no depende solo del color
 
 ### Focus ring (anillo de foco por contexto)
 - Regla global: `:focus-visible { outline: 3px solid var(--focus-ring-color, var(--color-focus-ring)); }`

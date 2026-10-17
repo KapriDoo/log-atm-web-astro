@@ -53,6 +53,12 @@
   .skip-link:focus {
     top: 0;
   }
+  /* Anillo hacia adentro: con offset positivo cruzaba el logo del header */
+  .skip-link:focus-visible {
+    outline-offset: -3px;
+    /* el fondo del skip link es primary-600: el anillo usa el tono inverso */
+    --focus-ring-color: var(--color-focus-ring-inverse);
+  }
 
   /* Screen-reader only — texto invisible visualmente, leído por AT */
   .sr-only {
@@ -82,8 +88,11 @@
   }
 
   a {
-    color: var(--color-brand);
+    color: var(--color-brand-solid);
     text-decoration: none;
+  }
+  a:hover {
+    color: var(--color-brand-solid-hover);
   }
 
   img, video {

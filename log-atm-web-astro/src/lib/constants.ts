@@ -235,7 +235,7 @@ export const WHY_ITEMS = [
 export const INDUSTRIES = [
   { icon: 'lucide:pickaxe',       name: 'Minería',            sub: 'Cobre, litio, maquinaria',     color: '#658fc3', img: indMineria },
   { icon: 'lucide:shopping-bag',  name: 'Retail',             sub: 'Moda, consumo, temporada',     color: '#3EB978', img: indRetail },
-  { icon: 'lucide:wheat',         name: 'Agroindustria',      sub: 'Fruta, vinos, granos',         color: '#2D9B6F', img: indAgro },
+  { icon: 'lucide:wheat',         name: 'Agroindustria',      sub: 'Fruta, vinos, granos',         color: 'var(--color-accent-700)', img: indAgro },
   { icon: 'lucide:pill',          name: 'Farmacéutica',       sub: 'Cadena de frío, reactivos',    color: '#4A7BB5', img: indFarma },
   { icon: 'lucide:shopping-cart', name: 'E-commerce',         sub: 'Cross-border, fulfillment',    color: '#339965', img: indEcommerce },
   { icon: 'lucide:hard-hat',      name: 'Construcción',       sub: 'Maquinaria, materiales',       color: '#3b6497', img: indConstruccion },

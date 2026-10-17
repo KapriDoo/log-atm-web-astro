@@ -129,7 +129,7 @@
   transition: border-color 150ms, background 150ms;
 }
 .cta-final__input::placeholder {
-  color: color-mix(in srgb, var(--color-text-inverse) 50%, transparent);
+  color: color-mix(in srgb, var(--color-text-inverse) 70%, transparent);
 }
 .cta-final__input:focus {
   border-color: var(--color-focus-ring-inverse);

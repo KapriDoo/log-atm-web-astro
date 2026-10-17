@@ -1,5 +1,10 @@
 import { formatDateCL } from "./mailer";
 
+// Espejo de --color-brand-solid (primary-600): enlaces, marca y botones, 6.08:1 sobre blanco
+const EMAIL_BRAND = "#3b6497";
+// Espejo de --color-text-muted (neutral-600): texto secundario, ≥ 4.5:1 sobre el fondo del correo
+const EMAIL_MUTED = "#6e6963";
+
 // ============================================================
 // Utilidades base — conservar escapeHtml sin modificaciones
 // ============================================================
@@ -82,7 +87,7 @@ function buildEmailHeader(badge: { color: BadgeColor; label: string }): string {
     `<tr>` +
     `<td style="vertical-align:middle;padding-right:12px;">` +
     `<div style="width:40px;height:40px;background:#ffffff;border-radius:10px;display:inline-block;vertical-align:middle;line-height:40px;text-align:center;">` +
-    `<span style="color:#4A7BB5;font-family:'Outfit',Arial,sans-serif;font-weight:900;font-size:18px;">A</span>` +
+    `<span style="color:${EMAIL_BRAND};font-family:'Outfit',Arial,sans-serif;font-weight:900;font-size:18px;">A</span>` +
     `</div>` +
     `</td>` +
     `<td style="vertical-align:middle;">` +
@@ -132,7 +137,7 @@ function buildEmailFooter(): string {
 function buildHeroSection(args: { kicker: string; title: string; subtitle: string }): string {
   return (
     `<tr><td style="padding:32px 32px 8px;">` +
-    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#339965;font-weight:600;margin-bottom:8px;">${args.kicker}</div>` +
+    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#22663f;font-weight:600;margin-bottom:8px;">${args.kicker}</div>` +
     `<h1 style="font-family:'Outfit',Arial,sans-serif;font-weight:800;font-size:26px;line-height:1.15;letter-spacing:-.02em;color:#211f1c;margin:0 0 8px;">${args.title}</h1>` +
     `<p style="font-family:'Inter',Arial,sans-serif;font-size:15px;line-height:1.55;color:#544f4a;margin:0;">${args.subtitle}</p>` +
     `</td></tr>`
@@ -149,7 +154,7 @@ function buildRouteSection(route: RouteInput): string {
       `<tr><td style="padding:24px 32px 8px;">` +
       `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background:#eef4fb;border-radius:14px;padding:0;">` +
       `<tr><td style="padding:20px 24px;">` +
-      `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#3b6497;margin-bottom:4px;">Ruta</div>` +
+      `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:${EMAIL_BRAND};margin-bottom:4px;">Ruta</div>` +
       `<div style="font-family:'Outfit',Arial,sans-serif;font-weight:700;font-size:18px;color:#112236;letter-spacing:-.01em;">${escapeHtml(String(text))}</div>` +
       `</td></tr>` +
       `</table>` +
@@ -171,16 +176,16 @@ function buildRouteSection(route: RouteInput): string {
     `<tr>` +
     // Origen
     `<td style="vertical-align:middle;">` +
-    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#3b6497;margin-bottom:4px;">Origen</div>` +
+    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:${EMAIL_BRAND};margin-bottom:4px;">Origen</div>` +
     `<div style="font-family:'Outfit',Arial,sans-serif;font-weight:700;font-size:18px;color:#112236;letter-spacing:-.01em;">${escapeHtml(hasOrigin ? String(origin) : "—")}</div>` +
     `</td>` +
     // Flecha central
     `<td align="center" style="vertical-align:middle;width:60px;">` +
-    `<span style="color:#4A7BB5;font-size:24px;font-weight:600;">&rarr;</span>` +
+    `<span style="color:${EMAIL_BRAND};font-size:24px;font-weight:600;">&rarr;</span>` +
     `</td>` +
     // Destino
     `<td align="right" style="vertical-align:middle;">` +
-    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#3b6497;margin-bottom:4px;">Destino</div>` +
+    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:${EMAIL_BRAND};margin-bottom:4px;">Destino</div>` +
     `<div style="font-family:'Outfit',Arial,sans-serif;font-weight:700;font-size:18px;color:#112236;letter-spacing:-.01em;">${escapeHtml(hasDest ? String(dest) : "—")}</div>` +
     `</td>` +
     `</tr>` +
@@ -208,9 +213,9 @@ function buildDataGrid(args: { label: string; rows: GridRow[] }): string {
 
       let valueHtml: string;
       if (kind === "email") {
-        valueHtml = `<a href="mailto:${escapeHtml(val)}" style="color:#4A7BB5;text-decoration:none;font-weight:500;">${escapeHtml(val)}</a>`;
+        valueHtml = `<a href="mailto:${escapeHtml(val)}" style="color:${EMAIL_BRAND};text-decoration:none;font-weight:500;">${escapeHtml(val)}</a>`;
       } else if (kind === "tel") {
-        valueHtml = `<a href="tel:${cleanPhone(val)}" style="color:#4A7BB5;text-decoration:none;font-weight:500;">${escapeHtml(val)}</a>`;
+        valueHtml = `<a href="tel:${cleanPhone(val)}" style="color:${EMAIL_BRAND};text-decoration:none;font-weight:500;">${escapeHtml(val)}</a>`;
       } else if (kind === "pill") {
         valueHtml = `<span style="display:inline-block;background:#d7e4f4;color:#2b4e78;font-family:'JetBrains Mono','SF Mono',monospace;font-size:12px;font-weight:600;padding:4px 10px;border-radius:9999px;">${escapeHtml(val)}</span>`;
       } else {
@@ -220,7 +225,7 @@ function buildDataGrid(args: { label: string; rows: GridRow[] }): string {
       return (
         `<tr>` +
         `<td style="padding:14px 0;${borderStyle}width:140px;vertical-align:middle;">` +
-        `<span style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#6e6963;">${escapeHtml(row.label)}</span>` +
+        `<span style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:${EMAIL_MUTED};">${escapeHtml(row.label)}</span>` +
         `</td>` +
         `<td style="padding:14px 0;${borderStyle}font-family:'Inter',Arial,sans-serif;font-size:15px;color:#211f1c;">` +
         valueHtml +
@@ -232,7 +237,7 @@ function buildDataGrid(args: { label: string; rows: GridRow[] }): string {
 
   return (
     `<tr><td style="padding:24px 32px 8px;">` +
-    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#6e6963;font-weight:600;margin-bottom:14px;">${escapeHtml(args.label)}</div>` +
+    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:${EMAIL_MUTED};font-weight:600;margin-bottom:14px;">${escapeHtml(args.label)}</div>` +
     `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="font-family:'Inter',Arial,sans-serif;font-size:15px;color:#211f1c;">` +
     rowsHtml +
     `</table>` +
@@ -247,7 +252,7 @@ function buildMessageBlock(args: { label: string; message?: string | null }): st
 
   return (
     `<tr><td style="padding:8px 32px 24px;">` +
-    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#6e6963;font-weight:600;margin-bottom:10px;">${escapeHtml(args.label)}</div>` +
+    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:${EMAIL_MUTED};font-weight:600;margin-bottom:10px;">${escapeHtml(args.label)}</div>` +
     `<div style="background:#f8f7f6;border-left:3px solid #4A7BB5;padding:18px 22px;font-family:'Inter',Arial,sans-serif;font-size:15px;line-height:1.6;color:#37332f;border-radius:0 12px 12px 0;">` +
     escapeHtml(String(msg)) +
     `</div>` +
@@ -272,7 +277,7 @@ function buildCTAButtons(args: {
   const waBtnColors = `background:#25D366;color:#111b21;`;
   // Par del botón «Responder por email»: espejo de --color-brand-solid / --color-brand-solid-text
   // de tokens.css (primary-600 con texto blanco, 6.08:1).
-  const emailBtnColors = `background:#3b6497;color:#ffffff;`;
+  const emailBtnColors = `background:${EMAIL_BRAND};color:#ffffff;`;
 
   let buttonsHtml: string;
 
@@ -304,7 +309,7 @@ function buildCTAButtons(args: {
   return (
     `<tr><td style="padding:8px 32px 28px;">` +
     buttonsHtml +
-    `<p style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;color:#898580;text-align:center;margin:14px 0 0;letter-spacing:.04em;">SLA cliente &middot; responder a la brevedad</p>` +
+    `<p style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;color:${EMAIL_MUTED};text-align:center;margin:14px 0 0;letter-spacing:.04em;">SLA cliente &middot; responder a la brevedad</p>` +
     `</td></tr>`
   );
 }
@@ -313,19 +318,19 @@ function buildCTAButtons(args: {
 function buildMetadataBox(meta: Meta): string {
   const folioRow =
     meta.folio
-      ? `<tr><td style="width:90px;color:#898580;">Folio</td><td><strong style="color:#211f1c;">${escapeHtml(meta.folio)}</strong></td></tr>`
+      ? `<tr><td style="width:90px;color:${EMAIL_MUTED};">Folio</td><td><strong style="color:#211f1c;">${escapeHtml(meta.folio)}</strong></td></tr>`
       : "";
 
   return (
     `<tr><td style="padding:0 32px 24px;">` +
     `<div style="background:#f8f7f6;border:1px solid #e1dedb;border-radius:12px;padding:16px 20px;">` +
-    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#898580;margin-bottom:8px;">Metadatos técnicos</div>` +
+    `<div style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:${EMAIL_MUTED};margin-bottom:8px;">Metadatos técnicos</div>` +
     `<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="font-family:'JetBrains Mono','SF Mono',monospace;font-size:11px;color:#544f4a;line-height:1.7;">` +
     folioRow +
-    `<tr><td style="width:90px;color:#898580;">Formulario</td><td>${escapeHtml(meta.formType)}</td></tr>` +
-    `<tr><td style="color:#898580;">Recibido</td><td>${formatDateCL()}</td></tr>` +
-    `<tr><td style="color:#898580;">IP</td><td>${escapeHtml(meta.ip)}</td></tr>` +
-    `<tr><td style="vertical-align:top;color:#898580;">User-Agent</td><td>${escapeHtml(meta.userAgent)}</td></tr>` +
+    `<tr><td style="width:90px;color:${EMAIL_MUTED};">Formulario</td><td>${escapeHtml(meta.formType)}</td></tr>` +
+    `<tr><td style="color:${EMAIL_MUTED};">Recibido</td><td>${formatDateCL()}</td></tr>` +
+    `<tr><td style="color:${EMAIL_MUTED};">IP</td><td>${escapeHtml(meta.ip)}</td></tr>` +
+    `<tr><td style="vertical-align:top;color:${EMAIL_MUTED};">User-Agent</td><td>${escapeHtml(meta.userAgent)}</td></tr>` +
     `</table>` +
     `</div>` +
     `</td></tr>`
@@ -361,7 +366,7 @@ export function buildContactoEmail(
   const heroTitle =
     escapeHtml(d.name) +
     (d.company
-      ? ` &middot; <span style="color:#4A7BB5;font-family:'Outfit',Arial,sans-serif;">${escapeHtml(d.company)}</span>`
+      ? ` &middot; <span style="color:${EMAIL_BRAND};font-family:'Outfit',Arial,sans-serif;">${escapeHtml(d.company)}</span>`
       : "");
 
   const sections =
@@ -557,7 +562,7 @@ export function buildCotizacion4Email(
   const heroTitle =
     escapeHtml(d.name) +
     (d.company
-      ? ` &middot; <span style="color:#4A7BB5;font-family:'Outfit',Arial,sans-serif;">${escapeHtml(d.company)}</span>`
+      ? ` &middot; <span style="color:${EMAIL_BRAND};font-family:'Outfit',Arial,sans-serif;">${escapeHtml(d.company)}</span>`
       : "");
 
   const sections =
