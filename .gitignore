@@ -36,3 +36,6 @@ npm-debug.log*
 skills-lock.json
 log-atm-web-astro/chrome/
 .simba/
+
+# Sondas de navegador de «Cómo se verifica» (D190)
+.sonda/

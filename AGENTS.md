@@ -23,6 +23,7 @@ Desde la raíz del repo, con `--prefix` y sin `cd`:
 - El proyecto no tiene tests automatizados: `package.json` no trae un script de tests ni un runner, y no hay integración continua. Lo automático son los comandos de arriba, que simba corre como compuertas.
 - Lo demás (el comportamiento en el navegador, el envío real de correos, lo que se ve en pantalla) lo verifica a mano quien desarrolla, antes del deploy.
 - Por eso, un criterio de comportamiento se verifica leyendo el código contra el criterio y con esos comandos, sin exigir un test; agregar un runner de tests es un cambio aparte, que se pide.
+- Lo que se ve en el navegador (contraste medido en pantalla, el foco, los cortes de palabra, una página bajo demanda) se verifica con una sonda: un script `.mjs` en `.sonda/`, en la raíz del repo, que se corre con `node .sonda/<nombre>.mjs`. Usa `playwright-core` de `log-atm-web-astro/node_modules` y el Chrome de `log-atm-web-astro/chrome/linux-148.0.7778.167/chrome-linux64/chrome` (`executablePath`), sobre un `astro preview` propio del build de `npm run build`, que detiene antes de terminar; `log-atm-web-astro/scripts/axe-audit.mjs` muestra cómo levantar ese preview y abrir Chrome. `.sonda/` está ignorada por git: las sondas no se commitean.
 
 ## Convenciones
 

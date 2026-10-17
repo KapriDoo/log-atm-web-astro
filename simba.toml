@@ -3,7 +3,8 @@
 agente = "claude"
 
 # La app vive en log-atm-web-astro/: las sesiones corren npm con --prefix, sin cd.
-comandos = ["npm run check", "npm run build", "npm run validate-i18n", "npm run check-i18n-links", "npm run a11y"]
+# D190: `node` deja correr las sondas de navegador de «Cómo se verifica» (AGENTS.md).
+comandos = ["npm run check", "npm run build", "npm run validate-i18n", "npm run check-i18n-links", "npm run a11y", "node"]
 
 [compuertas]
 check = ["npm", "run", "check", "--prefix", "log-atm-web-astro"]
@@ -19,3 +20,10 @@ preparar = [
     ["npm", "ci", "--prefix", "log-atm-web-astro"],
     ["ln", "-sfn", "/home/kapridoo/projects/log-atm-web-astro/log-atm-web-astro/chrome", "log-atm-web-astro/chrome"],
 ]
+
+# D190: los ADR del proyecto, para leer si hacen falta.
+[fases.corto]
+contexto = ["memory/adrs"]
+
+[fases.review]
+contexto = ["memory/adrs"]
