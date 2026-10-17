@@ -11,3 +11,16 @@ i18n = ["npm", "run", "validate-i18n", "--prefix", "log-atm-web-astro"]
 
 [espacio]
 preparar = [["npm", "ci", "--prefix", "log-atm-web-astro"]]
+
+# Medición previa al pedido de incorporación (D191): «Cómo se verifica» como skill del proyecto,
+# de carga simba, en vez de una sección del AGENTS.md.
+[extensiones.skills.como-se-verifica]
+fuente = "ruta"
+ruta = "simba/skills/como-se-verifica"
+carga = "simba"
+
+[fases.corto]
+skills = ["como-se-verifica"]
+
+[fases.review]
+skills = ["como-se-verifica"]
