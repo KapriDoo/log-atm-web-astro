@@ -55,6 +55,10 @@ export const POST: APIRoute = async ({ request }) => {
     fields.email = "Caracteres no válidos.";
   if (data.phone && hasHeaderInjection(data.phone))
     fields.phone = "Caracteres no válidos.";
+  if (hasHeaderInjection(data.mode)) fields.mode = "Caracteres no válidos.";
+  if (hasHeaderInjection(data.origin)) fields.origin = "Caracteres no válidos.";
+  if (hasHeaderInjection(data.destination))
+    fields.destination = "Caracteres no válidos.";
 
   if (Object.keys(fields).length > 0) {
     return json(400, { ok: false, error: "validation", fields });
